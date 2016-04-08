@@ -1,0 +1,6 @@
+.gitignore
+.npmignore
+.idea
+coverage
+lib/test
+src
