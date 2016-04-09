@@ -59,6 +59,5 @@
     "mockery": "^1.4.1",
     "semistandard": "*",
     "snazzy": "^3.0.0"
-  },
-  "preferGlobal": true
+  }
 }
