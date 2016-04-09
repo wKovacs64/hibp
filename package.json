@@ -16,7 +16,7 @@
     "compile": "babel src --out-dir lib --source-maps",
     "coverage": "npm run compile && istanbul cover node_modules/mocha/bin/_mocha lib/test -- -R spec",
     "prepublish": "npm run compile",
-    "test": "semistandard src --verbose | snazzy && npm run coverage"
+    "test": "semistandard --verbose | snazzy && npm run coverage"
   },
   "repository": {
     "type": "git",
