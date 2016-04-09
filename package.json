@@ -60,5 +60,5 @@
     "semistandard": "*",
     "snazzy": "^3.0.0"
   },
-  "private": true
+  "preferGlobal": true
 }
