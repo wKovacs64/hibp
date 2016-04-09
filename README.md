@@ -3,6 +3,8 @@
 *A Node.js module for querying [Troy Hunt](http://www.troyhunt.com/)'s
 [Have I been pwned?](https://haveibeenpwned.com/) service.*
 
+[![Build Status](https://travis-ci.org/wKovacs64/hibp.svg?branch=master)](https://travis-ci.org/wKovacs64/hibp)
+
 ## Installation
 
 ```shell
