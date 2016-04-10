@@ -1,5 +1,24 @@
 # Change Log
 
+## Version 1.0.2 *(2016-04-10)*
+
+* Shield clients from broken
+  '[breach](https://haveibeenpwned.com/API/v2#SingleBreach)' endpoint when
+  querying for an invalid breach name
+
+  *Currently, the endpoint responds with HTTP status 200 and "page not found"
+  HTML in the body if an invalid breach name is queried (e.g. 'adobe.com',
+  instead of the proper breach name, 'adobe'). Based on the response codes
+  described in the API documentation, I believe it should respond with HTTP
+  status 400 (bad request). Prior to this patch, it lead to a confusing one-off
+  scenario for clients consuming this module. This change should provide a
+  consistent experience by intercepting this specific case and throwing a "bad
+  request" error instead of a `SyntaxError` from trying to parse HTML. I
+  brought this API behavioral discrepancy to the API author's attention and he
+  agreed it was broken and noted that a fix is incoming.*
+
+* Updated tests
+
 ## Version 1.0.1 *(2016-04-08)*
 
 * Removed `preferGlobal` option from package.json
