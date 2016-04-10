@@ -13,27 +13,27 @@ const mockery = require('mockery');
 
 // Test data
 const URL_PATTERN = '^https://haveibeenpwned.com/api';
-const DOMAIN = 'foo.bar';
-const DIRTY_ACCOUNT = 'foo';
-const CLEAN_ACCOUNT = 'bar';
-const DIRTY_SITE = 'foo.bar';
-const CLEAN_SITE = 'baz.qux';
-const DIRTY_EMAIL = 'foo@bar.com';
-const CLEAN_EMAIL = 'baz@qux.com';
-const INVALID_EMAIL = 'foobar';
 const INVALID_HEADER = 'invalidheader';
+const DOMAIN = 'foo.bar';
+const ACCOUNT_BREACHED = 'foo';
+const ACCOUNT_CLEAN = 'bar';
+const BREACH_FOUND = 'foo';
+const BREACH_NOT_FOUND = 'bar';
+const EMAIL_PASTED = 'foo@bar.com';
+const EMAIL_CLEAN = 'baz@qux.com';
+const EMAIL_INVALID = 'foobar';
 
 // Configure mocked fetch calls and results
-fetchMock.mock(`${URL_PATTERN}/breachedaccount/${DIRTY_ACCOUNT}`, {});
-fetchMock.mock(`${URL_PATTERN}/breachedaccount/${CLEAN_ACCOUNT}`, 404);
+fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_BREACHED}`, {});
+fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_CLEAN}`, 404);
 fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
 fetchMock.mock(`${URL_PATTERN}/breaches`, []);
-fetchMock.mock(`${URL_PATTERN}/breach/${DIRTY_SITE}`, {});
-fetchMock.mock(`${URL_PATTERN}/breach/${CLEAN_SITE}`, 404);
+fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
+fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
 fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
-fetchMock.mock(`${URL_PATTERN}/pasteaccount/${DIRTY_EMAIL}`, []);
-fetchMock.mock(`${URL_PATTERN}/pasteaccount/${CLEAN_EMAIL}`, 404);
-fetchMock.mock(`${URL_PATTERN}/pasteaccount/${INVALID_EMAIL}`, 400);
+fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
+fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
+fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_INVALID}`, 400);
 
 describe('hibp', () => {
   let hibp;
@@ -53,16 +53,16 @@ describe('hibp', () => {
     mockery.disable();
   });
 
-  describe('breachedAccount (dirty account, no parameters)', () => {
+  describe('breachedAccount (breached account, no parameters)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.breachedAccount(DIRTY_ACCOUNT);
+      let query = hibp.breachedAccount(ACCOUNT_BREACHED);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breachedAccount(DIRTY_ACCOUNT)
+      hibp.breachedAccount(ACCOUNT_BREACHED)
           .then((breachData) => {
             expect(breachData).to.be.an('object');
             done();
@@ -71,16 +71,16 @@ describe('hibp', () => {
     });
   });
 
-  describe('breachedAccount (dirty account, with truncateResults)', () => {
+  describe('breachedAccount (breached account, with truncateResults)', () => {
     it('should return a Promise', (done) => {
-      let truncatedQuery = hibp.breachedAccount(DIRTY_ACCOUNT, true);
+      let truncatedQuery = hibp.breachedAccount(ACCOUNT_BREACHED, true);
       expect(truncatedQuery).to.be.a(Promise);
       expect(truncatedQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breachedAccount(DIRTY_ACCOUNT, true)
+      hibp.breachedAccount(ACCOUNT_BREACHED, true)
           .then((breachData) => {
             expect(breachData).to.be.an('object');
             done();
@@ -89,16 +89,16 @@ describe('hibp', () => {
     });
   });
 
-  describe('breachedAccount (dirty account, with domain)', () => {
+  describe('breachedAccount (breached account, with domain)', () => {
     it('should return a Promise', (done) => {
-      let filteredQuery = hibp.breachedAccount(DIRTY_ACCOUNT, DOMAIN);
+      let filteredQuery = hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN);
       expect(filteredQuery).to.be.a(Promise);
       expect(filteredQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breachedAccount(DIRTY_ACCOUNT, DOMAIN)
+      hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN)
           .then((breachData) => {
             expect(breachData).to.be.an('object');
             done();
@@ -107,35 +107,35 @@ describe('hibp', () => {
     });
   });
 
-  describe('breachedAccount (dirty account, with domain and truncateResults)',
-      () => {
-        it('should return a Promise', (done) => {
-          let comboQuery = hibp.breachedAccount(DIRTY_ACCOUNT, DOMAIN, true);
-          expect(comboQuery).to.be.a(Promise);
-          expect(comboQuery).to.have.property('then');
-          done();
-        });
+  describe('breachedAccount (breached account, with domain and' +
+      ' truncateResults)', () => {
+    it('should return a Promise', (done) => {
+      let comboQuery = hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN, true);
+      expect(comboQuery).to.be.a(Promise);
+      expect(comboQuery).to.have.property('then');
+      done();
+    });
 
-        it('should resolve with an object', (done) => {
-          hibp.breachedAccount(DIRTY_ACCOUNT, DOMAIN, true)
-              .then((breachData) => {
-                expect(breachData).to.be.an('object');
-                done();
-              })
-              .catch(done);
-        });
-      });
+    it('should resolve with an object', (done) => {
+      hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN, true)
+          .then((breachData) => {
+            expect(breachData).to.be.an('object');
+            done();
+          })
+          .catch(done);
+    });
+  });
 
   describe('breachedAccount (clean account, no parameters)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.breachedAccount(CLEAN_ACCOUNT);
+      let query = hibp.breachedAccount(ACCOUNT_CLEAN);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with undefined', (done) => {
-      hibp.breachedAccount(CLEAN_ACCOUNT)
+      hibp.breachedAccount(ACCOUNT_CLEAN)
           .then((breachData) => {
             expect(breachData).to.be(undefined);
             done();
@@ -146,14 +146,14 @@ describe('hibp', () => {
 
   describe('breachedAccount (clean account, with truncateResults)', () => {
     it('should return a Promise', (done) => {
-      let truncatedQuery = hibp.breachedAccount(CLEAN_ACCOUNT, true);
+      let truncatedQuery = hibp.breachedAccount(ACCOUNT_CLEAN, true);
       expect(truncatedQuery).to.be.a(Promise);
       expect(truncatedQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with undefined', (done) => {
-      hibp.breachedAccount(CLEAN_ACCOUNT, true)
+      hibp.breachedAccount(ACCOUNT_CLEAN, true)
           .then((breachData) => {
             expect(breachData).to.be(undefined);
             done();
@@ -164,14 +164,14 @@ describe('hibp', () => {
 
   describe('breachedAccount (clean account, with domain)', () => {
     it('should return a Promise', (done) => {
-      let filteredQuery = hibp.breachedAccount(CLEAN_ACCOUNT, DOMAIN);
+      let filteredQuery = hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN);
       expect(filteredQuery).to.be.a(Promise);
       expect(filteredQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with undefined', (done) => {
-      hibp.breachedAccount(CLEAN_ACCOUNT, DOMAIN)
+      hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN)
           .then((breachData) => {
             expect(breachData).to.be(undefined);
             done();
@@ -183,14 +183,14 @@ describe('hibp', () => {
   describe('breachedAccount (clean account, with domain and truncateResults)',
       () => {
         it('should return a Promise', (done) => {
-          let comboQuery = hibp.breachedAccount(CLEAN_ACCOUNT, DOMAIN, true);
+          let comboQuery = hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN, true);
           expect(comboQuery).to.be.a(Promise);
           expect(comboQuery).to.have.property('then');
           done();
         });
 
         it('should resolve with undefined', (done) => {
-          hibp.breachedAccount(CLEAN_ACCOUNT, DOMAIN, true)
+          hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN, true)
               .then((breachData) => {
                 expect(breachData).to.be(undefined);
                 done();
@@ -253,16 +253,16 @@ describe('hibp', () => {
     });
   });
 
-  describe('breach (dirty site)', () => {
+  describe('breach (found)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.breach(DIRTY_SITE);
+      let query = hibp.breach(BREACH_FOUND);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breach(DIRTY_SITE)
+      hibp.breach(BREACH_FOUND)
           .then((breachData) => {
             expect(breachData).to.be.an('object');
             done();
@@ -271,16 +271,16 @@ describe('hibp', () => {
     });
   });
 
-  describe('breach (clean site)', () => {
+  describe('breach (not found)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.breach(CLEAN_SITE);
+      let query = hibp.breach(BREACH_NOT_FOUND);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with undefined', (done) => {
-      hibp.breach(CLEAN_SITE)
+      hibp.breach(BREACH_NOT_FOUND)
           .then((breachData) => {
             expect(breachData).to.be(undefined);
             done();
@@ -307,16 +307,16 @@ describe('hibp', () => {
     });
   });
 
-  describe('pasteAccount (dirty email)', () => {
+  describe('pasteAccount (pasted email)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.pasteAccount(DIRTY_EMAIL);
+      let query = hibp.pasteAccount(EMAIL_PASTED);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with an array', (done) => {
-      hibp.pasteAccount(DIRTY_EMAIL)
+      hibp.pasteAccount(EMAIL_PASTED)
           .then((pasteData) => {
             expect(pasteData).to.be.an('array');
             done();
@@ -327,14 +327,14 @@ describe('hibp', () => {
 
   describe('pasteAccount (clean email)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.pasteAccount(CLEAN_EMAIL);
+      let query = hibp.pasteAccount(EMAIL_CLEAN);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with undefined', (done) => {
-      hibp.pasteAccount(CLEAN_EMAIL)
+      hibp.pasteAccount(EMAIL_CLEAN)
           .then((pasteData) => {
             expect(pasteData).to.be(undefined);
             done();
@@ -345,14 +345,14 @@ describe('hibp', () => {
 
   describe('pasteAccount (invalid email)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.pasteAccount(INVALID_EMAIL);
+      let query = hibp.pasteAccount(EMAIL_INVALID);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should throw an Error starting with "Bad request"', (done) => {
-      hibp.pasteAccount(INVALID_EMAIL)
+      hibp.pasteAccount(EMAIL_INVALID)
           .catch((err) => {
             expect(err.message).to.match(/^Bad request/);
             done();
