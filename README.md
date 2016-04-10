@@ -72,6 +72,12 @@ require('es6-promise').polyfill();
 var hibp = require('hibp');
 ```
 
+## Projects Using hibp
+
+* [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying the 'Have I been pwned?' service
+
+Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add yours to the list.
+
 ## License
 
 This module is distributed under the [MIT License](LICENSE.txt).
