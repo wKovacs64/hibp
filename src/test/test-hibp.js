@@ -19,6 +19,8 @@ const ACCOUNT_BREACHED = 'foo';
 const ACCOUNT_CLEAN = 'bar';
 const BREACH_FOUND = 'foo';
 const BREACH_NOT_FOUND = 'bar';
+const BREACH_INVALID = 'my.invalid.breach';
+const BREACH_FAIL = 'FetchError';
 const EMAIL_PASTED = 'foo@bar.com';
 const EMAIL_CLEAN = 'baz@qux.com';
 const EMAIL_INVALID = 'foobar';
@@ -30,6 +32,11 @@ fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
 fetchMock.mock(`${URL_PATTERN}/breaches`, []);
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
+// Temporarily disabled while hack is in place for broken "breach" endpoint
+// fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_INVALID}`, 400);
+// Temporarily in place to mock the current behavior of the API (v2)
+fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_INVALID}`, '<html>');
+fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FAIL}`, {throws: new Error()});
 fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
 fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
 fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
@@ -286,6 +293,40 @@ describe('hibp', () => {
             done();
           })
           .catch(done);
+    });
+  });
+
+  describe('breach (invalid name)', () => {
+    it('should return a Promise', (done) => {
+      let query = hibp.breach(BREACH_INVALID);
+      expect(query).to.be.a(Promise);
+      expect(query).to.have.property('then');
+      done();
+    });
+
+    it('should throw an Error starting with "Bad request"', (done) => {
+      hibp.breach(BREACH_INVALID)
+          .catch((err) => {
+            expect(err.message).to.match(/^Bad request/);
+            done();
+          });
+    });
+  });
+
+  describe('breach (failed fetch)', () => {
+    it('should return a Promise', (done) => {
+      let query = hibp.breach(BREACH_FAIL);
+      expect(query).to.be.a(Promise);
+      expect(query).to.have.property('then');
+      done();
+    });
+
+    it('should throw an Error', (done) => {
+      hibp.breach(BREACH_FAIL)
+          .catch((err) => {
+            expect(err).to.be.an(Error);
+            done();
+          });
     });
   });
 

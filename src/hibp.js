@@ -102,7 +102,21 @@ const HIBP = {
   breach: (breachName) => {
     return new Promise((resolve, reject) => {
       let endpoint = `${API_URL}/breach/${breachName}`;
-      fetchFromApi(endpoint).then(resolve).catch(reject);
+      fetchFromApi(endpoint)
+          .then(resolve)
+          .catch((err) => {
+            // Temporary hack for the [what I would consider] broken
+            // "breach" APIv2 endpoint. It should respond with HTTP status 400
+            // or 404, but instead responds with 200 and "page not found" HTML
+            // in the body. The author has been notified and this should be
+            // reverted if the endpoint is changed to behave like the other
+            // endpoints (as documented).
+            if (err instanceof SyntaxError) {
+              return reject(new Error('Bad request — the account does not ' +
+                  'comply with an acceptable format.'));
+            }
+            reject(err);
+          });
     });
   },
 
