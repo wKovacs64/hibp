@@ -23,48 +23,68 @@ npm install --save hibp
 
 ## Usage
 
-##### Quick Start
-
-###### Example (paste data for an email address):
+##### Get all breaches for an account:
 
 ```javascript
 const hibp = require('hibp');
 
-hibp.pasteAccount('foo@bar.com')
+hibp.breachedAccount('foo') // username or email
     .then(console.log)
     .catch(console.error);
 ```
 
-###### Example (breach data for an account):
+##### Get all breached sites in the system:
 
 ```javascript
-var hibp = require('hibp');
+const hibp = require('hibp');
 
-hibp.breachedAccount('foo')
-    .then(function (breachData) {
-      if (breachData) {
-        console.log('Bummer. ' + breachData.length + ' breach(es) found.');
-      } else {
-        console.log('Congratulations! No breaches associated with that account.');
-      }
-    })
-    .catch(function (err) {
-      console.error(err);
-    });
+hibp.breaches()
+    .then(console.log)
+    .catch(console.error);
 ```
 
-##### Detailed Usage
+##### Get a single breached site:
+
+```javascript
+const hibp = require('hibp');
+
+hibp.breach('Adobe') // breach name (not domain name)
+    .then(console.log)
+    .catch(console.error);
+```
+
+##### Get all data classes:
+
+```javascript
+const hibp = require('hibp');
+
+hibp.dataClasses()
+    .then(console.log)
+    .catch(console.error);
+```
+
+##### Get all pastes for an account:
+
+```javascript
+const hibp = require('hibp');
+
+hibp.pasteAccount('foo@bar.com') // email (not username)
+    .then(console.log)
+    .catch(console.error);
+```
+
+#### Detailed Usage
 
 For more in-depth usage information, see the [JSDoc comments](JSDOC.md).
 
-##### Using in Node.js < 0.12
+#### Using in Node.js < 0.12
 
 This module requires a Promise implementation to exist in the global namespace
 prior to being loaded. Therefore, to facilitate use on versions of Node.js
 before 0.12, you are responsible for providing a polyfill. I recommend
 [es6-promise](https://github.com/stefanpenner/es6-promise).
 
-###### Example:
+##### Example:
 
 ```javascript
 // This must be first!
