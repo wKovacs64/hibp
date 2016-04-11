@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.0.3 *(2016-04-10)*
+
+* Update documentation
+
 ## Version 1.0.2 *(2016-04-10)*
 
 * Shield clients from broken
