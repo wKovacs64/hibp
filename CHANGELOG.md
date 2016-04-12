@@ -1,5 +1,15 @@
 # Change Log
 
+## Version 1.0.4 *(2016-04-12)*
+
+* Changed temporary 'breach' hack to match author's intentions
+
+  *The API author (Troy Hunt) indicated there is no hard format restrictions on
+  a breach name, so the concept of an invalid breach name is not in play here.
+  The API will respond with HTTP status 404 (not found) once the fix has been
+  applied. This change mimics that behavior as opposed to responding with HTTP
+  status 400 (bad request), which was my initial interpretation.*
+
 ## Version 1.0.3 *(2016-04-10)*
 
 * Update documentation
