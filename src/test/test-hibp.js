@@ -19,7 +19,9 @@ const ACCOUNT_BREACHED = 'foo';
 const ACCOUNT_CLEAN = 'bar';
 const BREACH_FOUND = 'foo';
 const BREACH_NOT_FOUND = 'bar';
+// TODO: remove when API is fixed
 const BREACH_INVALID = 'my.invalid.breach';
+// TODO: remove when API is fixed
 const BREACH_FAIL = 'FetchError';
 const EMAIL_PASTED = 'foo@bar.com';
 const EMAIL_CLEAN = 'baz@qux.com';
@@ -32,10 +34,9 @@ fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
 fetchMock.mock(`${URL_PATTERN}/breaches`, []);
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
-// Temporarily disabled while hack is in place for broken "breach" endpoint
-// fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_INVALID}`, 400);
-// Temporarily in place to mock the current behavior of the API (v2)
+// TODO: remove when API is fixed
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_INVALID}`, '<html>');
+// TODO: remove when API is fixed
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FAIL}`, {throws: new Error()});
 fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
 fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
@@ -296,6 +297,7 @@ describe('hibp', () => {
     });
   });
 
+  // TODO: remove when API is fixed
   describe('breach (invalid name)', () => {
     it('should return a Promise', (done) => {
       let query = hibp.breach(BREACH_INVALID);
@@ -304,15 +306,17 @@ describe('hibp', () => {
       done();
     });
 
-    it('should throw an Error starting with "Bad request"', (done) => {
+    it('should resolve with undefined', (done) => {
       hibp.breach(BREACH_INVALID)
-          .catch((err) => {
-            expect(err.message).to.match(/^Bad request/);
+          .then((breachData) => {
+            expect(breachData).to.be(undefined);
             done();
-          });
+          })
+          .catch(done);
     });
   });
 
+  // TODO: remove when API is fixed
   describe('breach (failed fetch)', () => {
     it('should return a Promise', (done) => {
       let query = hibp.breach(BREACH_FAIL);

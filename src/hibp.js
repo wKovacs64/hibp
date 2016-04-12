@@ -105,15 +105,14 @@ const HIBP = {
       fetchFromApi(endpoint)
           .then(resolve)
           .catch((err) => {
-            // Temporary hack for the [what I would consider] broken
-            // "breach" APIv2 endpoint. It should respond with HTTP status 400
-            // or 404, but instead responds with 200 and "page not found" HTML
-            // in the body. The author has been notified and this should be
-            // reverted if the endpoint is changed to behave like the other
-            // endpoints (as documented).
+            // Temporary hack for the broken "breach" APIv2 endpoint. It should
+            // respond with HTTP status 404, but instead responds with 200 and
+            // "page not found" HTML in the body. The author has been notified
+            // and this should be reverted when the endpoint is changed to
+            // behave like the other endpoints (as documented).
+            // TODO: remove when API is fixed
             if (err instanceof SyntaxError) {
-              return reject(new Error('Bad request — the account does not ' +
-                  'comply with an acceptable format.'));
+              return resolve(undefined);
             }
             reject(err);
           });
