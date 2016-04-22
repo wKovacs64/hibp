@@ -245,7 +245,7 @@ describe('hibp', () => {
 
   describe('breaches (with domain)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.breaches('adobe.com');
+      let query = hibp.breaches(DOMAIN);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
