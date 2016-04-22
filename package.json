@@ -58,6 +58,6 @@
     "mocha": "^2.4.5",
     "mockery": "^1.6.2",
     "semistandard": "*",
-    "snazzy": "^3.0.0"
+    "snazzy": "^3.0.1"
   }
 }
