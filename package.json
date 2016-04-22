@@ -45,7 +45,7 @@
     "node": ">= 0.10"
   },
   "dependencies": {
-    "node-fetch": "^1.5.0",
+    "node-fetch": "^1.5.1",
     "source-map-support": "^0.4.0"
   },
   "devDependencies": {
