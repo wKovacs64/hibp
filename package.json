@@ -56,7 +56,7 @@
     "fetch-mock": "^4.3.1",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
-    "mockery": "^1.4.1",
+    "mockery": "^1.6.2",
     "semistandard": "*",
     "snazzy": "^3.0.0"
   }
