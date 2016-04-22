@@ -19,10 +19,6 @@ const ACCOUNT_BREACHED = 'foo';
 const ACCOUNT_CLEAN = 'bar';
 const BREACH_FOUND = 'foo';
 const BREACH_NOT_FOUND = 'bar';
-// TODO: remove when API is fixed
-const BREACH_INVALID = 'my.invalid.breach';
-// TODO: remove when API is fixed
-const BREACH_FAIL = 'FetchError';
 const EMAIL_PASTED = 'foo@bar.com';
 const EMAIL_CLEAN = 'baz@qux.com';
 const EMAIL_INVALID = 'foobar';
@@ -34,10 +30,6 @@ fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
 fetchMock.mock(`${URL_PATTERN}/breaches`, []);
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
 fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
-// TODO: remove when API is fixed
-fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_INVALID}`, '<html>');
-// TODO: remove when API is fixed
-fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FAIL}`, {throws: new Error()});
 fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
 fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
 fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
@@ -294,43 +286,6 @@ describe('hibp', () => {
             done();
           })
           .catch(done);
-    });
-  });
-
-  // TODO: remove when API is fixed
-  describe('breach (invalid name)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breach(BREACH_INVALID);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
-    it('should resolve with undefined', (done) => {
-      hibp.breach(BREACH_INVALID)
-          .then((breachData) => {
-            expect(breachData).to.be(undefined);
-            done();
-          })
-          .catch(done);
-    });
-  });
-
-  // TODO: remove when API is fixed
-  describe('breach (failed fetch)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breach(BREACH_FAIL);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
-    it('should throw an Error', (done) => {
-      hibp.breach(BREACH_FAIL)
-          .catch((err) => {
-            expect(err).to.be.an(Error);
-            done();
-          });
     });
   });
 
