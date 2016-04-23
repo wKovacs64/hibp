@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.0.5 *(2016-04-22)*
+
+* Remove temporary 'breach' hack as the API endpoint has been fixed
+* Update dependencies
+
 ## Version 1.0.4 *(2016-04-12)*
 
 * Changed temporary 'breach' hack to match author's intentions
