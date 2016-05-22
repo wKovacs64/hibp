@@ -2,5 +2,5 @@
 .npmignore
 .idea
 coverage
-lib/test
+test
 src

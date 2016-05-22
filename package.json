@@ -13,10 +13,11 @@
   "license": "MIT",
   "main": "lib/hibp.js",
   "scripts": {
-    "compile": "babel src --out-dir lib --source-maps",
-    "coverage": "npm run compile && istanbul cover node_modules/mocha/bin/_mocha lib/test -- -R spec",
+    "clean": "rm -rf ./lib ./coverage",
+    "compile": "npm run clean && babel src --out-dir lib --source-maps",
+    "coverage": "npm run compile && istanbul cover node_modules/mocha/bin/_mocha test -- -R spec",
     "prepublish": "npm run compile",
-    "test": "eslint src && npm run coverage"
+    "test": "eslint src test && npm run coverage"
   },
   "repository": {
     "type": "git",
