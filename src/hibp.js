@@ -1,4 +1,3 @@
-/* eslint valid-jsdoc: 2 */
 'use strict';
 
 // Enable source map support
