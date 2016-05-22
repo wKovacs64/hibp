@@ -15,7 +15,7 @@
   "scripts": {
     "clean": "rm -rf ./lib ./coverage",
     "compile": "npm run clean && babel src --out-dir lib --source-maps",
-    "coverage": "npm run compile && istanbul cover node_modules/mocha/bin/_mocha test -- -R spec",
+    "coverage": "npm run compile && istanbul cover node_modules/mocha/bin/_mocha -- -R spec lib/test",
     "prepublish": "npm run compile",
     "test": "eslint src test && npm run coverage"
   },

@@ -3,5 +3,5 @@
 .idea
 .travis.yml
 coverage
-test
+lib/test
 src

@@ -44,7 +44,7 @@ describe('hibp', () => {
       warnOnUnregistered: false
     });
     mockery.registerMock('node-fetch', fetchMock.fetchMock);
-    hibp = require('../lib/hibp');
+    hibp = require('../hibp');
   });
 
   afterEach(() => {
