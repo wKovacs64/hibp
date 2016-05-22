@@ -1,6 +1,7 @@
 .gitignore
 .npmignore
 .idea
+.travis.yml
 coverage
 test
 src
