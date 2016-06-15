@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 /* global describe, it, beforeEach, afterEach */
-'use strict';
 
 // Polyfill global Promise if necessary
+import {polyfill} from 'es6-promise';
 if (global.Promise === undefined) {
-  require('es6-promise').polyfill();
+  polyfill();
 }
 
-const expect = require('expect.js');
-const fetchMock = require('fetch-mock/es5/server');
-const mockery = require('mockery');
+import expect from 'expect.js';
+import fetchMock from 'fetch-mock/es5/server';
+import mockery from 'mockery';
 
 // Test data
 const URL_PATTERN = '^https://haveibeenpwned.com/api';

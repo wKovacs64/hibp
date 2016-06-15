@@ -1,4 +1,8 @@
 {
+  "auxiliaryCommentBefore": "istanbul ignore next",
+  "plugins": [
+    "add-module-exports"
+  ],
   "presets": [
     "es2015"
   ]

@@ -1,10 +1,8 @@
-'use strict';
-
 // Enable source map support
-require('source-map-support').install();
+import 'source-map-support/register';
 
-const pkg = require('../package.json');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+import * as pkg from '../package.json';
 
 const API_URL = 'https://haveibeenpwned.com/api';
 const REQ_HEADERS = {
@@ -44,7 +42,7 @@ function fetchFromApi (endpoint) {
 /**
  * HIBP - an interface to the haveibeenpwned.com API (version 2).
  */
-const HIBP = {
+export default {
   /**
    * Fetches breach data for the specified account.
    *
@@ -132,8 +130,3 @@ const HIBP = {
     });
   }
 };
-
-// CommonJS
-module.exports = HIBP;
-// ES2015 default export compatibility
-module.exports.default = HIBP;
