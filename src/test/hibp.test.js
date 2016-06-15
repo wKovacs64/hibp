@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-/* global describe, it, beforeEach, afterEach */
+/* global describe, it, before, after */
 
 // Polyfill global Promise if necessary
 import {polyfill} from 'es6-promise';
@@ -23,22 +23,23 @@ const EMAIL_PASTED = 'foo@bar.com';
 const EMAIL_CLEAN = 'baz@qux.com';
 const EMAIL_INVALID = 'foobar';
 
-// Configure mocked fetch calls and results
-fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_BREACHED}`, {});
-fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_CLEAN}`, 404);
-fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
-fetchMock.mock(`${URL_PATTERN}/breaches`, []);
-fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
-fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
-fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
-fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
-fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
-fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_INVALID}`, 400);
-
 describe('hibp', () => {
   let hibp;
 
-  beforeEach(() => {
+  before(() => {
+    // Configure mocked fetch calls and results
+    fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_BREACHED}`, {});
+    fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_CLEAN}`, 404);
+    fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
+    fetchMock.mock(`${URL_PATTERN}/breaches`, []);
+    fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
+    fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
+    fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
+    fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
+    fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
+    fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_INVALID}`, 400);
+
+    // Mock out node-fetch to prevent real network calls
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -47,8 +48,7 @@ describe('hibp', () => {
     hibp = require('../hibp');
   });
 
-  afterEach(() => {
-    hibp = undefined;
+  after(() => {
     mockery.deregisterMock('node-fetch');
     mockery.disable();
   });
