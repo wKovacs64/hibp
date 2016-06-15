@@ -1,5 +1,4 @@
 {
-  "auxiliaryCommentBefore": "istanbul ignore next",
   "plugins": [
     "add-module-exports"
   ],
