@@ -27,27 +27,6 @@
     "url": "https://github.com/wKovacs64/hibp/issues"
   },
   "homepage": "https://github.com/wKovacs64/hibp",
-  "eslintConfig": {
-    "ecmaFeatures": {
-      "blockBindings": true
-    },
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "extends": "semistandard",
-    "rules": {
-      "max-len": [
-        "error",
-        80
-      ]
-    }
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
   "engines": {
     "iojs": "*",
     "node": ">= 0.10"

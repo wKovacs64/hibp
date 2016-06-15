@@ -1,0 +1,16 @@
+{
+  "ecmaFeatures": {
+    "blockBindings": true
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "semistandard",
+  "rules": {
+    "max-len": [
+      "error",
+      80
+    ]
+  }
+}
