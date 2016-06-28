@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.0.6 *(2016-06-28)*
+
+* Increased visibility in npm search
+* Minor improvements to development environment
+
 ## Version 1.0.5 *(2016-04-22)*
 
 * Remove temporary 'breach' hack as the API endpoint has been fixed
