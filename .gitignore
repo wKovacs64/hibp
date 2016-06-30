@@ -149,3 +149,4 @@ sftp-config.json
 
 ### Babel output ###
 lib/
+lib-test/
