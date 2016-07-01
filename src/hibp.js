@@ -54,22 +54,20 @@ export default {
    * breach or resolves to undefined if no breaches were found
    */
   breachedAccount: (account, domain, truncateResults) => {
-    return new Promise((resolve, reject) => {
-      let endpoint = `${API_URL}/breachedaccount/${account}`;
-      if (typeof domain === 'boolean') {
-        truncateResults = domain;
-        domain = undefined;
+    let endpoint = `${API_URL}/breachedaccount/${account}`;
+    if (typeof domain === 'boolean') {
+      truncateResults = domain;
+      domain = undefined;
+    }
+    if (domain) {
+      endpoint += `?domain=${domain}`;
+      if (truncateResults) {
+        endpoint += '&truncateResponse=true';
       }
-      if (domain) {
-        endpoint += `?domain=${domain}`;
-        if (truncateResults) {
-          endpoint += '&truncateResponse=true';
-        }
-      } else if (truncateResults) {
-        endpoint += '?truncateResponse=true';
-      }
-      fetchFromApi(endpoint).then(resolve).catch(reject);
-    });
+    } else if (truncateResults) {
+      endpoint += '?truncateResponse=true';
+    }
+    return fetchFromApi(endpoint);
   },
 
   /**
@@ -80,13 +78,11 @@ export default {
    * or resolves to undefined if no breaches were found
    */
   breaches: (domain) => {
-    return new Promise((resolve, reject) => {
-      let endpoint = `${API_URL}/breaches`;
-      if (domain) {
-        endpoint += `?domain=${domain}`;
-      }
-      fetchFromApi(endpoint).then(resolve).catch(reject);
-    });
+    let endpoint = `${API_URL}/breaches`;
+    if (domain) {
+      endpoint += `?domain=${domain}`;
+    }
+    return fetchFromApi(endpoint);
   },
 
   /**
@@ -97,10 +93,7 @@ export default {
    * breach or resolves to undefined if no breaches were found
    */
   breach: (breachName) => {
-    return new Promise((resolve, reject) => {
-      let endpoint = `${API_URL}/breach/${breachName}`;
-      fetchFromApi(endpoint).then(resolve).catch(reject);
-    });
+    return fetchFromApi(`${API_URL}/breach/${breachName}`);
   },
 
   /**
@@ -110,10 +103,7 @@ export default {
    * resolves to undefined if no data classes were found
    */
   dataClasses: () => {
-    return new Promise((resolve, reject) => {
-      let endpoint = `${API_URL}/dataclasses`;
-      fetchFromApi(endpoint).then(resolve).catch(reject);
-    });
+    return fetchFromApi(`${API_URL}/dataclasses`);
   },
 
   /**
@@ -124,9 +114,6 @@ export default {
    * resolves to undefined if no pastes were found
    */
   pasteAccount: (email) => {
-    return new Promise((resolve, reject) => {
-      let endpoint = `${API_URL}/pasteaccount/${email}`;
-      fetchFromApi(endpoint).then(resolve).catch(reject);
-    });
+    return fetchFromApi(`${API_URL}/pasteaccount/${email}`);
   }
 };
