@@ -22,7 +22,7 @@ const REQ_HEADERS = {
  * @returns {Promise} the Promise for this Fetch
  */
 function fetchFromApi (endpoint) {
-  return fetch(endpoint, {headers: REQ_HEADERS})
+  return Promise.resolve(fetch(endpoint, {headers: REQ_HEADERS}))
       .then((res) => {
         if (res.ok) {
           return res.text();
