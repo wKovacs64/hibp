@@ -28,16 +28,16 @@ describe('hibp', () => {
 
   before(() => {
     // Configure mocked fetch calls and results
-    fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_BREACHED}`, {});
-    fetchMock.mock(`${URL_PATTERN}/breachedaccount/${ACCOUNT_CLEAN}`, 404);
-    fetchMock.mock(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
-    fetchMock.mock(`${URL_PATTERN}/breaches`, []);
-    fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
-    fetchMock.mock(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
-    fetchMock.mock(`${URL_PATTERN}/dataclasses`, []);
-    fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
-    fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
-    fetchMock.mock(`${URL_PATTERN}/pasteaccount/${EMAIL_INVALID}`, 400);
+    fetchMock.get(`${URL_PATTERN}/breachedaccount/${ACCOUNT_BREACHED}`, {});
+    fetchMock.get(`${URL_PATTERN}/breachedaccount/${ACCOUNT_CLEAN}`, 404);
+    fetchMock.get(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
+    fetchMock.get(`${URL_PATTERN}/breaches`, []);
+    fetchMock.get(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
+    fetchMock.get(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
+    fetchMock.get(`${URL_PATTERN}/dataclasses`, []);
+    fetchMock.get(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
+    fetchMock.get(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
+    fetchMock.get(`${URL_PATTERN}/pasteaccount/${EMAIL_INVALID}`, 400);
 
     // Mock out node-fetch to prevent real network calls
     mockery.enable({
