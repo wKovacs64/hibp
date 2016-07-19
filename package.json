@@ -21,10 +21,11 @@
     "clean": "npm run srcClean && npm run testClean",
     "compile": "npm run clean && npm run srcCompile && npm run testCompile",
     "coverage": "npm run compile && istanbul cover -x '**/lib-test/**' node_modules/mocha/bin/_mocha -- -R spec lib-test",
+    "lint": "eslint src test",
     "prepublish": "npm run srcClean && npm run srcCompile",
     "srcClean": "rm -rf ./lib",
     "srcCompile": "babel src --out-dir lib --source-maps",
-    "test": "eslint src test && npm run coverage",
+    "test": "npm run coverage",
     "testClean": "rm -rf ./lib-test ./coverage",
     "testCompile": "babel test --out-dir lib-test --source-maps"
   },
