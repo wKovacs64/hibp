@@ -34,7 +34,7 @@ Fetches all breached sites in the system.
 
 **Kind**: static method of <code>[HIBP](#HIBP)</code>  
 **Returns**: <code>Promise</code> - a Promise which resolves to an array of breach Objects
-or resolves to undefined if no breaches were found  
+(an empty array if no breaches were found)
 
 | Param | Type | Description |
 | --- | --- | --- |

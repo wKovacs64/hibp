@@ -75,7 +75,7 @@ export default {
    *
    * @param {string} [domain] a domain by which to filter the results
    * @returns {Promise} a Promise which resolves to an array of breach Objects
-   * or resolves to undefined if no breaches were found
+   * (an empty array if no breaches were found)
    */
   breaches: (domain) => {
     let endpoint = `${API_URL}/breaches`;
