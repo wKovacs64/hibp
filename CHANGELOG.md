@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 1.0.7 *(2016-07-21)*
+
+* Minor performance increase
+* Fixed API documentation for 'breaches' query
+* Updated dependencies
+
 ## Version 1.0.6 *(2016-06-28)*
 
 * Increased visibility in npm search
@@ -7,8 +13,8 @@
 
 ## Version 1.0.5 *(2016-04-22)*
 
-* Remove temporary 'breach' hack as the API endpoint has been fixed
-* Update dependencies
+* Removed temporary 'breach' hack as the API endpoint has been fixed
+* Updated dependencies
 
 ## Version 1.0.4 *(2016-04-12)*
 
@@ -22,7 +28,7 @@
 
 ## Version 1.0.3 *(2016-04-10)*
 
-* Update documentation
+* Updated documentation
 
 ## Version 1.0.2 *(2016-04-10)*
 
