@@ -20,7 +20,7 @@
   "scripts": {
     "clean": "npm run srcClean && npm run testClean",
     "compile": "npm run clean && npm run srcCompile && npm run testCompile",
-    "coverage": "npm run compile && istanbul cover -x '**/lib-test/**' node_modules/mocha/bin/_mocha -- -R spec lib-test",
+    "coverage": "npm run compile && istanbul cover -x \"**/lib-test/**\" node_modules/mocha/bin/_mocha -- -R spec lib-test",
     "lint": "eslint src test",
     "prepublish": "npm run srcClean && npm run srcCompile",
     "srcClean": "rimraf ./lib",
