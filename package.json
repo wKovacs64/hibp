@@ -20,7 +20,7 @@
   "scripts": {
     "clean": "npm run srcClean && npm run testClean",
     "compile": "npm run clean && npm run srcCompile && npm run testCompile",
-    "coverage": "npm run compile && istanbul cover -x \"**/lib-test/**\" node_modules/mocha/bin/_mocha -- -R spec lib-test",
+    "coverage": "npm run compile && nyc mocha --recursive lib-test",
     "lint": "eslint src test",
     "prepublish": "npm run srcClean && npm run srcCompile",
     "srcClean": "rimraf ./lib",
@@ -28,6 +28,16 @@
     "test": "npm run coverage",
     "testClean": "rimraf ./lib-test ./coverage",
     "testCompile": "babel test --out-dir lib-test --source-maps"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "**/lib/**"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
   },
   "repository": {
     "type": "git",
@@ -57,9 +67,9 @@
     "eslint-plugin-standard": "^2.0.0",
     "expect.js": "^0.3.1",
     "fetch-mock": "^5.0.2",
-    "istanbul": "^1.0.0-alpha.2",
     "mocha": "^2.5.3",
     "mockery": "^1.7.0",
+    "nyc": "^7.1.0-candidate3",
     "rimraf": "^2.5.4"
   }
 }

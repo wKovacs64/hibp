@@ -147,6 +147,10 @@ fabric.properties
 sftp-config.json
 
 
+### nyc output ###
+.nyc_output/
+
+
 ### Babel output ###
 lib/
 lib-test/
