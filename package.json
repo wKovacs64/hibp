@@ -70,7 +70,7 @@
     "fetch-mock": "^5.0.3",
     "mocha": "^2.5.3",
     "mockery": "^1.7.0",
-    "nyc": "^7.1.0-candidate3",
+    "nyc": "^7.1.0",
     "rimraf": "^2.5.4"
   }
 }
