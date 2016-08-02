@@ -1,7 +1,7 @@
 {
   "name": "hibp",
   "version": "1.0.8-dev.0",
-  "description": "A Node.js module for querying the 'Have I been pwned?' service.",
+  "description": "A Promise-based API for querying the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
     "hibp",

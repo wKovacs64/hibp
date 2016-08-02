@@ -1,6 +1,6 @@
 # hibp
 
-*A Node.js module for querying [Troy Hunt](http://www.troyhunt.com/)'s
+*A Promise-based API for querying [Troy Hunt](http://www.troyhunt.com/)'s
 [Have I been pwned?](https://haveibeenpwned.com/) service.*
 
 [![npm Version][npm-image]][npm-url]
@@ -27,7 +27,7 @@ npm install --save hibp
 ##### Get all breaches for an account:
 
 ```javascript
-const hibp = require('hibp');
+import hibp from 'hibp';
 
 hibp.breachedAccount('foo') // username or email
     .then(console.log)
@@ -37,7 +37,7 @@ hibp.breachedAccount('foo') // username or email
 ##### Get all breached sites in the system:
 
 ```javascript
-const hibp = require('hibp');
+import hibp from 'hibp';
 
 hibp.breaches()
     .then(console.log)
@@ -47,9 +47,9 @@ hibp.breaches()
 ##### Get a single breached site:
 
 ```javascript
-const hibp = require('hibp');
+import hibp from 'hibp';
 
-hibp.breach('Adobe') // breach name (not domain name)
+hibp.breach('Adobe')
     .then(console.log)
     .catch(console.error);
 ```
@@ -57,7 +57,7 @@ hibp.breach('Adobe') // breach name (not domain name)
 ##### Get all data classes:
 
 ```javascript
-const hibp = require('hibp');
+import hibp from 'hibp';
 
 hibp.dataClasses()
     .then(console.log)
@@ -67,7 +67,7 @@ hibp.dataClasses()
 ##### Get all pastes for an account:
 
 ```javascript
-const hibp = require('hibp');
+import hibp from 'hibp';
 
 hibp.pasteAccount('foo@bar.com') // email (not username)
     .then(console.log)
