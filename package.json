@@ -52,7 +52,7 @@
     "node": ">= 0.10"
   },
   "dependencies": {
-    "node-fetch": "^1.5.3",
+    "axios": "^0.13.1",
     "source-map-support": "^0.4.2"
   },
   "devDependencies": {
@@ -67,10 +67,10 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
     "expect.js": "^0.3.1",
-    "fetch-mock": "^5.0.5",
     "mocha": "^3.0.1",
-    "mockery": "^1.7.0",
+    "moxios": "^0.3.0",
     "nyc": "^7.1.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "sinon": "^1.17.5"
   }
 }
