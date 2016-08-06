@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 1.0.8 *(2016-08-06)*
+
+* Updated description and example usage
+* Switched test coverage from istanbul to nyc
+* Improved cross-platform compatibility for development
+* Updated dependencies
+
 ## Version 1.0.7 *(2016-07-21)*
 
 * Minor performance increase
