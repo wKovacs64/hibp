@@ -22,14 +22,14 @@ const hibp = {
    * Fetches data from the supplied API endpoint.
    *
    * HTTP status code 200 returns an Object (data found).
-   * HTTP status code 404 returns undefined (no data found).
+   * HTTP status code 404 returns null (no data found).
    * HTTP status code 400 throws an Error (bad request).
    * HTTP status code 403 throws an Error (forbidden).
    *
    * @private
    * @param {string} endpoint the API endpoint to query
    * @returns {Promise} a Promise which resolves to the data resulting from the
-   * query (or undefined for 404 Not Found responses), or rejects with an Error
+   * query (or null for 404 Not Found responses), or rejects with an Error
    */
   fetchFromApi: (endpoint) => {
     const ERR400 = 'Bad request — the account does not comply with an ' +
@@ -49,7 +49,7 @@ const hibp = {
               case 403:
                 throw new Error(ERR403);
               case 404:
-                return undefined;
+                return null;
             }
           } else {
             throw err;
@@ -65,7 +65,7 @@ const hibp = {
    * @param {boolean} [truncateResults] truncate the results to only include the
    * name of each breach (default: false)
    * @returns {Promise} a Promise which resolves to an Object representing a
-   * breach (or undefined if no breaches were found), or rejects with an Error
+   * breach (or null if no breaches were found), or rejects with an Error
    */
   breachedAccount: (account, domain, truncateResults) => {
     let endpoint = `/breachedaccount/${account}`;
@@ -104,7 +104,7 @@ const hibp = {
    *
    * @param {string} breachName the name of a breach in the system
    * @returns {Promise} a Promise which resolves to an Object representing a
-   * breach (or undefined if no breach was found), or rejects with an Error
+   * breach (or null if no breach was found), or rejects with an Error
    */
   breach: (breachName) => {
     return hibp.fetchFromApi(`/breach/${breachName}`);
@@ -114,7 +114,7 @@ const hibp = {
    * Fetches all data classes in the system.
    *
    * @returns {Promise} a Promise which resolves to an array of strings (or
-   * undefined if no data classes were found), or rejects with an Error
+   * null if no data classes were found), or rejects with an Error
    */
   dataClasses: () => {
     return hibp.fetchFromApi('/dataclasses');
@@ -125,7 +125,7 @@ const hibp = {
    *
    * @param {string} email the email address to query
    * @returns {Promise} a Promise which resolves to an array of paste Objects
-   * (or undefined if no pastes were found), or rejects with an Error
+   * (or null if no pastes were found), or rejects with an Error
    */
   pasteAccount: (email) => {
     return hibp.fetchFromApi(`/pasteaccount/${email}`);

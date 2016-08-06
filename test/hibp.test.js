@@ -25,7 +25,7 @@ const EMAIL_CLEAN = 'baz@qux.com';
 const EMAIL_INVALID = 'foobar';
 const RESPONSE_OBJ = {};
 const RESPONSE_ARY = [];
-const RESPONSE_CLEAN = undefined;
+const RESPONSE_CLEAN = null;
 const STATUS_200 = 200;
 const STATUS_400 = 400;
 const STATUS_403 = 403;
@@ -207,7 +207,7 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN)
           .then(handler)
@@ -228,7 +228,7 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN, true)
           .then(handler)
@@ -249,7 +249,7 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN)
           .then(handler)
@@ -271,7 +271,7 @@ describe('hibp', () => {
           done();
         });
 
-        it('should resolve with undefined', (done) => {
+        it('should resolve with null', (done) => {
           const handler = sinon.spy();
           hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN, true)
               .then(handler)
@@ -380,7 +380,7 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breach(BREACH_NOT_FOUND)
           .then(handler)
@@ -443,7 +443,7 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.pasteAccount(EMAIL_CLEAN)
           .then(handler)
