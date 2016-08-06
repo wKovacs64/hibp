@@ -76,7 +76,7 @@ hibp.pasteAccount('foo@bar.com') // email (not username)
 
 #### Detailed Usage
 
-For more in-depth usage information, see the [JSDoc comments](JSDOC.md).
+For in-depth usage information, see the [JSDoc comments](JSDOC.md).
 
 #### Using in Node.js < 0.12
 
@@ -96,9 +96,11 @@ var hibp = require('hibp');
 
 ## Projects Using hibp
 
-* [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying the 'Have I been pwned?' service
+* [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying
+  the 'Have I been pwned?' service
 
-Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add yours to the list.
+Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add
+yours to the list.
 
 ## License
 
