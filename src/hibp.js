@@ -68,6 +68,18 @@ const hibp = {
    * the name of each breach (default: false)
    * @returns {Promise} a Promise which resolves to an Object representing a
    * breach (or null if no breaches were found), or rejects with an Error
+   * @example
+   * hibp.breachedAccount('foo')
+   *     .then(console.log)
+   *     .catch(console.error);
+   * @example
+   * hibp.breachedAccount('bar', {truncate: true})
+   *     .then(console.log)
+   *     .catch(console.error);
+   * @example
+   * hibp.breachedAccount('baz', {domain: 'adobe.com', truncate: true})
+   *     .then(console.log)
+   *     .catch(console.error);
    */
   breachedAccount: (account, options) => {
     options = options || {};
@@ -91,6 +103,14 @@ const hibp = {
    * (default: all domains)
    * @returns {Promise} a Promise which resolves to an array of breach Objects
    * (an empty array if no breaches were found), or rejects with an Error
+   * @example
+   * hibp.breaches()
+   *     .then(console.log)
+   *     .catch(console.error);
+   * @example
+   * hibp.breaches({domain: 'adobe.com'})
+   *     .then(console.log)
+   *     .catch(console.error);
    */
   breaches: (options) => {
     options = options || {};
@@ -107,6 +127,10 @@ const hibp = {
    * @param {string} breachName the name of a breach in the system
    * @returns {Promise} a Promise which resolves to an Object representing a
    * breach (or null if no breach was found), or rejects with an Error
+   * @example
+   * hibp.breach('Adobe')
+   *     .then(console.log)
+   *     .catch(console.error);
    */
   breach: (breachName) => {
     return hibp.fetchFromApi(`/breach/${breachName}`);
@@ -117,6 +141,10 @@ const hibp = {
    *
    * @returns {Promise} a Promise which resolves to an array of strings (or
    * null if no data classes were found), or rejects with an Error
+   * @example
+   * hibp.dataClasses()
+   *     .then(console.log)
+   *     .catch(console.error);
    */
   dataClasses: () => {
     return hibp.fetchFromApi('/dataclasses');
@@ -128,6 +156,10 @@ const hibp = {
    * @param {string} email the email address to query
    * @returns {Promise} a Promise which resolves to an array of paste Objects
    * (or null if no pastes were found), or rejects with an Error
+   * @example
+   * hibp.pasteAccount('foo@bar.com')
+   *     .then(console.log)
+   *     .catch(console.error);
    */
   pasteAccount: (email) => {
     return hibp.fetchFromApi(`/pasteaccount/${email}`);
