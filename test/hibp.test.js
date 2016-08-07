@@ -8,12 +8,13 @@ if (global.Promise === undefined) {
 }
 
 import expect from 'expect.js';
-import fetchMock from 'fetch-mock/es5/server';
-import mockery from 'mockery';
+import moxios from 'moxios';
+import sinon from 'sinon';
+import hibp from '../lib/hibp';
 
 // Test data
-const URL_PATTERN = '^https://haveibeenpwned.com/api';
-const INVALID_HEADER = 'invalidheader';
+const ERR_MSG = 'Set sail for fail!';
+const INVALID_HEADER = 'baz';
 const DOMAIN = 'foo.bar';
 const ACCOUNT_BREACHED = 'foo';
 const ACCOUNT_CLEAN = 'bar';
@@ -22,35 +23,98 @@ const BREACH_NOT_FOUND = 'bar';
 const EMAIL_PASTED = 'foo@bar.com';
 const EMAIL_CLEAN = 'baz@qux.com';
 const EMAIL_INVALID = 'foobar';
+const OPTS_DOM = {domain: DOMAIN};
+const OPTS_TRUNC = {truncate: true};
+const OPTS_DOM_TRUNC = {domain: DOMAIN, truncate: true};
+const RESPONSE_OBJ = {};
+const RESPONSE_ARY = [];
+const RESPONSE_CLEAN = null;
+const STATUS_200 = 200;
+const STATUS_400 = 400;
+const STATUS_403 = 403;
+const STATUS_404 = 404;
 
 describe('hibp', () => {
-  let hibp;
-
   before(() => {
-    // Configure mocked fetch calls and results
-    fetchMock.get(`${URL_PATTERN}/breachedaccount/${ACCOUNT_BREACHED}`, {});
-    fetchMock.get(`${URL_PATTERN}/breachedaccount/${ACCOUNT_CLEAN}`, 404);
-    fetchMock.get(`${URL_PATTERN}/breachedaccount/${INVALID_HEADER}`, 403);
-    fetchMock.get(`${URL_PATTERN}/breaches`, []);
-    fetchMock.get(`${URL_PATTERN}/breach/${BREACH_FOUND}`, {});
-    fetchMock.get(`${URL_PATTERN}/breach/${BREACH_NOT_FOUND}`, 404);
-    fetchMock.get(`${URL_PATTERN}/dataclasses`, []);
-    fetchMock.get(`${URL_PATTERN}/pasteaccount/${EMAIL_PASTED}`, []);
-    fetchMock.get(`${URL_PATTERN}/pasteaccount/${EMAIL_CLEAN}`, 404);
-    fetchMock.get(`${URL_PATTERN}/pasteaccount/${EMAIL_INVALID}`, 400);
+    moxios.install(hibp.axios);
 
-    // Mock out node-fetch to prevent real network calls
-    mockery.enable({
-      useCleanCache: true,
-      warnOnUnregistered: false
-    });
-    mockery.registerMock('node-fetch', fetchMock.fetchMock);
-    hibp = require('../lib/hibp');
+    // Configure mocked API calls and results
+    moxios.stubRequest(
+        new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
+          status: STATUS_200,
+          response: RESPONSE_OBJ
+        });
+    moxios.stubRequest(
+        new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
+          status: STATUS_404
+        });
+    moxios.stubRequest(
+        new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
+          status: STATUS_403
+        });
+    moxios.stubRequest(
+        new RegExp('/breaches\\??'), {
+          status: STATUS_200,
+          response: RESPONSE_ARY
+        });
+    moxios.stubRequest(
+        new RegExp(`/breach/${BREACH_FOUND}`), {
+          status: STATUS_200,
+          response: RESPONSE_OBJ
+        });
+    moxios.stubRequest(
+        new RegExp(`/breach/${BREACH_NOT_FOUND}`), {
+          status: STATUS_404
+        });
+    moxios.stubRequest(
+        new RegExp('/dataclasses'), {
+          status: STATUS_200,
+          response: RESPONSE_ARY
+        });
+    moxios.stubRequest(
+        new RegExp(`/pasteaccount/${EMAIL_PASTED}`), {
+          status: STATUS_200,
+          response: RESPONSE_ARY
+        });
+    moxios.stubRequest(
+        new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
+          status: STATUS_404
+        });
+    moxios.stubRequest(
+        new RegExp(`/pasteaccount/${EMAIL_INVALID}`), {
+          status: STATUS_400
+        });
   });
 
   after(() => {
-    mockery.deregisterMock('node-fetch');
-    mockery.disable();
+    moxios.uninstall(hibp.axios);
+  });
+
+  describe('fetchFromApi', () => {
+    let failboat;
+
+    before(() => {
+      failboat = hibp.axios.interceptors.request.use(() => {
+        throw new Error(ERR_MSG);
+      });
+    });
+
+    after(() => {
+      hibp.axios.interceptors.request.eject(failboat);
+    });
+
+    it('should re-throw request setup errors', (done) => {
+      const handler = sinon.spy();
+      hibp.dataClasses()
+          .then(handler)
+          .catch((err) => {
+            expect(handler.called).to.be(false);
+            expect(err).to.be.an(Error);
+            expect(err.message).to.match(new RegExp(`^${ERR_MSG}$`));
+            done();
+          })
+          .catch(done);
+    });
   });
 
   describe('breachedAccount (breached account, no parameters)', () => {
@@ -62,9 +126,12 @@ describe('hibp', () => {
     });
 
     it('should resolve with an object', (done) => {
+      const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_BREACHED)
-          .then((breachData) => {
-            expect(breachData).to.be.an('object');
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
             done();
           })
           .catch(done);
@@ -73,16 +140,19 @@ describe('hibp', () => {
 
   describe('breachedAccount (breached account, with truncateResults)', () => {
     it('should return a Promise', (done) => {
-      let truncatedQuery = hibp.breachedAccount(ACCOUNT_BREACHED, true);
+      let truncatedQuery = hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC);
       expect(truncatedQuery).to.be.a(Promise);
       expect(truncatedQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breachedAccount(ACCOUNT_BREACHED, true)
-          .then((breachData) => {
-            expect(breachData).to.be.an('object');
+      const handler = sinon.spy();
+      hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
             done();
           })
           .catch(done);
@@ -91,35 +161,41 @@ describe('hibp', () => {
 
   describe('breachedAccount (breached account, with domain)', () => {
     it('should return a Promise', (done) => {
-      let filteredQuery = hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN);
+      let filteredQuery = hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM);
       expect(filteredQuery).to.be.a(Promise);
       expect(filteredQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN)
-          .then((breachData) => {
-            expect(breachData).to.be.an('object');
+      const handler = sinon.spy();
+      hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
             done();
           })
           .catch(done);
     });
   });
 
-  describe('breachedAccount (breached account, with domain and' +
-      ' truncateResults)', () => {
+  describe('breachedAccount (breached account, with domain and ' +
+      'truncateResults)', () => {
     it('should return a Promise', (done) => {
-      let comboQuery = hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN, true);
+      let comboQuery = hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC);
       expect(comboQuery).to.be.a(Promise);
       expect(comboQuery).to.have.property('then');
       done();
     });
 
     it('should resolve with an object', (done) => {
-      hibp.breachedAccount(ACCOUNT_BREACHED, DOMAIN, true)
-          .then((breachData) => {
-            expect(breachData).to.be.an('object');
+      const handler = sinon.spy();
+      hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
             done();
           })
           .catch(done);
@@ -134,10 +210,13 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
+      const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN)
-          .then((breachData) => {
-            expect(breachData).to.be(undefined);
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
             done();
           })
           .catch(done);
@@ -146,16 +225,19 @@ describe('hibp', () => {
 
   describe('breachedAccount (clean account, with truncateResults)', () => {
     it('should return a Promise', (done) => {
-      let truncatedQuery = hibp.breachedAccount(ACCOUNT_CLEAN, true);
+      let truncatedQuery = hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC);
       expect(truncatedQuery).to.be.a(Promise);
       expect(truncatedQuery).to.have.property('then');
       done();
     });
 
-    it('should resolve with undefined', (done) => {
-      hibp.breachedAccount(ACCOUNT_CLEAN, true)
-          .then((breachData) => {
-            expect(breachData).to.be(undefined);
+    it('should resolve with null', (done) => {
+      const handler = sinon.spy();
+      hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
             done();
           })
           .catch(done);
@@ -164,16 +246,19 @@ describe('hibp', () => {
 
   describe('breachedAccount (clean account, with domain)', () => {
     it('should return a Promise', (done) => {
-      let filteredQuery = hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN);
+      let filteredQuery = hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM);
       expect(filteredQuery).to.be.a(Promise);
       expect(filteredQuery).to.have.property('then');
       done();
     });
 
-    it('should resolve with undefined', (done) => {
-      hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN)
-          .then((breachData) => {
-            expect(breachData).to.be(undefined);
+    it('should resolve with null', (done) => {
+      const handler = sinon.spy();
+      hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
             done();
           })
           .catch(done);
@@ -183,16 +268,19 @@ describe('hibp', () => {
   describe('breachedAccount (clean account, with domain and truncateResults)',
       () => {
         it('should return a Promise', (done) => {
-          let comboQuery = hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN, true);
+          let comboQuery = hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC);
           expect(comboQuery).to.be.a(Promise);
           expect(comboQuery).to.have.property('then');
           done();
         });
 
-        it('should resolve with undefined', (done) => {
-          hibp.breachedAccount(ACCOUNT_CLEAN, DOMAIN, true)
-              .then((breachData) => {
-                expect(breachData).to.be(undefined);
+        it('should resolve with null', (done) => {
+          const handler = sinon.spy();
+          hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
+              .then(handler)
+              .then(() => {
+                expect(handler.calledOnce).to.be(true);
+                expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
                 done();
               })
               .catch(done);
@@ -208,8 +296,15 @@ describe('hibp', () => {
     });
 
     it('should throw an Error starting with "Forbidden"', (done) => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
       hibp.breachedAccount(INVALID_HEADER)
-          .catch((err) => {
+          .then(handler)
+          .catch(errorHandler)
+          .then(() => {
+            expect(handler.called).to.be(false);
+            expect(errorHandler.calledOnce).to.be(true);
+            const err = errorHandler.getCall(0).args[0];
             expect(err.message).to.match(/^Forbidden/);
             done();
           })
@@ -226,9 +321,12 @@ describe('hibp', () => {
     });
 
     it('should resolve with an array', (done) => {
+      const handler = sinon.spy();
       hibp.breaches()
-          .then((breachData) => {
-            expect(breachData).to.be.an('array');
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
             done();
           })
           .catch(done);
@@ -237,16 +335,19 @@ describe('hibp', () => {
 
   describe('breaches (with domain)', () => {
     it('should return a Promise', (done) => {
-      let query = hibp.breaches(DOMAIN);
+      let query = hibp.breaches(OPTS_DOM);
       expect(query).to.be.a(Promise);
       expect(query).to.have.property('then');
       done();
     });
 
     it('should resolve with an array', (done) => {
-      hibp.breaches('adobe.com')
-          .then((breachData) => {
-            expect(breachData).to.be.an('array');
+      const handler = sinon.spy();
+      hibp.breaches(OPTS_DOM)
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
             done();
           })
           .catch(done);
@@ -262,9 +363,12 @@ describe('hibp', () => {
     });
 
     it('should resolve with an object', (done) => {
+      const handler = sinon.spy();
       hibp.breach(BREACH_FOUND)
-          .then((breachData) => {
-            expect(breachData).to.be.an('object');
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
             done();
           })
           .catch(done);
@@ -279,10 +383,13 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
+      const handler = sinon.spy();
       hibp.breach(BREACH_NOT_FOUND)
-          .then((breachData) => {
-            expect(breachData).to.be(undefined);
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
             done();
           })
           .catch(done);
@@ -298,9 +405,12 @@ describe('hibp', () => {
     });
 
     it('should resolve with an array', (done) => {
+      const handler = sinon.spy();
       hibp.dataClasses()
-          .then((dataClasses) => {
-            expect(dataClasses).to.be.an('array');
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
             done();
           })
           .catch(done);
@@ -316,9 +426,12 @@ describe('hibp', () => {
     });
 
     it('should resolve with an array', (done) => {
+      const handler = sinon.spy();
       hibp.pasteAccount(EMAIL_PASTED)
-          .then((pasteData) => {
-            expect(pasteData).to.be.an('array');
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
             done();
           })
           .catch(done);
@@ -333,10 +446,13 @@ describe('hibp', () => {
       done();
     });
 
-    it('should resolve with undefined', (done) => {
+    it('should resolve with null', (done) => {
+      const handler = sinon.spy();
       hibp.pasteAccount(EMAIL_CLEAN)
-          .then((pasteData) => {
-            expect(pasteData).to.be(undefined);
+          .then(handler)
+          .then(() => {
+            expect(handler.calledOnce).to.be(true);
+            expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
             done();
           })
           .catch(done);
@@ -352,11 +468,19 @@ describe('hibp', () => {
     });
 
     it('should throw an Error starting with "Bad request"', (done) => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
       hibp.pasteAccount(EMAIL_INVALID)
-          .catch((err) => {
+          .then(handler)
+          .catch(errorHandler)
+          .then(() => {
+            expect(handler.called).to.be(false);
+            expect(errorHandler.calledOnce).to.be(true);
+            const err = errorHandler.getCall(0).args[0];
             expect(err.message).to.match(/^Bad request/);
             done();
-          });
+          })
+          .catch(done);
     });
   });
 });

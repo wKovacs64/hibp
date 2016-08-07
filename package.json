@@ -1,6 +1,6 @@
 {
   "name": "hibp",
-  "version": "1.0.8",
+  "version": "2.0.0-dev.0",
   "description": "A Promise-based API for querying the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
@@ -17,20 +17,25 @@
   "contributors": [],
   "license": "MIT",
   "main": "lib/hibp.js",
+  "browser": "lib/hibp.min.js",
   "scripts": {
     "clean": "npm run srcClean && npm run testClean",
-    "compile": "npm run clean && npm run srcCompile && npm run testCompile",
-    "coverage": "npm run compile && nyc mocha --recursive lib-test",
+    "compile": "npm run srcCompile && npm run testCompile",
+    "coverage": "nyc mocha --recursive lib-test",
     "lint": "eslint src test",
     "prepublish": "npm run srcClean && npm run srcCompile",
     "srcClean": "rimraf ./lib",
-    "srcCompile": "babel src --out-dir lib --source-maps",
-    "test": "npm run coverage",
+    "srcCompile": "babel src --out-dir lib --source-maps && npm run webpack",
+    "test": "npm run clean && npm run compile && npm run coverage",
     "testClean": "rimraf ./lib-test ./coverage",
-    "testCompile": "babel test --out-dir lib-test --source-maps"
+    "testCompile": "babel test --out-dir lib-test --source-maps",
+    "webpack": "webpack -p"
   },
   "nyc": {
     "all": true,
+    "exclude": [
+      "**/lib/**.min.**"
+    ],
     "include": [
       "**/lib/**"
     ],
@@ -52,11 +57,12 @@
     "node": ">= 0.10"
   },
   "dependencies": {
-    "node-fetch": "^1.5.3",
+    "axios": "^0.13.1",
     "source-map-support": "^0.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
+    "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.13.2",
     "coveralls": "^2.11.12",
@@ -67,10 +73,11 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
     "expect.js": "^0.3.1",
-    "fetch-mock": "^5.0.5",
     "mocha": "^3.0.1",
-    "mockery": "^1.7.0",
+    "moxios": "^0.3.0",
     "nyc": "^7.1.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "sinon": "^1.17.5",
+    "webpack": "^1.13.1"
   }
 }
