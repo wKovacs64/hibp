@@ -1,5 +1,18 @@
 # Change Log
 
+## Version 2.0.0 *(2016-08-07)*
+
+##### New:
+
+* Added browser support
+
+##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
+
+* Changed API methods to resolve to null instead of undefined when no data was
+  found
+* Changed API methods to take a configuration object rather than optional,
+  positional parameters
+
 ## Version 1.0.8 *(2016-08-06)*
 
 * Updated description and example usage

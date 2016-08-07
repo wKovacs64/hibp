@@ -1,6 +1,6 @@
 {
   "name": "hibp",
-  "version": "2.0.0-dev.0",
+  "version": "2.0.0",
   "description": "A Promise-based API for querying the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
