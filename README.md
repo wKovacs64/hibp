@@ -33,59 +33,8 @@ Browser via CDN:
 
 ## Usage
 
-##### Get all breaches for an account:
-
-```javascript
-import hibp from 'hibp';
-
-hibp.breachedAccount('foo') // username or email
-    .then(console.log)
-    .catch(console.error);
-```
-
-##### Get all breached sites in the system:
-
-```javascript
-import hibp from 'hibp';
-
-hibp.breaches()
-    .then(console.log)
-    .catch(console.error);
-```
-
-##### Get a single breached site:
-
-```javascript
-import hibp from 'hibp';
-
-hibp.breach('Adobe')
-    .then(console.log)
-    .catch(console.error);
-```
-
-##### Get all data classes:
-
-```javascript
-import hibp from 'hibp';
-
-hibp.dataClasses()
-    .then(console.log)
-    .catch(console.error);
-```
-
-##### Get all pastes for an account:
-
-```javascript
-import hibp from 'hibp';
-
-hibp.pasteAccount('foo@bar.com') // email (not username)
-    .then(console.log)
-    .catch(console.error);
-```
-
-#### Detailed Usage
-
-For in-depth usage information, see the [JSDoc comments](JSDOC.md).
+Please see the [API reference](API.md) for detailed usage information and
+examples.
 
 #### Using in Node.js < 0.12
 
