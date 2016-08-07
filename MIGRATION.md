@@ -23,3 +23,22 @@
   [MDN](https://goo.gl/n85RSe):
   > In APIs, null is often retrieved in place where an object can be expected
   > but no object is relevant.
+
+* All API methods that previously took optional, positional parameters like
+  `domain` and `truncateResults` now take an options object instead. For
+  example:
+
+  1.0.8 (old):
+  ```javascript
+  hibp.breachedAccount(account, 'adobe.com', true)
+      .then(/* ... */);
+  ```
+
+  2.0.0 (new):
+  ```javascript
+  hibp.breachedAccount(account, {domain: 'adobe.com', truncate: true})
+      .then(/* ... */);
+  ```
+
+  This change was made to make the API more expressive and reduce ambiguity. See
+  the API documentation (or JSDoc comments) for details.

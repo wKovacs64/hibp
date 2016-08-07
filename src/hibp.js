@@ -61,24 +61,23 @@ const hibp = {
    * Fetches breach data for the specified account.
    *
    * @param {string} account a username or email address
-   * @param {string} [domain] a domain by which to filter the results
-   * @param {boolean} [truncateResults] truncate the results to only include the
-   * name of each breach (default: false)
+   * @param {Object} [options] a configuration object
+   * @param {string} [options.domain] a domain by which to filter the results
+   * (default: all domains)
+   * @param {boolean} [options.truncate] truncate the results to only include
+   * the name of each breach (default: false)
    * @returns {Promise} a Promise which resolves to an Object representing a
    * breach (or null if no breaches were found), or rejects with an Error
    */
-  breachedAccount: (account, domain, truncateResults) => {
+  breachedAccount: (account, options) => {
+    options = options || {};
     let endpoint = `/breachedaccount/${account}`;
-    if (typeof domain === 'boolean') {
-      truncateResults = domain;
-      domain = undefined;
-    }
-    if (domain) {
-      endpoint += `?domain=${domain}`;
-      if (truncateResults) {
+    if (options.domain) {
+      endpoint += `?domain=${options.domain}`;
+      if (options.truncate) {
         endpoint += '&truncateResponse=true';
       }
-    } else if (truncateResults) {
+    } else if (options.truncate) {
       endpoint += '?truncateResponse=true';
     }
     return hibp.fetchFromApi(endpoint);
@@ -87,14 +86,17 @@ const hibp = {
   /**
    * Fetches all breached sites in the system.
    *
-   * @param {string} [domain] a domain by which to filter the results
+   * @param {Object} [options] a configuration object
+   * @param {string} [options.domain] a domain by which to filter the results
+   * (default: all domains)
    * @returns {Promise} a Promise which resolves to an array of breach Objects
    * (an empty array if no breaches were found), or rejects with an Error
    */
-  breaches: (domain) => {
+  breaches: (options) => {
+    options = options || {};
     let endpoint = '/breaches';
-    if (domain) {
-      endpoint += `?domain=${domain}`;
+    if (options.domain) {
+      endpoint += `?domain=${options.domain}`;
     }
     return hibp.fetchFromApi(endpoint);
   },
