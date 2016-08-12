@@ -6,7 +6,7 @@ if (global.Promise === undefined) {
 import expect from 'expect.js';
 import moxios from 'moxios';
 import sinon from 'sinon';
-import hibp from '../lib/hibp';
+import hibp from '../src/hibp';
 
 // Test data
 const ERR_MSG = 'Set sail for fail!';
