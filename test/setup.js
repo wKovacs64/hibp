@@ -3,6 +3,13 @@ if (global.Promise === undefined) {
   polyfill();
 }
 
+import moxios from 'moxios';
+import hibp from '../src/hibp';
+
+const STATUS_200 = 200;
+const STATUS_400 = 400;
+const STATUS_403 = 403;
+const STATUS_404 = 404;
 const DOMAIN = 'foo.bar';
 
 export const ERR = new Error('Set sail for fail!');
@@ -20,7 +27,58 @@ export const OPTS_DOM_TRUNC = {domain: DOMAIN, truncate: true};
 export const RESPONSE_OBJ = {};
 export const RESPONSE_ARY = [];
 export const RESPONSE_CLEAN = null;
-export const STATUS_200 = 200;
-export const STATUS_400 = 400;
-export const STATUS_403 = 403;
-export const STATUS_404 = 404;
+
+before(() => {
+  moxios.install(hibp.axios);
+
+  // Configure mocked API calls and results
+  moxios.stubRequest(
+      new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
+        status: STATUS_200,
+        response: RESPONSE_OBJ
+      });
+  moxios.stubRequest(
+      new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
+        status: STATUS_404
+      });
+  moxios.stubRequest(
+      new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
+        status: STATUS_403
+      });
+  moxios.stubRequest(
+      new RegExp('/breaches\\??'), {
+        status: STATUS_200,
+        response: RESPONSE_ARY
+      });
+  moxios.stubRequest(
+      new RegExp(`/breach/${BREACH_FOUND}`), {
+        status: STATUS_200,
+        response: RESPONSE_OBJ
+      });
+  moxios.stubRequest(
+      new RegExp(`/breach/${BREACH_NOT_FOUND}`), {
+        status: STATUS_404
+      });
+  moxios.stubRequest(
+      new RegExp('/dataclasses'), {
+        status: STATUS_200,
+        response: RESPONSE_ARY
+      });
+  moxios.stubRequest(
+      new RegExp(`/pasteaccount/${EMAIL_PASTED}`), {
+        status: STATUS_200,
+        response: RESPONSE_ARY
+      });
+  moxios.stubRequest(
+      new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
+        status: STATUS_404
+      });
+  moxios.stubRequest(
+      new RegExp(`/pasteaccount/${EMAIL_INVALID}`), {
+        status: STATUS_400
+      });
+});
+
+after(() => {
+  moxios.uninstall(hibp.axios);
+});

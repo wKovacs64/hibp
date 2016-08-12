@@ -1,5 +1,4 @@
 import expect from 'expect.js';
-import moxios from 'moxios';
 import sinon from 'sinon';
 import hibp from '../src/hibp';
 import {
@@ -17,69 +16,10 @@ import {
     OPTS_DOM_TRUNC,
     RESPONSE_OBJ,
     RESPONSE_ARY,
-    RESPONSE_CLEAN,
-    STATUS_200,
-    STATUS_400,
-    STATUS_403,
-    STATUS_404
+    RESPONSE_CLEAN
 } from './setup';
 
 describe('hibp', () => {
-  before(() => {
-    moxios.install(hibp.axios);
-
-    // Configure mocked API calls and results
-    moxios.stubRequest(
-        new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
-          status: STATUS_200,
-          response: RESPONSE_OBJ
-        });
-    moxios.stubRequest(
-        new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
-          status: STATUS_404
-        });
-    moxios.stubRequest(
-        new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
-          status: STATUS_403
-        });
-    moxios.stubRequest(
-        new RegExp('/breaches\\??'), {
-          status: STATUS_200,
-          response: RESPONSE_ARY
-        });
-    moxios.stubRequest(
-        new RegExp(`/breach/${BREACH_FOUND}`), {
-          status: STATUS_200,
-          response: RESPONSE_OBJ
-        });
-    moxios.stubRequest(
-        new RegExp(`/breach/${BREACH_NOT_FOUND}`), {
-          status: STATUS_404
-        });
-    moxios.stubRequest(
-        new RegExp('/dataclasses'), {
-          status: STATUS_200,
-          response: RESPONSE_ARY
-        });
-    moxios.stubRequest(
-        new RegExp(`/pasteaccount/${EMAIL_PASTED}`), {
-          status: STATUS_200,
-          response: RESPONSE_ARY
-        });
-    moxios.stubRequest(
-        new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
-          status: STATUS_404
-        });
-    moxios.stubRequest(
-        new RegExp(`/pasteaccount/${EMAIL_INVALID}`), {
-          status: STATUS_400
-        });
-  });
-
-  after(() => {
-    moxios.uninstall(hibp.axios);
-  });
-
   describe('fetchFromApi', () => {
     let failboat;
 
