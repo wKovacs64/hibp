@@ -9,7 +9,7 @@ import sinon from 'sinon';
 import hibp from '../src/hibp';
 
 // Test data
-const ERR_MSG = 'Set sail for fail!';
+const ERR = new Error('Set sail for fail!');
 const INVALID_HEADER = 'baz';
 const DOMAIN = 'foo.bar';
 const ACCOUNT_BREACHED = 'foo';
@@ -91,7 +91,7 @@ describe('hibp', () => {
 
     before(() => {
       failboat = hibp.axios.interceptors.request.use(() => {
-        throw new Error(ERR_MSG);
+        throw ERR;
       });
     });
 
@@ -101,12 +101,15 @@ describe('hibp', () => {
 
     it('should re-throw request setup errors', (done) => {
       const handler = sinon.spy();
+      const errorHandler = sinon.spy();
       hibp.dataClasses()
           .then(handler)
-          .catch((err) => {
+          .catch(errorHandler)
+          .then(() => {
             expect(handler.called).to.be(false);
-            expect(err).to.be.an(Error);
-            expect(err.message).to.match(new RegExp(`^${ERR_MSG}$`));
+            expect(errorHandler.calledOnce).to.be(true);
+            const err = errorHandler.getCall(0).args[0];
+            expect(err).to.be(ERR);
             done();
           })
           .catch(done);
