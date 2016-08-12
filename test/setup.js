@@ -29,7 +29,7 @@ export const RESPONSE_ARY = [];
 export const RESPONSE_CLEAN = null;
 
 before(() => {
-  moxios.install(hibp.axios);
+  moxios.install(hibp._axios);
 
   // Configure mocked API calls and results
   moxios.stubRequest(
@@ -80,5 +80,5 @@ before(() => {
 });
 
 after(() => {
-  moxios.uninstall(hibp.axios);
+  moxios.uninstall(hibp._axios);
 });

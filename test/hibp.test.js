@@ -20,17 +20,17 @@ import {
 } from './setup';
 
 describe('hibp', () => {
-  describe('fetchFromApi', () => {
+  describe('_fetchFromApi', () => {
     let failboat;
 
     before(() => {
-      failboat = hibp.axios.interceptors.request.use(() => {
+      failboat = hibp._axios.interceptors.request.use(() => {
         throw ERR;
       });
     });
 
     after(() => {
-      hibp.axios.interceptors.request.eject(failboat);
+      hibp._axios.interceptors.request.eject(failboat);
     });
 
     it('should re-throw request setup errors', (done) => {

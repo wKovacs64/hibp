@@ -11,7 +11,7 @@ const hibp = {
    * @private
    * @type {axios.AxiosInstance}
    */
-  axios: Axios.create({
+  _axios: Axios.create({
     baseURL: 'https://haveibeenpwned.com/api',
     headers: {
       'Accept': 'application/vnd.haveibeenpwned.v2+json'
@@ -31,13 +31,13 @@ const hibp = {
    * @returns {Promise} a Promise which resolves to the data resulting from the
    * query (or null for 404 Not Found responses), or rejects with an Error
    */
-  fetchFromApi: (endpoint) => {
+  _fetchFromApi: (endpoint) => {
     const ERR400 = 'Bad request — the account does not comply with an ' +
         'acceptable format.';
     const ERR403 = 'Forbidden - no user agent has been specified in the ' +
         'request.';
     return Promise
-        .resolve(hibp.axios.get(endpoint))
+        .resolve(hibp._axios.get(endpoint))
         .then((res) => {
           return res.data;
         })
@@ -92,7 +92,7 @@ const hibp = {
     } else if (options.truncate) {
       endpoint += '?truncateResponse=true';
     }
-    return hibp.fetchFromApi(endpoint);
+    return hibp._fetchFromApi(endpoint);
   },
 
   /**
@@ -118,7 +118,7 @@ const hibp = {
     if (options.domain) {
       endpoint += `?domain=${options.domain}`;
     }
-    return hibp.fetchFromApi(endpoint);
+    return hibp._fetchFromApi(endpoint);
   },
 
   /**
@@ -133,7 +133,7 @@ const hibp = {
    *     .catch(console.error);
    */
   breach: (breachName) => {
-    return hibp.fetchFromApi(`/breach/${breachName}`);
+    return hibp._fetchFromApi(`/breach/${breachName}`);
   },
 
   /**
@@ -147,7 +147,7 @@ const hibp = {
    *     .catch(console.error);
    */
   dataClasses: () => {
-    return hibp.fetchFromApi('/dataclasses');
+    return hibp._fetchFromApi('/dataclasses');
   },
 
   /**
@@ -162,7 +162,7 @@ const hibp = {
    *     .catch(console.error);
    */
   pasteAccount: (email) => {
-    return hibp.fetchFromApi(`/pasteaccount/${email}`);
+    return hibp._fetchFromApi(`/pasteaccount/${email}`);
   }
 };
 
