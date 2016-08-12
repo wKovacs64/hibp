@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-/* global describe, it, before, after */
-
-// Polyfill global Promise if necessary
 import {polyfill} from 'es6-promise';
 if (global.Promise === undefined) {
   polyfill();
