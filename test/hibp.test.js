@@ -1,34 +1,28 @@
-import {polyfill} from 'es6-promise';
-if (global.Promise === undefined) {
-  polyfill();
-}
-
 import expect from 'expect.js';
 import moxios from 'moxios';
 import sinon from 'sinon';
 import hibp from '../src/hibp';
-
-// Test data
-const ERR = new Error('Set sail for fail!');
-const INVALID_HEADER = 'baz';
-const DOMAIN = 'foo.bar';
-const ACCOUNT_BREACHED = 'foo';
-const ACCOUNT_CLEAN = 'bar';
-const BREACH_FOUND = 'foo';
-const BREACH_NOT_FOUND = 'bar';
-const EMAIL_PASTED = 'foo@bar.com';
-const EMAIL_CLEAN = 'baz@qux.com';
-const EMAIL_INVALID = 'foobar';
-const OPTS_DOM = {domain: DOMAIN};
-const OPTS_TRUNC = {truncate: true};
-const OPTS_DOM_TRUNC = {domain: DOMAIN, truncate: true};
-const RESPONSE_OBJ = {};
-const RESPONSE_ARY = [];
-const RESPONSE_CLEAN = null;
-const STATUS_200 = 200;
-const STATUS_400 = 400;
-const STATUS_403 = 403;
-const STATUS_404 = 404;
+import {
+    ERR,
+    INVALID_HEADER,
+    ACCOUNT_BREACHED,
+    ACCOUNT_CLEAN,
+    BREACH_FOUND,
+    BREACH_NOT_FOUND,
+    EMAIL_PASTED,
+    EMAIL_CLEAN,
+    EMAIL_INVALID,
+    OPTS_DOM,
+    OPTS_TRUNC,
+    OPTS_DOM_TRUNC,
+    RESPONSE_OBJ,
+    RESPONSE_ARY,
+    RESPONSE_CLEAN,
+    STATUS_200,
+    STATUS_400,
+    STATUS_403,
+    STATUS_404
+} from './setup';
 
 describe('hibp', () => {
   before(() => {
