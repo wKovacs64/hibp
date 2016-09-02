@@ -18,7 +18,7 @@ npm install --save hibp
 Browser via CDN:
 
 ```html
-<script src="https://npmcdn.com/hibp/lib/hibp.min.js"></script>
+<script src="https://unpkg.com/hibp/lib/hibp.min.js"></script>
 ```
 
 ## Features
@@ -64,17 +64,17 @@ To use hibp in the browser, you have a few options:
 
 * Pull it in via CDN (this will reference the `latest` tag version by default,
   but you can specify a particular version if desired - see
-  [npmcdn](https://npmcdn.com) for details):
+  [unpkg](https://unpkg.com) for details):
 
   ```html
-  <script src="https://npmcdn.com/hibp/lib/hibp.min.js"></script>
+  <script src="https://unpkg.com/hibp/lib/hibp.min.js"></script>
   ```
 
   The `hibp` object should now be added to the browser's `window` object and
   ready for use.
 
 * Grab the browser/minified version from `node_modules/hibp/lib/hibp.min.js`
-  (or [download it from the CDN](https://npmcdn.com/hibp/lib/hibp.min.js)) and
+  (or [download it from the CDN](https://unpkg.com/hibp/lib/hibp.min.js)) and
   reference directly in a `<script>` tag. The `hibp` object should now be added
   to the browser's `window` object and ready for use.
 
