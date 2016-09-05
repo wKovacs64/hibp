@@ -1,5 +1,15 @@
 # Change Log
 
+## Version 2.1.0 *(2016-09-04)*
+
+* Replaced **npmcdn.com** with **unpkg.com** in the documentation as the service
+  is being renamed
+* Inherited support for `http_proxy` and `https_proxy` environment variables
+  from Axios 0.14.0
+* Simplified build scripts
+* Refactored test environment
+* Updated dependencies
+
 ## Version 2.0.0 *(2016-08-07)*
 
 ##### New:
