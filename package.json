@@ -26,14 +26,6 @@
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha",
     "webpack": "webpack -p"
   },
-  "nyc": {
-    "all": true,
-    "include": [
-      "**/src/**"
-    ],
-    "sourceMap": false,
-    "instrument": false
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/wKovacs64/hibp.git"
