@@ -51,13 +51,6 @@ describe('hibp', () => {
   });
 
   describe('breachedAccount (breached account, no parameters)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breachedAccount(ACCOUNT_BREACHED);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an object', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_BREACHED)
@@ -72,13 +65,6 @@ describe('hibp', () => {
   });
 
   describe('breachedAccount (breached account, with truncateResults)', () => {
-    it('should return a Promise', (done) => {
-      let truncatedQuery = hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC);
-      expect(truncatedQuery).to.be.a(Promise);
-      expect(truncatedQuery).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an object', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
@@ -93,13 +79,6 @@ describe('hibp', () => {
   });
 
   describe('breachedAccount (breached account, with domain)', () => {
-    it('should return a Promise', (done) => {
-      let filteredQuery = hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM);
-      expect(filteredQuery).to.be.a(Promise);
-      expect(filteredQuery).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an object', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
@@ -115,13 +94,6 @@ describe('hibp', () => {
 
   describe('breachedAccount (breached account, with domain and ' +
       'truncateResults)', () => {
-    it('should return a Promise', (done) => {
-      let comboQuery = hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC);
-      expect(comboQuery).to.be.a(Promise);
-      expect(comboQuery).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an object', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
@@ -136,13 +108,6 @@ describe('hibp', () => {
   });
 
   describe('breachedAccount (clean account, no parameters)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breachedAccount(ACCOUNT_CLEAN);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN)
@@ -157,13 +122,6 @@ describe('hibp', () => {
   });
 
   describe('breachedAccount (clean account, with truncateResults)', () => {
-    it('should return a Promise', (done) => {
-      let truncatedQuery = hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC);
-      expect(truncatedQuery).to.be.a(Promise);
-      expect(truncatedQuery).to.have.property('then');
-      done();
-    });
-
     it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
@@ -178,13 +136,6 @@ describe('hibp', () => {
   });
 
   describe('breachedAccount (clean account, with domain)', () => {
-    it('should return a Promise', (done) => {
-      let filteredQuery = hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM);
-      expect(filteredQuery).to.be.a(Promise);
-      expect(filteredQuery).to.have.property('then');
-      done();
-    });
-
     it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
@@ -200,13 +151,6 @@ describe('hibp', () => {
 
   describe('breachedAccount (clean account, with domain and truncateResults)',
       () => {
-        it('should return a Promise', (done) => {
-          let comboQuery = hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC);
-          expect(comboQuery).to.be.a(Promise);
-          expect(comboQuery).to.have.property('then');
-          done();
-        });
-
         it('should resolve with null', (done) => {
           const handler = sinon.spy();
           hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
@@ -221,13 +165,6 @@ describe('hibp', () => {
       });
 
   describe('breachedAccount (invalid request header)', () => {
-    it('should return a Promise', (done) => {
-      let invalidQuery = hibp.breachedAccount(INVALID_HEADER);
-      expect(invalidQuery).to.be.a(Promise);
-      expect(invalidQuery).to.have.property('then');
-      done();
-    });
-
     it('should throw an Error starting with "Forbidden"', (done) => {
       const handler = sinon.spy();
       const errorHandler = sinon.spy();
@@ -246,13 +183,6 @@ describe('hibp', () => {
   });
 
   describe('breaches (no parameters)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breaches();
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an array', (done) => {
       const handler = sinon.spy();
       hibp.breaches()
@@ -267,13 +197,6 @@ describe('hibp', () => {
   });
 
   describe('breaches (with domain)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breaches(OPTS_DOM);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an array', (done) => {
       const handler = sinon.spy();
       hibp.breaches(OPTS_DOM)
@@ -288,13 +211,6 @@ describe('hibp', () => {
   });
 
   describe('breach (found)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breach(BREACH_FOUND);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an object', (done) => {
       const handler = sinon.spy();
       hibp.breach(BREACH_FOUND)
@@ -309,13 +225,6 @@ describe('hibp', () => {
   });
 
   describe('breach (not found)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.breach(BREACH_NOT_FOUND);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.breach(BREACH_NOT_FOUND)
@@ -330,13 +239,6 @@ describe('hibp', () => {
   });
 
   describe('dataClasses', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.dataClasses();
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an array', (done) => {
       const handler = sinon.spy();
       hibp.dataClasses()
@@ -351,13 +253,6 @@ describe('hibp', () => {
   });
 
   describe('pasteAccount (pasted email)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.pasteAccount(EMAIL_PASTED);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with an array', (done) => {
       const handler = sinon.spy();
       hibp.pasteAccount(EMAIL_PASTED)
@@ -372,13 +267,6 @@ describe('hibp', () => {
   });
 
   describe('pasteAccount (clean email)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.pasteAccount(EMAIL_CLEAN);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should resolve with null', (done) => {
       const handler = sinon.spy();
       hibp.pasteAccount(EMAIL_CLEAN)
@@ -393,13 +281,6 @@ describe('hibp', () => {
   });
 
   describe('pasteAccount (invalid email)', () => {
-    it('should return a Promise', (done) => {
-      let query = hibp.pasteAccount(EMAIL_INVALID);
-      expect(query).to.be.a(Promise);
-      expect(query).to.have.property('then');
-      done();
-    });
-
     it('should throw an Error starting with "Bad request"', (done) => {
       const handler = sinon.spy();
       const errorHandler = sinon.spy();
