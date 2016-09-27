@@ -4,6 +4,7 @@ import hibp from '../src/hibp';
 import {
     ERR,
     INVALID_HEADER,
+    UNKNOWN_ERROR,
     ACCOUNT_BREACHED,
     ACCOUNT_CLEAN,
     BREACH_FOUND,
@@ -158,6 +159,22 @@ describe('hibp', () => {
             expect(errorHandler.calledOnce).to.be(true);
             const err = errorHandler.getCall(0).args[0];
             expect(err.message).to.match(/^Forbidden/);
+          });
+    });
+  });
+
+  describe('breachedAccount (unexpected HTTP error)', () => {
+    it('should throw an Error width the error text from the request', () => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
+      return hibp.breachedAccount(UNKNOWN_ERROR)
+          .then(handler)
+          .catch(errorHandler)
+          .then(() => {
+            expect(handler.called).to.be(false);
+            expect(errorHandler.calledOnce).to.be(true);
+            const err = errorHandler.getCall(0).args[0];
+            expect(err.message).to.match(/^Qux/);
           });
     });
   });
