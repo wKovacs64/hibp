@@ -50,6 +50,8 @@ const hibp = {
                 throw new Error(ERR403);
               case 404:
                 return null;
+              default:
+                throw new Error(err.response.data);
             }
           } else {
             throw err;
