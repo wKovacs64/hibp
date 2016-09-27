@@ -10,10 +10,12 @@ const STATUS_200 = 200;
 const STATUS_400 = 400;
 const STATUS_403 = 403;
 const STATUS_404 = 404;
+const STATUS_456 = 456;
 const DOMAIN = 'foo.bar';
 
 export const ERR = new Error('Set sail for fail!');
 export const INVALID_HEADER = 'baz';
+export const UNKNOWN_ERROR = 'qux';
 export const ACCOUNT_BREACHED = 'foo';
 export const ACCOUNT_CLEAN = 'bar';
 export const BREACH_FOUND = 'foo';
@@ -44,6 +46,11 @@ before(() => {
   moxios.stubRequest(
       new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
         status: STATUS_403
+      });
+  moxios.stubRequest(
+      new RegExp(`/breachedaccount/${UNKNOWN_ERROR}\\??`), {
+        status: STATUS_456,
+        statusText: UNKNOWN_ERROR
       });
   moxios.stubRequest(
       new RegExp('/breaches\\??'), {
