@@ -1,5 +1,11 @@
 import 'source-map-support/register';
 import Axios from 'axios';
+import {
+  BAD_REQUEST,
+  FORBIDDEN,
+  NOT_FOUND,
+  TOO_MANY_REQUESTS,
+} from './responses';
 
 /**
  * An interface to the haveibeenpwned.com API (version 2).
@@ -31,34 +37,27 @@ const hibp = {
    * @returns {Promise} a Promise which resolves to the data resulting from the
    * query (or null for 404 Not Found responses), or rejects with an Error
    */
-  _fetchFromApi: (endpoint) => {
-    const ERR400 = 'Bad request — the account does not comply with an ' +
-      'acceptable format.';
-    const ERR403 = 'Forbidden - no user agent has been specified in the ' +
-      'request.';
-    const ERR429 = 'Too many requests - the rate limit has been exceeded.';
-    return Promise
-      .resolve(hibp._axios.get(endpoint))
-      .then(res => res.data)
-      .catch((err) => {
-        if (err.response) {
-          switch (err.response.status) {
-            case 400:
-              throw new Error(ERR400);
-            case 403:
-              throw new Error(ERR403);
-            case 404:
-              return null;
-            case 429:
-              throw new Error(ERR429);
-            default:
-              throw new Error(err.response.statusText);
-          }
-        } else {
-          throw err;
+  _fetchFromApi: endpoint => Promise
+    .resolve(hibp._axios.get(endpoint))
+    .then(res => res.data)
+    .catch((err) => {
+      if (err.response) {
+        switch (err.response.status) {
+          case BAD_REQUEST.status:
+            throw new Error(BAD_REQUEST.statusText);
+          case FORBIDDEN.status:
+            throw new Error(FORBIDDEN.statusText);
+          case NOT_FOUND.status:
+            return null;
+          case TOO_MANY_REQUESTS.status:
+            throw new Error(TOO_MANY_REQUESTS.statusText);
+          default:
+            throw new Error(err.response.statusText);
         }
-      });
-  },
+      } else {
+        throw err;
+      }
+    }),
 
   /**
    * Fetches breach data for the specified account.
