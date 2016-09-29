@@ -25,6 +25,7 @@ const hibp = {
    * HTTP status code 404 returns null (no data found).
    * HTTP status code 400 throws an Error (bad request).
    * HTTP status code 403 throws an Error (forbidden).
+   * HTTP status code 429 throws an Error (too many requests).
    *
    * @private
    * @param {string} endpoint the API endpoint to query
@@ -36,6 +37,7 @@ const hibp = {
         'acceptable format.';
     const ERR403 = 'Forbidden - no user agent has been specified in the ' +
         'request.';
+    const ERR429 = 'Too many requests - the rate limit has been exceeded.';
     return Promise
         .resolve(hibp._axios.get(endpoint))
         .then((res) => {
@@ -50,6 +52,8 @@ const hibp = {
                 throw new Error(ERR403);
               case 404:
                 return null;
+              case 429:
+                throw new Error(ERR429);
               default:
                 throw new Error(err.response.statusText);
             }

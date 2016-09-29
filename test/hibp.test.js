@@ -4,6 +4,7 @@ import hibp from '../src/hibp';
 import {
     ERR,
     INVALID_HEADER,
+    RATE_LIMITED,
     UNKNOWN_ERROR,
     ACCOUNT_BREACHED,
     ACCOUNT_CLEAN,
@@ -159,6 +160,22 @@ describe('hibp', () => {
             expect(errorHandler.calledOnce).to.be(true);
             const err = errorHandler.getCall(0).args[0];
             expect(err.message).to.match(/^Forbidden/);
+          });
+    });
+  });
+
+  describe('breachedAccount (rate limited)', () => {
+    it('should throw an Error starting with "Too many requests"', () => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
+      return hibp.breachedAccount(RATE_LIMITED)
+          .then(handler)
+          .catch(errorHandler)
+          .then(() => {
+            expect(handler.called).to.be(false);
+            expect(errorHandler.calledOnce).to.be(true);
+            const err = errorHandler.getCall(0).args[0];
+            expect(err.message).to.match(/^Too many requests/);
           });
     });
   });
