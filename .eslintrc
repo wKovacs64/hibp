@@ -1,18 +1,12 @@
 {
-  "extends": "semistandard",
+  "extends": "airbnb",
   "rules": {
-    "indent": [
-      "error",
-      2,
-      {
-        "MemberExpression": 2,
-        "SwitchCase": 1
-      }
-    ],
     "max-len": [
       "error",
-      80
+      80,
+      2
     ],
+    "no-underscore-dangle": "off",
     "valid-jsdoc": [
       "error"
     ]

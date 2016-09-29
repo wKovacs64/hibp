@@ -1,4 +1,6 @@
-import {polyfill} from 'es6-promise';
+/* eslint-disable import/imports-first */
+import { polyfill } from 'es6-promise';
+
 if (global.Promise === undefined) {
   polyfill();
 }
@@ -25,9 +27,9 @@ export const BREACH_NOT_FOUND = 'bar';
 export const EMAIL_PASTED = 'foo@bar.com';
 export const EMAIL_CLEAN = 'baz@qux.com';
 export const EMAIL_INVALID = 'foobar';
-export const OPTS_DOM = {domain: DOMAIN};
-export const OPTS_TRUNC = {truncate: true};
-export const OPTS_DOM_TRUNC = {domain: DOMAIN, truncate: true};
+export const OPTS_DOM = { domain: DOMAIN };
+export const OPTS_TRUNC = { truncate: true };
+export const OPTS_DOM_TRUNC = { domain: DOMAIN, truncate: true };
 export const RESPONSE_OBJ = {};
 export const RESPONSE_ARY = [];
 export const RESPONSE_CLEAN = null;
@@ -37,59 +39,59 @@ before(() => {
 
   // Configure mocked API calls and results
   moxios.stubRequest(
-      new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
-        status: STATUS_200,
-        response: RESPONSE_OBJ
-      });
+    new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
+      status: STATUS_200,
+      response: RESPONSE_OBJ,
+    });
   moxios.stubRequest(
-      new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
-        status: STATUS_404
-      });
+    new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
+      status: STATUS_404,
+    });
   moxios.stubRequest(
-      new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
-        status: STATUS_403
-      });
+    new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
+      status: STATUS_403,
+    });
   moxios.stubRequest(
-      new RegExp(`/breachedaccount/${RATE_LIMITED}\\??`), {
-        status: STATUS_429
-      });
+    new RegExp(`/breachedaccount/${RATE_LIMITED}\\??`), {
+      status: STATUS_429,
+    });
   moxios.stubRequest(
-      new RegExp(`/breachedaccount/${UNKNOWN_ERROR}\\??`), {
-        status: STATUS_456,
-        statusText: UNKNOWN_ERROR
-      });
+    new RegExp(`/breachedaccount/${UNKNOWN_ERROR}\\??`), {
+      status: STATUS_456,
+      statusText: UNKNOWN_ERROR,
+    });
   moxios.stubRequest(
-      new RegExp('/breaches\\??'), {
-        status: STATUS_200,
-        response: RESPONSE_ARY
-      });
+    new RegExp('/breaches\\??'), {
+      status: STATUS_200,
+      response: RESPONSE_ARY,
+    });
   moxios.stubRequest(
-      new RegExp(`/breach/${BREACH_FOUND}`), {
-        status: STATUS_200,
-        response: RESPONSE_OBJ
-      });
+    new RegExp(`/breach/${BREACH_FOUND}`), {
+      status: STATUS_200,
+      response: RESPONSE_OBJ,
+    });
   moxios.stubRequest(
-      new RegExp(`/breach/${BREACH_NOT_FOUND}`), {
-        status: STATUS_404
-      });
+    new RegExp(`/breach/${BREACH_NOT_FOUND}`), {
+      status: STATUS_404,
+    });
   moxios.stubRequest(
-      new RegExp('/dataclasses'), {
-        status: STATUS_200,
-        response: RESPONSE_ARY
-      });
+    new RegExp('/dataclasses'), {
+      status: STATUS_200,
+      response: RESPONSE_ARY,
+    });
   moxios.stubRequest(
-      new RegExp(`/pasteaccount/${EMAIL_PASTED}`), {
-        status: STATUS_200,
-        response: RESPONSE_ARY
-      });
+    new RegExp(`/pasteaccount/${EMAIL_PASTED}`), {
+      status: STATUS_200,
+      response: RESPONSE_ARY,
+    });
   moxios.stubRequest(
-      new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
-        status: STATUS_404
-      });
+    new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
+      status: STATUS_404,
+    });
   moxios.stubRequest(
-      new RegExp(`/pasteaccount/${EMAIL_INVALID}`), {
-        status: STATUS_400
-      });
+    new RegExp(`/pasteaccount/${EMAIL_INVALID}`), {
+      status: STATUS_400,
+    });
 });
 
 after(() => {

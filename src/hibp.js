@@ -1,21 +1,20 @@
 import 'source-map-support/register';
-import * as Axios from 'axios';
+import Axios from 'axios';
 
 /**
  * An interface to the haveibeenpwned.com API (version 2).
  */
 const hibp = {
   /**
-   * The axios instance used for API queries. Not meant for general use.
+   * The Axios instance used for API queries. Not meant for general use.
    *
    * @private
-   * @type {axios.AxiosInstance}
    */
   _axios: Axios.create({
     baseURL: 'https://haveibeenpwned.com/api',
     headers: {
-      'Accept': 'application/vnd.haveibeenpwned.v2+json'
-    }
+      Accept: 'application/vnd.haveibeenpwned.v2+json',
+    },
   }),
 
   /**
@@ -34,33 +33,31 @@ const hibp = {
    */
   _fetchFromApi: (endpoint) => {
     const ERR400 = 'Bad request — the account does not comply with an ' +
-        'acceptable format.';
+      'acceptable format.';
     const ERR403 = 'Forbidden - no user agent has been specified in the ' +
-        'request.';
+      'request.';
     const ERR429 = 'Too many requests - the rate limit has been exceeded.';
     return Promise
-        .resolve(hibp._axios.get(endpoint))
-        .then((res) => {
-          return res.data;
-        })
-        .catch((err) => {
-          if (err.response) {
-            switch (err.response.status) {
-              case 400:
-                throw new Error(ERR400);
-              case 403:
-                throw new Error(ERR403);
-              case 404:
-                return null;
-              case 429:
-                throw new Error(ERR429);
-              default:
-                throw new Error(err.response.statusText);
-            }
-          } else {
-            throw err;
+      .resolve(hibp._axios.get(endpoint))
+      .then(res => res.data)
+      .catch((err) => {
+        if (err.response) {
+          switch (err.response.status) {
+            case 400:
+              throw new Error(ERR400);
+            case 403:
+              throw new Error(ERR403);
+            case 404:
+              return null;
+            case 429:
+              throw new Error(ERR429);
+            default:
+              throw new Error(err.response.statusText);
           }
-        });
+        } else {
+          throw err;
+        }
+      });
   },
 
   /**
@@ -87,8 +84,7 @@ const hibp = {
    *     .then(console.log)
    *     .catch(console.error);
    */
-  breachedAccount: (account, options) => {
-    options = options || {};
+  breachedAccount: (account, options = {}) => {
     let endpoint = `/breachedaccount/${account}`;
     if (options.domain) {
       endpoint += `?domain=${options.domain}`;
@@ -118,8 +114,7 @@ const hibp = {
    *     .then(console.log)
    *     .catch(console.error);
    */
-  breaches: (options) => {
-    options = options || {};
+  breaches: (options = {}) => {
     let endpoint = '/breaches';
     if (options.domain) {
       endpoint += `?domain=${options.domain}`;
@@ -138,9 +133,7 @@ const hibp = {
    *     .then(console.log)
    *     .catch(console.error);
    */
-  breach: (breachName) => {
-    return hibp._fetchFromApi(`/breach/${breachName}`);
-  },
+  breach: breachName => hibp._fetchFromApi(`/breach/${breachName}`),
 
   /**
    * Fetches all data classes in the system.
@@ -152,9 +145,7 @@ const hibp = {
    *     .then(console.log)
    *     .catch(console.error);
    */
-  dataClasses: () => {
-    return hibp._fetchFromApi('/dataclasses');
-  },
+  dataClasses: () => hibp._fetchFromApi('/dataclasses'),
 
   /**
    * Fetches all pastes for an account (email address).
@@ -167,9 +158,7 @@ const hibp = {
    *     .then(console.log)
    *     .catch(console.error);
    */
-  pasteAccount: (email) => {
-    return hibp._fetchFromApi(`/pasteaccount/${email}`);
-  }
+  pasteAccount: email => hibp._fetchFromApi(`/pasteaccount/${email}`),
 };
 
 export default hibp;

@@ -7,5 +7,12 @@
     "it": true,
     "before": true,
     "after": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": true,
+        "optionalDependencies": false
+    }]
   }
 }
