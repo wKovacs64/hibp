@@ -54,6 +54,7 @@ before(() => {
   moxios.stubRequest(
     new RegExp(`/breachedaccount/${RATE_LIMITED}\\??`), {
       status: TOO_MANY_REQUESTS.status,
+      response: TOO_MANY_REQUESTS.response,
     });
   moxios.stubRequest(
     new RegExp(`/breachedaccount/${UNEXPECTED}\\??`), {

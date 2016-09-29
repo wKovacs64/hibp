@@ -21,7 +21,6 @@ export const NOT_FOUND = {
 
 export const TOO_MANY_REQUESTS = {
   status: 429,
-  statusText: 'Too many requests - the rate limit has been exceeded.',
-  data: 'Rate limit exceeded, refer to acceptable use of the API: ' +
+  response: 'Rate limit exceeded, refer to acceptable use of the API: ' +
     'https://haveibeenpwned.com/API/v2#AcceptableUse',
 };

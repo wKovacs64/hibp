@@ -89,7 +89,7 @@ describe('hibp', () => {
   });
 
   describe('_fetchFromApi (rate limited)', () => {
-    it('should throw an Error with "Too Many Requests" status text', () => {
+    it('should throw an Error with "Too Many Requests" response data', () => {
       const handler = sinon.spy();
       const errorHandler = sinon.spy();
       return hibp.breachedAccount(RATE_LIMITED)
@@ -99,8 +99,7 @@ describe('hibp', () => {
           expect(handler.called).to.be(false);
           expect(errorHandler.calledOnce).to.be(true);
           const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to
-            .match(new RegExp(TOO_MANY_REQUESTS.statusText));
+          expect(err.message).to.match(new RegExp(TOO_MANY_REQUESTS.response));
         });
     });
   });

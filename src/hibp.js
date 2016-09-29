@@ -50,7 +50,7 @@ const hibp = {
           case NOT_FOUND.status:
             return null;
           case TOO_MANY_REQUESTS.status:
-            throw new Error(TOO_MANY_REQUESTS.statusText);
+            throw new Error(err.response.data);
           default:
             throw new Error(err.response.statusText);
         }
