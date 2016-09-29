@@ -28,7 +28,7 @@ import {
 } from './setup';
 
 describe('hibp', () => {
-  describe('_fetchFromApi', () => {
+  describe('_fetchFromApi (request failure)', () => {
     let failboat;
 
     before(() => {
@@ -52,6 +52,71 @@ describe('hibp', () => {
           expect(errorHandler.calledOnce).to.be(true);
           const err = errorHandler.getCall(0).args[0];
           expect(err).to.be(ERR);
+        });
+    });
+  });
+
+  describe('_fetchFromApi (invalid account format)', () => {
+    it('should throw an Error with "Bad Request" status text', () => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
+      return hibp.breachedAccount(EMAIL_INVALID)
+        .then(handler)
+        .catch(errorHandler)
+        .then(() => {
+          expect(handler.called).to.be(false);
+          expect(errorHandler.calledOnce).to.be(true);
+          const err = errorHandler.getCall(0).args[0];
+          expect(err.message).to.match(new RegExp(BAD_REQUEST.statusText));
+        });
+    });
+  });
+
+  describe('_fetchFromApi (invalid request header)', () => {
+    it('should throw an Error with "Forbidden" status text', () => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
+      return hibp.breachedAccount(INVALID_HEADER)
+        .then(handler)
+        .catch(errorHandler)
+        .then(() => {
+          expect(handler.called).to.be(false);
+          expect(errorHandler.calledOnce).to.be(true);
+          const err = errorHandler.getCall(0).args[0];
+          expect(err.message).to.match(new RegExp(FORBIDDEN.statusText));
+        });
+    });
+  });
+
+  describe('_fetchFromApi (rate limited)', () => {
+    it('should throw an Error with "Too Many Requests" status text', () => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
+      return hibp.breachedAccount(RATE_LIMITED)
+        .then(handler)
+        .catch(errorHandler)
+        .then(() => {
+          expect(handler.called).to.be(false);
+          expect(errorHandler.calledOnce).to.be(true);
+          const err = errorHandler.getCall(0).args[0];
+          expect(err.message).to
+            .match(new RegExp(TOO_MANY_REQUESTS.statusText));
+        });
+    });
+  });
+
+  describe('_fetchFromApi (unexpected HTTP error)', () => {
+    it('should throw an Error with the response status text', () => {
+      const handler = sinon.spy();
+      const errorHandler = sinon.spy();
+      return hibp.breachedAccount(UNEXPECTED)
+        .then(handler)
+        .catch(errorHandler)
+        .then(() => {
+          expect(handler.called).to.be(false);
+          expect(errorHandler.calledOnce).to.be(true);
+          const err = errorHandler.getCall(0).args[0];
+          expect(err.message).to.match(new RegExp(UNKNOWN.statusText));
         });
     });
   });
@@ -154,55 +219,6 @@ describe('hibp', () => {
       });
     });
 
-  describe('breachedAccount (invalid request header)', () => {
-    it('should throw an Error with "Forbidden" status text', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(INVALID_HEADER)
-        .then(handler)
-        .catch(errorHandler)
-        .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(FORBIDDEN.statusText));
-        });
-    });
-  });
-
-  describe('breachedAccount (rate limited)', () => {
-    it('should throw an Error with "Too many requests" status text', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(RATE_LIMITED)
-        .then(handler)
-        .catch(errorHandler)
-        .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to
-            .match(new RegExp(TOO_MANY_REQUESTS.statusText));
-        });
-    });
-  });
-
-  describe('breachedAccount (unexpected HTTP error)', () => {
-    it('should throw an Error with the status text from the response', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(UNEXPECTED)
-        .then(handler)
-        .catch(errorHandler)
-        .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(UNKNOWN.statusText));
-        });
-    });
-  });
-
   describe('breaches (no parameters)', () => {
     it('should resolve with an array', () => {
       const handler = sinon.spy();
@@ -283,22 +299,6 @@ describe('hibp', () => {
         .then(() => {
           expect(handler.calledOnce).to.be(true);
           expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
-        });
-    });
-  });
-
-  describe('pasteAccount (invalid email)', () => {
-    it('should throw an Error with "Bad request" status text', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.pasteAccount(EMAIL_INVALID)
-        .then(handler)
-        .catch(errorHandler)
-        .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(BAD_REQUEST.statusText));
         });
     });
   });

@@ -44,13 +44,8 @@ before(() => {
 
   // Configure mocked API calls and results
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
-      status: OK.status,
-      response: RESPONSE_OBJ,
-    });
-  moxios.stubRequest(
-    new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
-      status: NOT_FOUND.status,
+    new RegExp(`/breachedaccount/${EMAIL_INVALID}`), {
+      status: BAD_REQUEST.status,
     });
   moxios.stubRequest(
     new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
@@ -64,6 +59,15 @@ before(() => {
     new RegExp(`/breachedaccount/${UNEXPECTED}\\??`), {
       status: UNKNOWN.status,
       statusText: UNKNOWN.statusText,
+    });
+  moxios.stubRequest(
+    new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
+      status: OK.status,
+      response: RESPONSE_OBJ,
+    });
+  moxios.stubRequest(
+    new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
+      status: NOT_FOUND.status,
     });
   moxios.stubRequest(
     new RegExp('/breaches\\??'), {
@@ -92,10 +96,6 @@ before(() => {
   moxios.stubRequest(
     new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
       status: NOT_FOUND.status,
-    });
-  moxios.stubRequest(
-    new RegExp(`/pasteaccount/${EMAIL_INVALID}`), {
-      status: BAD_REQUEST.status,
     });
 });
 
