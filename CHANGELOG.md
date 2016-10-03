@@ -1,5 +1,13 @@
 # Change Log
 
+## Version 2.2.0 *(2016-10-03)*
+
+* Added fallback for unexpected HTTP responses (thanks @jellekralt)
+* Added handling for new HTTP 429 (Too Many Requests) rate-limiting responses
+* Improved tests
+* Switched code style from SemiStandard to Airbnb
+* Updated dependencies
+
 ## Version 2.1.0 *(2016-09-04)*
 
 * Replaced **npmcdn.com** with **unpkg.com** in the documentation as the service
