@@ -1,10 +1,4 @@
-/* eslint-disable import/imports-first */
-import { polyfill } from 'es6-promise';
-
-if (global.Promise === undefined) {
-  polyfill();
-}
-
+import 'es6-promise/auto';
 import moxios from 'moxios';
 import hibp from '../src/hibp';
 import {
