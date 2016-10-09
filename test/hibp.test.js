@@ -1,4 +1,4 @@
-import expect from 'expect.js';
+import { expect } from 'chai';
 import sinon from 'sinon';
 import hibp from '../src/hibp';
 import {
@@ -48,10 +48,12 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
+          // noinspection BadExpressionStatementJS
+          expect(handler.called).to.be.false;
+          // noinspection BadExpressionStatementJS
+          expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
-          expect(err).to.be(ERR);
+          expect(err).to.equal(ERR);
         });
     });
   });
@@ -64,8 +66,10 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
+          // noinspection BadExpressionStatementJS
+          expect(handler.called).to.be.false;
+          // noinspection BadExpressionStatementJS
+          expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(BAD_REQUEST.statusText));
         });
@@ -80,8 +84,10 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
+          // noinspection BadExpressionStatementJS
+          expect(handler.called).to.be.false;
+          // noinspection BadExpressionStatementJS
+          expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(FORBIDDEN.statusText));
         });
@@ -96,8 +102,10 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
+          // noinspection BadExpressionStatementJS
+          expect(handler.called).to.be.false;
+          // noinspection BadExpressionStatementJS
+          expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(TOO_MANY_REQUESTS.response));
         });
@@ -112,8 +120,10 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be(false);
-          expect(errorHandler.calledOnce).to.be(true);
+          // noinspection BadExpressionStatementJS
+          expect(handler.called).to.be.false;
+          // noinspection BadExpressionStatementJS
+          expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(UNKNOWN.statusText));
         });
@@ -126,8 +136,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
     });
   });
@@ -138,8 +149,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
     });
   });
@@ -150,8 +162,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
     });
   });
@@ -163,8 +176,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
     });
   });
@@ -175,8 +189,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_CLEAN)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
     });
   });
@@ -187,8 +202,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
     });
   });
@@ -199,8 +215,9 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
     });
   });
@@ -212,8 +229,9 @@ describe('hibp', () => {
         return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
           .then(handler)
           .then(() => {
-            expect(handler.calledOnce).to.be(true);
-            expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
+            // noinspection BadExpressionStatementJS
+            expect(handler.calledOnce).to.be.true;
+            expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
           });
       });
     });
@@ -224,8 +242,9 @@ describe('hibp', () => {
       return hibp.breaches()
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
     });
   });
@@ -236,8 +255,9 @@ describe('hibp', () => {
       return hibp.breaches(OPTS_DOM)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
     });
   });
@@ -248,8 +268,9 @@ describe('hibp', () => {
       return hibp.breach(BREACH_FOUND)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_OBJ);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
     });
   });
@@ -260,8 +281,9 @@ describe('hibp', () => {
       return hibp.breach(BREACH_NOT_FOUND)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
     });
   });
@@ -272,8 +294,9 @@ describe('hibp', () => {
       return hibp.dataClasses()
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
     });
   });
@@ -284,8 +307,9 @@ describe('hibp', () => {
       return hibp.pasteAccount(EMAIL_PASTED)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_ARY);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
     });
   });
@@ -296,8 +320,9 @@ describe('hibp', () => {
       return hibp.pasteAccount(EMAIL_CLEAN)
         .then(handler)
         .then(() => {
-          expect(handler.calledOnce).to.be(true);
-          expect(handler.getCall(0).args[0]).to.be(RESPONSE_CLEAN);
+          // noinspection BadExpressionStatementJS
+          expect(handler.calledOnce).to.be.true;
+          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
     });
   });
