@@ -48,9 +48,7 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.called).to.be.false;
-          // noinspection BadExpressionStatementJS
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err).to.equal(ERR);
@@ -66,9 +64,7 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.called).to.be.false;
-          // noinspection BadExpressionStatementJS
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(BAD_REQUEST.statusText));
@@ -84,9 +80,7 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.called).to.be.false;
-          // noinspection BadExpressionStatementJS
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(FORBIDDEN.statusText));
@@ -102,9 +96,7 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.called).to.be.false;
-          // noinspection BadExpressionStatementJS
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(TOO_MANY_REQUESTS.response));
@@ -120,9 +112,7 @@ describe('hibp', () => {
         .then(handler)
         .catch(errorHandler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.called).to.be.false;
-          // noinspection BadExpressionStatementJS
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(UNKNOWN.statusText));
@@ -136,7 +126,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
@@ -149,7 +138,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
@@ -162,7 +150,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
@@ -176,7 +163,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
@@ -189,7 +175,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_CLEAN)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
@@ -202,7 +187,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
@@ -215,7 +199,6 @@ describe('hibp', () => {
       return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
@@ -229,7 +212,6 @@ describe('hibp', () => {
         return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
           .then(handler)
           .then(() => {
-            // noinspection BadExpressionStatementJS
             expect(handler.calledOnce).to.be.true;
             expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
           });
@@ -242,7 +224,6 @@ describe('hibp', () => {
       return hibp.breaches()
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
@@ -255,7 +236,6 @@ describe('hibp', () => {
       return hibp.breaches(OPTS_DOM)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
@@ -268,7 +248,6 @@ describe('hibp', () => {
       return hibp.breach(BREACH_FOUND)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
         });
@@ -281,7 +260,6 @@ describe('hibp', () => {
       return hibp.breach(BREACH_NOT_FOUND)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
@@ -294,7 +272,6 @@ describe('hibp', () => {
       return hibp.dataClasses()
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
@@ -307,7 +284,6 @@ describe('hibp', () => {
       return hibp.pasteAccount(EMAIL_PASTED)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         });
@@ -320,7 +296,6 @@ describe('hibp', () => {
       return hibp.pasteAccount(EMAIL_CLEAN)
         .then(handler)
         .then(() => {
-          // noinspection BadExpressionStatementJS
           expect(handler.calledOnce).to.be.true;
           expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
         });
