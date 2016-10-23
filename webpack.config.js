@@ -23,7 +23,8 @@ module.exports = {
     ]
   },
   node: {
-    fs: 'empty'
+    fs: 'empty',
+    module: 'empty'
   },
   plugins: [
     new webpack.DefinePlugin({
