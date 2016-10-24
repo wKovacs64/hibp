@@ -33,8 +33,42 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ## Usage
 
-Please see the [API reference](API.md) for detailed usage information and
-examples.
+```javascript
+import hibp from 'hibp';
+```
+
+Now the following functions are available in the `hibp` object:
+
+* [.breachedAccount(account, [options])](API.md#hibp.breachedAccount)
+* [.breaches([options])](API.md#hibp.breaches)
+* [.breach(breachName)](API.md#hibp.breach)
+* [.dataClasses()](API.md#hibp.dataClasses)
+* [.pasteAccount(email)](API.md#hibp.pasteAccount)
+
+##### Example:
+
+```javascript
+import hibp from 'hibp';
+
+hibp
+  .breachedAccount('rick.sanchez')
+  .then((data) => {
+    if (data) {
+      // Bummer...
+      console.log(data);
+    } else {
+      // Phew! We're clear.
+      console.log('Good news — no pwnage found!');
+    }
+  })
+  .catch((err) => {
+    // Something went wrong.
+    console.log(err.message);
+  });
+```
+
+Please see the [API reference](API.md) for more detailed usage information and
+additional examples.
 
 #### Using in Node.js < 0.12
 
@@ -62,9 +96,9 @@ production (minified) UMD builds are both provided for download:
 * [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
 * [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
 
-You can include one of these builds directly via CDN (this will reference the
-`latest` tag version of the production build by default, but you can specify a
-particular version if desired - see [unpkg][unpkg] for details):
+You can include one of these builds directly via CDN (this example will
+reference the `latest` tag version of the production build by default, but you
+can specify a particular version if desired - see [unpkg][unpkg] for details):
 
 ```html
 <script src="https://unpkg.com/hibp"></script>
