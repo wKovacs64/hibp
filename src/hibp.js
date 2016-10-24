@@ -72,16 +72,40 @@ const hibp = {
    * breach (or null if no breaches were found), or rejects with an Error
    * @example
    * hibp.breachedAccount('foo')
-   *     .then(console.log)
-   *     .catch(console.error);
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    * @example
-   * hibp.breachedAccount('bar', {truncate: true})
-   *     .then(console.log)
-   *     .catch(console.error);
+   * hibp.breachedAccount('bar', { truncate: true })
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    * @example
-   * hibp.breachedAccount('baz', {domain: 'adobe.com', truncate: true})
-   *     .then(console.log)
-   *     .catch(console.error);
+   * hibp.breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    */
   breachedAccount: (account, options = {}) => {
     let endpoint = `/breachedaccount/${account}`;
@@ -106,12 +130,28 @@ const hibp = {
    * (an empty array if no breaches were found), or rejects with an Error
    * @example
    * hibp.breaches()
-   *     .then(console.log)
-   *     .catch(console.error);
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    * @example
-   * hibp.breaches({domain: 'adobe.com'})
-   *     .then(console.log)
-   *     .catch(console.error);
+   * hibp.breaches({ domain: 'adobe.com' })
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    */
   breaches: (options = {}) => {
     let endpoint = '/breaches';
@@ -129,8 +169,16 @@ const hibp = {
    * breach (or null if no breach was found), or rejects with an Error
    * @example
    * hibp.breach('Adobe')
-   *     .then(console.log)
-   *     .catch(console.error);
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    */
   breach: breachName => hibp._fetchFromApi(`/breach/${breachName}`),
 
@@ -141,8 +189,16 @@ const hibp = {
    * null if no data classes were found), or rejects with an Error
    * @example
    * hibp.dataClasses()
-   *     .then(console.log)
-   *     .catch(console.error);
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    */
   dataClasses: () => hibp._fetchFromApi('/dataclasses'),
 
@@ -154,8 +210,16 @@ const hibp = {
    * (or null if no pastes were found), or rejects with an Error
    * @example
    * hibp.pasteAccount('foo@bar.com')
-   *     .then(console.log)
-   *     .catch(console.error);
+   *   .then((data) => {
+   *     if (data) {
+   *       // ...
+   *     } else {
+   *       // ...
+   *     }
+   *   })
+   *   .catch((err) => {
+   *     // ...
+   *   });
    */
   pasteAccount: email => hibp._fetchFromApi(`/pasteaccount/${email}`),
 };

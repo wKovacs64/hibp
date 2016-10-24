@@ -31,20 +31,44 @@ breach (or null if no breaches were found), or rejects with an Error
 **Example**  
 ```js
 hibp.breachedAccount('foo')
-    .then(console.log)
-    .catch(console.error);
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 **Example**  
 ```js
-hibp.breachedAccount('bar', {truncate: true})
-    .then(console.log)
-    .catch(console.error);
+hibp.breachedAccount('bar', { truncate: true })
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 **Example**  
 ```js
-hibp.breachedAccount('baz', {domain: 'adobe.com', truncate: true})
-    .then(console.log)
-    .catch(console.error);
+hibp.breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 <a name="hibp.breaches"></a>
 
@@ -63,14 +87,30 @@ Fetches all breached sites in the system.
 **Example**  
 ```js
 hibp.breaches()
-    .then(console.log)
-    .catch(console.error);
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 **Example**  
 ```js
-hibp.breaches({domain: 'adobe.com'})
-    .then(console.log)
-    .catch(console.error);
+hibp.breaches({ domain: 'adobe.com' })
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 <a name="hibp.breach"></a>
 
@@ -88,8 +128,16 @@ breach (or null if no breach was found), or rejects with an Error
 **Example**  
 ```js
 hibp.breach('Adobe')
-    .then(console.log)
-    .catch(console.error);
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 <a name="hibp.dataClasses"></a>
 
@@ -102,8 +150,16 @@ null if no data classes were found), or rejects with an Error
 **Example**  
 ```js
 hibp.dataClasses()
-    .then(console.log)
-    .catch(console.error);
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
 <a name="hibp.pasteAccount"></a>
 
@@ -121,6 +177,14 @@ Fetches all pastes for an account (email address).
 **Example**  
 ```js
 hibp.pasteAccount('foo@bar.com')
-    .then(console.log)
-    .catch(console.error);
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
 ```
