@@ -17,14 +17,16 @@
   "contributors": [],
   "license": "MIT",
   "main": "lib/hibp.js",
-  "browser": "lib/hibp.min.js",
+  "browser": "dist/hibp.min.js",
   "scripts": {
-    "clean": "rimraf ./lib ./coverage ./nyc_output",
-    "compile": "babel src --out-dir lib --source-maps && npm run webpack",
+    "clean": "rimraf ./dist ./lib ./coverage ./nyc_output",
+    "compile": "babel src --out-dir lib --source-maps",
     "lint": "eslint src test",
-    "prepublish": "npm run clean && npm run compile",
+    "prepublish": "npm run clean && npm run compile && npm run webpack",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha",
-    "webpack": "webpack -p"
+    "webpack": "npm run webpack:dev && npm run webpack:prod",
+    "webpack:dev": "webpack --progress --config webpack/webpack.config.dev.js",
+    "webpack:prod": "webpack -p --progress --config webpack/webpack.config.prod.js"
   },
   "repository": {
     "type": "git",

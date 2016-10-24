@@ -1,7 +1,7 @@
 # hibp
 
-*A Promise-based API for querying [Troy Hunt](http://www.troyhunt.com/)'s
-[Have I been pwned?](https://haveibeenpwned.com/) service.*
+*A Promise-based API for querying [Troy Hunt][troy]'s
+[Have I been pwned?][haveibeenpwned] service.*
 
 [![npm Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -15,10 +15,10 @@ Local via npm:
 npm install --save hibp
 ```
 
-Browser via CDN:
+Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ```html
-<script src="https://unpkg.com/hibp/lib/hibp.min.js"></script>
+<script src="https://unpkg.com/hibp"></script>
 ```
 
 ## Features
@@ -41,74 +41,70 @@ examples.
 This module requires a Promise implementation to exist in the global namespace
 prior to being loaded. Therefore, to facilitate use on versions of Node.js
 before 0.12, you are responsible for providing a polyfill. I recommend
-[es6-promise](https://github.com/stefanpenner/es6-promise).
+[es6-promise][es6-promise].
 
 ##### Example:
 
 ```javascript
 // This must be first!
-require('es6-promise').polyfill();
+require('es6-promise/auto');
 
 var hibp = require('hibp');
 ```
 
 #### Using in the browser
 
-As stated above, this module requires a Promise implementation to exist in the
-global namespace prior to being loaded. Therefore, to facilitate usage on
-[browsers without native Promise support](http://caniuse.com/#search=promise),
-you are responsible for providing a polyfill. Again, I recommend
-[es6-promise](https://github.com/stefanpenner/es6-promise).
+There is a Universal Module Definition (UMD) build provided in the package
+`dist` directory for usage in the browser. When using this build, an `hibp`
+object will be added to the browser's `window` object. Development and
+production (minified) UMD builds are both provided for download:
 
-To use hibp in the browser, you have a few options:
+* [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
+* [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
 
-* Pull it in via CDN (this will reference the `latest` tag version by default,
-  but you can specify a particular version if desired - see
-  [unpkg](https://unpkg.com) for details):
+You can include one of these builds directly via CDN (this will reference the
+`latest` tag version of the production build by default, but you can specify a
+particular version if desired - see [unpkg][unpkg] for details):
 
-  ```html
-  <script src="https://unpkg.com/hibp/lib/hibp.min.js"></script>
-  ```
+```html
+<script src="https://unpkg.com/hibp"></script>
+```
 
-  The `hibp` object should now be added to the browser's `window` object and
-  ready for use.
+Alternatively, you may bundle it in with client-side code with a module bundler
+like [webpack][webpack]. If your build process honors the
+`browser` field in `package.json`, you can import or require it normally:
 
-* Grab the browser/minified version from `node_modules/hibp/lib/hibp.min.js`
-  (or [download it from the CDN](https://unpkg.com/hibp/lib/hibp.min.js)) and
-  reference directly in a `<script>` tag. The `hibp` object should now be added
-  to the browser's `window` object and ready for use.
+```javascript
+// ES2015
+import hibp from 'hibp';
 
-* Bundle it in with client-side code with a module bundler like
-  [webpack](https://webpack.github.io/). If your build process honors the
-  `browser` field in `package.json`, you can import or require it normally:
+// ES5
+var hibp = require('hibp');
+```
 
-  ```javascript
-  // ES2015
-  import hibp from 'hibp';
+If your build process does not respect the `browser` field of `package.json`,
+you may explicitly include or require the UMD version like so:
 
-  // ES5
-  var hibp = require('hibp');
-  ```
+```javascript
+// ES2015
+import hibp from 'hibp/dist/hibp.min.js';
 
-  If your build process does not respect the `browser` field of `package.json`,
-  you may explicitly include or require the pre-compiled/minified browser
-  version like so:
+// ES5
+var hibp = require('hibp/dist/hibp.min.js');
+```
 
-  ```javascript
-  // ES2015
-  import hibp from 'hibp/lib/hibp.min';
-
-  // ES5
-  var hibp = require('hibp/lib/hibp.min');
-  ```
+**N.B.** As stated above, this module requires a Promise implementation to
+exist in the global namespace prior to being loaded. Therefore, to facilitate
+usage on [browsers without native Promise support][caniuse-promise], you are
+responsible for providing a polyfill. Again, I recommend
+[es6-promise][es6-promise].
 
 ## Projects Using hibp
 
-* [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying
-  the 'Have I been pwned?' service
+* [pwned][pwned] - a command-line tool for querying the
+  '[Have I been pwned?][haveibeenpwned]' service
 
-Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add
-yours to the list.
+Send me a [PR][pulls] or an email and I'll add yours to the list.
 
 ## License
 
@@ -120,3 +116,13 @@ This module is distributed under the [MIT License](LICENSE.txt).
 [travis-url]: https://travis-ci.org/wKovacs64/hibp
 [coveralls-image]: https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/github/wKovacs64/hibp
+[troy]: http://www.troyhunt.com
+[haveibeenpwned]: https://haveibeenpwned.com
+[es6-promise]: https://github.com/stefanpenner/es6-promise
+[unpkg]: https://unpkg.com
+[webpack]: https://webpack.github.io
+[cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
+[cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js
+[caniuse-promise]: http://caniuse.com/#search=promise
+[pwned]: https://github.com/wKovacs64/pwned
+[pulls]: https://github.com/wKovacs64/hibp/pulls
