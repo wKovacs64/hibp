@@ -1,5 +1,17 @@
 # Change Log
 
+## Version 3.0.0 *(2016-10-23)*
+
+* Added `yarn.lock` for experimental [yarn](https://yarnpkg.com) support
+* Removed expect.js dependency from the test environment
+* Expanded usage documentation
+* Updated dependencies
+
+##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
+
+* The browser (UMD) version has moved from the `lib` directory to the `dist`
+  directory.
+
 ## Version 2.2.0 *(2016-10-03)*
 
 * Added fallback for unexpected HTTP responses (thanks @jellekralt)

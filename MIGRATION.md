@@ -1,5 +1,13 @@
 ## Migration Notes
 
+#### 2.2.0 → 3.0.0
+
+* The browser (UMD) build output has moved from the `lib` directory to the
+  `dist` directory to separate it from the server-side output. A development
+  (non-minified) version is also now included, which was omitted in the past as
+  it would have had the same file name in the same directory as the server-side
+  output.
+
 #### 1.0.8 → 2.0.0
 
 * All API methods which previously resolved to `undefined` (upon receiving a
