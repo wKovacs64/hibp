@@ -35,7 +35,7 @@
   "bugs": {
     "url": "https://github.com/wKovacs64/hibp/issues"
   },
-  "homepage": "https://github.com/wKovacs64/hibp",
+  "homepage": "https://wkovacs64.github.io/hibp",
   "engines": {
     "iojs": "*",
     "node": ">= 0.10"
