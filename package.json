@@ -37,8 +37,7 @@
   },
   "homepage": "https://wkovacs64.github.io/hibp",
   "engines": {
-    "iojs": "*",
-    "node": ">= 0.10"
+    "node": ">= 4"
   },
   "dependencies": {
     "axios": "^0.15.2",
