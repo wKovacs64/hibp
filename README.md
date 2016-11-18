@@ -137,6 +137,7 @@ responsible for providing a polyfill. Again, I recommend
 
 * [pwned][pwned] - a command-line tool for querying the
   '[Have I been pwned?][haveibeenpwned]' service
+* [hibp-stdlib][hibp-stdlib] - a microservice on [stdlib][stdlib]
 
 Send me a [PR][pulls] or an email and I'll add yours to the list.
 
@@ -160,3 +161,5 @@ This module is distributed under the [MIT License](LICENSE.txt).
 [caniuse-promise]: http://caniuse.com/#search=promise
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
+[hibp-stdlib]: https://stdlib.com/services/wKovacs64/hibp
+[stdlib]: https://stdlib.com
