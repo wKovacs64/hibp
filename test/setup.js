@@ -1,4 +1,3 @@
-import 'es6-promise/auto';
 import moxios from 'moxios';
 import hibp from '../src/hibp';
 import {
