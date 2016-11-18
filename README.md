@@ -70,22 +70,6 @@ hibp
 Please see the [API reference](API.md) for more detailed usage information and
 additional examples.
 
-#### Using in Node.js < 0.12
-
-This module requires a Promise implementation to exist in the global namespace
-prior to being loaded. Therefore, to facilitate use on versions of Node.js
-before 0.12, you are responsible for providing a polyfill. I recommend
-[es6-promise][es6-promise].
-
-##### Example:
-
-```javascript
-// This must be first!
-require('es6-promise/auto');
-
-var hibp = require('hibp');
-```
-
 #### Using in the browser
 
 There is a Universal Module Definition (UMD) build provided in the package
@@ -127,11 +111,10 @@ import hibp from 'hibp/dist/hibp.min.js';
 var hibp = require('hibp/dist/hibp.min.js');
 ```
 
-**N.B.** As stated above, this module requires a Promise implementation to
-exist in the global namespace prior to being loaded. Therefore, to facilitate
-usage on [browsers without native Promise support][caniuse-promise], you are
-responsible for providing a polyfill. Again, I recommend
-[es6-promise][es6-promise].
+**N.B.** This module requires a Promise implementation to exist in the global
+namespace prior to being loaded. Therefore, to facilitate usage on
+[browsers without native Promise support][caniuse-promise], you are responsible
+for providing a polyfill. I recommend [es6-promise][es6-promise].
 
 ## Projects Using hibp
 
