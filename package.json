@@ -19,6 +19,7 @@
   "main": "lib/hibp.js",
   "browser": "dist/hibp.min.js",
   "scripts": {
+    "build": "npm run compile",
     "clean": "rimraf ./dist ./lib ./coverage ./nyc_output",
     "compile": "babel src --out-dir lib --source-maps",
     "lint": "eslint src test",
