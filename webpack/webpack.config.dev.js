@@ -1,16 +1,17 @@
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
 
-const config = Object.create(baseConfig);
-
-config.devtool = 'eval';
-config.output.filename = config.output.library + '.js';
-config.plugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify('development'),
-    },
-  }),
-];
-
-module.exports = config;
+module.exports = merge.smart(baseConfig, {
+  devtool: 'eval',
+  output: {
+    filename: `${baseConfig.output.library}.js`,
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
+  ],
+});
