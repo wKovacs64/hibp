@@ -1,14 +1,16 @@
 const path = require('path');
 
+const projectRoot = path.join(__dirname, '..');
+
 module.exports = {
   cache: true,
   entry: [
-    path.join(__dirname, '..', 'src', 'hibp.js'),
+    path.join(projectRoot, 'src', 'hibp.js'),
   ],
   output: {
     library: 'hibp',
     libraryTarget: 'umd',
-    path: path.join(__dirname, '..', 'dist'),
+    path: path.join(projectRoot, 'dist'),
   },
   module: {
     loaders: [
@@ -18,7 +20,7 @@ module.exports = {
           'babel',
         ],
         include: [
-          path.join(__dirname, '..', 'src'),
+          path.join(projectRoot, 'src'),
         ],
       },
     ],
