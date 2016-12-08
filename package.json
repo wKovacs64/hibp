@@ -26,8 +26,8 @@
     "prepublish": "npm run clean && npm run compile && npm run webpack",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
     "webpack": "npm run webpack:dev && npm run webpack:prod",
-    "webpack:dev": "webpack --progress --config webpack/webpack.config.dev.js",
-    "webpack:prod": "webpack -p --progress --config webpack/webpack.config.prod.js"
+    "webpack:dev": "webpack --progress --colors --config webpack/webpack.config.dev.js",
+    "webpack:prod": "webpack -p --progress --colors --config webpack/webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
