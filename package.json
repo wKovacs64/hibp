@@ -22,7 +22,7 @@
     "build": "npm run compile",
     "clean": "rimraf ./dist ./lib ./coverage ./nyc_output",
     "compile": "babel src --out-dir lib --source-maps",
-    "lint": "eslint src test",
+    "lint": "eslint src test webpack",
     "prepublish": "npm run clean && npm run compile && npm run webpack",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
     "webpack": "npm run webpack:dev && npm run webpack:prod",
