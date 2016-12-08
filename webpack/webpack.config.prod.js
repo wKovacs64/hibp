@@ -8,6 +8,7 @@ module.exports = merge.smart(baseConfig, {
     filename: `${baseConfig.output.library}.min.js`,
   },
   plugins: [
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
