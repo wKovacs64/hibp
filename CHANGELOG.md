@@ -1,5 +1,15 @@
 # Change Log
 
+## Version 4.0.0 *(2016-12-10)*
+
+* Tweaked toolchain configs
+* Restructured test data
+* Updated dependencies
+
+##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
+
+* Dropped support for Node < 4
+
 ## Version 3.0.0 *(2016-10-23)*
 
 * Added `yarn.lock` for experimental [yarn](https://yarnpkg.com) support

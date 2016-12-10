@@ -1,5 +1,12 @@
 ## Migration Notes
 
+#### 3.0.0 → 4.0.0
+
+* Support for Node.js versions less than 4.x has been dropped. It will probably
+  still work (at least for the foreseeable future), but I'm not going out of my
+  way to make sure. If you are leveraging this library in such an environment,
+  you should restrict the version in your dependencies to `^3.0.0`.
+
 #### 2.2.0 → 3.0.0
 
 * The browser (UMD) build output has moved from the `lib` directory to the
