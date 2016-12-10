@@ -40,7 +40,11 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 ## Usage
 
 ```javascript
+// ES2015 (aka ES6)
 import hibp from 'hibp';
+
+// ES5
+var hibp = require('hibp');
 ```
 
 Now the following functions are available in the `hibp` object:
@@ -99,22 +103,14 @@ like [webpack][webpack]. If your build process honors the
 `browser` field in `package.json`, you can import or require it normally:
 
 ```javascript
-// ES2015
 import hibp from 'hibp';
-
-// ES5
-var hibp = require('hibp');
 ```
 
-If your build process does not respect the `browser` field of `package.json`,
-you may explicitly include or require the UMD version like so:
+If your build process does **not** respect the `browser` field of
+`package.json`, you may explicitly include or require the UMD version like so:
 
 ```javascript
-// ES2015
 import hibp from 'hibp/dist/hibp.min.js';
-
-// ES5
-var hibp = require('hibp/dist/hibp.min.js');
 ```
 
 **N.B.** This module requires a Promise implementation to exist in the global
@@ -132,7 +128,7 @@ Send me a [PR][pulls] or an email and I'll add yours to the list.
 
 ## License
 
-This module is distributed under the [MIT License](LICENSE.txt).
+This module is distributed under the [MIT License][license].
 
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
@@ -152,3 +148,4 @@ This module is distributed under the [MIT License](LICENSE.txt).
 [pulls]: https://github.com/wKovacs64/hibp/pulls
 [hibp-stdlib]: https://stdlib.com/services/wKovacs64/hibp
 [stdlib]: https://stdlib.com
+[license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
