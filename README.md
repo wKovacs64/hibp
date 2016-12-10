@@ -9,7 +9,13 @@
 
 ## Installation
 
-Local via npm:
+Locally via yarn:
+
+```shell
+yarn add hibp
+```
+
+Or, npm:
 
 ```shell
 npm install --save hibp
