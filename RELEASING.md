@@ -26,3 +26,4 @@
 
 10. `git commit -am "Prepare next development version"`
 11. `git push`
+12. Regenerate `gh-pages` branch.
