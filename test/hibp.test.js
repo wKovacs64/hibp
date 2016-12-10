@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import hibp from '../src/hibp';
+import './mockedAxios';
 import {
   BAD_REQUEST,
   FORBIDDEN,
@@ -25,7 +26,7 @@ import {
   RESPONSE_OBJ,
   RESPONSE_ARY,
   RESPONSE_CLEAN,
-} from './setup';
+} from './testData';
 
 describe('hibp', () => {
   describe('_fetchFromApi (request failure)', () => {
