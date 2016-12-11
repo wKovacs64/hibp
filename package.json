@@ -68,6 +68,6 @@
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6",
     "webpack": "^1.14.0",
-    "webpack-merge": "^1.1.0"
+    "webpack-merge": "^1.1.1"
   }
 }
