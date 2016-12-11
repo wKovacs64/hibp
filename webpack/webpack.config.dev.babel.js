@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const baseConfig = require('./webpack.config.base');
+import webpack from 'webpack';
+import merge from 'webpack-merge';
+import baseConfig from './webpack.config.base.babel';
 
-module.exports = merge.smart(baseConfig, {
+export default merge.smart(baseConfig, {
   devtool: 'eval',
   output: {
     filename: `${baseConfig.output.library}.js`,

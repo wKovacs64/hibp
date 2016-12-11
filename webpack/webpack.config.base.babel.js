@@ -1,8 +1,8 @@
-const path = require('path');
+import path from 'path';
 
 const projectRoot = path.join(__dirname, '..');
 
-module.exports = {
+export default {
   cache: true,
   entry: [
     path.join(projectRoot, 'src', 'hibp.js'),
