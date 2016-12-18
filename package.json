@@ -51,8 +51,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-core": "^6.20.0",
-    "babel-loader": "^6.2.9",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-istanbul": "^3.0.0",
     "babel-preset-env": "^1.1.4",
@@ -71,6 +71,6 @@
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6",
     "webpack": "^1.14.0",
-    "webpack-merge": "^1.1.1"
+    "webpack-merge": "^1.1.2"
   }
 }
