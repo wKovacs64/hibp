@@ -17,7 +17,22 @@ export default {
       {
         test: /\.js$/,
         loaders: [
-          'babel',
+          `babel?${JSON.stringify({
+            babelrc: false,
+            presets: [
+              [
+                'env',
+                {
+                  targets: {
+                    browsers: [
+                      '> 1%',
+                      'last 2 versions',
+                    ],
+                  },
+                },
+              ],
+            ],
+          })}`,
         ],
         include: [
           path.join(projectRoot, 'src'),
