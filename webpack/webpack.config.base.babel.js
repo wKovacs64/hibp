@@ -19,6 +19,9 @@ export default {
         loaders: [
           `babel?${JSON.stringify({
             babelrc: false,
+            plugins: [
+              'add-module-exports',
+            ],
             presets: [
               [
                 'env',
