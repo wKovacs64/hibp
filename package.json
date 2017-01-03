@@ -19,7 +19,7 @@
   },
   "contributors": [],
   "license": "MIT",
-  "main": "lib/hibp.js",
+  "main": "lib/index.js",
   "browser": "dist/hibp.min.js",
   "scripts": {
     "clean": "rimraf ./dist ./lib ./coverage ./nyc_output",

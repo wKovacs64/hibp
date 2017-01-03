@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import hibp from '../src/hibp';
+import hibp from '../src';
 import './mockedAxios';
 import {
   BAD_REQUEST,

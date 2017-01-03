@@ -1,4 +1,3 @@
-import 'source-map-support/register';
 import Axios from 'axios';
 import {
   BAD_REQUEST,
