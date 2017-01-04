@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 4.0.1 *(2017-01-04)*
+
+* First release of 2017! :tada:
+* Reduced size of UMD build by 75%
+* Updated dependencies
+
 ## Version 4.0.0 *(2016-12-10)*
 
 * Tweaked toolchain configs
