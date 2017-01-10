@@ -107,16 +107,15 @@ const hibp = {
    *   });
    */
   breachedAccount: (account, options = {}) => {
-    let endpoint = `/breachedaccount/${encodeURIComponent(account)}`;
+    const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
+    const params = [];
     if (options.domain) {
-      endpoint += `?domain=${encodeURIComponent(options.domain)}`;
-      if (options.truncate) {
-        endpoint += '&truncateResponse=true';
-      }
-    } else if (options.truncate) {
-      endpoint += '?truncateResponse=true';
+      params.push(`domain=${encodeURIComponent(options.domain)}`);
     }
-    return hibp._fetchFromApi(endpoint);
+    if (options.truncate) {
+      params.push('truncateResponse=true');
+    }
+    return hibp._fetchFromApi(`${endpoint}${params.join('&')}`);
   },
 
   /**
@@ -153,11 +152,12 @@ const hibp = {
    *   });
    */
   breaches: (options = {}) => {
-    let endpoint = '/breaches';
+    const endpoint = '/breaches?';
+    const params = [];
     if (options.domain) {
-      endpoint += `?domain=${encodeURIComponent(options.domain)}`;
+      params.push(`domain=${encodeURIComponent(options.domain)}`);
     }
-    return hibp._fetchFromApi(endpoint);
+    return hibp._fetchFromApi(`${endpoint}${params.join('&')}`);
   },
 
   /**
