@@ -28,60 +28,84 @@ before(() => {
 
   // Configure mocked API calls and results
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${EMAIL_INVALID}`), {
+    new RegExp(`/breachedaccount/${encodeURIComponent(EMAIL_INVALID)}`),
+    {
       status: BAD_REQUEST.status,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${INVALID_HEADER}\\??`), {
+    new RegExp(`/breachedaccount/${encodeURIComponent(INVALID_HEADER)}\\??`),
+    {
       status: FORBIDDEN.status,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${RATE_LIMITED}\\??`), {
+    new RegExp(`/breachedaccount/${encodeURIComponent(RATE_LIMITED)}\\??`),
+    {
       status: TOO_MANY_REQUESTS.status,
       response: TOO_MANY_REQUESTS.response,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${UNEXPECTED}\\??`), {
+    new RegExp(`/breachedaccount/${encodeURIComponent(UNEXPECTED)}\\??`),
+    {
       status: UNKNOWN.status,
       statusText: UNKNOWN.statusText,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${ACCOUNT_BREACHED}\\??`), {
+    new RegExp(`/breachedaccount/${encodeURIComponent(ACCOUNT_BREACHED)}\\??`),
+    {
       status: OK.status,
       response: RESPONSE_OBJ,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breachedaccount/${ACCOUNT_CLEAN}\\??`), {
+    new RegExp(`/breachedaccount/${encodeURIComponent(ACCOUNT_CLEAN)}\\??`),
+    {
       status: NOT_FOUND.status,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp('/breaches\\??'), {
+    new RegExp('/breaches\\??'),
+    {
       status: OK.status,
       response: RESPONSE_ARY,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breach/${BREACH_FOUND}`), {
+    new RegExp(`/breach/${encodeURIComponent(BREACH_FOUND)}`),
+    {
       status: OK.status,
       response: RESPONSE_OBJ,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/breach/${BREACH_NOT_FOUND}`), {
+    new RegExp(`/breach/${encodeURIComponent(BREACH_NOT_FOUND)}`),
+    {
       status: NOT_FOUND.status,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp('/dataclasses'), {
+    new RegExp('/dataclasses'),
+    {
       status: OK.status,
       response: RESPONSE_ARY,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/pasteaccount/${EMAIL_PASTED}`), {
+    new RegExp(`/pasteaccount/${encodeURIComponent(EMAIL_PASTED)}`),
+    {
       status: OK.status,
       response: RESPONSE_ARY,
-    });
+    },
+  );
   moxios.stubRequest(
-    new RegExp(`/pasteaccount/${EMAIL_CLEAN}`), {
+    new RegExp(`/pasteaccount/${encodeURIComponent(EMAIL_CLEAN)}`),
+    {
       status: NOT_FOUND.status,
-    });
+    },
+  );
 });
 
 after(() => {

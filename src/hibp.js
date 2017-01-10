@@ -107,9 +107,9 @@ const hibp = {
    *   });
    */
   breachedAccount: (account, options = {}) => {
-    let endpoint = `/breachedaccount/${account}`;
+    let endpoint = `/breachedaccount/${encodeURIComponent(account)}`;
     if (options.domain) {
-      endpoint += `?domain=${options.domain}`;
+      endpoint += `?domain=${encodeURIComponent(options.domain)}`;
       if (options.truncate) {
         endpoint += '&truncateResponse=true';
       }
@@ -155,7 +155,7 @@ const hibp = {
   breaches: (options = {}) => {
     let endpoint = '/breaches';
     if (options.domain) {
-      endpoint += `?domain=${options.domain}`;
+      endpoint += `?domain=${encodeURIComponent(options.domain)}`;
     }
     return hibp._fetchFromApi(endpoint);
   },
@@ -179,7 +179,9 @@ const hibp = {
    *     // ...
    *   });
    */
-  breach: breachName => hibp._fetchFromApi(`/breach/${breachName}`),
+  breach: breachName => (
+    hibp._fetchFromApi(`/breach/${encodeURIComponent(breachName)}`)
+  ),
 
   /**
    * Fetches all data classes in the system.
@@ -220,7 +222,9 @@ const hibp = {
    *     // ...
    *   });
    */
-  pasteAccount: email => hibp._fetchFromApi(`/pasteaccount/${email}`),
+  pasteAccount: email => (
+    hibp._fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`)
+  ),
 };
 
 export default hibp;
