@@ -21,6 +21,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "browser": "dist/hibp.min.js",
+  "runkitExampleFilename": "example/runkit.js",
   "scripts": {
     "clean": "rimraf ./dist ./lib ./coverage ./nyc_output",
     "build": "babel src --out-dir lib --source-maps",

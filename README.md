@@ -61,7 +61,7 @@ Now the following functions are available in the `hibp` object:
 import hibp from 'hibp';
 
 hibp
-  .breachedAccount('rick.sanchez')
+  .breachedAccount('someAccountOrEmail')
   .then((data) => {
     if (data) {
       // Bummer...
@@ -118,6 +118,10 @@ namespace prior to being loaded. Therefore, to facilitate usage on
 [browsers without native Promise support][caniuse-promise], you are responsible
 for providing a polyfill. I recommend [es6-promise][es6-promise].
 
+## Try It Out
+
+[Test hibp in your browser with RunKit.][runkit]
+
 ## Projects Using hibp
 
 * [pwned][pwned] - a command-line tool for querying the
@@ -144,6 +148,7 @@ This module is distributed under the [MIT License][license].
 [cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
 [cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js
 [caniuse-promise]: http://caniuse.com/#search=promise
+[runkit]: https://runkit.com/npm/hibp
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
 [hibp-stdlib]: https://stdlib.com/services/wKovacs64/hibp
