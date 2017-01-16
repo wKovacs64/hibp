@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 4.1.1 *(2017-01-16)*
+
+* Published `example` directory for RunKit support
+* Removed `old` directory from package that slipped in by mistake
+
 ## Version 4.1.0 *(2017-01-16)*
 
 * Encoded user input used in API query string parameters
