@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 4.1.0 *(2017-01-16)*
+
+* Encoded user input used in API query string parameters
+* Added RunKit information for live trial usage
+
 ## Version 4.0.1 *(2017-01-04)*
 
 * First release of 2017! :tada:
