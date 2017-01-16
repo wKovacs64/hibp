@@ -9,7 +9,6 @@
 .nycrc
 .nyc_output
 coverage
-example
 test
 src
 webpack
