@@ -13,32 +13,36 @@ export default {
     path: path.join(projectRoot, 'dist'),
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: [
-          `babel?${JSON.stringify({
-            babelrc: false,
-            plugins: [
-              'add-module-exports',
-            ],
-            presets: [
-              [
-                'env',
-                {
-                  targets: {
-                    browsers: [
-                      '> 1%',
-                      'last 2 versions',
-                    ],
-                  },
-                },
-              ],
-            ],
-          })}`,
-        ],
         include: [
           path.join(projectRoot, 'src'),
+        ],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              plugins: [
+                'add-module-exports',
+              ],
+              presets: [
+                [
+                  'env',
+                  {
+                    modules: false,
+                    targets: {
+                      browsers: [
+                        '> 1%',
+                        'last 2 versions',
+                      ],
+                    },
+                  },
+                ],
+              ],
+            },
+          },
         ],
       },
     ],
