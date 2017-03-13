@@ -24,6 +24,7 @@ export default {
             loader: 'babel-loader',
             options: {
               babelrc: false,
+              cacheDirectory: true,
               plugins: [
                 'add-module-exports',
               ],
