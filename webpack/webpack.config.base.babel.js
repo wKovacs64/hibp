@@ -51,5 +51,6 @@ export default {
   node: {
     fs: 'empty',
     module: 'empty',
+    Buffer: false, // axios 0.16.1
   },
 };
