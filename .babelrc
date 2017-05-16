@@ -1,22 +1,49 @@
 {
   "env": {
+    "es": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": false,
+            "targets": {
+              "node": 4
+            }
+          }
+        ]
+      ]
+    },
+    "commonjs": {
+      "plugins": [
+        "add-module-exports"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "modules": "commonjs",
+            "targets": {
+              "node": 4
+            }
+          }
+        ]
+      ]
+    },
     "test": {
       "plugins": [
         "istanbul"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "modules": "commonjs",
+            "targets": {
+              "node": 4
+            }
+          }
+        ]
       ]
     }
-  },
-  "plugins": [
-    "add-module-exports"
-  ],
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "node": 4
-        }
-      }
-    ]
-  ]
+  }
 }
