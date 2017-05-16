@@ -153,6 +153,7 @@ sftp-config.json
 
 ### Babel output ###
 lib/
+es/
 
 
 ### Webpack output ###
