@@ -29,6 +29,14 @@ import {
 } from './testData';
 
 describe('hibp', () => {
+  const successHandler = sinon.spy();
+  const errorHandler = sinon.spy();
+
+  afterEach(() => {
+    successHandler.reset();
+    errorHandler.reset();
+  });
+
   describe('_fetchFromApi (request failure)', () => {
     let failboat;
 
@@ -42,264 +50,239 @@ describe('hibp', () => {
       hibp._axios.interceptors.request.eject(failboat);
     });
 
-    it('should re-throw request setup errors', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.dataClasses()
-        .then(handler)
+    it('should re-throw request setup errors', () => (
+      hibp.dataClasses()
+        .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be.false;
+          expect(successHandler.called).to.be.false;
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err).to.equal(ERR);
-        });
-    });
+        })
+    ));
   });
 
   describe('_fetchFromApi (invalid account format)', () => {
-    it('should throw an Error with "Bad Request" status text', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(EMAIL_INVALID)
-        .then(handler)
+    it('should throw an Error with "Bad Request" status text', () => (
+      hibp.breachedAccount(EMAIL_INVALID)
+        .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be.false;
+          expect(successHandler.called).to.be.false;
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(BAD_REQUEST.statusText));
-        });
-    });
+        })
+    ));
   });
 
   describe('_fetchFromApi (invalid request header)', () => {
-    it('should throw an Error with "Forbidden" status text', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(INVALID_HEADER)
-        .then(handler)
+    it('should throw an Error with "Forbidden" status text', () => (
+      hibp.breachedAccount(INVALID_HEADER)
+        .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be.false;
+          expect(successHandler.called).to.be.false;
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(FORBIDDEN.statusText));
-        });
-    });
+        })
+    ));
   });
 
   describe('_fetchFromApi (rate limited)', () => {
-    it('should throw an Error with "Too Many Requests" response data', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(RATE_LIMITED)
-        .then(handler)
+    it('should throw an Error with "Too Many Requests" response data', () => (
+      hibp.breachedAccount(RATE_LIMITED)
+        .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be.false;
+          expect(successHandler.called).to.be.false;
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(TOO_MANY_REQUESTS.response));
-        });
-    });
+        })
+    ));
   });
 
   describe('_fetchFromApi (unexpected HTTP error)', () => {
-    it('should throw an Error with the response status text', () => {
-      const handler = sinon.spy();
-      const errorHandler = sinon.spy();
-      return hibp.breachedAccount(UNEXPECTED)
-        .then(handler)
+    it('should throw an Error with the response status text', () => (
+      hibp.breachedAccount(UNEXPECTED)
+        .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(handler.called).to.be.false;
+          expect(successHandler.called).to.be.false;
           expect(errorHandler.calledOnce).to.be.true;
           const err = errorHandler.getCall(0).args[0];
           expect(err.message).to.match(new RegExp(UNKNOWN.statusText));
-        });
-    });
+        })
+    ));
   });
 
   describe('breachedAccount (breached account, no parameters)', () => {
-    it('should resolve with an object', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_BREACHED)
-        .then(handler)
+    it('should resolve with an object', () => (
+      hibp.breachedAccount(ACCOUNT_BREACHED)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+        })
+    ));
   });
 
   describe('breachedAccount (breached account, with truncateResults)', () => {
-    it('should resolve with an object', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
-        .then(handler)
+    it('should resolve with an object', () => (
+      hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+        })
+    ));
   });
 
   describe('breachedAccount (breached account, with domain)', () => {
-    it('should resolve with an object', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
-        .then(handler)
+    it('should resolve with an object', () => (
+      hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+        })
+    ));
   });
 
   describe('breachedAccount (breached account, with domain and ' +
     'truncateResults)', () => {
-    it('should resolve with an object', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
-        .then(handler)
+    it('should resolve with an object', () => (
+      hibp.breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+        })
+    ));
   });
 
   describe('breachedAccount (clean account, no parameters)', () => {
-    it('should resolve with null', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_CLEAN)
-        .then(handler)
+    it('should resolve with null', () => (
+      hibp.breachedAccount(ACCOUNT_CLEAN)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+        })
+    ));
   });
 
   describe('breachedAccount (clean account, with truncateResults)', () => {
-    it('should resolve with null', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
-        .then(handler)
+    it('should resolve with null', () => (
+      hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+        })
+    ));
   });
 
   describe('breachedAccount (clean account, with domain)', () => {
-    it('should resolve with null', () => {
-      const handler = sinon.spy();
-      return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
-        .then(handler)
+    it('should resolve with null', () => (
+      hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+        })
+    ));
   });
 
   describe('breachedAccount (clean account, with domain and truncateResults)',
     () => {
-      it('should resolve with null', () => {
-        const handler = sinon.spy();
-        return hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
-          .then(handler)
+      it('should resolve with null', () => (
+        hibp.breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
+          .then(successHandler)
           .then(() => {
-            expect(handler.calledOnce).to.be.true;
-            expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-          });
-      });
+            expect(successHandler.calledOnce).to.be.true;
+            expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+          })
+      ));
     });
 
   describe('breaches (no parameters)', () => {
-    it('should resolve with an array', () => {
-      const handler = sinon.spy();
-      return hibp.breaches()
-        .then(handler)
+    it('should resolve with an array', () => (
+      hibp.breaches()
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        })
+    ));
   });
 
   describe('breaches (with domain)', () => {
-    it('should resolve with an array', () => {
-      const handler = sinon.spy();
-      return hibp.breaches(OPTS_DOM)
-        .then(handler)
+    it('should resolve with an array', () => (
+      hibp.breaches(OPTS_DOM)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        })
+    ));
   });
 
   describe('breach (found)', () => {
-    it('should resolve with an object', () => {
-      const handler = sinon.spy();
-      return hibp.breach(BREACH_FOUND)
-        .then(handler)
+    it('should resolve with an object', () => (
+      hibp.breach(BREACH_FOUND)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+        })
+    ));
   });
 
   describe('breach (not found)', () => {
-    it('should resolve with null', () => {
-      const handler = sinon.spy();
-      return hibp.breach(BREACH_NOT_FOUND)
-        .then(handler)
+    it('should resolve with null', () => (
+      hibp.breach(BREACH_NOT_FOUND)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+        })
+    ));
   });
 
   describe('dataClasses', () => {
-    it('should resolve with an array', () => {
-      const handler = sinon.spy();
-      return hibp.dataClasses()
-        .then(handler)
+    it('should resolve with an array', () => (
+      hibp.dataClasses()
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        })
+    ));
   });
 
   describe('pasteAccount (pasted email)', () => {
-    it('should resolve with an array', () => {
-      const handler = sinon.spy();
-      return hibp.pasteAccount(EMAIL_PASTED)
-        .then(handler)
+    it('should resolve with an array', () => (
+      hibp.pasteAccount(EMAIL_PASTED)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        })
+    ));
   });
 
   describe('pasteAccount (clean email)', () => {
-    it('should resolve with null', () => {
-      const handler = sinon.spy();
-      return hibp.pasteAccount(EMAIL_CLEAN)
-        .then(handler)
+    it('should resolve with null', () => (
+      hibp.pasteAccount(EMAIL_CLEAN)
+        .then(successHandler)
         .then(() => {
-          expect(handler.calledOnce).to.be.true;
-          expect(handler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-        });
-    });
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+        })
+    ));
   });
 });
