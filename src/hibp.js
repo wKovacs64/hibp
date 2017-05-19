@@ -67,8 +67,8 @@ const hibp = {
    * (default: all domains)
    * @param {boolean} [options.truncate] truncate the results to only include
    * the name of each breach (default: false)
-   * @returns {Promise} a Promise which resolves to an Object representing a
-   * breach (or null if no breaches were found), or rejects with an Error
+   * @returns {Promise} a Promise which resolves to an array of breach Objects
+   * (or null if no breaches were found), or rejects with an Error
    * @example
    * hibp.breachedAccount('foo')
    *   .then((data) => {

@@ -17,9 +17,9 @@ An interface to the haveibeenpwned.com API (version 2).
 ### hibp.breachedAccount(account, [options]) ⇒ <code>Promise</code>
 Fetches breach data for the specified account.
 
-**Kind**: static method of <code>[hibp](#hibp)</code>  
-**Returns**: <code>Promise</code> - a Promise which resolves to an Object representing a
-breach (or null if no breaches were found), or rejects with an Error  
+**Kind**: static method of [<code>hibp</code>](#hibp)  
+**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach Objects
+(or null if no breaches were found), or rejects with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -75,7 +75,7 @@ hibp.breachedAccount('baz', { domain: 'adobe.com', truncate: true })
 ### hibp.breaches([options]) ⇒ <code>Promise</code>
 Fetches all breached sites in the system.
 
-**Kind**: static method of <code>[hibp](#hibp)</code>  
+**Kind**: static method of [<code>hibp</code>](#hibp)  
 **Returns**: <code>Promise</code> - a Promise which resolves to an array of breach Objects
 (an empty array if no breaches were found), or rejects with an Error  
 
@@ -117,7 +117,7 @@ hibp.breaches({ domain: 'adobe.com' })
 ### hibp.breach(breachName) ⇒ <code>Promise</code>
 Fetches breach data for a single site by breach name.
 
-**Kind**: static method of <code>[hibp](#hibp)</code>  
+**Kind**: static method of [<code>hibp</code>](#hibp)  
 **Returns**: <code>Promise</code> - a Promise which resolves to an Object representing a
 breach (or null if no breach was found), or rejects with an Error  
 
@@ -144,7 +144,7 @@ hibp.breach('Adobe')
 ### hibp.dataClasses() ⇒ <code>Promise</code>
 Fetches all data classes in the system.
 
-**Kind**: static method of <code>[hibp](#hibp)</code>  
+**Kind**: static method of [<code>hibp</code>](#hibp)  
 **Returns**: <code>Promise</code> - a Promise which resolves to an array of strings (or
 null if no data classes were found), or rejects with an Error  
 **Example**  
@@ -166,7 +166,7 @@ hibp.dataClasses()
 ### hibp.pasteAccount(email) ⇒ <code>Promise</code>
 Fetches all pastes for an account (email address).
 
-**Kind**: static method of <code>[hibp](#hibp)</code>  
+**Kind**: static method of [<code>hibp</code>](#hibp)  
 **Returns**: <code>Promise</code> - a Promise which resolves to an array of paste Objects
 (or null if no pastes were found), or rejects with an Error  
 
