@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 4.2.0 *(2017-05-25)*
+
+* Fixed return type in `breachedAccount` documentation
+* Added support for tree-shaking bundlers
+* Optimized tests
+* Updated dependencies
+
 ## Version 4.1.1 *(2017-01-16)*
 
 * Published `example` directory for RunKit support
