@@ -39,7 +39,7 @@
           {
             "modules": "commonjs",
             "targets": {
-              "node": 4
+              "node": "current"
             }
           }
         ]
