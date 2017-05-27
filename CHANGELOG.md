@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.2.1 *(2017-05-27)*
+
+* Fixed UMD build that broke in 4.2.0
+
 ## Version 4.2.0 *(2017-05-25)*
 
 * Fixed return type in `breachedAccount` documentation
