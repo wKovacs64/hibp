@@ -32,7 +32,6 @@ export default {
                 [
                   'env',
                   {
-                    modules: false,
                     targets: {
                       browsers: [
                         '> 1%',
