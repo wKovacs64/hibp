@@ -10,6 +10,7 @@ export default {
   output: {
     library: 'hibp',
     libraryTarget: 'umd',
+    umdNamedDefine: true,
     path: path.join(projectRoot, 'dist'),
   },
   module: {
