@@ -67,7 +67,7 @@ const hibp = {
    * (default: all domains)
    * @param {boolean} [options.truncate] truncate the results to only include
    * the name of each breach (default: false)
-   * @returns {Promise} a Promise which resolves to an array of breach Objects
+   * @returns {Promise} a Promise which resolves to an array of breach objects
    * (or null if no breaches were found), or rejects with an Error
    * @example
    * hibp.breachedAccount('foo')
@@ -124,7 +124,7 @@ const hibp = {
    * @param {Object} [options] a configuration object
    * @param {string} [options.domain] a domain by which to filter the results
    * (default: all domains)
-   * @returns {Promise} a Promise which resolves to an array of breach Objects
+   * @returns {Promise} a Promise which resolves to an array of breach objects
    * (an empty array if no breaches were found), or rejects with an Error
    * @example
    * hibp.breaches()
@@ -164,7 +164,7 @@ const hibp = {
    * Fetches breach data for a single site by breach name.
    *
    * @param {string} breachName the name of a breach in the system
-   * @returns {Promise} a Promise which resolves to an Object representing a
+   * @returns {Promise} a Promise which resolves to an object representing a
    * breach (or null if no breach was found), or rejects with an Error
    * @example
    * hibp.breach('Adobe')
@@ -207,7 +207,7 @@ const hibp = {
    * Fetches all pastes for an account (email address).
    *
    * @param {string} email the email address to query
-   * @returns {Promise} a Promise which resolves to an array of paste Objects
+   * @returns {Promise} a Promise which resolves to an array of paste objects
    * (or null if no pastes were found), or rejects with an Error
    * @example
    * hibp.pasteAccount('foo@bar.com')
