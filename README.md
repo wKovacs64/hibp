@@ -40,10 +40,10 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 ## Usage
 
 ```javascript
-// ES2015 (aka ES6)
+// import using ECMAScript module syntax
 import hibp from 'hibp';
 
-// ES5
+// or require using CommonJS module syntax
 var hibp = require('hibp');
 ```
 
