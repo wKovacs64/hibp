@@ -125,7 +125,7 @@ describe('hibp', () => {
         .then(successHandler)
         .then(() => {
           expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         })
     ));
   });
@@ -136,7 +136,7 @@ describe('hibp', () => {
         .then(successHandler)
         .then(() => {
           expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         })
     ));
   });
@@ -147,7 +147,7 @@ describe('hibp', () => {
         .then(successHandler)
         .then(() => {
           expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         })
     ));
   });
@@ -159,7 +159,7 @@ describe('hibp', () => {
         .then(successHandler)
         .then(() => {
           expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
         })
     ));
   });

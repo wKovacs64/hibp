@@ -57,7 +57,7 @@ before(() => {
     new RegExp(`/breachedaccount/${encodeURIComponent(ACCOUNT_BREACHED)}\\??`),
     {
       status: OK.status,
-      response: RESPONSE_OBJ,
+      response: RESPONSE_ARY,
     },
   );
   moxios.stubRequest(
