@@ -34,6 +34,7 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 * Get a single breached site
 * Get all data classes
 * Get all pastes for an account
+* Search for an account in both breaches and pastes at the same time
 * All queries return a Promise
 * Available server-side (Node.js) and client-side (browser)
 
@@ -54,6 +55,7 @@ Now the following functions are available in the `hibp` object:
 * [.breach(breachName)](API.md#hibp.breach)
 * [.dataClasses()](API.md#hibp.dataClasses)
 * [.pasteAccount(email)](API.md#hibp.pasteAccount)
+* [.search(account, [breachOptions])](API.md#hibp.search)
 
 ##### Example:
 
@@ -61,9 +63,9 @@ Now the following functions are available in the `hibp` object:
 import hibp from 'hibp';
 
 hibp
-  .breachedAccount('someAccountOrEmail')
+  .search('someAccountOrEmail')
   .then((data) => {
-    if (data) {
+    if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
     } else {

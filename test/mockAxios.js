@@ -67,6 +67,13 @@ before(() => {
     },
   );
   moxios.stubRequest(
+    new RegExp(`/breachedaccount/${encodeURIComponent(EMAIL_PASTED)}\\??`),
+    {
+      status: OK.status,
+      response: RESPONSE_ARY,
+    },
+  );
+  moxios.stubRequest(
     new RegExp('/breaches\\??'),
     {
       status: OK.status,
@@ -104,6 +111,12 @@ before(() => {
     new RegExp(`/pasteaccount/${encodeURIComponent(EMAIL_CLEAN)}`),
     {
       status: NOT_FOUND.status,
+    },
+  );
+  moxios.stubRequest(
+    new RegExp(`/pasteaccount/${encodeURIComponent(ACCOUNT_BREACHED)}`),
+    {
+      status: BAD_REQUEST.status,
     },
   );
 });
