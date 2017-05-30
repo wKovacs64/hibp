@@ -18,7 +18,7 @@ An interface to the haveibeenpwned.com API (version 2).
 Fetches breach data for the specified account.
 
 **Kind**: static method of [<code>hibp</code>](#hibp)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach Objects
+**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach objects
 (or null if no breaches were found), or rejects with an Error  
 
 | Param | Type | Description |
@@ -76,7 +76,7 @@ hibp.breachedAccount('baz', { domain: 'adobe.com', truncate: true })
 Fetches all breached sites in the system.
 
 **Kind**: static method of [<code>hibp</code>](#hibp)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach Objects
+**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach objects
 (an empty array if no breaches were found), or rejects with an Error  
 
 | Param | Type | Description |
@@ -118,7 +118,7 @@ hibp.breaches({ domain: 'adobe.com' })
 Fetches breach data for a single site by breach name.
 
 **Kind**: static method of [<code>hibp</code>](#hibp)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an Object representing a
+**Returns**: <code>Promise</code> - a Promise which resolves to an object representing a
 breach (or null if no breach was found), or rejects with an Error  
 
 | Param | Type | Description |
@@ -167,7 +167,7 @@ hibp.dataClasses()
 Fetches all pastes for an account (email address).
 
 **Kind**: static method of [<code>hibp</code>](#hibp)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of paste Objects
+**Returns**: <code>Promise</code> - a Promise which resolves to an array of paste objects
 (or null if no pastes were found), or rejects with an Error  
 
 | Param | Type | Description |
