@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import isEmail from './isEmail';
 import {
   BAD_REQUEST,
   FORBIDDEN,
@@ -277,7 +276,8 @@ const hibp = {
   search: (account, breachOptions = {}) => Promise
     .all([
       hibp.breachedAccount(account, breachOptions),
-      isEmail(account) ? hibp.pasteAccount(account) : null,
+      // This email regex is garbage but it seems to be what the API uses:
+      /^.+@.+$/.test(account) ? hibp.pasteAccount(account) : null,
     ])
     .then(breachesAndPastes => ({
       breaches: breachesAndPastes[0],
