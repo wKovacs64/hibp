@@ -36,27 +36,27 @@ const hibp = {
    * @returns {Promise} a Promise which resolves to the data resulting from the
    * query (or null for 404 Not Found responses), or rejects with an Error
    */
-  _fetchFromApi: endpoint => Promise
-    .resolve(hibp._axios.get(endpoint))
-    .then(res => res.data)
-    .catch((err) => {
-      if (err.response) {
-        switch (err.response.status) {
-          case BAD_REQUEST.status:
-            throw new Error(BAD_REQUEST.statusText);
-          case FORBIDDEN.status:
-            throw new Error(FORBIDDEN.statusText);
-          case NOT_FOUND.status:
-            return null;
-          case TOO_MANY_REQUESTS.status:
-            throw new Error(err.response.data);
-          default:
-            throw new Error(err.response.statusText);
+  _fetchFromApi: endpoint =>
+    Promise.resolve(hibp._axios.get(endpoint))
+      .then(res => res.data)
+      .catch((err) => {
+        if (err.response) {
+          switch (err.response.status) {
+            case BAD_REQUEST.status:
+              throw new Error(BAD_REQUEST.statusText);
+            case FORBIDDEN.status:
+              throw new Error(FORBIDDEN.statusText);
+            case NOT_FOUND.status:
+              return null;
+            case TOO_MANY_REQUESTS.status:
+              throw new Error(err.response.data);
+            default:
+              throw new Error(err.response.statusText);
+          }
+        } else {
+          throw err;
         }
-      } else {
-        throw err;
-      }
-    }),
+      }),
 
   /**
    * Fetches breach data for the specified account.
@@ -179,9 +179,8 @@ const hibp = {
    *     // ...
    *   });
    */
-  breach: breachName => (
-    hibp._fetchFromApi(`/breach/${encodeURIComponent(breachName)}`)
-  ),
+  breach: breachName =>
+    hibp._fetchFromApi(`/breach/${encodeURIComponent(breachName)}`),
 
   /**
    * Fetches all data classes in the system.
@@ -222,9 +221,8 @@ const hibp = {
    *     // ...
    *   });
    */
-  pasteAccount: email => (
-    hibp._fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`)
-  ),
+  pasteAccount: email =>
+    hibp._fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`),
 
   /**
    * Fetches all breaches and all pastes associated with the provided account
@@ -273,13 +271,12 @@ const hibp = {
    *
    * @see https://haveibeenpwned.com/
    */
-  search: (account, breachOptions = {}) => Promise
-    .all([
+  search: (account, breachOptions = {}) =>
+    Promise.all([
       hibp.breachedAccount(account, breachOptions),
       // This email regex is garbage but it seems to be what the API uses:
       /^.+@.+$/.test(account) ? hibp.pasteAccount(account) : null,
-    ])
-    .then(breachesAndPastes => ({
+    ]).then(breachesAndPastes => ({
       breaches: breachesAndPastes[0],
       pastes: breachesAndPastes[1],
     })),
