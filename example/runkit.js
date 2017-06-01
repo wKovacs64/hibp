@@ -1,9 +1,9 @@
 const hibp = require('hibp');
 
 hibp
-  .breachedAccount('someAccountOrEmail')
+  .search('someAccountOrEmail')
   .then((data) => {
-    if (data) {
+    if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
     } else {

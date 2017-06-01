@@ -11,6 +11,7 @@ An interface to the haveibeenpwned.com API (version 2).
     * [.breach(breachName)](#hibp.breach) ⇒ <code>Promise</code>
     * [.dataClasses()](#hibp.dataClasses) ⇒ <code>Promise</code>
     * [.pasteAccount(email)](#hibp.pasteAccount) ⇒ <code>Promise</code>
+    * [.search(account, [breachOptions])](#hibp.search) ⇒ <code>Promise</code>
 
 <a name="hibp.breachedAccount"></a>
 
@@ -179,6 +180,59 @@ Fetches all pastes for an account (email address).
 hibp.pasteAccount('foo@bar.com')
   .then((data) => {
     if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
+<a name="hibp.search"></a>
+
+### hibp.search(account, [breachOptions]) ⇒ <code>Promise</code>
+Fetches all breaches and all pastes associated with the provided account
+(an email address or username). Note that the remote API does not support
+querying pastes by username (only email addresses), so in the event the
+provided account is not a valid email address, only breach data is queried
+and the "pastes" field of the resulting object will always be null. This is
+exactly how searching via the current web interface behaves, which this
+convenience method is designed to mimic.
+
+**Kind**: static method of [<code>hibp</code>](#hibp)  
+**Returns**: <code>Promise</code> - a Promise which resolves to an object containing a
+"breaches" key (which can be null or an array of breach objects) and a
+"pastes" key (which can be null or an array of paste objects), or rejects
+with an Error  
+**See**: https://haveibeenpwned.com/  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| account | <code>string</code> | an email address or username |
+| [breachOptions] | <code>Object</code> | a configuration object pertaining to breach queries |
+| [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+
+**Example**  
+```js
+hibp.search('foo')
+  .then((data) => {
+    if (data.breaches || data.pastes) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
+**Example**  
+```js
+hibp.search('nobody@nowhere.com', { truncate: true })
+  .then((data) => {
+    if (data.breaches || data.pastes) {
       // ...
     } else {
       // ...
