@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 4.3.0 *(2017-06-08)*
+
+* Added [`search`][hibp-search] method for querying breaches and pastes
+  simultaneously (like the search form on the [website][haveibeenpwned])
+* Set the AMD module name in the UMD build to `hibp` rather than anonymous
+* Updated dependencies
+
 ## Version 4.2.1 *(2017-05-27)*
 
 * Fixed UMD build that broke in 4.2.0
@@ -119,9 +126,8 @@
 
 ## Version 1.0.2 *(2016-04-10)*
 
-* Shield clients from broken
-  '[breach](https://haveibeenpwned.com/API/v2#SingleBreach)' endpoint when
-  querying for an invalid breach name
+* Shield clients from broken '[breach][singlebreach]' endpoint when querying for
+  an invalid breach name
 
   *Currently, the endpoint responds with HTTP status 200 and "page not found"
   HTML in the body if an invalid breach name is queried (e.g. 'adobe.com',
@@ -143,3 +149,7 @@
 ## Version 1.0.0 *(2016-04-08)*
 
 * Initial release
+
+[hibp-search]: API.md#hibp.search
+[haveibeenpwned]: https://haveibeenpwned.com
+[singlebreach]: https://haveibeenpwned.com/API/v2#SingleBreach
