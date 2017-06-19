@@ -1,12 +1,12 @@
 import moxios from 'moxios';
-import hibp from '../src/hibp';
+import axiosInstance from '../src/internal/axiosInstance';
 import {
   OK,
   BAD_REQUEST,
   FORBIDDEN,
   NOT_FOUND,
   TOO_MANY_REQUESTS,
-} from '../src/responses';
+} from '../src/internal/responses';
 import {
   EMAIL_INVALID,
   INVALID_HEADER,
@@ -24,7 +24,7 @@ import {
 } from './testData';
 
 before(() => {
-  moxios.install(hibp._axios);
+  moxios.install(axiosInstance);
 
   // Configure mocked API calls and results
   moxios.stubRequest(
@@ -122,5 +122,5 @@ before(() => {
 });
 
 after(() => {
-  moxios.uninstall(hibp._axios);
+  moxios.uninstall(axiosInstance);
 });

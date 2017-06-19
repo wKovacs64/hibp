@@ -6,7 +6,6 @@
       80,
       2
     ],
-    "no-underscore-dangle": "off",
     "valid-jsdoc": [
       "error",
       {
