@@ -1,18 +1,45 @@
 <a name="hibp"></a>
 
-## hibp
-An interface to the haveibeenpwned.com API (version 2).
+## hibp : <code>object</code>
+An object/namespace containing all the hibp functions.
 
-**Kind**: global constant  
+**Kind**: global namespace  
 
-* [hibp](#hibp)
+* [hibp](#hibp) : <code>object</code>
+    * [.breach(breachName)](#hibp.breach) ⇒ <code>Promise</code>
     * [.breachedAccount(account, [options])](#hibp.breachedAccount) ⇒ <code>Promise</code>
     * [.breaches([options])](#hibp.breaches) ⇒ <code>Promise</code>
-    * [.breach(breachName)](#hibp.breach) ⇒ <code>Promise</code>
     * [.dataClasses()](#hibp.dataClasses) ⇒ <code>Promise</code>
     * [.pasteAccount(email)](#hibp.pasteAccount) ⇒ <code>Promise</code>
     * [.search(account, [breachOptions])](#hibp.search) ⇒ <code>Promise</code>
 
+<a name="hibp.breach"></a>
+
+### hibp.breach(breachName) ⇒ <code>Promise</code>
+Fetches breach data for a single site by breach name.
+
+**Kind**: static method of [<code>hibp</code>](#hibp)  
+**Returns**: <code>Promise</code> - a Promise which resolves to an object representing a
+breach (or null if no breach was found), or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| breachName | <code>string</code> | the name of a breach in the system |
+
+**Example**  
+```js
+hibp.breach('Adobe')
+  .then((data) => {
+    if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
 <a name="hibp.breachedAccount"></a>
 
 ### hibp.breachedAccount(account, [options]) ⇒ <code>Promise</code>
@@ -102,33 +129,6 @@ hibp.breaches()
 **Example**  
 ```js
 hibp.breaches({ domain: 'adobe.com' })
-  .then((data) => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch((err) => {
-    // ...
-  });
-```
-<a name="hibp.breach"></a>
-
-### hibp.breach(breachName) ⇒ <code>Promise</code>
-Fetches breach data for a single site by breach name.
-
-**Kind**: static method of [<code>hibp</code>](#hibp)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an object representing a
-breach (or null if no breach was found), or rejects with an Error  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| breachName | <code>string</code> | the name of a breach in the system |
-
-**Example**  
-```js
-hibp.breach('Adobe')
   .then((data) => {
     if (data) {
       // ...

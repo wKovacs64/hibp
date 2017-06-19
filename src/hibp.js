@@ -1,6 +1,6 @@
+import breach from './breach';
 import breachedAccount from './breachedAccount';
 import breaches from './breaches';
-import breach from './breach';
 import dataClasses from './dataClasses';
 import pasteAccount from './pasteAccount';
 import search from './search';
@@ -16,12 +16,12 @@ import search from './search';
  */
 
 /**
- * An interface to the haveibeenpwned.com API (version 2).
+ * An object/namespace containing all the hibp functions.
  */
 export {
+  breach,
   breachedAccount,
   breaches,
-  breach,
   dataClasses,
   pasteAccount,
   search,
@@ -34,12 +34,13 @@ export {
  */
 
 /**
- * An interface to the haveibeenpwned.com API (version 2).
+ * An object/namespace containing all the hibp functions.
+ * @namespace hibp
  */
 export default {
+  breach,
   breachedAccount,
   breaches,
-  breach,
   dataClasses,
   pasteAccount,
   search,

@@ -7,7 +7,7 @@ import fetchFromApi from './internal/fetchFromApi';
  * @returns {Promise} a Promise which resolves to an object representing a
  * breach (or null if no breach was found), or rejects with an Error
  * @example
- * breach('Adobe')
+ * hibp.breach('Adobe')
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -18,6 +18,8 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
+ * @memberof hibp
+ * @function breach
  */
 export default breachName =>
   fetchFromApi(`/breach/${encodeURIComponent(breachName)}`);

@@ -9,7 +9,7 @@ import fetchFromApi from './internal/fetchFromApi';
  * @returns {Promise} a Promise which resolves to an array of breach objects
  * (an empty array if no breaches were found), or rejects with an Error
  * @example
- * breaches()
+ * hibp.breaches()
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -21,7 +21,7 @@ import fetchFromApi from './internal/fetchFromApi';
  *     // ...
  *   });
  * @example
- * breaches({ domain: 'adobe.com' })
+ * hibp.breaches({ domain: 'adobe.com' })
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -32,6 +32,8 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
+ * @memberof hibp
+ * @function breaches
  */
 export default (options = {}) => {
   const endpoint = '/breaches?';

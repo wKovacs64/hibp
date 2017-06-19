@@ -7,7 +7,7 @@ import fetchFromApi from './internal/fetchFromApi';
  * @returns {Promise} a Promise which resolves to an array of paste objects
  * (or null if no pastes were found), or rejects with an Error
  * @example
- * pasteAccount('foo@bar.com')
+ * hibp.pasteAccount('foo@bar.com')
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -18,6 +18,8 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
+ * @memberof hibp
+ * @function pasteAccount
  */
 export default email =>
   fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`);

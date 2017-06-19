@@ -22,7 +22,7 @@ import pasteAccount from './pasteAccount';
  * "pastes" key (which can be null or an array of paste objects), or rejects
  * with an Error
  * @example
- * search('foo')
+ * hibp.search('foo')
  *   .then((data) => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -34,7 +34,7 @@ import pasteAccount from './pasteAccount';
  *     // ...
  *   });
  * @example
- * search('nobody@nowhere.com', { truncate: true })
+ * hibp.search('nobody@nowhere.com', { truncate: true })
  *   .then((data) => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -47,6 +47,8 @@ import pasteAccount from './pasteAccount';
  *   });
  *
  * @see https://haveibeenpwned.com/
+ * @memberof hibp
+ * @function search
  */
 export default (account, breachOptions = {}) =>
   Promise.all([

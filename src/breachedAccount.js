@@ -12,7 +12,7 @@ import fetchFromApi from './internal/fetchFromApi';
  * @returns {Promise} a Promise which resolves to an array of breach objects
  * (or null if no breaches were found), or rejects with an Error
  * @example
- * breachedAccount('foo')
+ * hibp.breachedAccount('foo')
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -24,7 +24,7 @@ import fetchFromApi from './internal/fetchFromApi';
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { truncate: true })
+ * hibp.breachedAccount('bar', { truncate: true })
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -36,7 +36,7 @@ import fetchFromApi from './internal/fetchFromApi';
  *     // ...
  *   });
  * @example
- * breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+ * hibp.breachedAccount('baz', { domain: 'adobe.com', truncate: true })
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -47,6 +47,8 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
+ * @memberof hibp
+ * @function breachedAccount
  */
 export default (account, options = {}) => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;

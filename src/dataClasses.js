@@ -6,7 +6,7 @@ import fetchFromApi from './internal/fetchFromApi';
  * @returns {Promise} a Promise which resolves to an array of strings (or
  * null if no data classes were found), or rejects with an Error
  * @example
- * dataClasses()
+ * hibp.dataClasses()
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -17,5 +17,7 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
+ * @memberof hibp
+ * @function dataClasses
  */
 export default () => fetchFromApi('/dataclasses');
