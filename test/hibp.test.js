@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import hibp from '../src';
+import hibp from '../src/hibp';
 
 describe('hibp', () => {
   it('should export an object containing the advertised functions', () => {
@@ -10,7 +10,6 @@ describe('hibp', () => {
       'dataClasses',
       'pasteAccount',
       'search',
-      'default',
     ]);
   });
 });
