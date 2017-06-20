@@ -3,7 +3,7 @@ import pasteAccount from './pasteAccount';
 
 /**
  * Fetches all breaches and all pastes associated with the provided account
- * (an email address or username). Note that the remote API does not support
+ * (email address or username). Note that the remote API does not support
  * querying pastes by username (only email addresses), so in the event the
  * provided account is not a valid email address, only breach data is queried
  * and the "pastes" field of the resulting object will always be null. This is
@@ -22,7 +22,7 @@ import pasteAccount from './pasteAccount';
  * "pastes" key (which can be null or an array of paste objects), or rejects
  * with an Error
  * @example
- * hibp.search('foo')
+ * search('foo')
  *   .then((data) => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -34,7 +34,7 @@ import pasteAccount from './pasteAccount';
  *     // ...
  *   });
  * @example
- * hibp.search('nobody@nowhere.com', { truncate: true })
+ * search('nobody@nowhere.com', { truncate: true })
  *   .then((data) => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -47,10 +47,9 @@ import pasteAccount from './pasteAccount';
  *   });
  *
  * @see https://haveibeenpwned.com/
- * @memberof hibp
- * @function search
+ * @alias module:search
  */
-export default (account, breachOptions = {}) =>
+const search = (account, breachOptions = {}) =>
   Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
@@ -59,3 +58,13 @@ export default (account, breachOptions = {}) =>
     breaches: breachesAndPastes[0],
     pastes: breachesAndPastes[1],
   }));
+
+/**
+ * A module for searching all breach and paste data associated with a specific
+ * account (email address or username).
+ *
+ * @module search
+ * @example
+ * import { search } from 'hibp';
+ */
+export default search;

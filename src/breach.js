@@ -1,13 +1,13 @@
 import fetchFromApi from './internal/fetchFromApi';
 
 /**
- * Fetches breach data for a single site by breach name.
+ * Fetches data for a specific breach event.
  *
  * @param {string} breachName the name of a breach in the system
  * @returns {Promise} a Promise which resolves to an object representing a
  * breach (or null if no breach was found), or rejects with an Error
  * @example
- * hibp.breach('Adobe')
+ * breach('Adobe')
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -18,8 +18,16 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
- * @memberof hibp
- * @function breach
+ * @alias module:breach
  */
-export default breachName =>
+const breach = breachName =>
   fetchFromApi(`/breach/${encodeURIComponent(breachName)}`);
+
+/**
+ * A module for retrieving data for a specific breach event.
+ *
+ * @module breach
+ * @example
+ * import { breach } from 'hibp';
+ */
+export default breach;

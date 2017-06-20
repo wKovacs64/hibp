@@ -1,7 +1,5 @@
 // Enable source maps support in Node (not needed in UMD build)
 import 'source-map-support/register';
-// Import the hibp namespace for re-exporting
-import * as hibp from './hibp';
 
 /*
  * Export individual named functions in an anonymous object to allow the
@@ -12,7 +10,6 @@ import * as hibp from './hibp';
  * const { search } = require('hibp'); // CommonJS
  * const hibp = require('hibp');       // CommonJS
  */
-
 export * from './hibp';
 
 /*
@@ -20,5 +17,4 @@ export * from './hibp';
  *
  * import hibp from 'hibp'; // ESM (without tree-shaking!)
  */
-
-export default hibp;
+export { default } from './hibp';

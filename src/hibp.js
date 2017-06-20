@@ -14,9 +14,14 @@ import search from './search';
  * const { search } = require('hibp'); // CommonJS
  * const hibp = require('hibp');       // CommonJS
  */
-
 /**
  * An object/namespace containing all the hibp functions.
+ *
+ * @namespace hibp
+ * @example
+ * import hibp from 'hibp';
+ * // Now all hibp functions are available on the hibp object:
+ * hibp.dataClasses().then(...)
  */
 export {
   breach,
@@ -31,11 +36,6 @@ export {
  * Export the hibp namespace as the default export to allow the following:
  *
  * import hibp from 'hibp'; // ESM (without tree-shaking!)
- */
-
-/**
- * An object/namespace containing all the hibp functions.
- * @namespace hibp
  */
 export default {
   breach,

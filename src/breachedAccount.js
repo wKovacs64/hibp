@@ -1,7 +1,7 @@
 import fetchFromApi from './internal/fetchFromApi';
 
 /**
- * Fetches breach data for the specified account.
+ * Fetches breach data for a specific account.
  *
  * @param {string} account a username or email address
  * @param {Object} [options] a configuration object
@@ -12,7 +12,7 @@ import fetchFromApi from './internal/fetchFromApi';
  * @returns {Promise} a Promise which resolves to an array of breach objects
  * (or null if no breaches were found), or rejects with an Error
  * @example
- * hibp.breachedAccount('foo')
+ * breachedAccount('foo')
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -24,7 +24,7 @@ import fetchFromApi from './internal/fetchFromApi';
  *     // ...
  *   });
  * @example
- * hibp.breachedAccount('bar', { truncate: true })
+ * breachedAccount('bar', { truncate: true })
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -36,7 +36,7 @@ import fetchFromApi from './internal/fetchFromApi';
  *     // ...
  *   });
  * @example
- * hibp.breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+ * breachedAccount('baz', { domain: 'adobe.com', truncate: true })
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -47,10 +47,9 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
- * @memberof hibp
- * @function breachedAccount
+ * @alias module:breachedAccount
  */
-export default (account, options = {}) => {
+const breachedAccount = (account, options = {}) => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params = [];
   if (options.domain) {
@@ -61,3 +60,12 @@ export default (account, options = {}) => {
   }
   return fetchFromApi(`${endpoint}${params.join('&')}`);
 };
+
+/**
+ * A module for retrieving breach data for a specific account.
+ *
+ * @module breachedAccount
+ * @example
+ * import { breachedAccount } from 'hibp';
+ */
+export default breachedAccount;

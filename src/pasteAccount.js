@@ -1,13 +1,13 @@
 import fetchFromApi from './internal/fetchFromApi';
 
 /**
- * Fetches all pastes for an account (email address).
+ * Fetches paste data for a specific account (email address).
  *
  * @param {string} email the email address to query
  * @returns {Promise} a Promise which resolves to an array of paste objects
  * (or null if no pastes were found), or rejects with an Error
  * @example
- * hibp.pasteAccount('foo@bar.com')
+ * pasteAccount('foo@bar.com')
  *   .then((data) => {
  *     if (data) {
  *       // ...
@@ -18,8 +18,16 @@ import fetchFromApi from './internal/fetchFromApi';
  *   .catch((err) => {
  *     // ...
  *   });
- * @memberof hibp
- * @function pasteAccount
+ * @alias module:pasteAccount
  */
-export default email =>
+const pasteAccount = email =>
   fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`);
+
+/**
+ * A module for retrieving paste data for a specific account (email address).
+ *
+ * @module pasteAccount
+ * @example
+ * import { pasteAccount } from 'hibp';
+ */
+export default pasteAccount;
