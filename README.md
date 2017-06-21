@@ -29,9 +29,9 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ## Features
 
+* Get a single breach event
 * Get all breaches for an account
-* Get all breached sites in the system
-* Get a single breached site
+* Get all breach events in the system
 * Get all data classes
 * Get all pastes for an account
 * Search for an account in both breaches and pastes at the same time
@@ -41,29 +41,41 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 ## Usage
 
 ```javascript
-// import using ECMAScript module syntax
+/* ECMAScript module syntax */
+
+// import individual modules as needed
+import { dataClasses, search } from 'hibp';
+// or, import all modules into a local namespace
+import * as hibp from 'hibp';
+// or, import the default export (warning: prevents tree-shaking)
 import hibp from 'hibp';
 
-// or require using CommonJS module syntax
-var hibp = require('hibp');
+/* CommonJS module syntax */
+
+// require individual functions as needed
+const { search } = require('hibp');
+// or, require all functions into a local namespace
+const hibp = require('hibp');
 ```
 
-Now the following functions are available in the `hibp` object:
+The following modules are available:
 
-* [.breachedAccount(account, [options])](API.md#hibp.breachedAccount)
-* [.breaches([options])](API.md#hibp.breaches)
-* [.breach(breachName)](API.md#hibp.breach)
-* [.dataClasses()](API.md#hibp.dataClasses)
-* [.pasteAccount(email)](API.md#hibp.pasteAccount)
-* [.search(account, [breachOptions])](API.md#hibp.search)
+* [breach](API.md#breach)
+* [breachedAccount](API.md#breachedaccount)
+* [breaches](API.md#breaches)
+* [dataClasses](API.md#dataclasses)
+* [pasteAccount](API.md#pasteaccount)
+* [search](API.md#search)
 
-##### Example:
+Please see the [API reference](API.md) for more detailed usage information and
+examples.
+
+#### Quick-Start Example
 
 ```javascript
-import hibp from 'hibp';
+import { search } from 'hibp';
 
-hibp
-  .search('someAccountOrEmail')
+search('someAccountOrEmail')
   .then((data) => {
     if (data.breaches || data.pastes) {
       // Bummer...
@@ -78,9 +90,6 @@ hibp
     console.log(err.message);
   });
 ```
-
-Please see the [API reference](API.md) for more detailed usage information and
-additional examples.
 
 #### Using in the browser
 
@@ -102,17 +111,14 @@ can specify a particular version if desired - see [unpkg][unpkg] for details):
 
 Alternatively, you may bundle it in with client-side code with a module bundler
 like [webpack][webpack]. If your build process honors the
-`browser` field in `package.json`, you can import or require it normally:
-
-```javascript
-import hibp from 'hibp';
-```
+`browser` field in `package.json`, you can import or require it normally as
+described [above](#usage).
 
 If your build process does **not** respect the `browser` field of
 `package.json`, you may explicitly include or require the UMD version like so:
 
 ```javascript
-import hibp from 'hibp/dist/hibp.min.js';
+import { breachedAccount } from 'hibp/dist/hibp.min.js';
 ```
 
 **N.B.** This module requires a Promise implementation to exist in the global

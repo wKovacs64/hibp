@@ -26,9 +26,6 @@ export default {
             options: {
               babelrc: false,
               cacheDirectory: true,
-              plugins: [
-                'add-module-exports',
-              ],
               presets: [
                 [
                   'env',
