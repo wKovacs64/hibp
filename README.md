@@ -24,7 +24,7 @@ npm install --save hibp
 Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ```html
-<script src="https://unpkg.com/hibp"></script>
+<script src="https://unpkg.com/hibp@4.3.0"></script>
 ```
 
 ## Features
@@ -95,24 +95,29 @@ search('someAccountOrEmail')
 
 There is a Universal Module Definition (UMD) build provided in the package
 `dist` directory for usage in the browser. When using this build, an `hibp`
-object will be added to the browser's `window` object. Development and
-production (minified) UMD builds are both provided for download:
+object will be added to the browser's `window` object.
+
+The recommended way to include the UMD build (when using a `<script>` tag) is to
+use the [unpkg][unpkg] CDN, specifying the exact version you want. If you don't
+specify a version, the `latest` tag will be used, which could be dangerous
+if/when there are breaking changes made to the API. See [unpkg][unpkg] for
+details and advanced version specification, but generally you will want to do
+the following (replacing `x.y.z` with the version you want):
+
+```html
+<script src="https://unpkg.com/hibp@x.y.z"></script>
+```
+
+Development and production (minified) UMD builds are also provided for manual
+download if desired:
 
 * [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
 * [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
 
-You can include one of these builds directly via CDN (this example will
-reference the `latest` tag version of the production build by default, but you
-can specify a particular version if desired - see [unpkg][unpkg] for details):
-
-```html
-<script src="https://unpkg.com/hibp"></script>
-```
-
 Alternatively, you may bundle it in with client-side code with a module bundler
-like [webpack][webpack]. If your build process honors the
-`browser` field in `package.json`, you can import or require it normally as
-described [above](#usage).
+like [webpack][webpack]. If your build process honors the `browser` field in
+`package.json`, you can import or require it normally as described
+[above](#usage).
 
 If your build process does **not** respect the `browser` field of
 `package.json`, you may explicitly include or require the UMD version like so:
@@ -122,7 +127,7 @@ import { breachedAccount } from 'hibp/dist/hibp.min.js';
 ```
 
 **N.B.** This module requires a Promise implementation to exist in the global
-namespace prior to being loaded. Therefore, to facilitate usage on
+namespace prior to being loaded. Therefore, to facilitate usage in
 [browsers without native Promise support][caniuse-promise], you are responsible
 for providing a polyfill. I recommend [es6-promise][es6-promise].
 
@@ -150,12 +155,12 @@ This module is distributed under the [MIT License][license].
 [coveralls-url]: https://coveralls.io/github/wKovacs64/hibp
 [troy]: http://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
-[es6-promise]: https://github.com/stefanpenner/es6-promise
 [unpkg]: https://unpkg.com
-[webpack]: https://webpack.github.io
 [cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
 [cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js
+[webpack]: https://webpack.github.io
 [caniuse-promise]: http://caniuse.com/#search=promise
+[es6-promise]: https://github.com/stefanpenner/es6-promise
 [runkit]: https://runkit.com/npm/hibp
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
