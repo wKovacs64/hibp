@@ -5,6 +5,8 @@ const projectRoot = path.join(__dirname, '..');
 
 export default {
   cache: true,
+  node: false,
+  target: 'web',
   entry: [
     path.join(projectRoot, 'src', 'hibp.js'),
   ],
@@ -46,10 +48,6 @@ export default {
         ],
       },
     ],
-  },
-  node: {
-    fs: 'empty',
-    module: 'empty',
   },
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
