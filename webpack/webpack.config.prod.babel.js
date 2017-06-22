@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
-import BabiliPlugin from 'babili-webpack-plugin';
 import baseConfig from './webpack.config.base.babel';
 
 export default merge.smart(baseConfig, {
@@ -10,8 +9,9 @@ export default merge.smart(baseConfig, {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new BabiliPlugin({}, {
+    new webpack.optimize.UglifyJsPlugin({
       comments: false,
+      sourceMap: true,
     }),
   ],
 });
