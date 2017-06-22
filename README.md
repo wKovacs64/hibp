@@ -139,7 +139,7 @@ for providing a polyfill. I recommend [es6-promise][es6-promise].
 
 * [pwned][pwned] - a command-line tool for querying the
   '[Have I been pwned?][haveibeenpwned]' service
-* [hibp-stdlib][hibp-stdlib] - a microservice on [stdlib][stdlib]
+* [hibp-stdlib][hibp-stdlib] - a microservice on [StdLib][stdlib]
 
 Send me a [PR][pulls] or an email and I'll add yours to the list.
 
