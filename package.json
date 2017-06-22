@@ -28,8 +28,8 @@
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "build:commonjs": "cross-env NODE_ENV=production BABEL_ENV=commonjs babel src --out-dir lib --source-maps",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel src --out-dir es --source-maps",
-    "build:umd": "cross-env BABEL_ENV=commonjs webpack --progress --colors --hide-modules --config webpack/webpack.config.dev.babel.js",
-    "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=commonjs webpack -p --progress --colors --hide-modules --config webpack/webpack.config.prod.babel.js",
+    "build:umd": "cross-env BABEL_ENV=commonjs webpack --display-optimization-bailout --progress --colors --hide-modules --config webpack/webpack.config.dev.babel.js",
+    "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=commonjs webpack -p --display-optimization-bailout --progress --colors --hide-modules --config webpack/webpack.config.prod.babel.js",
     "docs": "jsdoc2md src/*.js > API.md",
     "lint": "eslint src test webpack",
     "prebuild": "npm run clean",
@@ -72,7 +72,7 @@
     "nyc": "^11.0.2",
     "rimraf": "^2.6.1",
     "sinon": "^2.3.5",
-    "webpack": "^2.6.1",
+    "webpack": "^3.0.0",
     "webpack-merge": "^4.1.0"
   }
 }

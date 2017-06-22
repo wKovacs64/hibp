@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 
 const projectRoot = path.join(__dirname, '..');
 
@@ -10,6 +11,7 @@ export default {
   output: {
     library: 'hibp',
     libraryTarget: 'umd',
+    libraryExport: 'default',
     umdNamedDefine: true,
     path: path.join(projectRoot, 'dist'),
   },
@@ -49,4 +51,7 @@ export default {
     fs: 'empty',
     module: 'empty',
   },
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+  ],
 };
