@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 4.4.0 *(2017-06-22)*
+
+* Separated functions into individual modules (fixed tree-shaking)
+* Provided safer UMD script tag instructions
+* Explicitly targeted browsers in UMD build (resulting in reduced file size)
+* Updated dependencies
+
 ## Version 4.3.0 *(2017-06-08)*
 
 * Added [`search`][hibp-search] method for querying breaches and pastes
