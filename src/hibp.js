@@ -19,7 +19,7 @@ import search from './search';
  *
  * @namespace hibp
  * @example
- * import hibp from 'hibp';
+ * import * as hibp from 'hibp';
  * // Now all hibp functions are available on the hibp object:
  * hibp.dataClasses().then(...)
  */

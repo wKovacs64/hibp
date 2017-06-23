@@ -351,7 +351,7 @@ An object/namespace containing all the hibp functions.
 **Kind**: global namespace  
 **Example**  
 ```js
-import hibp from 'hibp';
+import * as hibp from 'hibp';
 // Now all hibp functions are available on the hibp object:
 hibp.dataClasses().then(...)
 ```
