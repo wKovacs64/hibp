@@ -19,8 +19,8 @@
   },
   "contributors": [],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "lib/hibp.js",
+  "module": "es/hibp.js",
   "browser": "dist/hibp.min.js",
   "runkitExampleFilename": "example/runkit.js",
   "scripts": {
@@ -48,8 +48,7 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "axios": "^0.16.2",
-    "source-map-support": "^0.4.15"
+    "axios": "^0.16.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
