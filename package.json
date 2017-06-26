@@ -21,7 +21,7 @@
   "license": "MIT",
   "main": "lib/hibp.js",
   "module": "es/hibp.js",
-  "browser": "dist/hibp.min.js",
+  "unpkg": "dist/hibp.min.js",
   "runkitExampleFilename": "example/runkit.js",
   "scripts": {
     "clean": "rimraf dist lib es coverage nyc_output",

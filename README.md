@@ -114,17 +114,11 @@ download if desired:
 * [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
 * [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
 
-Alternatively, you may bundle it in with client-side code with a module bundler
-like [webpack][webpack]. If your build process honors the `browser` field in
-`package.json`, you can import or require it normally as described
-[above](#usage).
-
-If your build process does **not** respect the `browser` field of
-`package.json`, you may explicitly include or require the UMD version like so:
-
-```javascript
-import { breachedAccount } from 'hibp/dist/hibp.min.js';
-```
+Alternatively, you may bundle it in with client-side code using a module bundler
+like [webpack][webpack]. If your build process honors the `module` field in
+`package.json`, you can import the ECMAScript module as described
+[above](#usage). Otherwise, the `main` field resolves to the CommonJS module
+version.
 
 **N.B.** This module requires a Promise implementation to exist in the global
 namespace prior to being loaded. Therefore, to facilitate usage in
