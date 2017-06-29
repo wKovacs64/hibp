@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import hibp from '../src/hibp';
+import * as hibp from '../src/hibp';
 
 describe('hibp', () => {
   it('should export an object containing the advertised functions', () => {

@@ -47,8 +47,6 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 import { dataClasses, search } from 'hibp';
 // or, import all modules into a local namespace
 import * as hibp from 'hibp';
-// or, import the default export (warning: prevents tree-shaking)
-import hibp from 'hibp';
 
 /* CommonJS module syntax */
 
