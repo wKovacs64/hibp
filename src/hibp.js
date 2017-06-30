@@ -31,17 +31,3 @@ export {
   pasteAccount,
   search,
 };
-
-/*
- * Export the hibp namespace as the default export to allow the following:
- *
- * import hibp from 'hibp'; // ESM (without tree-shaking!)
- */
-export default {
-  breach,
-  breachedAccount,
-  breaches,
-  dataClasses,
-  pasteAccount,
-  search,
-};
