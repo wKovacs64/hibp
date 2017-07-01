@@ -40,18 +40,20 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ## Usage
 
-```javascript
-/* ECMAScript module syntax */
+##### ECMAScript module syntax:
 
+```javascript
 // import individual modules as needed
 import { dataClasses, search } from 'hibp';
 // or, import all modules into a local namespace
 import * as hibp from 'hibp';
+```
 
-/* CommonJS module syntax */
+##### CommonJS module syntax:
 
+```javascript
 // require individual functions as needed
-const { search } = require('hibp');
+const { dataClasses, search } = require('hibp');
 // or, require all functions into a local namespace
 const hibp = require('hibp');
 ```
