@@ -1,5 +1,52 @@
 ## Migration Notes
 
+#### 4.4.0 → 5.0.0
+
+* The biggest breaking change in `5.0.0` is the removal of the `default` export.
+  `hibp` is designed as a collection of modules to be imported explicitly as
+  needed and exporting a `default`-named object containing all the modules is
+  arguably an anti-pattern. Instead, an anonymous object of all the named
+  modules is exported, providing better dead code elimination
+  support in order to produce smaller bundles when importing from `hibp`. The
+  quickest upgrade path (providing invocation syntax equivalence to prior
+  versions) is to change your import statement to import all the modules into a
+  local `hibp` namespace, but the recommended upgrade path is to import exactly
+  which modules you need and update your calls to remove the preceeding `hibp`
+  references.
+
+  ```javascript
+  // 4.x
+  import hibp from 'hibp';
+  hibp.breachedAccount(/* ... */)
+
+  // 5.x (upgrade option 1, one-liner quick fix)
+  import * as hibp from 'hibp';
+  hibp.breachedAccount(/* ... */)
+
+  // 5.x (upgrade option 2, more explicit but requires more code changes)
+  import { breachedAccount } from 'hibp';
+  breachedAccount(/* ... */)
+  ```
+
+* The `browser` entry point field has been removed from `package.json` as
+  webpack was using it by default when omitting the `target` option or
+  explicitly using `target: 'web'` (see issue #8 for details). No `<script>` tag
+  changes should be necessary, but if you were otherwise relying on the
+  `browser` field to resolve to the UMD build, you will need to update your
+  configuration accordingly. Also worth noting here is the fact that the non-UMD
+  builds have been updated to target browsers (see issue #9), so bundling them
+  instead of the UMD build when targeting browsers should remain fully
+  compatible while producing smaller bundles.
+
+* The `index.js` file has been removed entirely. It's sole purpose was to
+  provide a separate entry point for the CJS/ESM (non-UMD) builds to include the
+  `source-map-support` module to enable source map support in Node for debugging
+  purposes. Source maps are still generated at build time and included in the
+  package, so debugging is still possible but the responsibility of enabling
+  support for source maps is now on the consumer. If you were importing
+  `index.js` explicitly rather than relying on the entry point fields in
+  `package.json`, you will need to replace that with `hibp.js`.
+
 #### 3.0.0 → 4.0.0
 
 * Support for Node.js versions less than 4.x has been dropped. It will probably

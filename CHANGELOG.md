@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 5.0.0 *(2017-07-01)*
+
+* Targeted browsers in CommonJS/ES Module builds (#11)
+* Updated dependencies
+
+##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
+
+* Removed `index.js`, the `source-map-support` entry point (#7)
+* Replaced `browser` field in package.json with `unpkg` (#12)
+* Removed the top-level `default` export (#14)
+
 ## Version 4.4.0 *(2017-06-22)*
 
 * Separated functions into individual modules (fixed tree-shaking)
@@ -157,6 +168,6 @@
 
 * Initial release
 
-[hibp-search]: API.md#hibp.search
+[hibp-search]: API.md#module_search
 [haveibeenpwned]: https://haveibeenpwned.com
 [singlebreach]: https://haveibeenpwned.com/API/v2#SingleBreach
