@@ -52,9 +52,9 @@ import * as hibp from 'hibp';
 ##### CommonJS module syntax:
 
 ```javascript
-// require individual functions as needed
+// require individual modules as needed
 const { dataClasses, search } = require('hibp');
-// or, require all functions into a local namespace
+// or, require all modules into a local namespace
 const hibp = require('hibp');
 ```
 
