@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
         unsafe: true,
         unsafe_comps: true,
       },
-    }, minify),
+    }, minify) // eslint-disable-line comma-dangle
   );
 }
 
