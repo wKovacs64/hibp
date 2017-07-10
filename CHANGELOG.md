@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 5.1.0 *(2017-07-10)*
+
+* Replaced webpack with rollup for UMD bundling (#15)
+* Updated dependencies
+
 ## Version 5.0.0 *(2017-07-01)*
 
 * Targeted browsers in CommonJS/ES Module builds (#11)
