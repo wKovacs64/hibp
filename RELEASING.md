@@ -15,8 +15,8 @@
 2. Update the `CHANGELOG.md` for the impending release.
 3. Update the `README.md` to use the new version in the CDN `<script>` tag.
 4. `git commit -am "X.Y.Z"` (where X.Y.Z is the new version)
-5. `git checkout master && git merge develop`
-6. `npm publish` (ensure this succeeds before proceeding)
+5. `npm publish` (ensure this succeeds before proceeding)
+6. `git checkout master && git merge develop`
 7. `git tag vX.Y.Z` (where X.Y.Z is the new version)
 8. `git push && git push --tags`
 9. `git checkout develop`
