@@ -1,3 +1,13 @@
+<a href="https://wkovacs64.github.io/hibp">
+  <img
+    alt="logo"
+    title="logo"
+    src="https://wkovacs64.github.io/hibp/logo.png"
+    align="right"
+    width="85"
+  />
+</a>
+
 # hibp
 
 *A Promise-based API for querying [Troy Hunt][troy]'s
