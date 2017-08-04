@@ -3,6 +3,7 @@ import breachedAccount from './breachedAccount';
 import breaches from './breaches';
 import dataClasses from './dataClasses';
 import pasteAccount from './pasteAccount';
+import pwnedPassword from './pwnedPassword';
 import search from './search';
 
 /*
@@ -29,5 +30,6 @@ export {
   breaches,
   dataClasses,
   pasteAccount,
+  pwnedPassword,
   search,
 };

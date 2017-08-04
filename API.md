@@ -16,6 +16,9 @@
 <dt><a href="#module_pasteAccount">pasteAccount</a></dt>
 <dd><p>A module for retrieving paste data for a specific account (email address).</p>
 </dd>
+<dt><a href="#module_pwnedPassword">pwnedPassword</a></dt>
+<dd><p>A module for determining if a password has been exposed in a breach.</p>
+</dd>
 <dt><a href="#module_search">search</a></dt>
 <dd><p>A module for searching all breach and paste data associated with a specific
 account (email address or username).</p>
@@ -47,6 +50,15 @@ account (email address or username).</p>
 </dd>
 <dt><a href="#exp_module_pasteAccount--pasteAccount">pasteAccount(email)</a> ⇒ <code>Promise</code> ⏏</dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
+</dd>
+<dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password, [options])</a> ⇒ <code>Promise</code> ⏏</dt>
+<dd><p>Fetches the pwned status for the given password, indicating whether or not it
+has been previously exposed in a breach. Passwords can be plain text or a
+SHA1 hash. The remote API will automatically attempt to discern between the
+two, but in the case where the password you wish to check is actually a
+plain text string containing a hash and you don&#39;t want the API to treat it as
+a hash, you can override the auto detection behavior by setting the isAHash
+option to true.</p>
 </dd>
 <dt><a href="#exp_module_search--search">search(account, [breachOptions])</a> ⇒ <code>Promise</code> ⏏</dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
@@ -271,6 +283,79 @@ Fetches paste data for a specific account (email address).
 pasteAccount('foo@bar.com')
   .then((data) => {
     if (data) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
+<a name="module_pwnedPassword"></a>
+
+## pwnedPassword
+A module for determining if a password has been exposed in a breach.
+
+**Example**  
+```js
+import { pwnedPassword } from 'hibp';
+```
+<a name="exp_module_pwnedPassword--pwnedPassword"></a>
+
+### pwnedPassword(password, [options]) ⇒ <code>Promise</code> ⏏
+Fetches the pwned status for the given password, indicating whether or not it
+has been previously exposed in a breach. Passwords can be plain text or a
+SHA1 hash. The remote API will automatically attempt to discern between the
+two, but in the case where the password you wish to check is actually a
+plain text string containing a hash and you don't want the API to treat it as
+a hash, you can override the auto detection behavior by setting the isAHash
+option to true.
+
+**Kind**: global method of [<code>pwnedPassword</code>](#module_pwnedPassword)  
+**Returns**: <code>Promise</code> - a Promise which resolves to true if the given password has
+been exposed in a breach (or false if not), or rejects with an Error  
+**See**: https://haveibeenpwned.com/API/v2#PwnedPasswords  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| password | <code>string</code> | a password (plain text string or SHA1 hash) |
+| [options] | <code>Object</code> | a configuration object |
+| [options.isAHash] | <code>boolean</code> | the pre-hashed password is a hash (default: false) |
+
+**Example**  
+```js
+pwnedPassword('f00b4r')
+  .then((isPwned) => {
+    if (isPwned) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
+**Example**  
+```js
+pwnedPassword('5e447cbeee6f483bf88c461d76994b0063ae81d5')
+  .then((isPwned) => {
+    if (isPwned) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
+**Example**  
+```js
+pwnedPassword('5e447cbeee6f483bf88c461d76994b0063ae81d5', { isAHash: true })
+  .then((isPwned) => {
+    if (isPwned) {
       // ...
     } else {
       // ...

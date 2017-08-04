@@ -44,6 +44,7 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 * Get all breach events in the system
 * Get all data classes
 * Get all pastes for an account
+* Check a password to see if it has been exposed in a data breach
 * Search for an account in both breaches and pastes at the same time
 * All queries return a Promise
 * Available server-side (Node.js) and client-side (browser)
@@ -75,6 +76,7 @@ The following modules are available:
 * [breaches](API.md#breaches)
 * [dataClasses](API.md#dataclasses)
 * [pasteAccount](API.md#pasteaccount)
+* [pwnedPassword](API.md#pwnedpassword)
 * [search](API.md#search)
 
 Please see the [API reference](API.md) for more detailed usage information and
