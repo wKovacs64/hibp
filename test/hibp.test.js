@@ -9,6 +9,7 @@ describe('hibp', () => {
       'breach',
       'dataClasses',
       'pasteAccount',
+      'pwnedPassword',
       'search',
     ]);
   });

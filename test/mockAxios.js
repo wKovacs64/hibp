@@ -21,6 +21,8 @@ import {
   BREACH_NOT_FOUND,
   EMAIL_PASTED,
   EMAIL_CLEAN,
+  PASSWORD_PWNED,
+  PASSWORD_CLEAN,
 } from './testData';
 
 before(() => {
@@ -98,6 +100,18 @@ before(() => {
     {
       status: OK.status,
       response: RESPONSE_ARY,
+    },
+  );
+  moxios.stubRequest(
+    new RegExp(`/pwnedpassword/${encodeURIComponent(PASSWORD_PWNED)}`),
+    {
+      status: OK.status,
+    },
+  );
+  moxios.stubRequest(
+    new RegExp(`/pwnedpassword/${encodeURIComponent(PASSWORD_CLEAN)}`),
+    {
+      status: NOT_FOUND.status,
     },
   );
   moxios.stubRequest(
