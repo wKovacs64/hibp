@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 5.2.0 *(2017-08-04)*
+
+* Added [`pwnedPassword`][hibp-pwnedpassword] method to check a password to see
+  if it has been previously exposed in a data breach (#16)
+
 ## Version 5.1.0 *(2017-07-10)*
 
 * Replaced webpack with rollup for UMD bundling (#15)
@@ -173,6 +178,7 @@
 
 * Initial release
 
+[hibp-pwnedpassword]: API.md#module_pwnedPassword
 [hibp-search]: API.md#module_search
 [haveibeenpwned]: https://haveibeenpwned.com
 [singlebreach]: https://haveibeenpwned.com/API/v2#SingleBreach
