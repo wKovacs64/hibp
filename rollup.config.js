@@ -7,11 +7,13 @@ import { minify } from 'uglify-es';
 
 // Common
 const config = {
-  entry: 'src/hibp.js',
-  dest: 'dist/hibp.js',
-  moduleName: 'hibp',
-  format: 'umd',
-  sourceMap: true,
+  input: 'src/hibp.js',
+  output: {
+    file: 'dist/hibp.js',
+    format: 'umd',
+  },
+  name: 'hibp',
+  sourcemap: true,
   plugins: [
     nodeResolve({
       browser: true,
@@ -29,7 +31,7 @@ const config = {
 
 // Production
 if (process.env.NODE_ENV === 'production') {
-  config.dest = 'dist/hibp.min.js';
+  config.output.file = 'dist/hibp.min.js';
   config.plugins.push(
     uglify({
       compress: {
