@@ -12,3 +12,12 @@ script:
   - yarn test
 after_success:
   - "nyc report --reporter=text-lcov | coveralls"
+jobs:
+  include:
+    - stage: "umd"
+      dist: trusty
+      node_js: "node"
+      script:
+        - yarn test:umd
+      after_success:
+        # no need to report coverage after UMD test

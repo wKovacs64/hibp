@@ -31,10 +31,11 @@
     "build:umd": "cross-env BABEL_ENV=es rollup --config",
     "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=es rollup --config",
     "docs": "jsdoc2md src/*.js > API.md",
-    "lint": "eslint src test",
+    "lint": "eslint src test test-umd",
     "prebuild": "npm run clean",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
-    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha"
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
+    "test:umd": "npm run build:umd:min && cross-env NODE_ENV=test mocha test-umd"
   },
   "repository": {
     "type": "git",
@@ -77,5 +78,8 @@
     "rollup-plugin-uglify": "^2.0.1",
     "sinon": "^3.2.1",
     "uglify-es": "^3.0.28"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^0.10.1"
   }
 }
