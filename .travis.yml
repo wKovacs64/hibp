@@ -10,13 +10,13 @@ node_js:
 script:
   - yarn lint
   - yarn test
+after_success:
+  - "nyc report --reporter=text-lcov | coveralls"
 jobs:
   include:
-    - stage: "test"
-      after_success:
-        - "nyc report --reporter=text-lcov | coveralls"
     - stage: "umd"
       dist: trusty
       node_js: "node"
       script:
         - yarn test:umd
+      after_success:
