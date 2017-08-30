@@ -8,9 +8,6 @@ node_js:
   - "4"
   - "6"
   - "node"
-install:
-  # puppeteer requires node >= 6.4.0 (only conditionally used, see below)
-  - yarn --ignore-engines
 script:
   - yarn lint
   - yarn test
