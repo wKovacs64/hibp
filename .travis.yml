@@ -11,6 +11,11 @@ node_js:
 script:
   - yarn lint
   - yarn test
-  - 'if [ "$TRAVIS_NODE_VERSION" = "node" ]; then yarn test:umd; fi'
+jobs:
+  include:
+    - stage: "UMD"
+      node_js: "node"
+      script:
+        - yarn test:umd
 after_success:
   - "nyc report --reporter=text-lcov | coveralls"
