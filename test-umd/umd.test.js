@@ -16,7 +16,7 @@ describe('UMD build', () => {
   let browser;
 
   before(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
   after(() => {

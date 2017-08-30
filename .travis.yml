@@ -1,4 +1,10 @@
 language: node_js
+dist: trusty
+addons:
+  apt:
+    packages:
+      # This is required to run new chrome on old trusty
+      - libnss3
 cache:
   yarn: true
   directories:
@@ -10,5 +16,7 @@ node_js:
 script:
   - yarn lint
   - yarn test
+  - echo TRAVIS_NODE_VERSION = $TRAVIS_NODE_VERSION
+  - 'if [ "$TRAVIS_NODE_VERSION" = "node" ]; then yarn test-umd; fi'
 after_success:
   - "nyc report --reporter=text-lcov | coveralls"
