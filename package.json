@@ -34,6 +34,7 @@
     "lint": "eslint src test",
     "prebuild": "npm run clean",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
+    "pretest": "npm run build:umd:min",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha"
   },
   "repository": {
@@ -68,6 +69,7 @@
     "mocha": "^3.5.0",
     "moxios": "^0.4.0",
     "nyc": "^11.1.0",
+    "puppeteer": "^0.10.1",
     "rimraf": "^2.6.1",
     "rollup": "^0.49.2",
     "rollup-plugin-babel": "^3.0.2",
