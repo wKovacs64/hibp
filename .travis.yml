@@ -1,21 +1,22 @@
 language: node_js
-dist: trusty
 cache:
   yarn: true
   directories:
     - node_modules
-node_js:
-  - "4"
-  - "6"
-  - "node"
-script:
-  - yarn lint
-  - yarn test
 jobs:
   include:
+    - stage: "Test"
+      node_js:
+        - "4"
+        - "6"
+        - "node"
+      script:
+        - yarn lint
+        - yarn test
+      after_success:
+        - "nyc report --reporter=text-lcov | coveralls"
     - stage: "UMD"
+      dist: trusty
       node_js: "node"
       script:
         - yarn test:umd
-after_success:
-  - "nyc report --reporter=text-lcov | coveralls"
