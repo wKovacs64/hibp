@@ -10,5 +10,6 @@
 .nyc_output
 coverage
 test
+test-umd
 src
 webpack
