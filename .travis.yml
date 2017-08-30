@@ -20,3 +20,4 @@ jobs:
       script:
         - yarn test:umd
       after_success:
+        # no need to report coverage after UMD test
