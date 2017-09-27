@@ -60,8 +60,9 @@ const pwnedPassword = (password, options = {}) => {
   if (options.isAHash) {
     params.push('originalPasswordIsAHash=true');
   }
-  return fetchFromApi(`${endpoint}${params.join('&')}`)
-    .then(pwned => (pwned !== null));
+  return fetchFromApi(`${endpoint}${params.join('&')}`).then(
+    pwned => pwned !== null,
+  );
 };
 
 /**

@@ -75,13 +75,10 @@ before(() => {
       response: RESPONSE_ARY,
     },
   );
-  moxios.stubRequest(
-    new RegExp('/breaches\\??'),
-    {
-      status: OK.status,
-      response: RESPONSE_ARY,
-    },
-  );
+  moxios.stubRequest(new RegExp('/breaches\\??'), {
+    status: OK.status,
+    response: RESPONSE_ARY,
+  });
   moxios.stubRequest(
     new RegExp(`/breach/${encodeURIComponent(BREACH_FOUND)}`),
     {
@@ -95,13 +92,10 @@ before(() => {
       status: NOT_FOUND.status,
     },
   );
-  moxios.stubRequest(
-    new RegExp('/dataclasses'),
-    {
-      status: OK.status,
-      response: RESPONSE_ARY,
-    },
-  );
+  moxios.stubRequest(new RegExp('/dataclasses'), {
+    status: OK.status,
+    response: RESPONSE_ARY,
+  });
   moxios.stubRequest(
     new RegExp(`/pwnedpassword/${encodeURIComponent(PASSWORD_PWNED)}`),
     {

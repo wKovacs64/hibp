@@ -14,11 +14,12 @@ describe('dataClasses', () => {
   });
 
   describe('no parameters', () => {
-    it('should resolve with an array', () => (
-      dataClasses().then(successHandler).then(() => {
-        expect(successHandler.calledOnce).to.be.true;
-        expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-      })
-    ));
+    it('should resolve with an array', () =>
+      dataClasses()
+        .then(successHandler)
+        .then(() => {
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        }));
   });
 });

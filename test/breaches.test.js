@@ -14,20 +14,22 @@ describe('breaches', () => {
   });
 
   describe('no parameters', () => {
-    it('should resolve with an array', () => (
-      breaches().then(successHandler).then(() => {
-        expect(successHandler.calledOnce).to.be.true;
-        expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-      })
-    ));
+    it('should resolve with an array', () =>
+      breaches()
+        .then(successHandler)
+        .then(() => {
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        }));
   });
 
   describe('with domain', () => {
-    it('should resolve with an array', () => (
-      breaches(OPTS_DOM).then(successHandler).then(() => {
-        expect(successHandler.calledOnce).to.be.true;
-        expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-      })
-    ));
+    it('should resolve with an array', () =>
+      breaches(OPTS_DOM)
+        .then(successHandler)
+        .then(() => {
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+        }));
   });
 });

@@ -19,24 +19,22 @@ describe('pasteAccount', () => {
   });
 
   describe('pasted email', () => {
-    it('should resolve with an array', () => (
+    it('should resolve with an array', () =>
       pasteAccount(EMAIL_PASTED)
         .then(successHandler)
         .then(() => {
           expect(successHandler.calledOnce).to.be.true;
           expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
-        })
-    ));
+        }));
   });
 
   describe('clean email', () => {
-    it('should resolve with null', () => (
+    it('should resolve with null', () =>
       pasteAccount(EMAIL_CLEAN)
         .then(successHandler)
         .then(() => {
           expect(successHandler.calledOnce).to.be.true;
           expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-        })
-    ));
+        }));
   });
 });

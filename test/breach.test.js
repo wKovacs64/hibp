@@ -19,20 +19,22 @@ describe('breach', () => {
   });
 
   describe('found', () => {
-    it('should resolve with an object', () => (
-      breach(BREACH_FOUND).then(successHandler).then(() => {
-        expect(successHandler.calledOnce).to.be.true;
-        expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
-      })
-    ));
+    it('should resolve with an object', () =>
+      breach(BREACH_FOUND)
+        .then(successHandler)
+        .then(() => {
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_OBJ);
+        }));
   });
 
   describe('not found', () => {
-    it('should resolve with null', () => (
-      breach(BREACH_NOT_FOUND).then(successHandler).then(() => {
-        expect(successHandler.calledOnce).to.be.true;
-        expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
-      })
-    ));
+    it('should resolve with null', () =>
+      breach(BREACH_NOT_FOUND)
+        .then(successHandler)
+        .then(() => {
+          expect(successHandler.calledOnce).to.be.true;
+          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+        }));
   });
 });

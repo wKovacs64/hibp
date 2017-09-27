@@ -16,8 +16,8 @@ export const OK = {
 
 export const BAD_REQUEST = {
   status: 400,
-  statusText: 'Bad request — the account does not comply with an acceptable ' +
-    'format.',
+  statusText:
+    'Bad request — the account does not comply with an acceptable format.',
 };
 
 export const FORBIDDEN = {
@@ -27,7 +27,8 @@ export const FORBIDDEN = {
 
 export const NOT_FOUND = {
   status: 404,
-  statusText: 'Not found - the account could not be found and has therefore ' +
+  statusText:
+    'Not found - the account could not be found and has therefore ' +
     'not been pwned.',
 };
 
@@ -38,6 +39,7 @@ export const NOT_FOUND = {
  */
 export const TOO_MANY_REQUESTS = {
   status: 429,
-  response: 'Rate limit exceeded, refer to acceptable use of the API: ' +
+  response:
+    'Rate limit exceeded, refer to acceptable use of the API: ' +
     'https://haveibeenpwned.com/API/v2#AcceptableUse',
 };

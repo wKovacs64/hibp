@@ -41,12 +41,15 @@ describe('internal: fetchFromApi', () => {
     });
 
     it('should re-throw request setup errors', () =>
-      dataClasses().then(successHandler).catch(errorHandler).then(() => {
-        expect(successHandler.called).to.be.false;
-        expect(errorHandler.calledOnce).to.be.true;
-        const err = errorHandler.getCall(0).args[0];
-        expect(err).to.equal(ERR);
-      }));
+      dataClasses()
+        .then(successHandler)
+        .catch(errorHandler)
+        .then(() => {
+          expect(successHandler.called).to.be.false;
+          expect(errorHandler.calledOnce).to.be.true;
+          const err = errorHandler.getCall(0).args[0];
+          expect(err).to.equal(ERR);
+        }));
   });
 
   describe('invalid account format', () => {
