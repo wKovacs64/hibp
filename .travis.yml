@@ -8,7 +8,7 @@ node_js:
   - "6"
   - "node"
 script:
-  - yarn lint
+  - yarn lint:main
   - yarn test
 after_success:
   - "nyc report --reporter=text-lcov | coveralls"
