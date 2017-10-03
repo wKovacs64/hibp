@@ -16,11 +16,11 @@ describe('UMD build', () => {
 
   let browser;
 
-  before(async () => {
+  beforeAll(async () => {
     browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
-  after(() => {
+  afterAll(() => {
     browser.close();
   });
 

@@ -9,9 +9,9 @@ node_js:
   - "node"
 script:
   - yarn lint:main
-  - yarn test
+  - yarn test:coverage --no-cache
 after_success:
-  - "nyc report --reporter=text-lcov | coveralls"
+  - "coveralls < coverage/lcov.info"
 jobs:
   include:
     - stage: "umd"

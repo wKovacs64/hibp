@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import pasteAccount from '../src/pasteAccount';
 import './mockAxios';
 import {
@@ -10,12 +8,10 @@ import {
 } from './testData';
 
 describe('pasteAccount', () => {
-  const successHandler = sinon.spy();
-  const errorHandler = sinon.spy();
+  const successHandler = jest.fn();
 
   afterEach(() => {
-    successHandler.reset();
-    errorHandler.reset();
+    successHandler.mockReset();
   });
 
   describe('pasted email', () => {
@@ -23,8 +19,8 @@ describe('pasteAccount', () => {
       pasteAccount(EMAIL_PASTED)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 
@@ -33,8 +29,8 @@ describe('pasteAccount', () => {
       pasteAccount(EMAIL_CLEAN)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
 });

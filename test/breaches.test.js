@@ -1,16 +1,12 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import breaches from '../src/breaches';
 import './mockAxios';
 import { OPTS_DOM, RESPONSE_ARY } from './testData';
 
 describe('breaches', () => {
-  const successHandler = sinon.spy();
-  const errorHandler = sinon.spy();
+  const successHandler = jest.fn();
 
   afterEach(() => {
-    successHandler.reset();
-    errorHandler.reset();
+    successHandler.mockReset();
   });
 
   describe('no parameters', () => {
@@ -18,8 +14,8 @@ describe('breaches', () => {
       breaches()
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 
@@ -28,8 +24,8 @@ describe('breaches', () => {
       breaches(OPTS_DOM)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 });

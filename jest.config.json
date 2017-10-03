@@ -1,0 +1,16 @@
+{
+  "collectCoverageFrom": [
+    "/src/**/*.js"
+  ],
+  "coverageDirectory": "coverage",
+  "coverageReporters": [
+    "html",
+    "json",
+    "lcov",
+    "text"
+  ],
+  "testEnvironment": "node",
+  "testPathIgnorePatterns": [
+    "test-umd"
+  ]
+}
