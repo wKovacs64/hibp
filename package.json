@@ -24,7 +24,7 @@
   "unpkg": "dist/hibp.min.js",
   "runkitExampleFilename": "example/runkit.js",
   "scripts": {
-    "clean": "rimraf dist lib es coverage nyc_output",
+    "clean": "rimraf dist lib es coverage .nyc_output",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "build:commonjs": "cross-env NODE_ENV=production BABEL_ENV=commonjs babel src --out-dir lib --source-maps",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel src --out-dir es --source-maps",
