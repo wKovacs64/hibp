@@ -25,7 +25,7 @@ import {
   PASSWORD_CLEAN,
 } from './testData';
 
-before(() => {
+beforeAll(() => {
   moxios.install(axiosInstance);
 
   // Configure mocked API calls and results
@@ -129,6 +129,6 @@ before(() => {
   );
 });
 
-after(() => {
+afterAll(() => {
   moxios.uninstall(axiosInstance);
 });

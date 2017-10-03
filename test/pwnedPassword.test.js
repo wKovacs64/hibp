@@ -1,16 +1,12 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import pwnedPassword from '../src/pwnedPassword';
 import './mockAxios';
 import { PASSWORD_PWNED, PASSWORD_CLEAN, OPTS_ISAHASH } from './testData';
 
 describe('pwnedPassword', () => {
-  const successHandler = sinon.spy();
-  const errorHandler = sinon.spy();
+  const successHandler = jest.fn();
 
   afterEach(() => {
-    successHandler.reset();
-    errorHandler.reset();
+    successHandler.mockReset();
   });
 
   describe('pwned (no parameters)', () => {
@@ -18,8 +14,8 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_PWNED)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.be.true;
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(true);
         }));
   });
 
@@ -28,8 +24,8 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_PWNED, OPTS_ISAHASH)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.be.true;
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(true);
         }));
   });
 
@@ -38,8 +34,8 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_CLEAN)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.be.false;
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(false);
         }));
   });
 
@@ -48,8 +44,8 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_CLEAN, OPTS_ISAHASH)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.be.false;
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(false);
         }));
   });
 });

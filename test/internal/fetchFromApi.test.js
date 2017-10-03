@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import dataClasses from '../../src/dataClasses';
 import breachedAccount from '../../src/breachedAccount';
 import axiosInstance from '../../src/internal/axiosInstance';
@@ -19,24 +17,24 @@ import {
 } from '../testData';
 
 describe('internal: fetchFromApi', () => {
-  const successHandler = sinon.spy();
-  const errorHandler = sinon.spy();
+  const successHandler = jest.fn();
+  const errorHandler = jest.fn();
 
   afterEach(() => {
-    successHandler.reset();
-    errorHandler.reset();
+    successHandler.mockReset();
+    errorHandler.mockReset();
   });
 
   describe('request failure', () => {
     let failboat;
 
-    before(() => {
+    beforeAll(() => {
       failboat = axiosInstance.interceptors.request.use(() => {
         throw ERR;
       });
     });
 
-    after(() => {
+    afterAll(() => {
       axiosInstance.interceptors.request.eject(failboat);
     });
 
@@ -45,10 +43,10 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.called).to.be.false;
-          expect(errorHandler.calledOnce).to.be.true;
-          const err = errorHandler.getCall(0).args[0];
-          expect(err).to.equal(ERR);
+          expect(successHandler.mock.calls.length).toBe(0);
+          expect(errorHandler.mock.calls.length).toBe(1);
+          const err = errorHandler.mock.calls[0][0];
+          expect(err).toBe(ERR);
         }));
   });
 
@@ -58,10 +56,10 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.called).to.be.false;
-          expect(errorHandler.calledOnce).to.be.true;
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(BAD_REQUEST.statusText));
+          expect(successHandler.mock.calls.length).toBe(0);
+          expect(errorHandler.mock.calls.length).toBe(1);
+          const err = errorHandler.mock.calls[0][0];
+          expect(err.message).toMatch(new RegExp(BAD_REQUEST.statusText));
         }));
   });
 
@@ -71,10 +69,10 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.called).to.be.false;
-          expect(errorHandler.calledOnce).to.be.true;
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(FORBIDDEN.statusText));
+          expect(successHandler.mock.calls.length).toBe(0);
+          expect(errorHandler.mock.calls.length).toBe(1);
+          const err = errorHandler.mock.calls[0][0];
+          expect(err.message).toMatch(new RegExp(FORBIDDEN.statusText));
         }));
   });
 
@@ -84,10 +82,10 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.called).to.be.false;
-          expect(errorHandler.calledOnce).to.be.true;
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(TOO_MANY_REQUESTS.response));
+          expect(successHandler.mock.calls.length).toBe(0);
+          expect(errorHandler.mock.calls.length).toBe(1);
+          const err = errorHandler.mock.calls[0][0];
+          expect(err.message).toMatch(new RegExp(TOO_MANY_REQUESTS.response));
         }));
   });
 
@@ -97,10 +95,10 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.called).to.be.false;
-          expect(errorHandler.calledOnce).to.be.true;
-          const err = errorHandler.getCall(0).args[0];
-          expect(err.message).to.match(new RegExp(UNKNOWN.statusText));
+          expect(successHandler.mock.calls.length).toBe(0);
+          expect(errorHandler.mock.calls.length).toBe(1);
+          const err = errorHandler.mock.calls[0][0];
+          expect(err.message).toMatch(new RegExp(UNKNOWN.statusText));
         }));
   });
 });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import breachedAccount from '../src/breachedAccount';
 import './mockAxios';
 import {
@@ -13,12 +11,10 @@ import {
 } from './testData';
 
 describe('breachedAccount', () => {
-  const successHandler = sinon.spy();
-  const errorHandler = sinon.spy();
+  const successHandler = jest.fn();
 
   afterEach(() => {
-    successHandler.reset();
-    errorHandler.reset();
+    successHandler.mockReset();
   });
 
   describe('breached (no parameters)', () => {
@@ -26,8 +22,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 
@@ -36,8 +32,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 
@@ -46,8 +42,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 
@@ -56,8 +52,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_ARY);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
 
@@ -66,8 +62,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
 
@@ -76,8 +72,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
 
@@ -86,8 +82,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
 
@@ -96,8 +92,8 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.calledOnce).to.be.true;
-          expect(successHandler.getCall(0).args[0]).to.equal(RESPONSE_CLEAN);
+          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
 });
