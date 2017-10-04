@@ -10,10 +10,6 @@ import {
 describe('pasteAccount', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   describe('pasted email', () => {
     it('should resolve with an array', () =>
       pasteAccount(EMAIL_PASTED)

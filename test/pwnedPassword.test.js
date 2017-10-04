@@ -5,10 +5,6 @@ import { PASSWORD_PWNED, PASSWORD_CLEAN, OPTS_ISAHASH } from './testData';
 describe('pwnedPassword', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   describe('pwned (no parameters)', () => {
     it('should resolve to true', () =>
       pwnedPassword(PASSWORD_PWNED)

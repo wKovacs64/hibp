@@ -5,10 +5,6 @@ import { RESPONSE_ARY } from './testData';
 describe('dataClasses', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   describe('no parameters', () => {
     it('should resolve with an array', () =>
       dataClasses()

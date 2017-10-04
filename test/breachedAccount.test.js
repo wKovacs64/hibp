@@ -13,10 +13,6 @@ import {
 describe('breachedAccount', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   describe('breached (no parameters)', () => {
     it('should resolve with an object', () =>
       breachedAccount(ACCOUNT_BREACHED)

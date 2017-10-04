@@ -10,10 +10,6 @@ import {
 describe('breach', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   describe('found', () => {
     it('should resolve with an object', () =>
       breach(BREACH_FOUND)

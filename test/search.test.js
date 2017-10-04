@@ -5,10 +5,6 @@ import { ACCOUNT_BREACHED, EMAIL_PASTED } from './testData';
 describe('search', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   it('should search breaches by username', () =>
     search(ACCOUNT_BREACHED)
       .then(successHandler)

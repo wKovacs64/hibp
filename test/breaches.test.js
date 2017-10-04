@@ -5,10 +5,6 @@ import { OPTS_DOM, RESPONSE_ARY } from './testData';
 describe('breaches', () => {
   const successHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-  });
-
   describe('no parameters', () => {
     it('should resolve with an array', () =>
       breaches()

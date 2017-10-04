@@ -20,11 +20,6 @@ describe('internal: fetchFromApi', () => {
   const successHandler = jest.fn();
   const errorHandler = jest.fn();
 
-  afterEach(() => {
-    successHandler.mockReset();
-    errorHandler.mockReset();
-  });
-
   describe('request failure', () => {
     let failboat;
 

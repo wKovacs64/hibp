@@ -1,4 +1,5 @@
 {
+  "clearMocks": true,
   "collectCoverageFrom": [
     "/src/**/*.js"
   ],
