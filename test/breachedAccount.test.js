@@ -18,7 +18,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
@@ -28,7 +28,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
@@ -38,7 +38,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
@@ -48,7 +48,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
@@ -58,7 +58,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
@@ -68,7 +68,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
@@ -78,7 +78,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });
@@ -88,7 +88,7 @@ describe('breachedAccount', () => {
       breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });

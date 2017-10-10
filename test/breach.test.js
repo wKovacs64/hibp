@@ -15,7 +15,7 @@ describe('breach', () => {
       breach(BREACH_FOUND)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_OBJ);
         }));
   });
@@ -25,7 +25,7 @@ describe('breach', () => {
       breach(BREACH_NOT_FOUND)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });

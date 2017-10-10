@@ -10,7 +10,7 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_PWNED)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(true);
         }));
   });
@@ -20,7 +20,7 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_PWNED, OPTS_ISAHASH)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(true);
         }));
   });
@@ -30,7 +30,7 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_CLEAN)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(false);
         }));
   });
@@ -40,7 +40,7 @@ describe('pwnedPassword', () => {
       pwnedPassword(PASSWORD_CLEAN, OPTS_ISAHASH)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(false);
         }));
   });

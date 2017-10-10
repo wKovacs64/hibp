@@ -9,7 +9,7 @@ describe('search', () => {
     search(ACCOUNT_BREACHED)
       .then(successHandler)
       .then(() => {
-        expect(successHandler.mock.calls.length).toBe(1);
+        expect(successHandler).toHaveBeenCalledTimes(1);
         const result = successHandler.mock.calls[0][0];
         expect(result).toEqual(
           expect.objectContaining({ breaches: [], pastes: null }),
@@ -20,7 +20,7 @@ describe('search', () => {
     search(EMAIL_PASTED)
       .then(successHandler)
       .then(() => {
-        expect(successHandler.mock.calls.length).toBe(1);
+        expect(successHandler).toHaveBeenCalledTimes(1);
         const result = successHandler.mock.calls[0][0];
         expect(result).toEqual(
           expect.objectContaining({ breaches: [], pastes: [] }),

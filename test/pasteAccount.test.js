@@ -15,7 +15,7 @@ describe('pasteAccount', () => {
       pasteAccount(EMAIL_PASTED)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
@@ -25,7 +25,7 @@ describe('pasteAccount', () => {
       pasteAccount(EMAIL_CLEAN)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
         }));
   });

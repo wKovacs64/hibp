@@ -38,8 +38,8 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(0);
-          expect(errorHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(0);
+          expect(errorHandler).toHaveBeenCalledTimes(1);
           const err = errorHandler.mock.calls[0][0];
           expect(err).toBe(ERR);
         }));
@@ -51,8 +51,8 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(0);
-          expect(errorHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(0);
+          expect(errorHandler).toHaveBeenCalledTimes(1);
           const err = errorHandler.mock.calls[0][0];
           expect(err.message).toMatch(new RegExp(BAD_REQUEST.statusText));
         }));
@@ -64,8 +64,8 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(0);
-          expect(errorHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(0);
+          expect(errorHandler).toHaveBeenCalledTimes(1);
           const err = errorHandler.mock.calls[0][0];
           expect(err.message).toMatch(new RegExp(FORBIDDEN.statusText));
         }));
@@ -77,8 +77,8 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(0);
-          expect(errorHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(0);
+          expect(errorHandler).toHaveBeenCalledTimes(1);
           const err = errorHandler.mock.calls[0][0];
           expect(err.message).toMatch(new RegExp(TOO_MANY_REQUESTS.response));
         }));
@@ -90,8 +90,8 @@ describe('internal: fetchFromApi', () => {
         .then(successHandler)
         .catch(errorHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(0);
-          expect(errorHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(0);
+          expect(errorHandler).toHaveBeenCalledTimes(1);
           const err = errorHandler.mock.calls[0][0];
           expect(err.message).toMatch(new RegExp(UNKNOWN.statusText));
         }));

@@ -10,7 +10,7 @@ describe('breaches', () => {
       breaches()
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
@@ -20,7 +20,7 @@ describe('breaches', () => {
       breaches(OPTS_DOM)
         .then(successHandler)
         .then(() => {
-          expect(successHandler.mock.calls.length).toBe(1);
+          expect(successHandler).toHaveBeenCalledTimes(1);
           expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
         }));
   });
