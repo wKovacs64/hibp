@@ -166,7 +166,7 @@ This module is distributed under the [MIT License][license].
 [unpkg]: https://unpkg.com
 [cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
 [cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js
-[webpack]: https://webpack.github.io
+[webpack]: https://webpack.js.org
 [caniuse-promise]: http://caniuse.com/#search=promise
 [es6-promise]: https://github.com/stefanpenner/es6-promise
 [runkit]: https://runkit.com/npm/hibp
