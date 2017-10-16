@@ -8,25 +8,13 @@ import {
 } from './testData';
 
 describe('breach', () => {
-  const successHandler = jest.fn();
-
   describe('found', () => {
     it('should resolve with an object', () =>
-      breach(BREACH_FOUND)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_OBJ);
-        }));
+      expect(breach(BREACH_FOUND)).resolves.toEqual(RESPONSE_OBJ));
   });
 
   describe('not found', () => {
     it('should resolve with null', () =>
-      breach(BREACH_NOT_FOUND)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
-        }));
+      expect(breach(BREACH_NOT_FOUND)).resolves.toEqual(RESPONSE_CLEAN));
   });
 });

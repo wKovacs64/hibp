@@ -11,85 +11,55 @@ import {
 } from './testData';
 
 describe('breachedAccount', () => {
-  const successHandler = jest.fn();
-
   describe('breached (no parameters)', () => {
     it('should resolve with an object', () =>
-      breachedAccount(ACCOUNT_BREACHED)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
-        }));
+      expect(breachedAccount(ACCOUNT_BREACHED)).resolves.toEqual(RESPONSE_ARY));
   });
 
   describe('breached (with truncateResults)', () => {
     it('should resolve with an object', () =>
-      breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
-        }));
+      expect(breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)).resolves.toEqual(
+        RESPONSE_ARY,
+      ));
   });
 
   describe('breached (with domain)', () => {
     it('should resolve with an object', () =>
-      breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
-        }));
+      expect(breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)).resolves.toEqual(
+        RESPONSE_ARY,
+      ));
   });
 
   describe('breached (with domain and truncateResults)', () => {
     it('should resolve with an object', () =>
-      breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_ARY);
-        }));
+      expect(
+        breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC),
+      ).resolves.toEqual(RESPONSE_ARY));
   });
 
   describe('clean (no parameters)', () => {
     it('should resolve with null', () =>
-      breachedAccount(ACCOUNT_CLEAN)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
-        }));
+      expect(breachedAccount(ACCOUNT_CLEAN)).resolves.toEqual(RESPONSE_CLEAN));
   });
 
   describe('clean (with truncateResults)', () => {
     it('should resolve with null', () =>
-      breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
-        }));
+      expect(breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)).resolves.toEqual(
+        RESPONSE_CLEAN,
+      ));
   });
 
   describe('clean (with domain)', () => {
     it('should resolve with null', () =>
-      breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
-        }));
+      expect(breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)).resolves.toEqual(
+        RESPONSE_CLEAN,
+      ));
   });
 
   describe('clean (with domain and truncateResults)', () => {
     it('should resolve with null', () =>
-      breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)
-        .then(successHandler)
-        .then(() => {
-          expect(successHandler).toHaveBeenCalledTimes(1);
-          expect(successHandler.mock.calls[0][0]).toBe(RESPONSE_CLEAN);
-        }));
+      expect(breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)).resolves.toEqual(
+        RESPONSE_CLEAN,
+      ));
   });
 });
