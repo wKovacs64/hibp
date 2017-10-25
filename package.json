@@ -54,7 +54,7 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.17.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
