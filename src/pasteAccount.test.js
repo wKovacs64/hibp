@@ -1,11 +1,10 @@
-import pasteAccount from '../src/pasteAccount';
-import './mockAxios';
 import {
   EMAIL_PASTED,
   EMAIL_CLEAN,
   RESPONSE_ARY,
   RESPONSE_CLEAN,
-} from './testData';
+} from './__mocks__/testData';
+import pasteAccount from './pasteAccount';
 
 describe('pasteAccount', () => {
   describe('pasted email', () => {

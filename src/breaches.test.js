@@ -1,6 +1,5 @@
-import breaches from '../src/breaches';
-import './mockAxios';
-import { OPTS_DOM, RESPONSE_ARY } from './testData';
+import { OPTS_DOM, RESPONSE_ARY } from './__mocks__/testData';
+import breaches from './breaches';
 
 describe('breaches', () => {
   describe('no parameters', () => {

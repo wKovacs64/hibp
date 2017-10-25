@@ -1,12 +1,13 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import moxios from 'moxios';
-import axiosInstance from '../src/internal/axiosInstance';
+import axiosInstance from '../internal/axiosInstance';
 import {
   OK,
   BAD_REQUEST,
   FORBIDDEN,
   NOT_FOUND,
   TOO_MANY_REQUESTS,
-} from '../src/internal/responses';
+} from '../internal/responses';
 import {
   EMAIL_INVALID,
   INVALID_HEADER,

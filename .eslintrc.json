@@ -1,5 +1,8 @@
 {
-  "extends": "airbnb",
+  "env": {
+    "jest": true
+  },
+ "extends": "airbnb",
   "rules": {
     "function-paren-newline": "off",
     "max-len": [

@@ -1,11 +1,10 @@
-import breach from '../src/breach';
-import './mockAxios';
 import {
   BREACH_FOUND,
   BREACH_NOT_FOUND,
   RESPONSE_OBJ,
   RESPONSE_CLEAN,
-} from './testData';
+} from './__mocks__/testData';
+import breach from './breach';
 
 describe('breach', () => {
   describe('found', () => {

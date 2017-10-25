@@ -1,6 +1,5 @@
-import dataClasses from '../src/dataClasses';
-import './mockAxios';
-import { RESPONSE_ARY } from './testData';
+import { RESPONSE_ARY } from './__mocks__/testData';
+import dataClasses from './dataClasses';
 
 describe('dataClasses', () => {
   describe('no parameters', () => {

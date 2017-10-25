@@ -1,6 +1,5 @@
-import search from '../src/search';
-import './mockAxios';
-import { ACCOUNT_BREACHED, EMAIL_PASTED } from './testData';
+import { ACCOUNT_BREACHED, EMAIL_PASTED } from './__mocks__/testData';
+import search from './search';
 
 describe('search', () => {
   it('should search breaches by username', () =>

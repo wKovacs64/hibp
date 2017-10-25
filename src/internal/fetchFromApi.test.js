@@ -1,12 +1,3 @@
-import dataClasses from '../../src/dataClasses';
-import breachedAccount from '../../src/breachedAccount';
-import axiosInstance from '../../src/internal/axiosInstance';
-import '../mockAxios';
-import {
-  BAD_REQUEST,
-  FORBIDDEN,
-  TOO_MANY_REQUESTS,
-} from '../../src/internal/responses';
 import {
   UNKNOWN,
   ERR,
@@ -14,7 +5,11 @@ import {
   RATE_LIMITED,
   UNEXPECTED,
   EMAIL_INVALID,
-} from '../testData';
+} from '../__mocks__/testData';
+import dataClasses from '../dataClasses';
+import breachedAccount from '../breachedAccount';
+import axiosInstance from './axiosInstance';
+import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
 
 describe('internal: fetchFromApi', () => {
   describe('request failure', () => {

@@ -1,6 +1,9 @@
-import pwnedPassword from '../src/pwnedPassword';
-import './mockAxios';
-import { PASSWORD_PWNED, PASSWORD_CLEAN, OPTS_ISAHASH } from './testData';
+import {
+  PASSWORD_PWNED,
+  PASSWORD_CLEAN,
+  OPTS_ISAHASH,
+} from './__mocks__/testData';
+import pwnedPassword from './pwnedPassword';
 
 describe('pwnedPassword', () => {
   describe('pwned (no parameters)', () => {

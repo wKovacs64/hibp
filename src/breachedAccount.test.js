@@ -1,5 +1,3 @@
-import breachedAccount from '../src/breachedAccount';
-import './mockAxios';
 import {
   ACCOUNT_BREACHED,
   ACCOUNT_CLEAN,
@@ -8,7 +6,8 @@ import {
   OPTS_DOM_TRUNC,
   RESPONSE_ARY,
   RESPONSE_CLEAN,
-} from './testData';
+} from './__mocks__/testData';
+import breachedAccount from './breachedAccount';
 
 describe('breachedAccount', () => {
   describe('breached (no parameters)', () => {
