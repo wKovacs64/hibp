@@ -9,6 +9,7 @@
 .travis.yml
 coverage
 jest.config.json
+rollup.config.js
 src
 test
 test-umd
