@@ -23,7 +23,7 @@ import {
 export default endpoint =>
   Promise.resolve(axios.get(endpoint))
     .then(res => res.data)
-    .catch((err) => {
+    .catch(err => {
       if (err.response) {
         switch (err.response.status) {
           case BAD_REQUEST.status:
