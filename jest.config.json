@@ -1,18 +1,9 @@
 {
   "clearMocks": true,
   "coverageDirectory": "coverage",
-  "coveragePathIgnorePatterns": [
-    "/__mocks__/"
-  ],
-  "coverageReporters": [
-    "html",
-    "json",
-    "lcov",
-    "text"
-  ],
+  "coveragePathIgnorePatterns": ["/__mocks__/"],
+  "coverageReporters": ["html", "json", "lcov", "text"],
   "setupTestFrameworkScriptFile": "<rootDir>/src/__mocks__/mockAxios.js",
   "testEnvironment": "node",
-  "testPathIgnorePatterns": [
-    "test-umd"
-  ]
+  "testPathIgnorePatterns": ["test-umd"]
 }
