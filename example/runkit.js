@@ -2,7 +2,7 @@ const hibp = require('hibp');
 
 hibp
   .search('someAccountOrEmail')
-  .then((data) => {
+  .then(data => {
     if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
@@ -11,7 +11,7 @@ hibp
       console.log('Good news — no pwnage found!');
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // Something went wrong.
     console.log(err.message);
   });
