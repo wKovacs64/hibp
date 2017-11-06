@@ -1,8 +1,7 @@
 {
   "name": "hibp",
   "version": "5.2.1-dev.0",
-  "description":
-    "A Promise-based API for querying the 'Have I been pwned?' service.",
+  "description": "A Promise-based API for querying the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
     "hibp",
@@ -26,27 +25,21 @@
   "runkitExampleFilename": "example/runkit.js",
   "scripts": {
     "clean": "rimraf dist lib es coverage",
-    "build":
-      "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "build:commonjs":
-      "cross-env NODE_ENV=production BABEL_ENV=commonjs babel src --out-dir lib --source-maps --ignore \"**/*.test.js\",\"**/__mocks__/\"",
-    "build:es":
-      "cross-env NODE_ENV=production BABEL_ENV=es babel src --out-dir es --source-maps --ignore \"**/*.test.js\",\"**/__mocks__/\"",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build:commonjs": "cross-env NODE_ENV=production BABEL_ENV=commonjs babel src --out-dir lib --source-maps --ignore \"**/*.test.js\",\"**/__mocks__/\"",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel src --out-dir es --source-maps --ignore \"**/*.test.js\",\"**/__mocks__/\"",
     "build:umd": "cross-env BABEL_ENV=es rollup --config",
-    "build:umd:min":
-      "cross-env NODE_ENV=production BABEL_ENV=es rollup --config",
+    "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=es rollup --config",
     "docs": "jsdoc2md src/*.js > API.md",
     "format": "prettier --write \"**/*.js\"",
     "lint": "npm run lint:main && npm run lint:test-umd",
     "lint:main": "eslint . --ignore-pattern test-umd",
     "lint:test-umd": "eslint test-umd",
     "prebuild": "npm run clean",
-    "prepublishOnly":
-      "npm run lint && npm run test && npm run test:umd && npm run build",
+    "prepublishOnly": "npm run lint && npm run test && npm run test:umd && npm run build",
     "test": "cross-env NODE_ENV=test jest --config jest.config.json",
     "test:coverage": "npm run test -- --coverage",
-    "test:umd":
-      "npm run build:umd:min && cross-env NODE_ENV=test jest test-umd",
+    "test:umd": "npm run build:umd:min && cross-env NODE_ENV=test jest test-umd",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
