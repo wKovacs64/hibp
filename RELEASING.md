@@ -18,7 +18,7 @@
 5. `npm publish` (ensure this succeeds before proceeding)
 6. `git checkout master && git merge develop`
 7. `git tag vX.Y.Z` (where X.Y.Z is the new version)
-8. `git push && git push --tags`
+8. `git push origin master --tags`
 9. `git checkout develop`
 10. Update the version in `package.json` to the next dev version in the
     `develop` branch.
