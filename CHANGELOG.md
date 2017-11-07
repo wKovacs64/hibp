@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 5.2.1 *(2017-11-07)*
+
+* Internal maintenance
+
 ## Version 5.2.0 *(2017-08-04)*
 
 * Added [`pwnedPassword`][hibp-pwnedpassword] method to check a password to see
