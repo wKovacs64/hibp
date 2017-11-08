@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 5.2.2 *(2017-11-08)*
+
+* Internal maintenance
+
 ## Version 5.2.1 *(2017-11-07)*
 
 * Internal maintenance
