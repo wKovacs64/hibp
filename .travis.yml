@@ -11,7 +11,7 @@ script:
   - yarn lint:main
   - yarn test:coverage --no-cache
 after_success:
-  - codecov
+  - "coveralls < coverage/lcov.info"
 jobs:
   include:
     - stage: "umd"

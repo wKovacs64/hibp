@@ -163,8 +163,8 @@ This module is distributed under the [MIT License][license].
 [npm-url]: https://www.npmjs.com/package/hibp
 [travis-image]: https://img.shields.io/travis/wKovacs64/hibp.svg?style=flat-square&branch=master
 [travis-url]: https://travis-ci.org/wKovacs64/hibp
-[coverage-image]: https://img.shields.io/codecov/c/github/wKovacs64/hibp/master.svg?style=flat-square
-[coverage-url]: https://codecov.io/github/wKovacs64/hibp
+[coverage-image]: https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square&branch=master
+[coverage-url]: https://coveralls.io/github/wKovacs64/hibp?branch=master
 [troy]: http://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [unpkg]: https://unpkg.com
