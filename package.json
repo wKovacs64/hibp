@@ -31,7 +31,7 @@
     "build:umd": "cross-env BABEL_ENV=es rollup --config",
     "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=es rollup --config",
     "docs": "jsdoc2md src/*.js > API.md",
-    "format": "prettier --write \"**/*.js\"",
+    "format": "prettier --write \"**/*.{js,json,md}\"",
     "lint": "npm run lint:main && npm run lint:test-umd",
     "lint:main": "eslint . --ignore-pattern test-umd",
     "lint:test-umd": "eslint test-umd",

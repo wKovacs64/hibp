@@ -6,26 +6,25 @@
   `hibp` is designed as a collection of modules to be imported explicitly as
   needed and exporting a `default`-named object containing all the modules is
   arguably an anti-pattern. Instead, an anonymous object of all the named
-  modules is exported, providing better dead code elimination
-  support in order to produce smaller bundles when importing from `hibp`. The
-  quickest upgrade path (providing invocation syntax equivalence to prior
-  versions) is to change your import statement to import all the modules into a
-  local `hibp` namespace, but the recommended upgrade path is to import exactly
-  which modules you need and update your calls to remove the preceeding `hibp`
-  references.
+  modules is exported, providing better dead code elimination support in order
+  to produce smaller bundles when importing from `hibp`. The quickest upgrade
+  path (providing invocation syntax equivalence to prior versions) is to change
+  your import statement to import all the modules into a local `hibp` namespace,
+  but the recommended upgrade path is to import exactly which modules you need
+  and update your calls to remove the preceeding `hibp` references.
 
   ```javascript
   // 4.x
   import hibp from 'hibp';
-  hibp.breachedAccount(/* ... */)
+  hibp.breachedAccount(/* ... */).then(/* ... */);
 
   // 5.x (upgrade option 1, one-liner quick fix)
   import * as hibp from 'hibp';
-  hibp.breachedAccount(/* ... */)
+  hibp.breachedAccount(/* ... */).then(/* ... */);
 
   // 5.x (upgrade option 2, more explicit but requires more code changes)
   import { breachedAccount } from 'hibp';
-  breachedAccount(/* ... */)
+  breachedAccount(/* ... */).then(/* ... */);
   ```
 
 * The `browser` entry point field has been removed from `package.json` as
@@ -71,18 +70,20 @@
   like `if (breachData) { ... }` will be fine, but strict equality checks like
   `if (breachData === undefined) { ... }` will break.
 
-  ***N.B.*** *This is a philosophical change based on various sources regarding
+  **_N.B._** _This is a philosophical change based on various sources regarding
   the difference between null and undefined in JavaScript. In the case where a
   query responds with no data, it is an expected absence of value, as that is
   how the remote API is documented to respond when there are no relevant objects
-  to return.*
+  to return._
 
   [Ryan Morr](http://goo.gl/TGTS96):
+
   > To distinguish between the two, you may want to think of undefined as
   > representing an unexpected absence of value and null as representing an
   > expected absence of value."
 
   [MDN](https://goo.gl/n85RSe):
+
   > In APIs, null is often retrieved in place where an object can be expected
   > but no object is relevant.
 
@@ -91,15 +92,17 @@
   example:
 
   1.0.8 (old):
+
   ```javascript
-  hibp.breachedAccount(account, 'adobe.com', true)
-      .then(/* ... */);
+  hibp.breachedAccount(account, 'adobe.com', true).then(/* ... */);
   ```
 
   2.0.0 (new):
+
   ```javascript
-  hibp.breachedAccount(account, {domain: 'adobe.com', truncate: true})
-      .then(/* ... */);
+  hibp
+    .breachedAccount(account, { domain: 'adobe.com', truncate: true })
+    .then(/* ... */);
   ```
 
   This change was made to make the API more expressive and reduce ambiguity. See
