@@ -54,7 +54,7 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "axios": "^0.17.0"
+    "axios": "^0.17.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -63,24 +63,24 @@
     "babel-register": "^6.26.0",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.1",
-    "eslint": "^4.10.0",
+    "eslint": "^4.11.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.7.0",
+    "eslint-config-prettier": "^2.8.0",
     "eslint-plugin-import": "^2.8.0",
     "jest": "^21.2.1",
     "jsdoc-to-markdown": "^3.1.0-0",
     "moxios": "^0.4.0",
-    "prettier": "^1.8.1",
+    "prettier": "^1.8.2",
     "rimraf": "^2.6.2",
-    "rollup": "^0.51.1",
+    "rollup": "^0.51.8",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.1",
-    "uglify-es": "^3.1.8"
+    "uglify-es": "^3.1.10"
   },
   "optionalDependencies": {
-    "puppeteer": "^0.12.0"
+    "puppeteer": "^0.13.0"
   }
 }
