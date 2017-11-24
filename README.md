@@ -153,12 +153,6 @@ Send me a [PR][pulls] or an email and I'll add yours to the list.
 
 This module is distributed under the [MIT License][license].
 
----
-
-[![Sponsor][sponsor-image]][sponsor-link]
-
----
-
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
 [travis-image]: https://img.shields.io/travis/wKovacs64/hibp.svg?style=flat-square&branch=master
@@ -179,5 +173,3 @@ This module is distributed under the [MIT License][license].
 [hibp-stdlib]: https://stdlib.com/services/wKovacs64/hibp
 [stdlib]: https://stdlib.com
 [license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
-[sponsor-image]: https://app.codesponsor.io/embed/1Z34ZozRAhWZ8QKV42A2yt3r/wKovacs64/hibp.svg
-[sponsor-link]: https://app.codesponsor.io/link/1Z34ZozRAhWZ8QKV42A2yt3r/wKovacs64/hibp
