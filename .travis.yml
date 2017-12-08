@@ -18,6 +18,7 @@ jobs:
       dist: trusty
       node_js: "node"
       script:
+        - yarn add puppeteer
         - yarn lint:test-umd
         - yarn test:umd
       after_success:

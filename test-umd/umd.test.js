@@ -1,5 +1,5 @@
 import path from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line
 import puppeteer from 'puppeteer';
 
 describe('UMD build', () => {
