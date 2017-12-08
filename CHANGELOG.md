@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 5.2.4 _(2017-12-07)_
+
+* Reverted `puppeteer` to `0.12.0` as `0.13.0` was causing downstream consumers
+  to download Chromium.
+
 ## Version 5.2.3 _(2017-12-07)_
 
 * Reformated some documentation files
