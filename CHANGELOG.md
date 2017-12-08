@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 5.2.3 _(2017-12-07)_
+
+* Reformated some documentation files
+* Updated dependencies
+
 ## Version 5.2.2 _(2017-11-08)_
 
 * Internal maintenance
