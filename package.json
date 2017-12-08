@@ -81,6 +81,6 @@
     "uglify-es": "^3.2.1"
   },
   "optionalDependencies": {
-    "puppeteer": "^0.13.0"
+    "puppeteer": "0.12.0"
   }
 }
