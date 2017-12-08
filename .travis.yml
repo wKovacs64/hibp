@@ -8,7 +8,7 @@ node_js:
   - "8"
   - "node"
 script:
-  - yarn lint:main
+  - yarn lint
   - yarn test:coverage --no-cache
 after_success:
   - "coveralls < coverage/lcov.info"
@@ -19,7 +19,6 @@ jobs:
       node_js: "node"
       script:
         - yarn add puppeteer
-        - yarn lint:test-umd
         - yarn test:umd
       after_success:
         # no need to report coverage after UMD test
