@@ -70,7 +70,7 @@
     "jest": "^21.2.1",
     "jsdoc-to-markdown": "^3.1.0-0",
     "moxios": "^0.4.0",
-    "prettier": "^1.9.0",
+    "prettier": "^1.9.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.52.1",
     "rollup-plugin-babel": "^3.0.2",
