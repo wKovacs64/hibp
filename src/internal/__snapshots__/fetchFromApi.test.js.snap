@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`internal: fetchFromApi invalid account format should throw a "Bad Request" error 1`] = `"Bad request — the account does not comply with an acceptable format."`;
+
+exports[`internal: fetchFromApi invalid request header should throw a "Forbidden" error 1`] = `"Forbidden - no user agent has been specified in the request."`;
+
+exports[`internal: fetchFromApi rate limited should throw a "Too Many Requests" error 1`] = `"Rate limit exceeded, refer to acceptable use of the API: https://haveibeenpwned.com/API/v2#AcceptableUse"`;
+
+exports[`internal: fetchFromApi request failure should re-throw request setup errors 1`] = `"Set sail for fail!"`;
+
+exports[`internal: fetchFromApi unexpected HTTP error should throw an "Unknown" error 1`] = `"Unknown - something unexpected happened."`;
