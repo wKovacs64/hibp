@@ -1,4 +1,5 @@
 import {
+  UNKNOWN,
   ERR,
   INVALID_HEADER,
   RATE_LIMITED,
@@ -8,6 +9,7 @@ import {
 import dataClasses from '../dataClasses';
 import breachedAccount from '../breachedAccount';
 import axiosInstance from './axiosInstance';
+import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
 
 describe('internal: fetchFromApi', () => {
   describe('request failure', () => {
@@ -24,34 +26,38 @@ describe('internal: fetchFromApi', () => {
     });
 
     it('should re-throw request setup errors', () =>
-      expect(dataClasses()).rejects.toThrowErrorMatchingSnapshot());
+      expect(dataClasses()).rejects.toEqual(ERR));
   });
 
   describe('invalid account format', () => {
-    it('should throw a "Bad Request" error', () =>
-      expect(
-        breachedAccount(EMAIL_INVALID),
-      ).rejects.toThrowErrorMatchingSnapshot());
+    it('should throw an Error with "Bad Request" status text', () =>
+      expect(breachedAccount(EMAIL_INVALID)).rejects.toHaveProperty(
+        'message',
+        BAD_REQUEST.statusText,
+      ));
   });
 
   describe('invalid request header', () => {
-    it('should throw a "Forbidden" error', () =>
-      expect(
-        breachedAccount(INVALID_HEADER),
-      ).rejects.toThrowErrorMatchingSnapshot());
+    it('should throw an Error with "Forbidden" status text', () =>
+      expect(breachedAccount(INVALID_HEADER)).rejects.toHaveProperty(
+        'message',
+        FORBIDDEN.statusText,
+      ));
   });
 
   describe('rate limited', () => {
-    it('should throw a "Too Many Requests" error', () =>
-      expect(
-        breachedAccount(RATE_LIMITED),
-      ).rejects.toThrowErrorMatchingSnapshot());
+    it('should throw an Error with "Too Many Requests" response data', () =>
+      expect(breachedAccount(RATE_LIMITED)).rejects.toHaveProperty(
+        'message',
+        TOO_MANY_REQUESTS.response,
+      ));
   });
 
   describe('unexpected HTTP error', () => {
-    it('should throw an "Unknown" error', () =>
-      expect(
-        breachedAccount(UNEXPECTED),
-      ).rejects.toThrowErrorMatchingSnapshot());
+    it('should throw an Error with the response status text', () =>
+      expect(breachedAccount(UNEXPECTED)).rejects.toHaveProperty(
+        'message',
+        UNKNOWN.statusText,
+      ));
   });
 });
