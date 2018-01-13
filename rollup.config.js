@@ -11,9 +11,9 @@ const config = {
   output: {
     file: 'dist/hibp.js',
     format: 'umd',
+    name: 'hibp',
+    sourcemap: true,
   },
-  name: 'hibp',
-  sourcemap: true,
   plugins: [
     nodeResolve({
       browser: true,
