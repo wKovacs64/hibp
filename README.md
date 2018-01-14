@@ -169,6 +169,6 @@ This module is distributed under the [MIT License][license].
 [runkit]: https://runkit.com/npm/hibp
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
-[hibp-stdlib]: https://stdlib.com/services/wKovacs64/hibp
+[hibp-stdlib]: https://stdlib.com/@wKovacs64/lib/hibp
 [stdlib]: https://stdlib.com
 [license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
