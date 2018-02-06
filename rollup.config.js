@@ -3,7 +3,6 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
-import { minify } from 'uglify-es';
 
 // Common
 const config = {
@@ -41,7 +40,6 @@ if (process.env.NODE_ENV === 'production') {
           unsafe_comps: true,
         },
       },
-      minify,
     ), // eslint-disable-line comma-dangle
   );
 }
