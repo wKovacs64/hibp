@@ -23,6 +23,7 @@
   "module": "es/hibp.js",
   "unpkg": "dist/hibp.min.js",
   "runkitExampleFilename": "example/runkit.js",
+  "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist lib es coverage",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
