@@ -32,15 +32,13 @@ const config = {
 if (process.env.NODE_ENV === 'production') {
   config.output.file = 'dist/hibp.min.js';
   config.plugins.push(
-    uglify(
-      {
-        compress: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
-        },
+    uglify({
+      compress: {
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
       },
-    ), // eslint-disable-line comma-dangle
+    }), // eslint-disable-line comma-dangle
   );
 }
 
