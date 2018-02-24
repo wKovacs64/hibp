@@ -18,7 +18,4 @@ export const RANGE_BAD_REQUEST = {
 
 export const NOT_FOUND = {
   status: 404,
-  statusText:
-    'Not found - the account could not be found and has therefore ' +
-    'not been pwned.',
 };
