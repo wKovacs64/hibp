@@ -3,7 +3,7 @@ import {
   BREACH_NOT_FOUND,
   RESPONSE_OBJ,
   RESPONSE_CLEAN,
-} from './__mocks__/testData';
+} from '../test/fixtures';
 import breach from './breach';
 
 describe('breach', () => {

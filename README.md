@@ -44,6 +44,8 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 * Get all data classes
 * Get all pastes for an account
 * Check a password to see if it has been exposed in a data breach
+* Check a password by SHA-1 prefix to see if it has been exposed in a data
+  breach (without exposing the password)
 * Search for an account in both breaches and pastes at the same time
 * All queries return a Promise
 * Available server-side (Node.js) and client-side (browser)
@@ -76,6 +78,7 @@ The following modules are available:
 * [dataClasses](API.md#dataclasses)
 * [pasteAccount](API.md#pasteaccount)
 * [pwnedPassword](API.md#pwnedpassword)
+* [pwnedPasswordRange](API.md#pwnedpasswordrange)
 * [search](API.md#search)
 
 Please see the [API reference](API.md) for more detailed usage information and

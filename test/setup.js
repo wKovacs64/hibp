@@ -1,13 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import moxios from 'moxios';
-import axiosInstance from '../internal/axiosInstance';
+import hibpAxiosInstance from '../src/internal/haveibeenpwned/axiosInstance';
+import ppAxiosInstance from '../src/internal/pwnedpasswords/axiosInstance';
+
 import {
   OK,
   BAD_REQUEST,
   FORBIDDEN,
   NOT_FOUND,
   TOO_MANY_REQUESTS,
-} from '../internal/responses';
+} from '../src/internal/haveibeenpwned/responses';
+import {
+  RANGE_OK,
+  RANGE_BAD_REQUEST,
+} from '../src/internal/pwnedpasswords/responses';
 import {
   EMAIL_INVALID,
   INVALID_HEADER,
@@ -24,10 +30,13 @@ import {
   EMAIL_CLEAN,
   PASSWORD_PWNED,
   PASSWORD_CLEAN,
-} from './testData';
+  RANGE_VALID,
+  RANGE_INVALID,
+} from './fixtures';
 
 beforeAll(() => {
-  moxios.install(axiosInstance);
+  moxios.install(hibpAxiosInstance);
+  moxios.install(ppAxiosInstance);
 
   // Configure mocked API calls and results
   moxios.stubRequest(
@@ -128,8 +137,32 @@ beforeAll(() => {
       status: BAD_REQUEST.status,
     },
   );
+  moxios.stubRequest(new RegExp(`/range/${encodeURIComponent(RANGE_VALID)}`), {
+    status: RANGE_OK.status,
+    response: RANGE_OK.response,
+  });
+  moxios.stubRequest(
+    new RegExp(`/range/${encodeURIComponent(RANGE_INVALID)}`),
+    {
+      status: RANGE_BAD_REQUEST.status,
+      response: RANGE_BAD_REQUEST.response,
+    },
+  );
+  moxios.stubRequest(
+    new RegExp(`/range/${encodeURIComponent(UNEXPECTED)}\\??`),
+    {
+      status: UNKNOWN.status,
+      statusText: UNKNOWN.statusText,
+    },
+  );
+  // All other requests
+  moxios.stubRequest(/.*/, {
+    status: 500,
+    responseText: 'API request URL not mocked!',
+  });
 });
 
 afterAll(() => {
-  moxios.uninstall(axiosInstance);
+  moxios.uninstall(hibpAxiosInstance);
+  moxios.uninstall(ppAxiosInstance);
 });

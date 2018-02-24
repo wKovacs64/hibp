@@ -8,6 +8,7 @@ Object {
   "dataClasses": [Function],
   "pasteAccount": [Function],
   "pwnedPassword": [Function],
+  "pwnedPasswordRange": [Function],
   "search": [Function],
 }
 `;

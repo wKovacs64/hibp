@@ -1,4 +1,4 @@
-import { ACCOUNT_BREACHED, EMAIL_PASTED } from './__mocks__/testData';
+import { ACCOUNT_BREACHED, EMAIL_PASTED } from '../test/fixtures';
 import search from './search';
 
 describe('search', () => {

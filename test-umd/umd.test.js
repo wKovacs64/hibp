@@ -11,6 +11,7 @@ describe('UMD build', () => {
     if (typeof window.hibp.dataClasses !== 'function') throw new Error();
     if (typeof window.hibp.pasteAccount !== 'function') throw new Error();
     if (typeof window.hibp.pwnedPassword !== 'function') throw new Error();
+    if (typeof window.hibp.pwnedPasswordRange !== 'function') throw new Error();
     if (typeof window.hibp.search !== 'function') throw new Error();
   `;
 

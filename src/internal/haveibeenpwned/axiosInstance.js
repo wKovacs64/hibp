@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 /**
- * The Axios instance used for API queries. Not meant for general use.
+ * An Axios instance used for API queries. Not meant for general use.
  *
  * @private
  */

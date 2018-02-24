@@ -6,7 +6,7 @@ import {
   OPTS_DOM_TRUNC,
   RESPONSE_ARY,
   RESPONSE_CLEAN,
-} from './__mocks__/testData';
+} from '../test/fixtures';
 import breachedAccount from './breachedAccount';
 
 describe('breachedAccount', () => {

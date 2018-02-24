@@ -1,4 +1,4 @@
-import { RESPONSE_ARY } from './__mocks__/testData';
+import { RESPONSE_ARY } from '../test/fixtures';
 import dataClasses from './dataClasses';
 
 describe('dataClasses', () => {

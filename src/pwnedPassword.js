@@ -1,4 +1,4 @@
-import fetchFromApi from './internal/fetchFromApi';
+import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
 
 /**
  * Fetches the pwned status for the given password, indicating whether or not it

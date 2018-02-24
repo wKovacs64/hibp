@@ -24,3 +24,5 @@ export const OPTS_ISAHASH = { isAHash: true };
 export const RESPONSE_OBJ = {};
 export const RESPONSE_ARY = [];
 export const RESPONSE_CLEAN = null;
+export const RANGE_VALID = '21BD1';
+export const RANGE_INVALID = '21BD';
