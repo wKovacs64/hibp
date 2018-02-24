@@ -1,10 +1,12 @@
-.babelrc
+.babelrc.js
 .editorconfig
+.eslintignore
 .eslintrc.json
 .gitattributes
 .gitignore
 .idea
 .npmignore
+.prettierignore
 .prettierrc
 .travis.yml
 coverage
@@ -13,6 +15,5 @@ rollup.config.js
 src
 test
 test-umd
-webpack
 yarn-error.log
 yarn.lock
