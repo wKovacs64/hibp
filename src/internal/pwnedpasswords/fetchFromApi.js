@@ -1,5 +1,5 @@
 import axios from './axiosInstance';
-import { RANGE_BAD_REQUEST, NOT_FOUND } from './responses';
+import { RANGE_BAD_REQUEST, PASSWORD_NOT_FOUND } from './responses';
 
 /**
  * Fetches data from the supplied API endpoint.
@@ -21,7 +21,7 @@ export default endpoint =>
         switch (err.response.status) {
           case RANGE_BAD_REQUEST.status:
             throw new Error(err.response.data);
-          case NOT_FOUND.status:
+          case PASSWORD_NOT_FOUND.status:
             return null;
           default:
             throw new Error(err.response.statusText);
