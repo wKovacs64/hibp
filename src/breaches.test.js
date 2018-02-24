@@ -1,4 +1,4 @@
-import { OPTS_DOM, RESPONSE_ARY } from './__mocks__/testData';
+import { OPTS_DOM, RESPONSE_ARY } from '../test/fixtures';
 import breaches from './breaches';
 
 describe('breaches', () => {

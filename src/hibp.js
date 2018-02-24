@@ -4,6 +4,7 @@ import breaches from './breaches';
 import dataClasses from './dataClasses';
 import pasteAccount from './pasteAccount';
 import pwnedPassword from './pwnedPassword';
+import pwnedPasswordRange from './pwnedPasswordRange';
 import search from './search';
 
 /*
@@ -31,5 +32,6 @@ export {
   dataClasses,
   pasteAccount,
   pwnedPassword,
+  pwnedPasswordRange,
   search,
 };

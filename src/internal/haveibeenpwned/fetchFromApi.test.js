@@ -5,13 +5,13 @@ import {
   RATE_LIMITED,
   UNEXPECTED,
   EMAIL_INVALID,
-} from '../__mocks__/testData';
-import dataClasses from '../dataClasses';
-import breachedAccount from '../breachedAccount';
+} from '../../../test/fixtures';
+import dataClasses from '../../dataClasses';
+import breachedAccount from '../../breachedAccount';
 import axiosInstance from './axiosInstance';
 import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
 
-describe('internal: fetchFromApi', () => {
+describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('request failure', () => {
     let failboat;
 

@@ -1,8 +1,4 @@
-import {
-  PASSWORD_PWNED,
-  PASSWORD_CLEAN,
-  OPTS_ISAHASH,
-} from './__mocks__/testData';
+import { PASSWORD_PWNED, PASSWORD_CLEAN, OPTS_ISAHASH } from '../test/fixtures';
 import pwnedPassword from './pwnedPassword';
 
 describe('pwnedPassword', () => {

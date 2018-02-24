@@ -3,7 +3,7 @@ import {
   EMAIL_CLEAN,
   RESPONSE_ARY,
   RESPONSE_CLEAN,
-} from './__mocks__/testData';
+} from '../test/fixtures';
 import pasteAccount from './pasteAccount';
 
 describe('pasteAccount', () => {

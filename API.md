@@ -19,6 +19,10 @@
 <dt><a href="#module_pwnedPassword">pwnedPassword</a></dt>
 <dd><p>A module for determining if a password has been exposed in a breach.</p>
 </dd>
+<dt><a href="#module_pwnedPasswordRange">pwnedPasswordRange</a></dt>
+<dd><p>A module for determining if a password has been exposed in a breach without
+exposing the password.</p>
+</dd>
 <dt><a href="#module_search">search</a></dt>
 <dd><p>A module for searching all breach and paste data associated with a specific
 account (email address or username).</p>
@@ -59,6 +63,15 @@ two, but in the case where the password you wish to check is actually a
 plain text string containing a hash and you don&#39;t want the API to treat it as
 a hash, you can override the auto detection behavior by setting the isAHash
 option to true.</p>
+</dd>
+<dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix)</a> ⇒ <code>Promise</code> ⏏</dt>
+<dd><p>Fetches the SHA-1 suffixes for the given 5-character SHA-1 prefix.</p>
+<p>When a password hash with the same first 5 characters is found in the Pwned
+Passwords repository, the API will respond with an HTTP 200 and include the
+suffix of every hash beginning with the specified prefix, followed by a count
+of how many times it appears in the data set. The API consumer can then
+search the results of the response for the presence of their source hash and
+if not found, the password does not exist in the data set.</p>
 </dd>
 <dt><a href="#exp_module_search--search">search(account, [breachOptions])</a> ⇒ <code>Promise</code> ⏏</dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
@@ -356,6 +369,53 @@ pwnedPassword('5e447cbeee6f483bf88c461d76994b0063ae81d5')
 pwnedPassword('5e447cbeee6f483bf88c461d76994b0063ae81d5', { isAHash: true })
   .then((isPwned) => {
     if (isPwned) {
+      // ...
+    } else {
+      // ...
+    }
+  })
+  .catch((err) => {
+    // ...
+  });
+```
+<a name="module_pwnedPasswordRange"></a>
+
+## pwnedPasswordRange
+A module for determining if a password has been exposed in a breach without
+exposing the password.
+
+**Example**  
+```js
+import { pwnedPasswordRange } from 'hibp';
+```
+<a name="exp_module_pwnedPasswordRange--pwnedPasswordRange"></a>
+
+### pwnedPasswordRange(prefix) ⇒ <code>Promise</code> ⏏
+Fetches the SHA-1 suffixes for the given 5-character SHA-1 prefix.
+
+When a password hash with the same first 5 characters is found in the Pwned
+Passwords repository, the API will respond with an HTTP 200 and include the
+suffix of every hash beginning with the specified prefix, followed by a count
+of how many times it appears in the data set. The API consumer can then
+search the results of the response for the presence of their source hash and
+if not found, the password does not exist in the data set.
+
+**Kind**: global method of [<code>pwnedPasswordRange</code>](#module_pwnedPasswordRange)  
+**Returns**: <code>Promise</code> - a Promise which resolves to plain text containing the
+suffix of every hash beginning with the specified prefix, followed by a count
+of how many times it appears in the data set if the given password has been
+exposed in a breach, or rejects with an Error  
+**See**: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| prefix | <code>string</code> | the first 5 characters of a SHA-1 password hash (case insensitive) |
+
+**Example**  
+```js
+pwnedPasswordRange('21BD1')
+  .then((suffixes) => {
+    if (suffixes.includes('0018A45C4D1DEF81644B54AB7F969B88D65')) {
       // ...
     } else {
       // ...

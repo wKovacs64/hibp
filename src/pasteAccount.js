@@ -1,4 +1,4 @@
-import fetchFromApi from './internal/fetchFromApi';
+import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
 
 /**
  * Fetches paste data for a specific account (email address).
