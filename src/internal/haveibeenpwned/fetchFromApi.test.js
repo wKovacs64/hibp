@@ -1,10 +1,10 @@
 import {
-  UNKNOWN,
   ERR,
   INVALID_HEADER,
   RATE_LIMITED,
-  UNEXPECTED,
   EMAIL_INVALID,
+  UNEXPECTED,
+  UNKNOWN,
 } from '../../../test/fixtures';
 import dataClasses from '../../dataClasses';
 import breachedAccount from '../../breachedAccount';

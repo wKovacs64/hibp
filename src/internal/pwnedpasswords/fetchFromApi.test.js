@@ -7,7 +7,7 @@ import {
 } from '../../../test/fixtures';
 import pwnedPasswordRange from '../../pwnedPasswordRange';
 import axiosInstance from './axiosInstance';
-import { RANGE_OK, RANGE_BAD_REQUEST } from './responses';
+import { RANGE_BAD_REQUEST } from './responses';
 
 describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('request failure', () => {
@@ -28,17 +28,10 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
   });
 
   describe('invalid range', () => {
-    it('should throw an Error with "Bad Request" status text', () =>
+    it('should throw an Error with "Bad Request" response data', () =>
       expect(pwnedPasswordRange(RANGE_INVALID)).rejects.toHaveProperty(
         'message',
         RANGE_BAD_REQUEST.response,
-      ));
-  });
-
-  describe('valid range', () => {
-    it('should not throw', () =>
-      expect(pwnedPasswordRange(RANGE_VALID)).resolves.toEqual(
-        RANGE_OK.response,
       ));
   });
 
