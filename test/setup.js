@@ -32,6 +32,7 @@ import {
   PASSWORD_CLEAN,
   RANGE_VALID,
   RANGE_INVALID,
+  RESPONSE_STR,
 } from './fixtures';
 
 beforeAll(() => {
@@ -139,7 +140,7 @@ beforeAll(() => {
   );
   moxios.stubRequest(new RegExp(`/range/${encodeURIComponent(RANGE_VALID)}`), {
     status: RANGE_OK.status,
-    response: RANGE_OK.response,
+    response: RESPONSE_STR,
   });
   moxios.stubRequest(
     new RegExp(`/range/${encodeURIComponent(RANGE_INVALID)}`),

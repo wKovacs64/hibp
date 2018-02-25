@@ -7,9 +7,6 @@
 
 export const RANGE_OK = {
   status: 200,
-  response:
-    '0018A45C4D1DEF81644B54AB7F969B88D65:1\n' +
-    '00D4F6E8FA6EECAD2A3AA415EEC418D38EC:2',
 };
 
 export const RANGE_BAD_REQUEST = {
