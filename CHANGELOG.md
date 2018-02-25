@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 5.3.0 _(2018-02-24)_
+
+* Added `"sideEffects": false` to support Webpack 4 tree-shaking
+* Added support for searching pwned passwords by range (#21)
+* Switched API endpoint for `pwnedPassword` module to new `pwnedpasswords.com`
+  domain
+
 ## Version 5.2.5 _(2017-12-07)_
 
 * Removed `puppeteer` optional dependency as it was causing downstream consumers
