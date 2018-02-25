@@ -10,15 +10,6 @@ node_js:
 script:
   - yarn lint
   - yarn test:coverage --no-cache
+  - yarn test:umd
 after_success:
   - "coveralls < coverage/lcov.info"
-jobs:
-  include:
-    - stage: "umd"
-      dist: trusty
-      node_js: "node"
-      script:
-        - yarn add puppeteer
-        - yarn test:umd
-      after_success:
-        # no need to report coverage after UMD test

@@ -29,6 +29,7 @@ const config = {
 };
 
 // Production
+// prettier-ignore
 if (process.env.NODE_ENV === 'production') {
   config.output.file = 'dist/hibp.min.js';
   config.plugins.push(
@@ -38,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
         unsafe: true,
         unsafe_comps: true,
       },
-    }), // eslint-disable-line comma-dangle
+    })
   );
 }
 

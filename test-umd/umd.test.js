@@ -1,5 +1,4 @@
 import path from 'path';
-// eslint-disable-next-line
 import puppeteer from 'puppeteer';
 
 describe('UMD build', () => {
