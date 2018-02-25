@@ -1,5 +1,14 @@
 # Change Log
 
+## Version 6.0.0 _(2018-02-25)_
+
+* Restored `puppeteer` to a development dependency
+* Cleaned up some tests
+
+##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
+
+* Dropped support for Node < 6
+
 ## Version 5.3.0 _(2018-02-24)_
 
 * Added `"sideEffects": false` to support Webpack 4 tree-shaking

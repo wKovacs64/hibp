@@ -1,5 +1,11 @@
 ## Migration Notes
 
+#### 5.3.0 → 6.0.0
+
+* Support for Node.js versions less than 6.x has been dropped. If you are
+  leveraging this library in such an environment, you should restrict the
+  version in your dependencies to `^5.3.0`.
+
 #### 4.4.0 → 5.0.0
 
 * The biggest breaking change in `5.0.0` is the removal of the `default` export.
