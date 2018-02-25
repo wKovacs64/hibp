@@ -1,7 +1,7 @@
 {
   "clearMocks": true,
   "coverageDirectory": "coverage",
-  "coveragePathIgnorePatterns": ["/__mocks__/"],
+  "coveragePathIgnorePatterns": ["/test/"],
   "coverageReporters": ["html", "json", "lcov", "text"],
   "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
   "testEnvironment": "node",
