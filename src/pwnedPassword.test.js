@@ -1,24 +1,14 @@
-import { PASSWORD_PWNED, PASSWORD_CLEAN, OPTS_ISAHASH } from '../test/fixtures';
+import { PASSWORD_PWNED, PASSWORD_CLEAN } from '../test/fixtures';
 import pwnedPassword from './pwnedPassword';
 
 describe('pwnedPassword', () => {
-  describe('pwned (no parameters)', () => {
-    it('should resolve to true', () =>
-      expect(pwnedPassword(PASSWORD_PWNED)).resolves.toBe(true));
+  describe('pwned', () => {
+    it('should resolve to number > 0', () =>
+      expect(pwnedPassword(PASSWORD_PWNED)).resolves.toBeGreaterThan(0));
   });
 
-  describe('pwned (with isAHash)', () => {
-    it('should resolve to true', () =>
-      expect(pwnedPassword(PASSWORD_PWNED, OPTS_ISAHASH)).resolves.toBe(true));
-  });
-
-  describe('clean (no parameters)', () => {
-    it('should resolve to false', () =>
-      expect(pwnedPassword(PASSWORD_CLEAN)).resolves.toBe(false));
-  });
-
-  describe('clean (with isAHash)', () => {
-    it('should resolve to false', () =>
-      expect(pwnedPassword(PASSWORD_CLEAN, OPTS_ISAHASH)).resolves.toBe(false));
+  describe('clean', () => {
+    it('should resolve to 0', () =>
+      expect(pwnedPassword(PASSWORD_CLEAN)).resolves.toBe(0));
   });
 });
