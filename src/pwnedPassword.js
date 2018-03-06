@@ -1,48 +1,20 @@
-import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
+import sha1 from 'js-sha1';
+import pwnedPasswordRange from './pwnedPasswordRange';
 
 /**
- * Fetches the pwned status for the given password, indicating whether or not it
- * has been previously exposed in a breach. Passwords can be plain text or a
- * SHA1 hash. The remote API will automatically attempt to discern between the
- * two, but in the case where the password you wish to check is actually a
- * plain text string containing a hash and you don't want the API to treat it as
- * a hash, you can override the auto detection behavior by setting the isAHash
- * option to true.
+ * Fetches the pwned status for the given password, indicating whether or not
+ * it has been previously exposed in a breach. The password is given in plain
+ * text, but only the first 5 characters of its SHA1 hash will be submitted to
+ * the API. The final evalution will be done locally.
  *
- * @param {string} password a password (plain text string or SHA1 hash)
- * @param {Object} [options] a configuration object
- * @param {boolean} [options.isAHash] the pre-hashed password is a hash
- * (default: false)
- * @returns {Promise} a Promise which resolves to true if the given password has
- * been exposed in a breach (or false if not), or rejects with an Error
+ * @param {string} password a password in plain text
+ * @returns {Promise} a Promise which resolves to the number of times the
+ * password has been exposed in a breach, or rejects with an Error
  * @example
  * pwnedPassword('f00b4r')
- *   .then((isPwned) => {
- *     if (isPwned) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
- *   .catch((err) => {
- *     // ...
- *   });
- * @example
- * pwnedPassword('5e447cbeee6f483bf88c461d76994b0063ae81d5')
- *   .then((isPwned) => {
- *     if (isPwned) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
- *   .catch((err) => {
- *     // ...
- *   });
- * @example
- * pwnedPassword('5e447cbeee6f483bf88c461d76994b0063ae81d5', { isAHash: true })
- *   .then((isPwned) => {
- *     if (isPwned) {
+ *   .then((numPwns) => {
+ *     // truthy check or numeric condition
+ *     if (numPwns) {
  *       // ...
  *     } else {
  *       // ...
@@ -54,14 +26,26 @@ import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
  * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
  * @alias module:pwnedPassword
  */
-const pwnedPassword = (password, options = {}) => {
-  const endpoint = `/pwnedpassword/${encodeURIComponent(password)}?`;
-  const params = [];
-  if (options.isAHash) {
-    params.push('originalPasswordIsAHash=true');
-  }
-  return fetchFromApi(`${endpoint}${params.join('&')}`).then(
-    pwned => pwned !== null,
+const pwnedPassword = password => {
+  const hash = sha1(password).toUpperCase();
+  const prefix = hash.slice(0, 5);
+  const suffix = hash.slice(5);
+
+  return (
+    pwnedPasswordRange(prefix)
+      // each line to an array
+      .then(res => res.split('\n'))
+      // each line split into suffix and count
+      .then(arr =>
+        arr.map(item => ({
+          suffix: item.split(':')[0],
+          count: parseInt(item.split(':')[1], 10),
+        })),
+      )
+      // filter to matching suffix
+      .then(arr => arr.filter(item => item.suffix === suffix))
+      // return count if match, 0 if not
+      .then(arr => (arr[0] ? arr[0].count : 0))
   );
 };
 

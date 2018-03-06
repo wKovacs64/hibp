@@ -13,7 +13,3 @@ export const RANGE_BAD_REQUEST = {
   status: 400,
   response: 'The hash prefix was not in a valid format',
 };
-
-export const PASSWORD_NOT_FOUND = {
-  status: 404,
-};

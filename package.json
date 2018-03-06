@@ -65,7 +65,8 @@
     "node": ">= 6.4.0"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "js-sha1": "^0.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.40",
@@ -74,6 +75,7 @@
     "@babel/preset-env": "^7.0.0-beta.40",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.4.1",
+    "common-tags": "^1.7.2",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.3",
     "eslint": "^4.18.1",
