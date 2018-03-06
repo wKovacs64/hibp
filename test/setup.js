@@ -33,7 +33,8 @@ import {
   RANGE_PASSWORD_PWNED,
   RANGE_PASSWORD_CLEAN,
   RANGE_INVALID,
-  RESPONSE_STR,
+  RANGE_PASSWORD_PWNED_RESPONSE,
+  RANGE_PASSWORD_CLEAN_RESPONSE,
 } from './fixtures';
 
 beforeAll(() => {
@@ -143,14 +144,14 @@ beforeAll(() => {
     new RegExp(`/range/${encodeURIComponent(RANGE_PASSWORD_PWNED)}`),
     {
       status: RANGE_OK.status,
-      response: RESPONSE_STR,
+      response: RANGE_PASSWORD_PWNED_RESPONSE,
     },
   );
   moxios.stubRequest(
     new RegExp(`/range/${encodeURIComponent(RANGE_PASSWORD_CLEAN)}`),
     {
       status: RANGE_OK.status,
-      response: RESPONSE_STR,
+      response: RANGE_PASSWORD_CLEAN_RESPONSE,
     },
   );
   moxios.stubRequest(
