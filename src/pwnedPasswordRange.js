@@ -32,7 +32,16 @@ import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
  * @alias module:pwnedPasswordRange
  */
 const pwnedPasswordRange = prefix =>
-  fetchFromApi(`/range/${encodeURIComponent(prefix)}`);
+  fetchFromApi(`/range/${encodeURIComponent(prefix)}`)
+    // each line to an array
+    .then(res => res.split('\n'))
+    // each line split into suffix and count
+    .then(arr =>
+      arr.map(item => ({
+        suffix: item.split(':')[0],
+        count: parseInt(item.split(':')[1], 10),
+      })),
+    );
 
 /**
  * A module for determining if a password SHA-1 hash has been exposed in a
