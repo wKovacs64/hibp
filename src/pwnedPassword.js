@@ -12,8 +12,9 @@ import pwnedPasswordRange from './pwnedPasswordRange';
  * been breached, or rejects with an Error
  * @example
  * pwnedPassword('f00b4r')
- *   .then((isPwned) => {
- *     if (isPwned) {
+ *   .then((numPwns) => {
+ *     // truthy check or numeric condition
+ *     if (numPwns) {
  *       // ...
  *     } else {
  *       // ...
@@ -28,12 +29,24 @@ import pwnedPasswordRange from './pwnedPasswordRange';
 const pwnedPassword = password => {
   const hash = sha1(password).toUpperCase();
   const prefix = hash.slice(0, 5);
-  // const suffix = hash.slice(5);
+  const suffix = hash.slice(5);
 
-  return pwnedPasswordRange(prefix).then(() => {
-    if (password === 'password') return 40;
-    return 0;
-  });
+  return (
+    pwnedPasswordRange(prefix)
+      // each line to an array
+      .then(res => res.split('\n'))
+      // each line split into suffix and count
+      .then(arr =>
+        arr.map(item => ({
+          suffix: item.split(':')[0],
+          count: parseInt(item.split(':')[1], 10),
+        })),
+      )
+      // filter to matching suffix
+      .then(arr => arr.filter(item => item.suffix === suffix))
+      // return count if match, 0 if not
+      .then(arr => (arr[0] ? arr[0].count : 0))
+  );
 };
 
 /**
