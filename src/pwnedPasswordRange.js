@@ -1,7 +1,7 @@
 import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
 
 /**
- * Fetches the SHA-1 suffixes for the given 5-character SHA-1 prefix.
+ * Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
  *
  * When a password hash with the same first 5 characters is found in the Pwned
  * Passwords repository, the API will respond with an HTTP 200 and include the
@@ -35,8 +35,8 @@ const pwnedPasswordRange = prefix =>
   fetchFromApi(`/range/${encodeURIComponent(prefix)}`);
 
 /**
- * A module for determining if a password has been exposed in a breach without
- * exposing the password.
+ * A module for determining if a password SHA-1 hash has been exposed in a
+ * breach.
  *
  * @module pwnedPasswordRange
  * @example

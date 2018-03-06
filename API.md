@@ -17,11 +17,11 @@
 <dd><p>A module for retrieving paste data for a specific account (email address).</p>
 </dd>
 <dt><a href="#module_pwnedPassword">pwnedPassword</a></dt>
-<dd><p>A module for determining if a password has been exposed in a breach.</p>
+<dd><p>A module for securely determining if a password has been exposed in a breach.</p>
 </dd>
 <dt><a href="#module_pwnedPasswordRange">pwnedPasswordRange</a></dt>
-<dd><p>A module for determining if a password has been exposed in a breach without
-exposing the password.</p>
+<dd><p>A module for determining if a password SHA-1 hash has been exposed in a
+breach.</p>
 </dd>
 <dt><a href="#module_search">search</a></dt>
 <dd><p>A module for searching all breach and paste data associated with a specific
@@ -56,13 +56,13 @@ account (email address or username).</p>
 <dd><p>Fetches paste data for a specific account (email address).</p>
 </dd>
 <dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password)</a> ⇒ <code>Promise</code> ⏏</dt>
-<dd><p>Fetches the pwned status for the given password, indicating whether or not
-it has been previously exposed in a breach. The password is given in plain
-text, but only the first 5 characters of its SHA1 hash will be submitted to
-the API. The final evalution will be done locally.</p>
+<dd><p>Fetches the pwned status for the given password, indicating whether or not it
+has been previously exposed in a breach. The password is given in plain text,
+but only the first 5 characters of its SHA-1 hash will be submitted to the
+API. The final evalution will be done locally.</p>
 </dd>
 <dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix)</a> ⇒ <code>Promise</code> ⏏</dt>
-<dd><p>Fetches the SHA-1 suffixes for the given 5-character SHA-1 prefix.</p>
+<dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
 suffix of every hash beginning with the specified prefix, followed by a count
@@ -305,7 +305,7 @@ pasteAccount('foo@bar.com')
 <a name="module_pwnedPassword"></a>
 
 ## pwnedPassword
-A module for determining if a password has been exposed in a breach.
+A module for securely determining if a password has been exposed in a breach.
 
 **Example**  
 ```js
@@ -314,10 +314,10 @@ import { pwnedPassword } from 'hibp';
 <a name="exp_module_pwnedPassword--pwnedPassword"></a>
 
 ### pwnedPassword(password) ⇒ <code>Promise</code> ⏏
-Fetches the pwned status for the given password, indicating whether or not
-it has been previously exposed in a breach. The password is given in plain
-text, but only the first 5 characters of its SHA1 hash will be submitted to
-the API. The final evalution will be done locally.
+Fetches the pwned status for the given password, indicating whether or not it
+has been previously exposed in a breach. The password is given in plain text,
+but only the first 5 characters of its SHA-1 hash will be submitted to the
+API. The final evalution will be done locally.
 
 **Kind**: global method of [<code>pwnedPassword</code>](#module_pwnedPassword)  
 **Returns**: <code>Promise</code> - a Promise which resolves to the number of times the
@@ -346,8 +346,8 @@ pwnedPassword('f00b4r')
 <a name="module_pwnedPasswordRange"></a>
 
 ## pwnedPasswordRange
-A module for determining if a password has been exposed in a breach without
-exposing the password.
+A module for determining if a password SHA-1 hash has been exposed in a
+breach.
 
 **Example**  
 ```js
@@ -356,7 +356,7 @@ import { pwnedPasswordRange } from 'hibp';
 <a name="exp_module_pwnedPasswordRange--pwnedPasswordRange"></a>
 
 ### pwnedPasswordRange(prefix) ⇒ <code>Promise</code> ⏏
-Fetches the SHA-1 suffixes for the given 5-character SHA-1 prefix.
+Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
 
 When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
