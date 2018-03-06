@@ -2,14 +2,14 @@ import sha1 from 'js-sha1';
 import pwnedPasswordRange from './pwnedPasswordRange';
 
 /**
- * Fetches the pwned status for the given password, indicating whether or not it
- * has been previously exposed in a breach. The password is given in plaintext,
- * but only the first 5 characters of its SHA1 hash will be sumitted to the API.
- * The final evalution will be done locally.
+ * Fetches the pwned status for the given password, indicating whether or not
+ * it has been previously exposed in a breach. The password is given in plain
+ * text, but only the first 5 characters of its SHA1 hash will be submitted to
+ * the API. The final evalution will be done locally.
  *
- * @param {string} password a password in plaintext
- * @returns {Promise} a Promise which resolves to the number of times the password has
- * been breached, or rejects with an Error
+ * @param {string} password a password in plain text
+ * @returns {Promise} a Promise which resolves to the number of times the
+ * password has been exposed in a breach, or rejects with an Error
  * @example
  * pwnedPassword('f00b4r')
  *   .then((numPwns) => {
