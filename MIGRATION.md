@@ -1,5 +1,31 @@
 ## Migration Notes
 
+#### 6.0.0 → 7.0.0
+
+* `pwnedPassword` now uses the more secure hash range API rather than submitting
+  plain text passwords over the wire. The [new remote
+  API][pwnedpasswordsbyrange] no longer makes a distinction between passwords
+  that are hashses vs. plain text, so `pwnedPassword` no longer takes an options
+  object as the `isAHash` option has been removed.
+
+* `pwnedPassword` now resolves with a number representing the number of times
+  the given password was exposed in a breach. Code using truthy checks should
+  continue to function as before (when it returned a boolean), but explicit
+  checks will need updated.
+
+* `pwnedPasswordRange` now returns an array of objects containing the matching
+  suffix and a count representing the number of occurrences, rather than a plain
+  text blob of all the data directly from the remote API response. Code
+  dependent on parsing the response text will need updated to deal with the new
+  data format:
+  ```js
+  [
+    { suffix: "003D68EB55068C33ACE09247EE4C639306B", count: 3 },
+    { suffix: "012C192B2F16F82EA0EB9EF18D9D539B0DD", count: 1 },
+    ...
+  ]
+  ```
+
 #### 5.3.0 → 6.0.0
 
 * Support for Node.js versions less than 6.x has been dropped. If you are
@@ -113,3 +139,5 @@
 
   This change was made to make the API more expressive and reduce ambiguity. See
   the API documentation (or JSDoc comments) for details.
+
+[pwnedpasswordsbyrange]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange

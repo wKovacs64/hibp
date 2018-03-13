@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 7.0.0 _(2018-03-13)_
+
+##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
+
+* Modified `pwnedPassword` to use the more secure hash range API
+  ([@danieladams456](https://github.com/danieladams456) in
+  [#23](https://github.com/wKovacs64/hibp/pull/23))
+* Modified `pwnedPasswordRange` to resolve with array of objects
+  ([@danieladams456](https://github.com/danieladams456) in
+  [#24](https://github.com/wKovacs64/hibp/pull/24))
+
 ## Version 6.0.0 _(2018-02-25)_
 
 * Restored `puppeteer` to a development dependency
