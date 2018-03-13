@@ -54,9 +54,9 @@ const search = (account, breachOptions = {}) =>
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account) ? pasteAccount(account) : null,
-  ]).then(breachesAndPastes => ({
-    breaches: breachesAndPastes[0],
-    pastes: breachesAndPastes[1],
+  ]).then(([breaches, pastes]) => ({
+    breaches,
+    pastes,
   }));
 
 /**
