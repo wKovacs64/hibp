@@ -6,25 +6,22 @@ import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
  * When a password hash with the same first 5 characters is found in the Pwned
  * Passwords repository, the API will respond with an HTTP 200 and include the
  * suffix of every hash beginning with the specified prefix, followed by a count
- * of how many times it appears in the data set. The API consumer can then
- * search the results of the response for the presence of their source hash and
- * if not found, the password does not exist in the data set.
+ * of how many times it appears in the data set.
+ * This function parses the response and returns a more structured JSON format
+ * meant to be consumed with map and filter operators.
  *
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
- * @returns {Promise} a Promise which resolves to plain text containing the
- * suffix of every hash beginning with the specified prefix, followed by a count
- * of how many times it appears in the data set if the given password has been
- * exposed in a breach, or rejects with an Error
+ * @returns {Promise} a Promise which resolves to a JSON list of objects each
+ * containing the `suffix` that when matched with the prefix composes the
+ * complete hash, and a `count` of how many times it appears in the breached
+ * password data set, or rejects with an Error
+ *
  * @example
  * pwnedPasswordRange('21BD1')
- *   .then((suffixes) => {
- *     if (suffixes.includes('0018A45C4D1DEF81644B54AB7F969B88D65')) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
+ *   .then(arr => arr.filter(
+ *     item => item.count > 5
+ *   ))
  *   .catch((err) => {
  *     // ...
  *   });
@@ -44,7 +41,7 @@ const pwnedPasswordRange = prefix =>
     );
 
 /**
- * A module for determining if a password SHA-1 hash has been exposed in a
+ * A module for determining if a password's SHA-1 hash has been exposed in a
  * breach.
  *
  * @module pwnedPasswordRange
