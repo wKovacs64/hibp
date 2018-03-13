@@ -33,15 +33,6 @@ const pwnedPassword = password => {
 
   return (
     pwnedPasswordRange(prefix)
-      // each line to an array
-      .then(res => res.split('\n'))
-      // each line split into suffix and count
-      .then(arr =>
-        arr.map(item => ({
-          suffix: item.split(':')[0],
-          count: parseInt(item.split(':')[1], 10),
-        })),
-      )
       // filter to matching suffix
       .then(arr => arr.filter(item => item.suffix === suffix))
       // return count if match, 0 if not
