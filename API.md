@@ -17,7 +17,8 @@
 <dd><p>A module for retrieving paste data for a specific account (email address).</p>
 </dd>
 <dt><a href="#module_pwnedPassword">pwnedPassword</a></dt>
-<dd><p>A module for securely determining if a password has been exposed in a breach.</p>
+<dd><p>A module for securely determining how many times a password has been exposed
+in a breach.</p>
 </dd>
 <dt><a href="#module_pwnedPasswordRange">pwnedPasswordRange</a></dt>
 <dd><p>A module for determining if a password&#39;s SHA-1 hash has been exposed in a
@@ -56,18 +57,17 @@ account (email address or username).</p>
 <dd><p>Fetches paste data for a specific account (email address).</p>
 </dd>
 <dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password)</a> ⇒ <code>Promise</code> ⏏</dt>
-<dd><p>Fetches the pwned status for the given password, indicating whether or not it
-has been previously exposed in a breach. The password is given in plain text,
-but only the first 5 characters of its SHA-1 hash will be submitted to the
-API. The final evalution will be done locally.</p>
+<dd><p>Fetches the number of times the the given password has been exposed in a
+breach (0 indicating no exposure). The password is given in plain text, but
+only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
 <dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix)</a> ⇒ <code>Promise</code> ⏏</dt>
 <dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
 suffix of every hash beginning with the specified prefix, followed by a count
-of how many times it appears in the data set.
-This function parses the response and returns a more structured format.</p>
+of how many times it appears in the data set. This function parses the
+response and returns a more structured format.</p>
 </dd>
 <dt><a href="#exp_module_search--search">search(account, [breachOptions])</a> ⇒ <code>Promise</code> ⏏</dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
@@ -105,14 +105,14 @@ breach (or null if no breach was found), or rejects with an Error
 **Example**  
 ```js
 breach('Adobe')
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
@@ -144,42 +144,42 @@ Fetches breach data for a specific account.
 **Example**  
 ```js
 breachedAccount('foo')
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
 **Example**  
 ```js
 breachedAccount('bar', { truncate: true })
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
 **Example**  
 ```js
 breachedAccount('baz', { domain: 'adobe.com', truncate: true })
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
@@ -209,28 +209,28 @@ Fetches all breach events in the system.
 **Example**  
 ```js
 breaches()
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
 **Example**  
 ```js
 breaches({ domain: 'adobe.com' })
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
@@ -254,14 +254,14 @@ null if no data classes were found), or rejects with an Error
 **Example**  
 ```js
 dataClasses()
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
@@ -290,21 +290,22 @@ Fetches paste data for a specific account (email address).
 **Example**  
 ```js
 pasteAccount('foo@bar.com')
-  .then((data) => {
+  .then(data => {
     if (data) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
 <a name="module_pwnedPassword"></a>
 
 ## pwnedPassword
-A module for securely determining if a password has been exposed in a breach.
+A module for securely determining how many times a password has been exposed
+in a breach.
 
 **Example**  
 ```js
@@ -313,10 +314,9 @@ import { pwnedPassword } from 'hibp';
 <a name="exp_module_pwnedPassword--pwnedPassword"></a>
 
 ### pwnedPassword(password) ⇒ <code>Promise</code> ⏏
-Fetches the pwned status for the given password, indicating whether or not it
-has been previously exposed in a breach. The password is given in plain text,
-but only the first 5 characters of its SHA-1 hash will be submitted to the
-API. The final evalution will be done locally.
+Fetches the number of times the the given password has been exposed in a
+breach (0 indicating no exposure). The password is given in plain text, but
+only the first 5 characters of its SHA-1 hash will be submitted to the API.
 
 **Kind**: global method of [<code>pwnedPassword</code>](#module_pwnedPassword)  
 **Returns**: <code>Promise</code> - a Promise which resolves to the number of times the
@@ -330,7 +330,7 @@ password has been exposed in a breach, or rejects with an Error
 **Example**  
 ```js
 pwnedPassword('f00b4r')
-  .then((numPwns) => {
+  .then(numPwns => {
     // truthy check or numeric condition
     if (numPwns) {
       // ...
@@ -338,7 +338,7 @@ pwnedPassword('f00b4r')
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
@@ -360,11 +360,11 @@ Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
 When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
 suffix of every hash beginning with the specified prefix, followed by a count
-of how many times it appears in the data set.
-This function parses the response and returns a more structured format.
+of how many times it appears in the data set. This function parses the
+response and returns a more structured format.
 
 **Kind**: global method of [<code>pwnedPasswordRange</code>](#module_pwnedPasswordRange)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of objects each
+**Returns**: <code>Promise</code> - a Promise which resolves to an array of objects, each
 containing the `suffix` that when matched with the prefix composes the
 complete hash, and a `count` of how many times it appears in the breached
 password data set, or rejects with an Error  
@@ -376,17 +376,25 @@ password data set, or rejects with an Error
 
 **Example**  
 ```js
+pwnedPasswordRange('5BAA6')
+  .then(results => {
+    // results will have the following shape:
+    // [
+    //   { suffix: "003D68EB55068C33ACE09247EE4C639306B", count: 3 },
+    //   { suffix: "012C192B2F16F82EA0EB9EF18D9D539B0DD", count: 1 },
+    //   ...
+    // ]
+  })
+```
+**Example**  
+```js
 const suffix = '1E4C9B93F3F0682250B6CF8331B7EE68FD8';
 pwnedPasswordRange('5BAA6')
   // filter to matching suffix
-  .then(
-    arr => arr.filter(item => item.suffix === suffix)
-  )
+  .then(results => results.filter(row => row.suffix === suffix))
   // return count if match, 0 if not
-  .then(
-    arr => (arr[0] ? arr[0].count : 0)
-  )
-  .catch((err) => {
+  .then(results => (results[0] ? results[0].count : 0))
+  .catch(err => {
     // ...
   });
 ```
@@ -428,28 +436,28 @@ with an Error
 **Example**  
 ```js
 search('foo')
-  .then((data) => {
+  .then(data => {
     if (data.breaches || data.pastes) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```
 **Example**  
 ```js
 search('nobody@nowhere.com', { truncate: true })
-  .then((data) => {
+  .then(data => {
     if (data.breaches || data.pastes) {
       // ...
     } else {
       // ...
     }
   })
-  .catch((err) => {
+  .catch(err => {
     // ...
   });
 ```

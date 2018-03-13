@@ -7,14 +7,14 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  * null if no data classes were found), or rejects with an Error
  * @example
  * dataClasses()
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @alias module:dataClasses

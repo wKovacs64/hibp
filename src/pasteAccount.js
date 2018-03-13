@@ -8,14 +8,14 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  * (or null if no pastes were found), or rejects with an Error
  * @example
  * pasteAccount('foo@bar.com')
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @alias module:pasteAccount

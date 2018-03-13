@@ -23,26 +23,26 @@ import pasteAccount from './pasteAccount';
  * with an Error
  * @example
  * search('foo')
- *   .then((data) => {
+ *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @example
  * search('nobody@nowhere.com', { truncate: true })
- *   .then((data) => {
+ *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  *

@@ -10,26 +10,26 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  * (an empty array if no breaches were found), or rejects with an Error
  * @example
  * breaches()
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @example
  * breaches({ domain: 'adobe.com' })
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @alias module:breaches

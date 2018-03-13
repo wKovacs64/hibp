@@ -8,14 +8,14 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  * breach (or null if no breach was found), or rejects with an Error
  * @example
  * breach('Adobe')
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @alias module:breach

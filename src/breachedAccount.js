@@ -13,38 +13,38 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  * (or null if no breaches were found), or rejects with an Error
  * @example
  * breachedAccount('foo')
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @example
  * breachedAccount('bar', { truncate: true })
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @example
  * breachedAccount('baz', { domain: 'adobe.com', truncate: true })
- *   .then((data) => {
+ *   .then(data => {
  *     if (data) {
  *       // ...
  *     } else {
  *       // ...
  *     }
  *   })
- *   .catch((err) => {
+ *   .catch(err => {
  *     // ...
  *   });
  * @alias module:breachedAccount
