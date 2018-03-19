@@ -4633,9 +4633,9 @@ rimraf@2.6.2, rimraf@^2.5.4:
   dependencies:
     glob "^7.0.5"
 
-rollup-plugin-babel@4.0.0-beta.2:
-  version "4.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.0.0-beta.2.tgz#abc05af4644aa52180e3fa2452f909b39b4ef145"
+rollup-plugin-babel@4.0.0-beta.3:
+  version "4.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.0.0-beta.3.tgz#357d444acbb12e9f02887ad007aa77aec9c19ceb"
   dependencies:
     "@babel/helper-module-imports" "7.0.0-beta.35"
     rollup-pluginutils "^2.0.1"
