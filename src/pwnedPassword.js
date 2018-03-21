@@ -32,10 +32,10 @@ const pwnedPassword = password => {
 
   return (
     pwnedPasswordRange(prefix)
-      // filter to matching suffix
-      .then(arr => arr.filter(item => item.suffix === suffix))
+      // find matching suffix
+      .then(arr => arr.find(item => item.suffix === suffix))
       // return count if match, 0 if not
-      .then(arr => (arr[0] ? arr[0].count : 0))
+      .then(item => (item ? item.count : 0))
   );
 };
 
