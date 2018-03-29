@@ -1,6 +1,5 @@
 const test = process.env.NODE_ENV === 'test';
 const cjs = process.env.BABEL_ENV === 'commonjs' || test;
-const loose = true;
 
 module.exports = {
   plugins: [cjs && '@babel/transform-modules-commonjs'].filter(Boolean),
@@ -8,7 +7,7 @@ module.exports = {
     [
       '@babel/env',
       {
-        loose,
+        loose: true,
         modules: false,
         targets: test
           ? { node: 'current' }
