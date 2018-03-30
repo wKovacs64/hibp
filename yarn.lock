@@ -1786,7 +1786,7 @@ eslint-config-prettier@2.9.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-import-resolver-jest@^2.1.1:
+eslint-import-resolver-jest@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-jest/-/eslint-import-resolver-jest-2.1.1.tgz#78c1934e3b5b77283326f036e089cc3b9fae6346"
   dependencies:
