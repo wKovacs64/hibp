@@ -1,5 +1,5 @@
-import AxiosError from '../../../test/AxiosError';
-import pwnedPasswordRange from '../../pwnedPasswordRange';
+import AxiosError from 'AxiosError';
+import pwnedPasswordRange from 'pwnedPasswordRange';
 import { BAD_REQUEST } from './responses';
 import mockAxios from './axiosInstance';
 

@@ -1,6 +1,6 @@
-import AxiosError from '../../../test/AxiosError';
-import dataClasses from '../../dataClasses';
-import breachedAccount from '../../breachedAccount';
+import AxiosError from 'AxiosError';
+import breachedAccount from 'breachedAccount';
+import dataClasses from 'dataClasses';
 import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
 import mockAxios from './axiosInstance';
 

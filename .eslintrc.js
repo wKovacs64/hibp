@@ -15,4 +15,11 @@ module.exports = {
       },
     ],
   },
+  settings: {
+    'import/resolver': {
+      jest: {
+        jestConfigFile: './jest.config.js',
+      },
+    },
+  },
 };

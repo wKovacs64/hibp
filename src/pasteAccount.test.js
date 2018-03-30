@@ -1,4 +1,4 @@
-import AxiosError from '../test/AxiosError';
+import AxiosError from 'AxiosError';
 import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
 import mockAxios from './internal/haveibeenpwned/axiosInstance';
 import pasteAccount from './pasteAccount';
