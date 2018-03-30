@@ -1,4 +1,4 @@
-import sha1 from 'js-sha1';
+import JSSHA from 'jssha/src/sha1';
 import pwnedPasswordRange from './pwnedPasswordRange';
 
 /**
@@ -26,7 +26,9 @@ import pwnedPasswordRange from './pwnedPasswordRange';
  * @alias module:pwnedPassword
  */
 const pwnedPassword = password => {
-  const hash = sha1(password).toUpperCase();
+  const sha1 = new JSSHA('SHA-1', 'TEXT');
+  sha1.update(password);
+  const hash = sha1.getHash('HEX', { outputUpper: true });
   const prefix = hash.slice(0, 5);
   const suffix = hash.slice(5);
 

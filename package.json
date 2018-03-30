@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "js-sha1": "^0.6.0"
+    "jssha": "2.3.1"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.42",
