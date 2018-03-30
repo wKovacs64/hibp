@@ -1,14 +1,24 @@
-import { OPTS_DOM, RESPONSE_ARY } from '../test/fixtures';
+import { OK } from './internal/haveibeenpwned/responses';
+import mockAxios from './internal/haveibeenpwned/axiosInstance';
 import breaches from './breaches';
 
 describe('breaches', () => {
+  const data = [{ breach: 'info' }];
+
+  beforeAll(() => {
+    mockAxios.get.mockResolvedValue({
+      status: OK.status,
+      data,
+    });
+  });
+
   describe('no parameters', () => {
-    it('should resolve with an array', () =>
-      expect(breaches()).resolves.toEqual(RESPONSE_ARY));
+    it('resolves with data from the remote API', () =>
+      expect(breaches()).resolves.toEqual(data));
   });
 
   describe('with domain', () => {
-    it('should resolve with an array', () =>
-      expect(breaches(OPTS_DOM)).resolves.toEqual(RESPONSE_ARY));
+    it('resolves with data from the remote API', () =>
+      expect(breaches({ domain: 'foo.bar' })).resolves.toEqual(data));
   });
 });

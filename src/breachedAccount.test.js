@@ -1,64 +1,75 @@
-import {
-  ACCOUNT_BREACHED,
-  ACCOUNT_CLEAN,
-  OPTS_DOM,
-  OPTS_TRUNC,
-  OPTS_DOM_TRUNC,
-  RESPONSE_ARY,
-  RESPONSE_CLEAN,
-} from '../test/fixtures';
+import AxiosError from '../test/AxiosError';
+import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
+import mockAxios from './internal/haveibeenpwned/axiosInstance';
 import breachedAccount from './breachedAccount';
 
 describe('breachedAccount', () => {
-  describe('breached (no parameters)', () => {
-    it('should resolve with an object', () =>
-      expect(breachedAccount(ACCOUNT_BREACHED)).resolves.toEqual(RESPONSE_ARY));
+  describe('breached', () => {
+    const data = [{ some: 'stuff' }];
+
+    beforeAll(() => {
+      mockAxios.get.mockResolvedValue({
+        status: OK.status,
+        data,
+      });
+    });
+
+    describe('no parameters', () => {
+      it('resolves with data from the remote API', () =>
+        expect(breachedAccount('breached')).resolves.toEqual(data));
+    });
+
+    describe('with truncateResults', () => {
+      it('resolves with data from the remote API', () =>
+        expect(
+          breachedAccount('breached', { truncate: true }),
+        ).resolves.toEqual(data));
+    });
+
+    describe('with domain', () => {
+      it('resolves with data from the remote API', () =>
+        expect(
+          breachedAccount('breached', { domain: 'foo.bar' }),
+        ).resolves.toEqual(data));
+    });
+
+    describe('with domain and truncateResults', () => {
+      it('resolves with data from the remote API', () =>
+        expect(
+          breachedAccount('breached', { domain: 'foo.bar', truncate: true }),
+        ).resolves.toEqual(data));
+    });
   });
 
-  describe('breached (with truncateResults)', () => {
-    it('should resolve with an object', () =>
-      expect(breachedAccount(ACCOUNT_BREACHED, OPTS_TRUNC)).resolves.toEqual(
-        RESPONSE_ARY,
-      ));
-  });
+  describe('clean', () => {
+    beforeAll(() => {
+      mockAxios.get.mockRejectedValue(new AxiosError(NOT_FOUND));
+    });
 
-  describe('breached (with domain)', () => {
-    it('should resolve with an object', () =>
-      expect(breachedAccount(ACCOUNT_BREACHED, OPTS_DOM)).resolves.toEqual(
-        RESPONSE_ARY,
-      ));
-  });
+    describe('no parameters', () => {
+      it('resolves with null', () =>
+        expect(breachedAccount('clean')).resolves.toBeNull());
+    });
 
-  describe('breached (with domain and truncateResults)', () => {
-    it('should resolve with an object', () =>
-      expect(
-        breachedAccount(ACCOUNT_BREACHED, OPTS_DOM_TRUNC),
-      ).resolves.toEqual(RESPONSE_ARY));
-  });
+    describe('with truncateResults', () => {
+      it('resolves with null', () =>
+        expect(
+          breachedAccount('clean', { truncate: true }),
+        ).resolves.toBeNull());
+    });
 
-  describe('clean (no parameters)', () => {
-    it('should resolve with null', () =>
-      expect(breachedAccount(ACCOUNT_CLEAN)).resolves.toEqual(RESPONSE_CLEAN));
-  });
+    describe('with domain', () => {
+      it('resolves with null', () =>
+        expect(
+          breachedAccount('clean', { domain: 'foo.bar' }),
+        ).resolves.toBeNull());
+    });
 
-  describe('clean (with truncateResults)', () => {
-    it('should resolve with null', () =>
-      expect(breachedAccount(ACCOUNT_CLEAN, OPTS_TRUNC)).resolves.toEqual(
-        RESPONSE_CLEAN,
-      ));
-  });
-
-  describe('clean (with domain)', () => {
-    it('should resolve with null', () =>
-      expect(breachedAccount(ACCOUNT_CLEAN, OPTS_DOM)).resolves.toEqual(
-        RESPONSE_CLEAN,
-      ));
-  });
-
-  describe('clean (with domain and truncateResults)', () => {
-    it('should resolve with null', () =>
-      expect(breachedAccount(ACCOUNT_CLEAN, OPTS_DOM_TRUNC)).resolves.toEqual(
-        RESPONSE_CLEAN,
-      ));
+    describe('with domain and truncateResults', () => {
+      it('resolves with null', () =>
+        expect(
+          breachedAccount('clean', { domain: 'foo.bar', truncate: true }),
+        ).resolves.toBeNull());
+    });
   });
 });

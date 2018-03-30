@@ -1,19 +1,32 @@
-import {
-  BREACH_FOUND,
-  BREACH_NOT_FOUND,
-  RESPONSE_OBJ,
-  RESPONSE_CLEAN,
-} from '../test/fixtures';
+import AxiosError from '../test/AxiosError';
+import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
+import mockAxios from './internal/haveibeenpwned/axiosInstance';
 import breach from './breach';
 
 describe('breach', () => {
   describe('found', () => {
-    it('should resolve with an object', () =>
-      expect(breach(BREACH_FOUND)).resolves.toEqual(RESPONSE_OBJ));
+    const data = {
+      some: 'information',
+      about: 'a breach',
+    };
+
+    beforeAll(() => {
+      mockAxios.get.mockResolvedValue({
+        status: OK.status,
+        data,
+      });
+    });
+
+    it('resolves with data from the remote API', () =>
+      expect(breach('found')).resolves.toEqual(data));
   });
 
   describe('not found', () => {
-    it('should resolve with null', () =>
-      expect(breach(BREACH_NOT_FOUND)).resolves.toEqual(RESPONSE_CLEAN));
+    beforeAll(() => {
+      mockAxios.get.mockRejectedValue(new AxiosError(NOT_FOUND));
+    });
+
+    it('resolves with null', () =>
+      expect(breach('not found')).resolves.toBeNull());
   });
 });

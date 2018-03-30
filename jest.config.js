@@ -3,7 +3,6 @@ module.exports = {
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: ['/test/'],
   coverageReporters: ['html', 'json', 'lcov', 'text'],
-  setupTestFrameworkScriptFile: '<rootDir>/test/setup.js',
   testEnvironment: 'node',
   testPathIgnorePatterns: ['test-umd'],
 };

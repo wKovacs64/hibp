@@ -5,11 +5,11 @@
  *
  */
 
-export const RANGE_OK = {
+export const OK = {
   status: 200,
 };
 
-export const RANGE_BAD_REQUEST = {
+export const BAD_REQUEST = {
   status: 400,
-  response: 'The hash prefix was not in a valid format',
+  data: 'The hash prefix was not in a valid format',
 };

@@ -1,49 +1,48 @@
-import {
-  ERR,
-  INVALID_HEADER,
-  RATE_LIMITED,
-  EMAIL_INVALID,
-  UNEXPECTED,
-} from '../../../test/fixtures';
+import AxiosError from '../../../test/AxiosError';
 import dataClasses from '../../dataClasses';
 import breachedAccount from '../../breachedAccount';
-import axiosInstance from './axiosInstance';
+import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
+import mockAxios from './axiosInstance';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('request failure', () => {
-    let failboat;
-
-    beforeAll(() => {
-      failboat = axiosInstance.interceptors.request.use(() => {
-        throw ERR;
-      });
+    it('re-throws request setup errors', () => {
+      const ERR = new Error('Set sail for fail!');
+      mockAxios.get.mockRejectedValueOnce(ERR);
+      expect(dataClasses()).rejects.toEqual(ERR);
     });
-
-    afterAll(() => {
-      axiosInstance.interceptors.request.eject(failboat);
-    });
-
-    it('should re-throw request setup errors', () =>
-      expect(dataClasses()).rejects.toEqual(ERR));
   });
 
   describe('invalid account format', () => {
-    it('should throw an Error with "Bad Request" status text', () =>
-      expect(breachedAccount(EMAIL_INVALID)).rejects.toMatchSnapshot());
+    it('throws a "Bad Request" error', () => {
+      mockAxios.get.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
+      expect(breachedAccount('bad request')).rejects.toMatchSnapshot();
+    });
   });
 
   describe('invalid request header', () => {
-    it('should throw an Error with "Forbidden" status text', () =>
-      expect(breachedAccount(INVALID_HEADER)).rejects.toMatchSnapshot());
+    it('throws a "Forbidden" error', () => {
+      mockAxios.get.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
+      expect(breachedAccount('forbidden')).rejects.toMatchSnapshot();
+    });
   });
 
   describe('rate limited', () => {
-    it('should throw an Error with "Too Many Requests" response data', () =>
-      expect(breachedAccount(RATE_LIMITED)).rejects.toMatchSnapshot());
+    it('throws a "Too Many Requests" error', () => {
+      mockAxios.get.mockRejectedValueOnce(new AxiosError(TOO_MANY_REQUESTS));
+      expect(breachedAccount('rate limited')).rejects.toMatchSnapshot();
+    });
   });
 
   describe('unexpected HTTP error', () => {
-    it('should throw an Error with the response status text', () =>
-      expect(breachedAccount(UNEXPECTED)).rejects.toMatchSnapshot());
+    it('throws an error with the response status text', () => {
+      mockAxios.get.mockRejectedValueOnce(
+        new AxiosError({
+          status: 999,
+          statusText: 'Unknown - something unexpected happened.',
+        }),
+      );
+      expect(breachedAccount('unknown response')).rejects.toMatchSnapshot();
+    });
   });
 });

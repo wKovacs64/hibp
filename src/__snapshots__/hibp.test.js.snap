@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`hibp should export an object containing the advertised functions 1`] = `
+exports[`hibp exports an object containing the advertised functions 1`] = `
 Object {
   "breach": [Function],
   "breachedAccount": [Function],

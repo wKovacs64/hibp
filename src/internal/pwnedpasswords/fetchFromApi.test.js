@@ -1,37 +1,33 @@
-import {
-  ERR,
-  RANGE_VALID,
-  RANGE_INVALID,
-  UNEXPECTED,
-} from '../../../test/fixtures';
+import AxiosError from '../../../test/AxiosError';
 import pwnedPasswordRange from '../../pwnedPasswordRange';
-import axiosInstance from './axiosInstance';
+import { BAD_REQUEST } from './responses';
+import mockAxios from './axiosInstance';
 
 describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('request failure', () => {
-    let failboat;
-
-    beforeAll(() => {
-      failboat = axiosInstance.interceptors.request.use(() => {
-        throw ERR;
-      });
+    it('re-throws request setup errors', () => {
+      const ERR = new Error('Set sail for fail!');
+      mockAxios.get.mockRejectedValueOnce(ERR);
+      expect(pwnedPasswordRange('setup error')).rejects.toEqual(ERR);
     });
-
-    afterAll(() => {
-      axiosInstance.interceptors.request.eject(failboat);
-    });
-
-    it('should re-throw request setup errors', () =>
-      expect(pwnedPasswordRange(RANGE_VALID)).rejects.toEqual(ERR));
   });
 
   describe('invalid range', () => {
-    it('should throw an Error with "Bad Request" response data', () =>
-      expect(pwnedPasswordRange(RANGE_INVALID)).rejects.toMatchSnapshot());
+    it('throws a "Bad Request" error', () => {
+      mockAxios.get.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
+      expect(pwnedPasswordRange('bad request')).rejects.toMatchSnapshot();
+    });
   });
 
   describe('unexpected HTTP error', () => {
-    it('should throw an Error with the response status text', () =>
-      expect(pwnedPasswordRange(UNEXPECTED)).rejects.toMatchSnapshot());
+    it('throws an error with the response status text', () => {
+      mockAxios.get.mockRejectedValueOnce(
+        new AxiosError({
+          status: 999,
+          statusText: 'Unknown - something unexpected happened.',
+        }),
+      );
+      expect(pwnedPasswordRange('unknown response')).rejects.toMatchSnapshot();
+    });
   });
 });

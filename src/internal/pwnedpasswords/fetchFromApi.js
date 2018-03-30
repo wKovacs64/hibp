@@ -1,5 +1,5 @@
 import axios from './axiosInstance';
-import { RANGE_BAD_REQUEST } from './responses';
+import { BAD_REQUEST } from './responses';
 
 /**
  * Fetches data from the supplied API endpoint.
@@ -18,7 +18,7 @@ export default endpoint =>
     .catch(err => {
       if (err.response) {
         switch (err.response.status) {
-          case RANGE_BAD_REQUEST.status:
+          case BAD_REQUEST.status:
             throw new Error(err.response.data);
           default:
             throw new Error(err.response.statusText);

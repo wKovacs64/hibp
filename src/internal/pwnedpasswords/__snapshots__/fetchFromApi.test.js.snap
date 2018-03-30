@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`internal (pwnedpassword): fetchFromApi invalid range should throw an Error with "Bad Request" response data 1`] = `[Error: The hash prefix was not in a valid format]`;
+exports[`internal (pwnedpassword): fetchFromApi invalid range throws a "Bad Request" error 1`] = `[Error: The hash prefix was not in a valid format]`;
 
-exports[`internal (pwnedpassword): fetchFromApi unexpected HTTP error should throw an Error with the response status text 1`] = `[Error: Unknown - something unexpected happened.]`;
+exports[`internal (pwnedpassword): fetchFromApi unexpected HTTP error throws an error with the response status text 1`] = `[Error: Unknown - something unexpected happened.]`;

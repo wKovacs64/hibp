@@ -1,19 +1,29 @@
-import {
-  EMAIL_PASTED,
-  EMAIL_CLEAN,
-  RESPONSE_ARY,
-  RESPONSE_CLEAN,
-} from '../test/fixtures';
+import AxiosError from '../test/AxiosError';
+import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
+import mockAxios from './internal/haveibeenpwned/axiosInstance';
 import pasteAccount from './pasteAccount';
 
 describe('pasteAccount', () => {
   describe('pasted email', () => {
-    it('should resolve with an array', () =>
-      expect(pasteAccount(EMAIL_PASTED)).resolves.toEqual(RESPONSE_ARY));
+    const data = [{ paste: 'information' }];
+
+    beforeAll(() => {
+      mockAxios.get.mockResolvedValue({
+        status: OK.status,
+        data,
+      });
+    });
+
+    it('resolves with data from the remote API', () =>
+      expect(pasteAccount('pasted@email.com')).resolves.toEqual(data));
   });
 
   describe('clean email', () => {
-    it('should resolve with null', () =>
-      expect(pasteAccount(EMAIL_CLEAN)).resolves.toEqual(RESPONSE_CLEAN));
+    beforeAll(() => {
+      mockAxios.get.mockRejectedValue(new AxiosError(NOT_FOUND));
+    });
+
+    it('resolves with null', () =>
+      expect(pasteAccount('clean@whistle.com')).resolves.toBeNull());
   });
 });

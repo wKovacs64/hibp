@@ -1,14 +1,25 @@
-import { PASSWORD_PWNED, PASSWORD_CLEAN } from '../test/fixtures';
+import { stripIndents } from 'common-tags';
+import { OK } from './internal/pwnedpasswords/responses';
+import mockAxios from './internal/pwnedpasswords/axiosInstance';
 import pwnedPassword from './pwnedPassword';
 
 describe('pwnedPassword', () => {
   describe('pwned', () => {
-    it('should resolve to number > 0', () =>
-      expect(pwnedPassword(PASSWORD_PWNED)).resolves.toBeGreaterThan(0));
+    mockAxios.get.mockResolvedValue({
+      status: OK.status,
+      data: stripIndents`
+        003D68EB55068C33ACE09247EE4C639306B:3
+        1E4C9B93F3F0682250B6CF8331B7EE68FD8:3303003
+        01330C689E5D64F660D6947A93AD634EF8F:1
+      `,
+    });
+
+    it('resolves to number > 0', () =>
+      expect(pwnedPassword('password')).resolves.toBeGreaterThan(0));
   });
 
   describe('clean', () => {
-    it('should resolve to 0', () =>
-      expect(pwnedPassword(PASSWORD_CLEAN)).resolves.toBe(0));
+    it('resolves to 0', () =>
+      expect(pwnedPassword('kjfhsdksjf454145jkhk!!!')).resolves.toBe(0));
   });
 });
