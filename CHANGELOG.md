@@ -1,15 +1,21 @@
 # Change Log
 
+## Version 7.1.0 _(2018-04-04)_
+
+* Added npm `prepare` script to facilitate installing from hosted git
+* Replaced [js-sha1][js-sha1] with [jsSHA][jssha]
+* Fixed a misleading comment in the `hibp` export documentation
+* Integrated [Renovate][renovate] for automated dependency updates
+* Changed mocking strategy and refactored tests
+
 ## Version 7.0.0 _(2018-03-13)_
 
 ##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
 
 * Modified `pwnedPassword` to use the more secure hash range API
-  ([@danieladams456](https://github.com/danieladams456) in
-  [#23](https://github.com/wKovacs64/hibp/pull/23))
+  ([@danieladams456][danieladams456] in [#23][23])
 * Modified `pwnedPasswordRange` to resolve with array of objects
-  ([@danieladams456](https://github.com/danieladams456) in
-  [#24](https://github.com/wKovacs64/hibp/pull/24))
+  ([@danieladams456][danieladams456] in [#24][24])
 
 ## Version 6.0.0 _(2018-02-25)_
 
@@ -126,7 +132,7 @@
 
 ## Version 3.0.0 _(2016-10-23)_
 
-* Added `yarn.lock` for experimental [yarn](https://yarnpkg.com) support
+* Added `yarn.lock` for experimental [yarn][yarn] support
 * Removed expect.js dependency from the test environment
 * Expanded usage documentation
 * Updated dependencies
@@ -234,3 +240,10 @@
 [hibp-search]: API.md#module_search
 [haveibeenpwned]: https://haveibeenpwned.com
 [singlebreach]: https://haveibeenpwned.com/API/v2#SingleBreach
+[yarn]: https://yarnpkg.com
+[danieladams456]: https://github.com/danieladams456
+[23]: https://github.com/wKovacs64/hibp/pull/23
+[24]: https://github.com/wKovacs64/hibp/pull/24
+[renovate]: https://renovateapp.com/
+[js-sha1]: https://github.com/emn178/js-sha1
+[jssha]: https://github.com/Caligatio/jsSHA
