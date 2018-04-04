@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.1.1 _(2018-04-04)_
+
+* Fixed build scripts to prevent including test-only mocks in published output
+
 ## Version 7.1.0 _(2018-04-04)_
 
 * Added npm `prepare` script to facilitate installing from hosted git
