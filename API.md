@@ -34,7 +34,7 @@ account (email address or username).</p>
 
 <dl>
 <dt><a href="#hibp">hibp</a> : <code>object</code></dt>
-<dd><p>An object/namespace containing all the hibp functions.</p>
+<dd><p>A namespace containing all of the hibp functions.</p>
 </dd>
 </dl>
 
@@ -464,7 +464,7 @@ search('nobody@nowhere.com', { truncate: true })
 <a name="hibp"></a>
 
 ## hibp : <code>object</code>
-An object/namespace containing all the hibp functions.
+A namespace containing all of the hibp functions.
 
 **Kind**: global namespace  
 **Example**  

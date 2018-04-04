@@ -8,8 +8,7 @@ import pwnedPasswordRange from './pwnedPasswordRange';
 import search from './search';
 
 /*
- * Export individual named functions in an anonymous object to allow the
- * following (and support tree-shaking):
+ * Export individual named functions to allow the following:
  *
  * import * as hibp from 'hibp';       // ESM (with tree-shaking)
  * import { search } from 'hibp';      // ESM (with tree-shaking)
@@ -17,7 +16,7 @@ import search from './search';
  * const hibp = require('hibp');       // CommonJS
  */
 /**
- * An object/namespace containing all the hibp functions.
+ * A namespace containing all of the hibp functions.
  *
  * @namespace hibp
  * @example
