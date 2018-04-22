@@ -3,8 +3,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: ['<rootDir>/node_modules/', '/test/'],
   coverageReporters: ['html', 'json', 'lcov', 'text'],
-  modulePaths: ['<rootDir>/src', '<rootDir>/test'],
-  modulePathIgnorePatterns: ['<rootDir>/dist', '<rootDir>/es', '<rootDir>/lib'],
+  modulePaths: ['<rootDir>/src', '<rootDir>/src/__mocks__'],
+  testPathIgnorePatterns: ['/umd/'],
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['test-umd'],
 };
