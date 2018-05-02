@@ -1,6 +1,8 @@
 import path from 'path';
 import puppeteer from 'puppeteer';
 
+jest.setTimeout(20000);
+
 describe('UMD build', () => {
   const hibpTest = `
     if (typeof window.hibp !== 'object') throw new Error();
