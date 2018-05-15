@@ -75,10 +75,10 @@
     "jssha": "2.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.46",
-    "@babel/core": "7.0.0-beta.46",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.46",
-    "@babel/preset-env": "7.0.0-beta.46",
+    "@babel/cli": "7.0.0-beta.47",
+    "@babel/core": "7.0.0-beta.47",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.47",
+    "@babel/preset-env": "7.0.0-beta.47",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.0.0-charlie.1",
     "common-tags": "1.7.2",
