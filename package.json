@@ -83,7 +83,7 @@
     "babel-jest": "23.0.0-charlie.3",
     "common-tags": "1.7.2",
     "coveralls": "3.0.1",
-    "cross-env": "5.1.5",
+    "cross-env": "5.1.6",
     "eslint": "4.19.1",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-config-prettier": "2.9.0",
