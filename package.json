@@ -45,7 +45,7 @@
     "prepublishOnly": "npm run lint && npm run test && npm run build",
     "test": "cross-env NODE_ENV=test jest",
     "test:coverage": "npm run test -- --coverage",
-    "test:umd": "npm run build:umd:min && jest --config \"{}\" src/__tests__/umd",
+    "test:umd": "npm run build:umd:min && jest --forceExit --config \"{}\" src/__tests__/umd",
     "test:watch": "npm run test -- --watch"
   },
   "lint-staged": {

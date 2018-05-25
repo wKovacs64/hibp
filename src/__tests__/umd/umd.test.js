@@ -1,7 +1,7 @@
 import path from 'path';
 import puppeteer from 'puppeteer';
 
-jest.setTimeout(20000);
+jest.setTimeout(60000);
 
 describe('UMD build', () => {
   const hibpTest = `
