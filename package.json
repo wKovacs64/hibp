@@ -93,7 +93,7 @@
     "jest": "23.0.1",
     "jsdoc-to-markdown": "4.0.1",
     "lint-staged": "7.1.2",
-    "prettier": "1.13.0",
+    "prettier": "1.13.2",
     "puppeteer": "1.4.0",
     "rimraf": "2.6.2",
     "rollup": "0.59.4",
