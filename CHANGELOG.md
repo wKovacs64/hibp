@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 7.1.2 _(2018-06-26)_
+
+- Fixed `Forbidden` errors by adding a custom `User-Agent` request header when
+  running outside the browser ([#39][39])
+
 ## Version 7.1.1 _(2018-04-04)_
 
 - Fixed build scripts to prevent including test-only mocks in published output
@@ -251,3 +256,4 @@
 [renovate]: https://renovateapp.com/
 [js-sha1]: https://github.com/emn178/js-sha1
 [jssha]: https://github.com/Caligatio/jsSHA
+[39]: https://github.com/wKovacs64/hibp/pull/39
