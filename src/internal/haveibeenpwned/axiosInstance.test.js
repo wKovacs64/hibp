@@ -7,6 +7,9 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
     // Node
     global.navigator = undefined;
     const axiosInstanceNode = require.requireActual('./axiosInstance').default;
+    expect(Object.keys(axiosInstanceNode.defaults.headers)).toContain(
+      'User-Agent',
+    );
     expect(axiosInstanceNode.defaults.headers['User-Agent']).toBeTruthy();
 
     jest.resetModules();
@@ -15,7 +18,9 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
     global.navigator = {};
     const axiosInstanceBrowser = require.requireActual('./axiosInstance')
       .default;
-    expect(axiosInstanceBrowser.defaults.headers['User-Agent']).toBeUndefined();
+    expect(Object.keys(axiosInstanceBrowser.defaults.headers)).not.toContain(
+      'User-Agent',
+    );
 
     global.navigator = originalNavigator;
   });
