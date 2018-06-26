@@ -1,3 +1,4 @@
+import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
@@ -14,6 +15,9 @@ const config = {
     sourcemap: true,
   },
   plugins: [
+    json({
+      preferConst: true,
+    }),
     nodeResolve({
       browser: true,
       jsnext: true,
