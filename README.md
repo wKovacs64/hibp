@@ -38,17 +38,17 @@ Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ## Features
 
-* Get a single breach event
-* Get all breaches for an account
-* Get all breach events in the system
-* Get all data classes
-* Get all pastes for an account
-* [Securely][search-by-range] check a password to see if it has been exposed in
+- Get a single breach event
+- Get all breaches for an account
+- Get all breach events in the system
+- Get all data classes
+- Get all pastes for an account
+- [Securely][search-by-range] check a password to see if it has been exposed in
   a data breach
-* Check a SHA-1 prefix to see if it has been exposed in a data breach
-* Search for an account in both breaches and pastes at the same time
-* All queries return a Promise
-* Available server-side (Node.js) and client-side (browser)
+- Check a SHA-1 prefix to see if it has been exposed in a data breach
+- Search for an account in both breaches and pastes at the same time
+- All queries return a Promise
+- Available server-side (Node.js) and client-side (browser)
 
 ## Usage
 
@@ -72,14 +72,14 @@ const hibp = require('hibp');
 
 The following modules are available:
 
-* [breach](API.md#breach)
-* [breachedAccount](API.md#breachedaccount)
-* [breaches](API.md#breaches)
-* [dataClasses](API.md#dataclasses)
-* [pasteAccount](API.md#pasteaccount)
-* [pwnedPassword](API.md#pwnedpassword)
-* [pwnedPasswordRange](API.md#pwnedpasswordrange)
-* [search](API.md#search)
+- [breach](API.md#breach)
+- [breachedAccount](API.md#breachedaccount)
+- [breaches](API.md#breaches)
+- [dataClasses](API.md#dataclasses)
+- [pasteAccount](API.md#pasteaccount)
+- [pwnedPassword](API.md#pwnedpassword)
+- [pwnedPasswordRange](API.md#pwnedpasswordrange)
+- [search](API.md#search)
 
 Please see the [API reference](API.md) for more detailed usage information and
 examples.
@@ -125,8 +125,8 @@ the following (replacing `x.y.z` with the version you want):
 Development and production (minified) UMD builds are also provided for manual
 download if desired:
 
-* [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
-* [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
+- [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
+- [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
 
 Alternatively, you may bundle it in with client-side code using a module bundler
 like [webpack][webpack]. If your build process honors the `module` field in
@@ -145,9 +145,9 @@ providing a polyfill. I recommend [es6-promise][es6-promise].
 
 ## Projects Using hibp
 
-* [pwned][pwned] - a command-line tool for querying the '[Have I been
+- [pwned][pwned] - a command-line tool for querying the '[Have I been
   pwned?][haveibeenpwned]' service
-* [hibp-stdlib][hibp-stdlib] - a microservice on [StdLib][stdlib]
+- [hibp-stdlib][hibp-stdlib] - a microservice on [StdLib][stdlib]
 
 Send me a [PR][pulls] or an email and I'll add yours to the list.
 
@@ -157,13 +157,16 @@ This module is distributed under the [MIT License][license].
 
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
-[travis-image]: https://img.shields.io/travis/wKovacs64/hibp.svg?style=flat-square&branch=master
+[travis-image]:
+  https://img.shields.io/travis/wKovacs64/hibp.svg?style=flat-square&branch=master
 [travis-url]: https://travis-ci.org/wKovacs64/hibp
-[coverage-image]: https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square&branch=master
+[coverage-image]:
+  https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square&branch=master
 [coverage-url]: https://coveralls.io/github/wKovacs64/hibp?branch=master
 [troy]: http://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
-[search-by-range]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+[search-by-range]:
+  https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
 [unpkg]: https://unpkg.com
 [cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
 [cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js

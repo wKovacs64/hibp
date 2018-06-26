@@ -2,18 +2,18 @@
 
 #### 6.0.0 → 7.0.0
 
-* `pwnedPassword` now uses the more secure hash range API rather than submitting
+- `pwnedPassword` now uses the more secure hash range API rather than submitting
   plain text passwords over the wire. The [new remote
   API][pwnedpasswordsbyrange] no longer makes a distinction between passwords
   that are hashses vs. plain text, so `pwnedPassword` no longer takes an options
   object as the `isAHash` option has been removed.
 
-* `pwnedPassword` now resolves with a number representing the number of times
+- `pwnedPassword` now resolves with a number representing the number of times
   the given password was exposed in a breach. Code using truthy checks should
   continue to function as before (when it returned a boolean), but explicit
   checks will need updated.
 
-* `pwnedPasswordRange` now returns an array of objects containing the matching
+- `pwnedPasswordRange` now returns an array of objects containing the matching
   suffix and a count representing the number of occurrences, rather than a plain
   text blob of all the data directly from the remote API response. Code
   dependent on parsing the response text will need updated to deal with the new
@@ -28,13 +28,13 @@
 
 #### 5.3.0 → 6.0.0
 
-* Support for Node.js versions less than 6.x has been dropped. If you are
+- Support for Node.js versions less than 6.x has been dropped. If you are
   leveraging this library in such an environment, you should restrict the
   version in your dependencies to `^5.3.0`.
 
 #### 4.4.0 → 5.0.0
 
-* The biggest breaking change in `5.0.0` is the removal of the `default` export.
+- The biggest breaking change in `5.0.0` is the removal of the `default` export.
   `hibp` is designed as a collection of modules to be imported explicitly as
   needed and exporting a `default`-named object containing all the modules is
   arguably an anti-pattern. Instead, an anonymous object of all the named
@@ -59,7 +59,7 @@
   breachedAccount(/* ... */).then(/* ... */);
   ```
 
-* The `browser` entry point field has been removed from `package.json` as
+- The `browser` entry point field has been removed from `package.json` as
   webpack was using it by default when omitting the `target` option or
   explicitly using `target: 'web'` (see issue #8 for details). No `<script>` tag
   changes should be necessary, but if you were otherwise relying on the
@@ -69,7 +69,7 @@
   instead of the UMD build when targeting browsers should remain fully
   compatible while producing smaller bundles.
 
-* The `index.js` file has been removed entirely. It's sole purpose was to
+- The `index.js` file has been removed entirely. It's sole purpose was to
   provide a separate entry point for the CJS/ESM (non-UMD) builds to include the
   `source-map-support` module to enable source map support in Node for debugging
   purposes. Source maps are still generated at build time and included in the
@@ -80,14 +80,14 @@
 
 #### 3.0.0 → 4.0.0
 
-* Support for Node.js versions less than 4.x has been dropped. It will probably
+- Support for Node.js versions less than 4.x has been dropped. It will probably
   still work (at least for the foreseeable future), but I'm not going out of my
   way to make sure. If you are leveraging this library in such an environment,
   you should restrict the version in your dependencies to `^3.0.0`.
 
 #### 2.2.0 → 3.0.0
 
-* The browser (UMD) build output has moved from the `lib` directory to the
+- The browser (UMD) build output has moved from the `lib` directory to the
   `dist` directory to separate it from the server-side output. A development
   (non-minified) version is also now included, which was omitted in the past as
   it would have had the same file name in the same directory as the server-side
@@ -95,7 +95,7 @@
 
 #### 1.0.8 → 2.0.0
 
-* All API methods which previously resolved to `undefined` (upon receiving a
+- All API methods which previously resolved to `undefined` (upon receiving a
   `404 Not Found` response from the remote endpoint) now resolve to `null`
   instead. This may or may not be a breaking change, depending on how strictly
   you're handling the "no data found" return value. Loose truthy/falsey checks
@@ -119,7 +119,7 @@
   > In APIs, null is often retrieved in place where an object can be expected
   > but no object is relevant.
 
-* All API methods that previously took optional, positional parameters like
+- All API methods that previously took optional, positional parameters like
   `domain` and `truncateResults` now take an options object instead. For
   example:
 
@@ -140,4 +140,5 @@
   This change was made to make the API more expressive and reduce ambiguity. See
   the API documentation (or JSDoc comments) for details.
 
-[pwnedpasswordsbyrange]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+[pwnedpasswordsbyrange]:
+  https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
