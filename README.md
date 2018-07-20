@@ -163,7 +163,7 @@ This module is distributed under the [MIT License][license].
 [coverage-image]:
   https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square&branch=master
 [coverage-url]: https://coveralls.io/github/wKovacs64/hibp?branch=master
-[troy]: http://www.troyhunt.com
+[troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [search-by-range]:
   https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
@@ -171,7 +171,7 @@ This module is distributed under the [MIT License][license].
 [cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
 [cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js
 [webpack]: https://webpack.js.org
-[caniuse-promise]: http://caniuse.com/#search=promise
+[caniuse-promise]: https://caniuse.com/#search=promise
 [es6-promise]: https://github.com/stefanpenner/es6-promise
 [runkit]: https://runkit.com/npm/hibp
 [pwned]: https://github.com/wKovacs64/pwned
