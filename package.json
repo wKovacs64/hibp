@@ -37,7 +37,7 @@
     "build:umd": "cross-env BABEL_ENV=es rollup --config",
     "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=es rollup --config",
     "docs": "jsdoc2md src/*.js > API.md",
-    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "format": "prettier --write \"**/*.{js,json,md,yml}\"",
     "lint": "eslint .",
     "prebuild": "npm run clean",
     "precommit": "lint-staged",
@@ -54,7 +54,7 @@
       "eslint --fix",
       "git add"
     ],
-    "*.{json,md}": [
+    "*.{json,md,yml}": [
       "prettier --write",
       "git add"
     ]
