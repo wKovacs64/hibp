@@ -76,9 +76,9 @@
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-rc.1",
-    "@babel/core": "7.0.0-rc.0",
+    "@babel/core": "7.0.0-rc.1",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-rc.1",
-    "@babel/preset-env": "7.0.0-rc.0",
+    "@babel/preset-env": "7.0.0-rc.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.4.2",
     "common-tags": "1.8.0",
