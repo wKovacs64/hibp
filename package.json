@@ -94,7 +94,7 @@
     "jsdoc-to-markdown": "4.0.1",
     "lint-staged": "7.2.0",
     "prettier": "1.14.2",
-    "puppeteer": "1.6.2",
+    "puppeteer": "1.7.0",
     "rimraf": "2.6.2",
     "rollup": "0.64.1",
     "rollup-plugin-babel": "4.0.0-beta.8",
