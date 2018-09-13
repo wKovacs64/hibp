@@ -4919,11 +4919,11 @@ rollup-plugin-commonjs@9.1.6:
     resolve "^1.5.0"
     rollup-pluginutils "^2.0.1"
 
-rollup-plugin-json@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-json/-/rollup-plugin-json-3.0.0.tgz#aeed2ff36e6c4fd0c60c4a8fc3d0884479e9dfce"
+rollup-plugin-json@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-json/-/rollup-plugin-json-3.1.0.tgz#7c1daf60c46bc21021ea016bd00863561a03321b"
   dependencies:
-    rollup-pluginutils "^2.2.0"
+    rollup-pluginutils "^2.3.1"
 
 rollup-plugin-node-resolve@3.4.0:
   version "3.4.0"
@@ -4956,9 +4956,16 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
 
-rollup-pluginutils@^2.2.0, rollup-pluginutils@^2.3.0:
+rollup-pluginutils@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.0.tgz#478ace04bd7f6da2e724356ca798214884738fc4"
+  dependencies:
+    estree-walker "^0.5.2"
+    micromatch "^2.3.11"
+
+rollup-pluginutils@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.1.tgz#760d185ccc237dedc12d7ae48c6bcd127b4892d0"
   dependencies:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
