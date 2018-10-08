@@ -1,11 +1,10 @@
 const test = process.env.NODE_ENV === 'test';
-const cjs = process.env.BABEL_ENV === 'commonjs' || test;
 
 module.exports = {
-  plugins: [cjs && '@babel/transform-modules-commonjs'].filter(Boolean),
+  plugins: [test && '@babel/plugin-transform-modules-commonjs'].filter(Boolean),
   presets: [
     [
-      '@babel/env',
+      '@babel/preset-env',
       {
         loose: true,
         modules: false,
