@@ -148,6 +148,8 @@ providing a polyfill. I recommend [es6-promise][es6-promise].
 - [pwned][pwned] - a command-line tool for querying the '[Have I been
   pwned?][haveibeenpwned]' service
 - [hibp-stdlib][hibp-stdlib] - a microservice on [StdLib][stdlib]
+- [Password Lense][pwl] - a static web application to reveal character types in
+  a password
 
 Send me a [PR][pulls] or an email and I'll add yours to the list.
 
@@ -178,4 +180,5 @@ This module is distributed under the [MIT License][license].
 [pulls]: https://github.com/wKovacs64/hibp/pulls
 [hibp-stdlib]: https://stdlib.com/@wKovacs64/lib/hibp
 [stdlib]: https://stdlib.com
+[pwl]: https://pwl.netlify.com/
 [license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
