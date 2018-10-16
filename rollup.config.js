@@ -65,6 +65,14 @@ export default [
     },
     plugins: [
       json({ preferConst: true }),
+      // babel is only necessary due to automated (CI) Cypress testing of the
+      // this build type as it uses Electron which doesn't support ESM script
+      // tags yet. To work around this limitation, the test transpiles the ESM
+      // code directly in the Electron browser, but it is unable to read hibp
+      // without this babel plugin here. For more information on how the test is
+      // setup, see:
+      // https://glebbahmutov.com/blog/testing-es6-module-in-cypress-electron/
+      babel({ exclude: 'node_modules/**' }),
       nodeResolve({ browser: true, jsnext: true }),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
@@ -82,6 +90,14 @@ export default [
     },
     plugins: [
       json({ preferConst: true }),
+      // babel is only necessary due to automated (CI) Cypress testing of the
+      // this build type as it uses Electron which doesn't support ESM script
+      // tags yet. To work around this limitation, the test transpiles the ESM
+      // code directly in the Electron browser, but it is unable to read hibp
+      // without this babel plugin here. For more information on how the test is
+      // setup, see:
+      // https://glebbahmutov.com/blog/testing-es6-module-in-cypress-electron/
+      babel({ exclude: 'node_modules/**' }),
       nodeResolve({ browser: true, jsnext: true }),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
