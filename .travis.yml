@@ -1,17 +1,16 @@
 language: node_js
 cache:
-  yarn: true
   directories:
-    - node_modules
+    - ~/.npm
+    - ~/.cache
 node_js:
-  - '6'
-  - '8'
+  - '10'
   - 'node'
 install:
   - yarn install --frozen-lockfile
 script:
   - yarn lint
   - yarn test:coverage --no-cache
-  - yarn test:umd
+  - yarn test:browser:ci
 after_success:
   - 'coveralls < coverage/lcov.info'
