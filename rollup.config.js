@@ -54,6 +54,47 @@ export default [
     ],
   },
 
+  // ESM for Browsers (development)
+  {
+    input: 'src/hibp.js',
+    output: {
+      file: 'dist/hibp.mjs',
+      format: 'esm',
+      sourcemap: true,
+      indent: false,
+    },
+    plugins: [
+      json({ preferConst: true }),
+      nodeResolve({ browser: true, jsnext: true }),
+      commonjs(),
+      replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+    ],
+  },
+
+  // ESM for Browsers (production)
+  {
+    input: 'src/hibp.js',
+    output: {
+      file: 'dist/hibp.min.mjs',
+      format: 'esm',
+      sourcemap: true,
+      indent: false,
+    },
+    plugins: [
+      json({ preferConst: true }),
+      nodeResolve({ browser: true, jsnext: true }),
+      commonjs(),
+      replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      terser({
+        compress: {
+          pure_getters: true,
+          unsafe: true,
+          unsafe_comps: true,
+        },
+      }),
+    ],
+  },
+
   // UMD (development)
   {
     input: 'src/hibp.js',
