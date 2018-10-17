@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.2.0 _(2018-10-16)_
+
+- Added an ESM for browsers build ([#49][49])
+
 ## Version 7.1.3 _(2018-06-26)_
 
 - Fixed custom `User-Agent` request header implementation ([#40][40])
@@ -262,3 +266,4 @@
 [jssha]: https://github.com/Caligatio/jsSHA
 [39]: https://github.com/wKovacs64/hibp/pull/39
 [40]: https://github.com/wKovacs64/hibp/pull/40
+[49]: https://github.com/wKovacs64/hibp/pull/49
