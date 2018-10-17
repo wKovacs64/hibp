@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESM Test</title>
+  <script src="./babel-browser-build.js"></script>
+  <script src="./browser-es-module-loader.js"></script>
+</head>
+
+<body>
+  <div>ESM Test Page</div>
+
+  <p>Test Results: <span id="results">failed (or incomplete)</span></p>
+
+  <script type="module">
+    import * as hibp from '../dist/hibp.min.mjs';
+
+    if (typeof hibp !== 'object') throw new Error();
+    if (typeof hibp.breach !== 'function') throw new Error();
+    if (typeof hibp.breachedAccount !== 'function') throw new Error();
+    if (typeof hibp.breaches !== 'function') throw new Error();
+    if (typeof hibp.dataClasses !== 'function') throw new Error();
+    if (typeof hibp.pasteAccount !== 'function') throw new Error();
+    if (typeof hibp.pwnedPassword !== 'function') throw new Error();
+    if (typeof hibp.pwnedPasswordRange !== 'function') throw new Error();
+    if (typeof hibp.search !== 'function') throw new Error();
+
+    document.getElementById('results').innerText = 'success';
+  </script>
+</body>
+
+</html>

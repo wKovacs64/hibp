@@ -6,14 +6,11 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        loose: true,
         modules: false,
-        targets: test
-          ? { node: 'current' }
-          : {
-              browsers: ['> 1%', 'last 2 versions'],
-              node: 6,
-            },
+        targets: {
+          browsers: ['> 1%', 'last 2 versions'],
+          node: 6,
+        },
       },
     ],
   ],

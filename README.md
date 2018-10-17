@@ -107,37 +107,73 @@ search('someAccountOrEmail')
 
 #### Using in the browser
 
-There is a Universal Module Definition (UMD) build provided in the package
-`dist` directory for usage in the browser. When using this build, an `hibp`
-object will be added to the browser's `window` object.
+**Prerequisite:** This module requires a Promise implementation to exist in the
+global namespace prior to being loaded. Therefore, to facilitate usage in
+[browsers without native Promise support][caniuse-promise], you are responsible
+for providing a polyfill. I recommend [es6-promise][es6-promise].
 
-The recommended way to include the UMD build (when using a `<script>` tag) is to
-use the [unpkg][unpkg] CDN, specifying the exact version you want. If you don't
-specify a version, the `latest` tag will be used, which could be dangerous
-if/when there are breaking changes made to the API. See [unpkg][unpkg] for
-details and advanced version specification, but generally you will want to do
-the following (replacing `x.y.z` with the version you want):
+You have several options for using this library in a browser environment:
 
-```html
-<script src="https://unpkg.com/hibp@x.y.z"></script>
-```
+1. Bundled
 
-Development and production (minified) UMD builds are also provided for manual
-download if desired:
+   The most performant and recommended method is to bundle it with client-side
+   code using a module bundler like [webpack][webpack]. If your build process
+   honors the `module` field in `package.json`, you can import the ECMAScript
+   module as described [above](#usage). Otherwise, the `main` field resolves to
+   the CommonJS module version.
 
-- [https://unpkg.com/hibp/dist/hibp.js][cdn-dev]
-- [https://unpkg.com/hibp/dist/hibp.min.js][cdn-prod]
+1. UMD
 
-Alternatively, you may bundle it in with client-side code using a module bundler
-like [webpack][webpack]. If your build process honors the `module` field in
-`package.json`, you can import the ECMAScript module as described
-[above](#usage). Otherwise, the `main` field resolves to the CommonJS module
-version.
+   There is also a Universal Module Definition (UMD) build provided in the
+   package `dist` directory for usage in the browser. When using this build, an
+   `hibp` object will be added to the browser's `window` object.
 
-**N.B.** This module requires a Promise implementation to exist in the global
-namespace prior to being loaded. Therefore, to facilitate usage in [browsers
-without native Promise support][caniuse-promise], you are responsible for
-providing a polyfill. I recommend [es6-promise][es6-promise].
+   The recommended way to include the UMD build (when using a `<script>` tag) is
+   to use the [unpkg][unpkg] CDN, specifying the exact version you want. If you
+   don't specify a version, the `latest` tag will be used, which could be
+   dangerous if/when there are breaking changes made to the API. See
+   [unpkg][unpkg] for details and advanced version specification, but generally
+   you will want to do the following (replacing `x.y.z` with the version you
+   want):
+
+   ```html
+   <script src="https://unpkg.com/hibp@x.y.z"></script>
+   ```
+
+   Development and production (minified) UMD builds are also provided for manual
+   download if desired:
+
+   - [https://unpkg.com/hibp/dist/hibp.js][cdn-umd-dev]
+   - [https://unpkg.com/hibp/dist/hibp.min.js][cdn-umd-prod]
+
+1. ESM for Browsers
+
+   Modern browsers now [support][caniuse-esm] importing ECMAScript modules via
+   `<script type="module">` tags. Like the UMD option above, this build is also
+   available the [unpkg][unpkg] CDN (and the same versioning rules apply), but
+   you must specify the full path including the `.mjs` file extension. For
+   example:
+
+   ```html
+   <script type="module">
+     import { dataClasses } from 'https://unpkg.com/hibp/dist/hibp.min.mjs@x.y.z';
+
+     const logDataClasses = async () => {
+       console.table(await dataClasses());
+     };
+
+     logDataClasses();
+   </script>
+   ```
+
+   Development and production (minified) ESM builds are also provided for manual
+   download if desired:
+
+   - [https://unpkg.com/hibp/dist/hibp.mjs][cdn-mjs-dev]
+   - [https://unpkg.com/hibp/dist/hibp.min.mjs][cdn-mjs-prod]
+
+   For more information on ESM in the browser, check out [Using JavaScript
+   modules on the web][esm-primer].
 
 ## Try It Out
 
@@ -170,8 +206,12 @@ This module is distributed under the [MIT License][license].
 [search-by-range]:
   https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
 [unpkg]: https://unpkg.com
-[cdn-dev]: https://unpkg.com/hibp/dist/hibp.js
-[cdn-prod]: https://unpkg.com/hibp/dist/hibp.min.js
+[cdn-umd-dev]: https://unpkg.com/hibp/dist/hibp.js
+[cdn-umd-prod]: https://unpkg.com/hibp/dist/hibp.min.js
+[caniuse-esm]: https://caniuse.com/#feat=es6-module
+[cdn-mjs-dev]: https://unpkg.com/hibp/dist/hibp.mjs
+[cdn-mjs-prod]: https://unpkg.com/hibp/dist/hibp.min.mjs
+[esm-primer]: https://developers.google.com/web/fundamentals/primers/modules
 [webpack]: https://webpack.js.org
 [caniuse-promise]: https://caniuse.com/#search=promise
 [es6-promise]: https://github.com/stefanpenner/es6-promise

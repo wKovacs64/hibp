@@ -9,12 +9,16 @@
 .prettierignore
 .prettierrc
 .travis.yml
+.vscode
 coverage
+cypress.json
 husky.config.js
 jest.config.js
 renovate.json
 rollup.config.js
+cypress
 src
 test
+serve.json
 yarn-error.log
 yarn.lock
