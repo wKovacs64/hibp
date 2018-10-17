@@ -2,5 +2,7 @@ coverage
 dist
 es
 lib
+test/babel-browser-build.js
+test/browser-es-module-loader.js
 package.json
 API.md
