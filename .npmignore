@@ -8,6 +8,7 @@
 .npmignore
 .prettierignore
 .prettierrc
+.size-snapshot.json
 .travis.yml
 .vscode
 coverage

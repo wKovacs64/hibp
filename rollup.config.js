@@ -4,6 +4,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
+import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
@@ -28,6 +29,7 @@ export default [
     plugins: [
       json({ preferConst: true }),
       babel({ exclude: 'node_modules/**' }),
+      sizeSnapshot({ printInfo: false }),
     ],
   },
 
@@ -68,6 +70,7 @@ export default [
       nodeResolve({ browser: true, jsnext: true }),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+      sizeSnapshot({ printInfo: false }),
     ],
   },
 
@@ -85,6 +88,7 @@ export default [
       nodeResolve({ browser: true, jsnext: true }),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      sizeSnapshot({ printInfo: false }),
       terser({
         compress: {
           pure_getters: true,
@@ -110,6 +114,7 @@ export default [
       nodeResolve({ browser: true, jsnext: true }),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+      sizeSnapshot({ printInfo: false }),
     ],
   },
 
@@ -129,6 +134,7 @@ export default [
       nodeResolve({ browser: true, jsnext: true }),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      sizeSnapshot({ printInfo: false }),
       terser({
         compress: {
           pure_getters: true,

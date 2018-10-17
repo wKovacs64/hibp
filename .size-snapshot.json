@@ -1,0 +1,45 @@
+{
+  "lib/hibp.js": {
+    "bundled": 15400,
+    "minified": 4058,
+    "gzipped": 1557
+  },
+  "dist/hibp.mjs": {
+    "bundled": 56422,
+    "minified": 22270,
+    "gzipped": 7909,
+    "treeshaked": {
+      "rollup": {
+        "code": 17824,
+        "import_statements": 0
+      },
+      "webpack": {
+        "code": 18993
+      }
+    }
+  },
+  "dist/hibp.min.mjs": {
+    "bundled": 56422,
+    "minified": 22270,
+    "gzipped": 7909,
+    "treeshaked": {
+      "rollup": {
+        "code": 17824,
+        "import_statements": 0
+      },
+      "webpack": {
+        "code": 18993
+      }
+    }
+  },
+  "dist/hibp.js": {
+    "bundled": 61744,
+    "minified": 20658,
+    "gzipped": 7665
+  },
+  "dist/hibp.min.js": {
+    "bundled": 58418,
+    "minified": 20658,
+    "gzipped": 7665
+  }
+}
