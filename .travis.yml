@@ -10,7 +10,7 @@ install:
   - yarn install --frozen-lockfile
 script:
   - yarn lint
-  - yarn test:coverage --no-cache
   - yarn test:browser:ci
+  - yarn test:coverage --no-cache
 after_success:
   - 'coveralls < coverage/lcov.info'
