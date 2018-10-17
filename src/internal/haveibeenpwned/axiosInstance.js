@@ -8,11 +8,13 @@ import { name, version } from '../../../package.json';
  */
 export default Axios.create({
   baseURL: 'https://haveibeenpwned.com/api',
-  headers: {
-    Accept: 'application/vnd.haveibeenpwned.v2+json',
-    // Add a custom User-Agent header when running outside the browser
-    ...(typeof navigator === 'undefined' && {
+  headers: Object.assign(
+    {
+      Accept: 'application/vnd.haveibeenpwned.v2+json',
+    },
+    typeof navigator === 'undefined' && {
+      // Add a custom User-Agent header when running outside the browser
       'User-Agent': `${name} ${version}`,
-    }),
-  },
+    },
+  ),
 });
