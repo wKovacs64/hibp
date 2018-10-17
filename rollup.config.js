@@ -11,12 +11,9 @@ import pkg from './package.json';
 export default [
   // CommonJS
   {
-    experimentalCodeSplitting: true,
-    input: glob.sync('src/**/*.js', {
-      ignore: ['**/__mocks__/**', '**/__tests__/**', '**/*.test.js'],
-    }),
+    input: 'src/hibp.js',
     output: {
-      dir: 'lib',
+      file: 'lib/hibp.js',
       format: 'cjs',
       sourcemap: true,
       indent: false,
