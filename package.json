@@ -37,7 +37,7 @@
     "docs": "jsdoc2md src/*.js > API.md",
     "format": "prettier --write \"**/*.{js,json,md,yml}\"",
     "lint": "eslint .",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run -s clean",
     "prepare": "npm run -s build",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
     "start-test-server": "serve --no-clipboard",
