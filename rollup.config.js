@@ -6,7 +6,19 @@ import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { terser } from 'rollup-plugin-terser';
-import pkg from './package.json';
+
+const umdName = 'hibp';
+const external = id => !id.startsWith('.') && !id.startsWith('/');
+const babelOpts = { exclude: 'node_modules/**' };
+const nodeResolveOpts = { browser: true, jsnext: true };
+const sizeSnapshotOpts = { matchSnapshot: true, printInfo: false };
+const terserOpts = {
+  compress: {
+    pure_getters: true,
+    unsafe: true,
+    unsafe_comps: true,
+  },
+};
 
 export default [
   // CommonJS
@@ -18,15 +30,11 @@ export default [
       sourcemap: true,
       indent: false,
     },
-    external: [
-      'jssha/src/sha1',
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ],
+    external,
     plugins: [
       json({ preferConst: true }),
-      babel({ exclude: 'node_modules/**' }),
-      sizeSnapshot({ printInfo: false }),
+      babel(babelOpts),
+      sizeSnapshot(sizeSnapshotOpts),
     ],
   },
 
@@ -42,15 +50,8 @@ export default [
       sourcemap: true,
       indent: false,
     },
-    external: [
-      'jssha/src/sha1',
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ],
-    plugins: [
-      json({ preferConst: true }),
-      babel({ exclude: 'node_modules/**' }),
-    ],
+    external,
+    plugins: [json({ preferConst: true }), babel(babelOpts)],
   },
 
   // ESM for Browsers (development)
@@ -64,10 +65,10 @@ export default [
     },
     plugins: [
       json({ preferConst: true }),
-      nodeResolve({ browser: true, jsnext: true }),
+      nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-      sizeSnapshot({ printInfo: false }),
+      sizeSnapshot(sizeSnapshotOpts),
     ],
   },
 
@@ -82,17 +83,11 @@ export default [
     },
     plugins: [
       json({ preferConst: true }),
-      nodeResolve({ browser: true, jsnext: true }),
+      nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-      sizeSnapshot({ printInfo: false }),
-      terser({
-        compress: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
-        },
-      }),
+      sizeSnapshot(sizeSnapshotOpts),
+      terser(terserOpts),
     ],
   },
 
@@ -102,16 +97,16 @@ export default [
     output: {
       file: 'dist/hibp.js',
       format: 'umd',
-      name: 'hibp',
+      name: umdName,
       sourcemap: true,
     },
     plugins: [
       json({ preferConst: true }),
-      babel({ exclude: 'node_modules/**' }),
-      nodeResolve({ browser: true, jsnext: true }),
+      babel(babelOpts),
+      nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-      sizeSnapshot({ printInfo: false }),
+      sizeSnapshot(sizeSnapshotOpts),
     ],
   },
 
@@ -121,24 +116,18 @@ export default [
     output: {
       file: 'dist/hibp.min.js',
       format: 'umd',
-      name: 'hibp',
+      name: umdName,
       sourcemap: true,
       indent: false,
     },
     plugins: [
       json({ preferConst: true }),
-      babel({ exclude: 'node_modules/**' }),
-      nodeResolve({ browser: true, jsnext: true }),
+      babel(babelOpts),
+      nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-      sizeSnapshot({ printInfo: false }),
-      terser({
-        compress: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
-        },
-      }),
+      sizeSnapshot(sizeSnapshotOpts),
+      terser(terserOpts),
     ],
   },
 ];
