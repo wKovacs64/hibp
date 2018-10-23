@@ -47,7 +47,7 @@
     "lint": "eslint .",
     "prebuild": "npm run -s clean",
     "prepare": "npm run -s build",
-    "prepublishOnly": "npm run lint && npm run test && npm run build",
+    "prepublishOnly": "npm run lint && npm run test",
     "start-test-server": "serve --no-clipboard",
     "test": "cross-env NODE_ENV=test jest",
     "test:coverage": "npm run test -- --coverage",
