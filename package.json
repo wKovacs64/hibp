@@ -28,6 +28,14 @@
   "module": "es/hibp.js",
   "unpkg": "dist/hibp.min.js",
   "runkitExampleFilename": "example/runkit.js",
+  "files": [
+    "dist",
+    "es",
+    "example",
+    "lib",
+    "API.md",
+    "MIGRATION.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "rollup --config",
