@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.2.1 _(2018-10-23)_
+
+- Fixed the CommonJS build ([3f33becf][3f33becf])
+
 ## Version 7.2.0 _(2018-10-16)_
 
 - Added an ESM for browsers build ([#49][49])
@@ -267,3 +271,5 @@
 [39]: https://github.com/wKovacs64/hibp/pull/39
 [40]: https://github.com/wKovacs64/hibp/pull/40
 [49]: https://github.com/wKovacs64/hibp/pull/49
+[3f33becf]:
+  https://github.com/wKovacs64/hibp/commit/3f33becfa23b80abc45fbeaad6c8c9f85113d126
