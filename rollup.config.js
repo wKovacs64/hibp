@@ -11,7 +11,7 @@ const umdName = 'hibp';
 const external = id => !id.startsWith('.') && !id.startsWith('/');
 const babelOpts = { exclude: 'node_modules/**' };
 const nodeResolveOpts = { browser: true, jsnext: true };
-const sizeSnapshotOpts = { matchSnapshot: true, printInfo: false };
+const sizeSnapshotOpts = { printInfo: false };
 const terserOpts = {
   compress: {
     pure_getters: true,
