@@ -47,17 +47,6 @@
     "test:browser:ci": "npm run build && start-server-and-test start-test-server 5000 cy:run",
     "test:watch": "npm run test -- --watch"
   },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{json,md,yml}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/wKovacs64/hibp.git"
