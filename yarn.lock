@@ -7921,10 +7921,10 @@ staged-git-files@1.1.1:
   resolved "https://registry.yarnpkg.com/staged-git-files/-/staged-git-files-1.1.1.tgz#37c2218ef0d6d26178b1310719309a16a59f8f7b"
   integrity sha512-H89UNKr1rQJvI1c/PIR3kiAMBV23yvR7LItZiV74HWZwzt7f3YHuujJ9nJZlt58WlFox7XQsOahexwk7nTe69A==
 
-start-server-and-test@1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/start-server-and-test/-/start-server-and-test-1.7.4.tgz#0fce5cf5fe388cafab864f7947303f28b6832919"
-  integrity sha512-e2xo541HP+bFovnl8iNpyr3xeiY+MXwUQ/0JjEWgMBRf/4JPygCkK5wCq+Azb7xRfCzpANji1vstHe3ppM87rQ==
+start-server-and-test@1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/start-server-and-test/-/start-server-and-test-1.7.5.tgz#33c6ffb71a2a24db2b713af711b55c334e5e20e0"
+  integrity sha512-lEu8cek0fgYYWXkFvbXLI5XrqPOdNe4tlFtiMiPABDUHasKeRCUn14MenIBR8lsfJjyeLSD1JoI1HaIXy3FwxQ==
   dependencies:
     bluebird "3.5.2"
     check-more-types "2.24.0"
