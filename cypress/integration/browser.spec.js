@@ -2,18 +2,33 @@ describe('UMD', () => {
   it('exposes the hibp namespace on the window object', () => {
     cy.visit('/test/umd.html');
 
-    cy.window().then(win => {
-      expect(win.hibp).to.be.an('object');
-      expect(win.hibp.breach).to.be.a('function');
-      expect(win.hibp.breach).to.be.a('function');
-      expect(win.hibp.breachedAccount).to.be.a('function');
-      expect(win.hibp.breaches).to.be.a('function');
-      expect(win.hibp.dataClasses).to.be.a('function');
-      expect(win.hibp.pasteAccount).to.be.a('function');
-      expect(win.hibp.pwnedPassword).to.be.a('function');
-      expect(win.hibp.pwnedPasswordRange).to.be.a('function');
-      expect(win.hibp.search).to.be.a('function');
-    });
+    cy.window()
+      .its('hibp')
+      .should('be.an', 'object')
+      .window()
+      .its('hibp.breach')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.breachedAccount')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.breaches')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.dataClasses')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.pasteAccount')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.pwnedPassword')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.pwnedPasswordRange')
+      .should('be.a', 'function')
+      .window()
+      .its('hibp.search')
+      .should('be.a', 'function');
   });
 });
 
