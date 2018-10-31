@@ -90,7 +90,7 @@
     "husky": "1.1.2",
     "jest": "23.6.0",
     "jsdoc-to-markdown": "4.0.1",
-    "lint-staged": "8.0.3",
+    "lint-staged": "8.0.4",
     "prettier": "1.14.3",
     "rimraf": "2.6.2",
     "rollup": "0.66.6",
