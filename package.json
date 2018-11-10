@@ -91,7 +91,7 @@
     "jest": "23.6.0",
     "jsdoc-to-markdown": "4.0.1",
     "lint-staged": "8.0.4",
-    "prettier": "1.15.1",
+    "prettier": "1.15.2",
     "rimraf": "2.6.2",
     "rollup": "0.67.0",
     "rollup-plugin-babel": "4.0.3",
