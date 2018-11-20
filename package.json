@@ -102,6 +102,6 @@
     "rollup-plugin-size-snapshot": "0.7.0",
     "rollup-plugin-terser": "3.0.0",
     "serve": "10.1.1",
-    "start-server-and-test": "1.7.9"
+    "start-server-and-test": "1.7.10"
   }
 }
