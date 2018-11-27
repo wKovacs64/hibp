@@ -1,5 +1,13 @@
 # Change Log
 
+## Version 7.2.2 _(2018-11-26)_
+
+- Updated a **development-only** dependency (`start-server-and-test`) to remove
+  a compromised transitive dependency (`flatmap-stream@0.1.1`). See
+  [dominictarr/event-stream#116][dominictarr/event-stream#116] for further
+  details.
+- Removed redundant pre-publish build step
+
 ## Version 7.2.1 _(2018-10-23)_
 
 - Fixed the CommonJS build ([3f33becf][3f33becf])
@@ -273,3 +281,5 @@
 [49]: https://github.com/wKovacs64/hibp/pull/49
 [3f33becf]:
   https://github.com/wKovacs64/hibp/commit/3f33becfa23b80abc45fbeaad6c8c9f85113d126
+[dominictarr/event-stream#116]:
+  https://github.com/dominictarr/event-stream/issues/116

@@ -33,7 +33,7 @@ npm install --save hibp
 Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ```html
-<script src="https://unpkg.com/hibp@7.2.1"></script>
+<script src="https://unpkg.com/hibp@7.2.2"></script>
 ```
 
 ## Features
