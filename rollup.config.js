@@ -8,7 +8,7 @@ import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { terser } from 'rollup-plugin-terser';
 
 const umdName = 'hibp';
-const external = id => !id.startsWith('.') && !id.startsWith('/');
+const external = id => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const babelOpts = { exclude: 'node_modules/**' };
 const nodeResolveOpts = { browser: true, jsnext: true };
 const sizeSnapshotOpts = { printInfo: false };
