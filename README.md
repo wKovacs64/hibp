@@ -199,8 +199,8 @@ This module is distributed under the [MIT License][license].
   https://img.shields.io/circleci/project/github/wKovacs64/hibp/master.svg?style=flat-square
 [ci-url]: https://circleci.com/gh/wKovacs64/hibp
 [coverage-image]:
-  https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square&branch=master
-[coverage-url]: https://coveralls.io/github/wKovacs64/hibp?branch=master
+  https://img.shields.io/codecov/c/github/wKovacs64/hibp/master.svg?style=flat-square
+[coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/master
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [search-by-range]:
