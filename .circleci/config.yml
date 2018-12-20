@@ -24,4 +24,4 @@ jobs:
       - run: yarn lint
       - run: yarn test:browser:ci
       - run: yarn test:coverage --no-cache
-      - run: ./node_modules/.bin/coveralls < coverage/lcov.info
+      - run: ./node_modules/.bin/codecov
