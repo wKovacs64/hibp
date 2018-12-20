@@ -13,7 +13,7 @@
 _A Promise-based API for querying [Troy Hunt][troy]'s [Have I been
 pwned?][haveibeenpwned] service._
 
-[![npm Version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+[![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
 [![Code Coverage][coverage-image]][coverage-url]
 
 ## Installation
@@ -195,9 +195,9 @@ This module is distributed under the [MIT License][license].
 
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
-[travis-image]:
-  https://img.shields.io/travis/wKovacs64/hibp.svg?style=flat-square&branch=master
-[travis-url]: https://travis-ci.org/wKovacs64/hibp
+[ci-image]:
+  https://img.shields.io/circleci/project/github/wKovacs64/hibp/master.svg?style=flat-square
+[ci-url]: https://circleci.com/gh/wKovacs64/hibp
 [coverage-image]:
   https://img.shields.io/coveralls/wKovacs64/hibp.svg?style=flat-square&branch=master
 [coverage-url]: https://coveralls.io/github/wKovacs64/hibp?branch=master
