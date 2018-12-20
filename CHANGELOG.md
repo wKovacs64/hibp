@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 7.2.3 _(2018-12-20)_
+
+- Fixed build on Windows ([48d25282][48d25282])
+- Moved CI from Travis to Circle ([#52][52])
+- Moved coverage reports from Coveralls to Codecov ([#53][53])
+
 ## Version 7.2.2 _(2018-11-26)_
 
 - Updated a **development-only** dependency (`start-server-and-test`) to remove
@@ -283,3 +289,7 @@
   https://github.com/wKovacs64/hibp/commit/3f33becfa23b80abc45fbeaad6c8c9f85113d126
 [dominictarr/event-stream#116]:
   https://github.com/dominictarr/event-stream/issues/116
+[48d25282]:
+  https://github.com/wKovacs64/hibp/commit/48d25282407d2b1d3cdfac51f311d018a6a16d25
+[52]: https://github.com/wKovacs64/hibp/pull/52
+[53]: https://github.com/wKovacs64/hibp/pull/53
