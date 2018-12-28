@@ -34,7 +34,6 @@ export default [
 
   // ESM
   {
-    experimentalCodeSplitting: true,
     input: glob.sync('src/**/*.js', {
       ignore: ['**/__mocks__/**', '**/__tests__/**', '**/*.test.js'],
     }),
