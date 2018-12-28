@@ -4,14 +4,12 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { terser } from 'rollup-plugin-terser';
 
 const umdName = 'hibp';
 const external = id => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const babelOpts = { exclude: 'node_modules/**' };
 const nodeResolveOpts = { browser: true, jsnext: true };
-const sizeSnapshotOpts = { printInfo: false };
 const terserOpts = {
   compress: {
     pure_getters: true,
@@ -31,11 +29,7 @@ export default [
       indent: false,
     },
     external,
-    plugins: [
-      json({ preferConst: true }),
-      babel(babelOpts),
-      sizeSnapshot(sizeSnapshotOpts),
-    ],
+    plugins: [json({ preferConst: true }), babel(babelOpts)],
   },
 
   // ESM
@@ -68,7 +62,6 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-      sizeSnapshot(sizeSnapshotOpts),
     ],
   },
 
@@ -86,7 +79,6 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-      sizeSnapshot(sizeSnapshotOpts),
       terser(terserOpts),
     ],
   },
@@ -106,7 +98,6 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-      sizeSnapshot(sizeSnapshotOpts),
     ],
   },
 
@@ -126,7 +117,6 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-      sizeSnapshot(sizeSnapshotOpts),
       terser(terserOpts),
     ],
   },
