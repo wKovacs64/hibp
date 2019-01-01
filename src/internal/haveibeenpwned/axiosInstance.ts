@@ -4,6 +4,7 @@ import { name, version } from '../../../package.json';
 /**
  * An Axios instance used for API queries. Not meant for general use.
  *
+ * @internal
  * @private
  */
 export default Axios.create({

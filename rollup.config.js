@@ -1,4 +1,5 @@
 import glob from 'glob';
+import typescript from 'rollup-plugin-typescript2';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -8,7 +9,17 @@ import { terser } from 'rollup-plugin-terser';
 
 const umdName = 'hibp';
 const external = id => !/^(\.|\/|[a-z]:\\)/i.test(id);
-const babelOpts = { exclude: 'node_modules/**' };
+const babelOpts = { exclude: 'node_modules/**', extensions: ['.js', '.ts'] };
+const typescriptOpts = {
+  check: false,
+  rollupCommonJSResolveHack: true,
+  tsconfigOverride: {
+    compilerOptions: {
+      noEmit: true,
+      declaration: false,
+    },
+  },
+};
 const nodeResolveOpts = { browser: true, jsnext: true };
 const terserOpts = {
   compress: {
@@ -21,7 +32,7 @@ const terserOpts = {
 export default [
   // CommonJS
   {
-    input: 'src/hibp.js',
+    input: 'src/hibp.ts',
     output: {
       file: 'lib/hibp.js',
       format: 'cjs',
@@ -29,13 +40,22 @@ export default [
       indent: false,
     },
     external,
-    plugins: [json({ preferConst: true }), babel(babelOpts)],
+    plugins: [
+      json({ preferConst: true }),
+      babel(babelOpts),
+      typescript(typescriptOpts),
+    ],
   },
 
   // ESM
   {
-    input: glob.sync('src/**/*.js', {
-      ignore: ['**/__mocks__/**', '**/__tests__/**', '**/*.test.js'],
+    input: glob.sync('src/**/*.ts', {
+      ignore: [
+        '**/__mocks__/**',
+        '**/__tests__/**',
+        '**/*.test.ts',
+        '**/*.d.ts',
+      ],
     }),
     output: {
       dir: 'es',
@@ -44,12 +64,16 @@ export default [
       indent: false,
     },
     external,
-    plugins: [json({ preferConst: true }), babel(babelOpts)],
+    plugins: [
+      json({ preferConst: true }),
+      babel(babelOpts),
+      typescript(typescriptOpts),
+    ],
   },
 
   // ESM for Browsers (development)
   {
-    input: 'src/hibp.js',
+    input: 'src/hibp.ts',
     output: {
       file: 'dist/hibp.mjs',
       format: 'esm',
@@ -61,12 +85,13 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+      typescript(typescriptOpts),
     ],
   },
 
   // ESM for Browsers (production)
   {
-    input: 'src/hibp.js',
+    input: 'src/hibp.ts',
     output: {
       file: 'dist/hibp.min.mjs',
       format: 'esm',
@@ -78,13 +103,14 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      typescript(typescriptOpts),
       terser(terserOpts),
     ],
   },
 
   // UMD (development)
   {
-    input: 'src/hibp.js',
+    input: 'src/hibp.ts',
     output: {
       file: 'dist/hibp.js',
       format: 'umd',
@@ -97,12 +123,13 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+      typescript(typescriptOpts),
     ],
   },
 
   // UMD (production)
   {
-    input: 'src/hibp.js',
+    input: 'src/hibp.ts',
     output: {
       file: 'dist/hibp.min.js',
       format: 'umd',
@@ -116,6 +143,7 @@ export default [
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      typescript(typescriptOpts),
       terser(terserOpts),
     ],
   },

@@ -15,7 +15,8 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
     jest.resetModules();
 
     // Browser
-    global.navigator = {};
+    // eslint-disable-next-line no-undef
+    global.navigator = {} as Navigator;
     const axiosInstanceBrowser = require.requireActual('./axiosInstance')
       .default;
     expect(Object.keys(axiosInstanceBrowser.defaults.headers)).not.toContain(

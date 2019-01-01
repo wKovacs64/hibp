@@ -10,21 +10,25 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
+/** @internal */
 export const OK = {
   status: 200,
 };
 
+/** @internal */
 export const BAD_REQUEST = {
   status: 400,
   statusText:
     'Bad request — the account does not comply with an acceptable format.',
 };
 
+/** @internal */
 export const FORBIDDEN = {
   status: 403,
   statusText: 'Forbidden - no user agent has been specified in the request.',
 };
 
+/** @internal */
 export const NOT_FOUND = {
   status: 404,
 };
@@ -33,6 +37,8 @@ export const NOT_FOUND = {
  * This response has unique behavior. For some reason, the API includes a
  * human-readable message in the response body for this one. Manually populating
  * the message here purely for use in tests.
+ *
+ * @internal
  */
 export const TOO_MANY_REQUESTS = {
   status: 429,

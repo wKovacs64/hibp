@@ -7,6 +7,7 @@ import { BAD_REQUEST } from './responses';
  * HTTP status code 200 returns plain text (data found).
  * HTTP status code 400 throws an Error (bad request).
  *
+ * @internal
  * @private
  * @param {string} endpoint the API endpoint to query
  * @returns {Promise} a Promise which resolves to the data resulting from the

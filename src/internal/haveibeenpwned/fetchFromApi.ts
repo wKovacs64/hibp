@@ -15,6 +15,7 @@ import {
  * HTTP status code 403 throws an Error (forbidden).
  * HTTP status code 429 throws an Error (too many requests).
  *
+ * @internal
  * @private
  * @param {string} endpoint the API endpoint to query
  * @returns {Promise} a Promise which resolves to the data resulting from the
