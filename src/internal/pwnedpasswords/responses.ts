@@ -5,6 +5,12 @@
  *
  */
 
+export interface PwnedPasswordsApiResponse {
+  // eslint-disable-next-line no-restricted-globals
+  status: number;
+  data?: string;
+}
+
 /** @internal */
 export const OK = {
   status: 200,

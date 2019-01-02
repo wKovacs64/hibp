@@ -1,6 +1,8 @@
 import { OK } from './internal/haveibeenpwned/responses';
-import mockAxios from './internal/haveibeenpwned/axiosInstance';
+import axios from './internal/haveibeenpwned/axiosInstance';
 import search from './search';
+
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('search', () => {
   it('searches breaches by username', () => {

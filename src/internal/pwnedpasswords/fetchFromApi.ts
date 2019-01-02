@@ -10,11 +10,11 @@ import { BAD_REQUEST } from './responses';
  * @internal
  * @private
  * @param {string} endpoint the API endpoint to query
- * @returns {Promise} a Promise which resolves to the data resulting from the
- * query, or rejects with an Error
+ * @returns {Promise<string>} a Promise which resolves to the data resulting
+ * from the query, or rejects with an Error
  */
-export default endpoint =>
-  Promise.resolve(axios.get(endpoint))
+export default (endpoint: string): Promise<string> =>
+  Promise.resolve(axios.get<string>(endpoint))
     .then(res => res.data)
     .catch(err => {
       if (err.response) {

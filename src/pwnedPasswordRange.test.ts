@@ -1,8 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { stripIndents } from 'common-tags';
 import { OK } from './internal/pwnedpasswords/responses';
-import mockAxios from './internal/pwnedpasswords/axiosInstance';
+import axios from './internal/pwnedpasswords/axiosInstance';
 import pwnedPasswordRange from './pwnedPasswordRange';
+
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('pwnedPasswordRange', () => {
   describe('valid range', () => {

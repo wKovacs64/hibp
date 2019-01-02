@@ -1,5 +1,19 @@
 import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
 
+export interface PwnedPasswordSuffix {
+  suffix: string;
+  count: number;
+}
+
+/**
+ * An object representing an exposed password hash suffix (corresponding to a
+ * given hash prefix) and how many times it occurred in the Pwned Passwords
+ * repository.
+ *
+ * @typedef {object} PwnedPasswordSuffix
+ * @property {string} suffix
+ * @property {number} count
+ */
 /**
  * Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
  *
@@ -11,10 +25,10 @@ import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
  *
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
- * @returns {Promise} a Promise which resolves to an array of objects, each
- * containing the `suffix` that when matched with the prefix composes the
- * complete hash, and a `count` of how many times it appears in the breached
- * password data set, or rejects with an Error
+ * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an array
+ * of objects, each containing the `suffix` that when matched with the prefix
+ * composes the complete hash, and a `count` of how many times it appears in the
+ * breached password data set, or rejects with an Error
  *
  * @example
  * pwnedPasswordRange('5BAA6')
@@ -39,7 +53,7 @@ import fetchFromApi from './internal/pwnedpasswords/fetchFromApi';
  * @see https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
  * @alias module:pwnedPasswordRange
  */
-const pwnedPasswordRange = prefix =>
+const pwnedPasswordRange = (prefix: string): Promise<PwnedPasswordSuffix[]> =>
   fetchFromApi(`/range/${encodeURIComponent(prefix)}`)
     // create array from lines of text in response body
     .then(data => data.split('\n'))

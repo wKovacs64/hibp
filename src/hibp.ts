@@ -34,3 +34,7 @@ export {
   pwnedPasswordRange,
   search,
 };
+
+// https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-document-TypeScript#jsdoc-comments-disappear
+// eslint-disable-next-line no-unused-vars
+const JSDOC2MARKDOWN_STUB = undefined;

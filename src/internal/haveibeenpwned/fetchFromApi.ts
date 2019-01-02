@@ -1,3 +1,4 @@
+import { Breach, Paste } from 'types/remote-api';
 import axios from './axiosInstance';
 import {
   BAD_REQUEST,
@@ -5,6 +6,13 @@ import {
   NOT_FOUND,
   TOO_MANY_REQUESTS,
 } from './responses';
+
+export type ApiData =
+  | Breach // breach
+  | Breach[] // breachedaccount, breaches
+  | Paste[] // pasteaccount
+  | string[] // dataclasses
+  | null; // most endpoints can return an empty response
 
 /**
  * Fetches data from the supplied API endpoint.
@@ -18,11 +26,12 @@ import {
  * @internal
  * @private
  * @param {string} endpoint the API endpoint to query
- * @returns {Promise} a Promise which resolves to the data resulting from the
- * query (or null for 404 Not Found responses), or rejects with an Error
+ * @returns {Promise<ApiData>} a Promise which resolves to the data resulting
+ * from the query (or null for 404 Not Found responses), or rejects with an
+ * Error
  */
-export default endpoint =>
-  Promise.resolve(axios.get(endpoint))
+export default (endpoint: string): Promise<ApiData> =>
+  Promise.resolve(axios.get<ApiData>(endpoint))
     .then(res => res.data)
     .catch(err => {
       if (err.response) {

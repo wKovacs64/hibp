@@ -2,7 +2,9 @@ import AxiosError from 'AxiosError';
 import breachedAccount from 'breachedAccount';
 import dataClasses from 'dataClasses';
 import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
-import mockAxios from './axiosInstance';
+import axios from './axiosInstance';
+
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('request failure', () => {

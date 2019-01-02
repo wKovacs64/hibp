@@ -3,8 +3,9 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
 /**
  * Fetches all data classes in the system.
  *
- * @returns {Promise} a Promise which resolves to an array of strings (or
- * null if no data classes were found), or rejects with an Error
+ * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
+ * array of strings (or null if no data classes were found), or rejects with an
+ * Error
  * @example
  * dataClasses()
  *   .then(data => {
@@ -19,7 +20,8 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  *   });
  * @alias module:dataClasses
  */
-const dataClasses = () => fetchFromApi('/dataclasses');
+const dataClasses = (): Promise<string[] | null> =>
+  fetchFromApi('/dataclasses') as Promise<string[] | null>;
 
 /**
  * A module for retrieving all data classes in the system.

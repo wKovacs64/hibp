@@ -1,6 +1,8 @@
 import { OK } from './internal/haveibeenpwned/responses';
-import mockAxios from './internal/haveibeenpwned/axiosInstance';
+import axios from './internal/haveibeenpwned/axiosInstance';
 import breaches from './breaches';
+
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('breaches', () => {
   const data = [{ breach: 'info' }];

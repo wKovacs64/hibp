@@ -1,9 +1,54 @@
+export interface Breach {
+  Name: string;
+  Title: string;
+  Domain: string;
+  BreachDate: string;
+  AddedDate: string;
+  ModifiedDate: string;
+  PwnCount: number;
+  Description: string;
+  LogoPath: string;
+  DataClasses: string[];
+  IsVerified: boolean;
+  IsFabricated: boolean;
+  IsSensitive: boolean;
+  IsRetired: boolean;
+  IsSpamList: boolean;
+}
+export interface Paste {
+  Id: string;
+  Source: string;
+  Title: string;
+  Date: string;
+  EmailCount: number;
+}
+/**
+ * An object representing a breach.
+ *
+ * @typedef {object} Breach
+ * @property {string} Name
+ * @property {string} Title
+ * @property {string} Domain
+ * @property {string} BreachDate
+ * @property {string} AddedDate
+ * @property {string} ModifiedDate
+ * @property {number} PwnCount
+ * @property {string} Description
+ * @property {string} LogoPath
+ * @property {string[]} DataClasses
+ * @property {boolean} IsVerified
+ * @property {boolean} IsFabricated
+ * @property {boolean} IsSensitive
+ * @property {boolean} IsRetired
+ * @property {boolean} IsSpamList
+ */
 /**
  * Fetches data for a specific breach event.
  *
  * @param {string} breachName the name of a breach in the system
- * @returns {Promise} a Promise which resolves to an object representing a
- * breach (or null if no breach was found), or rejects with an Error
+ * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
+ * object representing a breach (or null if no breach was found), or rejects
+ * with an Error
  * @example
  * breach('Adobe')
  *   .then(data => {
@@ -18,18 +63,23 @@
  *   });
  * @alias module:breach
  */
-export declare const breach: (breachName: any) => Promise<any>;
+export declare const breach: (breachName: string) => Promise<Breach | null>;
+export interface BreachedAccountOptions {
+  domain?: string;
+  truncate?: boolean;
+}
 /**
  * Fetches breach data for a specific account.
  *
  * @param {string} account a username or email address
- * @param {Object} [options] a configuration object
+ * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
- * @returns {Promise} a Promise which resolves to an array of breach objects
- * (or null if no breaches were found), or rejects with an Error
+ * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
+ * array of breach objects (or null if no breaches were found), or rejects with
+ * an Error
  * @example
  * breachedAccount('foo')
  *   .then(data => {
@@ -69,20 +119,20 @@ export declare const breach: (breachName: any) => Promise<any>;
  * @alias module:breachedAccount
  */
 export declare const breachedAccount: (
-  account: any,
-  options?: {
-    domain?: string;
-    truncate?: boolean;
-  },
-) => Promise<any>;
+  account: string,
+  options?: BreachedAccountOptions,
+) => Promise<Breach[] | null>;
+export interface BreachesOptions {
+  domain?: string;
+}
 /**
  * Fetches all breach events in the system.
  *
- * @param {Object} [options] a configuration object
+ * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
- * @returns {Promise} a Promise which resolves to an array of breach objects
- * (an empty array if no breaches were found), or rejects with an Error
+ * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
+ * objects (an empty array if no breaches were found), or rejects with an Error
  * @example
  * breaches()
  *   .then(data => {
@@ -109,16 +159,13 @@ export declare const breachedAccount: (
  *   });
  * @alias module:breaches
  */
-export declare const breaches: (
-  options?: {
-    domain?: string;
-  },
-) => Promise<any>;
+export declare const breaches: (options?: BreachesOptions) => Promise<Breach[]>;
 /**
  * Fetches all data classes in the system.
  *
- * @returns {Promise} a Promise which resolves to an array of strings (or
- * null if no data classes were found), or rejects with an Error
+ * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
+ * array of strings (or null if no data classes were found), or rejects with an
+ * Error
  * @example
  * dataClasses()
  *   .then(data => {
@@ -133,13 +180,24 @@ export declare const breaches: (
  *   });
  * @alias module:dataClasses
  */
-export declare const dataClasses: () => Promise<any>;
+export declare const dataClasses: () => Promise<string[] | null>;
+/**
+ * An object representing a paste.
+ *
+ * @typedef {object} Paste
+ * @property {string} Id
+ * @property {string} Source
+ * @property {string} Title
+ * @property {string} Date
+ * @property {number} EmailCount
+ */
 /**
  * Fetches paste data for a specific account (email address).
  *
  * @param {string} email the email address to query
- * @returns {Promise} a Promise which resolves to an array of paste objects
- * (or null if no pastes were found), or rejects with an Error
+ * @returns {(Promise<Paste[]> | Promise<null>)} a Promise which resolves to an
+ * array of paste objects (or null if no pastes were found), or rejects with an
+ * Error
  * @example
  * pasteAccount('foo@bar.com')
  *   .then(data => {
@@ -154,15 +212,15 @@ export declare const dataClasses: () => Promise<any>;
  *   });
  * @alias module:pasteAccount
  */
-export declare const pasteAccount: (email: any) => Promise<any>;
+export declare const pasteAccount: (email: string) => Promise<Paste[] | null>;
 /**
  * Fetches the number of times the the given password has been exposed in a
  * breach (0 indicating no exposure). The password is given in plain text, but
  * only the first 5 characters of its SHA-1 hash will be submitted to the API.
  *
  * @param {string} password a password in plain text
- * @returns {Promise} a Promise which resolves to the number of times the
- * password has been exposed in a breach, or rejects with an Error
+ * @returns {Promise<number>} a Promise which resolves to the number of times
+ * the password has been exposed in a breach, or rejects with an Error
  * @example
  * pwnedPassword('f00b4r')
  *   .then(numPwns => {
@@ -179,7 +237,20 @@ export declare const pasteAccount: (email: any) => Promise<any>;
  * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
  * @alias module:pwnedPassword
  */
-export declare const pwnedPassword: (password: any) => Promise<any>;
+export declare const pwnedPassword: (password: string) => Promise<number>;
+export interface PwnedPasswordSuffix {
+  suffix: string;
+  count: number;
+}
+/**
+ * An object representing an exposed password hash suffix (corresponding to a
+ * given hash prefix) and how many times it occurred in the Pwned Passwords
+ * repository.
+ *
+ * @typedef {object} PwnedPasswordSuffix
+ * @property {string} suffix
+ * @property {number} count
+ */
 /**
  * Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
  *
@@ -191,10 +262,10 @@ export declare const pwnedPassword: (password: any) => Promise<any>;
  *
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
- * @returns {Promise} a Promise which resolves to an array of objects, each
- * containing the `suffix` that when matched with the prefix composes the
- * complete hash, and a `count` of how many times it appears in the breached
- * password data set, or rejects with an Error
+ * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an array
+ * of objects, each containing the `suffix` that when matched with the prefix
+ * composes the complete hash, and a `count` of how many times it appears in the
+ * breached password data set, or rejects with an Error
  *
  * @example
  * pwnedPasswordRange('5BAA6')
@@ -219,7 +290,20 @@ export declare const pwnedPassword: (password: any) => Promise<any>;
  * @see https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
  * @alias module:pwnedPasswordRange
  */
-export declare const pwnedPasswordRange: (prefix: any) => Promise<any>;
+export declare const pwnedPasswordRange: (
+  prefix: string,
+) => Promise<PwnedPasswordSuffix[]>;
+export interface SearchResults {
+  breaches: Breach[] | null;
+  pastes: Paste[] | null;
+}
+/**
+ * An object representing search results.
+ *
+ * @typedef {object} SearchResults
+ * @property {(Breach[] | null)} breaches
+ * @property {(Paste[] | null)} pastes
+ */
 /**
  * Fetches all breaches and all pastes associated with the provided account
  * (email address or username). Note that the remote API does not support
@@ -230,16 +314,16 @@ export declare const pwnedPasswordRange: (prefix: any) => Promise<any>;
  * convenience method is designed to mimic.
  *
  * @param {string} account an email address or username
- * @param {Object} [breachOptions] a configuration object pertaining to
- * breach queries
+ * @param {object} [breachOptions] a configuration object
+ * pertaining to breach queries
  * @param {string} [breachOptions.domain] a domain by which to filter the
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: false)
- * @returns {Promise} a Promise which resolves to an object containing a
- * "breaches" key (which can be null or an array of breach objects) and a
- * "pastes" key (which can be null or an array of paste objects), or rejects
- * with an Error
+ * @returns {Promise<SearchResults>} a Promise which resolves to an object
+ * containing a "breaches" key (which can be null or an array of breach objects)
+ * and a "pastes" key (which can be null or an array of paste objects), or
+ * rejects with an Error
  * @example
  * search('foo')
  *   .then(data => {
@@ -269,11 +353,8 @@ export declare const pwnedPasswordRange: (prefix: any) => Promise<any>;
  * @alias module:search
  */
 export declare const search: (
-  account: any,
-  breachOptions?: {},
-) => Promise<{
-  breaches: any;
-  pastes: any;
-}>;
+  account: string,
+  breachOptions?: BreachedAccountOptions,
+) => Promise<SearchResults>;
 
 export as namespace hibp;

@@ -1,7 +1,9 @@
 import AxiosError from 'AxiosError';
 import pwnedPasswordRange from 'pwnedPasswordRange';
 import { BAD_REQUEST } from './responses';
-import mockAxios from './axiosInstance';
+import axios from './axiosInstance';
+
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('request failure', () => {

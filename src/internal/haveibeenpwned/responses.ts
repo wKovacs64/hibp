@@ -10,26 +10,33 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
+export interface HaveIBeenPwnedApiResponse {
+  // eslint-disable-next-line no-restricted-globals
+  status: number;
+  statusText?: string;
+  data?: string;
+}
+
 /** @internal */
-export const OK = {
+export const OK: HaveIBeenPwnedApiResponse = {
   status: 200,
 };
 
 /** @internal */
-export const BAD_REQUEST = {
+export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
   status: 400,
   statusText:
     'Bad request — the account does not comply with an acceptable format.',
 };
 
 /** @internal */
-export const FORBIDDEN = {
+export const FORBIDDEN: HaveIBeenPwnedApiResponse = {
   status: 403,
   statusText: 'Forbidden - no user agent has been specified in the request.',
 };
 
 /** @internal */
-export const NOT_FOUND = {
+export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
   status: 404,
 };
 
@@ -40,7 +47,7 @@ export const NOT_FOUND = {
  *
  * @internal
  */
-export const TOO_MANY_REQUESTS = {
+export const TOO_MANY_REQUESTS: HaveIBeenPwnedApiResponse = {
   status: 429,
   data:
     'Rate limit exceeded, refer to acceptable use of the API: ' +

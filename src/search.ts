@@ -1,6 +1,24 @@
-import breachedAccount from './breachedAccount';
+import { Breach, Paste } from './types/remote-api';
+import breachedAccount, { BreachedAccountOptions } from './breachedAccount';
 import pasteAccount from './pasteAccount';
 
+export interface SearchResults {
+  breaches: Breach[] | null;
+  pastes: Paste[] | null;
+}
+
+export interface SearchOptions {
+  account: string;
+  breachOptions: BreachedAccountOptions;
+}
+
+/**
+ * An object representing search results.
+ *
+ * @typedef {object} SearchResults
+ * @property {(Breach[] | null)} breaches
+ * @property {(Paste[] | null)} pastes
+ */
 /**
  * Fetches all breaches and all pastes associated with the provided account
  * (email address or username). Note that the remote API does not support
@@ -11,16 +29,16 @@ import pasteAccount from './pasteAccount';
  * convenience method is designed to mimic.
  *
  * @param {string} account an email address or username
- * @param {Object} [breachOptions] a configuration object pertaining to
- * breach queries
+ * @param {object} [breachOptions] a configuration object
+ * pertaining to breach queries
  * @param {string} [breachOptions.domain] a domain by which to filter the
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: false)
- * @returns {Promise} a Promise which resolves to an object containing a
- * "breaches" key (which can be null or an array of breach objects) and a
- * "pastes" key (which can be null or an array of paste objects), or rejects
- * with an Error
+ * @returns {Promise<SearchResults>} a Promise which resolves to an object
+ * containing a "breaches" key (which can be null or an array of breach objects)
+ * and a "pastes" key (which can be null or an array of paste objects), or
+ * rejects with an Error
  * @example
  * search('foo')
  *   .then(data => {
@@ -49,7 +67,10 @@ import pasteAccount from './pasteAccount';
  * @see https://haveibeenpwned.com/
  * @alias module:search
  */
-const search = (account, breachOptions = {}) =>
+const search = (
+  account: string,
+  breachOptions: BreachedAccountOptions = {},
+): Promise<SearchResults> =>
   Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:

@@ -1,16 +1,23 @@
 import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
+import { Breach } from './types/remote-api';
+
+export interface BreachedAccountOptions {
+  domain?: string;
+  truncate?: boolean;
+}
 
 /**
  * Fetches breach data for a specific account.
  *
  * @param {string} account a username or email address
- * @param {Object} [options] a configuration object
+ * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
- * @returns {Promise} a Promise which resolves to an array of breach objects
- * (or null if no breaches were found), or rejects with an Error
+ * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
+ * array of breach objects (or null if no breaches were found), or rejects with
+ * an Error
  * @example
  * breachedAccount('foo')
  *   .then(data => {
@@ -49,7 +56,10 @@ import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
  *   });
  * @alias module:breachedAccount
  */
-const breachedAccount = (account, options = {}) => {
+const breachedAccount = (
+  account: string,
+  options: BreachedAccountOptions = {},
+): Promise<Breach[] | null> => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params = [];
   if (options.domain) {
@@ -58,7 +68,9 @@ const breachedAccount = (account, options = {}) => {
   if (options.truncate) {
     params.push('truncateResponse=true');
   }
-  return fetchFromApi(`${endpoint}${params.join('&')}`);
+  return fetchFromApi(`${endpoint}${params.join('&')}`) as Promise<
+    Breach[] | null
+  >;
 };
 
 /**

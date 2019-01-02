@@ -1,7 +1,9 @@
 import AxiosError from 'AxiosError';
 import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
-import mockAxios from './internal/haveibeenpwned/axiosInstance';
+import axios from './internal/haveibeenpwned/axiosInstance';
 import breach from './breach';
+
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe('breach', () => {
   describe('found', () => {
