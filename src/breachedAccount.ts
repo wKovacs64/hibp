@@ -1,11 +1,6 @@
 import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
 import { Breach } from './types/remote-api';
 
-export interface BreachedAccountOptions {
-  domain?: string;
-  truncate?: boolean;
-}
-
 /**
  * Fetches breach data for a specific account.
  *
@@ -58,7 +53,10 @@ export interface BreachedAccountOptions {
  */
 const breachedAccount = (
   account: string,
-  options: BreachedAccountOptions = {},
+  options: {
+    domain?: string;
+    truncate?: boolean;
+  } = {},
 ): Promise<Breach[] | null> => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params = [];

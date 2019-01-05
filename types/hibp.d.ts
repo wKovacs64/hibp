@@ -64,10 +64,6 @@ export interface Paste {
  * @alias module:breach
  */
 export declare const breach: (breachName: string) => Promise<Breach | null>;
-export interface BreachedAccountOptions {
-  domain?: string;
-  truncate?: boolean;
-}
 /**
  * Fetches breach data for a specific account.
  *
@@ -120,11 +116,11 @@ export interface BreachedAccountOptions {
  */
 export declare const breachedAccount: (
   account: string,
-  options?: BreachedAccountOptions,
+  options?: {
+    domain?: string | undefined;
+    truncate?: boolean | undefined;
+  },
 ) => Promise<Breach[] | null>;
-export interface BreachesOptions {
-  domain?: string;
-}
 /**
  * Fetches all breach events in the system.
  *
@@ -159,7 +155,11 @@ export interface BreachesOptions {
  *   });
  * @alias module:breaches
  */
-export declare const breaches: (options?: BreachesOptions) => Promise<Breach[]>;
+export declare const breaches: (
+  options?: {
+    domain?: string | undefined;
+  },
+) => Promise<Breach[]>;
 /**
  * Fetches all data classes in the system.
  *
@@ -354,7 +354,10 @@ export interface SearchResults {
  */
 export declare const search: (
   account: string,
-  breachOptions?: BreachedAccountOptions,
+  breachOptions?: {
+    domain?: string | undefined;
+    truncate?: boolean | undefined;
+  },
 ) => Promise<SearchResults>;
 
 export as namespace hibp;

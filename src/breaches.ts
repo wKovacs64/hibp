@@ -1,10 +1,6 @@
 import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
 import { Breach } from './types/remote-api';
 
-export interface BreachesOptions {
-  domain?: string;
-}
-
 /**
  * Fetches all breach events in the system.
  *
@@ -39,7 +35,11 @@ export interface BreachesOptions {
  *   });
  * @alias module:breaches
  */
-const breaches = (options: BreachesOptions = {}): Promise<Breach[]> => {
+const breaches = (
+  options: {
+    domain?: string;
+  } = {},
+): Promise<Breach[]> => {
   const endpoint = '/breaches?';
   const params = [];
   if (options.domain) {

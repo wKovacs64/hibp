@@ -1,15 +1,10 @@
 import { Breach, Paste } from './types/remote-api';
-import breachedAccount, { BreachedAccountOptions } from './breachedAccount';
+import breachedAccount from './breachedAccount';
 import pasteAccount from './pasteAccount';
 
 export interface SearchResults {
   breaches: Breach[] | null;
   pastes: Paste[] | null;
-}
-
-export interface SearchOptions {
-  account: string;
-  breachOptions: BreachedAccountOptions;
 }
 
 /**
@@ -69,7 +64,10 @@ export interface SearchOptions {
  */
 const search = (
   account: string,
-  breachOptions: BreachedAccountOptions = {},
+  breachOptions: {
+    domain?: string;
+    truncate?: boolean;
+  } = {},
 ): Promise<SearchResults> =>
   Promise.all([
     breachedAccount(account, breachOptions),
