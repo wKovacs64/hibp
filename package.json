@@ -40,7 +40,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm-run-all --sequential build:bundle build:types",
+    "build": "npm-run-all --sequential build:bundle build:types docs",
     "build:bundle": "rollup --config",
     "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file types/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write types/hibp.d.ts",
     "check-types": "npm-run-all --sequential --continue-on-error check-types:*",
