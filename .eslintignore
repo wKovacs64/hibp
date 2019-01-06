@@ -3,5 +3,6 @@ dist
 es
 example
 lib
+types
 babel-browser-build.js
 browser-es-module-loader.js

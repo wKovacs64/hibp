@@ -41,27 +41,27 @@ account (email address or username).</p>
 ## Functions
 
 <dl>
-<dt><a href="#exp_module_breach--breach">breach(breachName)</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_breach--breach">breach(breachName)</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches data for a specific breach event.</p>
 </dd>
-<dt><a href="#exp_module_breachedAccount--breachedAccount">breachedAccount(account, [options])</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_breachedAccount--breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches breach data for a specific account.</p>
 </dd>
-<dt><a href="#exp_module_breaches--breaches">breaches([options])</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_breaches--breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> ⏏</dt>
 <dd><p>Fetches all breach events in the system.</p>
 </dd>
-<dt><a href="#exp_module_dataClasses--dataClasses">dataClasses()</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_dataClasses--dataClasses">dataClasses()</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
-<dt><a href="#exp_module_pasteAccount--pasteAccount">pasteAccount(email)</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_pasteAccount--pasteAccount">pasteAccount(email)</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
 </dd>
-<dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password)</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password)</a> ⇒ <code>Promise.&lt;number&gt;</code> ⏏</dt>
 <dd><p>Fetches the number of times the the given password has been exposed in a
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
-<dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix)</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix)</a> ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏</dt>
 <dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
@@ -69,7 +69,7 @@ suffix of every hash beginning with the specified prefix, followed by a count
 of how many times it appears in the data set. This function parses the
 response and returns a more structured format.</p>
 </dd>
-<dt><a href="#exp_module_search--search">search(account, [breachOptions])</a> ⇒ <code>Promise</code> ⏏</dt>
+<dt><a href="#exp_module_search--search">search(account, [breachOptions])</a> ⇒ <code><a href="#SearchResults">Promise.&lt;SearchResults&gt;</a></code> ⏏</dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
 (email address or username). Note that the remote API does not support
 querying pastes by username (only email addresses), so in the event the
@@ -77,6 +77,25 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
+</dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
+<dd><p>An object representing a breach.</p>
+</dd>
+<dt><a href="#Paste">Paste</a> : <code>object</code></dt>
+<dd><p>An object representing a paste.</p>
+</dd>
+<dt><a href="#PwnedPasswordSuffix">PwnedPasswordSuffix</a> : <code>object</code></dt>
+<dd><p>An object representing an exposed password hash suffix (corresponding to a
+given hash prefix) and how many times it occurred in the Pwned Passwords
+repository.</p>
+</dd>
+<dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
+<dd><p>An object representing search results.</p>
 </dd>
 </dl>
 
@@ -91,12 +110,13 @@ import { breach } from 'hibp';
 ```
 <a name="exp_module_breach--breach"></a>
 
-### breach(breachName) ⇒ <code>Promise</code> ⏏
+### breach(breachName) ⇒ [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches data for a specific breach event.
 
 **Kind**: global method of [<code>breach</code>](#module_breach)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an object representing a
-breach (or null if no breach was found), or rejects with an Error  
+**Returns**: [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
+object representing a breach (or null if no breach was found), or rejects
+with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -127,17 +147,18 @@ import { breachedAccount } from 'hibp';
 ```
 <a name="exp_module_breachedAccount--breachedAccount"></a>
 
-### breachedAccount(account, [options]) ⇒ <code>Promise</code> ⏏
+### breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches breach data for a specific account.
 
 **Kind**: global method of [<code>breachedAccount</code>](#module_breachedAccount)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach objects
-(or null if no breaches were found), or rejects with an Error  
+**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
+array of breach objects (or null if no breaches were found), or rejects with
+an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | account | <code>string</code> | a username or email address |
-| [options] | <code>Object</code> | a configuration object |
+| [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
 
@@ -194,16 +215,16 @@ import { breaches } from 'hibp';
 ```
 <a name="exp_module_breaches--breaches"></a>
 
-### breaches([options]) ⇒ <code>Promise</code> ⏏
+### breaches([options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> ⏏
 Fetches all breach events in the system.
 
 **Kind**: global method of [<code>breaches</code>](#module_breaches)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of breach objects
-(an empty array if no breaches were found), or rejects with an Error  
+**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> - a Promise which resolves to an array of breach
+objects (an empty array if no breaches were found), or rejects with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [options] | <code>Object</code> | a configuration object |
+| [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 
 **Example**  
@@ -245,12 +266,13 @@ import { dataClasses } from 'hibp';
 ```
 <a name="exp_module_dataClasses--dataClasses"></a>
 
-### dataClasses() ⇒ <code>Promise</code> ⏏
+### dataClasses() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches all data classes in the system.
 
 **Kind**: global method of [<code>dataClasses</code>](#module_dataClasses)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of strings (or
-null if no data classes were found), or rejects with an Error  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
+array of strings (or null if no data classes were found), or rejects with an
+Error  
 **Example**  
 ```js
 dataClasses()
@@ -276,12 +298,13 @@ import { pasteAccount } from 'hibp';
 ```
 <a name="exp_module_pasteAccount--pasteAccount"></a>
 
-### pasteAccount(email) ⇒ <code>Promise</code> ⏏
+### pasteAccount(email) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches paste data for a specific account (email address).
 
 **Kind**: global method of [<code>pasteAccount</code>](#module_pasteAccount)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of paste objects
-(or null if no pastes were found), or rejects with an Error  
+**Returns**: <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
+array of paste objects (or null if no pastes were found), or rejects with an
+Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -313,14 +336,14 @@ import { pwnedPassword } from 'hibp';
 ```
 <a name="exp_module_pwnedPassword--pwnedPassword"></a>
 
-### pwnedPassword(password) ⇒ <code>Promise</code> ⏏
+### pwnedPassword(password) ⇒ <code>Promise.&lt;number&gt;</code> ⏏
 Fetches the number of times the the given password has been exposed in a
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.
 
 **Kind**: global method of [<code>pwnedPassword</code>](#module_pwnedPassword)  
-**Returns**: <code>Promise</code> - a Promise which resolves to the number of times the
-password has been exposed in a breach, or rejects with an Error  
+**Returns**: <code>Promise.&lt;number&gt;</code> - a Promise which resolves to the number of times
+the password has been exposed in a breach, or rejects with an Error  
 **See**: https://haveibeenpwned.com/API/v2#PwnedPasswords  
 
 | Param | Type | Description |
@@ -354,7 +377,7 @@ import { pwnedPasswordRange } from 'hibp';
 ```
 <a name="exp_module_pwnedPasswordRange--pwnedPasswordRange"></a>
 
-### pwnedPasswordRange(prefix) ⇒ <code>Promise</code> ⏏
+### pwnedPasswordRange(prefix) ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏
 Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
 
 When a password hash with the same first 5 characters is found in the Pwned
@@ -364,10 +387,10 @@ of how many times it appears in the data set. This function parses the
 response and returns a more structured format.
 
 **Kind**: global method of [<code>pwnedPasswordRange</code>](#module_pwnedPasswordRange)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an array of objects, each
-containing the `suffix` that when matched with the prefix composes the
-complete hash, and a `count` of how many times it appears in the breached
-password data set, or rejects with an Error  
+**Returns**: <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> - a Promise which resolves to an array
+of objects, each containing the `suffix` that when matched with the prefix
+composes the complete hash, and a `count` of how many times it appears in the
+breached password data set, or rejects with an Error  
 **See**: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange  
 
 | Param | Type | Description |
@@ -410,7 +433,7 @@ import { search } from 'hibp';
 ```
 <a name="exp_module_search--search"></a>
 
-### search(account, [breachOptions]) ⇒ <code>Promise</code> ⏏
+### search(account, [breachOptions]) ⇒ [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) ⏏
 Fetches all breaches and all pastes associated with the provided account
 (email address or username). Note that the remote API does not support
 querying pastes by username (only email addresses), so in the event the
@@ -420,16 +443,16 @@ exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
 
 **Kind**: global method of [<code>search</code>](#module_search)  
-**Returns**: <code>Promise</code> - a Promise which resolves to an object containing a
-"breaches" key (which can be null or an array of breach objects) and a
-"pastes" key (which can be null or an array of paste objects), or rejects
-with an Error  
+**Returns**: [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) - a Promise which resolves to an object
+containing a "breaches" key (which can be null or an array of breach objects)
+and a "pastes" key (which can be null or an array of paste objects), or
+rejects with an Error  
 **See**: https://haveibeenpwned.com/  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | account | <code>string</code> | an email address or username |
-| [breachOptions] | <code>Object</code> | a configuration object pertaining to breach queries |
+| [breachOptions] | <code>object</code> | a configuration object pertaining to breach queries |
 | [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
 
@@ -473,3 +496,73 @@ import * as hibp from 'hibp';
 // Now all hibp functions are available on the hibp object:
 hibp.dataClasses().then(...)
 ```
+<a name="Breach"></a>
+
+## Breach : <code>object</code>
+An object representing a breach.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| Name | <code>string</code> | 
+| Title | <code>string</code> | 
+| Domain | <code>string</code> | 
+| BreachDate | <code>string</code> | 
+| AddedDate | <code>string</code> | 
+| ModifiedDate | <code>string</code> | 
+| PwnCount | <code>number</code> | 
+| Description | <code>string</code> | 
+| LogoPath | <code>string</code> | 
+| DataClasses | <code>Array.&lt;string&gt;</code> | 
+| IsVerified | <code>boolean</code> | 
+| IsFabricated | <code>boolean</code> | 
+| IsSensitive | <code>boolean</code> | 
+| IsRetired | <code>boolean</code> | 
+| IsSpamList | <code>boolean</code> | 
+
+<a name="Paste"></a>
+
+## Paste : <code>object</code>
+An object representing a paste.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| Id | <code>string</code> | 
+| Source | <code>string</code> | 
+| Title | <code>string</code> | 
+| Date | <code>string</code> | 
+| EmailCount | <code>number</code> | 
+
+<a name="PwnedPasswordSuffix"></a>
+
+## PwnedPasswordSuffix : <code>object</code>
+An object representing an exposed password hash suffix (corresponding to a
+given hash prefix) and how many times it occurred in the Pwned Passwords
+repository.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| suffix | <code>string</code> | 
+| count | <code>number</code> | 
+
+<a name="SearchResults"></a>
+
+## SearchResults : <code>object</code>
+An object representing search results.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
+| pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
+
