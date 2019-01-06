@@ -1,3 +1,6 @@
+// TODO: remove temporary workaround for bradzacher/eslint-plugin-typescript#255
+/* eslint-disable strict */
+
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //

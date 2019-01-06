@@ -1,3 +1,6 @@
+// TODO: remove temporary workaround for bradzacher/eslint-plugin-typescript#255
+/* eslint-disable strict */
+
 const fs = require('fs');
 
 const filename = 'API.md';

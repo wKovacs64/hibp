@@ -3,10 +3,7 @@ module.exports = {
     jest: true,
   },
   extends: ['airbnb-base', 'prettier'],
-  parser: 'pluggable-babel-eslint',
-  parserOptions: {
-    plugins: ['typescript'],
-  },
+  parser: 'eslint-plugin-typescript/parser',
   plugins: ['typescript'],
   rules: {
     'valid-jsdoc': [
@@ -24,7 +21,6 @@ module.exports = {
     {
       files: ['**/*.ts'],
       rules: {
-        'no-undef': 'off',
         'typescript/class-name-casing': 'error',
         'typescript/explicit-function-return-type': [
           'error',
@@ -39,10 +35,13 @@ module.exports = {
         ],
         'typescript/no-namespace': 'error',
         'typescript/no-non-null-assertion': 'error',
+        'typescript/no-object-literal-type-assertion': 'error',
         'typescript/no-parameter-properties': 'error',
         'typescript/no-triple-slash-reference': 'error',
+        'no-unused-vars': 'off',
         'typescript/no-unused-vars': 'error',
         'typescript/no-var-requires': 'error',
+        'typescript/prefer-interface': 'error',
         'typescript/prefer-namespace-keyword': 'error',
         'typescript/type-annotation-spacing': 'error',
       },
