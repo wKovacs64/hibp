@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 7.3.0 _(2019-01-05)_
+
+- Converted to TypeScript ([#56][56])
+
 ## Version 7.2.3 _(2018-12-20)_
 
 - Fixed build on Windows ([48d25282][48d25282])
@@ -293,3 +297,4 @@
   https://github.com/wKovacs64/hibp/commit/48d25282407d2b1d3cdfac51f311d018a6a16d25
 [52]: https://github.com/wKovacs64/hibp/pull/52
 [53]: https://github.com/wKovacs64/hibp/pull/53
+[56]: https://github.com/wKovacs64/hibp/pull/56
