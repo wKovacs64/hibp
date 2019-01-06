@@ -12,7 +12,8 @@
     "declaration": true,
     "strict": true,
     "stripInternal": true,
-    "types": ["node", "jsdom", "jest"]
+    "types": ["node", "jsdom", "jest", "jssha/src"],
+    "typeRoots": ["node_modules/@types", "./src/@types"]
   },
   "exclude": ["cypress"]
 }

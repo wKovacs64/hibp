@@ -1,4 +1,3 @@
-// @ts-ignore: dts-bundle-generator doesn't pick up ./internal/jssha.d.ts
 import JSSHA from 'jssha/src/sha1';
 import pwnedPasswordRange from './pwnedPasswordRange';
 
