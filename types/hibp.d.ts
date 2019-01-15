@@ -359,5 +359,15 @@ export declare const search: (
     truncate?: boolean | undefined;
   },
 ) => Promise<SearchResults>;
+export interface HIBP {
+  breach: typeof breach;
+  breachedAccount: typeof breachedAccount;
+  breaches: typeof breaches;
+  dataClasses: typeof dataClasses;
+  pasteAccount: typeof pasteAccount;
+  pwnedPassword: typeof pwnedPassword;
+  pwnedPasswordRange: typeof pwnedPasswordRange;
+  search: typeof search;
+}
 
 export as namespace hibp;
