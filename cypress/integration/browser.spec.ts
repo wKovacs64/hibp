@@ -7,31 +7,16 @@ describe('UMD', () => {
 
     cy.window()
       .its('hibp')
-      .should('be.an', 'object')
-      .window()
-      .its('hibp.breach')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.breachedAccount')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.breaches')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.dataClasses')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.pasteAccount')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.pwnedPassword')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.pwnedPasswordRange')
-      .should('be.a', 'function')
-      .window()
-      .its('hibp.search')
-      .should('be.a', 'function');
+      .then(hibp => {
+        expect(hibp.breach).to.be.a('function');
+        expect(hibp.breachedAccount).to.be.a('function');
+        expect(hibp.breaches).to.be.a('function');
+        expect(hibp.dataClasses).to.be.a('function');
+        expect(hibp.pasteAccount).to.be.a('function');
+        expect(hibp.pwnedPassword).to.be.a('function');
+        expect(hibp.pwnedPasswordRange).to.be.a('function');
+        expect(hibp.search).to.be.a('function');
+      });
   });
 });
 
