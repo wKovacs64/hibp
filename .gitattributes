@@ -1,3 +1,6 @@
+# Ignore vendor test-only JS files when calculating language stats on GitHub
+test/*.js linguist-vendored
+
 # Adapted from:
 # https://github.com/alexkaratarakis/gitattributes/blob/master/Web.gitattributes
 
