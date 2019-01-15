@@ -1,5 +1,5 @@
 import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
-import { Breach } from './types/remote-api';
+import { Breach } from './types/remote-api.d';
 
 /**
  * Fetches all breach events in the system.

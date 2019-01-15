@@ -12,6 +12,7 @@ const external = id => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const babelOpts = { exclude: 'node_modules/**', extensions: ['.js', '.ts'] };
 const typescriptOpts = {
   check: false,
+  exclude: ['**/*.d.ts'],
   rollupCommonJSResolveHack: true,
   tsconfigOverride: {
     compilerOptions: {
