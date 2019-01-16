@@ -100,7 +100,7 @@
     "dts-bundle-generator": "2.0.0",
     "eslint": "5.12.0",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-config-prettier": "3.4.0",
+    "eslint-config-prettier": "3.5.0",
     "eslint-import-resolver-jest": "2.1.1",
     "eslint-plugin-cypress": "2.2.0",
     "eslint-plugin-import": "2.14.0",
