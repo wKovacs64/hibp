@@ -87,7 +87,7 @@
     "@babel/preset-env": "7.2.3",
     "@babel/preset-typescript": "7.1.0",
     "@types/common-tags": "1.8.0",
-    "@types/jest": "23.3.12",
+    "@types/jest": "23.3.13",
     "@types/jsdom": "12.2.1",
     "@types/jssha": "2.0.0",
     "@types/node": "10.12.18",
