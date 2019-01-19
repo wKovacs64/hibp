@@ -32,7 +32,7 @@ export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
 /** @internal */
 export const FORBIDDEN: HaveIBeenPwnedApiResponse = {
   status: 403,
-  statusText: 'Forbidden - no user agent has been specified in the request.',
+  statusText: 'Forbidden - access denied.',
 };
 
 /** @internal */

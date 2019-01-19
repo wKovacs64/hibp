@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`internal (haveibeenpwned): fetchFromApi invalid account format throws a "Bad Request" error 1`] = `[Error: Bad request — the account does not comply with an acceptable format.]`;
+exports[`internal (haveibeenpwned): fetchFromApi blocked request throws a "Forbidden" error 1`] = `[Error: Forbidden - access denied.]`;
 
-exports[`internal (haveibeenpwned): fetchFromApi invalid request header throws a "Forbidden" error 1`] = `[Error: Forbidden - no user agent has been specified in the request.]`;
+exports[`internal (haveibeenpwned): fetchFromApi invalid account format throws a "Bad Request" error 1`] = `[Error: Bad request — the account does not comply with an acceptable format.]`;
 
 exports[`internal (haveibeenpwned): fetchFromApi rate limited throws a "Too Many Requests" error 1`] = `[Error: Rate limit exceeded, refer to acceptable use of the API: https://haveibeenpwned.com/API/v2#AcceptableUse]`;
 

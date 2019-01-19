@@ -22,7 +22,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     });
   });
 
-  describe('invalid request header', () => {
+  describe('blocked request', () => {
     it('throws a "Forbidden" error', () => {
       mockAxios.get.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
       expect(breachedAccount('forbidden')).rejects.toMatchSnapshot();
