@@ -1,7 +1,12 @@
 import AxiosError from 'AxiosError';
 import breachedAccount from 'breachedAccount';
 import dataClasses from 'dataClasses';
-import { BAD_REQUEST, FORBIDDEN, TOO_MANY_REQUESTS } from './responses';
+import {
+  BAD_REQUEST,
+  FORBIDDEN,
+  BLOCKED,
+  TOO_MANY_REQUESTS,
+} from './responses';
 import axios from './axiosInstance';
 
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -22,10 +27,15 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     });
   });
 
-  describe('blocked request', () => {
-    it('throws a "Forbidden" error', () => {
+  describe('forbidden request', () => {
+    it('throws a "Forbidden" error if no cf-ray header is present', () => {
       mockAxios.get.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
       expect(breachedAccount('forbidden')).rejects.toMatchSnapshot();
+    });
+
+    it('throws a "Blocked Request" error if a cf-ray header is present', () => {
+      mockAxios.get.mockRejectedValueOnce(new AxiosError(BLOCKED));
+      expect(breachedAccount('blocked')).rejects.toMatchSnapshot();
     });
   });
 

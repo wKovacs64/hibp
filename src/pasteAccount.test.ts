@@ -11,6 +11,7 @@ describe('pasteAccount', () => {
 
     beforeAll(() => {
       mockAxios.get.mockResolvedValue({
+        headers: {},
         status: OK.status,
         data,
       });

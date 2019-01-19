@@ -9,6 +9,7 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 describe('pwnedPassword', () => {
   describe('pwned', () => {
     mockAxios.get.mockResolvedValue({
+      headers: {},
       status: OK.status,
       data: stripIndents`
         003D68EB55068C33ACE09247EE4C639306B:3

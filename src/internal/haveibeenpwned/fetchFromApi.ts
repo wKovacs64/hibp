@@ -14,6 +14,9 @@ export type ApiData =
   | string[] // dataclasses
   | null; // most endpoints can return an empty response
 
+const blockedWithRayId = (rayId: string): string =>
+  `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
+
 /**
  * Fetches data from the supplied API endpoint.
  *
@@ -38,8 +41,14 @@ export default (endpoint: string): Promise<ApiData> =>
         switch (err.response.status) {
           case BAD_REQUEST.status:
             throw new Error(BAD_REQUEST.statusText);
-          case FORBIDDEN.status:
+          case FORBIDDEN.status: {
+            const rayId =
+              err.response.headers && err.response.headers['cf-ray'];
+            if (rayId) {
+              throw new Error(blockedWithRayId(rayId));
+            }
             throw new Error(FORBIDDEN.statusText);
+          }
           case NOT_FOUND.status:
             return null;
           case TOO_MANY_REQUESTS.status:

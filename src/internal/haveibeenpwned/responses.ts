@@ -11,6 +11,7 @@
  */
 
 export interface HaveIBeenPwnedApiResponse {
+  headers: { 'cf-ray'?: string };
   // eslint-disable-next-line no-restricted-globals
   status: number;
   statusText?: string;
@@ -19,11 +20,13 @@ export interface HaveIBeenPwnedApiResponse {
 
 /** @internal */
 export const OK: HaveIBeenPwnedApiResponse = {
+  headers: {},
   status: 200,
 };
 
 /** @internal */
 export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
+  headers: {},
   status: 400,
   statusText:
     'Bad request — the account does not comply with an acceptable format.',
@@ -31,12 +34,20 @@ export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
 
 /** @internal */
 export const FORBIDDEN: HaveIBeenPwnedApiResponse = {
+  headers: {},
   status: 403,
   statusText: 'Forbidden - access denied.',
 };
 
 /** @internal */
+export const BLOCKED: HaveIBeenPwnedApiResponse = {
+  headers: { 'cf-ray': 'someRayId' },
+  status: 403,
+};
+
+/** @internal */
 export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
+  headers: {},
   status: 404,
 };
 
@@ -48,6 +59,7 @@ export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
  * @internal
  */
 export const TOO_MANY_REQUESTS: HaveIBeenPwnedApiResponse = {
+  headers: {},
   status: 429,
   data:
     'Rate limit exceeded, refer to acceptable use of the API: ' +

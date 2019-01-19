@@ -11,6 +11,7 @@ describe('breachedAccount', () => {
 
     beforeAll(() => {
       mockAxios.get.mockResolvedValue({
+        headers: {},
         status: OK.status,
         data,
       });

@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`internal (haveibeenpwned): fetchFromApi blocked request throws a "Forbidden" error 1`] = `[Error: Forbidden - access denied.]`;
+exports[`internal (haveibeenpwned): fetchFromApi forbidden request throws a "Blocked Request" error if a cf-ray header is present 1`] = `[Error: Request blocked, contact haveibeenpwned.com if this continues (Ray ID: someRayId)]`;
+
+exports[`internal (haveibeenpwned): fetchFromApi forbidden request throws a "Forbidden" error if no cf-ray header is present 1`] = `[Error: Forbidden - access denied.]`;
 
 exports[`internal (haveibeenpwned): fetchFromApi invalid account format throws a "Bad Request" error 1`] = `[Error: Bad request — the account does not comply with an acceptable format.]`;
 

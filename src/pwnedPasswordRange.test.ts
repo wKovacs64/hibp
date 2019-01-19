@@ -15,6 +15,7 @@ describe('pwnedPasswordRange', () => {
     `;
 
     mockAxios.get.mockResolvedValue({
+      headers: {},
       status: OK.status,
       data,
     });

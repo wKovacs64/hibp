@@ -10,6 +10,7 @@ describe('search', () => {
     const pastes = null;
 
     mockAxios.get.mockResolvedValue({
+      headers: {},
       status: OK.status,
       data: breaches,
     });
@@ -26,6 +27,7 @@ describe('search', () => {
 
     mockAxios.get.mockImplementation(endpoint =>
       Promise.resolve({
+        headers: {},
         status: OK.status,
         data: /breachedaccount/.test(endpoint) ? breaches : pastes,
       }),
