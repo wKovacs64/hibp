@@ -71,6 +71,8 @@ export declare const breach: (breachName: string) => Promise<Breach | null>;
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
+ * @param {boolean} [options.includeUnverified] include "unverified" breaches in
+ * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
@@ -89,7 +91,7 @@ export declare const breach: (breachName: string) => Promise<Breach | null>;
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { truncate: true })
+ * breachedAccount('bar', { includeUnverified: true })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -118,6 +120,7 @@ export declare const breachedAccount: (
   account: string,
   options?: {
     domain?: string | undefined;
+    includeUnverified?: boolean | undefined;
     truncate?: boolean | undefined;
   },
 ) => Promise<Breach[] | null>;

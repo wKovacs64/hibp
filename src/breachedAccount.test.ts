@@ -36,6 +36,13 @@ describe('breachedAccount', () => {
         ).resolves.toEqual(data));
     });
 
+    describe('with includeUnverified', () => {
+      it('resolves with data from the remote API', () =>
+        expect(
+          breachedAccount('breached', { includeUnverified: true }),
+        ).resolves.toEqual(data));
+    });
+
     describe('with domain and truncateResults', () => {
       it('resolves with data from the remote API', () =>
         expect(
@@ -65,6 +72,13 @@ describe('breachedAccount', () => {
       it('resolves with null', () =>
         expect(
           breachedAccount('clean', { domain: 'foo.bar' }),
+        ).resolves.toBeNull());
+    });
+
+    describe('with includeUnverified', () => {
+      it('resolves with null', () =>
+        expect(
+          breachedAccount('clean', { includeUnverified: true }),
         ).resolves.toBeNull());
     });
 

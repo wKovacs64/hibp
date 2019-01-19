@@ -8,6 +8,8 @@ import { Breach } from './types/remote-api.d';
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
+ * @param {boolean} [options.includeUnverified] include "unverified" breaches in
+ * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
@@ -26,7 +28,7 @@ import { Breach } from './types/remote-api.d';
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { truncate: true })
+ * breachedAccount('bar', { includeUnverified: true })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -55,6 +57,7 @@ const breachedAccount = (
   account: string,
   options: {
     domain?: string;
+    includeUnverified?: boolean;
     truncate?: boolean;
   } = {},
 ): Promise<Breach[] | null> => {
@@ -62,6 +65,9 @@ const breachedAccount = (
   const params = [];
   if (options.domain) {
     params.push(`domain=${encodeURIComponent(options.domain)}`);
+  }
+  if (options.includeUnverified) {
+    params.push('includeUnverified=true');
   }
   if (options.truncate) {
     params.push('truncateResponse=true');
