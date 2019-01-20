@@ -12,7 +12,6 @@
 
 export interface HaveIBeenPwnedApiResponse {
   headers: { 'cf-ray'?: string };
-  // eslint-disable-next-line no-restricted-globals
   status: number;
   statusText?: string;
   data?: string;
