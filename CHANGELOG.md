@@ -1,5 +1,19 @@
 # Change Log
 
+## Version 7.4.0 _(2019-01-19)_
+
+- Added an `includeUnverified` option to the `breachedAccount` function to
+  include "unverified" breaches in the results ([be01ad12][be01ad12])
+- Generalized the 403 Forbidden response message to simply "access denied" as
+  this type of response from `haveibeenpwned.com` is no longer limited to a
+  missing `User-Agent` header field ([15e02f97][15e02f97])
+- Added a new error specific to 403 Forbidden responses that includes the Ray ID
+  from Cloudflare so users can contact `haveibeenpwned.com` when they are being
+  blocked ([cd74e40d][cd74e40d])
+- Removed (and prevented future creation of) empty `remote-api` bundle in the
+  ESM build
+- Defined and exported the `hibp` namespace for typing the UMD build
+
 ## Version 7.3.0 _(2019-01-05)_
 
 - Converted to TypeScript ([#56][56])
@@ -298,3 +312,9 @@
 [52]: https://github.com/wKovacs64/hibp/pull/52
 [53]: https://github.com/wKovacs64/hibp/pull/53
 [56]: https://github.com/wKovacs64/hibp/pull/56
+[be01ad12]:
+  https://github.com/wKovacs64/hibp/commit/be01ad1253b7ceb3c7f844049451a4e8e9e3a858
+[15e02f97]:
+  https://github.com/wKovacs64/hibp/commit/15e02f970286a410a275fe3457f559050632e5bd
+[cd74e40d]:
+  https://github.com/wKovacs64/hibp/commit/cd74e40de95143252ab99f5c070a84e54b1365a6
