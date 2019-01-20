@@ -1,6 +1,3 @@
-// TODO: remove temporary workaround for bradzacher/eslint-plugin-typescript#255
-/* eslint-disable strict */
-
 jest.unmock('axios');
 
 describe('internal (haveibeenpwned): axiosInstance', () => {
@@ -18,7 +15,7 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
     jest.resetModules();
 
     // Browser
-    // eslint-disable-next-line typescript/no-object-literal-type-assertion
+    // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
     global.navigator = {} as Navigator;
     const axiosInstanceBrowser = require.requireActual('./axiosInstance')
       .default;

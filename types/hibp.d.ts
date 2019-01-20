@@ -158,11 +158,9 @@ export declare const breachedAccount: (
  *   });
  * @alias module:breaches
  */
-export declare const breaches: (
-  options?: {
-    domain?: string | undefined;
-  },
-) => Promise<Breach[]>;
+export declare const breaches: (options?: {
+  domain?: string | undefined;
+}) => Promise<Breach[]>;
 /**
  * Fetches all data classes in the system.
  *
