@@ -10,11 +10,31 @@ import { BAD_REQUEST } from './responses';
  * @internal
  * @private
  * @param {string} endpoint the API endpoint to query
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<string>} a Promise which resolves to the data resulting
  * from the query, or rejects with an Error
  */
-export default (endpoint: string): Promise<string> =>
-  Promise.resolve(axios.get<string>(endpoint))
+export default (
+  endpoint: string,
+  /* istanbul ignore next: no need to test default empty object */
+  options: { userAgent?: string } = {},
+): Promise<string> => {
+  const { userAgent } = options;
+
+  const config = Object.assign(
+    {},
+    userAgent
+      ? {
+          headers: {
+            'User-Agent': userAgent,
+          },
+        }
+      : {},
+  );
+
+  return Promise.resolve(axios.get<string>(endpoint, config))
     .then(res => res.data)
     .catch(err => {
       if (err.response) {
@@ -28,3 +48,4 @@ export default (endpoint: string): Promise<string> =>
         throw err;
       }
     });
+};

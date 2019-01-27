@@ -57,4 +57,15 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       expect(breachedAccount('unknown response')).rejects.toMatchSnapshot();
     });
   });
+
+  describe('userAgent option', () => {
+    it('is passed on as a request header', () => {
+      const ua = 'custom UA';
+      return dataClasses({ userAgent: ua }).then(() => {
+        expect(mockAxios.get).toHaveBeenCalledWith(expect.any(String), {
+          headers: { 'User-Agent': ua },
+        });
+      });
+    });
+  });
 });

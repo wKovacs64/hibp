@@ -15,6 +15,9 @@ import { Paste } from './types/remote-api.d';
  * Fetches paste data for a specific account (email address).
  *
  * @param {string} email the email address to query
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Paste[]> | Promise<null>)} a Promise which resolves to an
  * array of paste objects (or null if no pastes were found), or rejects with an
  * Error
@@ -32,10 +35,13 @@ import { Paste } from './types/remote-api.d';
  *   });
  * @alias module:pasteAccount
  */
-const pasteAccount = (email: string): Promise<Paste[] | null> =>
-  fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`) as Promise<
-    Paste[] | null
-  >;
+const pasteAccount = (
+  email: string,
+  options: { userAgent?: string } = {},
+): Promise<Paste[] | null> =>
+  fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`, {
+    userAgent: options.userAgent,
+  }) as Promise<Paste[] | null>;
 
 /**
  * A module for retrieving paste data for a specific account (email address).

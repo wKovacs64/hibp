@@ -46,6 +46,9 @@ export interface Paste {
  * Fetches data for a specific breach event.
  *
  * @param {string} breachName the name of a breach in the system
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
  * object representing a breach (or null if no breach was found), or rejects
  * with an Error
@@ -63,7 +66,12 @@ export interface Paste {
  *   });
  * @alias module:breach
  */
-export declare const breach: (breachName: string) => Promise<Breach | null>;
+export declare const breach: (
+  breachName: string,
+  options?: {
+    userAgent?: string | undefined;
+  },
+) => Promise<Breach | null>;
 /**
  * Fetches breach data for a specific account.
  *
@@ -75,6 +83,8 @@ export declare const breach: (breachName: string) => Promise<Breach | null>;
  * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
  * array of breach objects (or null if no breaches were found), or rejects with
  * an Error
@@ -91,7 +101,7 @@ export declare const breach: (breachName: string) => Promise<Breach | null>;
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { includeUnverified: true })
+ * breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -122,6 +132,7 @@ export declare const breachedAccount: (
     domain?: string | undefined;
     includeUnverified?: boolean | undefined;
     truncate?: boolean | undefined;
+    userAgent?: string | undefined;
   },
 ) => Promise<Breach[] | null>;
 /**
@@ -130,6 +141,8 @@ export declare const breachedAccount: (
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
  * objects (an empty array if no breaches were found), or rejects with an Error
  * @example
@@ -160,10 +173,14 @@ export declare const breachedAccount: (
  */
 export declare const breaches: (options?: {
   domain?: string | undefined;
+  userAgent?: string | undefined;
 }) => Promise<Breach[]>;
 /**
  * Fetches all data classes in the system.
  *
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
  * array of strings (or null if no data classes were found), or rejects with an
  * Error
@@ -181,7 +198,9 @@ export declare const breaches: (options?: {
  *   });
  * @alias module:dataClasses
  */
-export declare const dataClasses: () => Promise<string[] | null>;
+export declare const dataClasses: (options?: {
+  userAgent?: string | undefined;
+}) => Promise<string[] | null>;
 /**
  * An object representing a paste.
  *
@@ -196,6 +215,9 @@ export declare const dataClasses: () => Promise<string[] | null>;
  * Fetches paste data for a specific account (email address).
  *
  * @param {string} email the email address to query
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Paste[]> | Promise<null>)} a Promise which resolves to an
  * array of paste objects (or null if no pastes were found), or rejects with an
  * Error
@@ -213,13 +235,21 @@ export declare const dataClasses: () => Promise<string[] | null>;
  *   });
  * @alias module:pasteAccount
  */
-export declare const pasteAccount: (email: string) => Promise<Paste[] | null>;
+export declare const pasteAccount: (
+  email: string,
+  options?: {
+    userAgent?: string | undefined;
+  },
+) => Promise<Paste[] | null>;
 /**
  * Fetches the number of times the the given password has been exposed in a
  * breach (0 indicating no exposure). The password is given in plain text, but
  * only the first 5 characters of its SHA-1 hash will be submitted to the API.
  *
  * @param {string} password a password in plain text
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<number>} a Promise which resolves to the number of times
  * the password has been exposed in a breach, or rejects with an Error
  * @example
@@ -238,7 +268,12 @@ export declare const pasteAccount: (email: string) => Promise<Paste[] | null>;
  * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
  * @alias module:pwnedPassword
  */
-export declare const pwnedPassword: (password: string) => Promise<number>;
+export declare const pwnedPassword: (
+  password: string,
+  options?: {
+    userAgent?: string | undefined;
+  },
+) => Promise<number>;
 export interface PwnedPasswordSuffix {
   suffix: string;
   count: number;
@@ -263,10 +298,13 @@ export interface PwnedPasswordSuffix {
  *
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
- * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an array
- * of objects, each containing the `suffix` that when matched with the prefix
- * composes the complete hash, and a `count` of how many times it appears in the
- * breached password data set, or rejects with an Error
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
+ * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an
+ * array of objects, each containing the `suffix` that when matched with the
+ * prefix composes the complete hash, and a `count` of how many times it appears
+ * in the breached password data set, or rejects with an Error
  *
  * @example
  * pwnedPasswordRange('5BAA6')
@@ -293,6 +331,9 @@ export interface PwnedPasswordSuffix {
  */
 export declare const pwnedPasswordRange: (
   prefix: string,
+  options?: {
+    userAgent?: string | undefined;
+  },
 ) => Promise<PwnedPasswordSuffix[]>;
 export interface SearchResults {
   breaches: Breach[] | null;
@@ -321,6 +362,8 @@ export interface SearchResults {
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: false)
+ * @param {string} [breachOptions.userAgent] a custom string to send as the
+ * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
  * containing a "breaches" key (which can be null or an array of breach objects)
  * and a "pastes" key (which can be null or an array of paste objects), or
@@ -358,6 +401,7 @@ export declare const search: (
   breachOptions?: {
     domain?: string | undefined;
     truncate?: boolean | undefined;
+    userAgent?: string | undefined;
   },
 ) => Promise<SearchResults>;
 export interface HIBP {

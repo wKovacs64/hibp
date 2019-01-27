@@ -29,12 +29,32 @@ const blockedWithRayId = (rayId: string): string =>
  * @internal
  * @private
  * @param {string} endpoint the API endpoint to query
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<ApiData>} a Promise which resolves to the data resulting
  * from the query (or null for 404 Not Found responses), or rejects with an
  * Error
  */
-export default (endpoint: string): Promise<ApiData> =>
-  Promise.resolve(axios.get<ApiData>(endpoint))
+export default (
+  endpoint: string,
+  /* istanbul ignore next: no need to test default empty object */
+  options: { userAgent?: string } = {},
+): Promise<ApiData> => {
+  const { userAgent } = options;
+
+  const config = Object.assign(
+    {},
+    userAgent
+      ? {
+          headers: {
+            'User-Agent': userAgent,
+          },
+        }
+      : {},
+  );
+
+  return Promise.resolve(axios.get<ApiData>(endpoint, config))
     .then(res => res.data)
     .catch(err => {
       if (err.response) {
@@ -60,3 +80,4 @@ export default (endpoint: string): Promise<ApiData> =>
         throw err;
       }
     });
+};

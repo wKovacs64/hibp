@@ -30,6 +30,8 @@ export interface SearchResults {
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: false)
+ * @param {string} [breachOptions.userAgent] a custom string to send as the
+ * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
  * containing a "breaches" key (which can be null or an array of breach objects)
  * and a "pastes" key (which can be null or an array of paste objects), or
@@ -67,12 +69,15 @@ const search = (
   breachOptions: {
     domain?: string;
     truncate?: boolean;
+    userAgent?: string;
   } = {},
 ): Promise<SearchResults> =>
   Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
-    /^.+@.+$/.test(account) ? pasteAccount(account) : null,
+    /^.+@.+$/.test(account)
+      ? pasteAccount(account, { userAgent: breachOptions.userAgent })
+      : null,
   ]).then(([breaches, pastes]) => ({
     breaches,
     pastes,

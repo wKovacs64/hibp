@@ -7,6 +7,9 @@ import pwnedPasswordRange from './pwnedPasswordRange';
  * only the first 5 characters of its SHA-1 hash will be submitted to the API.
  *
  * @param {string} password a password in plain text
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<number>} a Promise which resolves to the number of times
  * the password has been exposed in a breach, or rejects with an Error
  * @example
@@ -25,7 +28,10 @@ import pwnedPasswordRange from './pwnedPasswordRange';
  * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
  * @alias module:pwnedPassword
  */
-const pwnedPassword = (password: string): Promise<number> => {
+const pwnedPassword = (
+  password: string,
+  options: { userAgent?: string } = {},
+): Promise<number> => {
   const sha1 = new JSSHA('SHA-1', 'TEXT');
   sha1.update(password);
   const hash = sha1.getHash('HEX', { outputUpper: true });
@@ -33,7 +39,7 @@ const pwnedPassword = (password: string): Promise<number> => {
   const suffix = hash.slice(5);
 
   return (
-    pwnedPasswordRange(prefix)
+    pwnedPasswordRange(prefix, options)
       // filter to matching suffix
       .then(arr => arr.filter(item => item.suffix === suffix))
       // return count if match, 0 if not

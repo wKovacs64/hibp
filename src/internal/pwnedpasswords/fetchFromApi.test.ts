@@ -1,6 +1,6 @@
 import AxiosError from 'AxiosError';
 import pwnedPasswordRange from 'pwnedPasswordRange';
-import { BAD_REQUEST } from './responses';
+import { BAD_REQUEST, OK } from './responses';
 import axios from './axiosInstance';
 
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -30,6 +30,22 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         }),
       );
       expect(pwnedPasswordRange('unknown response')).rejects.toMatchSnapshot();
+    });
+  });
+
+  describe('userAgent option', () => {
+    it('is passed on as a request header', () => {
+      mockAxios.get.mockResolvedValueOnce({
+        headers: {},
+        status: OK.status,
+        data: '1234\n5678',
+      });
+      const ua = 'custom UA';
+      return pwnedPasswordRange('stuff', { userAgent: ua }).then(() => {
+        expect(mockAxios.get).toHaveBeenCalledWith(expect.any(String), {
+          headers: { 'User-Agent': ua },
+        });
+      });
     });
   });
 });

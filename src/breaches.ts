@@ -7,6 +7,8 @@ import { Breach } from './types/remote-api.d';
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
  * objects (an empty array if no breaches were found), or rejects with an Error
  * @example
@@ -38,6 +40,7 @@ import { Breach } from './types/remote-api.d';
 const breaches = (
   options: {
     domain?: string;
+    userAgent?: string;
   } = {},
 ): Promise<Breach[]> => {
   const endpoint = '/breaches?';
@@ -45,7 +48,9 @@ const breaches = (
   if (options.domain) {
     params.push(`domain=${encodeURIComponent(options.domain)}`);
   }
-  return fetchFromApi(`${endpoint}${params.join('&')}`) as Promise<Breach[]>;
+  return fetchFromApi(`${endpoint}${params.join('&')}`, {
+    userAgent: options.userAgent,
+  }) as Promise<Breach[]>;
 };
 
 /**
