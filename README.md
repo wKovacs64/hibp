@@ -33,7 +33,7 @@ npm install --save hibp
 Browser via CDN (see [below](#using-in-the-browser) for more information):
 
 ```html
-<script src="https://unpkg.com/hibp@7.4.0"></script>
+<script src="https://unpkg.com/hibp@7.5.0"></script>
 ```
 
 ## Features
@@ -106,6 +106,18 @@ search('someAccountOrEmail')
 ```
 
 #### Using in the browser
+
+---
+
+**Warning:** As of January, 2019, `haveibeenpwned.com` has started blocking
+requests to the `breachedaccount` API endpoint when originating from within a
+browser (based on the `User-Agent` field of the request headers), which affects
+the `breachedAccount` and `search` functions. To use these functions in a
+browser, you will likely have to proxy your request through a server of your
+own. The `baseUrl` option was added to facilitate this workaround. See issue
+[#60][60] for more details and discussion.
+
+---
 
 **Prerequisite:** This module requires a Promise implementation to exist in the
 global namespace prior to being loaded. Therefore, to facilitate usage in
@@ -222,3 +234,4 @@ This module is distributed under the [MIT License][license].
 [stdlib]: https://stdlib.com
 [pwl]: https://pwl.netlify.com/
 [license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
+[60]: https://github.com/wKovacs64/hibp/issues/60

@@ -1,5 +1,20 @@
 # Change Log
 
+## Version 7.5.0 _(2019-01-27)_
+
+- Added a `userAgent` option to all functions to facilitate specifying your own
+  `User-Agent` header value for requests made to the haveibeenpwned.com and
+  pwnedpasswords.com APIs ([#63][63])
+- Added a `baseUrl` option to all functions to facilitate specifying your own
+  URL for requests that would normally be made to
+  `https://haveibeenpwned.com/api` and `https://api.pwnedpasswords.com` to
+  facilitate proxying the requests through your own server (which may be
+  necessary if you wish to use the `breachedAccount` and `search` functions
+  after January, 2019 as `haveibeenpwned.com` no longer accepts
+  `breachedaccount` endpoint requests originating from a browser)
+
+  See issue [#60][60] for more details and discussion.
+
 ## Version 7.4.0 _(2019-01-19)_
 
 - Added an `includeUnverified` option to the `breachedAccount` function to
@@ -318,3 +333,6 @@
   https://github.com/wKovacs64/hibp/commit/15e02f970286a410a275fe3457f559050632e5bd
 [cd74e40d]:
   https://github.com/wKovacs64/hibp/commit/cd74e40de95143252ab99f5c070a84e54b1365a6
+[60]: https://github.com/wKovacs64/hibp/issues/60
+[63]: https://github.com/wKovacs64/hibp/pull/63
+[64]: https://github.com/wKovacs64/hibp/pull/64
