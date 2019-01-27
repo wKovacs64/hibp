@@ -7,6 +7,8 @@ import { Breach } from './types/remote-api.d';
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
@@ -40,6 +42,7 @@ import { Breach } from './types/remote-api.d';
 const breaches = (
   options: {
     domain?: string;
+    baseUrl?: string;
     userAgent?: string;
   } = {},
 ): Promise<Breach[]> => {
@@ -49,6 +52,7 @@ const breaches = (
     params.push(`domain=${encodeURIComponent(options.domain)}`);
   }
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
+    baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Breach[]>;
 };

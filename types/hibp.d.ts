@@ -47,6 +47,8 @@ export interface Paste {
  *
  * @param {string} breachName the name of a breach in the system
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
@@ -69,11 +71,20 @@ export interface Paste {
 export declare const breach: (
   breachName: string,
   options?: {
+    baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
 ) => Promise<Breach | null>;
 /**
  * Fetches breach data for a specific account.
+ *
+ * ***Warning:***
+ *
+ * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
+ * the `breachedaccount` endpoint when originating from within a browser (based
+ * on the `User-Agent` field of the request headers). To use this function in a
+ * browser, you will likely have to proxy your request through a server of your
+ * own. The `baseUrl` option was added to facilitate this workaround.
  *
  * @param {string} account a username or email address
  * @param {object} [options] a configuration object
@@ -83,6 +94,8 @@ export declare const breach: (
  * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
@@ -101,7 +114,10 @@ export declare const breach: (
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
+ * breachedAccount('bar', {
+ *   includeUnverified: true,
+ *   baseUrl: 'https://my-hibp-proxy:8080',
+ * })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -113,7 +129,11 @@ export declare const breach: (
  *     // ...
  *   });
  * @example
- * breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+ * breachedAccount('baz', {
+ *   domain: 'adobe.com',
+ *   truncate: true,
+ *   userAgent: 'my-app 1.0'
+ * })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -132,6 +152,7 @@ export declare const breachedAccount: (
     domain?: string | undefined;
     includeUnverified?: boolean | undefined;
     truncate?: boolean | undefined;
+    baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
 ) => Promise<Breach[] | null>;
@@ -141,6 +162,8 @@ export declare const breachedAccount: (
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
@@ -173,12 +196,15 @@ export declare const breachedAccount: (
  */
 export declare const breaches: (options?: {
   domain?: string | undefined;
+  baseUrl?: string | undefined;
   userAgent?: string | undefined;
 }) => Promise<Breach[]>;
 /**
  * Fetches all data classes in the system.
  *
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
@@ -199,6 +225,7 @@ export declare const breaches: (options?: {
  * @alias module:dataClasses
  */
 export declare const dataClasses: (options?: {
+  baseUrl?: string | undefined;
   userAgent?: string | undefined;
 }) => Promise<string[] | null>;
 /**
@@ -216,6 +243,8 @@ export declare const dataClasses: (options?: {
  *
  * @param {string} email the email address to query
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Paste[]> | Promise<null>)} a Promise which resolves to an
@@ -238,6 +267,7 @@ export declare const dataClasses: (options?: {
 export declare const pasteAccount: (
   email: string,
   options?: {
+    baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
 ) => Promise<Paste[] | null>;
@@ -248,6 +278,8 @@ export declare const pasteAccount: (
  *
  * @param {string} password a password in plain text
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<number>} a Promise which resolves to the number of times
@@ -271,6 +303,7 @@ export declare const pasteAccount: (
 export declare const pwnedPassword: (
   password: string,
   options?: {
+    baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
 ) => Promise<number>;
@@ -299,6 +332,8 @@ export interface PwnedPasswordSuffix {
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an
@@ -332,6 +367,7 @@ export interface PwnedPasswordSuffix {
 export declare const pwnedPasswordRange: (
   prefix: string,
   options?: {
+    baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
 ) => Promise<PwnedPasswordSuffix[]>;
@@ -355,6 +391,14 @@ export interface SearchResults {
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
  *
+ * ***Warning:***
+ *
+ * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
+ * the `breachedaccount` endpoint when originating from within a browser (based
+ * on the `User-Agent` field of the request headers). To use this function in a
+ * browser, you will likely have to proxy your request through a server of your
+ * own. The `baseUrl` option was added to facilitate this workaround.
+ *
  * @param {string} account an email address or username
  * @param {object} [breachOptions] a configuration object
  * pertaining to breach queries
@@ -362,6 +406,8 @@ export interface SearchResults {
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: false)
+ * @param {string} [breachOptions.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
@@ -401,6 +447,7 @@ export declare const search: (
   breachOptions?: {
     domain?: string | undefined;
     truncate?: boolean | undefined;
+    baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
 ) => Promise<SearchResults>;

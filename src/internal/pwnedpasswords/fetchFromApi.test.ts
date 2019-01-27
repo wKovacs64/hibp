@@ -48,4 +48,20 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
       });
     });
   });
+
+  describe('baseUrl option', () => {
+    it('is passed on as baseURL', () => {
+      mockAxios.get.mockResolvedValueOnce({
+        headers: {},
+        status: OK.status,
+        data: '1234\n5678',
+      });
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      return pwnedPasswordRange('whatever', { baseUrl }).then(() => {
+        expect(mockAxios.get).toHaveBeenCalledWith(expect.any(String), {
+          baseURL: baseUrl,
+        });
+      });
+    });
+  });
 });

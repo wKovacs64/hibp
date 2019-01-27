@@ -26,6 +26,8 @@ export interface PwnedPasswordSuffix {
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an
@@ -58,7 +60,7 @@ export interface PwnedPasswordSuffix {
  */
 const pwnedPasswordRange = (
   prefix: string,
-  options: { userAgent?: string } = {},
+  options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<PwnedPasswordSuffix[]> =>
   fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
     // create array from lines of text in response body

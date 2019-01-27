@@ -68,4 +68,15 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       });
     });
   });
+
+  describe('baseUrl option', () => {
+    it('is passed on as baseURL', () => {
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      return dataClasses({ baseUrl }).then(() => {
+        expect(mockAxios.get).toHaveBeenCalledWith(expect.any(String), {
+          baseURL: baseUrl,
+        });
+      });
+    });
+  });
 });
