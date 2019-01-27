@@ -25,6 +25,9 @@ import { Breach } from './types/remote-api.d';
  * Fetches data for a specific breach event.
  *
  * @param {string} breachName the name of a breach in the system
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
  * object representing a breach (or null if no breach was found), or rejects
  * with an Error
@@ -42,9 +45,13 @@ import { Breach } from './types/remote-api.d';
  *   });
  * @alias module:breach
  */
-const breach = (breachName: string): Promise<Breach | null> =>
+const breach = (
+  breachName: string,
+  options: { userAgent?: string } = {},
+): Promise<Breach | null> =>
   fetchFromApi(
     `/breach/${encodeURIComponent(breachName)}`,
+    options,
   ) as Promise<Breach | null>;
 
 /**

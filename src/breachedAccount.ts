@@ -12,6 +12,8 @@ import { Breach } from './types/remote-api.d';
  * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
  * array of breach objects (or null if no breaches were found), or rejects with
  * an Error
@@ -28,7 +30,7 @@ import { Breach } from './types/remote-api.d';
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { includeUnverified: true })
+ * breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -59,6 +61,7 @@ const breachedAccount = (
     domain?: string;
     includeUnverified?: boolean;
     truncate?: boolean;
+    userAgent?: string;
   } = {},
 ): Promise<Breach[] | null> => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
@@ -72,9 +75,9 @@ const breachedAccount = (
   if (options.truncate) {
     params.push('truncateResponse=true');
   }
-  return fetchFromApi(`${endpoint}${params.join('&')}`) as Promise<
-    Breach[] | null
-  >;
+  return fetchFromApi(`${endpoint}${params.join('&')}`, {
+    userAgent: options.userAgent,
+  }) as Promise<Breach[] | null>;
 };
 
 /**

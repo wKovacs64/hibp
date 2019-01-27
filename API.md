@@ -41,7 +41,7 @@ account (email address or username).</p>
 ## Functions
 
 <dl>
-<dt><a href="#exp_module_breach--breach">breach(breachName)</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#exp_module_breach--breach">breach(breachName, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches data for a specific breach event.</p>
 </dd>
 <dt><a href="#exp_module_breachedAccount--breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
@@ -50,18 +50,18 @@ account (email address or username).</p>
 <dt><a href="#exp_module_breaches--breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> ⏏</dt>
 <dd><p>Fetches all breach events in the system.</p>
 </dd>
-<dt><a href="#exp_module_dataClasses--dataClasses">dataClasses()</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#exp_module_dataClasses--dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
-<dt><a href="#exp_module_pasteAccount--pasteAccount">pasteAccount(email)</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#exp_module_pasteAccount--pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
 </dd>
-<dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password)</a> ⇒ <code>Promise.&lt;number&gt;</code> ⏏</dt>
+<dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password, [options])</a> ⇒ <code>Promise.&lt;number&gt;</code> ⏏</dt>
 <dd><p>Fetches the number of times the the given password has been exposed in a
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
-<dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix)</a> ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏</dt>
+<dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏</dt>
 <dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
@@ -110,7 +110,7 @@ import { breach } from 'hibp';
 ```
 <a name="exp_module_breach--breach"></a>
 
-### breach(breachName) ⇒ [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> ⏏
+### breach(breachName, [options]) ⇒ [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches data for a specific breach event.
 
 **Kind**: global method of [<code>breach</code>](#module_breach)  
@@ -121,6 +121,8 @@ with an Error
 | Param | Type | Description |
 | --- | --- | --- |
 | breachName | <code>string</code> | the name of a breach in the system |
+| [options] | <code>object</code> | a configuration object |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -162,6 +164,7 @@ an Error
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (by default, only verified breaches are included) |
 | [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -179,7 +182,7 @@ breachedAccount('foo')
 ```
 **Example**  
 ```js
-breachedAccount('bar', { includeUnverified: true })
+breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
   .then(data => {
     if (data) {
       // ...
@@ -227,6 +230,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -267,13 +271,19 @@ import { dataClasses } from 'hibp';
 ```
 <a name="exp_module_dataClasses--dataClasses"></a>
 
-### dataClasses() ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> ⏏
+### dataClasses([options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches all data classes in the system.
 
 **Kind**: global method of [<code>dataClasses</code>](#module_dataClasses)  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
 array of strings (or null if no data classes were found), or rejects with an
 Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | a configuration object |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
 **Example**  
 ```js
 dataClasses()
@@ -299,7 +309,7 @@ import { pasteAccount } from 'hibp';
 ```
 <a name="exp_module_pasteAccount--pasteAccount"></a>
 
-### pasteAccount(email) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
+### pasteAccount(email, [options]) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches paste data for a specific account (email address).
 
 **Kind**: global method of [<code>pasteAccount</code>](#module_pasteAccount)  
@@ -310,6 +320,8 @@ Error
 | Param | Type | Description |
 | --- | --- | --- |
 | email | <code>string</code> | the email address to query |
+| [options] | <code>object</code> | a configuration object |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -337,7 +349,7 @@ import { pwnedPassword } from 'hibp';
 ```
 <a name="exp_module_pwnedPassword--pwnedPassword"></a>
 
-### pwnedPassword(password) ⇒ <code>Promise.&lt;number&gt;</code> ⏏
+### pwnedPassword(password, [options]) ⇒ <code>Promise.&lt;number&gt;</code> ⏏
 Fetches the number of times the the given password has been exposed in a
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.
@@ -350,6 +362,8 @@ the password has been exposed in a breach, or rejects with an Error
 | Param | Type | Description |
 | --- | --- | --- |
 | password | <code>string</code> | a password in plain text |
+| [options] | <code>object</code> | a configuration object |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -378,7 +392,7 @@ import { pwnedPasswordRange } from 'hibp';
 ```
 <a name="exp_module_pwnedPasswordRange--pwnedPasswordRange"></a>
 
-### pwnedPasswordRange(prefix) ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏
+### pwnedPasswordRange(prefix, [options]) ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏
 Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
 
 When a password hash with the same first 5 characters is found in the Pwned
@@ -388,15 +402,17 @@ of how many times it appears in the data set. This function parses the
 response and returns a more structured format.
 
 **Kind**: global method of [<code>pwnedPasswordRange</code>](#module_pwnedPasswordRange)  
-**Returns**: <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> - a Promise which resolves to an array
-of objects, each containing the `suffix` that when matched with the prefix
-composes the complete hash, and a `count` of how many times it appears in the
-breached password data set, or rejects with an Error  
+**Returns**: <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> - a Promise which resolves to an
+array of objects, each containing the `suffix` that when matched with the
+prefix composes the complete hash, and a `count` of how many times it appears
+in the breached password data set, or rejects with an Error  
 **See**: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | prefix | <code>string</code> | the first 5 characters of a SHA-1 password hash (case insensitive) |
+| [options] | <code>object</code> | a configuration object |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -456,6 +472,7 @@ rejects with an Error
 | [breachOptions] | <code>object</code> | a configuration object pertaining to breach queries |
 | [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+| [breachOptions.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js

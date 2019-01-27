@@ -25,10 +25,13 @@ export interface PwnedPasswordSuffix {
  *
  * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
  * insensitive)
- * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an array
- * of objects, each containing the `suffix` that when matched with the prefix
- * composes the complete hash, and a `count` of how many times it appears in the
- * breached password data set, or rejects with an Error
+ * @param {object} [options] a configuration object
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
+ * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an
+ * array of objects, each containing the `suffix` that when matched with the
+ * prefix composes the complete hash, and a `count` of how many times it appears
+ * in the breached password data set, or rejects with an Error
  *
  * @example
  * pwnedPasswordRange('5BAA6')
@@ -53,8 +56,11 @@ export interface PwnedPasswordSuffix {
  * @see https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
  * @alias module:pwnedPasswordRange
  */
-const pwnedPasswordRange = (prefix: string): Promise<PwnedPasswordSuffix[]> =>
-  fetchFromApi(`/range/${encodeURIComponent(prefix)}`)
+const pwnedPasswordRange = (
+  prefix: string,
+  options: { userAgent?: string } = {},
+): Promise<PwnedPasswordSuffix[]> =>
+  fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
     // create array from lines of text in response body
     .then(data => data.split('\n'))
     // convert into array of objects containing suffix and count for each line
