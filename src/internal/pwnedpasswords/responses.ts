@@ -6,7 +6,6 @@
  */
 
 export interface PwnedPasswordsApiResponse {
-  // eslint-disable-next-line no-restricted-globals
   status: number;
   data?: string;
 }
