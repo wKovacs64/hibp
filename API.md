@@ -46,6 +46,12 @@ account (email address or username).</p>
 </dd>
 <dt><a href="#exp_module_breachedAccount--breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches breach data for a specific account.</p>
+<p><strong><em>Warning:</em></strong></p>
+<p>As of January, 2019, <code>haveibeenpwned.com</code> has started blocking requests to
+the <code>breachedaccount</code> endpoint when originating from within a browser (based
+on the <code>User-Agent</code> field of the request headers). To use this function in a
+browser, you will likely have to proxy your request through a server of your
+own. The <code>baseUrl</code> option was added to facilitate this workaround.</p>
 </dd>
 <dt><a href="#exp_module_breaches--breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> ⏏</dt>
 <dd><p>Fetches all breach events in the system.</p>
@@ -77,6 +83,12 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
+<p><strong><em>Warning:</em></strong></p>
+<p>As of January, 2019, <code>haveibeenpwned.com</code> has started blocking requests to
+the <code>breachedaccount</code> endpoint when originating from within a browser (based
+on the <code>User-Agent</code> field of the request headers). To use this function in a
+browser, you will likely have to proxy your request through a server of your
+own. The <code>baseUrl</code> option was added to facilitate this workaround.</p>
 </dd>
 </dl>
 
@@ -122,6 +134,7 @@ with an Error
 | --- | --- | --- |
 | breachName | <code>string</code> | the name of a breach in the system |
 | [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -152,6 +165,14 @@ import { breachedAccount } from 'hibp';
 ### breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches breach data for a specific account.
 
+***Warning:***
+
+As of January, 2019, `haveibeenpwned.com` has started blocking requests to
+the `breachedaccount` endpoint when originating from within a browser (based
+on the `User-Agent` field of the request headers). To use this function in a
+browser, you will likely have to proxy your request through a server of your
+own. The `baseUrl` option was added to facilitate this workaround.
+
 **Kind**: global method of [<code>breachedAccount</code>](#module_breachedAccount)  
 **Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
 array of breach objects (or null if no breaches were found), or rejects with
@@ -164,6 +185,7 @@ an Error
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (by default, only verified breaches are included) |
 | [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -182,7 +204,10 @@ breachedAccount('foo')
 ```
 **Example**  
 ```js
-breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
+breachedAccount('bar', {
+  includeUnverified: true,
+  baseUrl: 'https://my-hibp-proxy:8080',
+})
   .then(data => {
     if (data) {
       // ...
@@ -196,7 +221,11 @@ breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
 ```
 **Example**  
 ```js
-breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+breachedAccount('baz', {
+  domain: 'adobe.com',
+  truncate: true,
+  userAgent: 'my-app 1.0'
+})
   .then(data => {
     if (data) {
       // ...
@@ -230,6 +259,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -282,6 +312,7 @@ Error
 | Param | Type | Description |
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -321,6 +352,7 @@ Error
 | --- | --- | --- |
 | email | <code>string</code> | the email address to query |
 | [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -363,6 +395,7 @@ the password has been exposed in a breach, or rejects with an Error
 | --- | --- | --- |
 | password | <code>string</code> | a password in plain text |
 | [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -412,6 +445,7 @@ in the breached password data set, or rejects with an Error
 | --- | --- | --- |
 | prefix | <code>string</code> | the first 5 characters of a SHA-1 password hash (case insensitive) |
 | [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -459,6 +493,14 @@ and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
 
+***Warning:***
+
+As of January, 2019, `haveibeenpwned.com` has started blocking requests to
+the `breachedaccount` endpoint when originating from within a browser (based
+on the `User-Agent` field of the request headers). To use this function in a
+browser, you will likely have to proxy your request through a server of your
+own. The `baseUrl` option was added to facilitate this workaround.
+
 **Kind**: global method of [<code>search</code>](#module_search)  
 **Returns**: [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) - a Promise which resolves to an object
 containing a "breaches" key (which can be null or an array of breach objects)
@@ -472,6 +514,7 @@ rejects with an Error
 | [breachOptions] | <code>object</code> | a configuration object pertaining to breach queries |
 | [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+| [breachOptions.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [breachOptions.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  

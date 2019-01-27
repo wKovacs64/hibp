@@ -23,6 +23,14 @@ export interface SearchResults {
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
  *
+ * ***Warning:***
+ *
+ * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
+ * the `breachedaccount` endpoint when originating from within a browser (based
+ * on the `User-Agent` field of the request headers). To use this function in a
+ * browser, you will likely have to proxy your request through a server of your
+ * own. The `baseUrl` option was added to facilitate this workaround.
+ *
  * @param {string} account an email address or username
  * @param {object} [breachOptions] a configuration object
  * pertaining to breach queries
@@ -30,6 +38,8 @@ export interface SearchResults {
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: false)
+ * @param {string} [breachOptions.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
@@ -69,20 +79,23 @@ const search = (
   breachOptions: {
     domain?: string;
     truncate?: boolean;
+    baseUrl?: string;
     userAgent?: string;
   } = {},
-): Promise<SearchResults> =>
-  Promise.all([
+): Promise<SearchResults> => {
+  const { baseUrl, userAgent } = breachOptions;
+
+  return Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
-      ? pasteAccount(account, { userAgent: breachOptions.userAgent })
+      ? pasteAccount(account, { baseUrl, userAgent })
       : null,
   ]).then(([breaches, pastes]) => ({
     breaches,
     pastes,
   }));
-
+};
 /**
  * A module for searching all breach and paste data associated with a specific
  * account (email address or username).

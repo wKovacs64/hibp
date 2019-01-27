@@ -4,6 +4,14 @@ import { Breach } from './types/remote-api.d';
 /**
  * Fetches breach data for a specific account.
  *
+ * ***Warning:***
+ *
+ * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
+ * the `breachedaccount` endpoint when originating from within a browser (based
+ * on the `User-Agent` field of the request headers). To use this function in a
+ * browser, you will likely have to proxy your request through a server of your
+ * own. The `baseUrl` option was added to facilitate this workaround.
+ *
  * @param {string} account a username or email address
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
@@ -12,6 +20,8 @@ import { Breach } from './types/remote-api.d';
  * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: false)
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
@@ -30,7 +40,10 @@ import { Breach } from './types/remote-api.d';
  *     // ...
  *   });
  * @example
- * breachedAccount('bar', { includeUnverified: true, userAgent: 'my-app 1.0' })
+ * breachedAccount('bar', {
+ *   includeUnverified: true,
+ *   baseUrl: 'https://my-hibp-proxy:8080',
+ * })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -42,7 +55,11 @@ import { Breach } from './types/remote-api.d';
  *     // ...
  *   });
  * @example
- * breachedAccount('baz', { domain: 'adobe.com', truncate: true })
+ * breachedAccount('baz', {
+ *   domain: 'adobe.com',
+ *   truncate: true,
+ *   userAgent: 'my-app 1.0'
+ * })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -61,6 +78,7 @@ const breachedAccount = (
     domain?: string;
     includeUnverified?: boolean;
     truncate?: boolean;
+    baseUrl?: string;
     userAgent?: string;
   } = {},
 ): Promise<Breach[] | null> => {
@@ -76,6 +94,7 @@ const breachedAccount = (
     params.push('truncateResponse=true');
   }
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
+    baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Breach[] | null>;
 };

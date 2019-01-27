@@ -11,6 +11,8 @@ import { BAD_REQUEST } from './responses';
  * @private
  * @param {string} endpoint the API endpoint to query
  * @param {object} [options] a configuration object
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<string>} a Promise which resolves to the data resulting
@@ -19,12 +21,13 @@ import { BAD_REQUEST } from './responses';
 export default (
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
-  options: { userAgent?: string } = {},
+  options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<string> => {
-  const { userAgent } = options;
+  const { baseUrl, userAgent } = options;
 
   const config = Object.assign(
     {},
+    baseUrl ? { baseURL: baseUrl } : {},
     userAgent
       ? {
           headers: {
