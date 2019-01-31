@@ -1,6 +1,3 @@
-// TODO: remove temporary workaround for bradzacher/eslint-plugin-typescript#255
-/* eslint-disable strict */
-
 describe('UMD', () => {
   it('exposes the hibp namespace on the window object', () => {
     cy.visit('/test/umd.html');
