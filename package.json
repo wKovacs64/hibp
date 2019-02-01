@@ -89,7 +89,7 @@
     "@types/jsdom": "12.2.1",
     "@types/jssha": "2.0.0",
     "@types/node": "10.12.20",
-    "@wkovacs64/eslint-config": "1.0.1",
+    "@wkovacs64/eslint-config": "2.0.0",
     "babel-jest": "24.0.0",
     "codecov": "3.1.0",
     "common-tags": "1.8.0",
