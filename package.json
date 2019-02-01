@@ -127,6 +127,6 @@
     "rollup-plugin-typescript2": "0.19.2",
     "serve": "10.1.1",
     "start-server-and-test": "1.7.11",
-    "typescript": "3.2.4"
+    "typescript": "3.3.1"
   }
 }
