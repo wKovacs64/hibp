@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@wkovacs64/eslint-config/ts'],
+  extends: ['@wkovacs64/eslint-config-ts'],
   settings: {
     'import/resolver': {
       jest: {
