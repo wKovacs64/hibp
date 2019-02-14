@@ -59,7 +59,8 @@
     "start-test-server": "serve --no-clipboard",
     "test": "cross-env NODE_ENV=test jest",
     "test:browser": "npm-run-all --silent --sequential build:bundle \"ssat cy:open\"",
-    "test:browser:ci": "npm-run-all --silent --sequential build:bundle \"ssat cy:run\""
+    "test:browser:ci": "npm-run-all --silent --sequential build:bundle \"ssat cy:run\"",
+    "validate": "npm-run-all --silent --parallel lint check-types"
   },
   "repository": {
     "type": "git",
