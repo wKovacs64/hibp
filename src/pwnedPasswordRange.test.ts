@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { stripIndents } from 'common-tags';
-import { OK } from './internal/pwnedpasswords/responses';
+import { mockResponse } from '../test/utils';
 import axios from './internal/pwnedpasswords/axiosInstance';
 import pwnedPasswordRange from './pwnedPasswordRange';
 
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const mockGet = jest.spyOn(axios, 'get');
 
 describe('pwnedPasswordRange', () => {
   describe('valid range', () => {
@@ -14,11 +14,7 @@ describe('pwnedPasswordRange', () => {
       01330C689E5D64F660D6947A93AD634EF8F:1
     `;
 
-    mockAxios.get.mockResolvedValue({
-      headers: {},
-      status: OK.status,
-      data,
-    });
+    mockGet.mockResolvedValue(mockResponse({ data }));
 
     it('resolves with an array of objects', () =>
       expect(pwnedPasswordRange('5BAA6')).resolves.toEqual([

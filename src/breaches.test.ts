@@ -1,18 +1,14 @@
-import { OK } from './internal/haveibeenpwned/responses';
+import { mockResponse } from '../test/utils';
 import axios from './internal/haveibeenpwned/axiosInstance';
 import breaches from './breaches';
 
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const mockGet = jest.spyOn(axios, 'get');
 
 describe('breaches', () => {
   const data = [{ breach: 'info' }];
 
   beforeAll(() => {
-    mockAxios.get.mockResolvedValue({
-      headers: {},
-      status: OK.status,
-      data,
-    });
+    mockGet.mockResolvedValue(mockResponse({ data }));
   });
 
   describe('no parameters', () => {

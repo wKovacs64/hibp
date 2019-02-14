@@ -1,32 +1,24 @@
 import AxiosError from 'AxiosError';
-import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
+import { mockResponse } from '../test/utils';
+import { NOT_FOUND } from './internal/haveibeenpwned/responses';
 import axios from './internal/haveibeenpwned/axiosInstance';
 import pasteAccount from './pasteAccount';
 
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const mockGet = jest.spyOn(axios, 'get');
 
 describe('pasteAccount', () => {
   describe('pasted email', () => {
-    const data = [{ paste: 'information' }];
-
-    beforeAll(() => {
-      mockAxios.get.mockResolvedValue({
-        headers: {},
-        status: OK.status,
-        data,
-      });
+    it('resolves with data from the remote API', () => {
+      const data = [{ paste: 'information' }];
+      mockGet.mockResolvedValue(mockResponse({ data }));
+      expect(pasteAccount('pasted@email.com')).resolves.toEqual(data);
     });
-
-    it('resolves with data from the remote API', () =>
-      expect(pasteAccount('pasted@email.com')).resolves.toEqual(data));
   });
 
   describe('clean email', () => {
-    beforeAll(() => {
-      mockAxios.get.mockRejectedValue(new AxiosError(NOT_FOUND));
+    it('resolves with null', () => {
+      mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
+      expect(pasteAccount('clean@whistle.com')).resolves.toBeNull();
     });
-
-    it('resolves with null', () =>
-      expect(pasteAccount('clean@whistle.com')).resolves.toBeNull());
   });
 });
