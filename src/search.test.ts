@@ -1,19 +1,15 @@
-import { OK } from './internal/haveibeenpwned/responses';
+import { mockResponse } from '../test/utils';
 import axios from './internal/haveibeenpwned/axiosInstance';
 import search from './search';
 
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const mockGet = jest.spyOn(axios, 'get');
 
 describe('search', () => {
   it('searches breaches by username', () => {
     const breaches = [{ stuff: 'about', a: 'breach' }];
     const pastes = null;
 
-    mockAxios.get.mockResolvedValue({
-      headers: {},
-      status: OK.status,
-      data: breaches,
-    });
+    mockGet.mockResolvedValue(mockResponse({ data: breaches }));
 
     return expect(search('breached')).resolves.toEqual({
       breaches,
@@ -25,12 +21,12 @@ describe('search', () => {
     const breaches = [{ stuff: 'about', a: 'breach' }];
     const pastes = [{ other: 'stuff', about: 'a paste' }];
 
-    mockAxios.get.mockImplementation(endpoint =>
-      Promise.resolve({
-        headers: {},
-        status: OK.status,
-        data: /breachedaccount/.test(endpoint) ? breaches : pastes,
-      }),
+    mockGet.mockImplementation(endpoint =>
+      Promise.resolve(
+        mockResponse({
+          data: /breachedaccount/.test(endpoint) ? breaches : pastes,
+        }),
+      ),
     );
 
     return expect(search('pasted@email.com')).resolves.toEqual({

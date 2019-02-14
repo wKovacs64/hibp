@@ -1,20 +1,17 @@
 import AxiosError from 'AxiosError';
-import { OK, NOT_FOUND } from './internal/haveibeenpwned/responses';
+import { mockResponse } from '../test/utils';
+import { NOT_FOUND } from './internal/haveibeenpwned/responses';
 import axios from './internal/haveibeenpwned/axiosInstance';
 import breachedAccount from './breachedAccount';
 
-const mockAxios = axios as jest.Mocked<typeof axios>;
+const mockGet = jest.spyOn(axios, 'get');
 
 describe('breachedAccount', () => {
   describe('breached', () => {
     const data = [{ some: 'stuff' }];
 
     beforeAll(() => {
-      mockAxios.get.mockResolvedValue({
-        headers: {},
-        status: OK.status,
-        data,
-      });
+      mockGet.mockResolvedValue(mockResponse({ data }));
     });
 
     describe('no parameters', () => {
@@ -53,7 +50,7 @@ describe('breachedAccount', () => {
 
   describe('clean', () => {
     beforeAll(() => {
-      mockAxios.get.mockRejectedValue(new AxiosError(NOT_FOUND));
+      mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
     });
 
     describe('no parameters', () => {
