@@ -90,7 +90,7 @@
     "@types/jsdom": "12.2.2",
     "@types/jssha": "2.0.0",
     "@types/node": "10.12.26",
-    "@typescript-eslint/eslint-plugin": "1.3.0",
+    "@typescript-eslint/eslint-plugin": "1.4.0",
     "@wkovacs64/eslint-config-ts": "2.0.0",
     "babel-jest": "24.1.0",
     "codecov": "3.2.0",
