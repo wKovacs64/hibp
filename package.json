@@ -89,7 +89,7 @@
     "@types/jest": "24.0.6",
     "@types/jsdom": "12.2.2",
     "@types/jssha": "2.0.0",
-    "@types/node": "10.12.26",
+    "@types/node": "10.12.27",
     "@typescript-eslint/eslint-plugin": "1.4.0",
     "@wkovacs64/eslint-config-ts": "2.0.0",
     "babel-jest": "24.1.0",
