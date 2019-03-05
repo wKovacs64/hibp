@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 7.5.1 _(2019-03-05)_
+
+- Fixed an issue preventing the use of `hibp` in React Native development mode
+  ([8e5b4de7][8e5b4de7])
+
 ## Version 7.5.0 _(2019-01-27)_
 
 - Added a `userAgent` option to all functions to facilitate specifying your own
@@ -336,3 +341,5 @@
 [60]: https://github.com/wKovacs64/hibp/issues/60
 [63]: https://github.com/wKovacs64/hibp/pull/63
 [64]: https://github.com/wKovacs64/hibp/pull/64
+[8e5b4de7]:
+  https://github.com/wKovacs64/hibp/commit/8e5b4de79d25d834e14b8917101b4e0209d52f14
