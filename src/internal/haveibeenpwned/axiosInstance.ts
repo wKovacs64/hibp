@@ -13,9 +13,11 @@ export default Axios.create({
     {
       Accept: 'application/vnd.haveibeenpwned.v2+json',
     },
-    typeof navigator === 'undefined' && {
-      // Add a custom User-Agent header when running outside the browser
-      'User-Agent': `${name} ${version}`,
-    },
+    typeof navigator === 'undefined'
+      ? {
+          // Add a custom User-Agent header when running outside the browser
+          'User-Agent': `${name} ${version}`,
+        }
+      : {},
   ),
 });
