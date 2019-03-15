@@ -15,6 +15,7 @@ pwned?][haveibeenpwned] service._
 
 [![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
 [![Code Coverage][coverage-image]][coverage-url]
+[![semantic-release][semantic-release-image]][semantic-release-url]
 
 ## Installation
 
@@ -27,14 +28,11 @@ yarn add hibp
 Or, npm:
 
 ```shell
-npm install --save hibp
+npm install hibp
 ```
 
-Browser via CDN (see [below](#using-in-the-browser) for more information):
-
-```html
-<script src="https://unpkg.com/hibp@7.5.1"></script>
-```
+See the [browser](#using-in-the-browser) section below for information on how to
+use via `<script>` tag.
 
 ## Features
 
@@ -213,6 +211,9 @@ This module is distributed under the [MIT License][license].
 [coverage-image]:
   https://img.shields.io/codecov/c/github/wKovacs64/hibp/master.svg?style=flat-square
 [coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/master
+[semantic-release-image]:
+  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square
+[semantic-release-url]: https://github.com/semantic-release/semantic-release
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [search-by-range]:
