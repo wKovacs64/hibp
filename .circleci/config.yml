@@ -27,4 +27,5 @@ jobs:
       - run: yarn validate
       - run: yarn test:browser:ci
       - run: yarn test --coverage --no-cache
-      - run: ./node_modules/.bin/codecov
+      - run: yarn codecov
+      - run: yarn semantic-release
