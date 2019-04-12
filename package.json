@@ -111,7 +111,7 @@
     "cross-env": "5.2.0",
     "cypress": "3.2.0",
     "cz-conventional-changelog": "2.1.0",
-    "dts-bundle-generator": "2.1.0",
+    "dts-bundle-generator": "3.0.0",
     "eslint": "5.16.0",
     "eslint-plugin-cypress": "2.2.1",
     "eslint-plugin-import": "2.16.0",
