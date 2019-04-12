@@ -463,3 +463,5 @@ export interface HIBP {
 }
 
 export as namespace hibp;
+
+export {};
