@@ -111,9 +111,9 @@ search('someAccountOrEmail')
 requests to the `breachedaccount` API endpoint when originating from within a
 browser (based on the `User-Agent` field of the request headers), which affects
 the `breachedAccount` and `search` functions. To use these functions in a
-browser, you will likely have to proxy your request through a server of your
-own. The `baseUrl` option was added to facilitate this workaround. See issue
-[#60][60] for more details and discussion.
+browser, you will likely have to proxy your request through a server of your own
+(e.g. [`hibp-proxy`][hibp-proxy]). The `baseUrl` option was added to facilitate
+this workaround. See issue [#60][60] for more details and discussion.
 
 ---
 
@@ -235,4 +235,5 @@ This module is distributed under the [MIT License][license].
 [stdlib]: https://stdlib.com
 [pwl]: https://pwl.netlify.com/
 [license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
+[hibp-proxy]: https://github.com/wKovacs64/hibp-proxy#readme
 [60]: https://github.com/wKovacs64/hibp/issues/60
