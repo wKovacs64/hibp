@@ -98,7 +98,7 @@
     "@commitlint/cli": "7.6.1",
     "@commitlint/config-conventional": "7.6.0",
     "@types/common-tags": "1.8.0",
-    "@types/jest": "24.0.12",
+    "@types/jest": "24.0.13",
     "@types/jsdom": "12.2.3",
     "@types/jssha": "2.0.0",
     "@types/node": "10.14.6",
