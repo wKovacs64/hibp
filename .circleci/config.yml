@@ -31,11 +31,8 @@ jobs:
       - run: yarn semantic-release
       # store build output as artifacts for BuildSize GitHub app
       - store_artifacts:
-          path: lib/*.js
-          destination: lib
+          path: lib
       - store_artifacts:
-          path: es/*.js
-          destination: es
+          path: es
       - store_artifacts:
-          path: dist/*.js
-          destination: dist
+          path: dist
