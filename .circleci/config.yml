@@ -29,3 +29,13 @@ jobs:
       - run: yarn test --coverage --no-cache
       - run: yarn codecov
       - run: yarn semantic-release
+      # store build output as artifacts for BuildSize GitHub app
+      - store_artifacts:
+          path: lib/*.js
+          destination: lib
+      - store_artifacts:
+          path: es/*.js
+          destination: es
+      - store_artifacts:
+          path: dist/*.js
+          destination: dist
