@@ -84,7 +84,7 @@
     "node": ">= 6.4.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "jssha": "^2.3.1"
   },
   "devDependencies": {
