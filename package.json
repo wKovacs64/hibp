@@ -123,7 +123,7 @@
     "jsdoc-to-markdown": "5.0.0",
     "lint-staged": "8.2.0",
     "npm-run-all": "4.1.5",
-    "prettier": "1.18.0",
+    "prettier": "1.18.1",
     "rimraf": "2.6.3",
     "rollup": "1.14.3",
     "rollup-plugin-babel": "4.3.2",
