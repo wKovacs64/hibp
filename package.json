@@ -102,7 +102,7 @@
     "@types/jsdom": "12.2.3",
     "@types/jssha": "2.0.0",
     "@types/node": "10.14.8",
-    "@typescript-eslint/eslint-plugin": "1.9.0",
+    "@typescript-eslint/eslint-plugin": "1.10.1",
     "@wkovacs64/eslint-config-ts": "2.0.0",
     "babel-jest": "24.8.0",
     "codecov": "3.5.0",
