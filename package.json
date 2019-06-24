@@ -117,7 +117,7 @@
     "eslint-plugin-import": "2.17.3",
     "eslint-plugin-jest": "22.7.1",
     "glob": "7.1.4",
-    "husky": "2.4.1",
+    "husky": "2.5.0",
     "jest": "24.8.0",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "5.0.0",
