@@ -137,6 +137,6 @@
     "semantic-release": "15.13.18",
     "serve": "11.0.2",
     "start-server-and-test": "1.9.1",
-    "typescript": "3.5.2"
+    "typescript": "3.5.3"
   }
 }
