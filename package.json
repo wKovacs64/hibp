@@ -116,7 +116,7 @@
     "eslint": "5.16.0",
     "eslint-plugin-cypress": "2.6.0",
     "eslint-plugin-import": "2.18.0",
-    "eslint-plugin-jest": "22.9.0",
+    "eslint-plugin-jest": "22.10.0",
     "glob": "7.1.4",
     "husky": "3.0.0",
     "jest": "24.8.0",
