@@ -19,7 +19,7 @@ import { Breach } from './types/remote-api.d';
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
  * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
- * the name of each breach (default: false)
+ * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
@@ -57,7 +57,7 @@ import { Breach } from './types/remote-api.d';
  * @example
  * breachedAccount('baz', {
  *   domain: 'adobe.com',
- *   truncate: true,
+ *   truncate: false,
  *   userAgent: 'my-app 1.0'
  * })
  *   .then(data => {
@@ -80,7 +80,9 @@ const breachedAccount = (
     truncate?: boolean;
     baseUrl?: string;
     userAgent?: string;
-  } = {},
+  } = {
+    truncate: true,
+  },
 ): Promise<Breach[] | null> => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params = [];
@@ -90,8 +92,8 @@ const breachedAccount = (
   if (options.includeUnverified) {
     params.push('includeUnverified=true');
   }
-  if (options.truncate) {
-    params.push('truncateResponse=true');
+  if (options.truncate === false) {
+    params.push('truncateResponse=false');
   }
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
     baseUrl: options.baseUrl,

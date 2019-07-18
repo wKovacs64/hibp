@@ -34,4 +34,18 @@ describe('search', () => {
       pastes,
     });
   });
+
+  it('forwards the truncate option correctly', () => {
+    return search('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).not.toMatch(/truncateResponse=false/);
+        mockGet.mockClear();
+      })
+      .then(() => search('breached', { truncate: false }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).toMatch(/truncateResponse=false/);
+      });
+  });
 });

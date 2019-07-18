@@ -184,7 +184,7 @@ an Error
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (by default, only verified breaches are included) |
-| [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+| [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
@@ -223,7 +223,7 @@ breachedAccount('bar', {
 ```js
 breachedAccount('baz', {
   domain: 'adobe.com',
-  truncate: true,
+  truncate: false,
   userAgent: 'my-app 1.0'
 })
   .then(data => {
@@ -513,7 +513,7 @@ rejects with an Error
 | account | <code>string</code> | an email address or username |
 | [breachOptions] | <code>object</code> | a configuration object pertaining to breach queries |
 | [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
-| [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: false) |
+| [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
 | [breachOptions.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [breachOptions.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
@@ -533,7 +533,7 @@ search('foo')
 ```
 **Example**  
 ```js
-search('nobody@nowhere.com', { truncate: true })
+search('nobody@nowhere.com', { truncate: false })
   .then(data => {
     if (data.breaches || data.pastes) {
       // ...

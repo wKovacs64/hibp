@@ -37,7 +37,7 @@ export interface SearchResults {
  * @param {string} [breachOptions.domain] a domain by which to filter the
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
- * include the name of each breach (default: false)
+ * include the name of each breach (default: true)
  * @param {string} [breachOptions.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
@@ -59,7 +59,7 @@ export interface SearchResults {
  *     // ...
  *   });
  * @example
- * search('nobody@nowhere.com', { truncate: true })
+ * search('nobody@nowhere.com', { truncate: false })
  *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -81,7 +81,9 @@ const search = (
     truncate?: boolean;
     baseUrl?: string;
     userAgent?: string;
-  } = {},
+  } = {
+    truncate: true,
+  },
 ): Promise<SearchResults> => {
   const { baseUrl, userAgent } = breachOptions;
 

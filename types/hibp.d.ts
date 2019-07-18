@@ -93,7 +93,7 @@ export declare const breach: (
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
  * the results (by default, only verified breaches are included)
  * @param {boolean} [options.truncate] truncate the results to only include
- * the name of each breach (default: false)
+ * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
@@ -131,7 +131,7 @@ export declare const breach: (
  * @example
  * breachedAccount('baz', {
  *   domain: 'adobe.com',
- *   truncate: true,
+ *   truncate: false,
  *   userAgent: 'my-app 1.0'
  * })
  *   .then(data => {
@@ -405,7 +405,7 @@ export interface SearchResults {
  * @param {string} [breachOptions.domain] a domain by which to filter the
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
- * include the name of each breach (default: false)
+ * include the name of each breach (default: true)
  * @param {string} [breachOptions.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
@@ -427,7 +427,7 @@ export interface SearchResults {
  *     // ...
  *   });
  * @example
- * search('nobody@nowhere.com', { truncate: true })
+ * search('nobody@nowhere.com', { truncate: false })
  *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
