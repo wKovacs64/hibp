@@ -6,6 +6,6 @@ exports[`internal (haveibeenpwned): fetchFromApi forbidden request throws a "For
 
 exports[`internal (haveibeenpwned): fetchFromApi invalid account format throws a "Bad Request" error 1`] = `[Error: Bad request — the account does not comply with an acceptable format.]`;
 
-exports[`internal (haveibeenpwned): fetchFromApi rate limited throws a "Too Many Requests" error 1`] = `[Error: Rate limit exceeded, refer to acceptable use of the API: https://haveibeenpwned.com/API/v2#AcceptableUse]`;
+exports[`internal (haveibeenpwned): fetchFromApi rate limited throws a "Too Many Requests" error 1`] = `[Error: Rate limit is exceeded. Try again in 2 seconds.]`;
 
 exports[`internal (haveibeenpwned): fetchFromApi unexpected HTTP error throws an error with the response status text 1`] = `[Error: Unknown - something unexpected happened.]`;

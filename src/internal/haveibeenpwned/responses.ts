@@ -10,11 +10,16 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
+export interface RateLimitResponseBody {
+  statusCode: number;
+  message: string;
+}
+
 export interface HaveIBeenPwnedApiResponse {
   headers: { 'cf-ray'?: string };
   status: number;
   statusText?: string;
-  data?: string;
+  data?: RateLimitResponseBody;
 }
 
 /** @internal */
@@ -51,16 +56,17 @@ export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
 };
 
 /**
- * This response has unique behavior. For some reason, the API includes a
- * human-readable message in the response body for this one. Manually populating
- * the message here purely for use in tests.
+ * This response has unique behavior. For some reason, the API includes an
+ * object in the response body for this one, containing a human-readable
+ * message. Manually populating the message here purely for use in tests.
  *
  * @internal
  */
 export const TOO_MANY_REQUESTS: HaveIBeenPwnedApiResponse = {
   headers: {},
   status: 429,
-  data:
-    'Rate limit exceeded, refer to acceptable use of the API: ' +
-    'https://haveibeenpwned.com/API/v2#AcceptableUse',
+  data: {
+    statusCode: 429,
+    message: 'Rate limit is exceeded. Try again in 2 seconds.',
+  },
 };
