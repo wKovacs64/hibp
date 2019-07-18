@@ -27,6 +27,20 @@ describe('breachedAccount', () => {
       });
   });
 
+  it('honors the includeUnverified option', () => {
+    return breachedAccount('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).not.toMatch(/includeUnverified=false/);
+        mockGet.mockClear();
+      })
+      .then(() => breachedAccount('breached', { includeUnverified: false }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).toMatch(/includeUnverified=false/);
+      });
+  });
+
   describe('breached', () => {
     describe('no parameters', () => {
       it('resolves with data from the remote API', () =>
@@ -50,7 +64,7 @@ describe('breachedAccount', () => {
     describe('with includeUnverified', () => {
       it('resolves with data from the remote API', () =>
         expect(
-          breachedAccount('breached', { includeUnverified: true }),
+          breachedAccount('breached', { includeUnverified: false }),
         ).resolves.toEqual(data));
     });
 
@@ -89,7 +103,7 @@ describe('breachedAccount', () => {
     describe('with includeUnverified', () => {
       it('resolves with null', () =>
         expect(
-          breachedAccount('clean', { includeUnverified: true }),
+          breachedAccount('clean', { includeUnverified: false }),
         ).resolves.toBeNull());
     });
 

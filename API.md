@@ -183,7 +183,7 @@ an Error
 | account | <code>string</code> | a username or email address |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
-| [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (by default, only verified breaches are included) |
+| [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (default: true) |
 | [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
@@ -205,7 +205,7 @@ breachedAccount('foo')
 **Example**  
 ```js
 breachedAccount('bar', {
-  includeUnverified: true,
+  includeUnverified: false,
   baseUrl: 'https://my-hibp-proxy:8080',
 })
   .then(data => {

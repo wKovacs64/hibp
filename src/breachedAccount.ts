@@ -17,7 +17,7 @@ import { Breach } from './types/remote-api.d';
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
- * the results (by default, only verified breaches are included)
+ * the results (default: true)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
@@ -41,7 +41,7 @@ import { Breach } from './types/remote-api.d';
  *   });
  * @example
  * breachedAccount('bar', {
- *   includeUnverified: true,
+ *   includeUnverified: false,
  *   baseUrl: 'https://my-hibp-proxy:8080',
  * })
  *   .then(data => {
@@ -81,6 +81,7 @@ const breachedAccount = (
     baseUrl?: string;
     userAgent?: string;
   } = {
+    includeUnverified: true,
     truncate: true,
   },
 ): Promise<Breach[] | null> => {
@@ -89,8 +90,8 @@ const breachedAccount = (
   if (options.domain) {
     params.push(`domain=${encodeURIComponent(options.domain)}`);
   }
-  if (options.includeUnverified) {
-    params.push('includeUnverified=true');
+  if (options.includeUnverified === false) {
+    params.push('includeUnverified=false');
   }
   if (options.truncate === false) {
     params.push('truncateResponse=false');
