@@ -1,7 +1,7 @@
 /**
  * Known potential responses from the remote API.
  *
- * https://haveibeenpwned.com/API/v2#PwnedPasswords
+ * https://haveibeenpwned.com/api/v3#PwnedPasswords
  *
  */
 

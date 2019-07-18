@@ -48,7 +48,8 @@ export interface Paste {
  * @param {string} breachName the name of a breach in the system
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
@@ -95,7 +96,8 @@ export declare const breach: (
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
@@ -163,7 +165,8 @@ export declare const breachedAccount: (
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
@@ -204,7 +207,8 @@ export declare const breaches: (options?: {
  *
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
@@ -244,7 +248,8 @@ export declare const dataClasses: (options?: {
  * @param {string} email the email address to query
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Paste[]> | Promise<null>)} a Promise which resolves to an
@@ -297,7 +302,7 @@ export declare const pasteAccount: (
  *   .catch(err => {
  *     // ...
  *   });
- * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
+ * @see https://haveibeenpwned.com/api/v3#PwnedPasswords
  * @alias module:pwnedPassword
  */
 export declare const pwnedPassword: (
@@ -361,7 +366,7 @@ export interface PwnedPasswordSuffix {
  *   .catch(err => {
  *     // ...
  *   });
- * @see https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+ * @see https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange
  * @alias module:pwnedPasswordRange
  */
 export declare const pwnedPasswordRange: (
@@ -407,7 +412,8 @@ export interface SearchResults {
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: true)
  * @param {string} [breachOptions.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object

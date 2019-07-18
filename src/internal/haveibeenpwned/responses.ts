@@ -3,7 +3,7 @@
  *
  * Unfortunately, the API does not send a decent human-readable message back
  * with each response, but they are documented on the website:
- * https://haveibeenpwned.com/api/v2#ResponseCodes
+ * https://haveibeenpwned.com/api/v3#ResponseCodes
  *
  * These objects simply provide a mapping between the HTTP response status code
  * and the corresponding human-readable message so we can throw a more

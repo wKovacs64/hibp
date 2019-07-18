@@ -39,7 +39,8 @@ export interface SearchResults {
  * @param {boolean} [breachOptions.truncate] truncate the results to only
  * include the name of each breach (default: true)
  * @param {string} [breachOptions.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object

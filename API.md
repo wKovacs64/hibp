@@ -134,7 +134,7 @@ with an Error
 | --- | --- | --- |
 | breachName | <code>string</code> | the name of a breach in the system |
 | [options] | <code>object</code> | a configuration object |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -185,7 +185,7 @@ an Error
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (default: true) |
 | [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -259,7 +259,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -312,7 +312,7 @@ Error
 | Param | Type | Description |
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -352,7 +352,7 @@ Error
 | --- | --- | --- |
 | email | <code>string</code> | the email address to query |
 | [options] | <code>object</code> | a configuration object |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -389,7 +389,7 @@ only the first 5 characters of its SHA-1 hash will be submitted to the API.
 **Kind**: global method of [<code>pwnedPassword</code>](#module_pwnedPassword)  
 **Returns**: <code>Promise.&lt;number&gt;</code> - a Promise which resolves to the number of times
 the password has been exposed in a breach, or rejects with an Error  
-**See**: https://haveibeenpwned.com/API/v2#PwnedPasswords  
+**See**: https://haveibeenpwned.com/api/v3#PwnedPasswords  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -439,7 +439,7 @@ response and returns a more structured format.
 array of objects, each containing the `suffix` that when matched with the
 prefix composes the complete hash, and a `count` of how many times it appears
 in the breached password data set, or rejects with an Error  
-**See**: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange  
+**See**: https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -514,7 +514,7 @@ rejects with an Error
 | [breachOptions] | <code>object</code> | a configuration object pertaining to breach queries |
 | [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
-| [breachOptions.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`) |
+| [breachOptions.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [breachOptions.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
