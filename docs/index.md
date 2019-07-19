@@ -29,17 +29,17 @@ npm install hibp
 See the [browser](#using-in-the-browser) section below for information on how to
 use via `<script>` tag.
 
-## Features
+## Features (🔑 = [requires](https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/) an [API key](https://haveibeenpwned.com/API/Key))
 
 - Get a single breach event
-- Get all breaches for an account
+- Get all breaches for an account 🔑
 - Get all breach events in the system
 - Get all data classes
-- Get all pastes for an account
+- Get all pastes for an account 🔑
 - [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange)
   check a password to see if it has been exposed in a data breach
 - Check a SHA-1 prefix to see if it has been exposed in a data breach
-- Search for an account in both breaches and pastes at the same time
+- Search for an account in both breaches and pastes at the same time 🔑
 - All queries return a Promise
 - Available server-side (Node.js) and client-side (browser)
 
@@ -83,7 +83,7 @@ detailed usage information and examples.
 ```javascript
 import { search } from 'hibp';
 
-search('someAccountOrEmail')
+search('someAccountOrEmail', { apiKey: 'my-api-key' })
   .then(data => {
     if (data.breaches || data.pastes) {
       // Bummer...
@@ -103,13 +103,13 @@ search('someAccountOrEmail')
 
 ---
 
-**Warning:** As of January, 2019, `haveibeenpwned.com` has started blocking
-requests to the `breachedaccount` API endpoint when originating from within a
-browser (based on the `User-Agent` field of the request headers), which affects
-the `breachedAccount` and `search` functions. To use these functions in a
-browser, you will likely have to proxy your request through a server of your own
-(e.g. [`hibp-proxy`](https://github.com/wKovacs64/hibp-proxy#readme)). The
-`baseUrl` option was added to facilitate this workaround. See issue
+**Warning (January, 2019):** `haveibeenpwned.com` has started blocking requests
+to the `breachedaccount` API endpoint when originating from within a browser
+(based on the `User-Agent` field of the request headers), which affects the
+`breachedAccount` and `search` functions. To use these functions in a browser,
+you will likely have to proxy your request through a server of your own (e.g.
+[`hibp-proxy`](https://github.com/wKovacs64/hibp-proxy#readme)). The `baseUrl`
+option was added to facilitate this workaround. See issue
 [#60](https://github.com/wKovacs64/hibp/issues/60) for more details and
 discussion.
 
@@ -193,8 +193,6 @@ You have several options for using this library in a browser environment:
 
 - [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying
   the '[Have I been pwned?](https://haveibeenpwned.com)' service
-- [hibp-stdlib](https://stdlib.com/@wKovacs64/lib/hibp) - a microservice on
-  [StdLib](https://stdlib.com)
 - [Password Lense](https://pwl.netlify.com/) - a static web application to
   reveal character types in a password
 

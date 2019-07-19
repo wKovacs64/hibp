@@ -1,5 +1,23 @@
 ## Migration Notes
 
+#### 7.5.2 → 8.0.0
+
+- The `breachedAccount`, `pasteAccount`, and `search` modules now have an
+  `apiKey` option, which is required by v3 of the `haveibeenpwned.com` API
+  (unless you are proxying your requests through a server that inserts an API
+  key on your behalf via the `baseUrl` option). You can purchase an API key from
+  Troy at [https://haveibeenpwned.com/API/Key][get-key]. See [Troy's blog
+  post][api-key-blog-post] for rationale and a full explanation.
+- The default value of the `truncate` option in the `breachedAccount` and
+  `search` modules has been changed from `false` to `true` per Troy's
+  recommendation. If you do not specify a value of `false` explicitly, each
+  `Breach` result will only contain the breach name (no metadata).
+- The default value of the `includeUnverified` option in the `breachedAccount`
+  module has been changed from `false` to `true` per Troy's recommendation.
+  Although there are not many unverified breaches in the system, it's possible
+  you will get more breaches back than you did previously. You may explicitly
+  disable this by specifying a value of `false` for this option.
+
 #### 6.0.0 → 7.0.0
 
 - `pwnedPassword` now uses the more secure hash range API rather than submitting
@@ -142,3 +160,6 @@
 
 [pwnedpasswordsbyrange]:
   https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+[api-key-blog-post]:
+  https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/
+[get-key]: https://haveibeenpwned.com/API/Key
