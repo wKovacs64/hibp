@@ -1,6 +1,4 @@
 import AxiosError from 'AxiosError';
-import breachedAccount from 'breachedAccount';
-import dataClasses from 'dataClasses';
 import {
   OK,
   BAD_REQUEST,
@@ -14,8 +12,6 @@ import fetchFromApi from './fetchFromApi';
 
 const mockGet = jest.spyOn(axios, 'get');
 
-// TODO: rework tests to use fetchFromApi directly?
-
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';
 
@@ -23,7 +19,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       const ERR = new Error('Set sail for fail!');
       mockGet.mockRejectedValueOnce(ERR);
-      expect(dataClasses()).rejects.toEqual(ERR);
+      expect(fetchFromApi('/service')).rejects.toEqual(ERR);
     });
   });
 
@@ -31,7 +27,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('throws a "Bad Request" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
       expect(
-        breachedAccount('bad request', { apiKey }),
+        fetchFromApi('/service/bad_request', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
   });
@@ -39,7 +35,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('unauthorized', () => {
     it('throws an "Unauthorized" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(UNAUTHORIZED));
-      expect(breachedAccount('unauthorized')).rejects.toMatchSnapshot();
+      expect(fetchFromApi('/service/unauthorized')).rejects.toMatchSnapshot();
     });
   });
 
@@ -47,13 +43,15 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('throws a "Forbidden" error if no cf-ray header is present', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
       expect(
-        breachedAccount('forbidden', { apiKey }),
+        fetchFromApi('/service/forbidden', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BLOCKED));
-      expect(breachedAccount('blocked', { apiKey })).rejects.toMatchSnapshot();
+      expect(
+        fetchFromApi('/service/blocked', { apiKey }),
+      ).rejects.toMatchSnapshot();
     });
   });
 
@@ -61,7 +59,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('throws a "Too Many Requests" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(TOO_MANY_REQUESTS));
       expect(
-        breachedAccount('rate limited', { apiKey }),
+        fetchFromApi('/service/rate_limited', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
   });
@@ -74,7 +72,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
           statusText: 'Unknown - something unexpected happened.',
         }),
       );
-      expect(breachedAccount('unknown response')).rejects.toMatchSnapshot();
+      expect(
+        fetchFromApi('/service/unknown_response'),
+      ).rejects.toMatchSnapshot();
     });
   });
 
@@ -106,7 +106,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         statusText: '',
       });
       const ua = 'custom UA';
-      return dataClasses({ userAgent: ua }).then(() => {
+      return fetchFromApi('/service', { userAgent: ua }).then(() => {
         expect(mockGet).toHaveBeenCalledWith(expect.any(String), {
           headers: { 'User-Agent': ua },
         });
@@ -124,7 +124,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         statusText: '',
       });
       const baseUrl = 'https://my-hibp-proxy:8080';
-      return dataClasses({ baseUrl }).then(() => {
+      return fetchFromApi('/service', { baseUrl }).then(() => {
         expect(mockGet).toHaveBeenCalledWith(expect.any(String), {
           baseURL: baseUrl,
         });
