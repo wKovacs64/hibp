@@ -8,7 +8,7 @@ module.exports = {
         modules: test ? 'commonjs' : false,
         targets: {
           browsers: ['> 1%', 'last 2 versions'],
-          node: 6,
+          node: 8,
         },
       },
     ],

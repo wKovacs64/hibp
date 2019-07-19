@@ -17,6 +17,8 @@
   Although there are not many unverified breaches in the system, it's possible
   you will get more breaches back than you did previously. You may explicitly
   disable this by specifying a value of `false` for this option.
+- Support for Node.js version 6.x has been dropped. You must upgrade your
+  Node.js environment to at least v8.9.0.
 
 #### 6.0.0 → 7.0.0
 
