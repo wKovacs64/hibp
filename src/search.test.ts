@@ -34,4 +34,48 @@ describe('search', () => {
       pastes,
     });
   });
+
+  it('forwards the apiKey option correctly', () => {
+    const breaches = [{ stuff: 'about', a: 'breach' }];
+    const apiKey = 'my-api-key';
+    const requestConfigWithHeaders = {
+      headers: {
+        'HIBP-API-Key': apiKey,
+      },
+    };
+
+    mockGet.mockResolvedValue(mockResponse({ data: breaches }));
+
+    return search('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.not.objectContaining(requestConfigWithHeaders),
+        );
+        mockGet.mockClear();
+      })
+      .then(() => search('breached', { apiKey }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.objectContaining(requestConfigWithHeaders),
+        );
+      });
+  });
+
+  it('forwards the truncate option correctly', () => {
+    return search('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).not.toMatch(/truncateResponse=false/);
+        mockGet.mockClear();
+      })
+      .then(() => search('breached', { truncate: false }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).toMatch(/truncateResponse=false/);
+      });
+  });
 });

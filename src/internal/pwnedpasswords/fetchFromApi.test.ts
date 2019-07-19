@@ -1,7 +1,7 @@
 import AxiosError from 'AxiosError';
-import pwnedPasswordRange from 'pwnedPasswordRange';
 import { BAD_REQUEST, OK } from './responses';
 import axios from './axiosInstance';
+import fetchFromApi from './fetchFromApi';
 
 const mockGet = jest.spyOn(axios, 'get');
 
@@ -10,14 +10,14 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       const ERR = new Error('Set sail for fail!');
       mockGet.mockRejectedValueOnce(ERR);
-      expect(pwnedPasswordRange('setup error')).rejects.toEqual(ERR);
+      expect(fetchFromApi('/service/setup_error')).rejects.toEqual(ERR);
     });
   });
 
   describe('invalid range', () => {
     it('throws a "Bad Request" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
-      expect(pwnedPasswordRange('bad request')).rejects.toMatchSnapshot();
+      expect(fetchFromApi('/service/bad_request')).rejects.toMatchSnapshot();
     });
   });
 
@@ -29,7 +29,9 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
           statusText: 'Unknown - something unexpected happened.',
         }),
       );
-      expect(pwnedPasswordRange('unknown response')).rejects.toMatchSnapshot();
+      expect(
+        fetchFromApi('/service/unknown_response'),
+      ).rejects.toMatchSnapshot();
     });
   });
 
@@ -43,7 +45,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         statusText: '',
       });
       const ua = 'custom UA';
-      return pwnedPasswordRange('stuff', { userAgent: ua }).then(() => {
+      return fetchFromApi('/service/stuff', { userAgent: ua }).then(() => {
         expect(mockGet).toHaveBeenCalledWith(expect.any(String), {
           headers: { 'User-Agent': ua },
         });
@@ -61,7 +63,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         statusText: '',
       });
       const baseUrl = 'https://my-hibp-proxy:8080';
-      return pwnedPasswordRange('whatever', { baseUrl }).then(() => {
+      return fetchFromApi('/service/whatever', { baseUrl }).then(() => {
         expect(mockGet).toHaveBeenCalledWith(expect.any(String), {
           baseURL: baseUrl,
         });

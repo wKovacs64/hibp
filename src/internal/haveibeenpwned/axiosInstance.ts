@@ -8,11 +8,9 @@ import { name, version } from '../../../package.json';
  * @private
  */
 export default Axios.create({
-  baseURL: 'https://haveibeenpwned.com/api',
+  baseURL: 'https://haveibeenpwned.com/api/v3',
   headers: Object.assign(
-    {
-      Accept: 'application/vnd.haveibeenpwned.v2+json',
-    },
+    {},
     typeof navigator === 'undefined'
       ? {
           // Add a custom User-Agent header when running outside the browser

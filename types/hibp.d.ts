@@ -48,7 +48,8 @@ export interface Paste {
  * @param {string} breachName the name of a breach in the system
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
@@ -78,31 +79,34 @@ export declare const breach: (
 /**
  * Fetches breach data for a specific account.
  *
- * ***Warning:***
+ * ***Warning (July 18, 2019):***
  *
- * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
- * the `breachedaccount` endpoint when originating from within a browser (based
- * on the `User-Agent` field of the request headers). To use this function in a
- * browser, you will likely have to proxy your request through a server of your
- * own. The `baseUrl` option was added to facilitate this workaround.
+ * `haveibeenpwned.com` now requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
+ * `apiKey` option here is not explicitly required, but direct requests made
+ * without it (that is, without specifying a `baseUrl` to a proxy that inserts a
+ * valid API key on your behalf) will fail.
  *
  * @param {string} account a username or email address
  * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key (default: undefined)
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
- * the results (by default, only verified breaches are included)
+ * the results (default: true)
  * @param {boolean} [options.truncate] truncate the results to only include
- * the name of each breach (default: false)
+ * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
  * array of breach objects (or null if no breaches were found), or rejects with
  * an Error
  * @example
- * breachedAccount('foo')
+ * breachedAccount('foo', { apiKey: 'my-api-key' })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -115,7 +119,7 @@ export declare const breach: (
  *   });
  * @example
  * breachedAccount('bar', {
- *   includeUnverified: true,
+ *   includeUnverified: false,
  *   baseUrl: 'https://my-hibp-proxy:8080',
  * })
  *   .then(data => {
@@ -130,8 +134,9 @@ export declare const breach: (
  *   });
  * @example
  * breachedAccount('baz', {
+ *   apiKey: 'my-api-key',
  *   domain: 'adobe.com',
- *   truncate: true,
+ *   truncate: false,
  *   userAgent: 'my-app 1.0'
  * })
  *   .then(data => {
@@ -149,6 +154,7 @@ export declare const breach: (
 export declare const breachedAccount: (
   account: string,
   options?: {
+    apiKey?: string | undefined;
     domain?: string | undefined;
     includeUnverified?: boolean | undefined;
     truncate?: boolean | undefined;
@@ -163,7 +169,8 @@ export declare const breachedAccount: (
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
@@ -204,7 +211,8 @@ export declare const breaches: (options?: {
  *
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
@@ -241,17 +249,28 @@ export declare const dataClasses: (options?: {
 /**
  * Fetches paste data for a specific account (email address).
  *
+ * ***Warning (July 18, 2019):***
+ *
+ * `haveibeenpwned.com` now requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `pasteaccount` endpoint. The
+ * `apiKey` option here is not explicitly required, but direct requests made
+ * without it (that is, without specifying a `baseUrl` to a proxy that inserts a
+ * valid API key on your behalf) will fail.
+ *
  * @param {string} email the email address to query
  * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Paste[]> | Promise<null>)} a Promise which resolves to an
  * array of paste objects (or null if no pastes were found), or rejects with an
  * Error
  * @example
- * pasteAccount('foo@bar.com')
+ * pasteAccount('foo@bar.com', { apiKey: 'my-api-key' })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -267,6 +286,7 @@ export declare const dataClasses: (options?: {
 export declare const pasteAccount: (
   email: string,
   options?: {
+    apiKey?: string | undefined;
     baseUrl?: string | undefined;
     userAgent?: string | undefined;
   },
@@ -297,7 +317,7 @@ export declare const pasteAccount: (
  *   .catch(err => {
  *     // ...
  *   });
- * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
+ * @see https://haveibeenpwned.com/api/v3#PwnedPasswords
  * @alias module:pwnedPassword
  */
 export declare const pwnedPassword: (
@@ -361,7 +381,7 @@ export interface PwnedPasswordSuffix {
  *   .catch(err => {
  *     // ...
  *   });
- * @see https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+ * @see https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange
  * @alias module:pwnedPasswordRange
  */
 export declare const pwnedPasswordRange: (
@@ -391,23 +411,26 @@ export interface SearchResults {
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
  *
- * ***Warning:***
+ * ***Warning (July 18, 2019):***
  *
- * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
- * the `breachedaccount` endpoint when originating from within a browser (based
- * on the `User-Agent` field of the request headers). To use this function in a
- * browser, you will likely have to proxy your request through a server of your
- * own. The `baseUrl` option was added to facilitate this workaround.
+ * `haveibeenpwned.com` now requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `breachedaccount` and
+ * `pasteaccount` endpoints. The  `apiKey` option here is not explicitly
+ * required, but direct requests made without it (that is, without specifying a
+ * `baseUrl` to a proxy that inserts a valid API key on your behalf) will fail.
  *
  * @param {string} account an email address or username
- * @param {object} [breachOptions] a configuration object
- * pertaining to breach queries
+ * @param {object} [breachOptions] a configuration object pertaining to breach
+ * queries
+ * @param {string} [breachOptions.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key
  * @param {string} [breachOptions.domain] a domain by which to filter the
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
- * include the name of each breach (default: false)
+ * include the name of each breach (default: true)
  * @param {string} [breachOptions.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
@@ -415,7 +438,7 @@ export interface SearchResults {
  * and a "pastes" key (which can be null or an array of paste objects), or
  * rejects with an Error
  * @example
- * search('foo')
+ * search('foo', { apiKey: 'my-api-key' })
  *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -427,7 +450,7 @@ export interface SearchResults {
  *     // ...
  *   });
  * @example
- * search('nobody@nowhere.com', { truncate: true })
+ * search('nobody@nowhere.com', { apiKey: 'my-api-key', truncate: false })
  *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -445,6 +468,7 @@ export interface SearchResults {
 export declare const search: (
   account: string,
   breachOptions?: {
+    apiKey?: string | undefined;
     domain?: string | undefined;
     truncate?: boolean | undefined;
     baseUrl?: string | undefined;

@@ -1,14 +1,13 @@
 const hibp = require('hibp');
 
 hibp
-  .search('someAccountOrEmail')
+  .breach('Adobe')
   .then(data => {
-    if (data.breaches || data.pastes) {
-      // Bummer...
+    if (data) {
+      // Breach data found
       console.log(data);
     } else {
-      // Phew! We're clear.
-      console.log('Good news — no pwnage found!');
+      console.log('No breach data found by that name.');
     }
   })
   .catch(err => {

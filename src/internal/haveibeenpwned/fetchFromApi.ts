@@ -2,6 +2,7 @@ import { Breach, Paste } from 'types/remote-api.d';
 import axios from './axiosInstance';
 import {
   BAD_REQUEST,
+  UNAUTHORIZED,
   FORBIDDEN,
   NOT_FOUND,
   TOO_MANY_REQUESTS,
@@ -23,6 +24,7 @@ const blockedWithRayId = (rayId: string): string =>
  * HTTP status code 200 returns an Object (data found).
  * HTTP status code 404 returns null (no data found).
  * HTTP status code 400 throws an Error (bad request).
+ * HTTP status code 401 throws an Error (unauthorized).
  * HTTP status code 403 throws an Error (forbidden).
  * HTTP status code 429 throws an Error (too many requests).
  *
@@ -30,8 +32,11 @@ const blockedWithRayId = (rayId: string): string =>
  * @private
  * @param {string} endpoint the API endpoint to query
  * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<ApiData>} a Promise which resolves to the data resulting
@@ -41,29 +46,41 @@ const blockedWithRayId = (rayId: string): string =>
 export default (
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
-  options: { baseUrl?: string; userAgent?: string } = {},
+  options: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
 ): Promise<ApiData> => {
-  const { baseUrl, userAgent } = options;
+  const { apiKey, baseUrl, userAgent } = options;
 
-  const config = Object.assign(
+  const headers: {
+    'HIBP-API-Key'?: string;
+    'User-Agent'?: string;
+  } = {};
+
+  if (apiKey) {
+    headers['HIBP-API-Key'] = apiKey;
+  }
+  if (userAgent) {
+    headers['User-Agent'] = userAgent;
+  }
+
+  const requestConfig = Object.assign(
     {},
     baseUrl ? { baseURL: baseUrl } : {},
-    userAgent
+    Object.keys(headers).length > 0
       ? {
-          headers: {
-            'User-Agent': userAgent,
-          },
+          headers,
         }
       : {},
   );
 
-  return Promise.resolve(axios.get<ApiData>(endpoint, config))
+  return Promise.resolve(axios.get<ApiData>(endpoint, requestConfig))
     .then(res => res.data)
     .catch(err => {
       if (err.response) {
         switch (err.response.status) {
           case BAD_REQUEST.status:
             throw new Error(BAD_REQUEST.statusText);
+          case UNAUTHORIZED.status:
+            throw new Error(err.response.data.message);
           case FORBIDDEN.status: {
             const rayId =
               err.response.headers && err.response.headers['cf-ray'];
@@ -75,7 +92,7 @@ export default (
           case NOT_FOUND.status:
             return null;
           case TOO_MANY_REQUESTS.status:
-            throw new Error(err.response.data);
+            throw new Error(err.response.data.message);
           default:
             throw new Error(err.response.statusText);
         }

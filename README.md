@@ -34,17 +34,17 @@ npm install hibp
 See the [browser](#using-in-the-browser) section below for information on how to
 use via `<script>` tag.
 
-## Features
+## Features (🔑 = [requires][api-key-blog-post] an [API key][get-api-key])
 
 - Get a single breach event
-- Get all breaches for an account
+- Get all breaches for an account 🔑
 - Get all breach events in the system
 - Get all data classes
-- Get all pastes for an account
+- Get all pastes for an account 🔑
 - [Securely][search-by-range] check a password to see if it has been exposed in
   a data breach
 - Check a SHA-1 prefix to see if it has been exposed in a data breach
-- Search for an account in both breaches and pastes at the same time
+- Search for an account in both breaches and pastes at the same time 🔑
 - All queries return a Promise
 - Available server-side (Node.js) and client-side (browser)
 
@@ -87,7 +87,7 @@ examples.
 ```javascript
 import { search } from 'hibp';
 
-search('someAccountOrEmail')
+search('someAccountOrEmail', { apiKey: 'my-api-key' })
   .then(data => {
     if (data.breaches || data.pastes) {
       // Bummer...
@@ -104,18 +104,6 @@ search('someAccountOrEmail')
 ```
 
 #### Using in the browser
-
----
-
-**Warning:** As of January, 2019, `haveibeenpwned.com` has started blocking
-requests to the `breachedaccount` API endpoint when originating from within a
-browser (based on the `User-Agent` field of the request headers), which affects
-the `breachedAccount` and `search` functions. To use these functions in a
-browser, you will likely have to proxy your request through a server of your own
-(e.g. [`hibp-proxy`][hibp-proxy]). The `baseUrl` option was added to facilitate
-this workaround. See issue [#60][60] for more details and discussion.
-
----
 
 **Prerequisite:** This module requires a Promise implementation to exist in the
 global namespace prior to being loaded. Therefore, to facilitate usage in
@@ -193,7 +181,6 @@ You have several options for using this library in a browser environment:
 
 - [pwned][pwned] - a command-line tool for querying the '[Have I been
   pwned?][haveibeenpwned]' service
-- [hibp-stdlib][hibp-stdlib] - a microservice on [StdLib][stdlib]
 - [Password Lense][pwl] - a static web application to reveal character types in
   a password
 
@@ -218,6 +205,9 @@ This module is distributed under the [MIT License][license].
 [haveibeenpwned]: https://haveibeenpwned.com
 [search-by-range]:
   https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+[api-key-blog-post]:
+  https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/
+[get-api-key]: https://haveibeenpwned.com/API/Key
 [unpkg]: https://unpkg.com
 [cdn-umd-dev]: https://unpkg.com/hibp/dist/hibp.js
 [cdn-umd-prod]: https://unpkg.com/hibp/dist/hibp.min.js
@@ -231,9 +221,5 @@ This module is distributed under the [MIT License][license].
 [runkit]: https://runkit.com/npm/hibp
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
-[hibp-stdlib]: https://stdlib.com/@wKovacs64/lib/hibp
-[stdlib]: https://stdlib.com
 [pwl]: https://pwl.netlify.com/
 [license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
-[hibp-proxy]: https://github.com/wKovacs64/hibp-proxy#readme
-[60]: https://github.com/wKovacs64/hibp/issues/60

@@ -55,7 +55,7 @@ export interface PwnedPasswordSuffix {
  *   .catch(err => {
  *     // ...
  *   });
- * @see https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+ * @see https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange
  * @alias module:pwnedPasswordRange
  */
 const pwnedPasswordRange = (

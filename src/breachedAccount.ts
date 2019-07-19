@@ -4,31 +4,34 @@ import { Breach } from './types/remote-api.d';
 /**
  * Fetches breach data for a specific account.
  *
- * ***Warning:***
+ * ***Warning (July 18, 2019):***
  *
- * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
- * the `breachedaccount` endpoint when originating from within a browser (based
- * on the `User-Agent` field of the request headers). To use this function in a
- * browser, you will likely have to proxy your request through a server of your
- * own. The `baseUrl` option was added to facilitate this workaround.
+ * `haveibeenpwned.com` now requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
+ * `apiKey` option here is not explicitly required, but direct requests made
+ * without it (that is, without specifying a `baseUrl` to a proxy that inserts a
+ * valid API key on your behalf) will fail.
  *
  * @param {string} account a username or email address
  * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key (default: undefined)
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
- * the results (by default, only verified breaches are included)
+ * the results (default: true)
  * @param {boolean} [options.truncate] truncate the results to only include
- * the name of each breach (default: false)
+ * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
  * array of breach objects (or null if no breaches were found), or rejects with
  * an Error
  * @example
- * breachedAccount('foo')
+ * breachedAccount('foo', { apiKey: 'my-api-key' })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -41,7 +44,7 @@ import { Breach } from './types/remote-api.d';
  *   });
  * @example
  * breachedAccount('bar', {
- *   includeUnverified: true,
+ *   includeUnverified: false,
  *   baseUrl: 'https://my-hibp-proxy:8080',
  * })
  *   .then(data => {
@@ -56,8 +59,9 @@ import { Breach } from './types/remote-api.d';
  *   });
  * @example
  * breachedAccount('baz', {
+ *   apiKey: 'my-api-key',
  *   domain: 'adobe.com',
- *   truncate: true,
+ *   truncate: false,
  *   userAgent: 'my-app 1.0'
  * })
  *   .then(data => {
@@ -75,25 +79,30 @@ import { Breach } from './types/remote-api.d';
 const breachedAccount = (
   account: string,
   options: {
+    apiKey?: string;
     domain?: string;
     includeUnverified?: boolean;
     truncate?: boolean;
     baseUrl?: string;
     userAgent?: string;
-  } = {},
+  } = {
+    includeUnverified: true,
+    truncate: true,
+  },
 ): Promise<Breach[] | null> => {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params = [];
   if (options.domain) {
     params.push(`domain=${encodeURIComponent(options.domain)}`);
   }
-  if (options.includeUnverified) {
-    params.push('includeUnverified=true');
+  if (options.includeUnverified === false) {
+    params.push('includeUnverified=false');
   }
-  if (options.truncate) {
-    params.push('truncateResponse=true');
+  if (options.truncate === false) {
+    params.push('truncateResponse=false');
   }
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
+    apiKey: options.apiKey,
     baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Breach[] | null>;

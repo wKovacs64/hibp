@@ -23,23 +23,26 @@ export interface SearchResults {
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
  *
- * ***Warning:***
+ * ***Warning (July 18, 2019):***
  *
- * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
- * the `breachedaccount` endpoint when originating from within a browser (based
- * on the `User-Agent` field of the request headers). To use this function in a
- * browser, you will likely have to proxy your request through a server of your
- * own. The `baseUrl` option was added to facilitate this workaround.
+ * `haveibeenpwned.com` now requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `breachedaccount` and
+ * `pasteaccount` endpoints. The  `apiKey` option here is not explicitly
+ * required, but direct requests made without it (that is, without specifying a
+ * `baseUrl` to a proxy that inserts a valid API key on your behalf) will fail.
  *
  * @param {string} account an email address or username
- * @param {object} [breachOptions] a configuration object
- * pertaining to breach queries
+ * @param {object} [breachOptions] a configuration object pertaining to breach
+ * queries
+ * @param {string} [breachOptions.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key
  * @param {string} [breachOptions.domain] a domain by which to filter the
  * results (default: all domains)
  * @param {boolean} [breachOptions.truncate] truncate the results to only
- * include the name of each breach (default: false)
+ * include the name of each breach (default: true)
  * @param {string} [breachOptions.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api`)
+ * haveibeenpwned.com API endpoints (default:
+ * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [breachOptions.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
@@ -47,7 +50,7 @@ export interface SearchResults {
  * and a "pastes" key (which can be null or an array of paste objects), or
  * rejects with an Error
  * @example
- * search('foo')
+ * search('foo', { apiKey: 'my-api-key' })
  *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -59,7 +62,7 @@ export interface SearchResults {
  *     // ...
  *   });
  * @example
- * search('nobody@nowhere.com', { truncate: true })
+ * search('nobody@nowhere.com', { apiKey: 'my-api-key', truncate: false })
  *   .then(data => {
  *     if (data.breaches || data.pastes) {
  *       // ...
@@ -77,19 +80,22 @@ export interface SearchResults {
 const search = (
   account: string,
   breachOptions: {
+    apiKey?: string;
     domain?: string;
     truncate?: boolean;
     baseUrl?: string;
     userAgent?: string;
-  } = {},
+  } = {
+    truncate: true,
+  },
 ): Promise<SearchResults> => {
-  const { baseUrl, userAgent } = breachOptions;
+  const { apiKey, baseUrl, userAgent } = breachOptions;
 
   return Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
-      ? pasteAccount(account, { baseUrl, userAgent })
+      ? pasteAccount(account, { apiKey, baseUrl, userAgent })
       : null,
   ]).then(([breaches, pastes]) => ({
     breaches,

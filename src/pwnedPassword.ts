@@ -27,7 +27,7 @@ import pwnedPasswordRange from './pwnedPasswordRange';
  *   .catch(err => {
  *     // ...
  *   });
- * @see https://haveibeenpwned.com/API/v2#PwnedPasswords
+ * @see https://haveibeenpwned.com/api/v3#PwnedPasswords
  * @alias module:pwnedPassword
  */
 const pwnedPassword = (

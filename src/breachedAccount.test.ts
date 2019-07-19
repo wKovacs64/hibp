@@ -7,13 +7,68 @@ import breachedAccount from './breachedAccount';
 const mockGet = jest.spyOn(axios, 'get');
 
 describe('breachedAccount', () => {
+  const data = [{ some: 'stuff' }];
+
+  beforeAll(() => {
+    mockGet.mockResolvedValue(mockResponse({ data }));
+  });
+
+  it('honors the apiKey option', () => {
+    const apiKey = 'my-api-key';
+    const requestConfigWithHeaders = {
+      headers: {
+        'HIBP-API-Key': apiKey,
+      },
+    };
+
+    return breachedAccount('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.not.objectContaining(requestConfigWithHeaders),
+        );
+        mockGet.mockClear();
+      })
+      .then(() => breachedAccount('breached', { apiKey }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.objectContaining(requestConfigWithHeaders),
+        );
+      });
+  });
+
+  it('honors the truncate option', () => {
+    return breachedAccount('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).not.toMatch(/truncateResponse=false/);
+        mockGet.mockClear();
+      })
+      .then(() => breachedAccount('breached', { truncate: false }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).toMatch(/truncateResponse=false/);
+      });
+  });
+
+  it('honors the includeUnverified option', () => {
+    return breachedAccount('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).not.toMatch(/includeUnverified=false/);
+        mockGet.mockClear();
+      })
+      .then(() => breachedAccount('breached', { includeUnverified: false }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet.mock.calls[0][0]).toMatch(/includeUnverified=false/);
+      });
+  });
+
   describe('breached', () => {
-    const data = [{ some: 'stuff' }];
-
-    beforeAll(() => {
-      mockGet.mockResolvedValue(mockResponse({ data }));
-    });
-
     describe('no parameters', () => {
       it('resolves with data from the remote API', () =>
         expect(breachedAccount('breached')).resolves.toEqual(data));
@@ -22,7 +77,7 @@ describe('breachedAccount', () => {
     describe('with truncateResults', () => {
       it('resolves with data from the remote API', () =>
         expect(
-          breachedAccount('breached', { truncate: true }),
+          breachedAccount('breached', { truncate: false }),
         ).resolves.toEqual(data));
     });
 
@@ -36,14 +91,14 @@ describe('breachedAccount', () => {
     describe('with includeUnverified', () => {
       it('resolves with data from the remote API', () =>
         expect(
-          breachedAccount('breached', { includeUnverified: true }),
+          breachedAccount('breached', { includeUnverified: false }),
         ).resolves.toEqual(data));
     });
 
     describe('with domain and truncateResults', () => {
       it('resolves with data from the remote API', () =>
         expect(
-          breachedAccount('breached', { domain: 'foo.bar', truncate: true }),
+          breachedAccount('breached', { domain: 'foo.bar', truncate: false }),
         ).resolves.toEqual(data));
     });
   });
@@ -61,7 +116,7 @@ describe('breachedAccount', () => {
     describe('with truncateResults', () => {
       it('resolves with null', () =>
         expect(
-          breachedAccount('clean', { truncate: true }),
+          breachedAccount('clean', { truncate: false }),
         ).resolves.toBeNull());
     });
 
@@ -75,14 +130,14 @@ describe('breachedAccount', () => {
     describe('with includeUnverified', () => {
       it('resolves with null', () =>
         expect(
-          breachedAccount('clean', { includeUnverified: true }),
+          breachedAccount('clean', { includeUnverified: false }),
         ).resolves.toBeNull());
     });
 
     describe('with domain and truncateResults', () => {
       it('resolves with null', () =>
         expect(
-          breachedAccount('clean', { domain: 'foo.bar', truncate: true }),
+          breachedAccount('clean', { domain: 'foo.bar', truncate: false }),
         ).resolves.toBeNull());
     });
   });
