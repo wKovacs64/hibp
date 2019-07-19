@@ -61,7 +61,7 @@
   path (providing invocation syntax equivalence to prior versions) is to change
   your import statement to import all the modules into a local `hibp` namespace,
   but the recommended upgrade path is to import exactly which modules you need
-  and update your calls to remove the preceeding `hibp` references.
+  and update your calls to remove the preceding `hibp` references.
 
   ```javascript
   // 4.x
