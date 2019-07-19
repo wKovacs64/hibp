@@ -4,15 +4,21 @@ import dataClasses from 'dataClasses';
 import {
   OK,
   BAD_REQUEST,
+  UNAUTHORIZED,
   FORBIDDEN,
   BLOCKED,
   TOO_MANY_REQUESTS,
 } from './responses';
 import axios from './axiosInstance';
+import fetchFromApi from './fetchFromApi';
 
 const mockGet = jest.spyOn(axios, 'get');
 
+// TODO: rework tests to use fetchFromApi directly?
+
 describe('internal (haveibeenpwned): fetchFromApi', () => {
+  const apiKey = 'my-api-key';
+
   describe('request failure', () => {
     it('re-throws request setup errors', () => {
       const ERR = new Error('Set sail for fail!');
@@ -24,26 +30,39 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('invalid account format', () => {
     it('throws a "Bad Request" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
-      expect(breachedAccount('bad request')).rejects.toMatchSnapshot();
+      expect(
+        breachedAccount('bad request', { apiKey }),
+      ).rejects.toMatchSnapshot();
+    });
+  });
+
+  describe('unauthorized', () => {
+    it('throws an "Unauthorized" error', () => {
+      mockGet.mockRejectedValueOnce(new AxiosError(UNAUTHORIZED));
+      expect(breachedAccount('unauthorized')).rejects.toMatchSnapshot();
     });
   });
 
   describe('forbidden request', () => {
     it('throws a "Forbidden" error if no cf-ray header is present', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
-      expect(breachedAccount('forbidden')).rejects.toMatchSnapshot();
+      expect(
+        breachedAccount('forbidden', { apiKey }),
+      ).rejects.toMatchSnapshot();
     });
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BLOCKED));
-      expect(breachedAccount('blocked')).rejects.toMatchSnapshot();
+      expect(breachedAccount('blocked', { apiKey })).rejects.toMatchSnapshot();
     });
   });
 
   describe('rate limited', () => {
     it('throws a "Too Many Requests" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(TOO_MANY_REQUESTS));
-      expect(breachedAccount('rate limited')).rejects.toMatchSnapshot();
+      expect(
+        breachedAccount('rate limited', { apiKey }),
+      ).rejects.toMatchSnapshot();
     });
   });
 
@@ -56,6 +75,24 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
       expect(breachedAccount('unknown response')).rejects.toMatchSnapshot();
+    });
+  });
+
+  describe('apiKey option', () => {
+    it('is passed on as a request header', () => {
+      mockGet.mockResolvedValue({
+        headers: {},
+        status: OK.status,
+        data: {},
+        config: {},
+        statusText: '',
+      });
+      const endpoint = 'https://haveibeenpwned.com/api/v3/service/account';
+      return fetchFromApi(endpoint, { apiKey }).then(() => {
+        expect(mockGet).toHaveBeenCalledWith(endpoint, {
+          headers: { 'HIBP-API-Key': apiKey },
+        });
+      });
     });
   });
 

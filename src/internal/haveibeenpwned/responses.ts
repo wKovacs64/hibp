@@ -10,7 +10,7 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
-export interface RateLimitResponseBody {
+export interface ResponseBody {
   statusCode: number;
   message: string;
 }
@@ -19,7 +19,7 @@ export interface HaveIBeenPwnedApiResponse {
   headers: { 'cf-ray'?: string };
   status: number;
   statusText?: string;
-  data?: RateLimitResponseBody;
+  data?: ResponseBody;
 }
 
 /** @internal */
@@ -34,6 +34,22 @@ export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
   status: 400,
   statusText:
     'Bad request — the account does not comply with an acceptable format.',
+};
+
+/**
+ * This response has unique behavior. For some reason, the API includes an
+ * object in the response body for this one, containing a human-readable
+ * message. Manually populating the message here purely for use in tests.
+ *
+ * @internal
+ */
+export const UNAUTHORIZED: HaveIBeenPwnedApiResponse = {
+  headers: {},
+  status: 401,
+  data: {
+    statusCode: 401,
+    message: 'Access denied due to missing hibp-api-key.',
+  },
 };
 
 /** @internal */

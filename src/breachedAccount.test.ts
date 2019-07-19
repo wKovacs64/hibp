@@ -13,6 +13,33 @@ describe('breachedAccount', () => {
     mockGet.mockResolvedValue(mockResponse({ data }));
   });
 
+  it('honors the apiKey option', () => {
+    const apiKey = 'my-api-key';
+    const requestConfigWithHeaders = {
+      headers: {
+        'HIBP-API-Key': apiKey,
+      },
+    };
+
+    return breachedAccount('breached')
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.not.objectContaining(requestConfigWithHeaders),
+        );
+        mockGet.mockClear();
+      })
+      .then(() => breachedAccount('breached', { apiKey }))
+      .then(() => {
+        expect(mockGet).toHaveBeenCalledTimes(1);
+        expect(mockGet).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.objectContaining(requestConfigWithHeaders),
+        );
+      });
+  });
+
   it('honors the truncate option', () => {
     return breachedAccount('breached')
       .then(() => {

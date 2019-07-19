@@ -4,16 +4,26 @@ import { Breach } from './types/remote-api.d';
 /**
  * Fetches breach data for a specific account.
  *
- * ***Warning:***
+ * ***Warning (January, 2019):***
  *
- * As of January, 2019, `haveibeenpwned.com` has started blocking requests to
- * the `breachedaccount` endpoint when originating from within a browser (based
- * on the `User-Agent` field of the request headers). To use this function in a
- * browser, you will likely have to proxy your request through a server of your
- * own. The `baseUrl` option was added to facilitate this workaround.
+ * `haveibeenpwned.com` has started blocking requests to the `breachedaccount`
+ * endpoint when originating from within a browser (based on the `User-Agent`
+ * field of the request headers). To use this function in a browser, you will
+ * likely have to proxy your request through a server of your own. The `baseUrl`
+ * option was added to facilitate this workaround.
+ *
+ * ***Warning (July 18, 2019):***
+ *
+ * `haveibeenpwned.com` now requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
+ * `apiKey` option here is not explicitly required, but direct requests made
+ * without it (that is, without specifying a `baseUrl` to a proxy that inserts a
+ * valid API key on your behalf) will fail.
  *
  * @param {string} account a username or email address
  * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key (default: undefined)
  * @param {string} [options.domain] a domain by which to filter the results
  * (default: all domains)
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
@@ -29,7 +39,7 @@ import { Breach } from './types/remote-api.d';
  * array of breach objects (or null if no breaches were found), or rejects with
  * an Error
  * @example
- * breachedAccount('foo')
+ * breachedAccount('foo', { apiKey: 'my-api-key' })
  *   .then(data => {
  *     if (data) {
  *       // ...
@@ -57,6 +67,7 @@ import { Breach } from './types/remote-api.d';
  *   });
  * @example
  * breachedAccount('baz', {
+ *   apiKey: 'my-api-key',
  *   domain: 'adobe.com',
  *   truncate: false,
  *   userAgent: 'my-app 1.0'
@@ -76,6 +87,7 @@ import { Breach } from './types/remote-api.d';
 const breachedAccount = (
   account: string,
   options: {
+    apiKey?: string;
     domain?: string;
     includeUnverified?: boolean;
     truncate?: boolean;
@@ -98,6 +110,7 @@ const breachedAccount = (
     params.push('truncateResponse=false');
   }
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
+    apiKey: options.apiKey,
     baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Breach[] | null>;
