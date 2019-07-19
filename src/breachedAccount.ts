@@ -4,14 +4,6 @@ import { Breach } from './types/remote-api.d';
 /**
  * Fetches breach data for a specific account.
  *
- * ***Warning (January, 2019):***
- *
- * `haveibeenpwned.com` has started blocking requests to the `breachedaccount`
- * endpoint when originating from within a browser (based on the `User-Agent`
- * field of the request headers). To use this function in a browser, you will
- * likely have to proxy your request through a server of your own. The `baseUrl`
- * option was added to facilitate this workaround.
- *
  * ***Warning (July 18, 2019):***
  *
  * `haveibeenpwned.com` now requires an API key from

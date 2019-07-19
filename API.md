@@ -46,12 +46,6 @@ account (email address or username).</p>
 </dd>
 <dt><a href="#exp_module_breachedAccount--breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
 <dd><p>Fetches breach data for a specific account.</p>
-<p><strong><em>Warning (January, 2019):</em></strong></p>
-<p><code>haveibeenpwned.com</code> has started blocking requests to the <code>breachedaccount</code>
-endpoint when originating from within a browser (based on the <code>User-Agent</code>
-field of the request headers). To use this function in a browser, you will
-likely have to proxy your request through a server of your own. The <code>baseUrl</code>
-option was added to facilitate this workaround.</p>
 <p><strong><em>Warning (July 18, 2019):</em></strong></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
@@ -95,12 +89,6 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
-<p><strong><em>Warning (January, 2019):</em></strong></p>
-<p><code>haveibeenpwned.com</code> has started blocking requests to the <code>breachedaccount</code>
-endpoint when originating from within a browser (based on the <code>User-Agent</code>
-field of the request headers). To use this function in a browser, you will
-likely have to proxy your request through a server of your own. The <code>baseUrl</code>
-option was added to facilitate this workaround.</p>
 <p><strong><em>Warning (July 18, 2019):</em></strong></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
@@ -182,14 +170,6 @@ import { breachedAccount } from 'hibp';
 
 ### breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
 Fetches breach data for a specific account.
-
-***Warning (January, 2019):***
-
-`haveibeenpwned.com` has started blocking requests to the `breachedaccount`
-endpoint when originating from within a browser (based on the `User-Agent`
-field of the request headers). To use this function in a browser, you will
-likely have to proxy your request through a server of your own. The `baseUrl`
-option was added to facilitate this workaround.
 
 ***Warning (July 18, 2019):***
 
@@ -529,14 +509,6 @@ provided account is not a valid email address, only breach data is queried
 and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
-
-***Warning (January, 2019):***
-
-`haveibeenpwned.com` has started blocking requests to the `breachedaccount`
-endpoint when originating from within a browser (based on the `User-Agent`
-field of the request headers). To use this function in a browser, you will
-likely have to proxy your request through a server of your own. The `baseUrl`
-option was added to facilitate this workaround.
 
 ***Warning (July 18, 2019):***
 

@@ -101,20 +101,6 @@ search('someAccountOrEmail', { apiKey: 'my-api-key' })
 
 #### Using in the browser
 
----
-
-**Warning (January, 2019):** `haveibeenpwned.com` has started blocking requests
-to the `breachedaccount` API endpoint when originating from within a browser
-(based on the `User-Agent` field of the request headers), which affects the
-`breachedAccount` and `search` functions. To use these functions in a browser,
-you will likely have to proxy your request through a server of your own (e.g.
-[`hibp-proxy`](https://github.com/wKovacs64/hibp-proxy#readme)). The `baseUrl`
-option was added to facilitate this workaround. See issue
-[#60](https://github.com/wKovacs64/hibp/issues/60) for more details and
-discussion.
-
----
-
 **Prerequisite:** This module requires a Promise implementation to exist in the
 global namespace prior to being loaded. Therefore, to facilitate usage in
 [browsers without native Promise support](https://caniuse.com/#search=promise),

@@ -79,14 +79,6 @@ export declare const breach: (
 /**
  * Fetches breach data for a specific account.
  *
- * ***Warning (January, 2019):***
- *
- * `haveibeenpwned.com` has started blocking requests to the `breachedaccount`
- * endpoint when originating from within a browser (based on the `User-Agent`
- * field of the request headers). To use this function in a browser, you will
- * likely have to proxy your request through a server of your own. The `baseUrl`
- * option was added to facilitate this workaround.
- *
  * ***Warning (July 18, 2019):***
  *
  * `haveibeenpwned.com` now requires an API key from
@@ -418,14 +410,6 @@ export interface SearchResults {
  * and the "pastes" field of the resulting object will always be null. This is
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
- *
- * ***Warning (January, 2019):***
- *
- * `haveibeenpwned.com` has started blocking requests to the `breachedaccount`
- * endpoint when originating from within a browser (based on the `User-Agent`
- * field of the request headers). To use this function in a browser, you will
- * likely have to proxy your request through a server of your own. The `baseUrl`
- * option was added to facilitate this workaround.
  *
  * ***Warning (July 18, 2019):***
  *
