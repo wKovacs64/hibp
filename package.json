@@ -56,6 +56,7 @@
     "prebuild": "npm run --silent clean",
     "prepare": "npm run --silent build",
     "prepublishOnly": "npm-run-all --silent --sequential lint check-types test test:browser:ci",
+    "prestart-test-server": "npm run --silent build:bundle",
     "ssat": "start-server-and-test start-test-server 5000",
     "start-test-server": "serve --no-clipboard",
     "test": "cross-env NODE_ENV=test jest",
