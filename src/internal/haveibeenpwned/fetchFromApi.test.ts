@@ -19,14 +19,14 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       const ERR = new Error('Set sail for fail!');
       mockGet.mockRejectedValueOnce(ERR);
-      expect(fetchFromApi('/service')).rejects.toEqual(ERR);
+      return expect(fetchFromApi('/service')).rejects.toEqual(ERR);
     });
   });
 
   describe('invalid account format', () => {
     it('throws a "Bad Request" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
-      expect(
+      return expect(
         fetchFromApi('/service/bad_request', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
@@ -35,21 +35,23 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('unauthorized', () => {
     it('throws an "Unauthorized" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(UNAUTHORIZED));
-      expect(fetchFromApi('/service/unauthorized')).rejects.toMatchSnapshot();
+      return expect(
+        fetchFromApi('/service/unauthorized'),
+      ).rejects.toMatchSnapshot();
     });
   });
 
   describe('forbidden request', () => {
     it('throws a "Forbidden" error if no cf-ray header is present', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
-      expect(
+      return expect(
         fetchFromApi('/service/forbidden', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BLOCKED));
-      expect(
+      return expect(
         fetchFromApi('/service/blocked', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
@@ -58,7 +60,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('rate limited', () => {
     it('throws a "Too Many Requests" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(TOO_MANY_REQUESTS));
-      expect(
+      return expect(
         fetchFromApi('/service/rate_limited', { apiKey }),
       ).rejects.toMatchSnapshot();
     });
@@ -72,7 +74,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
           statusText: 'Unknown - something unexpected happened.',
         }),
       );
-      expect(
+      return expect(
         fetchFromApi('/service/unknown_response'),
       ).rejects.toMatchSnapshot();
     });

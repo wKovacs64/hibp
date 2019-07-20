@@ -10,14 +10,16 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       const ERR = new Error('Set sail for fail!');
       mockGet.mockRejectedValueOnce(ERR);
-      expect(fetchFromApi('/service/setup_error')).rejects.toEqual(ERR);
+      return expect(fetchFromApi('/service/setup_error')).rejects.toEqual(ERR);
     });
   });
 
   describe('invalid range', () => {
     it('throws a "Bad Request" error', () => {
       mockGet.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
-      expect(fetchFromApi('/service/bad_request')).rejects.toMatchSnapshot();
+      return expect(
+        fetchFromApi('/service/bad_request'),
+      ).rejects.toMatchSnapshot();
     });
   });
 
@@ -29,7 +31,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
           statusText: 'Unknown - something unexpected happened.',
         }),
       );
-      expect(
+      return expect(
         fetchFromApi('/service/unknown_response'),
       ).rejects.toMatchSnapshot();
     });

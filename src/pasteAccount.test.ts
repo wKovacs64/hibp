@@ -42,14 +42,14 @@ describe('pasteAccount', () => {
     it('resolves with data from the remote API', () => {
       const data = [{ paste: 'information' }];
       mockGet.mockResolvedValue(mockResponse({ data }));
-      expect(pasteAccount('pasted@email.com')).resolves.toEqual(data);
+      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(data);
     });
   });
 
   describe('clean email', () => {
     it('resolves with null', () => {
       mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
-      expect(pasteAccount('clean@whistle.com')).resolves.toBeNull();
+      return expect(pasteAccount('clean@whistle.com')).resolves.toBeNull();
     });
   });
 });

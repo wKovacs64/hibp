@@ -15,14 +15,14 @@ describe('breach', () => {
 
     it('resolves with data from the remote API', () => {
       mockGet.mockResolvedValue(mockResponse({ data }));
-      expect(breach('found')).resolves.toEqual(data);
+      return expect(breach('found')).resolves.toEqual(data);
     });
   });
 
   describe('not found', () => {
     it('resolves with null', () => {
       mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
-      expect(breach('not found')).resolves.toBeNull();
+      return expect(breach('not found')).resolves.toBeNull();
     });
   });
 });
