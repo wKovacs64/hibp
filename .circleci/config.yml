@@ -1,35 +1,17 @@
-version: 2
+version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1.8.0
+
 jobs:
-  build:
-    branches:
-      ignore:
-        - gh-pages
-    docker:
-      - image: cypress/base:10
-        environment:
-          # this enables colors in the output
-          TERM: xterm
-    working_directory: ~/repo
+  test:
+    executor: cypress/base-10
     steps:
-      - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache
+      - attach_workspace:
+          at: ~/
       - run: yarn validate
-      - run: yarn test:browser:ci
       - run: yarn test --coverage --no-cache
       - run: yarn codecov
-      - run: yarn semantic-release
-      # store build output as artifacts for BuildSize GitHub app
       - store_artifacts:
           path: lib
           destination: lib
@@ -39,3 +21,26 @@ jobs:
       - store_artifacts:
           path: dist
           destination: dist
+  release:
+    executor: cypress/base-10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: yarn semantic-release
+
+workflows:
+  test_and_release:
+    jobs:
+      - cypress/run:
+          yarn: true
+          start: yarn start-test-server
+          wait-on: '--timeout 20000 http://localhost:5000'
+      - test:
+          requires:
+            - cypress/run
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
