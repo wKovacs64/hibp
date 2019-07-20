@@ -10,7 +10,7 @@ describe('dataClasses', () => {
   describe('no parameters', () => {
     it('resolves with data from the remote API', () => {
       mockGet.mockResolvedValue(mockResponse({ data }));
-      expect(dataClasses()).resolves.toEqual(data);
+      return expect(dataClasses()).resolves.toEqual(data);
     });
   });
 });
