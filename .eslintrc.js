@@ -1,5 +1,11 @@
 module.exports = {
-  extends: ['@wkovacs64/eslint-config-ts'],
+  extends: [
+    'plugin:wkovacs64/base',
+    'plugin:wkovacs64/jest',
+    'plugin:wkovacs64/typescript',
+    'prettier',
+    'prettier/@typescript-eslint',
+  ],
   settings: {
     'import/resolver': {
       jest: {
