@@ -101,7 +101,7 @@
     "@types/jest": "24.0.16",
     "@types/jsdom": "12.2.4",
     "@types/jssha": "2.0.0",
-    "@types/node": "10.14.13",
+    "@types/node": "10.14.14",
     "@wkovacs64/prettier-config": "1.0.2",
     "babel-jest": "24.8.0",
     "codecov": "3.5.0",
