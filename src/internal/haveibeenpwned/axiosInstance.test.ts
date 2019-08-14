@@ -15,7 +15,7 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
     jest.resetModules();
 
     // Browser
-    // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     global.navigator = {} as Navigator;
     const axiosInstanceBrowser = require.requireActual('./axiosInstance')
       .default;
