@@ -2,7 +2,9 @@
   "compilerOptions": {
     "noEmit": true,
     "strict": true,
-    "types": ["cypress", "jsdom"]
+    "types": ["cypress", "jsdom"],
+    // TODO: remove once Cypress types are sorted out
+    "skipLibCheck": true
   },
   "include": ["."]
 }
