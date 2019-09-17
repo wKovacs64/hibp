@@ -1,4 +1,4 @@
-import AxiosError from 'AxiosError';
+import { AxiosError } from '../../../../test/utils';
 import {
   OK,
   BAD_REQUEST,

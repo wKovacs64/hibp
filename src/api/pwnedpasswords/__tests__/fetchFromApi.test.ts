@@ -1,4 +1,4 @@
-import AxiosError from 'AxiosError';
+import { AxiosError } from '../../../../test/utils';
 import { BAD_REQUEST, OK } from '../responses';
 import axios from '../axiosInstance';
 import fetchFromApi from '../fetchFromApi';

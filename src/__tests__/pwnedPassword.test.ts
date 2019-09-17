@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { stripIndents } from 'common-tags';
 import { mockResponse } from '../../test/utils';
 import axios from '../api/pwnedpasswords/axiosInstance';

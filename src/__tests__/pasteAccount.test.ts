@@ -1,5 +1,4 @@
-import AxiosError from 'AxiosError';
-import { mockResponse } from '../../test/utils';
+import { AxiosError, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
 import axios from '../api/haveibeenpwned/axiosInstance';
 import pasteAccount from '../pasteAccount';
