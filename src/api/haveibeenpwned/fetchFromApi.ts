@@ -1,4 +1,4 @@
-import { Breach, Paste } from 'types/remote-api.d';
+import { Breach, Paste } from './types';
 import axios from './axiosInstance';
 import {
   BAD_REQUEST,

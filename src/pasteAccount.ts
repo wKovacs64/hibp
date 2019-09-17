@@ -1,5 +1,5 @@
-import fetchFromApi from './internal/haveibeenpwned/fetchFromApi';
-import { Paste } from './types/remote-api.d';
+import { Paste } from './api/haveibeenpwned/types';
+import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
 
 /**
  * An object representing a paste.

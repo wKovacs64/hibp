@@ -1,4 +1,4 @@
-import { Breach, Paste } from './types/remote-api.d';
+import { Breach, Paste } from './api/haveibeenpwned/types';
 import breachedAccount from './breachedAccount';
 import pasteAccount from './pasteAccount';
 
