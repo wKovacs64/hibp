@@ -1,5 +1,3 @@
-jest.unmock('axios');
-
 describe('internal (haveibeenpwned): axiosInstance', () => {
   it('only sets a User-Agent request header when outside the browser', () => {
     const originalNavigator = global.navigator;
