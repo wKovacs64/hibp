@@ -1,8 +1,8 @@
 import AxiosError from 'AxiosError';
-import { mockResponse } from '../test/utils';
-import { NOT_FOUND } from './internal/haveibeenpwned/responses';
-import axios from './internal/haveibeenpwned/axiosInstance';
-import breach from './breach';
+import { mockResponse } from '../../test/utils';
+import { NOT_FOUND } from '../internal/haveibeenpwned/responses';
+import axios from '../internal/haveibeenpwned/axiosInstance';
+import breach from '../breach';
 
 const mockGet = jest.spyOn(axios, 'get');
 

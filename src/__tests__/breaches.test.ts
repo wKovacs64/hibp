@@ -1,6 +1,6 @@
-import { mockResponse } from '../test/utils';
-import axios from './internal/haveibeenpwned/axiosInstance';
-import breaches from './breaches';
+import { mockResponse } from '../../test/utils';
+import axios from '../internal/haveibeenpwned/axiosInstance';
+import breaches from '../breaches';
 
 const mockGet = jest.spyOn(axios, 'get');
 

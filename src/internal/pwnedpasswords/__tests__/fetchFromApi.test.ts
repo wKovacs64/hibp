@@ -1,7 +1,7 @@
 import AxiosError from 'AxiosError';
-import { BAD_REQUEST, OK } from './responses';
-import axios from './axiosInstance';
-import fetchFromApi from './fetchFromApi';
+import { BAD_REQUEST, OK } from '../responses';
+import axios from '../axiosInstance';
+import fetchFromApi from '../fetchFromApi';
 
 const mockGet = jest.spyOn(axios, 'get');
 

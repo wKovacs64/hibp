@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { stripIndents } from 'common-tags';
-import { mockResponse } from '../test/utils';
-import axios from './internal/pwnedpasswords/axiosInstance';
-import pwnedPasswordRange from './pwnedPasswordRange';
+import { mockResponse } from '../../test/utils';
+import axios from '../internal/pwnedpasswords/axiosInstance';
+import pwnedPasswordRange from '../pwnedPasswordRange';
 
 const mockGet = jest.spyOn(axios, 'get');
 

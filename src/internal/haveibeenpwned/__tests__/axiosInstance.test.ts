@@ -6,7 +6,7 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
 
     // Node
     global.navigator = undefined;
-    const axiosInstanceNode = require.requireActual('./axiosInstance').default;
+    const axiosInstanceNode = require.requireActual('../axiosInstance').default;
     expect(Object.keys(axiosInstanceNode.defaults.headers)).toContain(
       'User-Agent',
     );
@@ -17,7 +17,7 @@ describe('internal (haveibeenpwned): axiosInstance', () => {
     // Browser
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     global.navigator = {} as Navigator;
-    const axiosInstanceBrowser = require.requireActual('./axiosInstance')
+    const axiosInstanceBrowser = require.requireActual('../axiosInstance')
       .default;
     expect(Object.keys(axiosInstanceBrowser.defaults.headers)).not.toContain(
       'User-Agent',

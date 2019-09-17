@@ -6,9 +6,9 @@ import {
   FORBIDDEN,
   BLOCKED,
   TOO_MANY_REQUESTS,
-} from './responses';
-import axios from './axiosInstance';
-import fetchFromApi from './fetchFromApi';
+} from '../responses';
+import axios from '../axiosInstance';
+import fetchFromApi from '../fetchFromApi';
 
 const mockGet = jest.spyOn(axios, 'get');
 
