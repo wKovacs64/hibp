@@ -1,5 +1,5 @@
-import { HaveIBeenPwnedApiResponse } from 'internal/haveibeenpwned/responses';
-import { PwnedPasswordsApiResponse } from 'internal/pwnedpasswords/responses';
+import { HaveIBeenPwnedApiResponse } from 'api/haveibeenpwned/responses';
+import { PwnedPasswordsApiResponse } from 'api/pwnedpasswords/responses';
 
 type ApiResponse = HaveIBeenPwnedApiResponse | PwnedPasswordsApiResponse;
 

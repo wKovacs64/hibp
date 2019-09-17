@@ -1,5 +1,5 @@
 import { mockResponse } from '../../test/utils';
-import axios from '../internal/haveibeenpwned/axiosInstance';
+import axios from '../api/haveibeenpwned/axiosInstance';
 import dataClasses from '../dataClasses';
 
 const mockGet = jest.spyOn(axios, 'get');
