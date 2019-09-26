@@ -133,7 +133,7 @@
     "rollup-plugin-terser": "5.1.2",
     "rollup-plugin-typescript2": "0.24.2",
     "semantic-release": "15.13.24",
-    "serve": "11.1.0",
+    "serve": "11.2.0",
     "start-server-and-test": "1.10.2",
     "typescript": "3.6.3"
   }
