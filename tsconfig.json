@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*", "src/*", "src/__mocks__/*"]
-    },
     "lib": ["esnext"],
     "target": "esnext",
     "moduleResolution": "node",
