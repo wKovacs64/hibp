@@ -1,6 +1,7 @@
 const test = process.env.NODE_ENV === 'test';
 
 module.exports = {
+  plugins: ['babel-plugin-annotate-pure-calls'],
   presets: [
     [
       '@babel/preset-env',

@@ -2221,6 +2221,11 @@ babel-jest@24.9.0, babel-jest@^24.9.0:
     chalk "^2.4.2"
     slash "^2.0.0"
 
+babel-plugin-annotate-pure-calls@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-annotate-pure-calls/-/babel-plugin-annotate-pure-calls-0.4.0.tgz#78aa00fd878c4fcde4d49f3da397fcf5defbcce8"
+  integrity sha512-oi4M/PWUJOU9ZyRGoPTfPMqdyMp06jbJAomd3RcyYuzUtBOddv98BqLm96Lucpi2QFoQHkdGQt0ACvw7VzVEQA==
+
 babel-plugin-dynamic-import-node@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.0.tgz#f00f507bdaa3c3e3ff6e7e5e98d90a7acab96f7f"
