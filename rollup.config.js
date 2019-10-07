@@ -7,6 +7,9 @@ import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
+const inputs = glob.sync('src/**/*.ts', {
+  ignore: ['**/__mocks__/**', '**/__tests__/**', '**/*.test.ts', '**/*.d.ts'],
+});
 const umdName = 'hibp';
 const external = id => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const babelOpts = { exclude: 'node_modules/**', extensions: ['.js', '.ts'] };
@@ -33,9 +36,9 @@ const terserOpts = {
 export default [
   // CommonJS
   {
-    input: 'src/hibp.ts',
+    input: inputs,
     output: {
-      file: 'lib/hibp.js',
+      dir: 'lib',
       format: 'cjs',
       sourcemap: true,
       indent: false,
@@ -50,14 +53,7 @@ export default [
 
   // ESM
   {
-    input: glob.sync('src/**/*.ts', {
-      ignore: [
-        '**/__mocks__/**',
-        '**/__tests__/**',
-        '**/*.test.ts',
-        '**/*.d.ts',
-      ],
-    }),
+    input: inputs,
     output: {
       dir: 'es',
       format: 'esm',
