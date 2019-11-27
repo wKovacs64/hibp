@@ -109,7 +109,7 @@
     "commitizen": "4.0.3",
     "common-tags": "1.8.0",
     "cross-env": "6.0.3",
-    "cypress": "3.6.1",
+    "cypress": "3.7.0",
     "cz-conventional-changelog": "3.0.2",
     "dts-bundle-generator": "3.3.1",
     "eslint": "6.7.1",
