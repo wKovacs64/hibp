@@ -101,7 +101,7 @@
     "@types/jest": "24.0.25",
     "@types/jsdom": "12.2.4",
     "@types/jssha": "2.0.0",
-    "@types/node": "12.12.22",
+    "@types/node": "12.12.23",
     "@wkovacs64/prettier-config": "1.0.2",
     "babel-jest": "24.9.0",
     "babel-plugin-annotate-pure-calls": "0.4.0",
