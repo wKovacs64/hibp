@@ -135,7 +135,7 @@
     "rollup-plugin-typescript2": "0.25.3",
     "semantic-release": "16.0.2",
     "serve": "11.3.0",
-    "start-server-and-test": "1.10.6",
+    "start-server-and-test": "1.10.7",
     "typescript": "3.7.5"
   }
 }
