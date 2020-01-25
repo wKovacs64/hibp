@@ -2,10 +2,16 @@ version: 2.1
 
 orbs:
   cypress: cypress-io/cypress@1.13.0
+  node: circleci/node@1.1.6
+
+jest-executor: &jest-executor
+  executor:
+    name: node/default
+    tag: lts
 
 jobs:
   test:
-    executor: cypress/base-10
+    <<: *jest-executor
     steps:
       - attach_workspace:
           at: ~/
@@ -22,7 +28,7 @@ jobs:
           path: dist
           destination: dist
   release:
-    executor: cypress/base-10
+    <<: *jest-executor
     steps:
       - attach_workspace:
           at: ~/
