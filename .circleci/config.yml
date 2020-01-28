@@ -4,14 +4,17 @@ orbs:
   cypress: cypress-io/cypress@1.13.0
   node: circleci/node@1.1.6
 
-jest-executor: &jest-executor
-  executor:
-    name: node/default
-    tag: lts
+executors:
+  cypress-on-node-12:
+    docker:
+      - image: 'cypress/base:12.14.0'
+  node-lts:
+    docker:
+      - image: 'node:lts'
 
 jobs:
   test:
-    <<: *jest-executor
+    executor: node-lts
     steps:
       - attach_workspace:
           at: ~/
@@ -28,7 +31,7 @@ jobs:
           path: dist
           destination: dist
   release:
-    <<: *jest-executor
+    executor: node-lts
     steps:
       - attach_workspace:
           at: ~/
@@ -38,6 +41,7 @@ workflows:
   test_and_release:
     jobs:
       - cypress/run:
+          executor: cypress-on-node-12
           yarn: true
           start: yarn start-test-server
           wait-on: '--timeout 20000 http://localhost:5000'
