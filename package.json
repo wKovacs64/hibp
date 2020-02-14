@@ -114,7 +114,7 @@
     "dts-bundle-generator": "3.3.1",
     "eslint": "6.8.0",
     "eslint-import-resolver-jest": "3.0.0",
-    "eslint-plugin-cypress": "2.9.0",
+    "eslint-plugin-cypress": "2.10.0",
     "eslint-plugin-wkovacs64": "2.3.0",
     "glob": "7.1.6",
     "husky": "4.2.3",
