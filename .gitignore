@@ -151,12 +151,7 @@ sftp-config.json
 .nyc_output/
 
 
-### Babel output ###
-lib/
-es/
-
-
-### Webpack output ###
+### Buildoutput ###
 dist/
 
 
