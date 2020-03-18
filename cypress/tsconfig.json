@@ -5,9 +5,7 @@
     "noEmit": true,
     "strict": true,
     "types": ["cypress", "jsdom", "jssha/src"],
-    "typeRoots": ["../node_modules/@types", "../@types"],
-    // TODO: remove once Cypress types are sorted out
-    "skipLibCheck": true
+    "typeRoots": ["../node_modules/@types", "../@types"]
   },
   "include": ["."]
 }
