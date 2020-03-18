@@ -1,30 +1,47 @@
-import { HaveIBeenPwnedApiResponse } from '../src/api/haveibeenpwned/responses';
-import { PwnedPasswordsApiResponse } from '../src/api/pwnedpasswords/responses';
-
-type ApiResponse = HaveIBeenPwnedApiResponse | PwnedPasswordsApiResponse;
+import fetch from 'isomorphic-unfetch';
 
 /** @internal */
-export class AxiosError extends Error {
-  response: ApiResponse;
-
-  constructor(response: ApiResponse) {
-    super();
-    this.response = response;
-  }
+interface MockResponseOptions {
+  headers?: Map<string, string>;
+  status?: number;
+  statusText?: string;
+  body?: string | object;
 }
 
-export function mockResponse({
-  headers = {},
+/** @internal */
+interface MockResponse {
+  headers: Map<string, string>;
+  ok: boolean;
+  status: number;
+  statusText: string;
+  json: jest.Mock;
+  text: jest.Mock;
+}
+
+export const mockResponse = ({
+  headers = new Map<string, string>(),
   status = 200,
-  data = {},
-  config = {},
-  statusText = '',
-}): import('axios').AxiosResponse {
-  return {
+  statusText = 'OK',
+  body = undefined,
+}: MockResponseOptions = {}): MockResponse => {
+  const res = {
     headers,
     status,
-    data,
-    config,
     statusText,
+    ok: status > 199 && status < 300,
+    json: jest.fn(),
+    text: jest.fn(),
   };
-}
+
+  if (typeof body === 'string') {
+    res.text.mockResolvedValue(body);
+  }
+
+  if (typeof body === 'object') {
+    res.json.mockResolvedValue(body);
+  }
+
+  return res;
+};
+
+export const mockFetch = fetch as jest.Mock;

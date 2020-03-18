@@ -1,110 +1,107 @@
-import { AxiosError, mockResponse } from '../../test/utils';
+import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import axios from '../api/haveibeenpwned/axiosInstance';
 import breachedAccount from '../breachedAccount';
 
-const mockGet = jest.spyOn(axios, 'get');
-
 describe('breachedAccount', () => {
-  const data = [{ some: 'stuff' }];
+  const body = [{ some: 'stuff' }];
 
   beforeAll(() => {
-    mockGet.mockResolvedValue(mockResponse({ data }));
+    mockFetch.mockResolvedValue(mockResponse({ body }));
   });
 
   it('honors the apiKey option', () => {
     const apiKey = 'my-api-key';
-    const requestConfigWithHeaders = {
-      headers: {
-        'HIBP-API-Key': apiKey,
-      },
+    const headers = {
+      'HIBP-API-Key': apiKey,
     };
 
     return breachedAccount('breached')
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.not.objectContaining(requestConfigWithHeaders),
-        );
-        mockGet.mockClear();
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.not.objectContaining(headers),
+        });
+        mockFetch.mockClear();
       })
       .then(() => breachedAccount('breached', { apiKey }))
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.objectContaining(requestConfigWithHeaders),
-        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.objectContaining(headers),
+        });
       });
   });
 
   it('honors the truncate option', () => {
     return breachedAccount('breached')
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet.mock.calls[0][0]).not.toMatch(/truncateResponse=false/);
-        mockGet.mockClear();
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch.mock.calls[0][0]).not.toMatch(
+          /truncateResponse=false/,
+        );
+        mockFetch.mockClear();
       })
       .then(() => breachedAccount('breached', { truncate: false }))
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet.mock.calls[0][0]).toMatch(/truncateResponse=false/);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch.mock.calls[0][0]).toMatch(/truncateResponse=false/);
       });
   });
 
   it('honors the includeUnverified option', () => {
     return breachedAccount('breached')
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet.mock.calls[0][0]).not.toMatch(/includeUnverified=false/);
-        mockGet.mockClear();
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch.mock.calls[0][0]).not.toMatch(
+          /includeUnverified=false/,
+        );
+        mockFetch.mockClear();
       })
       .then(() => breachedAccount('breached', { includeUnverified: false }))
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet.mock.calls[0][0]).toMatch(/includeUnverified=false/);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch.mock.calls[0][0]).toMatch(/includeUnverified=false/);
       });
   });
 
   describe('breached', () => {
     describe('no parameters', () => {
-      it('resolves with data from the remote API', () =>
-        expect(breachedAccount('breached')).resolves.toEqual(data));
+      it('resolves with body from the remote API', () =>
+        expect(breachedAccount('breached')).resolves.toEqual(body));
     });
 
     describe('with truncateResults', () => {
-      it('resolves with data from the remote API', () =>
+      it('resolves with body from the remote API', () =>
         expect(
           breachedAccount('breached', { truncate: false }),
-        ).resolves.toEqual(data));
+        ).resolves.toEqual(body));
     });
 
     describe('with domain', () => {
-      it('resolves with data from the remote API', () =>
+      it('resolves with body from the remote API', () =>
         expect(
           breachedAccount('breached', { domain: 'foo.bar' }),
-        ).resolves.toEqual(data));
+        ).resolves.toEqual(body));
     });
 
     describe('with includeUnverified', () => {
-      it('resolves with data from the remote API', () =>
+      it('resolves with body from the remote API', () =>
         expect(
           breachedAccount('breached', { includeUnverified: false }),
-        ).resolves.toEqual(data));
+        ).resolves.toEqual(body));
     });
 
     describe('with domain and truncateResults', () => {
-      it('resolves with data from the remote API', () =>
+      it('resolves with body from the remote API', () =>
         expect(
           breachedAccount('breached', { domain: 'foo.bar', truncate: false }),
-        ).resolves.toEqual(data));
+        ).resolves.toEqual(body));
     });
   });
 
   describe('clean', () => {
     beforeAll(() => {
-      mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
+      mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
     });
 
     describe('no parameters', () => {

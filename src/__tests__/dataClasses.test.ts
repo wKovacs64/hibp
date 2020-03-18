@@ -1,16 +1,13 @@
-import { mockResponse } from '../../test/utils';
-import axios from '../api/haveibeenpwned/axiosInstance';
+import { mockFetch, mockResponse } from '../../test/utils';
 import dataClasses from '../dataClasses';
 
-const mockGet = jest.spyOn(axios, 'get');
-
 describe('dataClasses', () => {
-  const data = ['some', 'data', 'classes'];
+  const body = ['some', 'data', 'classes'];
 
   describe('no parameters', () => {
     it('resolves with data from the remote API', () => {
-      mockGet.mockResolvedValue(mockResponse({ data }));
-      return expect(dataClasses()).resolves.toEqual(data);
+      mockFetch.mockResolvedValue(mockResponse({ body }));
+      return expect(dataClasses()).resolves.toEqual(body);
     });
   });
 });

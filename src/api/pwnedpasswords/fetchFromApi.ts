@@ -1,4 +1,4 @@
-import axios from './axiosInstance';
+import fetch from 'isomorphic-unfetch';
 import { BAD_REQUEST } from './responses';
 
 /**
@@ -21,13 +21,13 @@ import { BAD_REQUEST } from './responses';
 export default (
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
-  options: { baseUrl?: string; userAgent?: string } = {},
+  {
+    baseUrl = 'https://api.pwnedpasswords.com',
+    userAgent = undefined,
+  }: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<string> => {
-  const { baseUrl, userAgent } = options;
-
   const config = Object.assign(
     {},
-    baseUrl ? { baseURL: baseUrl } : {},
     userAgent
       ? {
           headers: {
@@ -37,18 +37,17 @@ export default (
       : {},
   );
 
-  return Promise.resolve(axios.get<string>(endpoint, config))
-    .then(res => res.data)
-    .catch(err => {
-      if (err.response) {
-        switch (err.response.status) {
-          case BAD_REQUEST.status:
-            throw new Error(err.response.data);
-          default:
-            throw new Error(err.response.statusText);
-        }
-      } else {
-        throw err;
-      }
-    });
+  const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
+
+  return fetch(url, config).then(res => {
+    if (res.ok) return res.text();
+
+    if (res.status === BAD_REQUEST.status) {
+      return res.text().then(text => {
+        throw new Error(text);
+      });
+    }
+
+    throw new Error(res.statusText);
+  });
 };
