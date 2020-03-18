@@ -19,7 +19,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: yarn validate
-      - run: yarn test --coverage --no-cache
+      - run: yarn test:coverage
       - run: yarn codecov
       - store_artifacts:
           path: lib

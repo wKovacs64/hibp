@@ -59,8 +59,10 @@
     "ssat": "start-server-and-test start-test-server 5000",
     "start-test-server": "serve --no-clipboard",
     "test": "cross-env NODE_ENV=test jest",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage --no-cache",
     "test:browser": "npm-run-all --silent --sequential build:bundle \"ssat cy:open\"",
     "test:browser:ci": "npm-run-all --silent --sequential build:bundle \"ssat cy:run\"",
+    "test:watch": "cross-env NODE_ENV=test jest --watch --onlyChanged",
     "validate": "npm-run-all --silent --parallel lint check-types"
   },
   "config": {
