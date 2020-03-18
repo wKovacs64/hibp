@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "noEmit": true,
     "strict": true,
-    "types": ["cypress", "jsdom"],
+    "types": ["cypress", "jsdom", "jssha/src"],
+    "typeRoots": ["../node_modules/@types", "../@types"],
     // TODO: remove once Cypress types are sorted out
     "skipLibCheck": true
   },

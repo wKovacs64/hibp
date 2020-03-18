@@ -10,7 +10,7 @@
     "stripInternal": true,
     "newLine": "lf",
     "types": ["node", "jsdom", "jest", "jssha/src"],
-    "typeRoots": ["node_modules/@types", "./src/@types"]
+    "typeRoots": ["node_modules/@types", "@types"]
   },
   "exclude": ["cypress"]
 }
