@@ -10,27 +10,27 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
-export interface ResponseBody {
-  statusCode: number;
-  message: string;
-}
-
 export interface HaveIBeenPwnedApiResponse {
-  headers: { 'cf-ray'?: string };
+  headers: Map<string, string>;
   status: number;
   statusText?: string;
-  data?: ResponseBody;
+  body?: {
+    statusCode: number;
+    message: string;
+  };
 }
+
+const emptyHeaders = new Map<string, string>();
 
 /** @internal */
 export const OK: HaveIBeenPwnedApiResponse = {
-  headers: {},
+  headers: emptyHeaders,
   status: 200,
 };
 
 /** @internal */
 export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
-  headers: {},
+  headers: emptyHeaders,
   status: 400,
   statusText:
     'Bad request — the account does not comply with an acceptable format.',
@@ -44,9 +44,9 @@ export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
  * @internal
  */
 export const UNAUTHORIZED: HaveIBeenPwnedApiResponse = {
-  headers: {},
+  headers: emptyHeaders,
   status: 401,
-  data: {
+  body: {
     statusCode: 401,
     message: 'Access denied due to missing hibp-api-key.',
   },
@@ -54,20 +54,20 @@ export const UNAUTHORIZED: HaveIBeenPwnedApiResponse = {
 
 /** @internal */
 export const FORBIDDEN: HaveIBeenPwnedApiResponse = {
-  headers: {},
+  headers: emptyHeaders,
   status: 403,
   statusText: 'Forbidden - access denied.',
 };
 
 /** @internal */
 export const BLOCKED: HaveIBeenPwnedApiResponse = {
-  headers: { 'cf-ray': 'someRayId' },
+  headers: new Map([['cf-ray', 'someRayId']]),
   status: 403,
 };
 
 /** @internal */
 export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
-  headers: {},
+  headers: emptyHeaders,
   status: 404,
 };
 
@@ -79,9 +79,9 @@ export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
  * @internal
  */
 export const TOO_MANY_REQUESTS: HaveIBeenPwnedApiResponse = {
-  headers: {},
+  headers: emptyHeaders,
   status: 429,
-  data: {
+  body: {
     statusCode: 429,
     message: 'Rate limit is exceeded. Try again in 2 seconds.',
   },

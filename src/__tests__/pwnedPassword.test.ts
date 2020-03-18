@@ -1,14 +1,11 @@
 import { stripIndents } from 'common-tags';
-import { mockResponse } from '../../test/utils';
-import axios from '../api/pwnedpasswords/axiosInstance';
+import { mockFetch, mockResponse } from '../../test/utils';
 import pwnedPassword from '../pwnedPassword';
 
-const mockGet = jest.spyOn(axios, 'get');
-
 describe('pwnedPassword', () => {
-  mockGet.mockResolvedValue(
+  mockFetch.mockResolvedValue(
     mockResponse({
-      data: stripIndents`
+      body: stripIndents`
         003D68EB55068C33ACE09247EE4C639306B:3
         1E4C9B93F3F0682250B6CF8331B7EE68FD8:3303003
         01330C689E5D64F660D6947A93AD634EF8F:1

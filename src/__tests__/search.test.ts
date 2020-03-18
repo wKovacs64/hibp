@@ -1,15 +1,12 @@
-import { mockResponse } from '../../test/utils';
-import axios from '../api/haveibeenpwned/axiosInstance';
+import { mockFetch, mockResponse } from '../../test/utils';
 import search from '../search';
-
-const mockGet = jest.spyOn(axios, 'get');
 
 describe('search', () => {
   it('searches breaches by username', () => {
     const breaches = [{ stuff: 'about', a: 'breach' }];
     const pastes = null;
 
-    mockGet.mockResolvedValue(mockResponse({ data: breaches }));
+    mockFetch.mockResolvedValue(mockResponse({ body: breaches }));
 
     return expect(search('breached')).resolves.toEqual({
       breaches,
@@ -21,10 +18,10 @@ describe('search', () => {
     const breaches = [{ stuff: 'about', a: 'breach' }];
     const pastes = [{ other: 'stuff', about: 'a paste' }];
 
-    mockGet.mockImplementation(endpoint =>
+    mockFetch.mockImplementation(endpoint =>
       Promise.resolve(
         mockResponse({
-          data: /breachedaccount/.test(endpoint) ? breaches : pastes,
+          body: /breachedaccount/.test(endpoint) ? breaches : pastes,
         }),
       ),
     );
@@ -38,44 +35,42 @@ describe('search', () => {
   it('forwards the apiKey option correctly', () => {
     const breaches = [{ stuff: 'about', a: 'breach' }];
     const apiKey = 'my-api-key';
-    const requestConfigWithHeaders = {
-      headers: {
-        'HIBP-API-Key': apiKey,
-      },
+    const headers = {
+      'HIBP-API-Key': apiKey,
     };
 
-    mockGet.mockResolvedValue(mockResponse({ data: breaches }));
+    mockFetch.mockResolvedValue(mockResponse({ body: breaches }));
 
     return search('breached')
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.not.objectContaining(requestConfigWithHeaders),
-        );
-        mockGet.mockClear();
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.not.objectContaining(headers),
+        });
+        mockFetch.mockClear();
       })
       .then(() => search('breached', { apiKey }))
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.objectContaining(requestConfigWithHeaders),
-        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.objectContaining(headers),
+        });
       });
   });
 
   it('forwards the truncate option correctly', () => {
     return search('breached')
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet.mock.calls[0][0]).not.toMatch(/truncateResponse=false/);
-        mockGet.mockClear();
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch.mock.calls[0][0]).not.toMatch(
+          /truncateResponse=false/,
+        );
+        mockFetch.mockClear();
       })
       .then(() => search('breached', { truncate: false }))
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet.mock.calls[0][0]).toMatch(/truncateResponse=false/);
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch.mock.calls[0][0]).toMatch(/truncateResponse=false/);
       });
   });
 });

@@ -1,4 +1,4 @@
-import { AxiosError } from '../../../../test/utils';
+import { mockFetch, mockResponse } from '../../../../test/utils';
 import {
   OK,
   BAD_REQUEST,
@@ -7,92 +7,161 @@ import {
   BLOCKED,
   TOO_MANY_REQUESTS,
 } from '../responses';
-import axios from '../axiosInstance';
 import fetchFromApi from '../fetchFromApi';
-
-const mockGet = jest.spyOn(axios, 'get');
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';
 
+  describe('User-Agent', () => {
+    // Node
+    it('sets a User-Agent request header when outside the browser', () => {
+      const originalNavigator = global.navigator;
+      mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
+
+      global.navigator = undefined;
+      return fetchFromApi('/service')
+        .then(() => {
+          expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+            headers: expect.objectContaining({
+              'User-Agent': expect.any(String),
+            }),
+          });
+        })
+        .finally(() => {
+          global.navigator = originalNavigator;
+        });
+    });
+
+    // Browser
+    it('does not set a User-Agent request header when inside the browser', () => {
+      mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      global.navigator = {} as Navigator;
+      return fetchFromApi('/service').then(() => {
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.not.objectContaining({
+            'User-Agent': expect.any(String),
+          }),
+        });
+      });
+    });
+  });
+
   describe('request failure', () => {
     it('re-throws request setup errors', () => {
       const ERR = new Error('Set sail for fail!');
-      mockGet.mockRejectedValueOnce(ERR);
+      mockFetch.mockRejectedValueOnce(ERR);
+
       return expect(fetchFromApi('/service')).rejects.toEqual(ERR);
     });
   });
 
   describe('invalid account format', () => {
     it('throws a "Bad Request" error', () => {
-      mockGet.mockRejectedValueOnce(new AxiosError(BAD_REQUEST));
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({
+          status: BAD_REQUEST.status,
+          statusText: BAD_REQUEST.statusText,
+        }),
+      );
+
       return expect(
         fetchFromApi('/service/bad_request', { apiKey }),
-      ).rejects.toMatchSnapshot();
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: Bad request — the account does not comply with an acceptable format.]`,
+      );
     });
   });
 
   describe('unauthorized', () => {
     it('throws an "Unauthorized" error', () => {
-      mockGet.mockRejectedValueOnce(new AxiosError(UNAUTHORIZED));
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({
+          status: UNAUTHORIZED.status,
+          body: UNAUTHORIZED.body,
+        }),
+      );
+
       return expect(
         fetchFromApi('/service/unauthorized'),
-      ).rejects.toMatchSnapshot();
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: Access denied due to missing hibp-api-key.]`,
+      );
     });
   });
 
   describe('forbidden request', () => {
     it('throws a "Forbidden" error if no cf-ray header is present', () => {
-      mockGet.mockRejectedValueOnce(new AxiosError(FORBIDDEN));
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({
+          status: FORBIDDEN.status,
+          statusText: FORBIDDEN.statusText,
+        }),
+      );
+
       return expect(
         fetchFromApi('/service/forbidden', { apiKey }),
-      ).rejects.toMatchSnapshot();
+      ).rejects.toMatchInlineSnapshot(`[Error: Forbidden - access denied.]`);
     });
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
-      mockGet.mockRejectedValueOnce(new AxiosError(BLOCKED));
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({
+          headers: BLOCKED.headers,
+          status: BLOCKED.status,
+        }),
+      );
+
       return expect(
         fetchFromApi('/service/blocked', { apiKey }),
-      ).rejects.toMatchSnapshot();
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: Request blocked, contact haveibeenpwned.com if this continues (Ray ID: someRayId)]`,
+      );
     });
   });
 
   describe('rate limited', () => {
     it('throws a "Too Many Requests" error', () => {
-      mockGet.mockRejectedValueOnce(new AxiosError(TOO_MANY_REQUESTS));
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({
+          status: TOO_MANY_REQUESTS.status,
+          body: TOO_MANY_REQUESTS.body,
+        }),
+      );
+
       return expect(
         fetchFromApi('/service/rate_limited', { apiKey }),
-      ).rejects.toMatchSnapshot();
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: Rate limit is exceeded. Try again in 2 seconds.]`,
+      );
     });
   });
 
   describe('unexpected HTTP error', () => {
     it('throws an error with the response status text', () => {
-      mockGet.mockRejectedValueOnce(
-        new AxiosError({
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({
           status: 999,
           statusText: 'Unknown - something unexpected happened.',
         }),
       );
+
       return expect(
         fetchFromApi('/service/unknown_response'),
-      ).rejects.toMatchSnapshot();
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: Unknown - something unexpected happened.]`,
+      );
     });
   });
 
   describe('apiKey option', () => {
     it('is passed on as a request header', () => {
-      mockGet.mockResolvedValue({
-        headers: {},
-        status: OK.status,
-        data: {},
-        config: {},
-        statusText: '',
-      });
-      const endpoint = 'https://haveibeenpwned.com/api/v3/service/account';
-      return fetchFromApi(endpoint, { apiKey }).then(() => {
-        expect(mockGet).toHaveBeenCalledWith(endpoint, {
-          headers: { 'HIBP-API-Key': apiKey },
+      mockFetch.mockResolvedValue(mockResponse({ status: OK.status }));
+
+      return fetchFromApi('/service', { apiKey }).then(() => {
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.objectContaining({ 'HIBP-API-Key': apiKey }),
         });
       });
     });
@@ -100,36 +169,30 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('userAgent option', () => {
     it('is passed on as a request header', () => {
-      mockGet.mockResolvedValue({
-        headers: {},
-        status: OK.status,
-        data: {},
-        config: {},
-        statusText: '',
-      });
+      mockFetch.mockResolvedValue(mockResponse({ status: OK.status }));
+
       const ua = 'custom UA';
+
       return fetchFromApi('/service', { userAgent: ua }).then(() => {
-        expect(mockGet).toHaveBeenCalledWith(expect.any(String), {
-          headers: { 'User-Agent': ua },
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.objectContaining({ 'User-Agent': ua }),
         });
       });
     });
   });
 
   describe('baseUrl option', () => {
-    it('is passed on as baseURL', () => {
-      mockGet.mockResolvedValue({
-        headers: {},
-        status: OK.status,
-        data: {},
-        config: {},
-        statusText: '',
-      });
+    it('is used in the final URL', () => {
+      mockFetch.mockResolvedValue(mockResponse({ status: OK.status }));
+
       const baseUrl = 'https://my-hibp-proxy:8080';
-      return fetchFromApi('/service', { baseUrl }).then(() => {
-        expect(mockGet).toHaveBeenCalledWith(expect.any(String), {
-          baseURL: baseUrl,
-        });
+      const endpoint = '/service';
+
+      return fetchFromApi(endpoint, { baseUrl }).then(() => {
+        expect(mockFetch).toHaveBeenCalledWith(
+          `${baseUrl}${endpoint}`,
+          expect.any(Object),
+        );
       });
     });
   });

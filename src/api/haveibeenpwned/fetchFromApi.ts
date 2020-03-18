@@ -1,5 +1,6 @@
+import fetch from 'isomorphic-unfetch';
+import { name, version } from '../../../package.json';
 import { Breach, Paste } from './types';
-import axios from './axiosInstance';
 import {
   BAD_REQUEST,
   UNAUTHORIZED,
@@ -46,58 +47,55 @@ const blockedWithRayId = (rayId: string): string =>
 export default (
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
-  options: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
+  {
+    apiKey = undefined,
+    baseUrl = 'https://haveibeenpwned.com/api/v3',
+    userAgent = undefined,
+  }: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
 ): Promise<ApiData> => {
-  const { apiKey, baseUrl, userAgent } = options;
-
-  const headers: {
-    'HIBP-API-Key'?: string;
-    'User-Agent'?: string;
-  } = {};
+  const headers: Record<string, string> = {};
 
   if (apiKey) {
     headers['HIBP-API-Key'] = apiKey;
   }
+
   if (userAgent) {
     headers['User-Agent'] = userAgent;
   }
 
-  const requestConfig = Object.assign(
-    {},
-    baseUrl ? { baseURL: baseUrl } : {},
-    Object.keys(headers).length > 0
-      ? {
-          headers,
-        }
-      : {},
-  );
+  // Provide a default User-Agent when running outside the browser
+  if (!userAgent && typeof navigator === 'undefined') {
+    headers['User-Agent'] = `${name} ${version}`;
+  }
 
-  return Promise.resolve(axios.get<ApiData>(endpoint, requestConfig))
-    .then(res => res.data)
-    .catch(err => {
-      if (err.response) {
-        switch (err.response.status) {
-          case BAD_REQUEST.status:
-            throw new Error(BAD_REQUEST.statusText);
-          case UNAUTHORIZED.status:
-            throw new Error(err.response.data.message);
-          case FORBIDDEN.status: {
-            const rayId =
-              err.response.headers && err.response.headers['cf-ray'];
-            if (rayId) {
-              throw new Error(blockedWithRayId(rayId));
-            }
-            throw new Error(FORBIDDEN.statusText);
-          }
-          case NOT_FOUND.status:
-            return null;
-          case TOO_MANY_REQUESTS.status:
-            throw new Error(err.response.data.message);
-          default:
-            throw new Error(err.response.statusText);
+  const config = { headers };
+  const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
+
+  return fetch(url, config).then(res => {
+    if (res.ok) return res.json();
+
+    switch (res.status) {
+      case BAD_REQUEST.status:
+        throw new Error(BAD_REQUEST.statusText);
+      case UNAUTHORIZED.status:
+        return res.json().then(body => {
+          throw new Error(body.message);
+        });
+      case FORBIDDEN.status: {
+        const rayId = res.headers.get('cf-ray');
+        if (rayId) {
+          throw new Error(blockedWithRayId(rayId));
         }
-      } else {
-        throw err;
+        throw new Error(FORBIDDEN.statusText);
       }
-    });
+      case NOT_FOUND.status:
+        return null;
+      case TOO_MANY_REQUESTS.status:
+        return res.json().then(body => {
+          throw new Error(body.message);
+        });
+      default:
+        throw new Error(res.statusText);
+    }
+  });
 };

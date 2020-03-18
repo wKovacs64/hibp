@@ -1,26 +1,23 @@
-import { AxiosError, mockResponse } from '../../test/utils';
+import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import axios from '../api/haveibeenpwned/axiosInstance';
 import breach from '../breach';
-
-const mockGet = jest.spyOn(axios, 'get');
 
 describe('breach', () => {
   describe('found', () => {
-    const data = {
+    const body = {
       some: 'information',
       about: 'a breach',
     };
 
     it('resolves with data from the remote API', () => {
-      mockGet.mockResolvedValue(mockResponse({ data }));
-      return expect(breach('found')).resolves.toEqual(data);
+      mockFetch.mockResolvedValue(mockResponse({ body }));
+      return expect(breach('found')).resolves.toEqual(body);
     });
   });
 
   describe('not found', () => {
     it('resolves with null', () => {
-      mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
+      mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
       return expect(breach('not found')).resolves.toBeNull();
     });
   });

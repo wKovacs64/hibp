@@ -1,53 +1,43 @@
-import { AxiosError, mockResponse } from '../../test/utils';
+import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import axios from '../api/haveibeenpwned/axiosInstance';
 import pasteAccount from '../pasteAccount';
 
-const mockGet = jest.spyOn(axios, 'get');
-
 describe('pasteAccount', () => {
-  beforeAll(() => {
-    mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
-  });
-
   it('honors the apiKey option', () => {
     const apiKey = 'my-api-key';
-    const requestConfigWithHeaders = {
-      headers: {
-        'HIBP-API-Key': apiKey,
-      },
+    const headers = {
+      'HIBP-API-Key': apiKey,
     };
+    mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
 
     return pasteAccount('whatever@example.com')
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.not.objectContaining(requestConfigWithHeaders),
-        );
-        mockGet.mockClear();
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.not.objectContaining(headers),
+        });
+        mockFetch.mockClear();
       })
       .then(() => pasteAccount('whatever@example.com', { apiKey }))
       .then(() => {
-        expect(mockGet).toHaveBeenCalledTimes(1);
-        expect(mockGet).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.objectContaining(requestConfigWithHeaders),
-        );
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
+          headers: expect.objectContaining(headers),
+        });
       });
   });
 
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
-      const data = [{ paste: 'information' }];
-      mockGet.mockResolvedValue(mockResponse({ data }));
-      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(data);
+      const body = [{ paste: 'information' }];
+      mockFetch.mockResolvedValue(mockResponse({ body }));
+      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(body);
     });
   });
 
   describe('clean email', () => {
     it('resolves with null', () => {
-      mockGet.mockRejectedValue(new AxiosError(NOT_FOUND));
+      mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
       return expect(pasteAccount('clean@whistle.com')).resolves.toBeNull();
     });
   });
