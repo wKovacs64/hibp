@@ -1,5 +1,10 @@
 ## Migration Notes
 
+#### 8.0.1 → 9.0.0
+
+- Support for Node.js version 8.x has been dropped. You must upgrade your
+  Node.js environment to at least v10.
+
 #### 7.5.2 → 8.0.0
 
 - The `breachedAccount`, `pasteAccount`, and `search` modules now have an
