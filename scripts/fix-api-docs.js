@@ -1,6 +1,3 @@
-// TODO: remove temporary workaround for bradzacher/eslint-plugin-typescript#255
-/* eslint-disable strict */
-
 const fs = require('fs');
 
 const filename = 'API.md';
@@ -15,6 +12,6 @@ const newApiDocs = generatedApiDocs
   // syntax for a promise that resolves to an array of custom types.
   .replace(
     /(Promise\.&lt;Array\.&lt;([A-Z].*)&gt;&gt;)/g,
-    (match, g1, g2) => `<a href="#${g2.toLowerCase()}--object">${g1}</a>`,
+    (_match, g1, g2) => `<a href="#${g2.toLowerCase()}--object">${g1}</a>`,
   );
 fs.writeFileSync(filename, newApiDocs, 'utf8');
