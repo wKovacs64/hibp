@@ -19,13 +19,7 @@ pwned?][haveibeenpwned] service._
 
 ## Installation
 
-Locally via yarn:
-
-```shell
-yarn add hibp
-```
-
-Or, npm:
+Locally, via npm:
 
 ```shell
 npm install hibp
