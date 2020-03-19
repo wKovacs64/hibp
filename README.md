@@ -47,6 +47,7 @@ use via `<script>` tag.
 - Search for an account in both breaches and pastes at the same time 🔑
 - All queries return a Promise
 - Available server-side (Node.js) and client-side (browser)
+- Written in TypeScript, so all modules come fully typed
 
 ## Usage
 
