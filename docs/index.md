@@ -14,13 +14,7 @@ title: hibp
 
 ## Installation
 
-Locally via yarn:
-
-```shell
-yarn add hibp
-```
-
-Or, npm:
+Locally, via npm:
 
 ```shell
 npm install hibp
@@ -42,6 +36,7 @@ use via `<script>` tag.
 - Search for an account in both breaches and pastes at the same time 🔑
 - All queries return a Promise
 - Available server-side (Node.js) and client-side (browser)
+- Written in TypeScript, so all modules come fully typed
 
 ## Usage
 
@@ -111,7 +106,7 @@ You have several options for using this library in a browser environment:
 
 1. Bundled
 
-   The most performant and recommended method is to bundle it with client-side
+   The most efficient and recommended method is to bundle it with client-side
    code using a module bundler like [webpack](https://webpack.js.org). If your
    build process honors the `module` field in `package.json`, you can import the
    ECMAScript module as described [above](#usage). Otherwise, the `main` field
@@ -119,9 +114,9 @@ You have several options for using this library in a browser environment:
 
 1. UMD
 
-   There is also a Universal Module Definition (UMD) build provided in the
-   package `dist` directory for usage in the browser. When using this build, an
-   `hibp` object will be added to the browser's `window` object.
+   There is also a Universal Module Definition (UMD) build provided for usage in
+   the browser. When using this build, an `hibp` object will be added to the
+   browser's `window` object.
 
    The recommended way to include the UMD build (when using a `<script>` tag) is
    to use the [unpkg](https://unpkg.com) CDN, specifying the exact version you
@@ -138,8 +133,8 @@ You have several options for using this library in a browser environment:
    Development and production (minified) UMD builds are also provided for manual
    download if desired:
 
-   - [https://unpkg.com/hibp/dist/hibp.js](https://unpkg.com/hibp/dist/hibp.js)
-   - [https://unpkg.com/hibp/dist/hibp.min.js](https://unpkg.com/hibp/dist/hibp.min.js)
+   - [https://unpkg.com/hibp/dist/browser/hibp.umd.js](https://unpkg.com/hibp/dist/browser/hibp.umd.js)
+   - [https://unpkg.com/hibp/dist/browser/hibp.umd.min.js](https://unpkg.com/hibp/dist/browser/hibp.umd.min.js)
      <br><br>
 
 1. ESM for Browsers
@@ -148,11 +143,11 @@ You have several options for using this library in a browser environment:
    ECMAScript modules via `<script type="module">` tags. Like the UMD option
    above, this build is also available the [unpkg](https://unpkg.com) CDN (and
    the same versioning rules apply), but you must specify the full path
-   including the `.mjs` file extension. For example:
+   (including the file extension). For example:
 
    ```html
    <script type="module">
-     import { dataClasses } from 'https://unpkg.com/hibp/dist/hibp.min.mjs@x.y.z';
+     import { dataClasses } from 'https://unpkg.com/hibp/dist/browser/hibp.esm.min.js@x.y.z';
 
      const logDataClasses = async () => {
        console.table(await dataClasses());
@@ -165,8 +160,8 @@ You have several options for using this library in a browser environment:
    Development and production (minified) ESM builds are also provided for manual
    download if desired:
 
-   - [https://unpkg.com/hibp/dist/hibp.mjs](https://unpkg.com/hibp/dist/hibp.mjs)
-   - [https://unpkg.com/hibp/dist/hibp.min.mjs](https://unpkg.com/hibp/dist/hibp.min.mjs)
+   - [https://unpkg.com/hibp/dist/browser/hibp.esm.js](https://unpkg.com/hibp/dist/browser/hibp.esm.js)
+   - [https://unpkg.com/hibp/dist/browser/hibp.esm.min.js](https://unpkg.com/hibp/dist/browser/hibp.esm.min.js)
 
    For more information on ESM in the browser, check out
    [Using JavaScript modules on the web](https://developers.google.com/web/fundamentals/primers/modules).
