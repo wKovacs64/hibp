@@ -22,12 +22,6 @@ jobs:
       - run: yarn test:coverage
       - run: yarn codecov
       - store_artifacts:
-          path: lib
-          destination: lib
-      - store_artifacts:
-          path: es
-          destination: es
-      - store_artifacts:
           path: dist
           destination: dist
   release:

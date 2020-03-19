@@ -122,9 +122,9 @@ You have several options for using this library in a browser environment:
 
 1. UMD
 
-   There is also a Universal Module Definition (UMD) build provided in the
-   package `dist` directory for usage in the browser. When using this build, an
-   `hibp` object will be added to the browser's `window` object.
+   There is also a Universal Module Definition (UMD) build provided for usage in
+   the browser. When using this build, an `hibp` object will be added to the
+   browser's `window` object.
 
    The recommended way to include the UMD build (when using a `<script>` tag) is
    to use the [unpkg][unpkg] CDN, specifying the exact version you want. If you
@@ -141,20 +141,19 @@ You have several options for using this library in a browser environment:
    Development and production (minified) UMD builds are also provided for manual
    download if desired:
 
-   - [https://unpkg.com/hibp/dist/hibp.js][cdn-umd-dev]
-   - [https://unpkg.com/hibp/dist/hibp.min.js][cdn-umd-prod]
+   - [https://unpkg.com/hibp/dist/browser/hibp.umd.js][cdn-umd-dev]
+   - [https://unpkg.com/hibp/dist/browser/hibp.umd.min.js][cdn-umd-prod]
 
 1. ESM for Browsers
 
    Modern browsers now [support][caniuse-esm] importing ECMAScript modules via
    `<script type="module">` tags. Like the UMD option above, this build is also
    available the [unpkg][unpkg] CDN (and the same versioning rules apply), but
-   you must specify the full path including the `.mjs` file extension. For
-   example:
+   you must specify the full path (including the file extension). For example:
 
    ```html
    <script type="module">
-     import { dataClasses } from 'https://unpkg.com/hibp/dist/hibp.min.mjs@x.y.z';
+     import { dataClasses } from 'https://unpkg.com/hibp/dist/browser/hibp.esm.min.js@x.y.z';
 
      const logDataClasses = async () => {
        console.table(await dataClasses());
@@ -167,8 +166,8 @@ You have several options for using this library in a browser environment:
    Development and production (minified) ESM builds are also provided for manual
    download if desired:
 
-   - [https://unpkg.com/hibp/dist/hibp.mjs][cdn-mjs-dev]
-   - [https://unpkg.com/hibp/dist/hibp.min.mjs][cdn-mjs-prod]
+   - [https://unpkg.com/hibp/dist/browser/hibp.esm.js][cdn-browser-esm-dev]
+   - [https://unpkg.com/hibp/dist/browser/hibp.esm.min.js][cdn-browser-esm-prod]
 
    For more information on ESM in the browser, check out [Using JavaScript
    modules on the web][esm-primer].
@@ -209,11 +208,11 @@ This module is distributed under the [MIT License][license].
   https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/
 [get-api-key]: https://haveibeenpwned.com/API/Key
 [unpkg]: https://unpkg.com
-[cdn-umd-dev]: https://unpkg.com/hibp/dist/hibp.js
-[cdn-umd-prod]: https://unpkg.com/hibp/dist/hibp.min.js
+[cdn-umd-dev]: https://unpkg.com/hibp/dist/browser/hibp.umd.js
+[cdn-umd-prod]: https://unpkg.com/hibp/dist/browser/hibp.umd.min.js
 [caniuse-esm]: https://caniuse.com/#feat=es6-module
-[cdn-mjs-dev]: https://unpkg.com/hibp/dist/hibp.mjs
-[cdn-mjs-prod]: https://unpkg.com/hibp/dist/hibp.min.mjs
+[cdn-browser-esm-dev]: https://unpkg.com/hibp/dist/browser/hibp.esm.js
+[cdn-browser-esm-prod]: https://unpkg.com/hibp/dist/browser/hibp.esm.min.js
 [esm-primer]: https://developers.google.com/web/fundamentals/primers/modules
 [webpack]: https://webpack.js.org
 [caniuse-promise]: https://caniuse.com/#search=promise

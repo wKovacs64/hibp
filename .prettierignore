@@ -1,7 +1,7 @@
 coverage
-dist
-es
-lib
+dist/cjs
+dist/esm
+dist/browser
 test/babel-browser-build.js
 test/browser-es-module-loader.js
 package.json

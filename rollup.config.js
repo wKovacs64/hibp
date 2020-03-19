@@ -38,7 +38,7 @@ export default [
   {
     input: inputs,
     output: {
-      dir: 'lib',
+      dir: 'dist/cjs',
       format: 'cjs',
       sourcemap: true,
       indent: false,
@@ -55,7 +55,7 @@ export default [
   {
     input: inputs,
     output: {
-      dir: 'es',
+      dir: 'dist/esm',
       format: 'esm',
       sourcemap: true,
       indent: false,
@@ -72,7 +72,7 @@ export default [
   {
     input: 'src/hibp.ts',
     output: {
-      file: 'dist/hibp.mjs',
+      file: 'dist/browser/hibp.esm.js',
       format: 'esm',
       sourcemap: true,
       indent: false,
@@ -90,7 +90,7 @@ export default [
   {
     input: 'src/hibp.ts',
     output: {
-      file: 'dist/hibp.min.mjs',
+      file: 'dist/browser/hibp.esm.min.js',
       format: 'esm',
       sourcemap: true,
       indent: false,
@@ -109,7 +109,7 @@ export default [
   {
     input: 'src/hibp.ts',
     output: {
-      file: 'dist/hibp.js',
+      file: 'dist/browser/hibp.umd.js',
       format: 'umd',
       name: umdName,
       sourcemap: true,
@@ -128,7 +128,7 @@ export default [
   {
     input: 'src/hibp.ts',
     output: {
-      file: 'dist/hibp.min.js',
+      file: 'dist/browser/hibp.umd.min.js',
       format: 'umd',
       name: umdName,
       sourcemap: true,

@@ -2,6 +2,25 @@
 
 #### 8.0.1 → 9.0.0
 
+- Output files for all build targets have been consolidated under the `dist`
+  directory. This should be transparent if you followed the documentation, but
+  the changes are as follows:
+
+  - CommonJS
+    - `lib/hibp.js` → `dist/cjs/hibp.js`
+  - ECMAScript Modules
+    - `es/hibp.js` → `dist/esm/hibp.js`
+  - ECMAScript Modules for Browsers (development)
+    - `dist/hibp.mjs` → `dist/browser/hibp.esm.js`
+  - ECMAScript Modules for Browsers (production)
+    - `dist/hibp.min.mjs` → `dist/browser/hibp.esm.min.js`
+  - UMD (development)
+    - `dist/hibp.js` → `dist/browser/hibp.umd.js`
+  - UMD (production)
+    - `dist/hibp.min.js` → `dist/browser/hibp.umd.min.js`
+  - TypeScript Declarations
+    - `types/hibp.d.ts` → `dist/hibp.d.ts`
+
 - Support for Node.js version 8.x has been dropped. You must upgrade your
   Node.js environment to at least v10.
 
