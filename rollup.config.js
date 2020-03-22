@@ -11,7 +11,7 @@ const inputs = glob.sync('src/**/*.ts', {
   ignore: ['**/__mocks__/**', '**/__tests__/**', '**/*.test.ts', '**/*.d.ts'],
 });
 const umdName = 'hibp';
-const external = id => !/^(\.|\/|[a-z]:\\)/i.test(id);
+const external = (id) => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const babelOpts = { exclude: 'node_modules/**', extensions: ['.js', '.ts'] };
 const typescriptOpts = {
   check: false,

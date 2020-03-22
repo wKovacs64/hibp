@@ -64,10 +64,10 @@ const pwnedPasswordRange = (
 ): Promise<PwnedPasswordSuffix[]> =>
   fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
     // create array from lines of text in response body
-    .then(data => data.split('\n'))
+    .then((data) => data.split('\n'))
     // convert into array of objects containing suffix and count for each line
-    .then(results =>
-      results.map(row => ({
+    .then((results) =>
+      results.map((row) => ({
         suffix: row.split(':')[0],
         count: parseInt(row.split(':')[1], 10),
       })),

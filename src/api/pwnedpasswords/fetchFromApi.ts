@@ -39,11 +39,11 @@ export default (
 
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
 
-  return fetch(url, config).then(res => {
+  return fetch(url, config).then((res) => {
     if (res.ok) return res.text();
 
     if (res.status === BAD_REQUEST.status) {
-      return res.text().then(text => {
+      return res.text().then((text) => {
         throw new Error(text);
       });
     }

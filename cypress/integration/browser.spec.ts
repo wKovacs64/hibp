@@ -4,7 +4,7 @@ describe('UMD', () => {
 
     cy.window()
       .its('hibp')
-      .then(hibp => {
+      .then((hibp) => {
         expect(hibp.breach).to.be.a('function');
         expect(hibp.breachedAccount).to.be.a('function');
         expect(hibp.breaches).to.be.a('function');

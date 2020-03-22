@@ -2,7 +2,7 @@ const hibp = require('hibp');
 
 hibp
   .breach('Adobe')
-  .then(data => {
+  .then((data) => {
     if (data) {
       // Breach data found
       console.log(data);
@@ -10,7 +10,7 @@ hibp
       console.log('No breach data found by that name.');
     }
   })
-  .catch(err => {
+  .catch((err) => {
     // Something went wrong.
     console.log(err.message);
   });

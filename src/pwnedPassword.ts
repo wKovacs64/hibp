@@ -43,9 +43,9 @@ const pwnedPassword = (
   return (
     pwnedPasswordRange(prefix, options)
       // filter to matching suffix
-      .then(arr => arr.filter(item => item.suffix === suffix))
+      .then((arr) => arr.filter((item) => item.suffix === suffix))
       // return count if match, 0 if not
-      .then(arr => (arr[0] ? arr[0].count : 0))
+      .then((arr) => (arr[0] ? arr[0].count : 0))
   );
 };
 

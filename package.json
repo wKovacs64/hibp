@@ -102,7 +102,7 @@
     "@types/jssha": "2.0.0",
     "@types/node": "12.12.30",
     "@types/node-fetch": "2.5.5",
-    "@wkovacs64/prettier-config": "1.0.2",
+    "@wkovacs64/prettier-config": "2.0.0",
     "babel-jest": "25.1.0",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "codecov": "3.6.5",
