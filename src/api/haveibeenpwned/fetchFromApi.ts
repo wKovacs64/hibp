@@ -71,14 +71,14 @@ export default (
   const config = { headers };
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
 
-  return fetch(url, config).then(res => {
+  return fetch(url, config).then((res) => {
     if (res.ok) return res.json();
 
     switch (res.status) {
       case BAD_REQUEST.status:
         throw new Error(BAD_REQUEST.statusText);
       case UNAUTHORIZED.status:
-        return res.json().then(body => {
+        return res.json().then((body) => {
           throw new Error(body.message);
         });
       case FORBIDDEN.status: {
@@ -91,7 +91,7 @@ export default (
       case NOT_FOUND.status:
         return null;
       case TOO_MANY_REQUESTS.status:
-        return res.json().then(body => {
+        return res.json().then((body) => {
           throw new Error(body.message);
         });
       default:

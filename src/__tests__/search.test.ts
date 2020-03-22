@@ -18,7 +18,7 @@ describe('search', () => {
     const breaches = [{ stuff: 'about', a: 'breach' }];
     const pastes = [{ other: 'stuff', about: 'a paste' }];
 
-    mockFetch.mockImplementation(endpoint =>
+    mockFetch.mockImplementation((endpoint) =>
       Promise.resolve(
         mockResponse({
           body: /breachedaccount/.test(endpoint) ? breaches : pastes,

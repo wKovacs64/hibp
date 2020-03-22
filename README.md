@@ -83,7 +83,7 @@ examples.
 import { search } from 'hibp';
 
 search('someAccountOrEmail', { apiKey: 'my-api-key' })
-  .then(data => {
+  .then((data) => {
     if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
@@ -92,7 +92,7 @@ search('someAccountOrEmail', { apiKey: 'my-api-key' })
       console.log('Good news — no pwnage found!');
     }
   })
-  .catch(err => {
+  .catch((err) => {
     // Something went wrong.
     console.log(err.message);
   });
