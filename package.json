@@ -100,7 +100,7 @@
     "@types/jest": "25.1.4",
     "@types/jsdom": "16.2.0",
     "@types/jssha": "2.0.0",
-    "@types/node": "12.12.31",
+    "@types/node": "12.12.32",
     "@types/node-fetch": "2.5.5",
     "@wkovacs64/prettier-config": "2.0.0",
     "babel-jest": "25.2.3",
