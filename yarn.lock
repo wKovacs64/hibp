@@ -7110,10 +7110,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jssha@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/jssha/-/jssha-2.3.1.tgz#147b2125369035ca4b2f7d210dc539f009b3de9a"
-  integrity sha1-FHshJTaQNcpLL30hDcU58Amz3po=
+jssha@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jssha/-/jssha-3.0.0.tgz#9ef28ee95d1533684868a9e096f0c4bad444d384"
+  integrity sha512-jOFrgS+C7B0M2zPRKEF5Wb9lxvvJ08lljjgnMGUOkZNBW/nqzV4PZ40LC8vDEjKkdwPj6AquKKRPQgStvjmWBw==
 
 jsx-ast-utils@^2.2.1:
   version "2.2.1"
