@@ -2,19 +2,21 @@ version: 2.1
 
 orbs:
   cypress: cypress-io/cypress@1.19.1
-  node: circleci/node@1.1.6
+  node: circleci/node@2.0.1
 
 executors:
   cypress-on-node-12:
     docker:
       - image: 'cypress/base:12.16.1'
-  node-lts:
-    docker:
-      - image: 'node:lts'
+
+use-node-executor: &use-node-executor
+  executor:
+    name: 'node/default'
+    tag: '12.16.1'
 
 jobs:
   test:
-    executor: node-lts
+    <<: *use-node-executor
     steps:
       - attach_workspace:
           at: ~/
@@ -25,7 +27,7 @@ jobs:
           path: dist
           destination: dist
   release:
-    executor: node-lts
+    <<: *use-node-executor
     steps:
       - attach_workspace:
           at: ~/
