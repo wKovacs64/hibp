@@ -24,8 +24,14 @@ jobs:
       - run: yarn test:coverage
       - run: yarn codecov
       - store_artifacts:
-          path: dist
-          destination: dist
+          path: dist/browser
+          destination: dist/browser
+      - store_artifacts:
+          path: dist/cjs
+          destination: dist/cjs
+      - store_artifacts:
+          path: dist/esm
+          destination: dist/esm
   release:
     <<: *use-node-executor
     steps:
