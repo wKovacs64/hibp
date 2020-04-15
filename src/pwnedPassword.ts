@@ -1,4 +1,4 @@
-import JSSHA from 'jssha/src/sha1';
+import JSSHA from 'jssha/dist/sha1';
 import pwnedPasswordRange from './pwnedPasswordRange';
 
 /**

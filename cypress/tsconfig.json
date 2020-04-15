@@ -4,8 +4,7 @@
     "esModuleInterop": true,
     "noEmit": true,
     "strict": true,
-    "types": ["cypress", "jsdom", "jssha/src"],
-    "typeRoots": ["../node_modules/@types", "../@types"]
+    "types": ["cypress", "jsdom"]
   },
   "include": ["."]
 }

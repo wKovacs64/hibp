@@ -9,8 +9,7 @@
     "strict": true,
     "stripInternal": true,
     "newLine": "lf",
-    "types": ["node", "jsdom", "jest", "jssha/src"],
-    "typeRoots": ["node_modules/@types", "@types"]
+    "types": ["node", "jsdom", "jest"]
   },
   "exclude": ["cypress"]
 }
