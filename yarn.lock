@@ -1999,11 +1999,6 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
   integrity sha512-Il2DtDVRGDcqjDtE+rF8iqg1CArehSK84HZJCT7AMITlyXRBpuPhqGLDQMowraqqu1coEaimg4ZOqggt6L6L+A==
 
-"@types/jssha@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/jssha/-/jssha-2.0.0.tgz#15027ef6480c4d2c8c42762e227b23b34276e68f"
-  integrity sha512-oBnY3csYnXfqZXDRBJwP1nDDJCW/+VMJ88UHT4DCy0deSXpJIQvMCwYlnmdW4M+u7PiSfQc44LmiFcUbJ8hLEw==
-
 "@types/lodash@4.14.149":
   version "4.14.149"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.149.tgz#1342d63d948c6062838fbf961012f74d4e638440"
@@ -7110,10 +7105,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jssha@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/jssha/-/jssha-3.0.0.tgz#9ef28ee95d1533684868a9e096f0c4bad444d384"
-  integrity sha512-jOFrgS+C7B0M2zPRKEF5Wb9lxvvJ08lljjgnMGUOkZNBW/nqzV4PZ40LC8vDEjKkdwPj6AquKKRPQgStvjmWBw==
+jssha@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/jssha/-/jssha-3.1.0.tgz#bc9d11cefeea5cdaf931cee12cc5771b31d80252"
+  integrity sha512-tPCmr8xSLd8ug6N51k0rbF1tAQWZz1i/uCVHpCH9dl+Te+wM/T375R3lTexP3bk1HPmQ+NlJHQPYLmYuyk6slA==
 
 jsx-ast-utils@^2.2.1:
   version "2.2.1"
