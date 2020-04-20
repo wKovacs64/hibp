@@ -1,7 +1,7 @@
 {
   "name": "hibp",
   "version": "0.0.0-semantically-released",
-  "description": "A Promise-based API for querying the 'Have I been pwned?' service.",
+  "description": "A Promise-based client for the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
     "hibp",
@@ -11,7 +11,8 @@
     "dump",
     "breach",
     "pastes",
-    "passwords"
+    "passwords",
+    "client"
   ],
   "author": {
     "name": "Justin Hall",

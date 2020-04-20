@@ -1,5 +1,5 @@
 title: hibp
-description: A Promise-based API for querying the 'Have I been pwned?' service.
+description: A Promise-based client for the 'Have I been pwned?' service.
 google_analytics:
 show_downloads: true
 theme: jekyll-theme-cayman
