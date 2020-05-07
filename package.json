@@ -54,6 +54,7 @@
     "prebuild": "npm run --silent clean",
     "prepare": "npm run --silent build",
     "prepublishOnly": "npm-run-all --silent --sequential lint check-types test test:browser:ci",
+    "size": "size-limit",
     "ssat": "start-server-and-test start-test-server 5000",
     "start-test-server": "serve --no-clipboard",
     "test": "cross-env NODE_ENV=test jest",
@@ -61,7 +62,7 @@
     "test:browser": "npm-run-all --silent --sequential build:bundle \"ssat cy:open\"",
     "test:browser:ci": "npm-run-all --silent --sequential build:bundle \"ssat cy:run\"",
     "test:watch": "cross-env NODE_ENV=test jest --watch --onlyChanged",
-    "validate": "npm-run-all --silent --parallel lint check-types"
+    "validate": "npm-run-all --silent --parallel lint check-types size"
   },
   "config": {
     "commitizen": {
@@ -97,6 +98,7 @@
     "@babel/preset-typescript": "7.9.0",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
+    "@size-limit/preset-small-lib": "4.5.0",
     "@types/common-tags": "1.8.0",
     "@types/jest": "25.2.1",
     "@types/jsdom": "16.2.1",
@@ -135,6 +137,7 @@
     "rollup-plugin-typescript2": "0.27.0",
     "semantic-release": "17.0.7",
     "serve": "11.3.0",
+    "size-limit": "4.5.0",
     "start-server-and-test": "1.11.0",
     "typescript": "3.8.3"
   }
