@@ -9,7 +9,7 @@
     "strict": true,
     "stripInternal": true,
     "newLine": "lf",
-    "types": ["node", "jsdom", "jest"]
+    "types": ["node", "jest"]
   },
   "exclude": ["cypress"]
 }

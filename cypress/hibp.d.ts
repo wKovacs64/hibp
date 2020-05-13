@@ -1,4 +1,4 @@
-import { HIBP } from '../../src/hibp';
+import { HIBP } from '../src/hibp';
 
 declare global {
   interface Window {
