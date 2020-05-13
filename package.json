@@ -102,7 +102,7 @@
     "@types/common-tags": "1.8.0",
     "@types/jest": "25.2.1",
     "@types/jsdom": "16.2.1",
-    "@types/node": "12.12.38",
+    "@types/node": "12.12.39",
     "@types/node-fetch": "2.5.7",
     "@wkovacs64/prettier-config": "3.0.0",
     "babel-jest": "26.0.1",
