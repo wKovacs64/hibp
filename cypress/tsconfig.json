@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
+    "target": "ES5",
+    "lib": ["ESNext", "DOM"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "noEmit": true,
     "strict": true,
-    "types": ["cypress", "jsdom"]
-  },
-  "include": ["."]
+    "types": ["cypress"]
+  }
 }
