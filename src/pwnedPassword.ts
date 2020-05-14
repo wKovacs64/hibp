@@ -1,5 +1,5 @@
 import JSSHA from 'jssha/dist/sha1';
-import pwnedPasswordRange from './pwnedPasswordRange';
+import { pwnedPasswordRange } from './pwnedPasswordRange';
 
 /**
  * Fetches the number of times the the given password has been exposed in a
@@ -28,9 +28,8 @@ import pwnedPasswordRange from './pwnedPasswordRange';
  *     // ...
  *   });
  * @see https://haveibeenpwned.com/api/v3#PwnedPasswords
- * @alias module:pwnedPassword
  */
-const pwnedPassword = (
+export const pwnedPassword = (
   password: string,
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<number> => {
@@ -48,13 +47,3 @@ const pwnedPassword = (
       .then((arr) => (arr[0] ? arr[0].count : 0))
   );
 };
-
-/**
- * A module for securely determining how many times a password has been exposed
- * in a breach.
- *
- * @module pwnedPassword
- * @example
- * import { pwnedPassword } from 'hibp';
- */
-export default pwnedPassword;

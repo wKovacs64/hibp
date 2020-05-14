@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { mockFetch, mockResponse } from '../../test/utils';
-import pwnedPassword from '../pwnedPassword';
+import { pwnedPassword } from '../pwnedPassword';
 
 describe('pwnedPassword', () => {
   mockFetch.mockResolvedValue(

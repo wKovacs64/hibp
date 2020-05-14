@@ -1,50 +1,10 @@
-## Modules
-
-<dl>
-<dt><a href="#module_breach">breach</a></dt>
-<dd><p>A module for retrieving data for a specific breach event.</p>
-</dd>
-<dt><a href="#module_breachedAccount">breachedAccount</a></dt>
-<dd><p>A module for retrieving breach data for a specific account.</p>
-</dd>
-<dt><a href="#module_breaches">breaches</a></dt>
-<dd><p>A module for retrieving all breach events in the system.</p>
-</dd>
-<dt><a href="#module_dataClasses">dataClasses</a></dt>
-<dd><p>A module for retrieving all data classes in the system.</p>
-</dd>
-<dt><a href="#module_pasteAccount">pasteAccount</a></dt>
-<dd><p>A module for retrieving paste data for a specific account (email address).</p>
-</dd>
-<dt><a href="#module_pwnedPassword">pwnedPassword</a></dt>
-<dd><p>A module for securely determining how many times a password has been exposed
-in a breach.</p>
-</dd>
-<dt><a href="#module_pwnedPasswordRange">pwnedPasswordRange</a></dt>
-<dd><p>A module for determining if a password&#39;s SHA-1 hash has been exposed in a
-breach.</p>
-</dd>
-<dt><a href="#module_search">search</a></dt>
-<dd><p>A module for searching all breach and paste data associated with a specific
-account (email address or username).</p>
-</dd>
-</dl>
-
-## Objects
-
-<dl>
-<dt><a href="#hibp">hibp</a> : <code>object</code></dt>
-<dd><p>A namespace containing all of the hibp functions.</p>
-</dd>
-</dl>
-
 ## Functions
 
 <dl>
-<dt><a href="#exp_module_breach--breach">breach(breachName, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#breach">breach(breachName, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches data for a specific breach event.</p>
 </dd>
-<dt><a href="#exp_module_breachedAccount--breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
 <p><strong><em>Warning (July 18, 2019):</em></strong></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
@@ -53,13 +13,13 @@ account (email address or username).</p>
 without it (that is, without specifying a <code>baseUrl</code> to a proxy that inserts a
 valid API key on your behalf) will fail.</p>
 </dd>
-<dt><a href="#exp_module_breaches--breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> ⏏</dt>
+<dt><a href="#breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code></dt>
 <dd><p>Fetches all breach events in the system.</p>
 </dd>
-<dt><a href="#exp_module_dataClasses--dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
-<dt><a href="#exp_module_pasteAccount--pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code> ⏏</dt>
+<dt><a href="#pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
 <p><strong><em>Warning (July 18, 2019):</em></strong></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
@@ -68,12 +28,12 @@ valid API key on your behalf) will fail.</p>
 without it (that is, without specifying a <code>baseUrl</code> to a proxy that inserts a
 valid API key on your behalf) will fail.</p>
 </dd>
-<dt><a href="#exp_module_pwnedPassword--pwnedPassword">pwnedPassword(password, [options])</a> ⇒ <code>Promise.&lt;number&gt;</code> ⏏</dt>
+<dt><a href="#pwnedPassword">pwnedPassword(password, [options])</a> ⇒ <code>Promise.&lt;number&gt;</code></dt>
 <dd><p>Fetches the number of times the the given password has been exposed in a
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
-<dt><a href="#exp_module_pwnedPasswordRange--pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏</dt>
+<dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code></dt>
 <dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
@@ -81,7 +41,7 @@ suffix of every hash beginning with the specified prefix, followed by a count
 of how many times it appears in the data set. This function parses the
 response and returns a more structured format.</p>
 </dd>
-<dt><a href="#exp_module_search--search">search(account, [breachOptions])</a> ⇒ <code><a href="#SearchResults">Promise.&lt;SearchResults&gt;</a></code> ⏏</dt>
+<dt><a href="#search">search(account, [breachOptions])</a> ⇒ <code><a href="#SearchResults">Promise.&lt;SearchResults&gt;</a></code></dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
 (email address or username). Note that the remote API does not support
 querying pastes by username (only email addresses), so in the event the
@@ -117,21 +77,12 @@ repository.</p>
 </dd>
 </dl>
 
-<a name="module_breach"></a>
+<a name="breach"></a>
 
-## breach
-A module for retrieving data for a specific breach event.
-
-**Example**  
-```js
-import { breach } from 'hibp';
-```
-<a name="exp_module_breach--breach"></a>
-
-### breach(breachName, [options]) ⇒ [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> ⏏
+## breach(breachName, [options]) ⇒ [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code>
 Fetches data for a specific breach event.
 
-**Kind**: global method of [<code>breach</code>](#module_breach)  
+**Kind**: global function  
 **Returns**: [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
 object representing a breach (or null if no breach was found), or rejects
 with an Error  
@@ -157,18 +108,9 @@ breach('Adobe')
     // ...
   });
 ```
-<a name="module_breachedAccount"></a>
+<a name="breachedAccount"></a>
 
-## breachedAccount
-A module for retrieving breach data for a specific account.
-
-**Example**  
-```js
-import { breachedAccount } from 'hibp';
-```
-<a name="exp_module_breachedAccount--breachedAccount"></a>
-
-### breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
+## breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches breach data for a specific account.
 
 ***Warning (July 18, 2019):***
@@ -179,7 +121,7 @@ https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
 without it (that is, without specifying a `baseUrl` to a proxy that inserts a
 valid API key on your behalf) will fail.
 
-**Kind**: global method of [<code>breachedAccount</code>](#module_breachedAccount)  
+**Kind**: global function  
 **Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
 array of breach objects (or null if no breaches were found), or rejects with
 an Error  
@@ -245,21 +187,12 @@ breachedAccount('baz', {
     // ...
   });
 ```
-<a name="module_breaches"></a>
+<a name="breaches"></a>
 
-## breaches
-A module for retrieving all breach events in the system.
-
-**Example**  
-```js
-import { breaches } from 'hibp';
-```
-<a name="exp_module_breaches--breaches"></a>
-
-### breaches([options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> ⏏
+## breaches([options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code>
 Fetches all breach events in the system.
 
-**Kind**: global method of [<code>breaches</code>](#module_breaches)  
+**Kind**: global function  
 **Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> - a Promise which resolves to an array of breach
 objects (an empty array if no breaches were found), or rejects with an Error  
 
@@ -298,21 +231,12 @@ breaches({ domain: 'adobe.com' })
     // ...
   });
 ```
-<a name="module_dataClasses"></a>
+<a name="dataClasses"></a>
 
-## dataClasses
-A module for retrieving all data classes in the system.
-
-**Example**  
-```js
-import { dataClasses } from 'hibp';
-```
-<a name="exp_module_dataClasses--dataClasses"></a>
-
-### dataClasses([options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> ⏏
+## dataClasses([options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code>
 Fetches all data classes in the system.
 
-**Kind**: global method of [<code>dataClasses</code>](#module_dataClasses)  
+**Kind**: global function  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
 array of strings (or null if no data classes were found), or rejects with an
 Error  
@@ -337,18 +261,9 @@ dataClasses()
     // ...
   });
 ```
-<a name="module_pasteAccount"></a>
+<a name="pasteAccount"></a>
 
-## pasteAccount
-A module for retrieving paste data for a specific account (email address).
-
-**Example**  
-```js
-import { pasteAccount } from 'hibp';
-```
-<a name="exp_module_pasteAccount--pasteAccount"></a>
-
-### pasteAccount(email, [options]) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> ⏏
+## pasteAccount(email, [options]) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches paste data for a specific account (email address).
 
 ***Warning (July 18, 2019):***
@@ -359,7 +274,7 @@ https://haveibeenpwned.com/API/Key for the `pasteaccount` endpoint. The
 without it (that is, without specifying a `baseUrl` to a proxy that inserts a
 valid API key on your behalf) will fail.
 
-**Kind**: global method of [<code>pasteAccount</code>](#module_pasteAccount)  
+**Kind**: global function  
 **Returns**: <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
 array of paste objects (or null if no pastes were found), or rejects with an
 Error  
@@ -386,24 +301,14 @@ pasteAccount('foo@bar.com', { apiKey: 'my-api-key' })
     // ...
   });
 ```
-<a name="module_pwnedPassword"></a>
+<a name="pwnedPassword"></a>
 
-## pwnedPassword
-A module for securely determining how many times a password has been exposed
-in a breach.
-
-**Example**  
-```js
-import { pwnedPassword } from 'hibp';
-```
-<a name="exp_module_pwnedPassword--pwnedPassword"></a>
-
-### pwnedPassword(password, [options]) ⇒ <code>Promise.&lt;number&gt;</code> ⏏
+## pwnedPassword(password, [options]) ⇒ <code>Promise.&lt;number&gt;</code>
 Fetches the number of times the the given password has been exposed in a
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.
 
-**Kind**: global method of [<code>pwnedPassword</code>](#module_pwnedPassword)  
+**Kind**: global function  
 **Returns**: <code>Promise.&lt;number&gt;</code> - a Promise which resolves to the number of times
 the password has been exposed in a breach, or rejects with an Error  
 **See**: https://haveibeenpwned.com/api/v3#PwnedPasswords  
@@ -430,19 +335,9 @@ pwnedPassword('f00b4r')
     // ...
   });
 ```
-<a name="module_pwnedPasswordRange"></a>
+<a name="pwnedPasswordRange"></a>
 
-## pwnedPasswordRange
-A module for determining if a password's SHA-1 hash has been exposed in a
-breach.
-
-**Example**  
-```js
-import { pwnedPasswordRange } from 'hibp';
-```
-<a name="exp_module_pwnedPasswordRange--pwnedPasswordRange"></a>
-
-### pwnedPasswordRange(prefix, [options]) ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> ⏏
+## pwnedPasswordRange(prefix, [options]) ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code>
 Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
 
 When a password hash with the same first 5 characters is found in the Pwned
@@ -451,7 +346,7 @@ suffix of every hash beginning with the specified prefix, followed by a count
 of how many times it appears in the data set. This function parses the
 response and returns a more structured format.
 
-**Kind**: global method of [<code>pwnedPasswordRange</code>](#module_pwnedPasswordRange)  
+**Kind**: global function  
 **Returns**: <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> - a Promise which resolves to an
 array of objects, each containing the `suffix` that when matched with the
 prefix composes the complete hash, and a `count` of how many times it appears
@@ -489,19 +384,9 @@ pwnedPasswordRange('5BAA6')
     // ...
   });
 ```
-<a name="module_search"></a>
+<a name="search"></a>
 
-## search
-A module for searching all breach and paste data associated with a specific
-account (email address or username).
-
-**Example**  
-```js
-import { search } from 'hibp';
-```
-<a name="exp_module_search--search"></a>
-
-### search(account, [breachOptions]) ⇒ [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) ⏏
+## search(account, [breachOptions]) ⇒ [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults)
 Fetches all breaches and all pastes associated with the provided account
 (email address or username). Note that the remote API does not support
 querying pastes by username (only email addresses), so in the event the
@@ -518,7 +403,7 @@ https://haveibeenpwned.com/API/Key for the `breachedaccount` and
 required, but direct requests made without it (that is, without specifying a
 `baseUrl` to a proxy that inserts a valid API key on your behalf) will fail.
 
-**Kind**: global method of [<code>search</code>](#module_search)  
+**Kind**: global function  
 **Returns**: [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) - a Promise which resolves to an object
 containing a "breaches" key (which can be null or an array of breach objects)
 and a "pastes" key (which can be null or an array of paste objects), or
@@ -562,18 +447,6 @@ search('nobody@nowhere.com', { apiKey: 'my-api-key', truncate: false })
   .catch(err => {
     // ...
   });
-```
-<a name="hibp"></a>
-
-## hibp : <code>object</code>
-A namespace containing all of the hibp functions.
-
-**Kind**: global namespace  
-**Example**  
-```js
-import * as hibp from 'hibp';
-// Now all hibp functions are available on the hibp object:
-hibp.dataClasses().then(...)
 ```
 <a name="Breach"></a>
 

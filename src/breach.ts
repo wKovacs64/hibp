@@ -21,6 +21,7 @@ import { fetchFromApi } from './api/haveibeenpwned';
  * @property {boolean} IsRetired
  * @property {boolean} IsSpamList
  */
+
 /**
  * Fetches data for a specific breach event.
  *
@@ -46,9 +47,8 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *   .catch(err => {
  *     // ...
  *   });
- * @alias module:breach
  */
-const breach = (
+export const breach = (
   breachName: string,
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<Breach | null> =>
@@ -56,12 +56,3 @@ const breach = (
     `/breach/${encodeURIComponent(breachName)}`,
     options,
   ) as Promise<Breach | null>;
-
-/**
- * A module for retrieving data for a specific breach event.
- *
- * @module breach
- * @example
- * import { breach } from 'hibp';
- */
-export default breach;

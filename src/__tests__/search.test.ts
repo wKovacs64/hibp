@@ -1,5 +1,5 @@
 import { mockFetch, mockResponse } from '../../test/utils';
-import search from '../search';
+import { search } from '../search';
 
 describe('search', () => {
   it('searches breaches by username', () => {

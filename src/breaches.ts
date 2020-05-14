@@ -38,9 +38,8 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *   .catch(err => {
  *     // ...
  *   });
- * @alias module:breaches
  */
-const breaches = (
+export const breaches = (
   options: {
     domain?: string;
     baseUrl?: string;
@@ -57,12 +56,3 @@ const breaches = (
     userAgent: options.userAgent,
   }) as Promise<Breach[]>;
 };
-
-/**
- * A module for retrieving all breach events in the system.
- *
- * @module breaches
- * @example
- * import { breaches } from 'hibp';
- */
-export default breaches;

@@ -1,5 +1,5 @@
 import { mockFetch, mockResponse } from '../../test/utils';
-import breaches from '../breaches';
+import { breaches } from '../breaches';
 
 describe('breaches', () => {
   const body = [{ breach: 'info' }];
