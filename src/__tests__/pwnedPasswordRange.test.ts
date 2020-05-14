@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { mockFetch, mockResponse } from '../../test/utils';
-import pwnedPasswordRange from '../pwnedPasswordRange';
+import { pwnedPasswordRange } from '../pwnedPasswordRange';
 
 describe('pwnedPasswordRange', () => {
   describe('valid range', () => {

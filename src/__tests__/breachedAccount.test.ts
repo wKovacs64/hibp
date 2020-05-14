@@ -1,6 +1,6 @@
 import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import breachedAccount from '../breachedAccount';
+import { breachedAccount } from '../breachedAccount';
 
 describe('breachedAccount', () => {
   const body = [{ some: 'stuff' }];

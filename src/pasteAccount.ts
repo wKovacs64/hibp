@@ -1,5 +1,5 @@
 import { Paste } from './api/haveibeenpwned/types';
-import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
+import { fetchFromApi } from './api/haveibeenpwned';
 
 /**
  * An object representing a paste.
@@ -11,6 +11,7 @@ import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
  * @property {string} Date
  * @property {number} EmailCount
  */
+
 /**
  * Fetches paste data for a specific account (email address).
  *
@@ -46,9 +47,8 @@ import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
  *   .catch(err => {
  *     // ...
  *   });
- * @alias module:pasteAccount
  */
-const pasteAccount = (
+export const pasteAccount = (
   email: string,
   options: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
 ): Promise<Paste[] | null> =>
@@ -57,12 +57,3 @@ const pasteAccount = (
     baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Paste[] | null>;
-
-/**
- * A module for retrieving paste data for a specific account (email address).
- *
- * @module pasteAccount
- * @example
- * import { pasteAccount } from 'hibp';
- */
-export default pasteAccount;

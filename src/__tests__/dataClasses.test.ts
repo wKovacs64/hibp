@@ -1,5 +1,5 @@
 import { mockFetch, mockResponse } from '../../test/utils';
-import dataClasses from '../dataClasses';
+import { dataClasses } from '../dataClasses';
 
 describe('dataClasses', () => {
   const body = ['some', 'data', 'classes'];

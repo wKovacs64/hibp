@@ -1,6 +1,6 @@
 import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import pasteAccount from '../pasteAccount';
+import { pasteAccount } from '../pasteAccount';
 
 describe('pasteAccount', () => {
   it('honors the apiKey option', () => {

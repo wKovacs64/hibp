@@ -1,4 +1,4 @@
-import fetchFromApi from './api/pwnedpasswords/fetchFromApi';
+import { fetchFromApi } from './api/pwnedpasswords';
 
 export interface PwnedPasswordSuffix {
   suffix: string;
@@ -14,6 +14,7 @@ export interface PwnedPasswordSuffix {
  * @property {string} suffix
  * @property {number} count
  */
+
 /**
  * Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
  *
@@ -56,9 +57,8 @@ export interface PwnedPasswordSuffix {
  *     // ...
  *   });
  * @see https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange
- * @alias module:pwnedPasswordRange
  */
-const pwnedPasswordRange = (
+export const pwnedPasswordRange = (
   prefix: string,
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<PwnedPasswordSuffix[]> =>
@@ -72,13 +72,3 @@ const pwnedPasswordRange = (
         count: parseInt(row.split(':')[1], 10),
       })),
     );
-
-/**
- * A module for determining if a password's SHA-1 hash has been exposed in a
- * breach.
- *
- * @module pwnedPasswordRange
- * @example
- * import { pwnedPasswordRange } from 'hibp';
- */
-export default pwnedPasswordRange;

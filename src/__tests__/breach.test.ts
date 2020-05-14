@@ -1,6 +1,6 @@
 import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import breach from '../breach';
+import { breach } from '../breach';
 
 describe('breach', () => {
   describe('found', () => {

@@ -1,6 +1,6 @@
 import { Breach, Paste } from './api/haveibeenpwned/types';
-import breachedAccount from './breachedAccount';
-import pasteAccount from './pasteAccount';
+import { breachedAccount } from './breachedAccount';
+import { pasteAccount } from './pasteAccount';
 
 export interface SearchResults {
   breaches: Breach[] | null;
@@ -14,6 +14,7 @@ export interface SearchResults {
  * @property {(Breach[] | null)} breaches
  * @property {(Paste[] | null)} pastes
  */
+
 /**
  * Fetches all breaches and all pastes associated with the provided account
  * (email address or username). Note that the remote API does not support
@@ -75,9 +76,8 @@ export interface SearchResults {
  *   });
  *
  * @see https://haveibeenpwned.com/
- * @alias module:search
  */
-const search = (
+export const search = (
   account: string,
   breachOptions: {
     apiKey?: string;
@@ -102,12 +102,3 @@ const search = (
     pastes,
   }));
 };
-/**
- * A module for searching all breach and paste data associated with a specific
- * account (email address or username).
- *
- * @module search
- * @example
- * import { search } from 'hibp';
- */
-export default search;

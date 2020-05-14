@@ -18,12 +18,12 @@ import { BAD_REQUEST } from './responses';
  * @returns {Promise<string>} a Promise which resolves to the data resulting
  * from the query, or rejects with an Error
  */
-export default (
+export const fetchFromApi = (
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
   {
     baseUrl = 'https://api.pwnedpasswords.com',
-    userAgent = undefined,
+    userAgent,
   }: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<string> => {
   const config = Object.assign(

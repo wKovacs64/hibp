@@ -1,5 +1,5 @@
 import { Breach } from './api/haveibeenpwned/types';
-import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
+import { fetchFromApi } from './api/haveibeenpwned';
 
 /**
  * Fetches breach data for a specific account.
@@ -74,9 +74,8 @@ import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
  *   .catch(err => {
  *     // ...
  *   });
- * @alias module:breachedAccount
  */
-const breachedAccount = (
+export const breachedAccount = (
   account: string,
   options: {
     apiKey?: string;
@@ -107,12 +106,3 @@ const breachedAccount = (
     userAgent: options.userAgent,
   }) as Promise<Breach[] | null>;
 };
-
-/**
- * A module for retrieving breach data for a specific account.
- *
- * @module breachedAccount
- * @example
- * import { breachedAccount } from 'hibp';
- */
-export default breachedAccount;

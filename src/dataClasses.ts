@@ -1,4 +1,4 @@
-import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
+import { fetchFromApi } from './api/haveibeenpwned';
 
 /**
  * Fetches all data classes in the system.
@@ -24,18 +24,8 @@ import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
  *   .catch(err => {
  *     // ...
  *   });
- * @alias module:dataClasses
  */
-const dataClasses = (
+export const dataClasses = (
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<string[] | null> =>
   fetchFromApi('/dataclasses', options) as Promise<string[] | null>;
-
-/**
- * A module for retrieving all data classes in the system.
- *
- * @module dataClasses
- * @example
- * import { dataClasses } from 'hibp';
- */
-export default dataClasses;
