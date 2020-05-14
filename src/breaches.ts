@@ -1,5 +1,5 @@
 import { Breach } from './api/haveibeenpwned/types';
-import fetchFromApi from './api/haveibeenpwned/fetchFromApi';
+import { fetchFromApi } from './api/haveibeenpwned';
 
 /**
  * Fetches all breach events in the system.

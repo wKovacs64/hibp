@@ -44,13 +44,13 @@ const blockedWithRayId = (rayId: string): string =>
  * from the query (or null for 404 Not Found responses), or rejects with an
  * Error
  */
-export default (
+export const fetchFromApi = (
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
   {
-    apiKey = undefined,
+    apiKey,
     baseUrl = 'https://haveibeenpwned.com/api/v3',
-    userAgent = undefined,
+    userAgent,
   }: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
 ): Promise<ApiData> => {
   const headers: Record<string, string> = {};
