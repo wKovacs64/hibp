@@ -96,6 +96,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.9.6",
     "@babel/preset-env": "7.9.6",
     "@babel/preset-typescript": "7.9.0",
+    "@codechecks/client": "0.1.10",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
     "@size-limit/preset-small-lib": "4.5.0",
@@ -138,6 +139,7 @@
     "serve": "11.3.0",
     "size-limit": "4.5.0",
     "start-server-and-test": "1.11.0",
+    "typecov": "0.2.2",
     "typescript": "3.9.3"
   }
 }
