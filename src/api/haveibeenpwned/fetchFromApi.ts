@@ -7,7 +7,10 @@ import {
   FORBIDDEN,
   NOT_FOUND,
   TOO_MANY_REQUESTS,
+  HaveIBeenPwnedApiResponse,
 } from './responses';
+
+type ApiResponseBody = NonNullable<HaveIBeenPwnedApiResponse['body']>;
 
 export type ApiData =
   | Breach // breach
@@ -78,7 +81,7 @@ export const fetchFromApi = (
       case BAD_REQUEST.status:
         throw new Error(BAD_REQUEST.statusText);
       case UNAUTHORIZED.status:
-        return res.json().then((body) => {
+        return res.json().then((body: ApiResponseBody) => {
           throw new Error(body.message);
         });
       case FORBIDDEN.status: {
@@ -91,7 +94,7 @@ export const fetchFromApi = (
       case NOT_FOUND.status:
         return null;
       case TOO_MANY_REQUESTS.status:
-        return res.json().then((body) => {
+        return res.json().then((body: ApiResponseBody) => {
           throw new Error(body.message);
         });
       default:
