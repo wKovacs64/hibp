@@ -9,6 +9,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      # ~/.ssh is not persisted after cypress/run, so we have to recreate the
+      # known_hosts file manually
       - run: mkdir ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run: yarn codechecks
   test:
