@@ -9,7 +9,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run: mkdir ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run: yarn codechecks
   test:
     executor: cypress/base-12-16-1
