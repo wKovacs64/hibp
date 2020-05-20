@@ -4,6 +4,15 @@ orbs:
   cypress: cypress-io/cypress@1.22.0
 
 jobs:
+  codechecks:
+    executor: cypress/base-12-16-1
+    steps:
+      - attach_workspace:
+          at: ~/
+      # ~/.ssh is not persisted after cypress/run, so we have to recreate the
+      # known_hosts file manually
+      - run: mkdir ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run: yarn codechecks
   test:
     executor: cypress/base-12-16-1
     steps:
@@ -30,11 +39,15 @@ workflows:
           yarn: true
           start: yarn start-test-server
           wait-on: '--timeout 20000 http://localhost:5000'
+      - codechecks:
+          requires:
+            - cypress/run
       - test:
           requires:
             - cypress/run
       - release:
           requires:
+            - codechecks
             - test
           filters:
             branches:
