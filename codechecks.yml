@@ -3,6 +3,9 @@ checks:
     options:
       atLeast: 98
       strict: true
+      branches:
+        - develop
+        - master
       ignoreFiles:
         - '**/__tests__/**'
         - 'test/**'
