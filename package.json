@@ -138,6 +138,6 @@
     "serve": "11.3.0",
     "size-limit": "4.5.0",
     "start-server-and-test": "1.11.0",
-    "typescript": "3.9.2"
+    "typescript": "3.9.3"
   }
 }
