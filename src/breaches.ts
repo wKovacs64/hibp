@@ -47,7 +47,7 @@ export const breaches = (
   } = {},
 ): Promise<Breach[]> => {
   const endpoint = '/breaches?';
-  const params = [];
+  const params: Array<string> = [];
   if (options.domain) {
     params.push(`domain=${encodeURIComponent(options.domain)}`);
   }
