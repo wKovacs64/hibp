@@ -18,7 +18,8 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       const originalNavigator = global.navigator;
       mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
 
-      global.navigator = undefined;
+      delete global.navigator;
+
       return fetchFromApi('/service')
         .then(() => {
           expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
