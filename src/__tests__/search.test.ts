@@ -1,9 +1,10 @@
+import { EXAMPLE_BREACH, EXAMPLE_PASTE } from '../../test/fixtures';
 import { mockFetch, mockResponse } from '../../test/utils';
 import { search } from '../search';
 
 describe('search', () => {
   it('searches breaches by username', () => {
-    const breaches = [{ stuff: 'about', a: 'breach' }];
+    const breaches = [EXAMPLE_BREACH];
     const pastes = null;
 
     mockFetch.mockResolvedValue(mockResponse({ body: breaches }));
@@ -15,8 +16,8 @@ describe('search', () => {
   });
 
   it('searches breaches and pastes by email address', () => {
-    const breaches = [{ stuff: 'about', a: 'breach' }];
-    const pastes = [{ other: 'stuff', about: 'a paste' }];
+    const breaches = [EXAMPLE_BREACH];
+    const pastes = [EXAMPLE_PASTE];
 
     mockFetch.mockImplementation((endpoint) =>
       Promise.resolve(
@@ -33,7 +34,7 @@ describe('search', () => {
   });
 
   it('forwards the apiKey option correctly', () => {
-    const breaches = [{ stuff: 'about', a: 'breach' }];
+    const breaches = [EXAMPLE_BREACH];
     const apiKey = 'my-api-key';
     const headers = {
       'HIBP-API-Key': apiKey,

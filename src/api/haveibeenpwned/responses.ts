@@ -10,14 +10,14 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
+import { ResponseBody } from './types';
+
+/** @internal */
 export interface HaveIBeenPwnedApiResponse {
   headers: Map<string, string>;
   status: number;
   statusText?: string;
-  body?: {
-    statusCode: number;
-    message: string;
-  };
+  body?: ResponseBody;
 }
 
 const emptyHeaders = new Map<string, string>();
