@@ -1,8 +1,9 @@
+import { EXAMPLE_BREACH } from '../../test/fixtures';
 import { mockFetch, mockResponse } from '../../test/utils';
 import { breaches } from '../breaches';
 
 describe('breaches', () => {
-  const body = [{ breach: 'info' }];
+  const body = [EXAMPLE_BREACH];
 
   beforeAll(() => {
     mockFetch.mockResolvedValue(mockResponse({ body }));

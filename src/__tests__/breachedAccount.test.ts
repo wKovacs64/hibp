@@ -1,9 +1,10 @@
+import { EXAMPLE_BREACH } from '../../test/fixtures';
 import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
 import { breachedAccount } from '../breachedAccount';
 
 describe('breachedAccount', () => {
-  const body = [{ some: 'stuff' }];
+  const body = [EXAMPLE_BREACH];
 
   beforeAll(() => {
     mockFetch.mockResolvedValue(mockResponse({ body }));

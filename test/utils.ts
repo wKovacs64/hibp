@@ -1,11 +1,12 @@
 import fetch from 'isomorphic-unfetch';
+import { ResponseBody } from '../src/api/haveibeenpwned/types';
 
 /** @internal */
 interface MockResponseOptions {
   headers?: Map<string, string>;
   status?: number;
   statusText?: string;
-  body?: string | object;
+  body?: /* PwnedPasswords */ string | /* HIBP */ ResponseBody;
 }
 
 /** @internal */

@@ -1,13 +1,11 @@
+import { EXAMPLE_BREACH } from '../../test/fixtures';
 import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
 import { breach } from '../breach';
 
 describe('breach', () => {
   describe('found', () => {
-    const body = {
-      some: 'information',
-      about: 'a breach',
-    };
+    const body = EXAMPLE_BREACH;
 
     it('resolves with data from the remote API', () => {
       mockFetch.mockResolvedValue(mockResponse({ body }));

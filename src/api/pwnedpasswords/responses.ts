@@ -5,6 +5,7 @@
  *
  */
 
+/** @internal */
 export interface PwnedPasswordsApiResponse {
   status: number;
   body?: string;

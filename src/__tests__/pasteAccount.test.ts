@@ -1,3 +1,4 @@
+import { EXAMPLE_PASTE } from '../../test/fixtures';
 import { mockFetch, mockResponse } from '../../test/utils';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
 import { pasteAccount } from '../pasteAccount';
@@ -29,7 +30,7 @@ describe('pasteAccount', () => {
 
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
-      const body = [{ paste: 'information' }];
+      const body = [EXAMPLE_PASTE];
       mockFetch.mockResolvedValue(mockResponse({ body }));
       return expect(pasteAccount('pasted@email.com')).resolves.toEqual(body);
     });
