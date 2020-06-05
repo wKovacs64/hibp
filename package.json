@@ -136,7 +136,7 @@
     "rollup-plugin-terser": "6.1.0",
     "rollup-plugin-typescript2": "0.27.1",
     "semantic-release": "17.0.8",
-    "serve": "11.3.1",
+    "serve": "11.3.2",
     "size-limit": "4.5.0",
     "start-server-and-test": "1.11.0",
     "typecov": "0.2.2",
