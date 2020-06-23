@@ -2134,25 +2134,25 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@size-limit/file@4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@size-limit/file/-/file-4.5.1.tgz#8a35c970ef786361ca85446b80e61d7ce81566c9"
-  integrity sha512-/NqXm0hypfPmLO4EhfQXMoIJ+gq+zePTrlWZAJ0usCuhYY89iZMvPR4FokGgAO8+JizNMoK4mjLgIRzuOcS2wg==
+"@size-limit/file@4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@size-limit/file/-/file-4.5.2.tgz#c904c08bed011c297f62637c1c86c6c2c5375185"
+  integrity sha512-t8IS2TOs2mm35HHIvH8rG596XZy77121LuIDbRpYbokVygN4EUMmxaV9iteQgpTuhRN4CUbJZJvAi55RMv3K7w==
   dependencies:
     semver "7.3.2"
 
-"@size-limit/preset-small-lib@4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@size-limit/preset-small-lib/-/preset-small-lib-4.5.1.tgz#d160291bd6df18216844e1de0cfcaa42b2092148"
-  integrity sha512-cw+dUsPncw6IcfBGqOOH9phev0zuryYkzQDomTzuTc1mDqB3s3S7+9lA1yBr49ByNnoQVhCrt0SJ+yM5AyosaA==
+"@size-limit/preset-small-lib@4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@size-limit/preset-small-lib/-/preset-small-lib-4.5.2.tgz#7977d0dfe65d5bb535c2a4fd738806e786b8c8f2"
+  integrity sha512-6msDVypvfYm+3oJ5uOPM3AwQyeogL4wUjqxzwNkG1BkNZLhHyFNjf6X7TNylyiABbHB7IXH6x+EA2u7Kt9ymSg==
   dependencies:
-    "@size-limit/file" "4.5.1"
-    "@size-limit/webpack" "4.5.1"
+    "@size-limit/file" "4.5.2"
+    "@size-limit/webpack" "4.5.2"
 
-"@size-limit/webpack@4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@size-limit/webpack/-/webpack-4.5.1.tgz#f0f41f176df7261c5c5c8db7ed08372d101adc8e"
-  integrity sha512-goB1gcd5qHq6vMRqWVeGzYeyN5aapl2GmbE/zh0iLZIeRHKpy1HqC6MLuXdxZRsNDYakFMIO2xFcLxK4C1Kyug==
+"@size-limit/webpack@4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@size-limit/webpack/-/webpack-4.5.2.tgz#68fd089834175874972a04e6240912c2e462efed"
+  integrity sha512-liqD+N3EQXjMyoZ0UmlTdwo8pBj5ORHkebTmCAYPAfS/P46JEVDUi47Q6s+dzOVY9O/JgSGUyf3VrP/Er7gJ0g==
   dependencies:
     css-loader "^3.6.0"
     escape-string-regexp "^4.0.0"
