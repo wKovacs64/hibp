@@ -4201,6 +4201,11 @@ color@^3.0.0:
     color-convert "^1.9.1"
     color-string "^1.5.2"
 
+colorette@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.0.tgz#45306add826d196e8c87236ac05d797f25982e63"
+  integrity sha512-soRSroY+OF/8OdA3PTQXwaDJeMc7TfknKKrxeSCencL2a4+Tx5zhxmmv7hdpCjhKBjehzp8+bwe/T68K0hpIjw==
+
 colors@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
@@ -8722,11 +8727,6 @@ kleur@^3.0.0:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.1.tgz#4f5b313f5fa315432a400f19a24db78d451ede62"
   integrity sha512-P3kRv+B+Ra070ng2VKQqW4qW7gd/v3iD8sy/zOdcYRsfiD+QBokQNOps/AfP6Hr48cBhIIBFWckB9aO+IZhrWg==
 
-kleur@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.0.0.tgz#6da4e7a800e33eb28c53fb91902d623450a980d6"
-  integrity sha512-D8qk4wvB8ofBeLAsRNwnCkjbwdrcKYsMC/56pFQMOSfmmYJkG1O9/oBgXzD05K7biYAwnHjMI2abZ3YiuMY0Pg==
-
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/last-call-webpack-plugin/-/last-call-webpack-plugin-3.0.0.tgz#9742df0e10e3cf46e5c0381c2de90d3a7a2d7555"
@@ -12963,17 +12963,17 @@ sisteransi@^1.0.0:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.0.tgz#77d9622ff909080f1c19e5f4a1df0c1b0a27b88c"
   integrity sha512-N+z4pHB4AmUv0SjveWRd6q1Nj5w62m5jodv+GD8lvmbY/83T/rpbJGZOnK5T149OldDj4Db07BSv9xY4K6NTPQ==
 
-size-limit@4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-4.5.1.tgz#8773bcd6c8573398787695c52d3e70423195e5c9"
-  integrity sha512-QW5xWm/qhU57HPebmY2oF8lcqIIhh1yYJWpCIU302drwJTFUye4qCcUjzpnB+pYSGb88q5kBsG5oixXAiWOC0g==
+size-limit@4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-4.5.2.tgz#7448e2a41ad1d335143010409446684819cbcc8a"
+  integrity sha512-5UFx+Y7Yo6PkUxwQCigcT/1TrbPqThdD5uoAy1p2Q3ajBRzWdKb+pK2k+/p8D8pEbFIh4JFN+m5fwdPpgAJ1yQ==
   dependencies:
     bytes "^3.1.0"
     chokidar "^3.4.0"
     ci-job-number "^1.2.2"
+    colorette "^1.2.0"
     cosmiconfig "^6.0.0"
     globby "^11.0.1"
-    kleur "^4.0.0"
     ora "^4.0.4"
     read-pkg-up "^7.0.1"
 
