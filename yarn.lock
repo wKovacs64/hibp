@@ -5259,12 +5259,12 @@ dotenv@^5.0.1:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
   integrity sha512-4As8uPrjfwb7VXC+WnLCbXK7y+Ueb2B3zgNCePYfhxS1PYeaO1YTeplffTEcbfLhvFNGLAz90VvJs9yomG7bow==
 
-dts-bundle-generator@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/dts-bundle-generator/-/dts-bundle-generator-4.3.0.tgz#1cc66a67ebcb861848b3d49c00814a1fa050d8d2"
-  integrity sha512-gA4y4lyEoXxS9ojPSsq+TGcZxuCbZDKubwsI4hJ8ptgrufcKrPDR8OLylLyWD3k9LbO3JIIVOxXpWrE6ZUc4UA==
+dts-bundle-generator@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/dts-bundle-generator/-/dts-bundle-generator-5.0.0.tgz#9fd67ae6b05157eac9c4e8edc7872296b703a1de"
+  integrity sha512-GoOhIrE742PI5zBdzkspZAitpKOsZE4PbUakpkI94awAHnfWFQkpOiQw3Z2ooapR3LRCWQ7mbKcNImBvT6OsDA==
   dependencies:
-    typescript ">=2.6.1"
+    typescript ">=3.0.1"
     yargs "^15.3.1"
 
 duplexer2@~0.1.0:
@@ -14189,15 +14189,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.9.6:
+typescript@3.9.6, typescript@>=3.0.1:
   version "3.9.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.6.tgz#8f3e0198a34c3ae17091b35571d3afd31999365a"
   integrity sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
-
-typescript@>=2.6.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.1.tgz#6de14e1db4b8a006ac535e482c8ba018c55f750b"
-  integrity sha512-cTmIDFW7O0IHbn1DPYjkiebHxwtCMU+eTy30ZtJNBPF9j2O1ITu5XH2YnBeVRKWHqF+3JQwWJv0Q0aUgX8W7IA==
 
 typical@^2.4.2, typical@^2.6.0, typical@^2.6.1:
   version "2.6.1"
