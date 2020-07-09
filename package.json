@@ -138,7 +138,7 @@
     "semantic-release": "17.1.1",
     "serve": "11.3.2",
     "size-limit": "4.5.3",
-    "start-server-and-test": "1.11.0",
+    "start-server-and-test": "1.11.1",
     "typecov": "0.2.2",
     "typescript": "3.9.6"
   }
