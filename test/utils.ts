@@ -19,12 +19,12 @@ interface MockResponse {
   text: jest.Mock;
 }
 
-export const mockResponse = ({
+export function mockResponse({
   headers = new Map<string, string>(),
   status = 200,
   statusText = 'OK',
   body = undefined,
-}: MockResponseOptions = {}): MockResponse => {
+}: MockResponseOptions = {}): MockResponse {
   const res = {
     headers,
     status,
@@ -43,6 +43,6 @@ export const mockResponse = ({
   }
 
   return res;
-};
+}
 
 export const mockFetch = fetch as jest.Mock;

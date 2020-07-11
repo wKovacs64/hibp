@@ -48,12 +48,13 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *     // ...
  *   });
  */
-export const pasteAccount = (
+export function pasteAccount(
   email: string,
   options: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
-): Promise<Paste[] | null> =>
-  fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`, {
+): Promise<Paste[] | null> {
+  return fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`, {
     apiKey: options.apiKey,
     baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Paste[] | null>;
+}

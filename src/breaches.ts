@@ -39,13 +39,13 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *     // ...
  *   });
  */
-export const breaches = (
+export function breaches(
   options: {
     domain?: string;
     baseUrl?: string;
     userAgent?: string;
   } = {},
-): Promise<Breach[]> => {
+): Promise<Breach[]> {
   const endpoint = '/breaches?';
   const params: Array<string> = [];
   if (options.domain) {
@@ -55,4 +55,4 @@ export const breaches = (
     baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Breach[]>;
-};
+}

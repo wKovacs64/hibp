@@ -29,10 +29,10 @@ import { pwnedPasswordRange } from './pwnedPasswordRange';
  *   });
  * @see https://haveibeenpwned.com/api/v3#PwnedPasswords
  */
-export const pwnedPassword = (
+export function pwnedPassword(
   password: string,
   options: { baseUrl?: string; userAgent?: string } = {},
-): Promise<number> => {
+): Promise<number> {
   const sha1 = new JSSHA('SHA-1', 'TEXT');
   sha1.update(password);
   const hash = sha1.getHash('HEX', { outputUpper: true });
@@ -46,4 +46,4 @@ export const pwnedPassword = (
       // return count if match, 0 if not
       .then((arr) => (arr[0] ? arr[0].count : 0))
   );
-};
+}
