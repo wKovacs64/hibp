@@ -9,8 +9,9 @@ import {
   TOO_MANY_REQUESTS,
 } from './responses';
 
-const blockedWithRayId = (rayId: string): string =>
-  `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
+function blockedWithRayId(rayId: string) {
+  return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
+}
 
 /**
  * Fetches data from the supplied API endpoint.
@@ -37,7 +38,7 @@ const blockedWithRayId = (rayId: string): string =>
  * from the query (or null for 404 Not Found responses), or rejects with an
  * Error
  */
-export const fetchFromApi = (
+export function fetchFromApi(
   endpoint: string,
   /* istanbul ignore next: no need to test default empty object */
   {
@@ -45,7 +46,7 @@ export const fetchFromApi = (
     baseUrl = 'https://haveibeenpwned.com/api/v3',
     userAgent,
   }: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
-): Promise<ApiData> => {
+): Promise<ApiData> {
   const headers: Record<string, string> = {};
 
   if (apiKey) {
@@ -91,4 +92,4 @@ export const fetchFromApi = (
         throw new Error(res.statusText);
     }
   });
-};
+}

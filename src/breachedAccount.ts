@@ -75,7 +75,7 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *     // ...
  *   });
  */
-export const breachedAccount = (
+export function breachedAccount(
   account: string,
   options: {
     apiKey?: string;
@@ -88,7 +88,7 @@ export const breachedAccount = (
     includeUnverified: true,
     truncate: true,
   },
-): Promise<Breach[] | null> => {
+): Promise<Breach[] | null> {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params: Array<string> = [];
   if (options.domain) {
@@ -105,4 +105,4 @@ export const breachedAccount = (
     baseUrl: options.baseUrl,
     userAgent: options.userAgent,
   }) as Promise<Breach[] | null>;
-};
+}

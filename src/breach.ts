@@ -48,11 +48,12 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *     // ...
  *   });
  */
-export const breach = (
+export function breach(
   breachName: string,
   options: { baseUrl?: string; userAgent?: string } = {},
-): Promise<Breach | null> =>
-  fetchFromApi(
+): Promise<Breach | null> {
+  return fetchFromApi(
     `/breach/${encodeURIComponent(breachName)}`,
     options,
   ) as Promise<Breach | null>;
+}

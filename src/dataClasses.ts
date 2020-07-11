@@ -25,7 +25,8 @@ import { fetchFromApi } from './api/haveibeenpwned';
  *     // ...
  *   });
  */
-export const dataClasses = (
+export function dataClasses(
   options: { baseUrl?: string; userAgent?: string } = {},
-): Promise<string[] | null> =>
-  fetchFromApi('/dataclasses', options) as Promise<string[] | null>;
+): Promise<string[] | null> {
+  return fetchFromApi('/dataclasses', options) as Promise<string[] | null>;
+}

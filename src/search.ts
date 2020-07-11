@@ -77,7 +77,7 @@ export interface SearchResults {
  *
  * @see https://haveibeenpwned.com/
  */
-export const search = (
+export function search(
   account: string,
   breachOptions: {
     apiKey?: string;
@@ -88,7 +88,7 @@ export const search = (
   } = {
     truncate: true,
   },
-): Promise<SearchResults> => {
+): Promise<SearchResults> {
   const { apiKey, baseUrl, userAgent } = breachOptions;
 
   return Promise.all([
@@ -101,4 +101,4 @@ export const search = (
     breaches,
     pastes,
   }));
-};
+}
