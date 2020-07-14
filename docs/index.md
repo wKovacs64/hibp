@@ -164,7 +164,7 @@ You have several options for using this library in a browser environment:
    - [https://unpkg.com/hibp/dist/browser/hibp.esm.min.js](https://unpkg.com/hibp/dist/browser/hibp.esm.min.js)
 
    For more information on ESM in the browser, check out
-   [Using JavaScript modules on the web](https://developers.google.com/web/fundamentals/primers/modules).
+   [Using JS modules in the browser](https://v8.dev/features/modules#browser).
 
 ## Try It Out
 
