@@ -164,8 +164,8 @@ You have several options for using this library in a browser environment:
    - [https://unpkg.com/hibp/dist/browser/hibp.esm.js][cdn-browser-esm-dev]
    - [https://unpkg.com/hibp/dist/browser/hibp.esm.min.js][cdn-browser-esm-prod]
 
-   For more information on ESM in the browser, check out [Using JavaScript
-   modules on the web][esm-primer].
+   For more information on ESM in the browser, check out [Using JS modules in
+   the browser][js-modules].
 
 ## Try It Out
 
@@ -208,7 +208,7 @@ This module is distributed under the [MIT License][license].
 [caniuse-esm]: https://caniuse.com/#feat=es6-module
 [cdn-browser-esm-dev]: https://unpkg.com/hibp/dist/browser/hibp.esm.js
 [cdn-browser-esm-prod]: https://unpkg.com/hibp/dist/browser/hibp.esm.min.js
-[esm-primer]: https://developers.google.com/web/fundamentals/primers/modules
+[js-modules]: https://v8.dev/features/modules#browser
 [webpack]: https://webpack.js.org
 [caniuse-promise]: https://caniuse.com/#search=promise
 [es6-promise]: https://github.com/stefanpenner/es6-promise
