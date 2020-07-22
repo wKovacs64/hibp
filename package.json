@@ -139,7 +139,7 @@
     "serve": "11.3.2",
     "size-limit": "4.5.5",
     "start-server-and-test": "1.11.2",
-    "typecov": "0.2.2",
+    "typecov": "0.2.3",
     "typescript": "3.9.7"
   }
 }
