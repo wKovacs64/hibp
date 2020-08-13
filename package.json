@@ -99,7 +99,7 @@
     "@codechecks/client": "0.1.10",
     "@commitlint/cli": "9.1.1",
     "@commitlint/config-conventional": "9.1.1",
-    "@size-limit/preset-small-lib": "4.5.5",
+    "@size-limit/preset-small-lib": "4.5.6",
     "@types/common-tags": "1.8.0",
     "@types/jest": "26.0.9",
     "@types/node": "12.12.54",
@@ -137,7 +137,7 @@
     "rollup-plugin-typescript2": "0.27.2",
     "semantic-release": "17.1.1",
     "serve": "11.3.2",
-    "size-limit": "4.5.5",
+    "size-limit": "4.5.6",
     "start-server-and-test": "1.11.3",
     "typecov": "0.2.3",
     "typescript": "3.9.7"
