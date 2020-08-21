@@ -18,6 +18,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       const originalNavigator = global.navigator;
       mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
 
+      // @ts-expect-error
       delete global.navigator;
 
       return fetchFromApi('/service')
