@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   codechecks:
-    executor: cypress/base-12-16-1
+    executor: cypress/base-14-7-0
     steps:
       - attach_workspace:
           at: ~/
@@ -14,7 +14,7 @@ jobs:
       - run: mkdir ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run: yarn codechecks
   test:
-    executor: cypress/base-12-16-1
+    executor: cypress/base-14-7-0
     steps:
       - attach_workspace:
           at: ~/
@@ -25,7 +25,7 @@ jobs:
           path: dist
           destination: dist
   release:
-    executor: cypress/base-12-16-1
+    executor: cypress/base-14-7-0
     steps:
       - attach_workspace:
           at: ~/
@@ -35,7 +35,7 @@ workflows:
   test_and_release:
     jobs:
       - cypress/run:
-          executor: cypress/base-12-16-1
+          executor: cypress/base-14-7-0
           yarn: true
           start: yarn start-test-server
           wait-on: '--timeout 20000 http://localhost:5000'
