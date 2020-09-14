@@ -117,7 +117,7 @@
     "eslint": "7.9.0",
     "eslint-import-resolver-jest": "3.0.0",
     "eslint-plugin-cypress": "2.11.1",
-    "eslint-plugin-wkovacs64": "8.0.0",
+    "eslint-plugin-wkovacs64": "9.0.0",
     "glob": "7.1.6",
     "husky": "4.3.0",
     "jest": "26.4.2",
