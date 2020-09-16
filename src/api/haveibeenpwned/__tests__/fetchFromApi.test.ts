@@ -18,7 +18,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       const originalNavigator = global.navigator;
       mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
 
-      // @ts-expect-error
+      // @ts-expect-error: faking a non-browser (Node) environment
       delete global.navigator;
 
       return fetchFromApi('/service')
