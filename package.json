@@ -105,7 +105,7 @@
     "@types/node": "12.12.64",
     "@types/node-fetch": "2.5.7",
     "@wkovacs64/prettier-config": "3.0.0",
-    "babel-jest": "26.5.0",
+    "babel-jest": "26.5.2",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "codecov": "3.8.0",
     "commitizen": "4.2.1",
