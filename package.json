@@ -114,7 +114,7 @@
     "cypress": "5.5.0",
     "cz-conventional-changelog": "3.3.0",
     "dts-bundle-generator": "5.4.0",
-    "eslint": "7.12.0",
+    "eslint": "7.12.1",
     "eslint-import-resolver-jest": "3.0.0",
     "eslint-plugin-cypress": "2.11.2",
     "eslint-plugin-wkovacs64": "9.0.0",
