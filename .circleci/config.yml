@@ -46,6 +46,8 @@ workflows:
           requires:
             - cypress/run
       - release:
+          context:
+            - semantic-release
           requires:
             - codechecks
             - test
