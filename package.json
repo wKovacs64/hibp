@@ -99,7 +99,7 @@
     "@codechecks/client": "0.1.10",
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
-    "@size-limit/preset-small-lib": "4.8.0",
+    "@size-limit/preset-small-lib": "4.9.0",
     "@types/common-tags": "1.8.0",
     "@types/jest": "26.0.15",
     "@types/node": "12.19.6",
