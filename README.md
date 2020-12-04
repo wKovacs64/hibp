@@ -148,7 +148,8 @@ You have several options for using this library in a browser environment:
 
    ```html
    <script type="module">
-     import { dataClasses } from 'https://unpkg.com/hibp/dist/browser/hibp.esm.min.js@x.y.z';
+     // Replace x.y.z with the desired hibp version      ↓ ↓ ↓
+     import { dataClasses } from 'https://unpkg.com/hibp@x.y.z/dist/browser/hibp.esm.min.js';
 
      const logDataClasses = async () => {
        console.table(await dataClasses());
