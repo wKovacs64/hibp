@@ -2403,10 +2403,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.19.tgz#ca1018c26be01f07e66ac7fefbeb6407e4490c61"
   integrity sha512-2NVovndCjJQj6fUUn9jCgpP4WSqr+u1SoUZMZyJkhGeBFsm6dE46l31S7lPUYt9uQ28XI+ibrJA1f5XyH5HNtA==
 
-"@types/node@12.19.8":
-  version "12.19.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.19.8.tgz#efd6d1a90525519fc608c9db16c8a78f7693a978"
-  integrity sha512-D4k2kNi0URNBxIRCb1khTnkWNHv8KSL1owPmS/K5e5t8B2GzMReY7AsJIY1BnP5KdlgC4rj9jk2IkDMasIE7xg==
+"@types/node@14.14.10":
+  version "14.14.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.10.tgz#5958a82e41863cfc71f2307b3748e3491ba03785"
+  integrity sha512-J32dgx2hw8vXrSbu4ZlVhn1Nm3GbeCFNw2FWL8S5QKucHGY0cyNwjdQdO+KMBZ4wpmC7KhLCiNsdk1RFRIYUQQ==
 
 "@types/node@>= 8":
   version "13.1.6"
