@@ -140,12 +140,6 @@ You have several options for using this library in a browser environment:
    <script src="https://unpkg.com/hibp@x.y.z"></script>
    ```
 
-   Development and production (minified) UMD builds are also provided for manual
-   download if desired:
-
-   - [https://unpkg.com/hibp/dist/browser/hibp.umd.js][cdn-umd-dev]
-   - [https://unpkg.com/hibp/dist/browser/hibp.umd.min.js][cdn-umd-prod]
-
 1. ESM for Browsers
 
    Modern browsers now [support][caniuse-esm] importing ECMAScript modules via
@@ -156,7 +150,7 @@ You have several options for using this library in a browser environment:
    ```html
    <script type="module">
      // Replace x.y.z with the desired hibp version      ↓ ↓ ↓
-     import { dataClasses } from 'https://unpkg.com/hibp@x.y.z/dist/browser/hibp.esm.min.js';
+     import { dataClasses } from 'https://unpkg.com/hibp@x.y.z/dist/browser/hibp.module.js';
 
      const logDataClasses = async () => {
        console.table(await dataClasses());
@@ -165,12 +159,6 @@ You have several options for using this library in a browser environment:
      logDataClasses();
    </script>
    ```
-
-   Development and production (minified) ESM builds are also provided for manual
-   download if desired:
-
-   - [https://unpkg.com/hibp/dist/browser/hibp.esm.js][cdn-browser-esm-dev]
-   - [https://unpkg.com/hibp/dist/browser/hibp.esm.min.js][cdn-browser-esm-prod]
 
    For more information on ESM in the browser, check out [Using JS modules in
    the browser][js-modules].
@@ -219,11 +207,7 @@ This module is distributed under the [MIT License][license].
   https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/
 [get-api-key]: https://haveibeenpwned.com/API/Key
 [unpkg]: https://unpkg.com
-[cdn-umd-dev]: https://unpkg.com/hibp/dist/browser/hibp.umd.js
-[cdn-umd-prod]: https://unpkg.com/hibp/dist/browser/hibp.umd.min.js
 [caniuse-esm]: https://caniuse.com/#feat=es6-module
-[cdn-browser-esm-dev]: https://unpkg.com/hibp/dist/browser/hibp.esm.js
-[cdn-browser-esm-prod]: https://unpkg.com/hibp/dist/browser/hibp.esm.min.js
 [js-modules]: https://v8.dev/features/modules#browser
 [webpack]: https://webpack.js.org
 [caniuse-promise]: https://caniuse.com/#search=promise

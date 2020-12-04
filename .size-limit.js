@@ -1,12 +1,12 @@
 module.exports = [
   // Pre-bundled for Browser (UMD)
   {
-    path: 'dist/browser/hibp.umd.min.js',
+    path: 'dist/browser/hibp.umd.js',
     limit: '5.25 KB',
   },
   // Pre-bundled for Browser (ESM)
   {
-    path: 'dist/browser/hibp.esm.min.js',
+    path: 'dist/browser/hibp.module.js',
     limit: '4.75 KB',
   },
   // Bundled with Webpack (CJS)
@@ -44,35 +44,35 @@ module.exports = [
   },
   // Bundled with Webpack (ESM)
   {
-    path: 'dist/esm/breach.js',
+    path: 'dist/esm/breach.mjs',
     limit: '1.1 KB',
   },
   {
-    path: 'dist/esm/breachedAccount.js',
+    path: 'dist/esm/breachedAccount.mjs',
     limit: '1.1 KB',
   },
   {
-    path: 'dist/esm/breaches.js',
+    path: 'dist/esm/breaches.mjs',
     limit: '1.1 KB',
   },
   {
-    path: 'dist/esm/dataClasses.js',
+    path: 'dist/esm/dataClasses.mjs',
     limit: '1.1 KB',
   },
   {
-    path: 'dist/esm/pasteAccount.js',
+    path: 'dist/esm/pasteAccount.mjs',
     limit: '1.1 KB',
   },
   {
-    path: 'dist/esm/pwnedPassword.js',
+    path: 'dist/esm/pwnedPassword.mjs',
     limit: '4.1 KB',
   },
   {
-    path: 'dist/esm/pwnedPasswordRange.js',
+    path: 'dist/esm/pwnedPasswordRange.mjs',
     limit: '1 KB',
   },
   {
-    path: 'dist/esm/search.js',
+    path: 'dist/esm/search.mjs',
     limit: '1.7 KB',
   },
 ];

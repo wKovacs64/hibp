@@ -2,6 +2,23 @@
 
 #### 9.0.3 → 10.0.0
 
+- The production/minified versions of the browser build targets have been
+  renamed:
+
+  - ESM for Browsers (`<script type="module">`)
+    - `dist/browser/hibp.esm.min.js` → `dist/browser/hibp.module.js`
+  - UMD
+    - `dist/browser/hibp.umd.min.js` → `dist/browser/hibp.umd.js`
+
+- The development/non-minified versions of the UMD and ESM for browsers build
+  targets have been removed. If you were using them, please update your imports
+  to use the production/minified versions (see above).
+
+- The internal directory structure of the source code is now being preserved in
+  the CJS and ESM for bundlers build outputs (`dist/cjs` and `dist/esm`). If you
+  were deep importing anything you probably shouldn't have been (:wink:), you
+  may need to update your imports.
+
 - Support for Node.js version 10.x has been dropped. You must upgrade your
   Node.js environment to at least v12.16.0.
 

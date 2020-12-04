@@ -15,7 +15,7 @@
     <p>Test Results: <span id="results">failed (or incomplete)</span></p>
 
     <script type="module">
-      import * as hibp from '../dist/browser/hibp.esm.min.js';
+      import * as hibp from '../dist/browser/hibp.module.js';
 
       if (typeof hibp !== 'object') throw new Error();
       if (typeof hibp.breach !== 'function') throw new Error();

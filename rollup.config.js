@@ -41,6 +41,8 @@ export default [
       format: 'cjs',
       sourcemap: true,
       indent: false,
+      preserveModules: true,
+      preserveModulesRoot: 'src',
     },
     external,
     plugins: [
@@ -50,14 +52,17 @@ export default [
     ],
   },
 
-  // ESM
+  // ESM for Bundlers
   {
     input: inputs,
     output: {
       dir: 'dist/esm',
+      entryFileNames: '[name].mjs',
       format: 'esm',
       sourcemap: true,
       indent: false,
+      preserveModules: true,
+      preserveModulesRoot: 'src',
     },
     external,
     plugins: [
@@ -67,29 +72,11 @@ export default [
     ],
   },
 
-  // ESM for Browsers (development)
+  // ESM for Browsers
   {
     input: 'src/hibp.ts',
     output: {
-      file: 'dist/browser/hibp.esm.js',
-      format: 'esm',
-      sourcemap: true,
-      indent: false,
-    },
-    plugins: [
-      json({ preferConst: true }),
-      nodeResolve(nodeResolveOpts),
-      commonjs(),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-      typescript(typescriptOpts),
-    ],
-  },
-
-  // ESM for Browsers (production)
-  {
-    input: 'src/hibp.ts',
-    output: {
-      file: 'dist/browser/hibp.esm.min.js',
+      file: 'dist/browser/hibp.module.js',
       format: 'esm',
       sourcemap: true,
       indent: false,
@@ -104,30 +91,11 @@ export default [
     ],
   },
 
-  // UMD (development)
+  // UMD
   {
     input: 'src/hibp.ts',
     output: {
       file: 'dist/browser/hibp.umd.js',
-      format: 'umd',
-      name: umdName,
-      sourcemap: true,
-    },
-    plugins: [
-      json({ preferConst: true }),
-      babel(babelOpts),
-      nodeResolve(nodeResolveOpts),
-      commonjs(),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-      typescript(typescriptOpts),
-    ],
-  },
-
-  // UMD (production)
-  {
-    input: 'src/hibp.ts',
-    output: {
-      file: 'dist/browser/hibp.umd.min.js',
       format: 'umd',
       name: umdName,
       sourcemap: true,
