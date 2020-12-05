@@ -177,9 +177,15 @@ You have several options for using this library in a browser environment:
   the '[Have I been pwned?](https://haveibeenpwned.com)' service
 - [Password Lense](https://pwl.netlify.com/) - a static web application to
   reveal character types in a password
+- [Hasura Backend Plus](https://nhost.github.io/hasura-backend-plus/) -
+  Authentication & Storage for Hasura
+- [Staart API](https://staart.js.org/api/) - a Node.js backend starter for SaaS
+  startups
+- [BanManager-WebUI](https://github.com/BanManagement/BanManager-WebUI) - Web
+  interface for BanManager
 
 Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add
-yours to the list.
+yours to the list!
 
 ## License
 
