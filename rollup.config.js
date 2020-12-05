@@ -1,10 +1,10 @@
 import glob from 'glob';
-import typescript from 'rollup-plugin-typescript2';
-import json from 'rollup-plugin-json';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import replace from 'rollup-plugin-replace';
+import typescript from '@rollup/plugin-typescript';
+import json from '@rollup/plugin-json';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
 const inputs = glob.sync('src/**/*.ts', {
@@ -12,19 +12,18 @@ const inputs = glob.sync('src/**/*.ts', {
 });
 const umdName = 'hibp';
 const external = (id) => !/^(\.|\/|[a-z]:\\)/i.test(id);
-const babelOpts = { exclude: 'node_modules/**', extensions: ['.js', '.ts'] };
-const typescriptOpts = {
-  check: false,
-  exclude: ['**/*.d.ts'],
-  rollupCommonJSResolveHack: true,
-  tsconfigOverride: {
-    compilerOptions: {
-      noEmit: true,
-      declaration: false,
-    },
-  },
+const babelOpts = {
+  exclude: 'node_modules/**',
+  extensions: ['.js', '.ts'],
+  babelHelpers: 'bundled',
 };
-const nodeResolveOpts = { browser: true, jsnext: true };
+const typescriptOpts = {
+  exclude: ['**/*.d.ts'],
+  declaration: false,
+};
+const nodeResolveOpts = {
+  browser: true,
+};
 const terserOpts = {
   compress: {
     pure_getters: true,
