@@ -28,7 +28,7 @@ import * as hibp from 'https://cdn.skypack.dev/hibp@x.y.z?dts';
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to
-use via `<script>` tag.
+use it in the browser.
 
 ## Features (🔑 = [requires](https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/) an [API key](https://haveibeenpwned.com/API/Key))
 
