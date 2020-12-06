@@ -1,5 +1,10 @@
 ## Migration Notes
 
+#### 9.0.3 → 10.0.0
+
+- Support for Node.js version 10.x has been dropped. You must upgrade your
+  Node.js environment to at least v12.16.0.
+
 #### 8.0.1 → 9.0.0
 
 - Output files for all build targets have been consolidated under the `dist`
