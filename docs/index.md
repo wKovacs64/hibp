@@ -14,10 +14,17 @@ title: hibp
 
 ## Installation
 
-Locally, via npm:
+In Node.js:
 
 ```shell
 npm install hibp
+```
+
+In [Deno](https://deno.land/) (via [Skypack](https://www.skypack.dev/)):
+
+```ts
+// Replace x.y.z with the desired hibp version      ↓ ↓ ↓
+import * as hibp from 'https://cdn.skypack.dev/hibp@x.y.z?dts';
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to
