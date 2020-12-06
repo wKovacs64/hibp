@@ -25,9 +25,19 @@
     }
   ],
   "license": "MIT",
+  "exports": {
+    ".": {
+      "browser": "./dist/browser/hibp.module.js",
+      "umd": "./dist/browser/hibp.umd.js",
+      "require": "./dist/cjs/hibp.js",
+      "import": "./dist/esm/hibp.mjs"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
   "main": "dist/cjs/hibp.js",
-  "module": "dist/esm/hibp.js",
-  "unpkg": "dist/browser/hibp.umd.min.js",
+  "module": "dist/esm/hibp.mjs",
+  "unpkg": "dist/browser/hibp.umd.js",
   "types": "dist/hibp.d.ts",
   "runkitExampleFilename": "example/runkit.js",
   "files": [

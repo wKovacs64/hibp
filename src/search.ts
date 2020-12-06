@@ -97,8 +97,11 @@ export function search(
     /^.+@.+$/.test(account)
       ? pasteAccount(account, { apiKey, baseUrl, userAgent })
       : null,
-  ]).then(([breaches, pastes]) => ({
-    breaches,
-    pastes,
-  }));
+  ]).then(
+    // Avoid array destructuring here to prevent need for Babel helpers
+    (promises) => ({
+      breaches: promises[0],
+      pastes: promises[1],
+    }),
+  );
 }
