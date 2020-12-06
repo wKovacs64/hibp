@@ -82,7 +82,7 @@
   },
   "homepage": "https://wkovacs64.github.io/hibp",
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12.16"
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",
