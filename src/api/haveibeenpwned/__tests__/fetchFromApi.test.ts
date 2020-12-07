@@ -1,4 +1,4 @@
-import { mockFetch, mockResponse } from '../../../../test/utils';
+import { server, rest } from '../../../mocks/server';
 import {
   OK,
   BAD_REQUEST,
@@ -14,20 +14,23 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('User-Agent', () => {
     // Node
-    it('sets a User-Agent request header when outside the browser', () => {
+    it('sends a custom User-Agent request header when outside the browser', () => {
+      server.use(
+        rest.get('*', (req, res, ctx) => {
+          return req.headers.get('User-Agent')?.includes('hibp')
+            ? res.once(ctx.status(OK.status), ctx.json(null))
+            : res.once(ctx.status(FORBIDDEN.status));
+        }),
+      );
+
       const originalNavigator = global.navigator;
-      mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
 
       // @ts-expect-error: faking a non-browser (Node) environment
       delete global.navigator;
 
       return fetchFromApi('/service')
-        .then(() => {
-          expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-            headers: expect.objectContaining({
-              'User-Agent': expect.any(String),
-            }),
-          });
+        .then((apiData) => {
+          expect(apiData).toBeNull();
         })
         .finally(() => {
           global.navigator = originalNavigator;
@@ -35,36 +38,46 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     });
 
     // Browser
-    it('does not set a User-Agent request header when inside the browser', () => {
-      mockFetch.mockResolvedValueOnce(mockResponse({ status: OK.status }));
+    it('sends a natural User-Agent request header when inside the browser', () => {
+      // Note: this test is _kinda_ bogus because it runs in Node so node-fetch
+      // is used to make the request and node-fetch sends its own UA, whereas in
+      // a browser environment, the browser would send its own UA. But I think
+      // it accomplishes the same thing by checking for our custom UA (which we
+      // don't want to see).
+      server.use(
+        rest.get('*', (req, res, ctx) => {
+          return !req.headers.get('User-Agent')?.includes('hibp')
+            ? res.once(ctx.status(OK.status), ctx.json(null))
+            : res.once(ctx.status(FORBIDDEN.status));
+        }),
+      );
 
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       global.navigator = {} as Navigator;
-      return fetchFromApi('/service').then(() => {
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.not.objectContaining({
-            'User-Agent': expect.any(String),
-          }),
-        });
+
+      return fetchFromApi('/service').then((apiData) => {
+        expect(apiData).toBeNull();
       });
     });
   });
 
   describe('request failure', () => {
     it('re-throws request setup errors', () => {
-      const ERR = new Error('Set sail for fail!');
-      mockFetch.mockRejectedValueOnce(ERR);
-
-      return expect(fetchFromApi('/service')).rejects.toEqual(ERR);
+      return expect(
+        fetchFromApi('/service', { baseUrl: 'relativeBaseUrl' }),
+      ).rejects.toMatchInlineSnapshot(
+        `[TypeError: Only absolute URLs are supported]`,
+      );
     });
   });
 
   describe('invalid account format', () => {
     it('throws a "Bad Request" error', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: BAD_REQUEST.status,
-          statusText: BAD_REQUEST.statusText,
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(
+            ctx.status(BAD_REQUEST.status, BAD_REQUEST.statusText),
+          );
         }),
       );
 
@@ -78,10 +91,12 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('unauthorized', () => {
     it('throws an "Unauthorized" error', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: UNAUTHORIZED.status,
-          body: UNAUTHORIZED.body,
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(
+            ctx.status(UNAUTHORIZED.status),
+            ctx.json(UNAUTHORIZED.body),
+          );
         }),
       );
 
@@ -95,10 +110,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('forbidden request', () => {
     it('throws a "Forbidden" error if no cf-ray header is present', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: FORBIDDEN.status,
-          statusText: FORBIDDEN.statusText,
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(ctx.status(FORBIDDEN.status, FORBIDDEN.statusText));
         }),
       );
 
@@ -108,10 +122,12 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     });
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          headers: BLOCKED.headers,
-          status: BLOCKED.status,
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          const headerTransformers = Array.from(
+            BLOCKED.headers,
+          ).map(([header, value]) => ctx.set(header, value));
+          return res.once(ctx.status(BLOCKED.status), ...headerTransformers);
         }),
       );
 
@@ -125,10 +141,12 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('rate limited', () => {
     it('throws a "Too Many Requests" error', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: TOO_MANY_REQUESTS.status,
-          body: TOO_MANY_REQUESTS.body,
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(
+            ctx.status(TOO_MANY_REQUESTS.status),
+            ctx.json(TOO_MANY_REQUESTS.body),
+          );
         }),
       );
 
@@ -142,10 +160,11 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('unexpected HTTP error', () => {
     it('throws an error with the response status text', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: 999,
-          statusText: 'Unknown - something unexpected happened.',
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(
+            ctx.status(999, 'Unknown - something unexpected happened.'),
+          );
         }),
       );
 
@@ -159,42 +178,51 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('apiKey option', () => {
     it('is passed on as a request header', () => {
-      mockFetch.mockResolvedValue(mockResponse({ status: OK.status }));
+      server.use(
+        rest.get('*', (req, res, ctx) => {
+          return req.headers.get('hibp-api-key')
+            ? res.once(ctx.status(OK.status), ctx.json(null))
+            : res.once(ctx.status(UNAUTHORIZED.status));
+        }),
+      );
 
-      return fetchFromApi('/service', { apiKey }).then(() => {
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.objectContaining({ 'HIBP-API-Key': apiKey }),
-        });
+      return fetchFromApi('/service', { apiKey }).then((apiData) => {
+        expect(apiData).toBeNull();
       });
     });
   });
 
   describe('userAgent option', () => {
     it('is passed on as a request header', () => {
-      mockFetch.mockResolvedValue(mockResponse({ status: OK.status }));
-
       const ua = 'custom UA';
 
-      return fetchFromApi('/service', { userAgent: ua }).then(() => {
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.objectContaining({ 'User-Agent': ua }),
-        });
+      server.use(
+        rest.get('*', (req, res, ctx) => {
+          return req.headers.get('User-Agent')?.includes(ua)
+            ? res.once(ctx.status(OK.status), ctx.json(null))
+            : res.once(ctx.status(UNAUTHORIZED.status));
+        }),
+      );
+
+      return fetchFromApi('/service', { userAgent: ua }).then((apiData) => {
+        expect(apiData).toBeNull();
       });
     });
   });
 
   describe('baseUrl option', () => {
     it('is used in the final URL', () => {
-      mockFetch.mockResolvedValue(mockResponse({ status: OK.status }));
-
       const baseUrl = 'https://my-hibp-proxy:8080';
       const endpoint = '/service';
 
-      return fetchFromApi(endpoint, { baseUrl }).then(() => {
-        expect(mockFetch).toHaveBeenCalledWith(
-          `${baseUrl}${endpoint}`,
-          expect.any(Object),
-        );
+      server.use(
+        rest.get(new RegExp(`^${baseUrl}`), (_, res, ctx) => {
+          return res.once(ctx.status(OK.status), ctx.json(null));
+        }),
+      );
+
+      return fetchFromApi(endpoint, { baseUrl }).then((apiData) => {
+        expect(apiData).toBeNull();
       });
     });
   });

@@ -1,23 +1,26 @@
-import { mockFetch, mockResponse } from '../../../../test/utils';
+import { server, rest } from '../../../mocks/server';
 import { BAD_REQUEST, OK } from '../responses';
 import { fetchFromApi } from '../fetchFromApi';
 
 describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('request failure', () => {
     it('re-throws request setup errors', () => {
-      const ERR = new Error('Set sail for fail!');
-      mockFetch.mockRejectedValueOnce(ERR);
-
-      return expect(fetchFromApi('/service/setup_error')).rejects.toEqual(ERR);
+      return expect(
+        fetchFromApi('/service', { baseUrl: 'relativeBaseUrl' }),
+      ).rejects.toMatchInlineSnapshot(
+        `[TypeError: Only absolute URLs are supported]`,
+      );
     });
   });
 
   describe('invalid range', () => {
     it('throws a "Bad Request" error', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: BAD_REQUEST.status,
-          body: BAD_REQUEST.body,
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(
+            ctx.status(BAD_REQUEST.status),
+            ctx.body(BAD_REQUEST.body as string),
+          );
         }),
       );
 
@@ -31,10 +34,11 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
 
   describe('unexpected HTTP error', () => {
     it('throws an error with the response status text', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: 999,
-          statusText: 'Unknown - something unexpected happened.',
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(
+            ctx.status(999, 'Unknown - something unexpected happened.'),
+          );
         }),
       );
 
@@ -48,39 +52,37 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
 
   describe('userAgent option', () => {
     it('is passed on as a request header', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: OK.status,
-          statusText: 'OK',
-          body: '1234\n5678',
+      const ua = 'custom UA';
+      const body = '1234\n5678';
+
+      server.use(
+        rest.get('*', (req, res, ctx) => {
+          return req.headers.get('User-Agent')
+            ? res.once(ctx.status(OK.status), ctx.body(body))
+            : res.once(ctx.status(401));
         }),
       );
 
-      const ua = 'custom UA';
-
-      return fetchFromApi('/service/stuff', { userAgent: ua }).then(() => {
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: { 'User-Agent': ua },
-        });
+      return fetchFromApi('/service', { userAgent: ua }).then((apiData) => {
+        expect(apiData).toBe(body);
       });
     });
   });
 
   describe('baseUrl option', () => {
     it('is used in the final URL', () => {
-      mockFetch.mockResolvedValueOnce(
-        mockResponse({
-          status: OK.status,
-          statusText: '',
-          body: '1234\n5678',
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      const endpoint = '/service/whatever';
+      const body = '1234\n5678';
+
+      server.use(
+        rest.get(new RegExp(`^${baseUrl}`), (_, res, ctx) => {
+          return res.once(ctx.status(OK.status), ctx.body(body));
         }),
       );
 
-      const baseUrl = 'https://my-hibp-proxy:8080';
-      const endpoint = '/service/whatever';
-
-      return fetchFromApi(endpoint, { baseUrl }).then(() => {
-        expect(mockFetch).toHaveBeenCalledWith(`${baseUrl}${endpoint}`, {});
+      return fetchFromApi(endpoint, { baseUrl }).then((apiData) => {
+        expect(apiData).toBe(body);
       });
     });
   });

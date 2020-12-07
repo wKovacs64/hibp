@@ -1,15 +1,17 @@
+import { server, rest } from '../mocks/server';
 import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
-import { mockFetch, mockResponse } from '../../test/utils';
 import { pwnedPasswordRange } from '../pwnedPasswordRange';
 
 describe('pwnedPasswordRange', () => {
   describe('valid range', () => {
-    mockFetch.mockResolvedValue(
-      mockResponse({ body: EXAMPLE_PASSWORD_HASHES }),
-    );
+    it('resolves with an array of objects', () => {
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res(ctx.text(EXAMPLE_PASSWORD_HASHES));
+        }),
+      );
 
-    it('resolves with an array of objects', () =>
-      expect(pwnedPasswordRange('5BAA6')).resolves.toEqual([
+      return expect(pwnedPasswordRange('5BAA6')).resolves.toEqual([
         {
           suffix: '003D68EB55068C33ACE09247EE4C639306B',
           count: 3,
@@ -22,6 +24,7 @@ describe('pwnedPasswordRange', () => {
           suffix: '01330C689E5D64F660D6947A93AD634EF8F',
           count: 1,
         },
-      ]));
+      ]);
+    });
   });
 });

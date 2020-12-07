@@ -1,77 +1,100 @@
-import { EXAMPLE_BREACH, EXAMPLE_PASTE } from '../../test/fixtures';
-import { mockFetch, mockResponse } from '../../test/utils';
+import { server, rest } from '../mocks/server';
+import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures';
 import { search } from '../search';
+import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';
+import { ErrorData } from '../api/haveibeenpwned/types';
 
 describe('search', () => {
-  it('searches breaches by username', () => {
-    const breaches = [EXAMPLE_BREACH];
-    const pastes = null;
+  const BREACHES = [{ Name: VERIFIED_BREACH.Name }];
+  const BREACHES_EXPANDED = [VERIFIED_BREACH];
+  const PASTES = [EXAMPLE_PASTE];
 
-    mockFetch.mockResolvedValue(mockResponse({ body: breaches }));
+  it('searches breaches by username', () => {
+    server.use(
+      rest.get(/breachedaccount/, (_, res, ctx) => {
+        return res.once(ctx.json(BREACHES));
+      }),
+    );
 
     return expect(search('breached')).resolves.toEqual({
-      breaches,
-      pastes,
+      breaches: BREACHES,
+      pastes: null,
     });
   });
 
   it('searches breaches and pastes by email address', () => {
-    const breaches = [EXAMPLE_BREACH];
-    const pastes = [EXAMPLE_PASTE];
-
-    mockFetch.mockImplementation((endpoint) =>
-      Promise.resolve(
-        mockResponse({
-          body: /breachedaccount/.test(endpoint) ? breaches : pastes,
-        }),
-      ),
+    server.use(
+      rest.get(/breachedaccount/, (_, res, ctx) => {
+        return res.once(ctx.json(BREACHES));
+      }),
+      rest.get(/pasteaccount/, (_, res, ctx) => {
+        return res.once(ctx.json(PASTES));
+      }),
     );
 
     return expect(search('pasted@email.com')).resolves.toEqual({
-      breaches,
-      pastes,
+      breaches: BREACHES,
+      pastes: PASTES,
     });
   });
 
   it('forwards the apiKey option correctly', () => {
-    const breaches = [EXAMPLE_BREACH];
     const apiKey = 'my-api-key';
-    const headers = {
-      'HIBP-API-Key': apiKey,
-    };
 
-    mockFetch.mockResolvedValue(mockResponse({ body: breaches }));
+    server.use(
+      rest.get(/breachedaccount/, (req, res, ctx) => {
+        if (!req.headers.get('hibp-api-key')) {
+          return res(
+            ctx.status(UNAUTHORIZED.status),
+            ctx.json(UNAUTHORIZED.body),
+          );
+        }
 
-    return search('breached')
-      .then(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.not.objectContaining(headers),
-        });
-        mockFetch.mockClear();
+        return res(ctx.json(BREACHES));
+      }),
+      rest.get(/pasteaccount/, (req, res, ctx) => {
+        if (!req.headers.get('hibp-api-key')) {
+          return res(
+            ctx.status(UNAUTHORIZED.status),
+            ctx.json(UNAUTHORIZED.body),
+          );
+        }
+
+        return res(ctx.json(PASTES));
+      }),
+    );
+
+    return search('breached@foo.bar')
+      .catch((err) => {
+        expect(err.message).toBe((UNAUTHORIZED.body as ErrorData).message);
       })
-      .then(() => search('breached', { apiKey }))
-      .then(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.objectContaining(headers),
-        });
+      .then(() => search('breached@foo.bar', { apiKey }))
+      .then((apiData) => {
+        expect(apiData).toEqual({ breaches: BREACHES, pastes: PASTES });
       });
   });
 
   it('forwards the truncate option correctly', () => {
-    return search('breached')
-      .then(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch.mock.calls[0][0]).not.toMatch(
-          /truncateResponse=false/,
+    server.use(
+      rest.get(/breachedaccount/, (req, res, ctx) => {
+        return res(
+          req.url.searchParams.get('truncateResponse') === 'false'
+            ? ctx.json(BREACHES_EXPANDED)
+            : ctx.json(BREACHES),
         );
-        mockFetch.mockClear();
+      }),
+    );
+
+    return search('breached')
+      .then((apiData) => {
+        expect(apiData).toEqual({ breaches: BREACHES, pastes: null });
       })
       .then(() => search('breached', { truncate: false }))
-      .then(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch.mock.calls[0][0]).toMatch(/truncateResponse=false/);
+      .then((apiData) => {
+        expect(apiData).toEqual({
+          breaches: BREACHES_EXPANDED,
+          pastes: null,
+        });
       });
   });
 });

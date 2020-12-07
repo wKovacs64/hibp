@@ -8,7 +8,13 @@ import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
 const inputs = glob.sync('src/**/*.ts', {
-  ignore: ['**/__mocks__/**', '**/__tests__/**', '**/*.test.ts', '**/*.d.ts'],
+  ignore: [
+    '**/__mocks__/**',
+    '**/__tests__/**',
+    '**/mocks/**',
+    '**/*.test.ts',
+    '**/*.d.ts',
+  ],
 });
 const umdName = 'hibp';
 const external = (id) => !/^(\.|\/|[a-z]:\\)/i.test(id);
