@@ -1,13 +1,18 @@
-import { mockFetch, mockResponse } from '../../test/utils';
+import { server, rest } from '../mocks/server';
 import { dataClasses } from '../dataClasses';
 
 describe('dataClasses', () => {
-  const body = ['some', 'data', 'classes'];
+  const DATA_CLASSES = ['some', 'data', 'classes'];
 
   describe('no parameters', () => {
     it('resolves with data from the remote API', () => {
-      mockFetch.mockResolvedValue(mockResponse({ body }));
-      return expect(dataClasses()).resolves.toEqual(body);
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(ctx.json(DATA_CLASSES));
+        }),
+      );
+
+      return expect(dataClasses()).resolves.toEqual(DATA_CLASSES);
     });
   });
 });

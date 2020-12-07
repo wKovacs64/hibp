@@ -1,44 +1,60 @@
+import { server, rest } from '../mocks/server';
 import { EXAMPLE_PASTE } from '../../test/fixtures';
-import { mockFetch, mockResponse } from '../../test/utils';
-import { NOT_FOUND } from '../api/haveibeenpwned/responses';
+import { NOT_FOUND, UNAUTHORIZED } from '../api/haveibeenpwned/responses';
 import { pasteAccount } from '../pasteAccount';
+import { ErrorData } from '../api/haveibeenpwned/types';
 
 describe('pasteAccount', () => {
+  const PASTE_ACCOUNT_DATA = [EXAMPLE_PASTE];
+
   it('honors the apiKey option', () => {
     const apiKey = 'my-api-key';
-    const headers = {
-      'HIBP-API-Key': apiKey,
-    };
-    mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
+
+    server.use(
+      rest.get('*', (req, res, ctx) => {
+        if (!req.headers.get('hibp-api-key')) {
+          return res(
+            ctx.status(UNAUTHORIZED.status),
+            ctx.json(UNAUTHORIZED.body),
+          );
+        }
+
+        return res(ctx.json(PASTE_ACCOUNT_DATA));
+      }),
+    );
 
     return pasteAccount('whatever@example.com')
-      .then(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.not.objectContaining(headers),
-        });
-        mockFetch.mockClear();
+      .catch((err) => {
+        expect(err.message).toBe((UNAUTHORIZED.body as ErrorData).message);
       })
       .then(() => pasteAccount('whatever@example.com', { apiKey }))
-      .then(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch).toHaveBeenCalledWith(expect.any(String), {
-          headers: expect.objectContaining(headers),
-        });
+      .then((apiData) => {
+        expect(apiData).toEqual(PASTE_ACCOUNT_DATA);
       });
   });
 
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
-      const body = [EXAMPLE_PASTE];
-      mockFetch.mockResolvedValue(mockResponse({ body }));
-      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(body);
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res(ctx.json(PASTE_ACCOUNT_DATA));
+        }),
+      );
+
+      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(
+        PASTE_ACCOUNT_DATA,
+      );
     });
   });
 
   describe('clean email', () => {
     it('resolves with null', () => {
-      mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res(ctx.status(NOT_FOUND.status));
+        }),
+      );
+
       return expect(pasteAccount('clean@whistle.com')).resolves.toBeNull();
     });
   });

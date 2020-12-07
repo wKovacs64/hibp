@@ -1,7 +1,7 @@
 import { stripIndents } from 'common-tags';
 import { Breach, Paste } from '../src/api/haveibeenpwned/types';
 
-export const EXAMPLE_BREACH: Breach = {
+export const VERIFIED_BREACH: Breach = {
   Name: 'Adobe',
   Title: 'Adobe',
   Domain: 'adobe.com',
@@ -16,6 +16,32 @@ export const EXAMPLE_BREACH: Breach = {
   IsVerified: true,
   IsFabricated: false,
   IsSensitive: false,
+  IsRetired: false,
+  IsSpamList: false,
+};
+
+export const UNVERIFIED_BREACH: Breach = {
+  Name: 'Badoo',
+  Title: 'Badoo',
+  Domain: 'badoo.com',
+  BreachDate: '2013-06-01',
+  AddedDate: '2016-07-06T08:16:03Z',
+  ModifiedDate: '2016-07-06T08:16:03Z',
+  PwnCount: 112005531,
+  Description:
+    'In June 2016, <a href="http://motherboard.vice.com/read/another-day-another-hack-user-accounts-of-dating-site-badoo" target="_blank" rel="noopener">a data breach allegedly originating from the social website Badoo was found to be circulating amongst traders</a>. Likely obtained several years earlier, the data contained 112 million unique email addresses with personal data including names, birthdates and passwords stored as MD5 hashes. Whilst there are many indicators suggesting Badoo did indeed suffer a data breach, <a href="https://www.troyhunt.com/introducing-unverified-breaches-to-have-i-been-pwned" target="_blank" rel="noopener">the legitimacy of the data could not be emphatically proven</a> so this breach has been categorised as &quot;unverified&quot;.',
+  LogoPath: 'https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png',
+  DataClasses: [
+    'Dates of birth',
+    'Email addresses',
+    'Genders',
+    'Names',
+    'Passwords',
+    'Usernames',
+  ],
+  IsVerified: false,
+  IsFabricated: false,
+  IsSensitive: true,
   IsRetired: false,
   IsSpamList: false,
 };

@@ -1,21 +1,29 @@
-import { EXAMPLE_BREACH } from '../../test/fixtures';
-import { mockFetch, mockResponse } from '../../test/utils';
+import { server, rest } from '../mocks/server';
+import { VERIFIED_BREACH } from '../../test/fixtures';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses';
 import { breach } from '../breach';
 
 describe('breach', () => {
   describe('found', () => {
-    const body = EXAMPLE_BREACH;
-
     it('resolves with data from the remote API', () => {
-      mockFetch.mockResolvedValue(mockResponse({ body }));
-      return expect(breach('found')).resolves.toEqual(body);
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(ctx.json(VERIFIED_BREACH));
+        }),
+      );
+
+      return expect(breach('found')).resolves.toEqual(VERIFIED_BREACH);
     });
   });
 
   describe('not found', () => {
     it('resolves with null', () => {
-      mockFetch.mockResolvedValue(mockResponse({ status: NOT_FOUND.status }));
+      server.use(
+        rest.get('*', (_, res, ctx) => {
+          return res.once(ctx.status(NOT_FOUND.status), ctx.json(null));
+        }),
+      );
+
       return expect(breach('not found')).resolves.toBeNull();
     });
   });
