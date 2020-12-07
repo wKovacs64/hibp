@@ -96,7 +96,7 @@
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",
-    "jssha": "^3.1.2"
+    "jssha": "^3.2.0"
   },
   "devDependencies": {
     "@babel/cli": "7.12.8",
