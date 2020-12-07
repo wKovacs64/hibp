@@ -135,7 +135,7 @@
     "eslint-plugin-cypress": "2.11.2",
     "eslint-plugin-wkovacs64": "10.0.0",
     "glob": "7.1.6",
-    "husky": "4.3.4",
+    "husky": "5.0.4",
     "jest": "26.6.3",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "6.0.1",
