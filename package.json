@@ -117,7 +117,7 @@
     "@rollup/plugin-typescript": "8.0.0",
     "@size-limit/preset-small-lib": "4.9.1",
     "@types/common-tags": "1.8.0",
-    "@types/jest": "26.0.17",
+    "@types/jest": "26.0.18",
     "@types/node": "14.14.11",
     "@types/node-fetch": "2.5.7",
     "@wkovacs64/prettier-config": "3.0.0",
