@@ -99,12 +99,12 @@
     "jssha": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.8",
-    "@babel/core": "7.12.9",
-    "@babel/parser": "7.12.7",
+    "@babel/cli": "7.12.10",
+    "@babel/core": "7.12.10",
+    "@babel/parser": "7.12.10",
     "@babel/plugin-proposal-class-properties": "7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "7.12.1",
-    "@babel/preset-env": "7.12.7",
+    "@babel/preset-env": "7.12.10",
     "@babel/preset-typescript": "7.12.7",
     "@codechecks/client": "0.1.10",
     "@commitlint/cli": "11.0.0",
