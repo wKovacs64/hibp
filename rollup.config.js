@@ -3,10 +3,11 @@ import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
+const supportedNodeVersion = '12.16';
 const inputs = glob.sync('src/**/*.ts', {
   ignore: [
     '**/__mocks__/**',
@@ -16,13 +17,8 @@ const inputs = glob.sync('src/**/*.ts', {
     '**/*.d.ts',
   ],
 });
-const umdName = 'hibp';
 const external = (id) => !/^(\.|\/|[a-z]:\\)/i.test(id);
-const babelOpts = {
-  exclude: 'node_modules/**',
-  extensions: ['.js', '.ts'],
-  babelHelpers: 'bundled',
-};
+const umdName = 'hibp';
 const typescriptOpts = {
   exclude: ['**/*.d.ts'],
   declaration: false,
@@ -53,8 +49,11 @@ export default [
     external,
     plugins: [
       json({ preferConst: true }),
-      babel(babelOpts),
       typescript(typescriptOpts),
+      getBabelOutputPlugin({
+        plugins: ['babel-plugin-annotate-pure-calls'],
+        presets: [['@babel/env', { targets: { node: supportedNodeVersion } }]],
+      }),
     ],
   },
 
@@ -73,8 +72,11 @@ export default [
     external,
     plugins: [
       json({ preferConst: true }),
-      babel(babelOpts),
       typescript(typescriptOpts),
+      getBabelOutputPlugin({
+        plugins: ['babel-plugin-annotate-pure-calls'],
+        presets: [['@babel/env', { targets: { node: supportedNodeVersion } }]],
+      }),
     ],
   },
 
@@ -102,18 +104,30 @@ export default [
     input: 'src/hibp.ts',
     output: {
       file: 'dist/browser/hibp.umd.js',
-      format: 'umd',
-      name: umdName,
+      format: 'esm',
       sourcemap: true,
       indent: false,
     },
     plugins: [
       json({ preferConst: true }),
-      babel(babelOpts),
       nodeResolve(nodeResolveOpts),
       commonjs(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
       typescript(typescriptOpts),
+      getBabelOutputPlugin({
+        moduleId: umdName,
+        presets: [
+          [
+            '@babel/env',
+            {
+              modules: 'umd',
+              targets: {
+                browsers: ['> 1%', 'last 2 versions'],
+              },
+            },
+          ],
+        ],
+      }),
       terser(terserOpts),
     ],
   },

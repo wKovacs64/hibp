@@ -1,18 +1,9 @@
-const test = process.env.NODE_ENV === 'test';
+// Note: this Babel config file is only used by Jest (babel-jest) when running
+// tests. Babel configuration for build outputs is in rollup.config.js.
 
 module.exports = {
-  plugins: ['babel-plugin-annotate-pure-calls'],
   presets: [
-    [
-      '@babel/preset-env',
-      {
-        modules: test ? 'commonjs' : false,
-        targets: {
-          browsers: ['> 1%', 'last 2 versions'],
-          node: '12.16',
-        },
-      },
-    ],
+    ['@babel/preset-env', { targets: { node: 'current' } }],
     '@babel/preset-typescript',
   ],
 };
