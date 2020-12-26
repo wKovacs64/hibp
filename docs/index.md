@@ -20,11 +20,11 @@ In Node.js:
 npm install hibp
 ```
 
-In [Deno](https://deno.land/) (via [Skypack](https://www.skypack.dev/)):
+In [Deno](https://deno.land/) (via [esm.sh](https://esm.sh/)):
 
 ```ts
-// Replace x.y.z with the desired hibp version      ↓ ↓ ↓
-import * as hibp from 'https://cdn.skypack.dev/hibp@x.y.z?dts';
+// Replace x.y.z with the desired hibp version
+import * as hibp from 'https://esm.sh/hibp@x.y.z';
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to

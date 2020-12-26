@@ -25,11 +25,11 @@ In Node.js:
 npm install hibp
 ```
 
-In [Deno][deno] (via [Skypack][skypack]):
+In [Deno][deno] (via [esm.sh][esm.sh]):
 
 ```ts
-// Replace x.y.z with the desired hibp version      ↓ ↓ ↓
-import * as hibp from 'https://cdn.skypack.dev/hibp@x.y.z?dts';
+// Replace x.y.z with the desired hibp version
+import * as hibp from 'https://esm.sh/hibp@x.y.z';
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to
@@ -198,7 +198,7 @@ This module is distributed under the [MIT License][license].
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
 [deno]: https://deno.land/
-[skypack]: https://www.skypack.dev/
+[esm.sh]: https://esm.sh/
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [search-by-range]:
