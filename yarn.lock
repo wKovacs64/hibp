@@ -5463,7 +5463,7 @@ debug@4, debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-debug@4.3.1:
+debug@4.3.1, debug@^4.3.0:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -10409,10 +10409,10 @@ ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-msw@0.24.4:
-  version "0.24.4"
-  resolved "https://registry.yarnpkg.com/msw/-/msw-0.24.4.tgz#e1f918862146a2bb39be005e52b24905c8c6108e"
-  integrity sha512-RKPAyfOrEVwritMn6RL5QROYhZMeRVApGuj4JdIQh/uyV0ASx349wsARJVI4VAXGEKu4B1TBvJZf0P0iVMsheg==
+msw@0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/msw/-/msw-0.25.0.tgz#a743cd2c11e7aec28b2597cb133afa8dc7044acc"
+  integrity sha512-KWW9Qwf4ecw7lgf7KM0gRfFLvfmUPw0ljCvii2IluhObZggoN/dBMFe5YJf1utnW7q9qHBc4oMNLrd8zFE6BfQ==
   dependencies:
     "@open-draft/until" "^1.0.3"
     "@types/cookie" "^0.4.0"
@@ -10423,8 +10423,9 @@ msw@0.24.4:
     headers-utils "^1.2.0"
     node-fetch "^2.6.1"
     node-match-path "^0.6.0"
-    node-request-interceptor "^0.5.3"
+    node-request-interceptor "^0.6.3"
     statuses "^2.0.0"
+    strict-event-emitter "^0.1.0"
     yargs "^16.2.0"
 
 mute-stream@0.0.7:
@@ -10633,14 +10634,15 @@ node-releases@^1.1.66, node-releases@^1.1.67:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.67.tgz#28ebfcccd0baa6aad8e8d4d8fe4cbc49ae239c12"
   integrity sha512-V5QF9noGFl3EymEwUYzO+3NTDpGfQB4ve6Qfnzf3UNydMhjQRVPR1DZTuvWiLzaFJYw2fmDwAfnRNEVb64hSIg==
 
-node-request-interceptor@^0.5.3:
-  version "0.5.8"
-  resolved "https://registry.yarnpkg.com/node-request-interceptor/-/node-request-interceptor-0.5.8.tgz#1777c05eae25f468c891f24075f4087ac2ea3f3b"
-  integrity sha512-fO+3XGPboRX8760kOpg/6zGIWtbJoTTSIr359ig1ubzunQppAOCYva3SOIXKX+BHiGNgJsefbAjIEQKvV9S8Kg==
+node-request-interceptor@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/node-request-interceptor/-/node-request-interceptor-0.6.3.tgz#f2f0dbec2d421584419dd39ff6782ce1e02b42a7"
+  integrity sha512-8I2V7H2Ch0NvW7qWcjmS0/9Lhr0T6x7RD6PDirhvWEkUQvy83x8BA4haYMr09r/rig7hcgYSjYh6cd4U7G1vLA==
   dependencies:
     "@open-draft/until" "^1.0.3"
-    debug "^4.1.1"
+    debug "^4.3.0"
     headers-utils "^1.2.0"
+    strict-event-emitter "^0.1.0"
 
 nopt@^4.0.1, nopt@^4.0.3:
   version "4.0.3"
@@ -13815,6 +13817,11 @@ stream-via@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/stream-via/-/stream-via-1.0.4.tgz#8dccbb0ac909328eb8bc8e2a4bd3934afdaf606c"
   integrity sha512-DBp0lSvX5G9KGRDTkR/R+a29H+Wk2xItOF+MpZLLNDWbEV9tGPnqLPxHEYjmiz8xGtJHRIqmI+hCjmNzqoA4nQ==
+
+strict-event-emitter@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/strict-event-emitter/-/strict-event-emitter-0.1.0.tgz#fd742c1fb7e3852f0b964ecdae2d7666a6fb7ef8"
+  integrity sha512-8hSYfU+WKLdNcHVXJ0VxRXiPESalzRe7w1l8dg9+/22Ry+iZQUoQuoJ27R30GMD1TiyYINWsIEGY05WrskhSKw==
 
 strict-uri-encode@^2.0.0:
   version "2.0.0"
