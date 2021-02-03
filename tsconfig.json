@@ -6,6 +6,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "declaration": true,
+    "skipLibCheck": true,
     "strict": true,
     "stripInternal": true,
     "newLine": "lf",
