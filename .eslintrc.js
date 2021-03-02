@@ -4,6 +4,5 @@ module.exports = {
     'plugin:wkovacs64/jest',
     'plugin:wkovacs64/typescript',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
 };
