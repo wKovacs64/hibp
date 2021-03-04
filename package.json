@@ -118,7 +118,7 @@
     "@rollup/plugin-node-resolve": "11.2.0",
     "@rollup/plugin-replace": "2.4.1",
     "@rollup/plugin-typescript": "8.2.0",
-    "@size-limit/preset-small-lib": "4.9.2",
+    "@size-limit/preset-small-lib": "4.10.0",
     "@types/common-tags": "1.8.0",
     "@types/jest": "26.0.20",
     "@types/node": "14.14.31",
