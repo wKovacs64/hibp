@@ -6,7 +6,7 @@
 </dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
-<p><strong><em>Warning (July 18, 2019):</em></strong></p>
+<p><em><strong>Warning (July 18, 2019):</strong></em></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
@@ -21,7 +21,7 @@ valid API key on your behalf) will fail.</p>
 </dd>
 <dt><a href="#pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
-<p><strong><em>Warning (July 18, 2019):</em></strong></p>
+<p><em><strong>Warning (July 18, 2019):</strong></em></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>pasteaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
@@ -49,7 +49,7 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
-<p><strong><em>Warning (July 18, 2019):</em></strong></p>
+<p><em><strong>Warning (July 18, 2019):</strong></em></p>
 <p><code>haveibeenpwned.com</code> now requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
 <code>pasteaccount</code> endpoints. The  <code>apiKey</code> option here is not explicitly
