@@ -39,11 +39,7 @@ export function pwnedPassword(
   const prefix = hash.slice(0, 5);
   const suffix = hash.slice(5);
 
-  return (
-    pwnedPasswordRange(prefix, options)
-      // filter to matching suffix
-      .then((arr) => arr.filter((item) => item.suffix === suffix))
-      // return count if match, 0 if not
-      .then((arr) => (arr[0] ? arr[0].count : 0))
+  return pwnedPasswordRange(prefix, options).then(
+    (range) => range[suffix] || 0,
   );
 }

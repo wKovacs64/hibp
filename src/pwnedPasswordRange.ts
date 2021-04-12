@@ -1,18 +1,14 @@
 import { fetchFromApi } from './api/pwnedpasswords';
 
 export interface PwnedPasswordSuffix {
-  suffix: string;
-  count: number;
+  [suffix: string]: number;
 }
 
 /**
- * An object representing an exposed password hash suffix (corresponding to a
- * given hash prefix) and how many times it occurred in the Pwned Passwords
- * repository.
+ * An object mapping an exposed password hash suffix (corresponding to a given
+ * hash prefix) to how many times it occurred in the Pwned Passwords repository.
  *
- * @typedef {object} PwnedPasswordSuffix
- * @property {string} suffix
- * @property {number} count
+ * @typedef {Object.<string, number>} PwnedPasswordSuffix
  */
 
 /**
@@ -31,28 +27,25 @@ export interface PwnedPasswordSuffix {
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {Promise<PwnedPasswordSuffix[]>} a Promise which resolves to an
- * array of objects, each containing the `suffix` that when matched with the
- * prefix composes the complete hash, and a `count` of how many times it appears
- * in the breached password data set, or rejects with an Error
+ * @returns {Promise<PwnedPasswordSuffix>} a Promise which resolves to an object
+ * mapping the `suffix` that when matched with the prefix composes the complete
+ * hash, to the `count` of how many times it appears in the breached password
+ * data set, or rejects with an Error
  *
  * @example
  * pwnedPasswordRange('5BAA6')
  *   .then(results => {
  *     // results will have the following shape:
- *     // [
- *     //   { suffix: "003D68EB55068C33ACE09247EE4C639306B", count: 3 },
- *     //   { suffix: "012C192B2F16F82EA0EB9EF18D9D539B0DD", count: 1 },
+ *     // {
+ *     //   "003D68EB55068C33ACE09247EE4C639306B": 3,
+ *     //   "012C192B2F16F82EA0EB9EF18D9D539B0DD": 1,
  *     //   ...
- *     // ]
+ *     // }
  *   })
  * @example
  * const suffix = '1E4C9B93F3F0682250B6CF8331B7EE68FD8';
  * pwnedPasswordRange('5BAA6')
- *   // filter to matching suffix
- *   .then(results => results.filter(row => row.suffix === suffix))
- *   // return count if match, 0 if not
- *   .then(results => (results[0] ? results[0].count : 0))
+ *   .then(results => (results[suffix] || 0))
  *   .catch(err => {
  *     // ...
  *   });
@@ -61,17 +54,18 @@ export interface PwnedPasswordSuffix {
 export function pwnedPasswordRange(
   prefix: string,
   options: { baseUrl?: string; userAgent?: string } = {},
-): Promise<PwnedPasswordSuffix[]> {
+): Promise<PwnedPasswordSuffix> {
   return (
     fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
       // create array from lines of text in response body
       .then((data) => data.split('\n'))
-      // convert into array of objects containing suffix and count for each line
+      // convert into an object mapping suffix to count for each line
       .then((results) =>
-        results.map((row) => ({
-          suffix: row.split(':')[0],
-          count: parseInt(row.split(':')[1], 10),
-        })),
+        results.reduce<PwnedPasswordSuffix>((acc, row) => {
+          const [suffix, countString] = row.split(':');
+          acc[suffix] = parseInt(countString, 10);
+          return acc;
+        }, {}),
       )
   );
 }
