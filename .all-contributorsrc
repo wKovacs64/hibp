@@ -24,6 +24,15 @@
         "review",
         "test"
       ]
+    },
+    {
+      "login": "troyhunt",
+      "name": "Troy Hunt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/273244?v=4",
+      "profile": "https://www.troyhunt.com",
+      "contributions": [
+        "data"
+      ]
     }
   ]
 }
