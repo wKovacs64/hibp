@@ -1,9 +1,15 @@
 {
+  "projectName": "hibp",
+  "projectOwner": "wKovacs64",
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": false,
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
-  "commit": false,
   "contributors": [
     {
       "login": "wKovacs64",
@@ -19,11 +25,5 @@
         "test"
       ]
     }
-  ],
-  "contributorsPerLine": 7,
-  "projectName": "hibp",
-  "projectOwner": "wKovacs64",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+  ]
 }
