@@ -1,7 +1,4 @@
 <a href="https://wkovacs64.github.io/hibp">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
   <img
     alt="logo"
     title="logo"
@@ -19,6 +16,7 @@ pwned?][haveibeenpwned] service._
 [![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![semantic-release][semantic-release-image]][semantic-release-url]
+[![All Contributors][all-contributors-image]](#contributors-)
 
 ## Installation
 
@@ -200,6 +198,8 @@ This module is distributed under the [MIT License][license].
 [semantic-release-image]:
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
+[all-contributors-image]:
+  https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square
 [deno]: https://deno.land/
 [skypack]: https://www.skypack.dev/
 [troy]: https://www.troyhunt.com
@@ -223,7 +223,8 @@ This module is distributed under the [MIT License][license].
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -239,4 +240,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
