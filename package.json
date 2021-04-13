@@ -18,15 +18,6 @@
     "name": "Justin Hall",
     "email": "justin.r.hall@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "Daniel Adams",
-      "email": "danieladams456@gmail.com"
-    }, {
-      "name": "Jonathan Sharpe",
-      "email": "mail@jonrshar.pe"
-    }
-  ],
   "license": "MIT",
   "exports": {
     ".": {

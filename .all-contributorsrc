@@ -1,0 +1,29 @@
+{
+  "projectName": "hibp",
+  "projectOwner": "wKovacs64",
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": false,
+  "files": [
+    "README.md"
+  ],
+  "contributors": [
+    {
+      "login": "wKovacs64",
+      "name": "Justin Hall",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1288694?v=4",
+      "profile": "https://github.com/wKovacs64",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "maintenance",
+        "review",
+        "test"
+      ]
+    }
+  ]
+}
