@@ -1,6 +1,6 @@
 ## Migration Notes
 
-### 10.0.1 → 11.0.0
+#### 10.0.1 → 11.0.0
 
 - `pwnedPasswordRange` now returns an object mapping the matching suffix to a
   count representing the number of occurrences, rather than an array of objects
