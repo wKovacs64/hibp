@@ -33,7 +33,7 @@ valid API key on your behalf) will fail.</p>
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
-<dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code></dt>
+<dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#PwnedPasswordSuffixes">Promise.&lt;PwnedPasswordSuffixes&gt;</a></code></dt>
 <dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
@@ -67,10 +67,9 @@ required, but direct requests made without it (that is, without specifying a
 <dt><a href="#Paste">Paste</a> : <code>object</code></dt>
 <dd><p>An object representing a paste.</p>
 </dd>
-<dt><a href="#PwnedPasswordSuffix">PwnedPasswordSuffix</a> : <code>object</code></dt>
-<dd><p>An object representing an exposed password hash suffix (corresponding to a
-given hash prefix) and how many times it occurred in the Pwned Passwords
-repository.</p>
+<dt><a href="#PwnedPasswordSuffixes">PwnedPasswordSuffixes</a> : <code>Object.&lt;string, number&gt;</code></dt>
+<dd><p>An object mapping an exposed password hash suffix (corresponding to a given
+hash prefix) to how many times it occurred in the Pwned Passwords repository.</p>
 </dd>
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
@@ -337,7 +336,7 @@ pwnedPassword('f00b4r')
 ```
 <a name="pwnedPasswordRange"></a>
 
-## pwnedPasswordRange(prefix, [options]) ⇒ <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code>
+## pwnedPasswordRange(prefix, [options]) ⇒ [<code>Promise.&lt;PwnedPasswordSuffixes&gt;</code>](#PwnedPasswordSuffixes)
 Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
 
 When a password hash with the same first 5 characters is found in the Pwned
@@ -347,10 +346,10 @@ of how many times it appears in the data set. This function parses the
 response and returns a more structured format.
 
 **Kind**: global function  
-**Returns**: <code><a href="#pwnedpasswordsuffix--object">Promise.&lt;Array.&lt;PwnedPasswordSuffix&gt;&gt;</a></code> - a Promise which resolves to an
-array of objects, each containing the `suffix` that when matched with the
-prefix composes the complete hash, and a `count` of how many times it appears
-in the breached password data set, or rejects with an Error  
+**Returns**: [<code>Promise.&lt;PwnedPasswordSuffixes&gt;</code>](#PwnedPasswordSuffixes) - a Promise which resolves to an
+object mapping the `suffix` that when matched with the prefix composes the
+complete hash, to the `count` of how many times it appears in the breached
+password data set, or rejects with an Error  
 **See**: https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange  
 
 | Param | Type | Description |
@@ -365,21 +364,18 @@ in the breached password data set, or rejects with an Error
 pwnedPasswordRange('5BAA6')
   .then(results => {
     // results will have the following shape:
-    // [
-    //   { suffix: "003D68EB55068C33ACE09247EE4C639306B", count: 3 },
-    //   { suffix: "012C192B2F16F82EA0EB9EF18D9D539B0DD", count: 1 },
+    // {
+    //   "003D68EB55068C33ACE09247EE4C639306B": 3,
+    //   "012C192B2F16F82EA0EB9EF18D9D539B0DD": 1,
     //   ...
-    // ]
+    // }
   })
 ```
 **Example**  
 ```js
 const suffix = '1E4C9B93F3F0682250B6CF8331B7EE68FD8';
 pwnedPasswordRange('5BAA6')
-  // filter to matching suffix
-  .then(results => results.filter(row => row.suffix === suffix))
-  // return count if match, 0 if not
-  .then(results => (results[0] ? results[0].count : 0))
+  .then(results => (results[suffix] || 0))
   .catch(err => {
     // ...
   });
@@ -490,21 +486,13 @@ An object representing a paste.
 | Date | <code>string</code> | 
 | EmailCount | <code>number</code> | 
 
-<a name="PwnedPasswordSuffix"></a>
+<a name="PwnedPasswordSuffixes"></a>
 
-## PwnedPasswordSuffix : <code>object</code>
-An object representing an exposed password hash suffix (corresponding to a
-given hash prefix) and how many times it occurred in the Pwned Passwords
-repository.
+## PwnedPasswordSuffixes : <code>Object.&lt;string, number&gt;</code>
+An object mapping an exposed password hash suffix (corresponding to a given
+hash prefix) to how many times it occurred in the Pwned Passwords repository.
 
 **Kind**: global typedef  
-**Properties**
-
-| Name | Type |
-| --- | --- |
-| suffix | <code>string</code> | 
-| count | <code>number</code> | 
-
 <a name="SearchResults"></a>
 
 ## SearchResults : <code>object</code>

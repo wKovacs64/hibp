@@ -1,5 +1,19 @@
 ## Migration Notes
 
+### 10.0.1 → 11.0.0
+
+- `pwnedPasswordRange` now returns an object mapping the matching suffix to a
+  count representing the number of occurrences, rather than an array of objects
+  each containing a matching suffix and its count. Code dependent on parsing the
+  response text will need updated to deal with the new data format:
+  ```js
+  {
+    "003D68EB55068C33ACE09247EE4C639306B": 3,
+    "012C192B2F16F82EA0EB9EF18D9D539B0DD": 1,
+    ...
+  }
+  ```
+
 #### 9.0.3 → 10.0.0
 
 - The production/minified versions of the browser build targets have been

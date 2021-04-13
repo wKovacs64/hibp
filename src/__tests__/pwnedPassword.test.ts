@@ -19,7 +19,7 @@ describe('pwnedPassword', () => {
     it('resolves to 0', () => {
       server.use(
         rest.get('*', (_, res, ctx) => {
-          return res(ctx.json(null));
+          return res(ctx.text(EXAMPLE_PASSWORD_HASHES));
         }),
       );
 
