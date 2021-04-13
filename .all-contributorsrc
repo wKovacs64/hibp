@@ -6,7 +6,7 @@
   "contributorsPerLine": 7,
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": false,
+  "skipCi": true,
   "files": [
     "README.md"
   ],
