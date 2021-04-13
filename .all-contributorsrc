@@ -33,6 +33,15 @@
       "contributions": [
         "data"
       ]
+    },
+    {
+      "login": "jellekralt",
+      "name": "Jelle Kralt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/214558?v=4",
+      "profile": "https://jellekralt.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
