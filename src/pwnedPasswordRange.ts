@@ -1,6 +1,6 @@
 import { fetchFromApi } from './api/pwnedpasswords';
 
-export interface PwnedPasswordSuffix {
+export interface PwnedPasswordSuffixes {
   [suffix: string]: number;
 }
 
@@ -8,7 +8,7 @@ export interface PwnedPasswordSuffix {
  * An object mapping an exposed password hash suffix (corresponding to a given
  * hash prefix) to how many times it occurred in the Pwned Passwords repository.
  *
- * @typedef {Object.<string, number>} PwnedPasswordSuffix
+ * @typedef {Object.<string, number>} PwnedPasswordSuffixes
  */
 
 /**
@@ -27,10 +27,10 @@ export interface PwnedPasswordSuffix {
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {Promise<PwnedPasswordSuffix>} a Promise which resolves to an object
- * mapping the `suffix` that when matched with the prefix composes the complete
- * hash, to the `count` of how many times it appears in the breached password
- * data set, or rejects with an Error
+ * @returns {Promise<PwnedPasswordSuffixes>} a Promise which resolves to an
+ * object mapping the `suffix` that when matched with the prefix composes the
+ * complete hash, to the `count` of how many times it appears in the breached
+ * password data set, or rejects with an Error
  *
  * @example
  * pwnedPasswordRange('5BAA6')
@@ -54,14 +54,14 @@ export interface PwnedPasswordSuffix {
 export function pwnedPasswordRange(
   prefix: string,
   options: { baseUrl?: string; userAgent?: string } = {},
-): Promise<PwnedPasswordSuffix> {
+): Promise<PwnedPasswordSuffixes> {
   return (
     fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
       // create array from lines of text in response body
       .then((data) => data.split('\n'))
       // convert into an object mapping suffix to count for each line
       .then((results) =>
-        results.reduce<PwnedPasswordSuffix>((acc, row) => {
+        results.reduce<PwnedPasswordSuffixes>((acc, row) => {
           const [suffix, countString] = row.split(':');
           acc[suffix] = parseInt(countString, 10);
           return acc;
