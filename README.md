@@ -16,7 +16,7 @@ pwned?][haveibeenpwned] service._
 [![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![semantic-release][semantic-release-image]][semantic-release-url]
-[![All Contributors][all-contributors-image]](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 
 ## Installation
 
@@ -198,8 +198,6 @@ This module is distributed under the [MIT License][license].
 [semantic-release-image]:
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
-[all-contributors-image]:
-  https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square
 [deno]: https://deno.land/
 [skypack]: https://www.skypack.dev/
 [troy]: https://www.troyhunt.com
