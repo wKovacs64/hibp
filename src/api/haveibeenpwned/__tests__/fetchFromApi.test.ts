@@ -14,7 +14,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
   describe('User-Agent', () => {
     // Node
-    it('sends a custom User-Agent request header when outside the browser', () => {
+    it('sends a custom User-Agent request header when outside the browser', async () => {
       server.use(
         rest.get('*', (req, res, ctx) => {
           return req.headers.get('User-Agent')?.includes('hibp')
@@ -28,13 +28,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       // @ts-expect-error: faking a non-browser (Node) environment
       delete global.navigator;
 
-      return fetchFromApi('/service')
-        .then((apiData) => {
-          expect(apiData).toBeNull();
-        })
-        .finally(() => {
-          global.navigator = originalNavigator;
-        });
+      await expect(fetchFromApi('/service')).resolves.toBeNull();
+
+      global.navigator = originalNavigator;
     });
 
     // Browser
@@ -55,9 +51,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       global.navigator = {} as Navigator;
 
-      return fetchFromApi('/service').then((apiData) => {
-        expect(apiData).toBeNull();
-      });
+      return expect(fetchFromApi('/service')).resolves.toBeNull();
     });
   });
 
@@ -124,9 +118,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
       server.use(
         rest.get('*', (_, res, ctx) => {
-          const headerTransformers = Array.from(
-            BLOCKED.headers,
-          ).map(([header, value]) => ctx.set(header, value));
+          const headerTransformers = Array.from(BLOCKED.headers).map(
+            ([header, value]) => ctx.set(header, value),
+          );
           return res.once(ctx.status(BLOCKED.status), ...headerTransformers);
         }),
       );
@@ -186,9 +180,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return fetchFromApi('/service', { apiKey }).then((apiData) => {
-        expect(apiData).toBeNull();
-      });
+      return expect(fetchFromApi('/service', { apiKey })).resolves.toBeNull();
     });
   });
 
@@ -204,9 +196,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return fetchFromApi('/service', { userAgent: ua }).then((apiData) => {
-        expect(apiData).toBeNull();
-      });
+      return expect(
+        fetchFromApi('/service', { userAgent: ua }),
+      ).resolves.toBeNull();
     });
   });
 
@@ -221,9 +213,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return fetchFromApi(endpoint, { baseUrl }).then((apiData) => {
-        expect(apiData).toBeNull();
-      });
+      return expect(fetchFromApi(endpoint, { baseUrl })).resolves.toBeNull();
     });
   });
 });

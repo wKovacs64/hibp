@@ -35,7 +35,7 @@ describe('breachedAccount', () => {
     );
   });
 
-  it('honors the truncate option', () => {
+  it('honors the truncate option', async () => {
     server.use(
       rest.get('*', (req, res, ctx) => {
         return res(
@@ -46,17 +46,15 @@ describe('breachedAccount', () => {
       }),
     );
 
-    return breachedAccount('breached')
-      .then((apiData) => {
-        expect(apiData).toEqual(BREACHED_ACCOUNT_DATA);
-      })
-      .then(() => breachedAccount('breached', { truncate: false }))
-      .then((apiData) => {
-        expect(apiData).toEqual(BREACHED_ACCOUNT_DATA_EXPANDED);
-      });
+    await expect(breachedAccount('breached')).resolves.toEqual(
+      BREACHED_ACCOUNT_DATA,
+    );
+    await expect(
+      breachedAccount('breached', { truncate: false }),
+    ).resolves.toEqual(BREACHED_ACCOUNT_DATA_EXPANDED);
   });
 
-  it('honors the includeUnverified option', () => {
+  it('honors the includeUnverified option', async () => {
     server.use(
       rest.get('*', (req, res, ctx) => {
         return res(
@@ -67,14 +65,12 @@ describe('breachedAccount', () => {
       }),
     );
 
-    return breachedAccount('breached')
-      .then((apiData) => {
-        expect(apiData).toEqual(BREACHED_ACCOUNT_DATA);
-      })
-      .then(() => breachedAccount('breached', { includeUnverified: false }))
-      .then((apiData) => {
-        expect(apiData).toEqual(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED);
-      });
+    await expect(breachedAccount('breached')).resolves.toEqual(
+      BREACHED_ACCOUNT_DATA,
+    );
+    await expect(
+      breachedAccount('breached', { includeUnverified: false }),
+    ).resolves.toEqual(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED);
   });
 
   it('honors the domain option', () => {

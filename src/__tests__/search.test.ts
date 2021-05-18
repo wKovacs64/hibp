@@ -73,7 +73,7 @@ describe('search', () => {
     });
   });
 
-  it('forwards the truncate option correctly', () => {
+  it('forwards the truncate option correctly', async () => {
     server.use(
       rest.get(/breachedaccount/, (req, res, ctx) => {
         return res(
@@ -84,16 +84,13 @@ describe('search', () => {
       }),
     );
 
-    return search('breached')
-      .then((apiData) => {
-        expect(apiData).toEqual({ breaches: BREACHES, pastes: null });
-      })
-      .then(() => search('breached', { truncate: false }))
-      .then((apiData) => {
-        expect(apiData).toEqual({
-          breaches: BREACHES_EXPANDED,
-          pastes: null,
-        });
-      });
+    await expect(search('breached')).resolves.toEqual({
+      breaches: BREACHES,
+      pastes: null,
+    });
+    await expect(search('breached', { truncate: false })).resolves.toEqual({
+      breaches: BREACHES_EXPANDED,
+      pastes: null,
+    });
   });
 });

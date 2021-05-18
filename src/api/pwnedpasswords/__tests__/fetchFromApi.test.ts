@@ -63,9 +63,9 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         }),
       );
 
-      return fetchFromApi('/service', { userAgent: ua }).then((apiData) => {
-        expect(apiData).toBe(body);
-      });
+      return expect(fetchFromApi('/service', { userAgent: ua })).resolves.toBe(
+        body,
+      );
     });
   });
 
@@ -81,9 +81,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         }),
       );
 
-      return fetchFromApi(endpoint, { baseUrl }).then((apiData) => {
-        expect(apiData).toBe(body);
-      });
+      return expect(fetchFromApi(endpoint, { baseUrl })).resolves.toBe(body);
     });
   });
 });
