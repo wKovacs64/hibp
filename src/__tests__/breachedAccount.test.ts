@@ -13,7 +13,7 @@ describe('breachedAccount', () => {
   const BREACHED_ACCOUNT_DATA_EXPANDED = [VERIFIED_BREACH, UNVERIFIED_BREACH];
   const BREACHED_ACCOUNT_DATA_NO_UNVERIFIED = [{ Name: VERIFIED_BREACH.Name }];
 
-  it('honors the apiKey option', () => {
+  it('honors the apiKey option', async () => {
     server.use(
       rest.get('*', (req, res, ctx) => {
         if (!req.headers.get('hibp-api-key')) {
@@ -27,14 +27,12 @@ describe('breachedAccount', () => {
       }),
     );
 
-    return breachedAccount('breached')
-      .catch((err) => {
-        expect(err.message).toBe((UNAUTHORIZED.body as ErrorData).message);
-      })
-      .then(() => breachedAccount('breached', { apiKey }))
-      .then((apiData) => {
-        expect(apiData).toEqual(BREACHED_ACCOUNT_DATA);
-      });
+    await expect(breachedAccount('breached')).rejects.toThrow(
+      (UNAUTHORIZED.body as ErrorData).message,
+    );
+    await expect(breachedAccount('breached', { apiKey })).resolves.toEqual(
+      BREACHED_ACCOUNT_DATA,
+    );
   });
 
   it('honors the truncate option', () => {

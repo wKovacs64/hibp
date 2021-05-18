@@ -38,7 +38,7 @@ describe('search', () => {
     });
   });
 
-  it('forwards the apiKey option correctly', () => {
+  it('forwards the apiKey option correctly', async () => {
     const apiKey = 'my-api-key';
 
     server.use(
@@ -64,14 +64,13 @@ describe('search', () => {
       }),
     );
 
-    return search('breached@foo.bar')
-      .catch((err) => {
-        expect(err.message).toBe((UNAUTHORIZED.body as ErrorData).message);
-      })
-      .then(() => search('breached@foo.bar', { apiKey }))
-      .then((apiData) => {
-        expect(apiData).toEqual({ breaches: BREACHES, pastes: PASTES });
-      });
+    await expect(search('breached@foo.bar')).rejects.toThrow(
+      (UNAUTHORIZED.body as ErrorData).message,
+    );
+    await expect(search('breached@foo.bar', { apiKey })).resolves.toEqual({
+      breaches: BREACHES,
+      pastes: PASTES,
+    });
   });
 
   it('forwards the truncate option correctly', () => {

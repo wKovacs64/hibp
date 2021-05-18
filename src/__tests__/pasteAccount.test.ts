@@ -7,7 +7,7 @@ import { ErrorData } from '../api/haveibeenpwned/types';
 describe('pasteAccount', () => {
   const PASTE_ACCOUNT_DATA = [EXAMPLE_PASTE];
 
-  it('honors the apiKey option', () => {
+  it('honors the apiKey option', async () => {
     const apiKey = 'my-api-key';
 
     server.use(
@@ -23,14 +23,12 @@ describe('pasteAccount', () => {
       }),
     );
 
-    return pasteAccount('whatever@example.com')
-      .catch((err) => {
-        expect(err.message).toBe((UNAUTHORIZED.body as ErrorData).message);
-      })
-      .then(() => pasteAccount('whatever@example.com', { apiKey }))
-      .then((apiData) => {
-        expect(apiData).toEqual(PASTE_ACCOUNT_DATA);
-      });
+    await expect(pasteAccount('whatever@example.com')).rejects.toThrow(
+      (UNAUTHORIZED.body as ErrorData).message,
+    );
+    await expect(
+      pasteAccount('whatever@example.com', { apiKey }),
+    ).resolves.toEqual(PASTE_ACCOUNT_DATA);
   });
 
   describe('pasted email', () => {
