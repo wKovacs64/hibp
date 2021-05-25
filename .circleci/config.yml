@@ -3,9 +3,14 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.28.0
 
+executors:
+  my-cypress-executor:
+    docker:
+      - image: cypress/base:14.16.0
+
 jobs:
   codechecks:
-    executor: cypress/base-14-7-0
+    executor: my-cypress-executor
     steps:
       - attach_workspace:
           at: ~/
@@ -14,7 +19,7 @@ jobs:
       - run: mkdir ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run: yarn codechecks
   test:
-    executor: cypress/base-14-7-0
+    executor: my-cypress-executor
     steps:
       - attach_workspace:
           at: ~/
@@ -25,7 +30,7 @@ jobs:
           path: dist
           destination: dist
   release:
-    executor: cypress/base-14-7-0
+    executor: my-cypress-executor
     steps:
       - attach_workspace:
           at: ~/
@@ -35,7 +40,7 @@ workflows:
   test_and_release:
     jobs:
       - cypress/run:
-          executor: cypress/base-14-7-0
+          executor: my-cypress-executor
           yarn: true
           start: yarn start-test-server
           wait-on: '--timeout 20000 http://localhost:5000'
