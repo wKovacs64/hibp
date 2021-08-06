@@ -135,7 +135,7 @@
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "7.0.1",
     "lint-staged": "11.1.2",
-    "msw": "0.33.3",
+    "msw": "0.34.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.3.2",
     "rimraf": "3.0.2",
