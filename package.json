@@ -130,7 +130,7 @@
     "eslint-plugin-cypress": "2.11.3",
     "eslint-plugin-wkovacs64": "13.4.0",
     "glob": "7.1.7",
-    "husky": "7.0.1",
+    "husky": "7.0.2",
     "jest": "27.0.6",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "7.0.1",
