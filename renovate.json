@@ -8,8 +8,13 @@
   },
   "packageRules": [
     {
-      "packageNames": ["eslint"],
-      "updateTypes": ["major"],
+      "matchPackageNames": ["eslint"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["@types/node-fetch"],
+      "matchUpdateTypes": ["major"],
       "enabled": false
     }
   ],
