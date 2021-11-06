@@ -60,7 +60,7 @@
     "prepare": "npm-run-all --silent husky:install build",
     "prepublishOnly": "npm-run-all --silent --sequential lint check-types test test:browser:ci",
     "size": "size-limit",
-    "ssat": "start-server-and-test start-test-server 5000",
+    "ssat": "start-server-and-test start-test-server 3000",
     "start-test-server": "serve --no-clipboard",
     "test": "cross-env NODE_ENV=test jest",
     "test:coverage": "cross-env NODE_ENV=test jest --coverage --no-cache",
