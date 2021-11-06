@@ -43,7 +43,7 @@ workflows:
           executor: my-cypress-executor
           yarn: true
           start: yarn start-test-server
-          wait-on: '--timeout 20000 http://localhost:5000'
+          wait-on: '--timeout 20000 http://localhost:3000'
       - codechecks:
           requires:
             - cypress/run
