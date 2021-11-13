@@ -58,7 +58,7 @@ export function pwnedPasswordRange(
   return (
     fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
       // create array from lines of text in response body
-      .then((data) => data.split('\n'))
+      .then((data) => data.split('\n').filter(Boolean))
       // convert into an object mapping suffix to count for each line
       .then((results) =>
         results.reduce<PwnedPasswordSuffixes>((acc, row) => {
