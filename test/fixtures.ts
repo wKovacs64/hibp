@@ -1,5 +1,6 @@
 import { stripIndents } from 'common-tags';
-import { Breach, Paste } from '../src/api/haveibeenpwned/types';
+
+import type { Breach, Paste } from '../src/api/haveibeenpwned/types';
 
 export const VERIFIED_BREACH: Breach = {
   Name: 'Adobe',

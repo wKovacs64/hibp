@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-unfetch';
 import { name, version } from '../../../package.json';
-import { ApiData, ErrorData } from './types';
 import {
   BAD_REQUEST,
   UNAUTHORIZED,
@@ -8,6 +7,8 @@ import {
   NOT_FOUND,
   TOO_MANY_REQUESTS,
 } from './responses';
+
+import type { ApiData, ErrorData } from './types';
 
 function blockedWithRayId(rayId: string) {
   return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;

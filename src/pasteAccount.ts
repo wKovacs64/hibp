@@ -1,5 +1,6 @@
-import { Paste } from './api/haveibeenpwned/types';
 import { fetchFromApi } from './api/haveibeenpwned';
+
+import type { Paste } from './api/haveibeenpwned/types';
 
 /**
  * An object representing a paste.

@@ -10,7 +10,7 @@
  * descriptive error for the consumer. (They are also leveraged in our tests.)
  */
 
-import { ResponseBody } from './types';
+import type { ResponseBody } from './types';
 
 /** @internal */
 export interface HaveIBeenPwnedApiResponse {
