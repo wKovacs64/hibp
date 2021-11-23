@@ -5502,10 +5502,10 @@ dot-prop@^5.1.0:
   dependencies:
     is-obj "^2.0.0"
 
-dts-bundle-generator@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/dts-bundle-generator/-/dts-bundle-generator-6.0.0.tgz#8f745b8c398c8204e1a77a628458c2e4fe68308d"
-  integrity sha512-lbBpqiFjnbl2K7RDwr1JKEraAT8k5BOmZioKVXvz8ksE96+ziQY3/lZNfoCIp77OHQ0HmQzoMqx7ULAUiDQawg==
+dts-bundle-generator@6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/dts-bundle-generator/-/dts-bundle-generator-6.1.0.tgz#3e35df2882b11950613cfe8df8afbe602dede845"
+  integrity sha512-9MGbhZExuN75zq8ImoM7iVeGUavjtGw+UIfbaNRWZ+Jq4Nw2MN5OLuSrA1EnWlmZakTZRCx1CMo1zqBQ9+HP9g==
   dependencies:
     typescript ">=3.0.1"
     yargs "^17.2.1"
