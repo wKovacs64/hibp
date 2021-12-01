@@ -131,7 +131,7 @@
     "eslint-plugin-wkovacs64": "13.8.0",
     "glob": "7.2.0",
     "husky": "7.0.4",
-    "jest": "27.4.2",
+    "jest": "27.4.3",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "7.1.0",
     "lint-staged": "12.1.2",
