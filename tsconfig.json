@@ -5,6 +5,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "importsNotUsedAsValues": "error",
     "declaration": true,
     "skipLibCheck": true,
     "strict": true,
