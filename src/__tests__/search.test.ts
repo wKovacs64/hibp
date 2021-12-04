@@ -47,7 +47,7 @@ describe('search', () => {
         if (!req.headers.get('hibp-api-key')) {
           return res(
             ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body),
+            ctx.json(UNAUTHORIZED.body as ErrorData),
           );
         }
 
@@ -57,7 +57,7 @@ describe('search', () => {
         if (!req.headers.get('hibp-api-key')) {
           return res(
             ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body),
+            ctx.json(UNAUTHORIZED.body as ErrorData),
           );
         }
 
