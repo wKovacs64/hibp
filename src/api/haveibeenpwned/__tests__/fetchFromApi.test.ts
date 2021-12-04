@@ -9,6 +9,8 @@ import {
 } from '../responses';
 import { fetchFromApi } from '../fetchFromApi';
 
+import type { ErrorData } from '../types';
+
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';
 
@@ -18,7 +20,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       server.use(
         rest.get('*', (req, res, ctx) => {
           return req.headers.get('User-Agent')?.includes('hibp')
-            ? res.once(ctx.status(OK.status), ctx.json(null))
+            ? res.once(ctx.status(OK.status), ctx.json({}))
             : res.once(ctx.status(FORBIDDEN.status));
         }),
       );
@@ -28,7 +30,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       // @ts-expect-error: faking a non-browser (Node) environment
       delete global.navigator;
 
-      await expect(fetchFromApi('/service')).resolves.toBeNull();
+      await expect(fetchFromApi('/service')).resolves.toEqual({});
 
       global.navigator = originalNavigator;
     });
@@ -43,7 +45,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       server.use(
         rest.get('*', (req, res, ctx) => {
           return !req.headers.get('User-Agent')?.includes('hibp')
-            ? res.once(ctx.status(OK.status), ctx.json(null))
+            ? res.once(ctx.status(OK.status), ctx.json({}))
             : res.once(ctx.status(FORBIDDEN.status));
         }),
       );
@@ -51,7 +53,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       global.navigator = {} as Navigator;
 
-      return expect(fetchFromApi('/service')).resolves.toBeNull();
+      return expect(fetchFromApi('/service')).resolves.toEqual({});
     });
   });
 
@@ -89,7 +91,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         rest.get('*', (_, res, ctx) => {
           return res.once(
             ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body),
+            ctx.json(UNAUTHORIZED.body as ErrorData),
           );
         }),
       );
@@ -139,7 +141,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         rest.get('*', (_, res, ctx) => {
           return res.once(
             ctx.status(TOO_MANY_REQUESTS.status),
-            ctx.json(TOO_MANY_REQUESTS.body),
+            ctx.json(TOO_MANY_REQUESTS.body as ErrorData),
           );
         }),
       );
@@ -175,12 +177,12 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       server.use(
         rest.get('*', (req, res, ctx) => {
           return req.headers.get('hibp-api-key')
-            ? res.once(ctx.status(OK.status), ctx.json(null))
+            ? res.once(ctx.status(OK.status), ctx.json({}))
             : res.once(ctx.status(UNAUTHORIZED.status));
         }),
       );
 
-      return expect(fetchFromApi('/service', { apiKey })).resolves.toBeNull();
+      return expect(fetchFromApi('/service', { apiKey })).resolves.toEqual({});
     });
   });
 
@@ -191,14 +193,14 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       server.use(
         rest.get('*', (req, res, ctx) => {
           return req.headers.get('User-Agent')?.includes(ua)
-            ? res.once(ctx.status(OK.status), ctx.json(null))
+            ? res.once(ctx.status(OK.status), ctx.json({}))
             : res.once(ctx.status(UNAUTHORIZED.status));
         }),
       );
 
       return expect(
         fetchFromApi('/service', { userAgent: ua }),
-      ).resolves.toBeNull();
+      ).resolves.toEqual({});
     });
   });
 
@@ -209,11 +211,11 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
       server.use(
         rest.get(new RegExp(`^${baseUrl}`), (_, res, ctx) => {
-          return res.once(ctx.status(OK.status), ctx.json(null));
+          return res.once(ctx.status(OK.status), ctx.json({}));
         }),
       );
 
-      return expect(fetchFromApi(endpoint, { baseUrl })).resolves.toBeNull();
+      return expect(fetchFromApi(endpoint, { baseUrl })).resolves.toEqual({});
     });
   });
 });

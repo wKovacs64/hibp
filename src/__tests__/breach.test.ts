@@ -20,7 +20,7 @@ describe('breach', () => {
     it('resolves with null', () => {
       server.use(
         rest.get('*', (_, res, ctx) => {
-          return res.once(ctx.status(NOT_FOUND.status), ctx.json(null));
+          return res.once(ctx.status(NOT_FOUND.status));
         }),
       );
 
