@@ -113,7 +113,7 @@
     "@size-limit/preset-small-lib": "7.0.5",
     "@types/common-tags": "1.8.1",
     "@types/jest": "27.4.0",
-    "@types/node": "16.11.20",
+    "@types/node": "16.11.21",
     "@types/node-fetch": "2.5.12",
     "@wkovacs64/prettier-config": "3.0.0",
     "babel-jest": "27.4.6",
