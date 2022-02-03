@@ -3,7 +3,7 @@ module.exports = {
     // Pre-bundled for Browser (UMD)
     {
       path: 'dist/browser/hibp.umd.js',
-      maxSize: '6.1 kB',
+      maxSize: '5.9 kB',
     },
     // Pre-bundled for Browser (ESM)
     {
@@ -13,27 +13,27 @@ module.exports = {
     // Bundled with Webpack (CJS)
     {
       path: 'dist/cjs/breach.js',
-      maxSize: '1.5 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/cjs/breachedAccount.js',
-      maxSize: '1.6 kB',
+      maxSize: '1.2 kB',
     },
     {
       path: 'dist/cjs/breaches.js',
-      maxSize: '1.6 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/cjs/dataClasses.js',
-      maxSize: '1.5 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/cjs/pasteAccount.js',
-      maxSize: '1.5 kB',
+      maxSize: '1.1 kB',
     },
     {
       path: 'dist/cjs/pwnedPassword.js',
-      maxSize: '4.6 kB',
+      maxSize: '1.1 kB',
     },
     {
       path: 'dist/cjs/pwnedPasswordRange.js',
@@ -41,32 +41,32 @@ module.exports = {
     },
     {
       path: 'dist/cjs/search.js',
-      maxSize: '1.8 kB',
+      maxSize: '1.5 kB',
     },
     // Bundled with Webpack (ESM)
     {
       path: 'dist/esm/breach.mjs',
-      maxSize: '1.5 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/esm/breachedAccount.mjs',
-      maxSize: '1.6 kB',
+      maxSize: '1.1 kB',
     },
     {
       path: 'dist/esm/breaches.mjs',
-      maxSize: '1.5 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/esm/dataClasses.mjs',
-      maxSize: '1.5 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/esm/pasteAccount.mjs',
-      maxSize: '1.5 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/esm/pwnedPassword.mjs',
-      maxSize: '4.3 kB',
+      maxSize: '1 kB',
     },
     {
       path: 'dist/esm/pwnedPasswordRange.mjs',
@@ -74,7 +74,7 @@ module.exports = {
     },
     {
       path: 'dist/esm/search.mjs',
-      maxSize: '1.7 kB',
+      maxSize: '1.4 kB',
     },
   ],
 };
