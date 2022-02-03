@@ -1,9 +1,11 @@
 name: CI
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [synchronize, opened]
 
 jobs:
-  size-limit:
+  bundlewatch:
     runs-on: ubuntu-latest
     env:
       CI_JOB_NUMBER: 1
@@ -15,9 +17,12 @@ jobs:
         run:
           git fetch --no-tags --prune --depth=1 origin
           +refs/heads/${BASE_BRANCH}:refs/remotes/origin/${BASE_BRANCH}
-      - uses: andresz1/size-limit-action@v1.5.1
+      - run: yarn
+      - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          build-script: yarn build
+          bundlewatch-config: .bundlewatch.config.js
+          bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
 #
 # https://github.com/actions/checkout/issues/93
 # https://github.com/actions/checkout/pull/155
