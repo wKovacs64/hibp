@@ -1,0 +1,17 @@
+name: Push
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  bundlewatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn
+      - uses: jackyef/bundlewatch-gh-action@0.2.0
+        with:
+          bundlewatch-config: .bundlewatch.config.js
+          bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
