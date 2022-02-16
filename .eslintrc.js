@@ -5,4 +5,7 @@ module.exports = {
     'plugin:wkovacs64/typescript',
     'prettier',
   ],
+  rules: {
+    'jest/no-conditional-in-test': 'off',
+  },
 };
