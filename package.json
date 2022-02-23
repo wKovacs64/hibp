@@ -111,7 +111,7 @@
     "@rollup/plugin-replace": "3.1.0",
     "@rollup/plugin-typescript": "8.3.0",
     "@types/common-tags": "1.8.1",
-    "@types/jest": "27.4.0",
+    "@types/jest": "27.4.1",
     "@types/node": "16.11.25",
     "@types/node-fetch": "2.6.1",
     "@wkovacs64/prettier-config": "3.0.0",
