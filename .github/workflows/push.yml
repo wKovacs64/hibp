@@ -9,7 +9,7 @@ jobs:
   bundlewatch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: yarn
       - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
