@@ -41,7 +41,6 @@ function blockedWithRayId(rayId: string) {
  */
 export function fetchFromApi(
   endpoint: string,
-  /* istanbul ignore next: no need to test default empty object */
   {
     apiKey,
     baseUrl = 'https://haveibeenpwned.com/api/v3',

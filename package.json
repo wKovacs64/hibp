@@ -61,11 +61,11 @@
     "size": "bundlewatch --config .bundlewatch.config.js",
     "ssat": "start-server-and-test start-test-server 3000",
     "start-test-server": "serve --no-clipboard",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:coverage": "cross-env NODE_ENV=test jest --coverage --no-cache",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:browser": "npm-run-all --silent --sequential build:bundle \"ssat cy:open\"",
     "test:browser:ci": "npm-run-all --silent --sequential build:bundle \"ssat cy:run\"",
-    "test:watch": "cross-env NODE_ENV=test jest --watch --onlyChanged",
+    "test:watch": "vitest watch",
     "validate": "npm-run-all --silent --parallel lint check-types size"
   },
   "config": {
@@ -93,7 +93,6 @@
     "jssha": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.17.6",
     "@babel/core": "7.17.9",
     "@babel/parser": "7.17.9",
     "@babel/plugin-proposal-class-properties": "7.16.7",
@@ -110,13 +109,12 @@
     "@rollup/plugin-replace": "4.0.0",
     "@rollup/plugin-typescript": "8.3.1",
     "@types/common-tags": "1.8.1",
-    "@types/jest": "27.4.1",
     "@types/node": "16.11.26",
     "@types/node-fetch": "2.6.1",
     "@wkovacs64/prettier-config": "3.0.0",
-    "babel-jest": "27.5.1",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "bundlewatch": "0.3.3",
+    "c8": "7.11.0",
     "codecov": "3.8.3",
     "commitizen": "4.2.4",
     "common-tags": "1.8.2",
@@ -125,12 +123,10 @@
     "cz-conventional-changelog": "3.3.0",
     "dts-bundle-generator": "6.7.0",
     "eslint": "7.32.0",
-    "eslint-import-resolver-jest": "3.0.2",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-wkovacs64": "13.12.0",
     "glob": "7.2.0",
     "husky": "7.0.4",
-    "jest": "27.5.1",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "7.1.1",
     "lint-staged": "12.3.7",
@@ -145,6 +141,7 @@
     "start-server-and-test": "1.14.0",
     "tslib": "2.3.1",
     "typecov": "0.2.3",
-    "typescript": "4.6.3"
+    "typescript": "4.6.3",
+    "vitest": "0.9.1"
   }
 }

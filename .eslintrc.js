@@ -7,5 +7,7 @@ module.exports = {
   ],
   rules: {
     'jest/no-conditional-in-test': 'off',
+    // doesn't work with vitest as it relies on jest version detection
+    'jest/no-deprecated-functions': 'off',
   },
 };

@@ -11,7 +11,7 @@
     "strict": true,
     "stripInternal": true,
     "newLine": "lf",
-    "types": ["node", "jest"]
+    "types": ["node", "vitest/globals"]
   },
   "exclude": ["cypress"]
 }

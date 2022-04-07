@@ -20,7 +20,6 @@ import { BAD_REQUEST } from './responses';
  */
 export function fetchFromApi(
   endpoint: string,
-  /* istanbul ignore next: no need to test default empty object */
   {
     baseUrl = 'https://api.pwnedpasswords.com',
     userAgent,
