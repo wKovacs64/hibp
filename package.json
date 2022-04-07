@@ -26,8 +26,7 @@
       "require": "./dist/cjs/hibp.js",
       "import": "./dist/esm/hibp.mjs"
     },
-    "./package.json": "./package.json",
-    "./": "./"
+    "./package.json": "./package.json"
   },
   "main": "dist/cjs/hibp.js",
   "module": "dist/esm/hibp.mjs",
