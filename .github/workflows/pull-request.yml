@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: yarn
+      - run: npm install
       - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
           bundlewatch-config: .bundlewatch.config.js

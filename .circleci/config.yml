@@ -17,15 +17,15 @@ jobs:
       # ~/.ssh is not persisted after cypress/run, so we have to recreate the
       # known_hosts file manually
       - run: mkdir ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-      - run: yarn codechecks
+      - run: npx codechecks
   test:
     executor: my-cypress-executor
     steps:
       - attach_workspace:
           at: ~/
-      - run: yarn validate
-      - run: yarn test:coverage
-      - run: yarn codecov
+      - run: npm run validate
+      - run: npm run test:coverage
+      - run: npx codecov
       - store_artifacts:
           path: dist
           destination: dist
@@ -34,15 +34,14 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: yarn semantic-release
+      - run: npx semantic-release
 
 workflows:
   test_and_release:
     jobs:
       - cypress/run:
           executor: my-cypress-executor
-          yarn: true
-          start: yarn start-test-server
+          start: npm run start-test-server
           wait-on: '--timeout 20000 http://localhost:3000'
       - codechecks:
           requires:
