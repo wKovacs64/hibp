@@ -44,7 +44,7 @@
     "build": "npm-run-all --silent --sequential build:bundle build:types build:docs",
     "build:bundle": "rollup --config",
     "build:docs": "jsdoc2md --no-cache --files src/*.ts --configure jsdoc2md.json > API.md && node scripts/fix-api-docs.js",
-    "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file dist/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write dist/hibp.d.ts",
+    "build:types": "dts-bundle-generator --silent --no-check --umd-module-name hibp --out-file dist/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write dist/hibp.d.ts",
     "check-types": "npm-run-all --silent --parallel check-types:*",
     "check-types:cypress": "tsc --project cypress",
     "check-types:src": "tsc --noEmit",
