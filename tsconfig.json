@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
     "declaration": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "strict": true,
     "stripInternal": true,
     "newLine": "lf",
