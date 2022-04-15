@@ -130,7 +130,7 @@
     "husky": "7.0.4",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "7.1.1",
-    "lint-staged": "12.3.7",
+    "lint-staged": "12.3.8",
     "msw": "0.39.2",
     "npm-run-all": "4.1.5",
     "prettier": "2.6.2",
