@@ -93,11 +93,11 @@
     "jssha": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.9",
-    "@babel/parser": "7.17.9",
+    "@babel/core": "7.17.10",
+    "@babel/parser": "7.17.10",
     "@babel/plugin-proposal-class-properties": "7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "7.17.3",
-    "@babel/preset-env": "7.16.11",
+    "@babel/preset-env": "7.17.10",
     "@babel/preset-typescript": "7.16.7",
     "@codechecks/client": "0.1.12",
     "@commitlint/cli": "16.2.4",
