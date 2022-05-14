@@ -10,6 +10,36 @@ import {
 
 import type { ApiData, ErrorData } from './types';
 
+/**
+ * Custom error thrown when the haveibeenpwned.com API responds with 429 Too
+ * Many Requests. See the `retryAfterSeconds` property for the number of seconds
+ * to wait before attempting the request again.
+ *
+ * @see https://haveibeenpwned.com/API/v3#RateLimiting
+ */
+export class RateLimitError extends Error {
+  /**
+   * The number of seconds to wait before attempting the request again. May be
+   * `undefined` if the API does not provide a `retry-after` header, but this
+   * should never happen.
+   */
+  public retryAfterSeconds: number | undefined;
+
+  constructor(
+    retryAfter: ReturnType<Headers['get']>,
+    message: Error['constructor']['prototype']['message'],
+    options?: Error['constructor']['prototype']['options'],
+  ) {
+    super(message, options);
+    this.name = this.constructor.name;
+    this.retryAfterSeconds =
+      typeof retryAfter === 'string'
+        ? Number.parseInt(retryAfter, 10) /* c8 ignore start */
+        : undefined;
+  }
+}
+/* c8 ignore stop */
+
 function blockedWithRayId(rayId: string) {
   return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
 }
@@ -86,7 +116,8 @@ export function fetchFromApi(
         return null;
       case TOO_MANY_REQUESTS.status:
         return res.json().then((body: ErrorData) => {
-          throw new Error(body.message);
+          const retryAfter = res.headers.get('retry-after');
+          throw new RateLimitError(retryAfter, body.message);
         });
       default:
         throw new Error(res.statusText);

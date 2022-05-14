@@ -3,12 +3,12 @@ module.exports = {
     // Pre-bundled for Browser (UMD)
     {
       path: 'dist/browser/hibp.umd.js',
-      maxSize: '5.9 kB',
+      maxSize: '6.2 kB',
     },
     // Pre-bundled for Browser (ESM)
     {
       path: 'dist/browser/hibp.module.js',
-      maxSize: '4.7 kB',
+      maxSize: '4.9 kB',
     },
     // Bundled with Webpack (CJS)
     {

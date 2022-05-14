@@ -136,20 +136,28 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   });
 
   describe('rate limited', () => {
-    it('throws a "Too Many Requests" error', () => {
+    it('throws a "Too Many Requests" rate limit error', async () => {
       server.use(
         rest.get('*', (_, res, ctx) => {
           return res.once(
             ctx.status(TOO_MANY_REQUESTS.status),
+            ctx.set('retry-after', '2'),
             ctx.json(TOO_MANY_REQUESTS.body as ErrorData),
           );
         }),
       );
+      let err;
 
-      return expect(
-        fetchFromApi('/service/rate_limited', { apiKey }),
-      ).rejects.toMatchInlineSnapshot(
-        `[Error: Rate limit is exceeded. Try again in 2 seconds.]`,
+      try {
+        await fetchFromApi('/service/rate_limited', { apiKey });
+      } catch (e: unknown) {
+        err = e;
+      }
+
+      expect(err).toBeInstanceOf(Error);
+      expect(err).toHaveProperty('retryAfterSeconds', 2);
+      expect(err).toMatchInlineSnapshot(
+        '[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]',
       );
     });
   });

@@ -6,6 +6,7 @@ import { pasteAccount } from './pasteAccount';
 import { pwnedPassword } from './pwnedPassword';
 import { pwnedPasswordRange } from './pwnedPasswordRange';
 import { search } from './search';
+import { RateLimitError } from './api/haveibeenpwned';
 
 /*
  * Export individual named functions to allow the following:
@@ -25,6 +26,7 @@ export {
   pwnedPassword,
   pwnedPasswordRange,
   search,
+  RateLimitError,
 };
 
 // Export the overall interface, primarily for typing the `hibp` object placed
@@ -38,6 +40,7 @@ export interface HIBP {
   pwnedPassword: typeof pwnedPassword;
   pwnedPasswordRange: typeof pwnedPasswordRange;
   search: typeof search;
+  RateLimitError: typeof RateLimitError;
 }
 
 // https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-document-TypeScript#jsdoc-comments-disappear
