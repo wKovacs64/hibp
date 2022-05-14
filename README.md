@@ -106,6 +106,15 @@ search('someAccountOrEmail', { apiKey: 'my-api-key' })
   });
 ```
 
+#### Rate Limiting
+
+The haveibeenpwned.com API [rate limits][haveibeenpwned-rate-limiting] requests
+to prevent abuse. In the event you get rate limited, the module will throw a
+custom `RateLimitError` which will include a `retryAfterSeconds` property so you
+know when you can try the call again (as a `number`, unless the remote API did
+not provide one, in which case it will be `undefined` - but that _should_ never
+happen).
+
 #### Using in the browser
 
 **Prerequisite:** This module requires a Promise implementation to exist in the
@@ -202,6 +211,7 @@ This module is distributed under the [MIT License][license].
 [skypack]: https://www.skypack.dev/
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
+[haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
 [search-by-range]:
   https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
 [api-key-blog-post]:

@@ -101,6 +101,16 @@ search('someAccountOrEmail', { apiKey: 'my-api-key' })
   });
 ```
 
+#### Rate Limiting
+
+The haveibeenpwned.com API
+[rate limits](https://haveibeenpwned.com/API/v3#RateLimiting) requests to
+prevent abuse. In the event you get rate limited, the module will throw a custom
+`RateLimitError` which will include a `retryAfterSeconds` property so you know
+when you can try the call again (as a `number`, unless the remote API did not
+provide one, in which case it will be `undefined` - but that _should_ never
+happen).
+
 #### Using in the browser
 
 **Prerequisite:** This module requires a Promise implementation to exist in the

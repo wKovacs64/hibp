@@ -79,7 +79,7 @@ export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
  * @internal
  */
 export const TOO_MANY_REQUESTS: HaveIBeenPwnedApiResponse = {
-  headers: emptyHeaders,
+  headers: new Map([['retry-after', '2']]),
   status: 429,
   body: {
     statusCode: 429,
