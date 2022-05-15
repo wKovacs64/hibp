@@ -7,7 +7,6 @@ import {
   NOT_FOUND,
   TOO_MANY_REQUESTS,
 } from './responses';
-
 import type { ApiData, ErrorData } from './types';
 
 /**

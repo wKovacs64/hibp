@@ -1,9 +1,8 @@
 import { server, rest } from '../mocks/server';
 import { EXAMPLE_PASTE } from '../../test/fixtures';
 import { NOT_FOUND, UNAUTHORIZED } from '../api/haveibeenpwned/responses';
-import { pasteAccount } from '../pasteAccount';
-
 import type { ErrorData } from '../api/haveibeenpwned/types';
+import { pasteAccount } from '../pasteAccount';
 
 describe('pasteAccount', () => {
   const PASTE_ACCOUNT_DATA = [EXAMPLE_PASTE];

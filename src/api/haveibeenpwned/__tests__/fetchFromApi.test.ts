@@ -7,9 +7,8 @@ import {
   BLOCKED,
   TOO_MANY_REQUESTS,
 } from '../responses';
-import { fetchFromApi } from '../fetchFromApi';
-
 import type { ErrorData } from '../types';
+import { fetchFromApi } from '../fetchFromApi';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';
