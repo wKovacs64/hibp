@@ -13,5 +13,5 @@
     "newLine": "lf",
     "types": ["node", "vitest/globals"]
   },
-  "exclude": ["cypress"]
+  "exclude": ["cypress", "cypress.config.ts"]
 }
