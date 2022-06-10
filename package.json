@@ -107,7 +107,7 @@
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "4.0.0",
-    "@rollup/plugin-typescript": "8.3.2",
+    "@rollup/plugin-typescript": "8.3.3",
     "@types/common-tags": "1.8.1",
     "@types/node": "16.11.39",
     "@types/node-fetch": "2.6.1",
