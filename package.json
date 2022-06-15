@@ -110,7 +110,7 @@
     "@rollup/plugin-typescript": "8.3.3",
     "@types/common-tags": "1.8.1",
     "@types/debug": "4.1.7",
-    "@types/node": "16.11.40",
+    "@types/node": "16.11.41",
     "@types/node-fetch": "2.6.1",
     "@types/ws": "8.5.3",
     "@wkovacs64/prettier-config": "3.0.2",
