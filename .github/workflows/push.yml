@@ -3,7 +3,7 @@ name: Push
 on:
   push:
     branches:
-      - develop
+      - dev
 
 jobs:
   bundlewatch:
@@ -13,6 +13,6 @@ jobs:
       - run: npm install
       - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
-          branch-base: develop
+          branch-base: dev
           bundlewatch-config: .bundlewatch.config.js
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
