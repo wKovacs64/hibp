@@ -13,10 +13,11 @@
 _A Promise-based client for [Troy Hunt][troy]'s [Have I been
 pwned?][haveibeenpwned] service._
 
-[![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
+[![npm Version][npm-image]][npm-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![semantic-release][semantic-release-image]][semantic-release-url]
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![Build Status][ci-image]][ci-url]
 
 ## Installation
 
@@ -199,8 +200,8 @@ This module is distributed under the [MIT License][license].
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
 [ci-image]:
-  https://img.shields.io/circleci/project/github/wKovacs64/hibp/main.svg?style=flat-square
-[ci-url]: https://circleci.com/gh/wKovacs64/hibp
+  https://github.com/wKovacs64/hibp/actions/workflows/ci.yml/badge.svg?event=push
+[ci-url]: https://github.com/wKovacs64/hibp/actions/workflows/ci.yml
 [coverage-image]:
   https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
 [coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main

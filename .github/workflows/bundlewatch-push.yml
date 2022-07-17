@@ -1,4 +1,4 @@
-name: Push
+name: ⚖ Bundlewatch on Push
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
+      - uses: bahmutov/npm-install@v1
       - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
           branch-base: dev

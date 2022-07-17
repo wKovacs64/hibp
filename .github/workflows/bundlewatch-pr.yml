@@ -1,4 +1,4 @@
-name: PR
+name: ⚖ Bundlewatch on PR
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
+      - uses: bahmutov/npm-install@v1
       - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
           bundlewatch-config: .bundlewatch.config.js
