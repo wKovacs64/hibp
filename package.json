@@ -37,6 +37,7 @@
     "dist",
     "example",
     "API.md",
+    "CHANGELOG.md",
     "MIGRATION.md"
   ],
   "sideEffects": false,
