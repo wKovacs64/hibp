@@ -67,17 +67,17 @@ const hibp = require('hibp');
 
 The following modules are available:
 
-- [breach](https://github.com/wKovacs64/hibp/tree/master/API.md#breach)
-- [breachedAccount](https://github.com/wKovacs64/hibp/tree/master/API.md#breachedaccount)
-- [breaches](https://github.com/wKovacs64/hibp/tree/master/API.md#breaches)
-- [dataClasses](https://github.com/wKovacs64/hibp/tree/master/API.md#dataclasses)
-- [pasteAccount](https://github.com/wKovacs64/hibp/tree/master/API.md#pasteaccount)
-- [pwnedPassword](https://github.com/wKovacs64/hibp/tree/master/API.md#pwnedpassword)
-- [pwnedPasswordRange](https://github.com/wKovacs64/hibp/tree/master/API.md#pwnedpasswordrange)
-- [search](https://github.com/wKovacs64/hibp/tree/master/API.md#search)
+- [breach](https://github.com/wKovacs64/hibp/tree/main/API.md#breach)
+- [breachedAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#breachedaccount)
+- [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
+- [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)
+- [pasteAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#pasteaccount)
+- [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)
+- [pwnedPasswordRange](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpasswordrange)
+- [search](https://github.com/wKovacs64/hibp/tree/main/API.md#search)
 
 Please see the
-[API reference](https://github.com/wKovacs64/hibp/tree/master/API.md) for more
+[API reference](https://github.com/wKovacs64/hibp/tree/main/API.md) for more
 detailed usage information and examples.
 
 #### Quick-Start Example
@@ -194,7 +194,7 @@ yours to the list!
 ## License
 
 This module is distributed under the
-[MIT License](https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt).
+[MIT License](https://github.com/wKovacs64/hibp/tree/main/LICENSE.txt).
 
 ## Contributors ✨
 

@@ -1,7 +1,7 @@
 settings:
   branches:
-    - develop
-    - master
+    - dev
+    - main
 checks:
   - name: typecov
     options:

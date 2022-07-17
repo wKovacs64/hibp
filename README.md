@@ -199,11 +199,11 @@ This module is distributed under the [MIT License][license].
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
 [ci-image]:
-  https://img.shields.io/circleci/project/github/wKovacs64/hibp/master.svg?style=flat-square
+  https://img.shields.io/circleci/project/github/wKovacs64/hibp/main.svg?style=flat-square
 [ci-url]: https://circleci.com/gh/wKovacs64/hibp
 [coverage-image]:
-  https://img.shields.io/codecov/c/github/wKovacs64/hibp/master.svg?style=flat-square
-[coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/master
+  https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
+[coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main
 [semantic-release-image]:
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
@@ -227,7 +227,7 @@ This module is distributed under the [MIT License][license].
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
 [pwl]: https://pwl.netlify.com/
-[license]: https://github.com/wKovacs64/hibp/tree/master/LICENSE.txt
+[license]: https://github.com/wKovacs64/hibp/tree/main/LICENSE.txt
 
 ## Contributors ✨
 
