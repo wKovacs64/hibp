@@ -13,7 +13,6 @@ describe('hibp', () => {
         "pwnedPassword": [Function],
         "pwnedPasswordRange": [Function],
         "search": [Function],
-        Symbol(Symbol.toStringTag): "Module",
       }
     `);
   });
