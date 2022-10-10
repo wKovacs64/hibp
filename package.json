@@ -112,7 +112,7 @@
     "@types/node": "16.11.64",
     "@types/node-fetch": "2.6.2",
     "@types/ws": "8.5.3",
-    "@vitest/coverage-c8": "0.24.0",
+    "@vitest/coverage-c8": "0.24.1",
     "@wkovacs64/prettier-config": "3.0.2",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "bundlewatch": "0.3.3",
