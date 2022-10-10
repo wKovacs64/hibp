@@ -104,7 +104,7 @@
     "@rollup/plugin-babel": "6.0.0",
     "@rollup/plugin-commonjs": "23.0.0",
     "@rollup/plugin-json": "5.0.0",
-    "@rollup/plugin-node-resolve": "14.1.0",
+    "@rollup/plugin-node-resolve": "15.0.0",
     "@rollup/plugin-replace": "5.0.0",
     "@rollup/plugin-typescript": "8.5.0",
     "@types/common-tags": "1.8.1",
