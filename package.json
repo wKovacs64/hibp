@@ -126,7 +126,7 @@
     "dts-bundle-generator": "7.0.0",
     "eslint": "8.25.0",
     "eslint-plugin-cypress": "2.12.1",
-    "eslint-plugin-wkovacs64": "13.16.0",
+    "eslint-plugin-wkovacs64": "13.17.0",
     "glob": "8.0.3",
     "husky": "8.0.1",
     "jsdoc-babel": "0.5.0",
