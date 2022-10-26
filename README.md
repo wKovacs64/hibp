@@ -13,10 +13,8 @@
 _A Promise-based client for [Troy Hunt][troy]'s [Have I been
 pwned?][haveibeenpwned] service._
 
-[![npm Version][npm-image]][npm-url]
-[![Build Status][ci-image]][ci-url]
+[![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
 [![Code Coverage][coverage-image]][coverage-url]
-[![semantic-release][semantic-release-image]][semantic-release-url]
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 
 ## Installation
@@ -205,9 +203,6 @@ This module is distributed under the [MIT License][license].
 [coverage-image]:
   https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
 [coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main
-[semantic-release-image]:
-  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square
-[semantic-release-url]: https://github.com/semantic-release/semantic-release
 [deno]: https://deno.land/
 [skypack]: https://www.skypack.dev/
 [troy]: https://www.troyhunt.com

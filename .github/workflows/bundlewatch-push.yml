@@ -3,7 +3,7 @@ name: ⚖ Bundlewatch on Push
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   bundlewatch:
@@ -13,6 +13,6 @@ jobs:
       - uses: bahmutov/npm-install@v1
       - uses: jackyef/bundlewatch-gh-action@0.2.0
         with:
-          branch-base: dev
+          branch-base: main
           bundlewatch-config: .bundlewatch.config.js
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
