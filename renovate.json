@@ -8,12 +8,12 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["eslint"],
-      "matchUpdateTypes": ["major"],
-      "enabled": false
-    },
-    {
-      "matchPackageNames": ["@types/node-fetch"],
+      "matchPackageNames": [
+        "eslint",
+        "@types/node-fetch",
+        "@types/node",
+        "node"
+      ],
       "matchUpdateTypes": ["major"],
       "enabled": false
     }
