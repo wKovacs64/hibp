@@ -87,7 +87,7 @@
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",
-    "jssha": "^3.2.0"
+    "jssha": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.19.6",
