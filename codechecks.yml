@@ -1,6 +1,5 @@
 settings:
   branches:
-    - dev
     - main
 checks:
   - name: typecov
