@@ -110,7 +110,7 @@
     "@types/node": "16.18.3",
     "@types/node-fetch": "2.6.2",
     "@types/ws": "8.5.3",
-    "@vitest/coverage-c8": "0.25.1",
+    "@vitest/coverage-c8": "0.25.2",
     "@wkovacs64/prettier-config": "3.0.2",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "bundlewatch": "0.3.3",
@@ -139,6 +139,6 @@
     "tslib": "2.4.1",
     "typecov": "0.2.3",
     "typescript": "4.8.4",
-    "vitest": "0.25.1"
+    "vitest": "0.25.2"
   }
 }
