@@ -5,7 +5,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 
 const supportedNodeVersion = '12.16';
 const inputs = glob.sync('src/**/*.ts', {
@@ -19,6 +19,10 @@ const inputs = glob.sync('src/**/*.ts', {
 });
 const external = (id) => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const umdName = 'hibp';
+const replaceOpts = {
+  'process.env.NODE_ENV': JSON.stringify('production'),
+  preventAssignment: true,
+};
 const typescriptOpts = {
   exclude: ['**/*.d.ts'],
   declaration: false,
@@ -93,7 +97,7 @@ export default [
       json({ preferConst: true }),
       nodeResolve(nodeResolveOpts),
       commonjs(),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      replace(replaceOpts),
       typescript(typescriptOpts),
       terser(terserOpts),
     ],
@@ -112,7 +116,7 @@ export default [
       json({ preferConst: true }),
       nodeResolve(nodeResolveOpts),
       commonjs(),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      replace(replaceOpts),
       typescript(typescriptOpts),
       getBabelOutputPlugin({
         moduleId: umdName,
