@@ -26,8 +26,8 @@ export class RateLimitError extends Error {
 
   constructor(
     retryAfter: ReturnType<Headers['get']>,
-    message: Error['constructor']['prototype']['message'],
-    options?: Error['constructor']['prototype']['options'],
+    message: string | undefined,
+    options?: ErrorOptions,
   ) {
     super(message, options);
     this.name = this.constructor.name;
@@ -95,7 +95,7 @@ export function fetchFromApi(
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
 
   return fetch(url, config).then((res) => {
-    if (res.ok) return res.json();
+    if (res.ok) return res.json() as Promise<ApiData>;
 
     switch (res.status) {
       case BAD_REQUEST.status:
