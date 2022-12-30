@@ -198,7 +198,7 @@ This module is distributed under the [MIT License][license].
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
 [ci-image]:
-  https://img.shields.io/github/workflow/status/wKovacs64/hibp/%F0%9F%A4%96%20CI/main?logo=github&style=flat-square
+  https://img.shields.io/github/actions/workflow/status/wKovacs64/hibp/ci.yml?logo=github&style=flat-square
 [ci-url]: https://github.com/wKovacs64/hibp/actions?query=workflow%3Aci
 [coverage-image]:
   https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
