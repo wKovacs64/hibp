@@ -119,7 +119,7 @@
     "cross-env": "7.0.3",
     "cypress": "12.2.0",
     "dts-bundle-generator": "7.1.0",
-    "eslint": "8.30.0",
+    "eslint": "8.31.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-wkovacs64": "14.1.0",
     "glob": "8.0.3",
