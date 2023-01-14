@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
-      - uses: jackyef/bundlewatch-gh-action@0.2.0
+      - uses: jackyef/bundlewatch-gh-action@0.2.1
         with:
           branch-base: main
           bundlewatch-config: .bundlewatch.config.js
