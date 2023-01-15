@@ -122,7 +122,7 @@
     "eslint": "8.31.0",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-wkovacs64": "14.1.0",
-    "glob": "8.0.3",
+    "glob": "8.1.0",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "8.0.0",
     "msw": "0.49.2",
