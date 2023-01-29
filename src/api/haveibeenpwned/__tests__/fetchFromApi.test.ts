@@ -60,9 +60,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       return expect(
         fetchFromApi('/service', { baseUrl: 'relativeBaseUrl' }),
-      ).rejects.toMatchInlineSnapshot(
-        `[TypeError: Only absolute URLs are supported]`,
-      );
+      ).rejects.toMatchInlineSnapshot(`[TypeError: Invalid URL]`);
     });
   });
 
