@@ -21,6 +21,7 @@
   "license": "MIT",
   "exports": {
     ".": {
+      "types": "./dist/hibp.d.ts",
       "browser": "./dist/browser/hibp.module.js",
       "umd": "./dist/browser/hibp.umd.js",
       "require": "./dist/cjs/hibp.js",
