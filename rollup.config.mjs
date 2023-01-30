@@ -92,6 +92,7 @@ export default [
       format: 'esm',
       sourcemap: true,
       indent: false,
+      inlineDynamicImports: true,
     },
     plugins: [
       json({ preferConst: true }),
@@ -111,6 +112,7 @@ export default [
       format: 'esm',
       sourcemap: true,
       indent: false,
+      inlineDynamicImports: true,
     },
     plugins: [
       json({ preferConst: true }),

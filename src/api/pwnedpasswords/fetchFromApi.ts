@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from '../web-fetch';
 import { BAD_REQUEST } from './responses';
 
 /**

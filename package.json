@@ -86,7 +86,7 @@
     "node": ">= 14.13.1"
   },
   "dependencies": {
-    "isomorphic-unfetch": "^3.1.0",
+    "@remix-run/web-fetch": "^4.3.2",
     "jssha": "^3.3.0"
   },
   "devDependencies": {
@@ -108,7 +108,6 @@
     "@types/common-tags": "1.8.1",
     "@types/debug": "4.1.7",
     "@types/node": "16.18.11",
-    "@types/node-fetch": "2.6.2",
     "@types/ws": "8.5.4",
     "@vitest/coverage-c8": "0.28.3",
     "@wkovacs64/prettier-config": "3.0.3",
