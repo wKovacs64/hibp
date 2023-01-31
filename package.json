@@ -117,7 +117,7 @@
     "codecov": "3.8.3",
     "common-tags": "1.8.2",
     "cross-env": "7.0.3",
-    "cypress": "12.4.1",
+    "cypress": "12.5.0",
     "dts-bundle-generator": "7.2.0",
     "eslint": "8.33.0",
     "eslint-plugin-cypress": "2.12.1",
