@@ -1,4 +1,4 @@
-import glob from 'glob';
+import { globSync } from 'glob';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
@@ -8,7 +8,7 @@ import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 
 const supportedNodeVersion = '14.13.1';
-const inputs = glob.sync('src/**/*.ts', {
+const inputs = globSync('src/**/*.ts', {
   ignore: [
     '**/__mocks__/**',
     '**/__tests__/**',
