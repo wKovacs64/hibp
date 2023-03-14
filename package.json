@@ -21,7 +21,6 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "types": "./dist/hibp.d.ts",
       "browser": "./dist/browser/hibp.module.js",
       "umd": "./dist/browser/hibp.umd.js",
       "require": "./dist/cjs/hibp.js",
@@ -32,7 +31,6 @@
   "main": "dist/cjs/hibp.js",
   "module": "dist/esm/hibp.mjs",
   "unpkg": "dist/browser/hibp.umd.js",
-  "types": "dist/hibp.d.ts",
   "runkitExampleFilename": "example/runkit.js",
   "files": [
     "dist",
@@ -46,7 +44,7 @@
     "build": "run-s --silent build:bundle build:types build:docs",
     "build:bundle": "rollup --config",
     "build:docs": "jsdoc2md --no-cache --files src/*.ts --configure jsdoc2md.json > API.md && node scripts/fix-api-docs.js",
-    "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file dist/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write dist/hibp.d.ts",
+    "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file dist/cjs/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write dist/cjs/hibp.d.ts && cpy dist/cjs/hibp.d.ts dist/esm --flat --rename=hibp.d.mts",
     "changeset": "changeset",
     "changeset:version": "changeset version && npm install --package-lock-only",
     "changeset:publish": "changeset publish",
@@ -116,6 +114,7 @@
     "c8": "7.13.0",
     "codecov": "3.8.3",
     "common-tags": "1.8.2",
+    "cpy-cli": "4.2.0",
     "cross-env": "7.0.3",
     "cypress": "12.7.0",
     "dts-bundle-generator": "7.2.0",
