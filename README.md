@@ -25,11 +25,11 @@ In Node.js:
 npm install hibp
 ```
 
-In [Deno][deno] (via [Skypack][skypack]):
+In [Deno][deno]:
 
 ```ts
-// Replace x.y.z with the desired hibp version      ↓ ↓ ↓
-import * as hibp from 'https://cdn.skypack.dev/hibp@x.y.z?dts';
+// Replace x.y.z with the desired hibp version
+import * as hibp from 'npm:hibp@x.y.z';
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to
@@ -204,7 +204,6 @@ This module is distributed under the [MIT License][license].
   https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
 [coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main
 [deno]: https://deno.land/
-[skypack]: https://www.skypack.dev/
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
