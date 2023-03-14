@@ -1,5 +1,13 @@
 # Change Log
 
+## 12.0.1
+
+### Patch Changes
+
+- [#372](https://github.com/wKovacs64/hibp/pull/372) [`d2fb74f`](https://github.com/wKovacs64/hibp/commit/d2fb74f076e5f1873adc3e99f9894f77f3a64317) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Publish types next to their CJS/ESM source files.
+
+  For reference, see the following Twitter thread from Andrew Branch: https://mobile.twitter.com/atcb/status/1634653474041503744?t=8RVawwsEHrxnCD8BaITckg
+
 ## 12.0.0
 
 ### Major Changes
