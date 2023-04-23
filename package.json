@@ -126,7 +126,7 @@
     "jsdoc-to-markdown": "8.0.0",
     "msw": "1.2.1",
     "npm-run-all": "4.1.5",
-    "prettier": "2.8.7",
+    "prettier": "2.8.8",
     "rimraf": "5.0.0",
     "rollup": "3.20.7",
     "serve": "14.2.0",
