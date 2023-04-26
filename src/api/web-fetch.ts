@@ -5,6 +5,6 @@ async function fetchWrapper(
   input: string | URL,
   init?: RequestInit | undefined,
 ): Promise<Response> {
-  const { default: webFetch } = await import('@remix-run/web-fetch');
-  return webFetch(input, init);
+  const webFetchExports = await import('@remix-run/web-fetch');
+  return webFetchExports.fetch(input, init);
 }
