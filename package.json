@@ -117,7 +117,7 @@
     "cpy-cli": "4.2.0",
     "cross-env": "7.0.3",
     "cypress": "12.10.0",
-    "dts-bundle-generator": "7.2.0",
+    "dts-bundle-generator": "8.0.1",
     "eslint": "8.39.0",
     "eslint-plugin-cypress": "2.13.2",
     "eslint-plugin-wkovacs64": "14.1.0",
