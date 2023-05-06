@@ -1,3 +1,4 @@
+import { RateLimitError } from './api/haveibeenpwned/fetchFromApi';
 import { breach } from './breach';
 import { breachedAccount } from './breachedAccount';
 import { breaches } from './breaches';
@@ -6,7 +7,6 @@ import { pasteAccount } from './pasteAccount';
 import { pwnedPassword } from './pwnedPassword';
 import { pwnedPasswordRange } from './pwnedPasswordRange';
 import { search } from './search';
-import { RateLimitError } from './api/haveibeenpwned';
 
 /*
  * Export individual named functions to allow the following:
