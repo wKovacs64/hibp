@@ -121,10 +121,8 @@ You have several options for using this library in a browser environment:
 1. Bundled
 
    The most efficient and recommended method is to bundle it with client-side
-   code using a module bundler like [webpack](https://webpack.js.org). If your
-   build process honors the `module` field in `package.json`, you can import the
-   ECMAScript module as described [above](#usage). Otherwise, the `main` field
-   resolves to the CommonJS module version.
+   code using a module bundler like [webpack](https://webpack.js.org) or, more
+   likely, whatever your framework of choice uses under the hood.
 
 1. UMD
 
