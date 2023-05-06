@@ -84,7 +84,7 @@
     "node": ">= 16.0.0"
   },
   "dependencies": {
-    "@remix-run/web-fetch": "^4.3.2",
+    "@remix-run/web-fetch": "^4.3.4",
     "jssha": "^3.3.0"
   },
   "devDependencies": {
