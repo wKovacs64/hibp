@@ -8,7 +8,7 @@ import {
   TOO_MANY_REQUESTS,
 } from '../responses';
 import type { ErrorData } from '../types';
-import { fetchFromApi } from '../fetchFromApi';
+import { fetchFromApi } from '../fetch-from-api';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';

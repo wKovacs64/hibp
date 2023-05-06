@@ -1,12 +1,12 @@
+import { RateLimitError } from './api/haveibeenpwned/fetch-from-api';
 import { breach } from './breach';
-import { breachedAccount } from './breachedAccount';
+import { breachedAccount } from './breached-account';
 import { breaches } from './breaches';
-import { dataClasses } from './dataClasses';
-import { pasteAccount } from './pasteAccount';
-import { pwnedPassword } from './pwnedPassword';
-import { pwnedPasswordRange } from './pwnedPasswordRange';
+import { dataClasses } from './data-classes';
+import { pasteAccount } from './paste-account';
+import { pwnedPassword } from './pwned-password';
+import { pwnedPasswordRange } from './pwned-password-range';
 import { search } from './search';
-import { RateLimitError } from './api/haveibeenpwned';
 
 /*
  * Export individual named functions to allow the following:

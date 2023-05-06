@@ -1,4 +1,4 @@
-import { fetchFromApi } from './api/pwnedpasswords';
+import { fetchFromApi } from './api/pwnedpasswords/fetch-from-api';
 
 export interface PwnedPasswordSuffixes {
   [suffix: string]: number;

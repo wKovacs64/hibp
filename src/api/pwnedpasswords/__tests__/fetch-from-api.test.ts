@@ -1,6 +1,6 @@
 import { server, rest } from '../../../mocks/server';
 import { BAD_REQUEST, OK } from '../responses';
-import { fetchFromApi } from '../fetchFromApi';
+import { fetchFromApi } from '../fetch-from-api';
 
 describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('request failure', () => {
