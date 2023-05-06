@@ -41,8 +41,8 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "run-s --silent build:bundle build:types build:docs",
-    "build:bundle": "rollup --config",
+    "build": "run-s --silent build:lib build:types build:docs",
+    "build:lib": "rollup --config",
     "build:docs": "jsdoc2md --no-cache --files src/*.ts --configure jsdoc2md.json > API.md && node scripts/fix-api-docs.js",
     "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file dist/cjs/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write dist/cjs/hibp.d.ts && cpy dist/cjs/hibp.d.ts dist/esm --flat --rename=hibp.d.mts",
     "changeset": "changeset",
@@ -64,8 +64,8 @@
     "start-test-server": "serve --no-clipboard",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:browser:open": "run-s --silent build:bundle \"ssat cy:open\"",
-    "test:browser:run": "run-s --silent build:bundle \"ssat cy:run\"",
+    "test:browser:open": "run-s --silent build:lib \"ssat cy:open\"",
+    "test:browser:run": "run-s --silent build:lib \"ssat cy:run\"",
     "test:watch": "vitest watch"
   },
   "private": false,
