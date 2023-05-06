@@ -2,7 +2,7 @@ import { server, rest } from '../mocks/server';
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from '../../test/fixtures';
 import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';
 import type { ErrorData } from '../api/haveibeenpwned/types';
-import { breachedAccount } from '../breachedAccount';
+import { breachedAccount } from '../breached-account';
 
 describe('breachedAccount', () => {
   const apiKey = 'my-api-key';

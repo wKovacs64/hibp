@@ -1,6 +1,6 @@
 import type { Breach, Paste } from './api/haveibeenpwned/types';
-import { breachedAccount } from './breachedAccount';
-import { pasteAccount } from './pasteAccount';
+import { breachedAccount } from './breached-account';
+import { pasteAccount } from './paste-account';
 
 export interface SearchResults {
   breaches: Breach[] | null;

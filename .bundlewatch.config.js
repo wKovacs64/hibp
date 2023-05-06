@@ -16,7 +16,7 @@ module.exports = {
       maxSize: '1 kB',
     },
     {
-      path: 'dist/cjs/breachedAccount.js',
+      path: 'dist/cjs/breached-account.js',
       maxSize: '1.2 kB',
     },
     {
@@ -24,19 +24,19 @@ module.exports = {
       maxSize: '1 kB',
     },
     {
-      path: 'dist/cjs/dataClasses.js',
+      path: 'dist/cjs/data-classes.js',
       maxSize: '1 kB',
     },
     {
-      path: 'dist/cjs/pasteAccount.js',
+      path: 'dist/cjs/paste-account.js',
       maxSize: '1.1 kB',
     },
     {
-      path: 'dist/cjs/pwnedPassword.js',
+      path: 'dist/cjs/pwned-password.js',
       maxSize: '1.1 kB',
     },
     {
-      path: 'dist/cjs/pwnedPasswordRange.js',
+      path: 'dist/cjs/pwned-password-range.js',
       maxSize: '1.3 kB',
     },
     {
@@ -49,7 +49,7 @@ module.exports = {
       maxSize: '1 kB',
     },
     {
-      path: 'dist/esm/breachedAccount.mjs',
+      path: 'dist/esm/breached-account.mjs',
       maxSize: '1.1 kB',
     },
     {
@@ -57,20 +57,20 @@ module.exports = {
       maxSize: '1 kB',
     },
     {
-      path: 'dist/esm/dataClasses.mjs',
+      path: 'dist/esm/data-classes.mjs',
       maxSize: '1 kB',
     },
     {
-      path: 'dist/esm/pasteAccount.mjs',
+      path: 'dist/esm/paste-account.mjs',
       maxSize: '1 kB',
     },
     {
-      path: 'dist/esm/pwnedPassword.mjs',
+      path: 'dist/esm/pwned-password.mjs',
       maxSize: '1 kB',
     },
     {
-      path: 'dist/esm/pwnedPasswordRange.mjs',
-      maxSize: '1.2 kB',
+      path: 'dist/esm/pwned-password-range.mjs',
+      maxSize: '1.3 kB',
     },
     {
       path: 'dist/esm/search.mjs',

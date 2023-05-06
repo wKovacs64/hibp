@@ -1,4 +1,4 @@
-import { fetchFromApi } from './api/haveibeenpwned/fetchFromApi';
+import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api';
 
 /**
  * Fetches all data classes in the system.

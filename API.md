@@ -28,11 +28,6 @@ valid API key on your behalf) will fail.</p>
 without it (that is, without specifying a <code>baseUrl</code> to a proxy that inserts a
 valid API key on your behalf) will fail.</p>
 </dd>
-<dt><a href="#pwnedPassword">pwnedPassword(password, [options])</a> ⇒ <code>Promise.&lt;number&gt;</code></dt>
-<dd><p>Fetches the number of times the the given password has been exposed in a
-breach (0 indicating no exposure). The password is given in plain text, but
-only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
-</dd>
 <dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#PwnedPasswordSuffixes">Promise.&lt;PwnedPasswordSuffixes&gt;</a></code></dt>
 <dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
@@ -40,6 +35,11 @@ Passwords repository, the API will respond with an HTTP 200 and include the
 suffix of every hash beginning with the specified prefix, followed by a count
 of how many times it appears in the data set. This function parses the
 response and returns a more structured format.</p>
+</dd>
+<dt><a href="#pwnedPassword">pwnedPassword(password, [options])</a> ⇒ <code>Promise.&lt;number&gt;</code></dt>
+<dd><p>Fetches the number of times the the given password has been exposed in a
+breach (0 indicating no exposure). The password is given in plain text, but
+only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
 <dt><a href="#search">search(account, [breachOptions])</a> ⇒ <code><a href="#SearchResults">Promise.&lt;SearchResults&gt;</a></code></dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
@@ -292,39 +292,6 @@ try {
   // ...
 }
 ```
-<a name="pwnedPassword"></a>
-
-## pwnedPassword(password, [options]) ⇒ <code>Promise.&lt;number&gt;</code>
-Fetches the number of times the the given password has been exposed in a
-breach (0 indicating no exposure). The password is given in plain text, but
-only the first 5 characters of its SHA-1 hash will be submitted to the API.
-
-**Kind**: global function  
-**Returns**: <code>Promise.&lt;number&gt;</code> - a Promise which resolves to the number of times
-the password has been exposed in a breach, or rejects with an Error  
-**See**: https://haveibeenpwned.com/api/v3#PwnedPasswords  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| password | <code>string</code> | a password in plain text |
-| [options] | <code>object</code> | a configuration object |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
-| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
-
-**Example**  
-```js
-try {
-  const numPwns = await pwnedPassword("f00b4r");
-  // truthy check or numeric condition
-  if (numPwns) {
-    // ...
-  } else {
-    // ...
-  }
-} catch (err) {
-  // ...
-}
-```
 <a name="pwnedPasswordRange"></a>
 
 ## pwnedPasswordRange(prefix, [options]) ⇒ [<code>Promise.&lt;PwnedPasswordSuffixes&gt;</code>](#PwnedPasswordSuffixes)
@@ -370,6 +337,39 @@ try {
   const suffix = "1E4C9B93F3F0682250B6CF8331B7EE68FD8";
   const results = await pwnedPasswordRange("5BAA6");
   const numPwns = results[suffix] || 0;
+} catch (err) {
+  // ...
+}
+```
+<a name="pwnedPassword"></a>
+
+## pwnedPassword(password, [options]) ⇒ <code>Promise.&lt;number&gt;</code>
+Fetches the number of times the the given password has been exposed in a
+breach (0 indicating no exposure). The password is given in plain text, but
+only the first 5 characters of its SHA-1 hash will be submitted to the API.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;number&gt;</code> - a Promise which resolves to the number of times
+the password has been exposed in a breach, or rejects with an Error  
+**See**: https://haveibeenpwned.com/api/v3#PwnedPasswords  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| password | <code>string</code> | a password in plain text |
+| [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const numPwns = await pwnedPassword("f00b4r");
+  // truthy check or numeric condition
+  if (numPwns) {
+    // ...
+  } else {
+    // ...
+  }
 } catch (err) {
   // ...
 }

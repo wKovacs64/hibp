@@ -1,5 +1,5 @@
 import JSSHA from 'jssha/dist/sha1';
-import { pwnedPasswordRange } from './pwnedPasswordRange';
+import { pwnedPasswordRange } from './pwned-password-range';
 
 /**
  * Fetches the number of times the the given password has been exposed in a

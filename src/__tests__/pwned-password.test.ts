@@ -1,6 +1,6 @@
 import { server, rest } from '../mocks/server';
 import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
-import { pwnedPassword } from '../pwnedPassword';
+import { pwnedPassword } from '../pwned-password';
 
 describe('pwnedPassword', () => {
   describe('pwned', () => {

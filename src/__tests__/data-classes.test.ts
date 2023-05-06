@@ -1,5 +1,5 @@
 import { server, rest } from '../mocks/server';
-import { dataClasses } from '../dataClasses';
+import { dataClasses } from '../data-classes';
 
 describe('dataClasses', () => {
   const DATA_CLASSES = ['some', 'data', 'classes'];
