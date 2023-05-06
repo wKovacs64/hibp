@@ -1,6 +1,6 @@
 {
   "name": "hibp",
-  "version": "12.0.1",
+  "version": "13.0.0",
   "description": "A Promise-based client for the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
