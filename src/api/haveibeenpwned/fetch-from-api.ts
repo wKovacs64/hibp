@@ -34,10 +34,9 @@ export class RateLimitError extends Error {
     this.retryAfterSeconds =
       typeof retryAfter === 'string'
         ? Number.parseInt(retryAfter, 10) /* c8 ignore start */
-        : undefined;
+        : undefined; /* c8 ignore stop */
   }
 }
-/* c8 ignore stop */
 
 function blockedWithRayId(rayId: string) {
   return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
