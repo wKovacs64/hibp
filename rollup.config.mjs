@@ -7,7 +7,7 @@ import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 
-const supportedNodeVersion = '14.13.1';
+const supportedNodeVersion = '16.0.0';
 const inputs = globSync('src/**/*.ts', {
   ignore: [
     '**/__mocks__/**',
