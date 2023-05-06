@@ -116,11 +116,6 @@ happen).
 
 #### Using in the browser
 
-**Prerequisite:** This module requires a Promise implementation to exist in the
-global namespace prior to being loaded. Therefore, to facilitate usage in
-[browsers without native Promise support][caniuse-promise], you are responsible
-for providing a polyfill. I recommend [es6-promise][es6-promise].
-
 You have several options for using this library in a browser environment:
 
 1. Bundled
@@ -216,8 +211,6 @@ This module is distributed under the [MIT License][license].
 [caniuse-esm]: https://caniuse.com/#feat=es6-module
 [js-modules]: https://v8.dev/features/modules#browser
 [webpack]: https://webpack.js.org
-[caniuse-promise]: https://caniuse.com/#search=promise
-[es6-promise]: https://github.com/stefanpenner/es6-promise
 [runkit]: https://runkit.com/npm/hibp
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls

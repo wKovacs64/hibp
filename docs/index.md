@@ -113,12 +113,6 @@ happen).
 
 #### Using in the browser
 
-**Prerequisite:** This module requires a Promise implementation to exist in the
-global namespace prior to being loaded. Therefore, to facilitate usage in
-[browsers without native Promise support](https://caniuse.com/#search=promise),
-you are responsible for providing a polyfill. I recommend
-[es6-promise](https://github.com/stefanpenner/es6-promise).
-
 You have several options for using this library in a browser environment:
 
 1. Bundled

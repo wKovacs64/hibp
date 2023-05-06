@@ -128,7 +128,7 @@ export default [
             {
               modules: 'umd',
               targets: {
-                browsers: ['> 1%', 'last 2 versions'],
+                browsers: ['defaults', 'supports promises'],
               },
             },
           ],
