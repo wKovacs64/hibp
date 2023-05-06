@@ -1,5 +1,13 @@
 # Change Log
 
+## 13.0.0
+
+### Major Changes
+
+- [#383](https://github.com/wKovacs64/hibp/pull/383) [`b837a57`](https://github.com/wKovacs64/hibp/commit/b837a57abf29bcc00d4d3a14bbfe38d4f80ca97d) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Drop support for Node.js 14 as it is [end-of-life](https://nodejs.org/en/about/releases/), making the new minimum Node.js runtime v16.0.0. Please upgrade your Node.js environment if necessary, or continue using a previous release if you are unable to upgrade your environment.
+
+- [#381](https://github.com/wKovacs64/hibp/pull/381) [`6711b59`](https://github.com/wKovacs64/hibp/commit/6711b5924d0f8bf2c8ba03462b305af1bf901b3f) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Drop support for browsers without native Promise implementations. In reality, this likely didn't change anything.
+
 ## 12.0.1
 
 ### Patch Changes
