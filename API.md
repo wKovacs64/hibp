@@ -95,17 +95,16 @@ with an Error
 
 **Example**  
 ```js
-breach('Adobe')
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await breach("Adobe");
+  if (data) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="breachedAccount"></a>
 
@@ -138,53 +137,50 @@ an Error
 
 **Example**  
 ```js
-breachedAccount('foo', { apiKey: 'my-api-key' })
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await breachedAccount("foo", { apiKey: "my-api-key" });
+  if (data) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 **Example**  
 ```js
-breachedAccount('bar', {
-  includeUnverified: false,
-  baseUrl: 'https://my-hibp-proxy:8080',
-})
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
-    // ...
+try {
+  const data = await breachedAccount("bar", {
+    includeUnverified: false,
+    baseUrl: "https://my-hibp-proxy:8080",
   });
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 **Example**  
 ```js
-breachedAccount('baz', {
-  apiKey: 'my-api-key',
-  domain: 'adobe.com',
-  truncate: false,
-  userAgent: 'my-app 1.0'
-})
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
-    // ...
+try {
+  const data = await breachedAccount("baz", {
+    apiKey: "my-api-key",
+    domain: "adobe.com",
+    truncate: false,
+    userAgent: "my-app 1.0",
   });
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="breaches"></a>
 
@@ -204,31 +200,29 @@ objects (an empty array if no breaches were found), or rejects with an Error
 
 **Example**  
 ```js
-breaches()
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await breaches();
+  if (data) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 **Example**  
 ```js
-breaches({ domain: 'adobe.com' })
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await breaches({ domain: "adobe.com" });
+  if (data) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="dataClasses"></a>
 
@@ -248,17 +242,16 @@ Error
 
 **Example**  
 ```js
-dataClasses()
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await dataClasses();
+  if (data) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="pasteAccount"></a>
 
@@ -288,17 +281,16 @@ Error
 
 **Example**  
 ```js
-pasteAccount('foo@bar.com', { apiKey: 'my-api-key' })
-  .then(data => {
-    if (data) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await pasteAccount("foo@bar.com", { apiKey: "my-api-key" });
+  if (data) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="pwnedPassword"></a>
 
@@ -321,18 +313,17 @@ the password has been exposed in a breach, or rejects with an Error
 
 **Example**  
 ```js
-pwnedPassword('f00b4r')
-  .then(numPwns => {
-    // truthy check or numeric condition
-    if (numPwns) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const numPwns = await pwnedPassword("f00b4r");
+  // truthy check or numeric condition
+  if (numPwns) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="pwnedPasswordRange"></a>
 
@@ -361,24 +352,27 @@ password data set, or rejects with an Error
 
 **Example**  
 ```js
-pwnedPasswordRange('5BAA6')
-  .then(results => {
-    // results will have the following shape:
-    // {
-    //   "003D68EB55068C33ACE09247EE4C639306B": 3,
-    //   "012C192B2F16F82EA0EB9EF18D9D539B0DD": 1,
-    //   ...
-    // }
-  })
+try {
+  const results = await pwnedPasswordRange("5BAA6");
+  // results will have the following shape:
+  // {
+  //   "003D68EB55068C33ACE09247EE4C639306B": 3,
+  //   "012C192B2F16F82EA0EB9EF18D9D539B0DD": 1,
+  //   ...
+  // }
+} catch (err) {
+  // ...
+}
 ```
 **Example**  
 ```js
-const suffix = '1E4C9B93F3F0682250B6CF8331B7EE68FD8';
-pwnedPasswordRange('5BAA6')
-  .then(results => (results[suffix] || 0))
-  .catch(err => {
-    // ...
-  });
+try {
+  const suffix = "1E4C9B93F3F0682250B6CF8331B7EE68FD8";
+  const results = await pwnedPasswordRange("5BAA6");
+  const numPwns = results[suffix] || 0;
+} catch (err) {
+  // ...
+}
 ```
 <a name="search"></a>
 
@@ -418,31 +412,32 @@ rejects with an Error
 
 **Example**  
 ```js
-search('foo', { apiKey: 'my-api-key' })
-  .then(data => {
-    if (data.breaches || data.pastes) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
+try {
+  const data = await search("foo", { apiKey: "my-api-key" });
+  if (data.breaches || data.pastes) {
     // ...
-  });
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 **Example**  
 ```js
-search('nobody@nowhere.com', { apiKey: 'my-api-key', truncate: false })
-  .then(data => {
-    if (data.breaches || data.pastes) {
-      // ...
-    } else {
-      // ...
-    }
-  })
-  .catch(err => {
-    // ...
+try {
+  const data = await search("nobody@nowhere.com", {
+    apiKey: "my-api-key",
+    truncate: false,
   });
+  if (data.breaches || data.pastes) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
 ```
 <a name="Breach"></a>
 

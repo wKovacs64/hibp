@@ -36,17 +36,16 @@ import { fetchFromApi } from './api/haveibeenpwned';
  * array of paste objects (or null if no pastes were found), or rejects with an
  * Error
  * @example
- * pasteAccount('foo@bar.com', { apiKey: 'my-api-key' })
- *   .then(data => {
- *     if (data) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
- *   .catch(err => {
+ * try {
+ *   const data = await pasteAccount("foo@bar.com", { apiKey: "my-api-key" });
+ *   if (data) {
  *     // ...
- *   });
+ *   } else {
+ *     // ...
+ *   }
+ * } catch (err) {
+ *   // ...
+ * }
  */
 export function pasteAccount(
   email: string,

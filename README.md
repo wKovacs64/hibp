@@ -89,8 +89,9 @@ examples.
 ```javascript
 import { search } from 'hibp';
 
-search('someAccountOrEmail', { apiKey: 'my-api-key' })
-  .then((data) => {
+async function main() {
+  try {
+    const data = await search('someAccountOrEmail', { apiKey: 'my-api-key' });
     if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
@@ -98,11 +99,13 @@ search('someAccountOrEmail', { apiKey: 'my-api-key' })
       // Phew! We're clear.
       console.log('Good news — no pwnage found!');
     }
-  })
-  .catch((err) => {
+  } catch (err) {
     // Something went wrong.
     console.log(err.message);
-  });
+  }
+}
+
+main();
 ```
 
 #### Rate Limiting

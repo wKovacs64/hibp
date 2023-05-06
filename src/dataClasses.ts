@@ -13,17 +13,16 @@ import { fetchFromApi } from './api/haveibeenpwned';
  * array of strings (or null if no data classes were found), or rejects with an
  * Error
  * @example
- * dataClasses()
- *   .then(data => {
- *     if (data) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
- *   .catch(err => {
+ * try {
+ *   const data = await dataClasses();
+ *   if (data) {
  *     // ...
- *   });
+ *   } else {
+ *     // ...
+ *   }
+ * } catch (err) {
+ *   // ...
+ * }
  */
 export function dataClasses(
   options: { baseUrl?: string; userAgent?: string } = {},

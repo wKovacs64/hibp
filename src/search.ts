@@ -51,30 +51,30 @@ export interface SearchResults {
  * and a "pastes" key (which can be null or an array of paste objects), or
  * rejects with an Error
  * @example
- * search('foo', { apiKey: 'my-api-key' })
- *   .then(data => {
- *     if (data.breaches || data.pastes) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
- *   .catch(err => {
+ * try {
+ *   const data = await search("foo", { apiKey: "my-api-key" });
+ *   if (data.breaches || data.pastes) {
  *     // ...
- *   });
+ *   } else {
+ *     // ...
+ *   }
+ * } catch (err) {
+ *   // ...
+ * }
  * @example
- * search('nobody@nowhere.com', { apiKey: 'my-api-key', truncate: false })
- *   .then(data => {
- *     if (data.breaches || data.pastes) {
- *       // ...
- *     } else {
- *       // ...
- *     }
- *   })
- *   .catch(err => {
- *     // ...
+ * try {
+ *   const data = await search("nobody@nowhere.com", {
+ *     apiKey: "my-api-key",
+ *     truncate: false,
  *   });
- *
+ *   if (data.breaches || data.pastes) {
+ *     // ...
+ *   } else {
+ *     // ...
+ *   }
+ * } catch (err) {
+ *   // ...
+ * }
  * @see https://haveibeenpwned.com/
  */
 export function search(
