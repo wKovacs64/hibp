@@ -13,6 +13,5 @@
     "stripInternal": true,
     "newLine": "lf",
     "types": ["node", "vitest/globals"]
-  },
-  "exclude": ["cypress", "cypress.config.ts"]
+  }
 }

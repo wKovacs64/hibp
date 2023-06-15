@@ -91,9 +91,10 @@ jobs:
         with:
           fail_ci_if_error: true
 
-  cypress:
-    name: ⚫️ Cypress
+  playwright:
+    name: 🎭 Playwright
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
@@ -107,18 +108,35 @@ jobs:
       - name: 📥 Install deps
         run: npm install
 
-      - name: 🌳 Cypress Run
-        uses: cypress-io/github-action@v4
+      - name: 🔢 Get Playwright version
+        run: echo "PLAYWRIGHT_VERSION=$(npx playwright --version | tr ' ' '-')" >> $GITHUB_ENV
+
+      - name: 📦 Cache Playwright binaries
+        id: playwright-cache
+        uses: actions/cache@v3
         with:
-          install: false
-          start: npm run start-test-server
-          wait-on: 'http://localhost:3000'
-          config: baseUrl=http://localhost:3000
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: 📥 Install Playwright Browsers
+        run: npx playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: 🎭 Playwright tests
+        run: npx playwright test
+
+      - name: 📊 Upload report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright/report/
+          retention-days: 30
 
   release:
     name: 🚀 Release
     runs-on: ubuntu-latest
-    needs: [prettier, lint, typecheck, test, cypress]
+    needs: [prettier, lint, typecheck, test, playwright]
     if: github.ref == 'refs/heads/main'
     steps:
       - name: ⬇️ Checkout repo
