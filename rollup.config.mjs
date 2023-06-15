@@ -24,7 +24,7 @@ const replaceOpts = {
   preventAssignment: true,
 };
 const typescriptOpts = {
-  exclude: ['**/*.d.ts'],
+  exclude: ['**/*.d.ts', 'playwright/**'],
   declaration: false,
 };
 const nodeResolveOpts = {

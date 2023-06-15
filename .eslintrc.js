@@ -3,6 +3,7 @@ module.exports = {
     'plugin:wkovacs64/base',
     'plugin:wkovacs64/jest',
     'plugin:wkovacs64/typescript',
+    'plugin:playwright/playwright-test',
     'prettier',
   ],
   rules: {
@@ -13,7 +14,6 @@ module.exports = {
   parserOptions: {
     project: 'tsconfig.json',
   },
-  ignorePatterns: ['cypress.config.ts'],
   settings: {
     react: {
       // config hack to work around eslint-plugin-react crying
