@@ -115,7 +115,7 @@
     "eslint": "8.43.0",
     "eslint-plugin-playwright": "0.15.2",
     "eslint-plugin-wkovacs64": "14.3.1",
-    "glob": "10.3.0",
+    "glob": "10.3.1",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "8.0.0",
     "msw": "1.2.2",
