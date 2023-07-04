@@ -7,8 +7,8 @@ describe('pwnedPasswordRange', () => {
   describe('valid range', () => {
     it('resolves with an object', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res(ctx.text(EXAMPLE_PASSWORD_HASHES));
+        rest.get('*', () => {
+          return new Response(EXAMPLE_PASSWORD_HASHES);
         }),
       );
 

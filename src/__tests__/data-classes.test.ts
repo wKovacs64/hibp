@@ -8,8 +8,8 @@ describe('dataClasses', () => {
   describe('no parameters', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(ctx.json(DATA_CLASSES));
+        rest.get('*', () => {
+          return new Response(JSON.stringify(DATA_CLASSES));
         }),
       );
 

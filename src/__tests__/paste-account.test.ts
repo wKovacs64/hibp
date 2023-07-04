@@ -12,15 +12,14 @@ describe('pasteAccount', () => {
     const apiKey = 'my-api-key';
 
     server.use(
-      rest.get('*', (req, res, ctx) => {
-        if (!req.headers.get('hibp-api-key')) {
-          return res(
-            ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body as ErrorData),
-          );
+      rest.get('*', ({ request }) => {
+        if (!request.headers.has('hibp-api-key')) {
+          return new Response(JSON.stringify(UNAUTHORIZED.body), {
+            status: UNAUTHORIZED.status,
+          });
         }
 
-        return res(ctx.json(PASTE_ACCOUNT_DATA));
+        return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
       }),
     );
 
@@ -35,8 +34,8 @@ describe('pasteAccount', () => {
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res(ctx.json(PASTE_ACCOUNT_DATA));
+        rest.get('*', () => {
+          return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
         }),
       );
 
@@ -49,8 +48,8 @@ describe('pasteAccount', () => {
   describe('clean email', () => {
     it('resolves with null', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res(ctx.status(NOT_FOUND.status));
+        rest.get('*', () => {
+          return new Response(null, { status: NOT_FOUND.status });
         }),
       );
 

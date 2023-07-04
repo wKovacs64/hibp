@@ -8,8 +8,8 @@ describe('breach', () => {
   describe('found', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(ctx.json(VERIFIED_BREACH));
+        rest.get('*', () => {
+          return new Response(JSON.stringify(VERIFIED_BREACH));
         }),
       );
 
@@ -20,8 +20,8 @@ describe('breach', () => {
   describe('not found', () => {
     it('resolves with null', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(ctx.status(NOT_FOUND.status));
+        rest.get('*', () => {
+          return new Response(null, { status: NOT_FOUND.status });
         }),
       );
 

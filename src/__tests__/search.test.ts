@@ -12,8 +12,8 @@ describe('search', () => {
 
   it('searches breaches by username', () => {
     server.use(
-      rest.get(/breachedaccount/, (_, res, ctx) => {
-        return res.once(ctx.json(BREACHES));
+      rest.get(/breachedaccount/, () => {
+        return new Response(JSON.stringify(BREACHES));
       }),
     );
 
@@ -25,11 +25,11 @@ describe('search', () => {
 
   it('searches breaches and pastes by email address', () => {
     server.use(
-      rest.get(/breachedaccount/, (_, res, ctx) => {
-        return res.once(ctx.json(BREACHES));
+      rest.get(/breachedaccount/, () => {
+        return new Response(JSON.stringify(BREACHES));
       }),
-      rest.get(/pasteaccount/, (_, res, ctx) => {
-        return res.once(ctx.json(PASTES));
+      rest.get(/pasteaccount/, () => {
+        return new Response(JSON.stringify(PASTES));
       }),
     );
 
@@ -43,25 +43,23 @@ describe('search', () => {
     const apiKey = 'my-api-key';
 
     server.use(
-      rest.get(/breachedaccount/, (req, res, ctx) => {
-        if (!req.headers.get('hibp-api-key')) {
-          return res(
-            ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body as ErrorData),
-          );
+      rest.get(/breachedaccount/, ({ request }) => {
+        if (!request.headers.has('hibp-api-key')) {
+          return new Response(JSON.stringify(UNAUTHORIZED.body), {
+            status: UNAUTHORIZED.status,
+          });
         }
 
-        return res(ctx.json(BREACHES));
+        return new Response(JSON.stringify(BREACHES));
       }),
-      rest.get(/pasteaccount/, (req, res, ctx) => {
-        if (!req.headers.get('hibp-api-key')) {
-          return res(
-            ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body as ErrorData),
-          );
+      rest.get(/pasteaccount/, ({ request }) => {
+        if (!request.headers.has('hibp-api-key')) {
+          return new Response(JSON.stringify(UNAUTHORIZED.body), {
+            status: UNAUTHORIZED.status,
+          });
         }
 
-        return res(ctx.json(PASTES));
+        return new Response(JSON.stringify(PASTES));
       }),
     );
 
@@ -76,12 +74,12 @@ describe('search', () => {
 
   it('forwards the truncate option correctly', async () => {
     server.use(
-      rest.get(/breachedaccount/, (req, res, ctx) => {
-        return res(
-          req.url.searchParams.get('truncateResponse') === 'false'
-            ? ctx.json(BREACHES_EXPANDED)
-            : ctx.json(BREACHES),
-        );
+      rest.get(/breachedaccount/, ({ request }) => {
+        const url = new URL(request.url);
+        if (url.searchParams.get('truncateResponse') === 'false') {
+          return new Response(JSON.stringify(BREACHES_EXPANDED));
+        }
+        return new Response(JSON.stringify(BREACHES));
       }),
     );
 
