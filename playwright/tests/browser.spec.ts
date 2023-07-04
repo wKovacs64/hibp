@@ -1,5 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { test, expect } from '@playwright/test';
+import type * as hibp from '../../src/hibp';
+
+declare global {
+  interface Window {
+    hibp: typeof hibp;
+  }
+}
 
 test('UMD', async ({ page }) => {
   await page.goto('/test/umd.html');
