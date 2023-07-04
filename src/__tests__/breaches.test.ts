@@ -9,8 +9,8 @@ describe('breaches', () => {
   describe('no parameters', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(ctx.json(BREACHES));
+        rest.get('*', () => {
+          return new Response(JSON.stringify(BREACHES));
         }),
       );
 
@@ -21,12 +21,12 @@ describe('breaches', () => {
   describe('with domain', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', (req, res, ctx) => {
-          return res.once(
-            req.url.searchParams.get('domain') === 'foo.bar'
-              ? ctx.json(BREACHES)
-              : ctx.status(418),
-          );
+        rest.get('*', ({ request }) => {
+          const url = new URL(request.url);
+          if (url.searchParams.get('domain') === 'foo.bar') {
+            return new Response(JSON.stringify(BREACHES));
+          }
+          return new Response(null, { status: 418 });
         }),
       );
 

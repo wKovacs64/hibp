@@ -16,15 +16,14 @@ describe('breachedAccount', () => {
 
   it('honors the apiKey option', async () => {
     server.use(
-      rest.get('*', (req, res, ctx) => {
-        if (!req.headers.get('hibp-api-key')) {
-          return res(
-            ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body as ErrorData),
-          );
+      rest.get('*', ({ request }) => {
+        if (!request.headers.get('hibp-api-key')) {
+          return new Response(JSON.stringify(UNAUTHORIZED.body), {
+            status: UNAUTHORIZED.status,
+          });
         }
 
-        return res(ctx.json(BREACHED_ACCOUNT_DATA));
+        return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
       }),
     );
 
@@ -38,12 +37,12 @@ describe('breachedAccount', () => {
 
   it('honors the truncate option', async () => {
     server.use(
-      rest.get('*', (req, res, ctx) => {
-        return res(
-          req.url.searchParams.get('truncateResponse') === 'false'
-            ? ctx.json(BREACHED_ACCOUNT_DATA_EXPANDED)
-            : ctx.json(BREACHED_ACCOUNT_DATA),
-        );
+      rest.get('*', ({ request }) => {
+        const url = new URL(request.url);
+        if (url.searchParams.get('truncateResponse') === 'false') {
+          return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA_EXPANDED));
+        }
+        return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
       }),
     );
 
@@ -57,12 +56,14 @@ describe('breachedAccount', () => {
 
   it('honors the includeUnverified option', async () => {
     server.use(
-      rest.get('*', (req, res, ctx) => {
-        return res(
-          req.url.searchParams.get('includeUnverified') === 'false'
-            ? ctx.json(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED)
-            : ctx.json(BREACHED_ACCOUNT_DATA),
-        );
+      rest.get('*', ({ request }) => {
+        const url = new URL(request.url);
+        if (url.searchParams.get('includeUnverified') === 'false') {
+          return new Response(
+            JSON.stringify(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED),
+          );
+        }
+        return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
       }),
     );
 
@@ -76,12 +77,12 @@ describe('breachedAccount', () => {
 
   it('honors the domain option', () => {
     server.use(
-      rest.get('*', (req, res, ctx) => {
-        return res.once(
-          req.url.searchParams.get('domain') === 'foo.bar'
-            ? ctx.json(BREACHED_ACCOUNT_DATA)
-            : ctx.status(418),
-        );
+      rest.get('*', ({ request }) => {
+        const url = new URL(request.url);
+        if (url.searchParams.get('domain') === 'foo.bar') {
+          return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
+        }
+        return new Response(null, { status: 418 });
       }),
     );
 

@@ -13,13 +13,12 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
   });
 
   describe('invalid range', () => {
-    it('throws a "Bad Request" error', () => {
+    it('throws a "Bad Request" error', async () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(
-            ctx.status(BAD_REQUEST.status),
-            ctx.body(BAD_REQUEST.body as string),
-          );
+        rest.get('*', () => {
+          return new Response(BAD_REQUEST.body, {
+            status: BAD_REQUEST.status,
+          });
         }),
       );
 
@@ -34,10 +33,11 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('unexpected HTTP error', () => {
     it('throws an error with the response status text', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(
-            ctx.status(999, 'Unknown - something unexpected happened.'),
-          );
+        rest.get('*', () => {
+          return new Response(null, {
+            status: 599,
+            statusText: 'Unknown - something unexpected happened.',
+          });
         }),
       );
 
@@ -55,10 +55,10 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
       const body = '1234\n5678';
 
       server.use(
-        rest.get('*', (req, res, ctx) => {
-          return req.headers.get('User-Agent')
-            ? res.once(ctx.status(OK.status), ctx.body(body))
-            : res.once(ctx.status(401));
+        rest.get('*', ({ request }) => {
+          return request.headers.has('User-Agent')
+            ? new Response(body, { status: OK.status })
+            : new Response(null, { status: 401 });
         }),
       );
 
@@ -75,8 +75,8 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
       const body = '1234\n5678';
 
       server.use(
-        rest.get(new RegExp(`^${baseUrl}`), (_, res, ctx) => {
-          return res.once(ctx.status(OK.status), ctx.body(body));
+        rest.get(new RegExp(`^${baseUrl}`), () => {
+          return new Response(body, { status: OK.status });
         }),
       );
 

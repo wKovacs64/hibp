@@ -8,7 +8,6 @@ import {
   BLOCKED,
   TOO_MANY_REQUESTS,
 } from '../responses';
-import type { ErrorData } from '../types';
 import { fetchFromApi } from '../fetch-from-api';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
@@ -18,10 +17,10 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     // Node
     it('sends a custom User-Agent request header when outside the browser', async () => {
       server.use(
-        rest.get('*', (req, res, ctx) => {
-          return req.headers.get('User-Agent')?.includes('hibp')
-            ? res.once(ctx.status(OK.status), ctx.json({}))
-            : res.once(ctx.status(FORBIDDEN.status));
+        rest.get('*', ({ request }) => {
+          return request.headers.get('User-Agent')?.includes('hibp')
+            ? new Response(JSON.stringify({}), { status: OK.status })
+            : new Response(null, { status: FORBIDDEN.status });
         }),
       );
 
@@ -43,10 +42,10 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       // it accomplishes the same thing by checking for our custom UA (which we
       // don't want to see).
       server.use(
-        rest.get('*', (req, res, ctx) => {
-          return !req.headers.get('User-Agent')?.includes('hibp')
-            ? res.once(ctx.status(OK.status), ctx.json({}))
-            : res.once(ctx.status(FORBIDDEN.status));
+        rest.get('*', ({ request }) => {
+          return !request.headers.get('User-Agent')?.includes('hibp')
+            ? new Response(JSON.stringify({}), { status: OK.status })
+            : new Response(null, { status: FORBIDDEN.status });
         }),
       );
 
@@ -68,10 +67,10 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('invalid account format', () => {
     it('throws a "Bad Request" error', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(
-            ctx.status(BAD_REQUEST.status, BAD_REQUEST.statusText),
-          );
+        rest.get('*', () => {
+          return new Response(null, {
+            status: BAD_REQUEST.status,
+          });
         }),
       );
 
@@ -86,11 +85,10 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('unauthorized', () => {
     it('throws an "Unauthorized" error', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(
-            ctx.status(UNAUTHORIZED.status),
-            ctx.json(UNAUTHORIZED.body as ErrorData),
-          );
+        rest.get('*', () => {
+          return new Response(JSON.stringify(UNAUTHORIZED.body), {
+            status: UNAUTHORIZED.status,
+          });
         }),
       );
 
@@ -105,8 +103,11 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('forbidden request', () => {
     it('throws a "Forbidden" error if no cf-ray header is present', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(ctx.status(FORBIDDEN.status, FORBIDDEN.statusText));
+        rest.get('*', () => {
+          return new Response(null, {
+            status: FORBIDDEN.status,
+            statusText: FORBIDDEN.statusText,
+          });
         }),
       );
 
@@ -117,11 +118,11 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          const headerTransformers = Array.from(BLOCKED.headers).map(
-            ([header, value]) => ctx.set(header, value),
-          );
-          return res.once(ctx.status(BLOCKED.status), ...headerTransformers);
+        rest.get('*', () => {
+          return new Response(null, {
+            status: BLOCKED.status,
+            headers: Array.from(BLOCKED.headers),
+          });
         }),
       );
 
@@ -136,12 +137,11 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('rate limited', () => {
     it('throws a "Too Many Requests" rate limit error', async () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(
-            ctx.status(TOO_MANY_REQUESTS.status),
-            ctx.set('retry-after', '2'),
-            ctx.json(TOO_MANY_REQUESTS.body as ErrorData),
-          );
+        rest.get('*', () => {
+          return new Response(JSON.stringify(TOO_MANY_REQUESTS.body), {
+            status: TOO_MANY_REQUESTS.status,
+            headers: Array.from(TOO_MANY_REQUESTS.headers),
+          });
         }),
       );
       let err;
@@ -163,10 +163,11 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('unexpected HTTP error', () => {
     it('throws an error with the response status text', () => {
       server.use(
-        rest.get('*', (_, res, ctx) => {
-          return res.once(
-            ctx.status(999, 'Unknown - something unexpected happened.'),
-          );
+        rest.get('*', () => {
+          return new Response(null, {
+            status: 599,
+            statusText: 'Unknown - something unexpected happened.',
+          });
         }),
       );
 
@@ -181,10 +182,10 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
   describe('apiKey option', () => {
     it('is passed on as a request header', () => {
       server.use(
-        rest.get('*', (req, res, ctx) => {
-          return req.headers.get('hibp-api-key')
-            ? res.once(ctx.status(OK.status), ctx.json({}))
-            : res.once(ctx.status(UNAUTHORIZED.status));
+        rest.get('*', ({ request }) => {
+          return request.headers.get('hibp-api-key')
+            ? new Response(JSON.stringify({}), { status: OK.status })
+            : new Response(null, { status: UNAUTHORIZED.status });
         }),
       );
 
@@ -197,10 +198,10 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       const ua = 'custom UA';
 
       server.use(
-        rest.get('*', (req, res, ctx) => {
-          return req.headers.get('User-Agent')?.includes(ua)
-            ? res.once(ctx.status(OK.status), ctx.json({}))
-            : res.once(ctx.status(UNAUTHORIZED.status));
+        rest.get('*', ({ request }) => {
+          return request.headers.get('User-Agent')?.includes(ua)
+            ? new Response(JSON.stringify({}), { status: OK.status })
+            : new Response(null, { status: UNAUTHORIZED.status });
         }),
       );
 
@@ -216,8 +217,8 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       const endpoint = '/service';
 
       server.use(
-        rest.get(new RegExp(`^${baseUrl}`), (_, res, ctx) => {
-          return res.once(ctx.status(OK.status), ctx.json({}));
+        rest.get(new RegExp(`^${baseUrl}`), () => {
+          return new Response(JSON.stringify({}), { status: OK.status });
         }),
       );
 
