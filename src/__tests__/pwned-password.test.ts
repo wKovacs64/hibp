@@ -1,4 +1,5 @@
-import { server, rest } from '../mocks/server';
+import { rest } from 'msw';
+import { server } from '../mocks/server';
 import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
 import { pwnedPassword } from '../pwned-password';
 

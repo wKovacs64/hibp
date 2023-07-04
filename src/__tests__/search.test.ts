@@ -1,4 +1,5 @@
-import { server, rest } from '../mocks/server';
+import { rest } from 'msw';
+import { server } from '../mocks/server';
 import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures';
 import { search } from '../search';
 import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';

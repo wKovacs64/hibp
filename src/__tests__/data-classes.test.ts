@@ -1,4 +1,5 @@
-import { server, rest } from '../mocks/server';
+import { rest } from 'msw';
+import { server } from '../mocks/server';
 import { dataClasses } from '../data-classes';
 
 describe('dataClasses', () => {

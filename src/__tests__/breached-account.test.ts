@@ -1,4 +1,5 @@
-import { server, rest } from '../mocks/server';
+import { rest } from 'msw';
+import { server } from '../mocks/server';
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from '../../test/fixtures';
 import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';
 import type { ErrorData } from '../api/haveibeenpwned/types';

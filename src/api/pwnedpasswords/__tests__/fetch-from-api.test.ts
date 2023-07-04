@@ -1,4 +1,5 @@
-import { server, rest } from '../../../mocks/server';
+import { rest } from 'msw';
+import { server } from '../../../mocks/server';
 import { BAD_REQUEST, OK } from '../responses';
 import { fetchFromApi } from '../fetch-from-api';
 
