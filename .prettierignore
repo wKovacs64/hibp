@@ -1,12 +1,6 @@
-coverage
-dist/cjs
-dist/esm
-dist/browser
+# .gitignore and...
+
 test/babel-browser-build.js
 test/browser-es-module-loader.js
 package.json
 API.md
-
-/playwright/results/
-/playwright/report/
-/playwright/.cache/
