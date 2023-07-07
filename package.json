@@ -44,7 +44,7 @@
     "build": "run-s --silent build:lib build:types build:docs",
     "build:lib": "rollup --config",
     "build:docs": "jsdoc2md --no-cache --files src/*.ts --configure jsdoc2md.json > API.md && node scripts/fix-api-docs.js",
-    "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file dist/cjs/hibp.d.ts src/hibp.ts && prettier --loglevel silent --write dist/cjs/hibp.d.ts && cpy dist/cjs/hibp.d.ts dist/esm --flat --rename=hibp.d.mts",
+    "build:types": "dts-bundle-generator --silent --umd-module-name hibp --out-file dist/cjs/hibp.d.ts src/hibp.ts && prettier --log-level silent --write dist/cjs/hibp.d.ts && cpy dist/cjs/hibp.d.ts dist/esm --flat --rename=hibp.d.mts",
     "changeset": "changeset",
     "changeset:version": "changeset version && npm install --package-lock-only",
     "changeset:publish": "changeset publish",
