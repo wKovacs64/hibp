@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "declaration": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "strict": true,
     "stripInternal": true,
     "newLine": "lf",
