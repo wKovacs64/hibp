@@ -112,7 +112,7 @@
     "cpy-cli": "5.0.0",
     "cross-env": "7.0.3",
     "dts-bundle-generator": "8.0.1",
-    "eslint": "8.44.0",
+    "eslint": "8.45.0",
     "eslint-plugin-playwright": "0.15.3",
     "eslint-plugin-wkovacs64": "14.3.1",
     "glob": "10.3.3",
