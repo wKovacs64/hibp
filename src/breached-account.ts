@@ -87,7 +87,7 @@ export function breachedAccount(
   },
 ): Promise<Breach[] | null> {
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
-  const params: Array<string> = [];
+  const params: string[] = [];
   if (options.domain) {
     params.push(`domain=${encodeURIComponent(options.domain)}`);
   }
