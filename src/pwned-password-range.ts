@@ -1,8 +1,6 @@
 import { fetchFromApi } from './api/pwnedpasswords/fetch-from-api';
 
-export interface PwnedPasswordSuffixes {
-  [suffix: string]: number;
-}
+export type PwnedPasswordSuffixes = Record<string, number>;
 
 /**
  * An object mapping an exposed password hash suffix (corresponding to a given
