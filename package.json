@@ -92,7 +92,7 @@
     "@babel/preset-typescript": "7.22.5",
     "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.2",
-    "@playwright/test": "1.37.0",
+    "@playwright/test": "1.37.1",
     "@rollup/plugin-babel": "6.0.3",
     "@rollup/plugin-commonjs": "25.0.4",
     "@rollup/plugin-json": "6.0.0",
