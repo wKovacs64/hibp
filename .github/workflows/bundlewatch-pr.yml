@@ -8,7 +8,7 @@ jobs:
   bundlewatch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: bahmutov/npm-install@v1
       - uses: jackyef/bundlewatch-gh-action@0.2.1
         with:
