@@ -114,7 +114,7 @@
     "dts-bundle-generator": "8.0.1",
     "eslint": "8.49.0",
     "eslint-plugin-playwright": "0.16.0",
-    "eslint-plugin-wkovacs64": "15.0.1",
+    "eslint-plugin-wkovacs64": "15.1.0",
     "glob": "10.3.4",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "8.0.0",
