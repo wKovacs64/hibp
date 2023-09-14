@@ -77,7 +77,7 @@
   },
   "homepage": "https://wkovacs64.github.io/hibp",
   "engines": {
-    "node": ">= 16.0.0"
+    "node": ">= 18.0.0"
   },
   "dependencies": {
     "@remix-run/web-fetch": "^4.3.4",
