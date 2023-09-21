@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../mocks/server';
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from '../../test/fixtures';
 import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';
@@ -16,7 +16,7 @@ describe('breachedAccount', () => {
 
   it('honors the apiKey option', async () => {
     server.use(
-      rest.get('*', ({ request }) => {
+      http.get('*', ({ request }) => {
         if (!request.headers.get('hibp-api-key')) {
           return new Response(JSON.stringify(UNAUTHORIZED.body), {
             status: UNAUTHORIZED.status,
@@ -37,7 +37,7 @@ describe('breachedAccount', () => {
 
   it('honors the truncate option', async () => {
     server.use(
-      rest.get('*', ({ request }) => {
+      http.get('*', ({ request }) => {
         const url = new URL(request.url);
         if (url.searchParams.get('truncateResponse') === 'false') {
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA_EXPANDED));
@@ -56,7 +56,7 @@ describe('breachedAccount', () => {
 
   it('honors the includeUnverified option', async () => {
     server.use(
-      rest.get('*', ({ request }) => {
+      http.get('*', ({ request }) => {
         const url = new URL(request.url);
         if (url.searchParams.get('includeUnverified') === 'false') {
           return new Response(
@@ -77,7 +77,7 @@ describe('breachedAccount', () => {
 
   it('honors the domain option', () => {
     server.use(
-      rest.get('*', ({ request }) => {
+      http.get('*', ({ request }) => {
         const url = new URL(request.url);
         if (url.searchParams.get('domain') === 'foo.bar') {
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));

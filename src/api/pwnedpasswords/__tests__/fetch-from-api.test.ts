@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../../../mocks/server';
 import { BAD_REQUEST, OK } from '../responses';
 import { fetchFromApi } from '../fetch-from-api';
@@ -15,7 +15,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('invalid range', () => {
     it('throws a "Bad Request" error', async () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(BAD_REQUEST.body, {
             status: BAD_REQUEST.status,
           });
@@ -33,7 +33,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('unexpected HTTP error', () => {
     it('throws an error with the response status text', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(null, {
             status: 599,
             statusText: 'Unknown - something unexpected happened.',
@@ -55,7 +55,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
       const body = '1234\n5678';
 
       server.use(
-        rest.get('*', ({ request }) => {
+        http.get('*', ({ request }) => {
           return request.headers.has('User-Agent')
             ? new Response(body, { status: OK.status })
             : new Response(null, { status: 401 });
@@ -75,7 +75,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
       const body = '1234\n5678';
 
       server.use(
-        rest.get(new RegExp(`^${baseUrl}`), () => {
+        http.get(new RegExp(`^${baseUrl}`), () => {
           return new Response(body, { status: OK.status });
         }),
       );

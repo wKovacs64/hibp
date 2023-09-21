@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../mocks/server';
 import { VERIFIED_BREACH } from '../../test/fixtures';
 import { breaches } from '../breaches';
@@ -9,7 +9,7 @@ describe('breaches', () => {
   describe('no parameters', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(JSON.stringify(BREACHES));
         }),
       );
@@ -21,7 +21,7 @@ describe('breaches', () => {
   describe('with domain', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', ({ request }) => {
+        http.get('*', ({ request }) => {
           const url = new URL(request.url);
           if (url.searchParams.get('domain') === 'foo.bar') {
             return new Response(JSON.stringify(BREACHES));

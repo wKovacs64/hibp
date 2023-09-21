@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../mocks/server';
 import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
 import { pwnedPassword } from '../pwned-password';
@@ -7,7 +7,7 @@ describe('pwnedPassword', () => {
   describe('pwned', () => {
     it('resolves to number > 0', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(EXAMPLE_PASSWORD_HASHES);
         }),
       );
@@ -19,7 +19,7 @@ describe('pwnedPassword', () => {
   describe('clean', () => {
     it('resolves to 0', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(EXAMPLE_PASSWORD_HASHES);
         }),
       );

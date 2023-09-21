@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../mocks/server';
 import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
 import { pwnedPasswordRange } from '../pwned-password-range';
@@ -7,7 +7,7 @@ describe('pwnedPasswordRange', () => {
   describe('valid range', () => {
     it('resolves with an object', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(EXAMPLE_PASSWORD_HASHES);
         }),
       );

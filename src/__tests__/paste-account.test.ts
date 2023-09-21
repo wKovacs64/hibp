@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../mocks/server';
 import { EXAMPLE_PASTE } from '../../test/fixtures';
 import { NOT_FOUND, UNAUTHORIZED } from '../api/haveibeenpwned/responses';
@@ -12,7 +12,7 @@ describe('pasteAccount', () => {
     const apiKey = 'my-api-key';
 
     server.use(
-      rest.get('*', ({ request }) => {
+      http.get('*', ({ request }) => {
         if (!request.headers.has('hibp-api-key')) {
           return new Response(JSON.stringify(UNAUTHORIZED.body), {
             status: UNAUTHORIZED.status,
@@ -34,7 +34,7 @@ describe('pasteAccount', () => {
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
         }),
       );
@@ -48,7 +48,7 @@ describe('pasteAccount', () => {
   describe('clean email', () => {
     it('resolves with null', () => {
       server.use(
-        rest.get('*', () => {
+        http.get('*', () => {
           return new Response(null, { status: NOT_FOUND.status });
         }),
       );

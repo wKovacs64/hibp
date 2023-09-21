@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http } from 'msw';
 import { server } from '../mocks/server';
 import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures';
 import { search } from '../search';
@@ -12,7 +12,7 @@ describe('search', () => {
 
   it('searches breaches by username', () => {
     server.use(
-      rest.get(/breachedaccount/, () => {
+      http.get(/breachedaccount/, () => {
         return new Response(JSON.stringify(BREACHES));
       }),
     );
@@ -25,10 +25,10 @@ describe('search', () => {
 
   it('searches breaches and pastes by email address', () => {
     server.use(
-      rest.get(/breachedaccount/, () => {
+      http.get(/breachedaccount/, () => {
         return new Response(JSON.stringify(BREACHES));
       }),
-      rest.get(/pasteaccount/, () => {
+      http.get(/pasteaccount/, () => {
         return new Response(JSON.stringify(PASTES));
       }),
     );
@@ -43,7 +43,7 @@ describe('search', () => {
     const apiKey = 'my-api-key';
 
     server.use(
-      rest.get(/breachedaccount/, ({ request }) => {
+      http.get(/breachedaccount/, ({ request }) => {
         if (!request.headers.has('hibp-api-key')) {
           return new Response(JSON.stringify(UNAUTHORIZED.body), {
             status: UNAUTHORIZED.status,
@@ -52,7 +52,7 @@ describe('search', () => {
 
         return new Response(JSON.stringify(BREACHES));
       }),
-      rest.get(/pasteaccount/, ({ request }) => {
+      http.get(/pasteaccount/, ({ request }) => {
         if (!request.headers.has('hibp-api-key')) {
           return new Response(JSON.stringify(UNAUTHORIZED.body), {
             status: UNAUTHORIZED.status,
@@ -74,7 +74,7 @@ describe('search', () => {
 
   it('forwards the truncate option correctly', async () => {
     server.use(
-      rest.get(/breachedaccount/, ({ request }) => {
+      http.get(/breachedaccount/, ({ request }) => {
         const url = new URL(request.url);
         if (url.searchParams.get('truncateResponse') === 'false') {
           return new Response(JSON.stringify(BREACHES_EXPANDED));
