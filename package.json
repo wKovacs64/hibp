@@ -100,7 +100,7 @@
     "@rollup/plugin-replace": "5.0.4",
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "11.1.5",
-    "@types/common-tags": "1.8.2",
+    "@types/common-tags": "1.8.3",
     "@types/debug": "4.1.9",
     "@types/node": "18.18.5",
     "@types/ws": "8.5.7",
