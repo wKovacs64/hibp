@@ -113,7 +113,7 @@
     "cross-env": "7.0.3",
     "dts-bundle-generator": "8.0.1",
     "eslint": "8.52.0",
-    "eslint-plugin-playwright": "0.17.0",
+    "eslint-plugin-playwright": "0.18.0",
     "eslint-plugin-wkovacs64": "15.1.0",
     "glob": "10.3.10",
     "jsdoc-babel": "0.5.0",
