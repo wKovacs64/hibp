@@ -102,7 +102,7 @@
     "@rollup/plugin-typescript": "11.1.5",
     "@types/common-tags": "1.8.3",
     "@types/debug": "4.1.10",
-    "@types/node": "18.18.7",
+    "@types/node": "20.8.9",
     "@types/ws": "8.5.8",
     "@vitest/coverage-v8": "0.34.6",
     "@wkovacs64/prettier-config": "3.0.3",
