@@ -14,5 +14,5 @@ jobs:
       - uses: jackyef/bundlewatch-gh-action@0.2.1
         with:
           branch-base: main
-          bundlewatch-config: .bundlewatch.config.js
+          bundlewatch-config: .bundlewatch.config.json
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
