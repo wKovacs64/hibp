@@ -7,11 +7,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
-    "declaration": true,
     "skipLibCheck": true,
     "strict": true,
     "stripInternal": true,
-    "newLine": "lf",
     "types": ["node", "vitest/globals"]
   }
 }
