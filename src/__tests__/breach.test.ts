@@ -1,8 +1,8 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { VERIFIED_BREACH } from '../../test/fixtures';
-import { NOT_FOUND } from '../api/haveibeenpwned/responses';
-import { breach } from '../breach';
+import { server } from '../mocks/server.js';
+import { VERIFIED_BREACH } from '../../test/fixtures.js';
+import { NOT_FOUND } from '../api/haveibeenpwned/responses.js';
+import { breach } from '../breach.js';
 
 describe('breach', () => {
   describe('found', () => {

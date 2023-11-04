@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext", "DOM"],
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
-    "declaration": true,
     "skipLibCheck": true,
     "strict": true,
     "stripInternal": true,
-    "newLine": "lf",
     "types": ["node", "vitest/globals"]
   }
 }

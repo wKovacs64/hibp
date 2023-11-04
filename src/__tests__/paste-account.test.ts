@@ -1,9 +1,9 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { EXAMPLE_PASTE } from '../../test/fixtures';
-import { NOT_FOUND, UNAUTHORIZED } from '../api/haveibeenpwned/responses';
-import type { ErrorData } from '../api/haveibeenpwned/types';
-import { pasteAccount } from '../paste-account';
+import { server } from '../mocks/server.js';
+import { EXAMPLE_PASTE } from '../../test/fixtures.js';
+import { NOT_FOUND, UNAUTHORIZED } from '../api/haveibeenpwned/responses.js';
+import type { ErrorData } from '../api/haveibeenpwned/types.js';
+import { pasteAccount } from '../paste-account.js';
 
 describe('pasteAccount', () => {
   const PASTE_ACCOUNT_DATA = [EXAMPLE_PASTE];

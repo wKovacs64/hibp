@@ -1,5 +1,5 @@
-import fetch from '../web-fetch';
-import { BAD_REQUEST } from './responses';
+import fetch from '../web-fetch.js';
+import { BAD_REQUEST } from './responses.js';
 
 /**
  * Fetches data from the supplied API endpoint.

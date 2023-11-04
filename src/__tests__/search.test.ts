@@ -1,9 +1,9 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures';
-import { search } from '../search';
-import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';
-import type { ErrorData } from '../api/haveibeenpwned/types';
+import { server } from '../mocks/server.js';
+import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures.js';
+import { search } from '../search.js';
+import { UNAUTHORIZED } from '../api/haveibeenpwned/responses.js';
+import type { ErrorData } from '../api/haveibeenpwned/types.js';
 
 describe('search', () => {
   const BREACHES = [{ Name: VERIFIED_BREACH.Name }];

@@ -1,5 +1,5 @@
-import type { Breach } from './api/haveibeenpwned/types';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api';
+import type { Breach } from './api/haveibeenpwned/types.js';
+import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
 
 /**
  * Fetches breach data for a specific account.

@@ -1,4 +1,4 @@
-import { fetchFromApi } from './api/pwnedpasswords/fetch-from-api';
+import { fetchFromApi } from './api/pwnedpasswords/fetch-from-api.js';
 
 export type PwnedPasswordSuffixes = Record<string, number>;
 

@@ -1,9 +1,9 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { VERIFIED_BREACH, UNVERIFIED_BREACH } from '../../test/fixtures';
-import { UNAUTHORIZED } from '../api/haveibeenpwned/responses';
-import type { ErrorData } from '../api/haveibeenpwned/types';
-import { breachedAccount } from '../breached-account';
+import { server } from '../mocks/server.js';
+import { VERIFIED_BREACH, UNVERIFIED_BREACH } from '../../test/fixtures.js';
+import { UNAUTHORIZED } from '../api/haveibeenpwned/responses.js';
+import type { ErrorData } from '../api/haveibeenpwned/types.js';
+import { breachedAccount } from '../breached-account.js';
 
 describe('breachedAccount', () => {
   const apiKey = 'my-api-key';

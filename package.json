@@ -28,6 +28,7 @@
     },
     "./package.json": "./package.json"
   },
+  "type": "module",
   "main": "dist/cjs/hibp.js",
   "module": "dist/esm/hibp.mjs",
   "unpkg": "dist/browser/hibp.umd.js",
@@ -55,7 +56,7 @@
     "prebuild": "npm run --silent clean",
     "prepare": "npm run --silent build",
     "prepublishOnly": "run-s --silent lint typecheck test test:browser:run",
-    "size": "bundlewatch --config .bundlewatch.config.js",
+    "size": "bundlewatch --config .bundlewatch.config.json",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "pretest:browser:open": "npm run --silent build:lib",
