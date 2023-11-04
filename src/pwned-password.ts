@@ -1,5 +1,5 @@
 import JSSHA from 'jssha/dist/sha1';
-import { pwnedPasswordRange } from './pwned-password-range';
+import { pwnedPasswordRange } from './pwned-password-range.js';
 
 /**
  * Fetches the number of times the the given password has been exposed in a
@@ -32,6 +32,8 @@ export async function pwnedPassword(
   password: string,
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<number> {
+  /* eslint-disable */
+  // @ts-expect-error: JSSHA types are busted
   const sha1 = new JSSHA('SHA-1', 'TEXT');
   sha1.update(password);
   const hash = sha1.getHash('HEX', { outputUpper: true });
@@ -40,4 +42,5 @@ export async function pwnedPassword(
 
   const range = await pwnedPasswordRange(prefix, options);
   return range[suffix] || 0;
+  /* eslint-enable */
 }

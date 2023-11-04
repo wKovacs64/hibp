@@ -1,7 +1,7 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { VERIFIED_BREACH } from '../../test/fixtures';
-import { breaches } from '../breaches';
+import { server } from '../mocks/server.js';
+import { VERIFIED_BREACH } from '../../test/fixtures.js';
+import { breaches } from '../breaches.js';
 
 describe('breaches', () => {
   const BREACHES = [VERIFIED_BREACH];

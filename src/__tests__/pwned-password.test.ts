@@ -1,7 +1,7 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
-import { pwnedPassword } from '../pwned-password';
+import { server } from '../mocks/server.js';
+import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures.js';
+import { pwnedPassword } from '../pwned-password.js';
 
 describe('pwnedPassword', () => {
   describe('pwned', () => {

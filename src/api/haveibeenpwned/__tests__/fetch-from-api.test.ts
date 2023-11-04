@@ -1,5 +1,5 @@
 import { http } from 'msw';
-import { server } from '../../../mocks/server';
+import { server } from '../../../mocks/server.js';
 import {
   OK,
   BAD_REQUEST,
@@ -7,8 +7,8 @@ import {
   FORBIDDEN,
   BLOCKED,
   TOO_MANY_REQUESTS,
-} from '../responses';
-import { fetchFromApi } from '../fetch-from-api';
+} from '../responses.js';
+import { fetchFromApi } from '../fetch-from-api.js';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';

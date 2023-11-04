@@ -1,6 +1,6 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { dataClasses } from '../data-classes';
+import { server } from '../mocks/server.js';
+import { dataClasses } from '../data-classes.js';
 
 describe('dataClasses', () => {
   const DATA_CLASSES = ['some', 'data', 'classes'];

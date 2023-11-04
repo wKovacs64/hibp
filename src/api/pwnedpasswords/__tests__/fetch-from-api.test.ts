@@ -1,7 +1,7 @@
 import { http } from 'msw';
-import { server } from '../../../mocks/server';
-import { BAD_REQUEST, OK } from '../responses';
-import { fetchFromApi } from '../fetch-from-api';
+import { server } from '../../../mocks/server.js';
+import { BAD_REQUEST, OK } from '../responses.js';
+import { fetchFromApi } from '../fetch-from-api.js';
 
 describe('internal (pwnedpassword): fetchFromApi', () => {
   describe('request failure', () => {

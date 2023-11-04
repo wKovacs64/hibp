@@ -1,4 +1,4 @@
-import fetch from '../web-fetch';
+import fetch from '../web-fetch.js';
 import { name, version } from '../../../package.json';
 import {
   BAD_REQUEST,
@@ -6,8 +6,8 @@ import {
   FORBIDDEN,
   NOT_FOUND,
   TOO_MANY_REQUESTS,
-} from './responses';
-import type { ApiData, ErrorData } from './types';
+} from './responses.js';
+import type { ApiData, ErrorData } from './types.js';
 
 /**
  * Custom error thrown when the haveibeenpwned.com API responds with 429 Too

@@ -1,12 +1,12 @@
-import { RateLimitError } from './api/haveibeenpwned/fetch-from-api';
-import { breach } from './breach';
-import { breachedAccount } from './breached-account';
-import { breaches } from './breaches';
-import { dataClasses } from './data-classes';
-import { pasteAccount } from './paste-account';
-import { pwnedPassword } from './pwned-password';
-import { pwnedPasswordRange } from './pwned-password-range';
-import { search } from './search';
+import { RateLimitError } from './api/haveibeenpwned/fetch-from-api.js';
+import { breach } from './breach.js';
+import { breachedAccount } from './breached-account.js';
+import { breaches } from './breaches.js';
+import { dataClasses } from './data-classes.js';
+import { pasteAccount } from './paste-account.js';
+import { pwnedPassword } from './pwned-password.js';
+import { pwnedPasswordRange } from './pwned-password-range.js';
+import { search } from './search.js';
 
 /*
  * Export individual named functions to allow the following:

@@ -1,7 +1,7 @@
 import { http } from 'msw';
-import { server } from '../mocks/server';
-import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures';
-import { pwnedPasswordRange } from '../pwned-password-range';
+import { server } from '../mocks/server.js';
+import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures.js';
+import { pwnedPasswordRange } from '../pwned-password-range.js';
 
 describe('pwnedPasswordRange', () => {
   describe('valid range', () => {

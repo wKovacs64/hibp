@@ -1,4 +1,4 @@
-import * as hibp from '../hibp';
+import * as hibp from '../hibp.js';
 
 describe('hibp', () => {
   it('exports an object containing the advertised functions', () => {
