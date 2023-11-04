@@ -25,6 +25,8 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
+ * @param {boolean} [options.addPadding] ask the remote API to add padding to
+ * the response to obscure the password prefix (default: `false`)
  * @returns {Promise<PwnedPasswordSuffixes>} a Promise which resolves to an
  * object mapping the `suffix` that when matched with the prefix composes the
  * complete hash, to the `count` of how many times it appears in the breached
@@ -54,7 +56,7 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  */
 export async function pwnedPasswordRange(
   prefix: string,
-  options: { baseUrl?: string; userAgent?: string } = {},
+  options: { baseUrl?: string; userAgent?: string; addPadding?: boolean } = {},
 ): Promise<PwnedPasswordSuffixes> {
   const data = await fetchFromApi(
     `/range/${encodeURIComponent(prefix)}`,

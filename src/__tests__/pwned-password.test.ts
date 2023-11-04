@@ -27,4 +27,18 @@ describe('pwnedPassword', () => {
       return expect(pwnedPassword('kjfhsdksjf454145jkhk!!!')).resolves.toBe(0);
     });
   });
+
+  describe('addPadding option', () => {
+    it('causes Add-Padding header to be included in the request', async () => {
+      expect.assertions(1);
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('Add-Padding')).toBe('true');
+          return new Response(EXAMPLE_PASSWORD_HASHES);
+        }),
+      );
+
+      await pwnedPassword('password', { addPadding: true });
+    });
+  });
 });

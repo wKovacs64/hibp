@@ -15,6 +15,8 @@ import { BAD_REQUEST } from './responses.js';
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
+ * @param {boolean} [options.addPadding] ask the remote API to add padding to
+ * the response to obscure the password prefix (default: `false`)
  * @returns {Promise<string>} a Promise which resolves to the data resulting
  * from the query, or rejects with an Error
  */
@@ -23,17 +25,13 @@ export async function fetchFromApi(
   {
     baseUrl = 'https://api.pwnedpasswords.com',
     userAgent,
-  }: { baseUrl?: string; userAgent?: string } = {},
+    addPadding = false,
+  }: { baseUrl?: string; userAgent?: string; addPadding?: boolean } = {},
 ): Promise<string> {
   const config = Object.assign(
     {},
-    userAgent
-      ? {
-          headers: {
-            'User-Agent': userAgent,
-          },
-        }
-      : {},
+    userAgent ? { headers: { 'User-Agent': userAgent } } : {},
+    addPadding ? { headers: { 'Add-Padding': 'true' } } : {},
   );
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
   const response = await fetch(url, config);
