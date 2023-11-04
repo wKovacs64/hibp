@@ -91,7 +91,7 @@ export async function search(
 ): Promise<SearchResults> {
   const { apiKey, baseUrl, userAgent } = breachOptions;
 
-  const promises = await Promise.all([
+  const [breaches, pastes] = await Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
@@ -99,9 +99,5 @@ export async function search(
       : null,
   ]);
 
-  // Avoid array destructuring here to prevent need for Babel helpers
-  return {
-    breaches: promises[0],
-    pastes: promises[1],
-  };
+  return { breaches, pastes };
 }
