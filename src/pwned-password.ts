@@ -28,7 +28,7 @@ import { pwnedPasswordRange } from './pwned-password-range';
  * }
  * @see https://haveibeenpwned.com/api/v3#PwnedPasswords
  */
-export function pwnedPassword(
+export async function pwnedPassword(
   password: string,
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<number> {
@@ -38,7 +38,6 @@ export function pwnedPassword(
   const prefix = hash.slice(0, 5);
   const suffix = hash.slice(5);
 
-  return pwnedPasswordRange(prefix, options).then(
-    (range) => range[suffix] || 0,
-  );
+  const range = await pwnedPasswordRange(prefix, options);
+  return range[suffix] || 0;
 }

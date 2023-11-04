@@ -67,7 +67,7 @@ function blockedWithRayId(rayId: string) {
  * from the query (or null for 404 Not Found responses), or rejects with an
  * Error
  */
-export function fetchFromApi(
+export async function fetchFromApi(
   endpoint: string,
   {
     apiKey,
@@ -92,33 +92,33 @@ export function fetchFromApi(
 
   const config = { headers };
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
+  const response = await fetch(url, config);
 
-  return fetch(url, config).then((res) => {
-    if (res.ok) return res.json() as Promise<ApiData>;
+  if (response.ok) return response.json() as Promise<ApiData>;
 
-    switch (res.status) {
-      case BAD_REQUEST.status:
-        throw new Error(BAD_REQUEST.statusText);
-      case UNAUTHORIZED.status:
-        return res.json().then((body: ErrorData) => {
-          throw new Error(body.message);
-        });
-      case FORBIDDEN.status: {
-        const rayId = res.headers.get('cf-ray');
-        if (rayId) {
-          throw new Error(blockedWithRayId(rayId));
-        }
-        throw new Error(FORBIDDEN.statusText);
-      }
-      case NOT_FOUND.status:
-        return null;
-      case TOO_MANY_REQUESTS.status:
-        return res.json().then((body: ErrorData) => {
-          const retryAfter = res.headers.get('retry-after');
-          throw new RateLimitError(retryAfter, body.message);
-        });
-      default:
-        throw new Error(res.statusText);
+  switch (response.status) {
+    case BAD_REQUEST.status: {
+      throw new Error(BAD_REQUEST.statusText);
     }
-  });
+    case UNAUTHORIZED.status: {
+      const body = (await response.json()) as unknown as ErrorData;
+      throw new Error(body.message);
+    }
+    case FORBIDDEN.status: {
+      const rayId = response.headers.get('cf-ray');
+      if (rayId) throw new Error(blockedWithRayId(rayId));
+      throw new Error(FORBIDDEN.statusText);
+    }
+    case NOT_FOUND.status: {
+      return null;
+    }
+    case TOO_MANY_REQUESTS.status: {
+      const body = (await response.json()) as unknown as ErrorData;
+      const retryAfter = response.headers.get('retry-after');
+      throw new RateLimitError(retryAfter, body.message);
+    }
+    default: {
+      throw new Error(response.statusText);
+    }
+  }
 }

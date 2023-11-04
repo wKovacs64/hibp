@@ -18,7 +18,7 @@ import { BAD_REQUEST } from './responses';
  * @returns {Promise<string>} a Promise which resolves to the data resulting
  * from the query, or rejects with an Error
  */
-export function fetchFromApi(
+export async function fetchFromApi(
   endpoint: string,
   {
     baseUrl = 'https://api.pwnedpasswords.com',
@@ -35,18 +35,15 @@ export function fetchFromApi(
         }
       : {},
   );
-
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
+  const response = await fetch(url, config);
 
-  return fetch(url, config).then((res) => {
-    if (res.ok) return res.text();
+  if (response.ok) return response.text();
 
-    if (res.status === BAD_REQUEST.status) {
-      return res.text().then((text) => {
-        throw new Error(text);
-      });
-    }
+  if (response.status === BAD_REQUEST.status) {
+    const text = await response.text();
+    throw new Error(text);
+  }
 
-    throw new Error(res.statusText);
-  });
+  throw new Error(response.statusText);
 }

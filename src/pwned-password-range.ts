@@ -52,21 +52,20 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  * }
  * @see https://haveibeenpwned.com/api/v3#SearchingPwnedPasswordsByRange
  */
-export function pwnedPasswordRange(
+export async function pwnedPasswordRange(
   prefix: string,
   options: { baseUrl?: string; userAgent?: string } = {},
 ): Promise<PwnedPasswordSuffixes> {
-  return (
-    fetchFromApi(`/range/${encodeURIComponent(prefix)}`, options)
-      // create array from lines of text in response body
-      .then((data) => data.split('\n').filter(Boolean))
-      // convert into an object mapping suffix to count for each line
-      .then((results) =>
-        results.reduce<PwnedPasswordSuffixes>((acc, row) => {
-          const [suffix, countString] = row.split(':');
-          acc[suffix] = parseInt(countString, 10);
-          return acc;
-        }, {}),
-      )
+  const data = await fetchFromApi(
+    `/range/${encodeURIComponent(prefix)}`,
+    options,
   );
+  // create array from lines of text in response body
+  const results = data.split('\n').filter(Boolean);
+  // convert into an object mapping suffix to count for each line
+  return results.reduce<PwnedPasswordSuffixes>((acc, row) => {
+    const [suffix, countString] = row.split(':');
+    acc[suffix] = Number.parseInt(countString, 10);
+    return acc;
+  }, {});
 }

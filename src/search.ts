@@ -77,7 +77,7 @@ export interface SearchResults {
  * }
  * @see https://haveibeenpwned.com/
  */
-export function search(
+export async function search(
   account: string,
   breachOptions: {
     apiKey?: string;
@@ -91,17 +91,17 @@ export function search(
 ): Promise<SearchResults> {
   const { apiKey, baseUrl, userAgent } = breachOptions;
 
-  return Promise.all([
+  const promises = await Promise.all([
     breachedAccount(account, breachOptions),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
       ? pasteAccount(account, { apiKey, baseUrl, userAgent })
       : null,
-  ]).then(
-    // Avoid array destructuring here to prevent need for Babel helpers
-    (promises) => ({
-      breaches: promises[0],
-      pastes: promises[1],
-    }),
-  );
+  ]);
+
+  // Avoid array destructuring here to prevent need for Babel helpers
+  return {
+    breaches: promises[0],
+    pastes: promises[1],
+  };
 }
