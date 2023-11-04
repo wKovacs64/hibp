@@ -1,5 +1,3 @@
 coverage
 dist
 example
-babel-browser-build.js
-browser-es-module-loader.js
