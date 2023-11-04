@@ -457,13 +457,15 @@ An object representing a breach.
 | ModifiedDate | <code>string</code> | 
 | PwnCount | <code>number</code> | 
 | Description | <code>string</code> | 
-| LogoPath | <code>string</code> | 
 | DataClasses | <code>Array.&lt;string&gt;</code> | 
 | IsVerified | <code>boolean</code> | 
 | IsFabricated | <code>boolean</code> | 
 | IsSensitive | <code>boolean</code> | 
 | IsRetired | <code>boolean</code> | 
 | IsSpamList | <code>boolean</code> | 
+| IsMalware | <code>boolean</code> | 
+| IsSubscriptionFree | <code>boolean</code> | 
+| LogoPath | <code>string</code> | 
 
 <a name="Paste"></a>
 

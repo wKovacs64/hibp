@@ -13,13 +13,15 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api';
  * @property {string} ModifiedDate
  * @property {number} PwnCount
  * @property {string} Description
- * @property {string} LogoPath
  * @property {string[]} DataClasses
  * @property {boolean} IsVerified
  * @property {boolean} IsFabricated
  * @property {boolean} IsSensitive
  * @property {boolean} IsRetired
  * @property {boolean} IsSpamList
+ * @property {boolean} IsMalware
+ * @property {boolean} IsSubscriptionFree
+ * @property {string} LogoPath
  */
 
 /**

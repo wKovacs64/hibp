@@ -12,13 +12,15 @@ export const VERIFIED_BREACH: Breach = {
   PwnCount: 152445165,
   Description:
     'In October 2013, 153 million Adobe accounts were breached with each containing an internal ID, username, email, <em>encrypted</em> password and a password hint in plain text. The password cryptography was poorly done and <a href="http://stricture-group.com/files/adobe-top100.txt" target="_blank" rel="noopener">many were quickly resolved back to plain text</a>. The unencrypted hints also <a href="http://www.troyhunt.com/2013/11/adobe-credentials-and-serious.html" target="_blank" rel="noopener">disclosed much about the passwords</a> adding further to the risk that hundreds of millions of Adobe customers already faced.',
-  LogoPath: 'https://haveibeenpwned.com/Content/Images/PwnedLogos/Adobe.png',
   DataClasses: ['Email addresses', 'Password hints', 'Passwords', 'Usernames'],
   IsVerified: true,
   IsFabricated: false,
   IsSensitive: false,
   IsRetired: false,
   IsSpamList: false,
+  IsMalware: false,
+  IsSubscriptionFree: false,
+  LogoPath: 'https://haveibeenpwned.com/Content/Images/PwnedLogos/Adobe.png',
 };
 
 export const UNVERIFIED_BREACH: Breach = {
@@ -31,7 +33,6 @@ export const UNVERIFIED_BREACH: Breach = {
   PwnCount: 112005531,
   Description:
     'In June 2016, <a href="http://motherboard.vice.com/read/another-day-another-hack-user-accounts-of-dating-site-badoo" target="_blank" rel="noopener">a data breach allegedly originating from the social website Badoo was found to be circulating amongst traders</a>. Likely obtained several years earlier, the data contained 112 million unique email addresses with personal data including names, birthdates and passwords stored as MD5 hashes. Whilst there are many indicators suggesting Badoo did indeed suffer a data breach, <a href="https://www.troyhunt.com/introducing-unverified-breaches-to-have-i-been-pwned" target="_blank" rel="noopener">the legitimacy of the data could not be emphatically proven</a> so this breach has been categorised as &quot;unverified&quot;.',
-  LogoPath: 'https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png',
   DataClasses: [
     'Dates of birth',
     'Email addresses',
@@ -45,6 +46,9 @@ export const UNVERIFIED_BREACH: Breach = {
   IsSensitive: true,
   IsRetired: false,
   IsSpamList: false,
+  IsMalware: false,
+  IsSubscriptionFree: false,
+  LogoPath: 'https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png',
 };
 
 export const EXAMPLE_PASTE: Paste = {
