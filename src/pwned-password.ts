@@ -12,6 +12,8 @@ import { pwnedPasswordRange } from './pwned-password-range.js';
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
+ * @param {boolean} [options.addPadding] ask the remote API to add padding to
+ * the response to obscure the password prefix (default: `false`)
  * @returns {Promise<number>} a Promise which resolves to the number of times
  * the password has been exposed in a breach, or rejects with an Error
  * @example
@@ -30,7 +32,7 @@ import { pwnedPasswordRange } from './pwned-password-range.js';
  */
 export async function pwnedPassword(
   password: string,
-  options: { baseUrl?: string; userAgent?: string } = {},
+  options: { baseUrl?: string; userAgent?: string; addPadding?: boolean } = {},
 ): Promise<number> {
   /* eslint-disable */
   // @ts-expect-error: JSSHA types are busted
