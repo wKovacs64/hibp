@@ -1,5 +1,5 @@
 title: hibp
-description: A Promise-based client for the 'Have I been pwned?' service.
+description: An unofficial TypeScript SDK for the 'Have I been pwned?' service.
 google_analytics:
 show_downloads: true
 theme: jekyll-theme-cayman

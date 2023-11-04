@@ -10,7 +10,7 @@
 
 # hibp
 
-_A Promise-based client for [Troy Hunt][troy]'s [Have I been
+_An unofficial TypeScript SDK for [Troy Hunt][troy]'s [Have I been
 pwned?][haveibeenpwned] service._
 
 [![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
