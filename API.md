@@ -57,6 +57,9 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it (that is, without specifying a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf) will fail.</p>
 </dd>
+<dt><a href="#subscriptionStatus">subscriptionStatus(apiKey, [options])</a> ⇒ <code><a href="#SubscriptionStatus">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
+<dd><p>Fetches the current status of your HIBP subscription (API key).</p>
+</dd>
 </dl>
 
 ## Typedefs
@@ -74,6 +77,9 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 </dd>
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
+</dd>
+<dt><a href="#SubscriptionStatus">SubscriptionStatus</a> : <code>object</code></dt>
+<dd><p>An object representing the status of your HIBP subscription.</p>
 </dd>
 </dl>
 
@@ -444,6 +450,31 @@ try {
   // ...
 }
 ```
+<a name="subscriptionStatus"></a>
+
+## subscriptionStatus(apiKey, [options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#SubscriptionStatus)
+Fetches the current status of your HIBP subscription (API key).
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#SubscriptionStatus) - a Promise which resolves to a
+subscription status object, or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| apiKey | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key |
+| [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await subscriptionStatus("my-api-key");
+  // ...
+} catch (err) {
+  // ...
+}
+```
 <a name="Breach"></a>
 
 ## Breach : <code>object</code>
@@ -507,4 +538,20 @@ An object representing search results.
 | --- | --- |
 | breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
 | pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
+
+<a name="SubscriptionStatus"></a>
+
+## SubscriptionStatus : <code>object</code>
+An object representing the status of your HIBP subscription.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| SubscriptionName | <code>string</code> | 
+| Description | <code>string</code> | 
+| SubscribedUntil | <code>string</code> | 
+| Rpm | <code>number</code> | 
+| DomainSearchMaxBreachedAccounts | <code>number</code> | 
 

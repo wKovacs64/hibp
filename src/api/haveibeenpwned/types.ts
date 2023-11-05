@@ -30,6 +30,14 @@ export interface Paste {
   EmailCount: number;
 }
 
+export interface SubscriptionStatus {
+  SubscriptionName: string;
+  Description: string;
+  SubscribedUntil: string;
+  Rpm: number;
+  DomainSearchMaxBreachedAccounts: number;
+}
+
 //
 // Internal convenience types
 //
@@ -44,6 +52,7 @@ export type ApiData =
   | Breach[] // breachedaccount, breaches
   | Paste[] // pasteaccount
   | string[] // dataclasses
+  | SubscriptionStatus // subscription/status
   | null; // most endpoints can return an empty response (404, but not an error)
 
 /**

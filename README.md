@@ -46,6 +46,7 @@ use it in the browser.
   a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 - Search for an account in both breaches and pastes at the same time 🔑
+- Get your subscription status 🔑
 - All queries return a Promise
 - Available server-side (Node.js) and client-side (browser)
 - Written in TypeScript, so all modules come fully typed
@@ -80,6 +81,7 @@ The following modules are available:
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
+- [subscriptionStatus](API.md#subscriptionstatus)
 
 Please see the [API reference](API.md) for more detailed usage information and
 examples.

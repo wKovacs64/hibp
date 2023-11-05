@@ -13,6 +13,7 @@ describe('hibp', () => {
         "pwnedPassword": [Function],
         "pwnedPasswordRange": [Function],
         "search": [Function],
+        "subscriptionStatus": [Function],
       }
     `);
   });

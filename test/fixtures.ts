@@ -1,5 +1,9 @@
 import { stripIndents } from 'common-tags';
-import type { Breach, Paste } from '../src/api/haveibeenpwned/types.js';
+import type {
+  Breach,
+  Paste,
+  SubscriptionStatus,
+} from '../src/api/haveibeenpwned/types.js';
 
 export const VERIFIED_BREACH: Breach = {
   Name: 'Adobe',
@@ -56,6 +60,15 @@ export const EXAMPLE_PASTE: Paste = {
   Title: 'syslog',
   Date: '2014-03-04T19:14:54Z',
   EmailCount: 139,
+};
+
+export const EXAMPLE_SUBSCRIPTION_STATUS: SubscriptionStatus = {
+  SubscriptionName: 'Pwned 1',
+  Description:
+    'Domains with up to 25 breached addresses each, and a rate limited API key allowing 10 email address searches per minute',
+  SubscribedUntil: '2024-04-02T12:34:56',
+  Rpm: 10,
+  DomainSearchMaxBreachedAccounts: 25,
 };
 
 export const EXAMPLE_PASSWORD = 'password';
