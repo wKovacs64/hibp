@@ -1,8 +1,11 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
 import {
-  EXAMPLE_NTLM_PASSWORD_HASHES,
-  EXAMPLE_SHA1_PASSWORD_HASHES,
+  EXAMPLE_NTLM_RESPONSE_BODY,
+  EXAMPLE_NTLM_SUFFIXES_OBJECT,
+  EXAMPLE_SHA1_PREFIX,
+  EXAMPLE_SHA1_RESPONSE_BODY,
+  EXAMPLE_SHA1_SUFFIXES_OBJECT,
 } from '../../test/fixtures.js';
 import { pwnedPasswordRange } from '../pwned-password-range.js';
 
@@ -11,15 +14,45 @@ describe('pwnedPasswordRange', () => {
     it('resolves with an object', () => {
       server.use(
         http.get('*', () => {
-          return new Response(EXAMPLE_SHA1_PASSWORD_HASHES);
+          return new Response(EXAMPLE_SHA1_RESPONSE_BODY);
         }),
       );
 
-      return expect(pwnedPasswordRange('5BAA6')).resolves.toEqual({
-        '003D68EB55068C33ACE09247EE4C639306B': 3,
-        '1E4C9B93F3F0682250B6CF8331B7EE68FD8': 3303003,
-        '01330C689E5D64F660D6947A93AD634EF8F': 1,
-      });
+      return expect(pwnedPasswordRange(EXAMPLE_SHA1_PREFIX)).resolves.toEqual(
+        EXAMPLE_SHA1_SUFFIXES_OBJECT,
+      );
+    });
+  });
+
+  describe('baseUrl option', () => {
+    it('is the beginning of the final URL', () => {
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      server.use(
+        http.get(new RegExp(`^${baseUrl}`), () => {
+          return new Response(EXAMPLE_SHA1_RESPONSE_BODY);
+        }),
+      );
+
+      return expect(
+        pwnedPasswordRange(EXAMPLE_SHA1_PREFIX, { baseUrl }),
+      ).resolves.toEqual(EXAMPLE_SHA1_SUFFIXES_OBJECT);
+    });
+  });
+
+  describe('userAgent option', () => {
+    it('is passed on as a request header', () => {
+      expect.assertions(2);
+      const userAgent = 'Custom UA';
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('User-Agent')).toBe(userAgent);
+          return new Response(EXAMPLE_SHA1_RESPONSE_BODY);
+        }),
+      );
+
+      return expect(
+        pwnedPasswordRange(EXAMPLE_SHA1_PREFIX, { userAgent }),
+      ).resolves.toEqual(EXAMPLE_SHA1_SUFFIXES_OBJECT);
     });
   });
 
@@ -29,32 +62,28 @@ describe('pwnedPasswordRange', () => {
       server.use(
         http.get('*', ({ request }) => {
           expect(request.headers.get('Add-Padding')).toBe('true');
-          return new Response(EXAMPLE_SHA1_PASSWORD_HASHES);
+          return new Response(EXAMPLE_SHA1_RESPONSE_BODY);
         }),
       );
 
-      await pwnedPasswordRange('5BAA6', { addPadding: true });
+      await pwnedPasswordRange(EXAMPLE_SHA1_PREFIX, { addPadding: true });
     });
   });
 
   describe('mode option', () => {
-    it('sets mode query parameter in the request', async () => {
+    it('sets the mode query parameter in the request', async () => {
       expect.assertions(2);
       server.use(
         http.get('*', ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get('mode')).toBe('ntlm');
-          return new Response(EXAMPLE_NTLM_PASSWORD_HASHES);
+          return new Response(EXAMPLE_NTLM_RESPONSE_BODY);
         }),
       );
 
       return expect(
-        pwnedPasswordRange('5BAA6', { mode: 'ntlm' }),
-      ).resolves.toEqual({
-        B95AF67BEE5270A681E5410D611: 1,
-        B964C3513680B4C0204A157CCF5: 1110,
-        B9697A53922A10401EAB7504866: 1,
-      });
+        pwnedPasswordRange(EXAMPLE_SHA1_PREFIX, { mode: 'ntlm' }),
+      ).resolves.toEqual(EXAMPLE_NTLM_SUFFIXES_OBJECT);
     });
   });
 });

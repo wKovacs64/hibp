@@ -23,12 +23,6 @@ export interface HaveIBeenPwnedApiResponse {
 const emptyHeaders = new Map<string, string>();
 
 /** @internal */
-export const OK: HaveIBeenPwnedApiResponse = {
-  headers: emptyHeaders,
-  status: 200,
-};
-
-/** @internal */
 export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
   headers: emptyHeaders,
   status: 400,

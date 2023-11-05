@@ -2,8 +2,6 @@ import { http } from 'msw';
 import { server } from '../mocks/server.js';
 import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures.js';
 import { search } from '../search.js';
-import { UNAUTHORIZED } from '../api/haveibeenpwned/responses.js';
-import type { ErrorData } from '../api/haveibeenpwned/types.js';
 
 describe('search', () => {
   const BREACHES = [{ Name: VERIFIED_BREACH.Name }];
@@ -40,56 +38,37 @@ describe('search', () => {
   });
 
   it('forwards the apiKey option correctly', async () => {
+    expect.assertions(2);
     const apiKey = 'my-api-key';
-
     server.use(
       http.get(/breachedaccount/, ({ request }) => {
-        if (!request.headers.has('hibp-api-key')) {
-          return new Response(JSON.stringify(UNAUTHORIZED.body), {
-            status: UNAUTHORIZED.status,
-          });
-        }
-
+        expect(request.headers.get('hibp-api-key')).toBe(apiKey);
         return new Response(JSON.stringify(BREACHES));
       }),
       http.get(/pasteaccount/, ({ request }) => {
-        if (!request.headers.has('hibp-api-key')) {
-          return new Response(JSON.stringify(UNAUTHORIZED.body), {
-            status: UNAUTHORIZED.status,
-          });
-        }
-
+        expect(request.headers.get('hibp-api-key')).toBe(apiKey);
         return new Response(JSON.stringify(PASTES));
       }),
     );
 
-    await expect(search('breached@foo.bar')).rejects.toThrow(
-      (UNAUTHORIZED.body as ErrorData).message,
-    );
-    await expect(search('breached@foo.bar', { apiKey })).resolves.toEqual({
-      breaches: BREACHES,
-      pastes: PASTES,
-    });
+    return search('breached@foo.bar', { apiKey });
   });
 
   it('forwards the truncate option correctly', async () => {
+    expect.assertions(2);
     server.use(
       http.get(/breachedaccount/, ({ request }) => {
-        const url = new URL(request.url);
-        if (url.searchParams.get('truncateResponse') === 'false') {
-          return new Response(JSON.stringify(BREACHES_EXPANDED));
-        }
-        return new Response(JSON.stringify(BREACHES));
+        const { searchParams } = new URL(request.url);
+        expect(searchParams.get('truncateResponse')).toBe('false');
+        return new Response(JSON.stringify(BREACHES_EXPANDED));
+      }),
+      http.get(/pasteaccount/, ({ request }) => {
+        const { searchParams } = new URL(request.url);
+        expect(searchParams.has('truncateResponse')).toBe(false);
+        return new Response(JSON.stringify(PASTES));
       }),
     );
 
-    await expect(search('breached')).resolves.toEqual({
-      breaches: BREACHES,
-      pastes: null,
-    });
-    await expect(search('breached', { truncate: false })).resolves.toEqual({
-      breaches: BREACHES_EXPANDED,
-      pastes: null,
-    });
+    return search('breached@foo.bar', { truncate: false });
   });
 });
