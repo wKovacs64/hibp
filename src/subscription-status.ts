@@ -15,8 +15,15 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
 /**
  * Fetches the current status of your HIBP subscription (API key).
  *
- * @param {string} apiKey an API key from https://haveibeenpwned.com/API/Key
+ * 🔑 `haveibeenpwned.com` requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `subscription/status` endpoint.
+ * The `apiKey` option here is not explicitly required, but direct requests made
+ * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+ * a valid API key on your behalf).
+ *
  * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
+ * https://haveibeenpwned.com/API/Key (default: undefined)
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
@@ -26,23 +33,29 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * subscription status object, or rejects with an Error
  * @example
  * try {
- *   const data = await subscriptionStatus("my-api-key");
+ *   const data = await subscriptionStatus({ apiKey: "my-api-key" });
+ *   // ...
+ * } catch (err) {
+ *   // ...
+ * }
+ * @example
+ * try {
+ *   const data = await subscriptionStatus({
+ *     baseUrl: "https://my-hibp-proxy:8080",
+ *   });
  *   // ...
  * } catch (err) {
  *   // ...
  * }
  */
 export async function subscriptionStatus(
-  apiKey: string,
   options: {
+    apiKey?: string;
     baseUrl?: string;
     userAgent?: string;
   } = {},
 ) {
   const endpoint = '/subscription/status';
 
-  return fetchFromApi(endpoint, {
-    apiKey,
-    ...options,
-  }) as Promise<SubscriptionStatus>;
+  return fetchFromApi(endpoint, options) as Promise<SubscriptionStatus>;
 }
