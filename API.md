@@ -54,8 +54,13 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it will fail (unless you specify a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#subscriptionStatus">subscriptionStatus(apiKey, [options])</a> ⇒ <code><a href="#subscriptionstatus--object">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
+<dt><a href="#subscriptionStatus">subscriptionStatus([options])</a> ⇒ <code><a href="#subscriptionstatus--object">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
 <dd><p>Fetches the current status of your HIBP subscription (API key).</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>subscription/status</code> endpoint.
+The <code>apiKey</code> option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
 </dd>
 </dl>
 
@@ -458,8 +463,14 @@ try {
 ```
 <a name="subscriptionStatus"></a>
 
-## subscriptionStatus(apiKey, [options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object)
+## subscriptionStatus([options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object)
 Fetches the current status of your HIBP subscription (API key).
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `subscription/status` endpoint.
+The `apiKey` option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object) - a Promise which resolves to a
@@ -467,15 +478,26 @@ subscription status object, or rejects with an Error
 
 | Param | Type | Description |
 | --- | --- | --- |
-| apiKey | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key |
 | [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
 try {
-  const data = await subscriptionStatus("my-api-key");
+  const data = await subscriptionStatus({ apiKey: "my-api-key" });
+  // ...
+} catch (err) {
+  // ...
+}
+```
+**Example**  
+```js
+try {
+  const data = await subscriptionStatus({
+    baseUrl: "https://my-hibp-proxy:8080",
+  });
   // ...
 } catch (err) {
   // ...

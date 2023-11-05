@@ -16,7 +16,7 @@ describe('subscriptionStatus', () => {
         }),
       );
 
-      return subscriptionStatus(apiKey);
+      return subscriptionStatus({ apiKey });
     });
   });
 
@@ -29,7 +29,7 @@ describe('subscriptionStatus', () => {
         }),
       );
 
-      return expect(subscriptionStatus(apiKey, { baseUrl })).resolves.toEqual(
+      return expect(subscriptionStatus({ baseUrl })).resolves.toEqual(
         SUBSCRIPTION_STATUS,
       );
     });
@@ -46,7 +46,7 @@ describe('subscriptionStatus', () => {
         }),
       );
 
-      return subscriptionStatus(apiKey, { userAgent });
+      return subscriptionStatus({ userAgent });
     });
   });
 });
