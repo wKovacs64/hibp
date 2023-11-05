@@ -1,6 +1,6 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
-import { EXAMPLE_SUBSCRIPTION_STATUS } from '../../test/fixtures.js';
+import { SUBSCRIPTION_STATUS } from '../../test/fixtures.js';
 import { subscriptionStatus } from '../subscription-status.js';
 
 describe('subscriptionStatus', () => {
@@ -12,7 +12,7 @@ describe('subscriptionStatus', () => {
       server.use(
         http.get('*', ({ request }) => {
           expect(request.headers.get('hibp-api-key')).toBe(apiKey);
-          return new Response(JSON.stringify(EXAMPLE_SUBSCRIPTION_STATUS));
+          return new Response(JSON.stringify(SUBSCRIPTION_STATUS));
         }),
       );
 
@@ -25,12 +25,12 @@ describe('subscriptionStatus', () => {
       const baseUrl = 'https://my-hibp-proxy:8080';
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
-          return new Response(JSON.stringify(EXAMPLE_SUBSCRIPTION_STATUS));
+          return new Response(JSON.stringify(SUBSCRIPTION_STATUS));
         }),
       );
 
       return expect(subscriptionStatus(apiKey, { baseUrl })).resolves.toEqual(
-        EXAMPLE_SUBSCRIPTION_STATUS,
+        SUBSCRIPTION_STATUS,
       );
     });
   });
@@ -42,7 +42,7 @@ describe('subscriptionStatus', () => {
       server.use(
         http.get('*', ({ request }) => {
           expect(request.headers.get('User-Agent')).toBe(userAgent);
-          return new Response(JSON.stringify(EXAMPLE_SUBSCRIPTION_STATUS));
+          return new Response(JSON.stringify(SUBSCRIPTION_STATUS));
         }),
       );
 

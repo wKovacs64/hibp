@@ -1,12 +1,12 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
-import { VERIFIED_BREACH, EXAMPLE_PASTE } from '../../test/fixtures.js';
+import { VERIFIED_BREACH, PASTE } from '../../test/fixtures.js';
 import { search } from '../search.js';
 
 describe('search', () => {
   const BREACHES = [{ Name: VERIFIED_BREACH.Name }];
   const BREACHES_EXPANDED = [VERIFIED_BREACH];
-  const PASTES = [EXAMPLE_PASTE];
+  const PASTES = [PASTE];
 
   it('searches breaches by username', () => {
     server.use(

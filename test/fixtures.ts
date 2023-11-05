@@ -54,7 +54,7 @@ export const UNVERIFIED_BREACH: Breach = {
   LogoPath: 'https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png',
 };
 
-export const EXAMPLE_PASTE: Paste = {
+export const PASTE: Paste = {
   Source: 'Pastebin',
   Id: '8Q0BvKD8',
   Title: 'syslog',
@@ -62,7 +62,7 @@ export const EXAMPLE_PASTE: Paste = {
   EmailCount: 139,
 };
 
-export const EXAMPLE_SUBSCRIPTION_STATUS: SubscriptionStatus = {
+export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscriptionName: 'Pwned 1',
   Description:
     'Domains with up to 25 breached addresses each, and a rate limited API key allowing 10 email address searches per minute',
@@ -71,29 +71,29 @@ export const EXAMPLE_SUBSCRIPTION_STATUS: SubscriptionStatus = {
   DomainSearchMaxBreachedAccounts: 25,
 };
 
-export const EXAMPLE_PASSWORD = 'password';
+export const PASSWORD = 'password';
 
-export const EXAMPLE_SHA1_PREFIX = '5BAA6';
+export const SHA1_PREFIX = '5BAA6';
 
-export const EXAMPLE_SHA1_RESPONSE_BODY = stripIndents`
+export const SHA1_RESPONSE_BODY = stripIndents`
   003D68EB55068C33ACE09247EE4C639306B:3
   1E4C9B93F3F0682250B6CF8331B7EE68FD8:3303003
   01330C689E5D64F660D6947A93AD634EF8F:1
 `;
 
-export const EXAMPLE_SHA1_SUFFIXES_OBJECT = {
+export const SHA1_SUFFIXES_OBJECT = {
   '003D68EB55068C33ACE09247EE4C639306B': 3,
   '1E4C9B93F3F0682250B6CF8331B7EE68FD8': 3303003,
   '01330C689E5D64F660D6947A93AD634EF8F': 1,
 };
 
-export const EXAMPLE_NTLM_RESPONSE_BODY = stripIndents`
+export const NTLM_RESPONSE_BODY = stripIndents`
   B95AF67BEE5270A681E5410D611: 1
   B964C3513680B4C0204A157CCF5: 1110
   B9697A53922A10401EAB7504866: 1
 `;
 
-export const EXAMPLE_NTLM_SUFFIXES_OBJECT = {
+export const NTLM_SUFFIXES_OBJECT = {
   B95AF67BEE5270A681E5410D611: 1,
   B964C3513680B4C0204A157CCF5: 1110,
   B9697A53922A10401EAB7504866: 1,

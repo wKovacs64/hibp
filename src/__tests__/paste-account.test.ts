@@ -1,11 +1,11 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
-import { EXAMPLE_PASTE } from '../../test/fixtures.js';
+import { PASTE } from '../../test/fixtures.js';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses.js';
 import { pasteAccount } from '../paste-account.js';
 
 describe('pasteAccount', () => {
-  const PASTE_ACCOUNT_DATA = [EXAMPLE_PASTE];
+  const PASTE_ACCOUNT_DATA = [PASTE];
 
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
