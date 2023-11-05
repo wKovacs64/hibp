@@ -12,11 +12,6 @@ export interface PwnedPasswordsApiResponse {
 }
 
 /** @internal */
-export const OK: PwnedPasswordsApiResponse = {
-  status: 200,
-};
-
-/** @internal */
 export const BAD_REQUEST: PwnedPasswordsApiResponse = {
   status: 400,
   body: 'The hash prefix was not in a valid format',

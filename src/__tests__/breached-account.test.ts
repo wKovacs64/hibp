@@ -1,12 +1,9 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from '../../test/fixtures.js';
-import { UNAUTHORIZED } from '../api/haveibeenpwned/responses.js';
-import type { ErrorData } from '../api/haveibeenpwned/types.js';
 import { breachedAccount } from '../breached-account.js';
 
 describe('breachedAccount', () => {
-  const apiKey = 'my-api-key';
   const BREACHED_ACCOUNT_DATA = [
     { Name: VERIFIED_BREACH.Name },
     { Name: UNVERIFIED_BREACH.Name },
@@ -14,80 +11,95 @@ describe('breachedAccount', () => {
   const BREACHED_ACCOUNT_DATA_EXPANDED = [VERIFIED_BREACH, UNVERIFIED_BREACH];
   const BREACHED_ACCOUNT_DATA_NO_UNVERIFIED = [{ Name: VERIFIED_BREACH.Name }];
 
-  it('honors the apiKey option', async () => {
-    server.use(
-      http.get('*', ({ request }) => {
-        if (!request.headers.get('hibp-api-key')) {
-          return new Response(JSON.stringify(UNAUTHORIZED.body), {
-            status: UNAUTHORIZED.status,
-          });
-        }
-
-        return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
-      }),
-    );
-
-    await expect(breachedAccount('breached')).rejects.toThrow(
-      (UNAUTHORIZED.body as ErrorData).message,
-    );
-    await expect(breachedAccount('breached', { apiKey })).resolves.toEqual(
-      BREACHED_ACCOUNT_DATA,
-    );
-  });
-
-  it('honors the truncate option', async () => {
-    server.use(
-      http.get('*', ({ request }) => {
-        const url = new URL(request.url);
-        if (url.searchParams.get('truncateResponse') === 'false') {
+  describe('truncate option', () => {
+    it('sets the truncateResponse query parameter in the request', async () => {
+      expect.assertions(1);
+      server.use(
+        http.get('*', ({ request }) => {
+          const { searchParams } = new URL(request.url);
+          expect(searchParams.get('truncateResponse')).toBe('false');
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA_EXPANDED));
-        }
-        return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
-      }),
-    );
+        }),
+      );
 
-    await expect(breachedAccount('breached')).resolves.toEqual(
-      BREACHED_ACCOUNT_DATA,
-    );
-    await expect(
-      breachedAccount('breached', { truncate: false }),
-    ).resolves.toEqual(BREACHED_ACCOUNT_DATA_EXPANDED);
+      return breachedAccount('breached', { truncate: false });
+    });
   });
 
-  it('honors the includeUnverified option', async () => {
-    server.use(
-      http.get('*', ({ request }) => {
-        const url = new URL(request.url);
-        if (url.searchParams.get('includeUnverified') === 'false') {
+  describe('includeUnverified option', () => {
+    it('sets the includeUnverified query parameter in the request', async () => {
+      expect.assertions(1);
+      server.use(
+        http.get('*', ({ request }) => {
+          const { searchParams } = new URL(request.url);
+          expect(searchParams.get('includeUnverified')).toBe('false');
           return new Response(
             JSON.stringify(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED),
           );
-        }
-        return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
-      }),
-    );
+        }),
+      );
 
-    await expect(breachedAccount('breached')).resolves.toEqual(
-      BREACHED_ACCOUNT_DATA,
-    );
-    await expect(
-      breachedAccount('breached', { includeUnverified: false }),
-    ).resolves.toEqual(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED);
+      return breachedAccount('breached', { includeUnverified: false });
+    });
   });
 
-  it('honors the domain option', () => {
-    server.use(
-      http.get('*', ({ request }) => {
-        const url = new URL(request.url);
-        if (url.searchParams.get('domain') === 'foo.bar') {
+  describe('domain option', () => {
+    it('sets the domain query parameter in the request', () => {
+      expect.assertions(1);
+      server.use(
+        http.get('*', ({ request }) => {
+          const { searchParams } = new URL(request.url);
+          expect(searchParams.get('domain')).toBe('foo.bar');
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
-        }
-        return new Response(null, { status: 418 });
-      }),
-    );
+        }),
+      );
 
-    return expect(
-      breachedAccount('breached', { domain: 'foo.bar' }),
-    ).resolves.toEqual(BREACHED_ACCOUNT_DATA);
+      return breachedAccount('breached', { domain: 'foo.bar' });
+    });
+  });
+
+  describe('apiKey option', () => {
+    it('sets the hibp-api-key header', async () => {
+      expect.assertions(1);
+      const apiKey = 'my-api-key';
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('hibp-api-key')).toBe(apiKey);
+          return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
+        }),
+      );
+
+      return breachedAccount('breached', { apiKey });
+    });
+  });
+
+  describe('baseUrl option', () => {
+    it('is the beginning of the final URL', () => {
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      server.use(
+        http.get(new RegExp(`^${baseUrl}`), () => {
+          return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
+        }),
+      );
+
+      return expect(breachedAccount('breached', { baseUrl })).resolves.toEqual(
+        BREACHED_ACCOUNT_DATA,
+      );
+    });
+  });
+
+  describe('userAgent option', () => {
+    it('is passed on as a request header', () => {
+      expect.assertions(1);
+      const userAgent = 'Custom UA';
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('User-Agent')).toBe(userAgent);
+          return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
+        }),
+      );
+
+      return breachedAccount('breached', { userAgent });
+    });
   });
 });

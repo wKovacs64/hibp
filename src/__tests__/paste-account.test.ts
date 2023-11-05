@@ -1,35 +1,11 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
 import { EXAMPLE_PASTE } from '../../test/fixtures.js';
-import { NOT_FOUND, UNAUTHORIZED } from '../api/haveibeenpwned/responses.js';
-import type { ErrorData } from '../api/haveibeenpwned/types.js';
+import { NOT_FOUND } from '../api/haveibeenpwned/responses.js';
 import { pasteAccount } from '../paste-account.js';
 
 describe('pasteAccount', () => {
   const PASTE_ACCOUNT_DATA = [EXAMPLE_PASTE];
-
-  it('honors the apiKey option', async () => {
-    const apiKey = 'my-api-key';
-
-    server.use(
-      http.get('*', ({ request }) => {
-        if (!request.headers.has('hibp-api-key')) {
-          return new Response(JSON.stringify(UNAUTHORIZED.body), {
-            status: UNAUTHORIZED.status,
-          });
-        }
-
-        return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
-      }),
-    );
-
-    await expect(pasteAccount('whatever@example.com')).rejects.toThrow(
-      (UNAUTHORIZED.body as ErrorData).message,
-    );
-    await expect(
-      pasteAccount('whatever@example.com', { apiKey }),
-    ).resolves.toEqual(PASTE_ACCOUNT_DATA);
-  });
 
   describe('pasted email', () => {
     it('resolves with data from the remote API', () => {
@@ -54,6 +30,51 @@ describe('pasteAccount', () => {
       );
 
       return expect(pasteAccount('clean@whistle.com')).resolves.toBeNull();
+    });
+  });
+
+  describe('apiKey option', () => {
+    it('sets the hibp-api-key header', async () => {
+      expect.assertions(1);
+      const apiKey = 'my-api-key';
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('hibp-api-key')).toBe(apiKey);
+          return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
+        }),
+      );
+
+      return pasteAccount('whatever@example.com', { apiKey });
+    });
+  });
+
+  describe('baseUrl option', () => {
+    it('is the beginning of the final URL', () => {
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      server.use(
+        http.get(new RegExp(`^${baseUrl}`), () => {
+          return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
+        }),
+      );
+
+      return expect(
+        pasteAccount('whatever@example.com', { baseUrl }),
+      ).resolves.toEqual(PASTE_ACCOUNT_DATA);
+    });
+  });
+
+  describe('userAgent option', () => {
+    it('is passed on as a request header', () => {
+      expect.assertions(1);
+      const userAgent = 'Custom UA';
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('User-Agent')).toBe(userAgent);
+          return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
+        }),
+      );
+
+      return pasteAccount('whatever@example.com', { userAgent });
     });
   });
 });

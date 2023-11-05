@@ -28,4 +28,34 @@ describe('breach', () => {
       return expect(breach('not found')).resolves.toBeNull();
     });
   });
+
+  describe('baseUrl option', () => {
+    it('is the beginning of the final URL', () => {
+      const baseUrl = 'https://my-hibp-proxy:8080';
+      server.use(
+        http.get(new RegExp(`^${baseUrl}`), () => {
+          return new Response(JSON.stringify(VERIFIED_BREACH));
+        }),
+      );
+
+      return expect(breach('found', { baseUrl })).resolves.toEqual(
+        VERIFIED_BREACH,
+      );
+    });
+  });
+
+  describe('userAgent option', () => {
+    it('is passed on as a request header', () => {
+      expect.assertions(1);
+      const userAgent = 'Custom UA';
+      server.use(
+        http.get('*', ({ request }) => {
+          expect(request.headers.get('User-Agent')).toBe(userAgent);
+          return new Response(JSON.stringify(VERIFIED_BREACH));
+        }),
+      );
+
+      return breach('found', { userAgent });
+    });
+  });
 });

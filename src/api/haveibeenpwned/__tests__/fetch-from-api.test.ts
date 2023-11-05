@@ -1,7 +1,6 @@
 import { http } from 'msw';
 import { server } from '../../../mocks/server.js';
 import {
-  OK,
   BAD_REQUEST,
   UNAUTHORIZED,
   FORBIDDEN,
@@ -19,7 +18,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       server.use(
         http.get('*', ({ request }) => {
           return request.headers.get('User-Agent')?.includes('hibp')
-            ? new Response(JSON.stringify({}), { status: OK.status })
+            ? new Response(JSON.stringify({}))
             : new Response(null, { status: FORBIDDEN.status });
         }),
       );
@@ -44,7 +43,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       server.use(
         http.get('*', ({ request }) => {
           return !request.headers.get('User-Agent')?.includes('hibp')
-            ? new Response(JSON.stringify({}), { status: OK.status })
+            ? new Response(JSON.stringify({}))
             : new Response(null, { status: FORBIDDEN.status });
         }),
       );
@@ -176,53 +175,6 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
       ).rejects.toMatchInlineSnapshot(
         `[Error: Unknown - something unexpected happened.]`,
       );
-    });
-  });
-
-  describe('apiKey option', () => {
-    it('is passed on as a request header', () => {
-      server.use(
-        http.get('*', ({ request }) => {
-          return request.headers.get('hibp-api-key')
-            ? new Response(JSON.stringify({}), { status: OK.status })
-            : new Response(null, { status: UNAUTHORIZED.status });
-        }),
-      );
-
-      return expect(fetchFromApi('/service', { apiKey })).resolves.toEqual({});
-    });
-  });
-
-  describe('userAgent option', () => {
-    it('is passed on as a request header', () => {
-      const ua = 'custom UA';
-
-      server.use(
-        http.get('*', ({ request }) => {
-          return request.headers.get('User-Agent')?.includes(ua)
-            ? new Response(JSON.stringify({}), { status: OK.status })
-            : new Response(null, { status: UNAUTHORIZED.status });
-        }),
-      );
-
-      return expect(
-        fetchFromApi('/service', { userAgent: ua }),
-      ).resolves.toEqual({});
-    });
-  });
-
-  describe('baseUrl option', () => {
-    it('is used in the final URL', () => {
-      const baseUrl = 'https://my-hibp-proxy:8080';
-      const endpoint = '/service';
-
-      server.use(
-        http.get(new RegExp(`^${baseUrl}`), () => {
-          return new Response(JSON.stringify({}), { status: OK.status });
-        }),
-      );
-
-      return expect(fetchFromApi(endpoint, { baseUrl })).resolves.toEqual({});
     });
   });
 });
