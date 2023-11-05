@@ -24,18 +24,16 @@ export interface SearchResults {
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
  *
- * ***Warning (July 18, 2019):***
- *
- * `haveibeenpwned.com` now requires an API key from
+ * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` and
- * `pasteaccount` endpoints. The  `apiKey` option here is not explicitly
- * required, but direct requests made without it (that is, without specifying a
- * `baseUrl` to a proxy that inserts a valid API key on your behalf) will fail.
+ * `pasteaccount` endpoints. The `apiKey` option here is not explicitly
+ * required, but direct requests made without it will fail (unless you specify a
+ * `baseUrl` to a proxy that inserts a valid API key on your behalf).
  *
  * @param {string} account an email address or username
  * @param {object} [options] a configuration object
  * @param {string} [options.apiKey] an API key from
- * https://haveibeenpwned.com/API/Key
+ * https://haveibeenpwned.com/API/Key (default: undefined)
  * @param {string} [options.domain] a domain by which to filter the breach
  * results (default: all domains)
  * @param {boolean} [options.truncate] truncate the breach results to only
@@ -63,7 +61,7 @@ export interface SearchResults {
  * @example
  * try {
  *   const data = await search("nobody@nowhere.com", {
- *     apiKey: "my-api-key",
+ *     baseUrl: "https://my-hibp-proxy:8080",
  *     truncate: false,
  *   });
  *   if (data.breaches || data.pastes) {

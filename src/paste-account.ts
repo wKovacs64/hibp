@@ -15,18 +15,16 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
 /**
  * Fetches paste data for a specific account (email address).
  *
- * ***Warning (July 18, 2019):***
- *
- * `haveibeenpwned.com` now requires an API key from
+ * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `pasteaccount` endpoint. The
  * `apiKey` option here is not explicitly required, but direct requests made
- * without it (that is, without specifying a `baseUrl` to a proxy that inserts a
- * valid API key on your behalf) will fail.
+ * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+ * a valid API key on your behalf).
  *
  * @param {string} email the email address to query
  * @param {object} [options] a configuration object
  * @param {string} [options.apiKey] an API key from
- * https://haveibeenpwned.com/API/Key
+ * https://haveibeenpwned.com/API/Key (default: undefined)
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
@@ -38,6 +36,19 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * @example
  * try {
  *   const data = await pasteAccount("foo@bar.com", { apiKey: "my-api-key" });
+ *   if (data) {
+ *     // ...
+ *   } else {
+ *     // ...
+ *   }
+ * } catch (err) {
+ *   // ...
+ * }
+ * @example
+ * try {
+ *   const data = await pasteAccount("foo@bar.com", {
+ *     baseUrl: "https://my-hibp-proxy:8080",
+ *   });
  *   if (data) {
  *     // ...
  *   } else {

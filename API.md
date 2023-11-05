@@ -6,12 +6,11 @@
 </dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
-<p><em><strong>Warning (July 18, 2019):</strong></em></p>
-<p><code>haveibeenpwned.com</code> now requires an API key from
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
-without it (that is, without specifying a <code>baseUrl</code> to a proxy that inserts a
-valid API key on your behalf) will fail.</p>
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code></dt>
 <dd><p>Fetches all breach events in the system.</p>
@@ -21,12 +20,11 @@ valid API key on your behalf) will fail.</p>
 </dd>
 <dt><a href="#pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
-<p><em><strong>Warning (July 18, 2019):</strong></em></p>
-<p><code>haveibeenpwned.com</code> now requires an API key from
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>pasteaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
-without it (that is, without specifying a <code>baseUrl</code> to a proxy that inserts a
-valid API key on your behalf) will fail.</p>
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#PwnedPasswordSuffixes">Promise.&lt;PwnedPasswordSuffixes&gt;</a></code></dt>
 <dd><p>Fetches the SHA-1 or NTLM hash suffixes for the given 5-character hash
@@ -50,12 +48,11 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
-<p><em><strong>Warning (July 18, 2019):</strong></em></p>
-<p><code>haveibeenpwned.com</code> now requires an API key from
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
-<code>pasteaccount</code> endpoints. The  <code>apiKey</code> option here is not explicitly
-required, but direct requests made without it (that is, without specifying a
-<code>baseUrl</code> to a proxy that inserts a valid API key on your behalf) will fail.</p>
+<code>pasteaccount</code> endpoints. The <code>apiKey</code> option here is not explicitly
+required, but direct requests made without it will fail (unless you specify a
+<code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#subscriptionStatus">subscriptionStatus(apiKey, [options])</a> ⇒ <code><a href="#subscriptionstatus--object">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
 <dd><p>Fetches the current status of your HIBP subscription (API key).</p>
@@ -118,13 +115,11 @@ try {
 ## breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches breach data for a specific account.
 
-***Warning (July 18, 2019):***
-
-`haveibeenpwned.com` now requires an API key from
+🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
 `apiKey` option here is not explicitly required, but direct requests made
-without it (that is, without specifying a `baseUrl` to a proxy that inserts a
-valid API key on your behalf) will fail.
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
 
 **Kind**: global function  
 **Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
@@ -265,13 +260,11 @@ try {
 ## pasteAccount(email, [options]) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches paste data for a specific account (email address).
 
-***Warning (July 18, 2019):***
-
-`haveibeenpwned.com` now requires an API key from
+🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `pasteaccount` endpoint. The
 `apiKey` option here is not explicitly required, but direct requests made
-without it (that is, without specifying a `baseUrl` to a proxy that inserts a
-valid API key on your behalf) will fail.
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
 
 **Kind**: global function  
 **Returns**: <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
@@ -282,7 +275,7 @@ Error
 | --- | --- | --- |
 | email | <code>string</code> | the email address to query |
 | [options] | <code>object</code> | a configuration object |
-| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
@@ -290,6 +283,21 @@ Error
 ```js
 try {
   const data = await pasteAccount("foo@bar.com", { apiKey: "my-api-key" });
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
+```
+**Example**  
+```js
+try {
+  const data = await pasteAccount("foo@bar.com", {
+    baseUrl: "https://my-hibp-proxy:8080",
+  });
   if (data) {
     // ...
   } else {
@@ -396,13 +404,11 @@ and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
 
-***Warning (July 18, 2019):***
-
-`haveibeenpwned.com` now requires an API key from
+🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` and
-`pasteaccount` endpoints. The  `apiKey` option here is not explicitly
-required, but direct requests made without it (that is, without specifying a
-`baseUrl` to a proxy that inserts a valid API key on your behalf) will fail.
+`pasteaccount` endpoints. The `apiKey` option here is not explicitly
+required, but direct requests made without it will fail (unless you specify a
+`baseUrl` to a proxy that inserts a valid API key on your behalf).
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) - a Promise which resolves to an object
@@ -415,7 +421,7 @@ rejects with an Error
 | --- | --- | --- |
 | account | <code>string</code> | an email address or username |
 | [options] | <code>object</code> | a configuration object |
-| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.domain] | <code>string</code> | a domain by which to filter the breach results (default: all domains) |
 | [options.truncate] | <code>boolean</code> | truncate the breach results to only include the name of each breach (default: true) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
@@ -438,7 +444,7 @@ try {
 ```js
 try {
   const data = await search("nobody@nowhere.com", {
-    apiKey: "my-api-key",
+    baseUrl: "https://my-hibp-proxy:8080",
     truncate: false,
   });
   if (data.breaches || data.pastes) {
