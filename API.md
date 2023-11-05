@@ -57,7 +57,7 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it (that is, without specifying a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf) will fail.</p>
 </dd>
-<dt><a href="#subscriptionStatus">subscriptionStatus(apiKey, [options])</a> ⇒ <code><a href="#SubscriptionStatus">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
+<dt><a href="#subscriptionStatus">subscriptionStatus(apiKey, [options])</a> ⇒ <code><a href="#subscriptionstatus--object">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
 <dd><p>Fetches the current status of your HIBP subscription (API key).</p>
 </dd>
 </dl>
@@ -78,7 +78,7 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
 </dd>
-<dt><a href="#SubscriptionStatus">SubscriptionStatus</a> : <code>object</code></dt>
+<dt><a href="#subscriptionstatus--object">SubscriptionStatus</a> : <code>object</code></dt>
 <dd><p>An object representing the status of your HIBP subscription.</p>
 </dd>
 </dl>
@@ -452,11 +452,11 @@ try {
 ```
 <a name="subscriptionStatus"></a>
 
-## subscriptionStatus(apiKey, [options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#SubscriptionStatus)
+## subscriptionStatus(apiKey, [options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object)
 Fetches the current status of your HIBP subscription (API key).
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#SubscriptionStatus) - a Promise which resolves to a
+**Returns**: [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object) - a Promise which resolves to a
 subscription status object, or rejects with an Error  
 
 | Param | Type | Description |
