@@ -39,7 +39,7 @@ use it in the browser.
 - Get all pastes for an account 🔑
 - [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange)
   check a password to see if it has been exposed in a data breach
-- Check a SHA-1 prefix to see if it has been exposed in a data breach
+- Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 - Search for an account in both breaches and pastes at the same time 🔑
 - All queries return a Promise
 - Available server-side (Node.js) and client-side (browser)
