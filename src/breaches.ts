@@ -44,13 +44,16 @@ export function breaches(
     userAgent?: string;
   } = {},
 ): Promise<Breach[]> {
+  const { domain, baseUrl, userAgent } = options;
   const endpoint = '/breaches?';
   const params: string[] = [];
-  if (options.domain) {
-    params.push(`domain=${encodeURIComponent(options.domain)}`);
+
+  if (domain) {
+    params.push(`domain=${encodeURIComponent(domain)}`);
   }
+
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
-    baseUrl: options.baseUrl,
-    userAgent: options.userAgent,
+    baseUrl,
+    userAgent,
   }) as Promise<Breach[]>;
 }

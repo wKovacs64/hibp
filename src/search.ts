@@ -33,18 +33,17 @@ export interface SearchResults {
  * `baseUrl` to a proxy that inserts a valid API key on your behalf) will fail.
  *
  * @param {string} account an email address or username
- * @param {object} [breachOptions] a configuration object pertaining to breach
- * queries
- * @param {string} [breachOptions.apiKey] an API key from
+ * @param {object} [options] a configuration object
+ * @param {string} [options.apiKey] an API key from
  * https://haveibeenpwned.com/API/Key
- * @param {string} [breachOptions.domain] a domain by which to filter the
+ * @param {string} [options.domain] a domain by which to filter the breach
  * results (default: all domains)
- * @param {boolean} [breachOptions.truncate] truncate the results to only
+ * @param {boolean} [options.truncate] truncate the breach results to only
  * include the name of each breach (default: true)
- * @param {string} [breachOptions.baseUrl] a custom base URL for the
+ * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
- * @param {string} [breachOptions.userAgent] a custom string to send as the
+ * @param {string} [options.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
  * containing a "breaches" key (which can be null or an array of breach objects)
@@ -79,20 +78,18 @@ export interface SearchResults {
  */
 export async function search(
   account: string,
-  breachOptions: {
+  options: {
     apiKey?: string;
     domain?: string;
     truncate?: boolean;
     baseUrl?: string;
     userAgent?: string;
-  } = {
-    truncate: true,
-  },
+  } = {},
 ): Promise<SearchResults> {
-  const { apiKey, baseUrl, userAgent } = breachOptions;
+  const { apiKey, domain, truncate = true, baseUrl, userAgent } = options;
 
   const [breaches, pastes] = await Promise.all([
-    breachedAccount(account, breachOptions),
+    breachedAccount(account, { apiKey, domain, truncate, baseUrl, userAgent }),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
       ? pasteAccount(account, { apiKey, baseUrl, userAgent })

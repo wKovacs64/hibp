@@ -49,11 +49,14 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  */
 export function pasteAccount(
   email: string,
-  options: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
+  options: {
+    apiKey?: string;
+    baseUrl?: string;
+    userAgent?: string;
+  } = {},
 ): Promise<Paste[] | null> {
-  return fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`, {
-    apiKey: options.apiKey,
-    baseUrl: options.baseUrl,
-    userAgent: options.userAgent,
-  }) as Promise<Paste[] | null>;
+  return fetchFromApi(
+    `/pasteaccount/${encodeURIComponent(email)}`,
+    options,
+  ) as Promise<Paste[] | null>;
 }

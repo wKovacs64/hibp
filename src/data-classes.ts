@@ -25,7 +25,10 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * }
  */
 export function dataClasses(
-  options: { baseUrl?: string; userAgent?: string } = {},
+  options: {
+    baseUrl?: string;
+    userAgent?: string;
+  } = {},
 ): Promise<string[] | null> {
   return fetchFromApi('/dataclasses', options) as Promise<string[] | null>;
 }

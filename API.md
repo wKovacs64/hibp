@@ -42,7 +42,7 @@ response and returns a more structured format.</p>
 breach (0 indicating no exposure). The password is given in plain text, but
 only the first 5 characters of its SHA-1 hash will be submitted to the API.</p>
 </dd>
-<dt><a href="#search">search(account, [breachOptions])</a> ⇒ <code><a href="#SearchResults">Promise.&lt;SearchResults&gt;</a></code></dt>
+<dt><a href="#search">search(account, [options])</a> ⇒ <code><a href="#SearchResults">Promise.&lt;SearchResults&gt;</a></code></dt>
 <dd><p>Fetches all breaches and all pastes associated with the provided account
 (email address or username). Note that the remote API does not support
 querying pastes by username (only email addresses), so in the event the
@@ -381,7 +381,7 @@ try {
 ```
 <a name="search"></a>
 
-## search(account, [breachOptions]) ⇒ [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults)
+## search(account, [options]) ⇒ [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults)
 Fetches all breaches and all pastes associated with the provided account
 (email address or username). Note that the remote API does not support
 querying pastes by username (only email addresses), so in the event the
@@ -408,12 +408,12 @@ rejects with an Error
 | Param | Type | Description |
 | --- | --- | --- |
 | account | <code>string</code> | an email address or username |
-| [breachOptions] | <code>object</code> | a configuration object pertaining to breach queries |
-| [breachOptions.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key |
-| [breachOptions.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
-| [breachOptions.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
-| [breachOptions.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
-| [breachOptions.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key |
+| [options.domain] | <code>string</code> | a domain by which to filter the breach results (default: all domains) |
+| [options.truncate] | <code>boolean</code> | truncate the breach results to only include the name of each breach (default: true) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
