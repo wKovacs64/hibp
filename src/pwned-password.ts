@@ -32,7 +32,11 @@ import { pwnedPasswordRange } from './pwned-password-range.js';
  */
 export async function pwnedPassword(
   password: string,
-  options: { baseUrl?: string; userAgent?: string; addPadding?: boolean } = {},
+  options: {
+    baseUrl?: string;
+    userAgent?: string;
+    addPadding?: boolean;
+  } = {},
 ): Promise<number> {
   /* eslint-disable */
   // @ts-expect-error: JSSHA types are busted

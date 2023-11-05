@@ -81,25 +81,34 @@ export function breachedAccount(
     truncate?: boolean;
     baseUrl?: string;
     userAgent?: string;
-  } = {
-    includeUnverified: true,
-    truncate: true,
-  },
+  } = {},
 ): Promise<Breach[] | null> {
+  const {
+    apiKey,
+    domain,
+    includeUnverified = true,
+    truncate = true,
+    baseUrl,
+    userAgent,
+  } = options;
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params: string[] = [];
-  if (options.domain) {
-    params.push(`domain=${encodeURIComponent(options.domain)}`);
+
+  if (domain) {
+    params.push(`domain=${encodeURIComponent(domain)}`);
   }
-  if (options.includeUnverified === false) {
+
+  if (!includeUnverified) {
     params.push('includeUnverified=false');
   }
-  if (options.truncate === false) {
+
+  if (!truncate) {
     params.push('truncateResponse=false');
   }
+
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
-    apiKey: options.apiKey,
-    baseUrl: options.baseUrl,
-    userAgent: options.userAgent,
+    apiKey,
+    baseUrl,
+    userAgent,
   }) as Promise<Breach[] | null>;
 }

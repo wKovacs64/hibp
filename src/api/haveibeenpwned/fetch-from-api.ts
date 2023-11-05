@@ -69,12 +69,17 @@ function blockedWithRayId(rayId: string) {
  */
 export async function fetchFromApi(
   endpoint: string,
-  {
+  options: {
+    apiKey?: string;
+    baseUrl?: string;
+    userAgent?: string;
+  } = {},
+): Promise<ApiData> {
+  const {
     apiKey,
     baseUrl = 'https://haveibeenpwned.com/api/v3',
     userAgent,
-  }: { apiKey?: string; baseUrl?: string; userAgent?: string } = {},
-): Promise<ApiData> {
+  } = options;
   const headers: Record<string, string> = {};
 
   if (apiKey) {

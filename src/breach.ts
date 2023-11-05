@@ -51,7 +51,10 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  */
 export function breach(
   breachName: string,
-  options: { baseUrl?: string; userAgent?: string } = {},
+  options: {
+    baseUrl?: string;
+    userAgent?: string;
+  } = {},
 ): Promise<Breach | null> {
   return fetchFromApi(
     `/breach/${encodeURIComponent(breachName)}`,

@@ -24,18 +24,20 @@ import { BAD_REQUEST } from './responses.js';
  */
 export async function fetchFromApi(
   endpoint: string,
-  {
-    baseUrl = 'https://api.pwnedpasswords.com',
-    userAgent,
-    addPadding = false,
-    mode = 'sha1',
-  }: {
+  options: {
     baseUrl?: string;
     userAgent?: string;
     addPadding?: boolean;
     mode?: 'sha1' | 'ntlm';
   } = {},
 ): Promise<string> {
+  const {
+    baseUrl = 'https://api.pwnedpasswords.com',
+    userAgent,
+    addPadding = false,
+    mode = 'sha1',
+  } = options;
+
   const config = Object.assign(
     {},
     userAgent ? { headers: { 'User-Agent': userAgent } } : {},

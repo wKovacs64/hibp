@@ -66,12 +66,18 @@ export async function pwnedPasswordRange(
     mode?: 'sha1' | 'ntlm';
   } = {},
 ): Promise<PwnedPasswordSuffixes> {
-  const data = await fetchFromApi(
-    `/range/${encodeURIComponent(prefix)}`,
-    options,
-  );
+  const { baseUrl, userAgent, addPadding = false, mode = 'sha1' } = options;
+
+  const data = await fetchFromApi(`/range/${encodeURIComponent(prefix)}`, {
+    baseUrl,
+    userAgent,
+    addPadding,
+    mode,
+  });
+
   // create array from lines of text in response body
   const results = data.split('\n').filter(Boolean);
+
   // convert into an object mapping suffix to count for each line
   return results.reduce<PwnedPasswordSuffixes>((acc, row) => {
     const [suffix, countString] = row.split(':');
