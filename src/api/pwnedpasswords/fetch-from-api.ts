@@ -17,6 +17,8 @@ import { BAD_REQUEST } from './responses.js';
  * field in the request headers (default: `hibp <version>`)
  * @param {boolean} [options.addPadding] ask the remote API to add padding to
  * the response to obscure the password prefix (default: `false`)
+ * @param {'sha1' | 'ntlm'} [options.mode] return SHA-1 or NTLM hashes
+ * (default: `sha1`)
  * @returns {Promise<string>} a Promise which resolves to the data resulting
  * from the query, or rejects with an Error
  */
@@ -26,14 +28,20 @@ export async function fetchFromApi(
     baseUrl = 'https://api.pwnedpasswords.com',
     userAgent,
     addPadding = false,
-  }: { baseUrl?: string; userAgent?: string; addPadding?: boolean } = {},
+    mode = 'sha1',
+  }: {
+    baseUrl?: string;
+    userAgent?: string;
+    addPadding?: boolean;
+    mode?: 'sha1' | 'ntlm';
+  } = {},
 ): Promise<string> {
   const config = Object.assign(
     {},
     userAgent ? { headers: { 'User-Agent': userAgent } } : {},
     addPadding ? { headers: { 'Add-Padding': 'true' } } : {},
   );
-  const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
+  const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}?mode=${mode}`;
   const response = await fetch(url, config);
 
   if (response.ok) return response.text();

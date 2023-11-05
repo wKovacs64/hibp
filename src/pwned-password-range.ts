@@ -10,7 +10,8 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  */
 
 /**
- * Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
+ * Fetches the SHA-1 or NTLM hash suffixes for the given 5-character hash
+ * prefix.
  *
  * When a password hash with the same first 5 characters is found in the Pwned
  * Passwords repository, the API will respond with an HTTP 200 and include the
@@ -18,7 +19,7 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  * of how many times it appears in the data set. This function parses the
  * response and returns a more structured format.
  *
- * @param {string} prefix the first 5 characters of a SHA-1 password hash (case
+ * @param {string} prefix the first 5 characters of a password hash (case
  * insensitive)
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
@@ -27,6 +28,8 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  * field in the request headers (default: `hibp <version>`)
  * @param {boolean} [options.addPadding] ask the remote API to add padding to
  * the response to obscure the password prefix (default: `false`)
+ * @param {'sha1' | 'ntlm'} [options.mode] return SHA-1 or NTLM hashes
+ * (default: `sha1`)
  * @returns {Promise<PwnedPasswordSuffixes>} a Promise which resolves to an
  * object mapping the `suffix` that when matched with the prefix composes the
  * complete hash, to the `count` of how many times it appears in the breached
@@ -56,7 +59,12 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  */
 export async function pwnedPasswordRange(
   prefix: string,
-  options: { baseUrl?: string; userAgent?: string; addPadding?: boolean } = {},
+  options: {
+    baseUrl?: string;
+    userAgent?: string;
+    addPadding?: boolean;
+    mode?: 'sha1' | 'ntlm';
+  } = {},
 ): Promise<PwnedPasswordSuffixes> {
   const data = await fetchFromApi(
     `/range/${encodeURIComponent(prefix)}`,

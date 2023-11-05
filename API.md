@@ -29,7 +29,8 @@ without it (that is, without specifying a <code>baseUrl</code> to a proxy that i
 valid API key on your behalf) will fail.</p>
 </dd>
 <dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#PwnedPasswordSuffixes">Promise.&lt;PwnedPasswordSuffixes&gt;</a></code></dt>
-<dd><p>Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.</p>
+<dd><p>Fetches the SHA-1 or NTLM hash suffixes for the given 5-character hash
+prefix.</p>
 <p>When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
 suffix of every hash beginning with the specified prefix, followed by a count
@@ -295,7 +296,8 @@ try {
 <a name="pwnedPasswordRange"></a>
 
 ## pwnedPasswordRange(prefix, [options]) ⇒ [<code>Promise.&lt;PwnedPasswordSuffixes&gt;</code>](#PwnedPasswordSuffixes)
-Fetches the SHA-1 hash suffixes for the given 5-character SHA-1 hash prefix.
+Fetches the SHA-1 or NTLM hash suffixes for the given 5-character hash
+prefix.
 
 When a password hash with the same first 5 characters is found in the Pwned
 Passwords repository, the API will respond with an HTTP 200 and include the
@@ -312,11 +314,12 @@ password data set, or rejects with an Error
 
 | Param | Type | Description |
 | --- | --- | --- |
-| prefix | <code>string</code> | the first 5 characters of a SHA-1 password hash (case insensitive) |
+| prefix | <code>string</code> | the first 5 characters of a password hash (case insensitive) |
 | [options] | <code>object</code> | a configuration object |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 | [options.addPadding] | <code>boolean</code> | ask the remote API to add padding to the response to obscure the password prefix (default: `false`) |
+| [options.mode] | <code>&#x27;sha1&#x27;</code> \| <code>&#x27;ntlm&#x27;</code> | return SHA-1 or NTLM hashes (default: `sha1`) |
 
 **Example**  
 ```js
