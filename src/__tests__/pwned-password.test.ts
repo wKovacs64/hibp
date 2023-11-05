@@ -1,6 +1,6 @@
 import { http } from 'msw';
 import { server } from '../mocks/server.js';
-import { EXAMPLE_PASSWORD_HASHES } from '../../test/fixtures.js';
+import { EXAMPLE_SHA1_PASSWORD_HASHES } from '../../test/fixtures.js';
 import { pwnedPassword } from '../pwned-password.js';
 
 describe('pwnedPassword', () => {
@@ -8,7 +8,7 @@ describe('pwnedPassword', () => {
     it('resolves to number > 0', () => {
       server.use(
         http.get('*', () => {
-          return new Response(EXAMPLE_PASSWORD_HASHES);
+          return new Response(EXAMPLE_SHA1_PASSWORD_HASHES);
         }),
       );
 
@@ -20,7 +20,7 @@ describe('pwnedPassword', () => {
     it('resolves to 0', () => {
       server.use(
         http.get('*', () => {
-          return new Response(EXAMPLE_PASSWORD_HASHES);
+          return new Response(EXAMPLE_SHA1_PASSWORD_HASHES);
         }),
       );
 
@@ -34,7 +34,7 @@ describe('pwnedPassword', () => {
       server.use(
         http.get('*', ({ request }) => {
           expect(request.headers.get('Add-Padding')).toBe('true');
-          return new Response(EXAMPLE_PASSWORD_HASHES);
+          return new Response(EXAMPLE_SHA1_PASSWORD_HASHES);
         }),
       );
 
