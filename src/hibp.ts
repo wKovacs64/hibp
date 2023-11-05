@@ -7,6 +7,7 @@ import { pasteAccount } from './paste-account.js';
 import { pwnedPassword } from './pwned-password.js';
 import { pwnedPasswordRange } from './pwned-password-range.js';
 import { search } from './search.js';
+import { subscriptionStatus } from './subscription-status.js';
 
 /*
  * Export individual named functions to allow the following:
@@ -26,6 +27,7 @@ export {
   pwnedPassword,
   pwnedPasswordRange,
   search,
+  subscriptionStatus,
   RateLimitError,
 };
 
@@ -40,6 +42,7 @@ export interface HIBP {
   pwnedPassword: typeof pwnedPassword;
   pwnedPasswordRange: typeof pwnedPasswordRange;
   search: typeof search;
+  subscriptionStatus: typeof subscriptionStatus;
   RateLimitError: typeof RateLimitError;
 }
 

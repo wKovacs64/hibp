@@ -3,7 +3,7 @@
     {
       "//": "Pre-bundled for Browser (UMD)",
       "path": "dist/browser/hibp.umd.js",
-      "maxSize": "9 kB"
+      "maxSize": "9.2 kB"
     },
     {
       "//": "Pre-bundled for Browser (ESM)",
@@ -44,6 +44,10 @@
       "maxSize": "1.5 kB"
     },
     {
+      "path": "dist/cjs/subscription-status.js",
+      "maxSize": "1 kB"
+    },
+    {
       "//": "Bundled with Webpack (ESM)",
       "path": "dist/esm/breach.mjs",
       "maxSize": "1 kB"
@@ -75,6 +79,10 @@
     {
       "path": "dist/esm/search.mjs",
       "maxSize": "1.4 kB"
+    },
+    {
+      "path": "dist/esm/subscription-status.mjs",
+      "maxSize": "1 kB"
     }
   ]
 }
