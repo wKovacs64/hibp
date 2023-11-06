@@ -48,6 +48,12 @@ test('UMD', async ({ page }) => {
   expect(
     await page.evaluate(() => typeof window.hibp.search === 'function'),
   ).toBe(true);
+
+  expect(
+    await page.evaluate(
+      () => typeof window.hibp.subscriptionStatus === 'function',
+    ),
+  ).toBe(true);
 });
 
 test('ESM for browsers', async ({ page }) => {
