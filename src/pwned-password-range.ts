@@ -22,14 +22,14 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  * @param {string} prefix the first 5 characters of a password hash (case
  * insensitive)
  * @param {object} [options] a configuration object
- * @param {string} [options.baseUrl] a custom base URL for the
- * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
- * @param {string} [options.userAgent] a custom string to send as the User-Agent
- * field in the request headers (default: `hibp <version>`)
  * @param {boolean} [options.addPadding] ask the remote API to add padding to
  * the response to obscure the password prefix (default: `false`)
  * @param {'sha1' | 'ntlm'} [options.mode] return SHA-1 or NTLM hashes
  * (default: `sha1`)
+ * @param {string} [options.baseUrl] a custom base URL for the
+ * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<PwnedPasswordSuffixes>} a Promise which resolves to an
  * object mapping the `suffix` that when matched with the prefix composes the
  * complete hash, to the `count` of how many times it appears in the breached
@@ -60,10 +60,25 @@ export type PwnedPasswordSuffixes = Record<string, number>;
 export async function pwnedPasswordRange(
   prefix: string,
   options: {
-    baseUrl?: string;
-    userAgent?: string;
+    /**
+     * ask the remote API to add padding to the response to obscure the password
+     * prefix (default: `false`)
+     */
     addPadding?: boolean;
+    /**
+     * return SHA-1 or NTLM hashes (default: `sha1`)
+     */
     mode?: 'sha1' | 'ntlm';
+    /**
+     * a custom base URL for the haveibeenpwned.com API endpoints (default:
+     * `https://haveibeenpwned.com/api/v3`)
+     */
+    baseUrl?: string;
+    /**
+     * a custom string to send as the User-Agent field in the request headers
+     * (default: `hibp <version>`)
+     */
+    userAgent?: string;
   } = {},
 ): Promise<PwnedPasswordSuffixes> {
   const { baseUrl, userAgent, addPadding = false, mode = 'sha1' } = options;
