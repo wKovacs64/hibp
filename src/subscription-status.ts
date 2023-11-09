@@ -50,8 +50,19 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  */
 export async function subscriptionStatus(
   options: {
+    /**
+     * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
+     */
     apiKey?: string;
+    /**
+     * a custom base URL for the haveibeenpwned.com API endpoints (default:
+     * `https://haveibeenpwned.com/api/v3`)
+     */
     baseUrl?: string;
+    /**
+     * a custom string to send as the User-Agent field in the request headers
+     * (default: `hibp <version>`)
+     */
     userAgent?: string;
   } = {},
 ) {
