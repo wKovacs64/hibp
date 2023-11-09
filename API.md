@@ -335,10 +335,10 @@ password data set, or rejects with an Error
 | --- | --- | --- |
 | prefix | <code>string</code> | the first 5 characters of a password hash (case insensitive) |
 | [options] | <code>object</code> | a configuration object |
-| [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
-| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 | [options.addPadding] | <code>boolean</code> | ask the remote API to add padding to the response to obscure the password prefix (default: `false`) |
 | [options.mode] | <code>&#x27;sha1&#x27;</code> \| <code>&#x27;ntlm&#x27;</code> | return SHA-1 or NTLM hashes (default: `sha1`) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
@@ -380,9 +380,9 @@ the password has been exposed in a breach, or rejects with an Error
 | --- | --- | --- |
 | password | <code>string</code> | a password in plain text |
 | [options] | <code>object</code> | a configuration object |
+| [options.addPadding] | <code>boolean</code> | ask the remote API to add padding to the response to obscure the password prefix (default: `false`) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
-| [options.addPadding] | <code>boolean</code> | ask the remote API to add padding to the response to obscure the password prefix (default: `false`) |
 
 **Example**  
 ```js
