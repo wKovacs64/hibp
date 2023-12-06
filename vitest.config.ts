@@ -8,7 +8,10 @@ export default defineConfig({
       exclude: [
         ...(configDefaults.coverage.exclude ?? []),
         '**/mocks/**',
+        '**/types.ts',
         '**/index.ts',
+        '**/*.config.ts',
+        '**/*.js',
       ],
       reporter: ['text', 'lcov', 'clover'],
     },
