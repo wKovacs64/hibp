@@ -1,5 +1,11 @@
 # Change Log
 
+## 14.0.1
+
+### Patch Changes
+
+- [#428](https://github.com/wKovacs64/hibp/pull/428) [`4a69884`](https://github.com/wKovacs64/hibp/commit/4a69884b3268b00bdf17808796d1d03ba9cc801a) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add descriptions to each config option for a better IDE experience.
+
 ## 14.0.0
 
 ### Major Changes
