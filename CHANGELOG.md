@@ -1,5 +1,11 @@
 # Change Log
 
+## 14.0.3
+
+### Patch Changes
+
+- [#438](https://github.com/wKovacs64/hibp/pull/438) [`3da8b89`](https://github.com/wKovacs64/hibp/commit/3da8b89dd835be1a059c7e51d41dbe6e542db184) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Restore missing TypeScript declarations that were forgotten in v14.0.2 (PR #436).
+
 ## 14.0.2
 
 ### Patch Changes
