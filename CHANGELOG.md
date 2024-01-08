@@ -1,5 +1,13 @@
 # Change Log
 
+## 14.0.2
+
+### Patch Changes
+
+- [#436](https://github.com/wKovacs64/hibp/pull/436) [`961d6e0`](https://github.com/wKovacs64/hibp/commit/961d6e000e20a4894443fa1c7f98c4224c590ff1) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Fix CommonJS exports that broke in v14.0.0.
+
+  CommonJS consumers were getting an `ERR_REQUIRE_ESM` error as of v14.0.0 due to changing the project source to ESM in PR #420. This change resolves that by publishing the CommonJS files in `dist/cjs` with a `.cjs` file extension and the ESM files in `dist/esm` with the `.js` file extension.
+
 ## 14.0.1
 
 ### Patch Changes
