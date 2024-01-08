@@ -23,14 +23,14 @@
     ".": {
       "browser": "./dist/browser/hibp.module.js",
       "umd": "./dist/browser/hibp.umd.js",
-      "require": "./dist/cjs/hibp.js",
-      "import": "./dist/esm/hibp.mjs"
+      "require": "./dist/cjs/hibp.cjs",
+      "import": "./dist/esm/hibp.js"
     },
     "./package.json": "./package.json"
   },
   "type": "module",
-  "main": "dist/cjs/hibp.js",
-  "module": "dist/esm/hibp.mjs",
+  "main": "dist/cjs/hibp.cjs",
+  "module": "dist/esm/hibp.js",
   "unpkg": "dist/browser/hibp.umd.js",
   "runkitExampleFilename": "example/runkit.js",
   "files": [

@@ -44,6 +44,7 @@ export default [
     input: inputs,
     output: {
       dir: 'dist/cjs',
+      entryFileNames: '[name].cjs',
       format: 'cjs',
       sourcemap: true,
       indent: false,
@@ -66,7 +67,6 @@ export default [
     input: inputs,
     output: {
       dir: 'dist/esm',
-      entryFileNames: '[name].mjs',
       format: 'esm',
       sourcemap: true,
       indent: false,
