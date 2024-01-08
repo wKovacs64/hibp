@@ -8,8 +8,21 @@ jobs:
   bundlewatch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: bahmutov/npm-install@v1
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version-file: '.nvmrc'
+
+      - name: 📥 Install deps
+        run: npm install
+
+      - name: 🛠️ Build
+        run: npm run build
+
       - uses: jackyef/bundlewatch-gh-action@0.2.1
         with:
           bundlewatch-config: .bundlewatch.config.json
