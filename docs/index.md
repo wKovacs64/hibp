@@ -178,6 +178,9 @@ You have several options for using this library in a browser environment:
   the '[Have I been pwned?](https://haveibeenpwned.com)' service
 - [Password Lense](https://pwl.netlify.com/) - a static web application to
   reveal character types in a password
+- [Plasmic](https://www.plasmic.app/) - the open-source visual builder for your
+  tech stack
+- [Medplum](https://www.medplum.com/) - fast and easy healthcare dev
 - [Hasura Backend Plus](https://nhost.github.io/hasura-backend-plus/) -
   Authentication & Storage for Hasura
 - [Staart API](https://staart.js.org/api/) - a Node.js backend starter for SaaS
