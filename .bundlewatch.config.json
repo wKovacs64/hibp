@@ -12,76 +12,76 @@
     },
     {
       "//": "Bundled with Webpack (CJS)",
-      "path": "dist/cjs/breach.js",
+      "path": "dist/cjs/breach.cjs",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/cjs/breached-account.js",
+      "path": "dist/cjs/breached-account.cjs",
       "maxSize": "1.2 kB"
     },
     {
-      "path": "dist/cjs/breaches.js",
+      "path": "dist/cjs/breaches.cjs",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/cjs/data-classes.js",
+      "path": "dist/cjs/data-classes.cjs",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/cjs/paste-account.js",
+      "path": "dist/cjs/paste-account.cjs",
       "maxSize": "1.1 kB"
     },
     {
-      "path": "dist/cjs/pwned-password.js",
+      "path": "dist/cjs/pwned-password.cjs",
       "maxSize": "1.1 kB"
     },
     {
-      "path": "dist/cjs/pwned-password-range.js",
+      "path": "dist/cjs/pwned-password-range.cjs",
       "maxSize": "1.4 kB"
     },
     {
-      "path": "dist/cjs/search.js",
+      "path": "dist/cjs/search.cjs",
       "maxSize": "1.5 kB"
     },
     {
-      "path": "dist/cjs/subscription-status.js",
+      "path": "dist/cjs/subscription-status.cjs",
       "maxSize": "1 kB"
     },
     {
       "//": "Bundled with Webpack (ESM)",
-      "path": "dist/esm/breach.mjs",
+      "path": "dist/esm/breach.js",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/esm/breached-account.mjs",
+      "path": "dist/esm/breached-account.js",
       "maxSize": "1.1 kB"
     },
     {
-      "path": "dist/esm/breaches.mjs",
+      "path": "dist/esm/breaches.js",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/esm/data-classes.mjs",
+      "path": "dist/esm/data-classes.js",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/esm/paste-account.mjs",
+      "path": "dist/esm/paste-account.js",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/esm/pwned-password.mjs",
+      "path": "dist/esm/pwned-password.js",
       "maxSize": "1 kB"
     },
     {
-      "path": "dist/esm/pwned-password-range.mjs",
+      "path": "dist/esm/pwned-password-range.js",
       "maxSize": "1.4 kB"
     },
     {
-      "path": "dist/esm/search.mjs",
+      "path": "dist/esm/search.js",
       "maxSize": "1.4 kB"
     },
     {
-      "path": "dist/esm/subscription-status.mjs",
+      "path": "dist/esm/subscription-status.js",
       "maxSize": "1 kB"
     }
   ]
