@@ -64,8 +64,14 @@ jobs:
       - name: 📥 Install deps
         run: npm install
 
+      - name: 🛠️ Build
+        run: npm run build
+
       - name: 🔎 Type check
         run: npm run typecheck
+
+      - name: 📦 Are the types wrong?
+        run: npx attw --pack --format table
 
   test:
     name: 🩺 Tests
