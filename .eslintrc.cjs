@@ -3,7 +3,6 @@ module.exports = {
     'plugin:wkovacs64/base',
     'plugin:wkovacs64/jest',
     'plugin:wkovacs64/typescript',
-    'plugin:playwright/playwright-test',
     'prettier',
   ],
   rules: {
@@ -20,4 +19,10 @@ module.exports = {
       version: '99999',
     },
   },
+  overrides: [
+    {
+      files: ['playwright/tests/*.spec.ts'],
+      extends: ['plugin:playwright/playwright-test'],
+    },
+  ],
 };
