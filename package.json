@@ -84,7 +84,7 @@
     "jssha": "^3.3.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.15.2",
+    "@arethetypeswrong/cli": "0.15.3",
     "@babel/core": "7.24.4",
     "@babel/parser": "7.24.4",
     "@babel/plugin-proposal-class-properties": "7.18.6",
