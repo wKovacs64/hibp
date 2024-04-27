@@ -1,5 +1,7 @@
-import fetch from '../web-fetch.js';
+import { installUndiciOnNode18 } from '../fetch-polyfill.js';
 import { BAD_REQUEST } from './responses.js';
+
+installUndiciOnNode18();
 
 /**
  * Fetches data from the supplied API endpoint.

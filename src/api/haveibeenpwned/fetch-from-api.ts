@@ -1,5 +1,5 @@
-import fetch from '../web-fetch.js';
 import { name, version } from '../../../package.json';
+import { installUndiciOnNode18 } from '../fetch-polyfill.js';
 import {
   BAD_REQUEST,
   UNAUTHORIZED,
@@ -8,6 +8,8 @@ import {
   TOO_MANY_REQUESTS,
 } from './responses.js';
 import type { ApiData, ErrorData } from './types.js';
+
+installUndiciOnNode18();
 
 /**
  * Custom error thrown when the haveibeenpwned.com API responds with 429 Too

@@ -59,7 +59,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       return expect(
         fetchFromApi('/service', { baseUrl: 'relativeBaseUrl' }),
-      ).rejects.toMatchInlineSnapshot(`[TypeError: Invalid URL]`);
+      ).rejects.toMatchInlineSnapshot(
+        `[TypeError: Failed to parse URL from relativeBaseUrl/service]`,
+      );
     });
   });
 
