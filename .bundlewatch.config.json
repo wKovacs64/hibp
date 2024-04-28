@@ -37,7 +37,7 @@
     },
     {
       "path": "dist/cjs/pwned-password-range.cjs",
-      "maxSize": "1.4 kB"
+      "maxSize": "1.5 kB"
     },
     {
       "path": "dist/cjs/search.cjs",
@@ -54,7 +54,7 @@
     },
     {
       "path": "dist/esm/breached-account.js",
-      "maxSize": "1.1 kB"
+      "maxSize": "1.2 kB"
     },
     {
       "path": "dist/esm/breaches.js",

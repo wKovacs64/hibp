@@ -18,6 +18,8 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * (default: all domains)
  * @param {boolean} [options.includeUnverified] include "unverified" breaches in
  * the results (default: true)
+ * @param {number} [options.timeoutMs] timeout for the request in milliseconds
+ * (default: none)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
@@ -86,6 +88,10 @@ export function breachedAccount(
      */
     includeUnverified?: boolean;
     /**
+     * timeout for the request in milliseconds (default: none)
+     */
+    timeoutMs?: number;
+    /**
      * truncate the results to only include the name of each breach (default:
      * true)
      */
@@ -106,6 +112,7 @@ export function breachedAccount(
     apiKey,
     domain,
     includeUnverified = true,
+    timeoutMs,
     truncate = true,
     baseUrl,
     userAgent,
@@ -128,6 +135,7 @@ export function breachedAccount(
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
     apiKey,
     baseUrl,
+    timeoutMs,
     userAgent,
   }) as Promise<Breach[] | null>;
 }

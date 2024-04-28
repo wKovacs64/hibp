@@ -63,6 +63,8 @@ function blockedWithRayId(rayId: string) {
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
+ * @param {number} [options.timeoutMs] timeout for the request in milliseconds
+ * (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<ApiData>} a Promise which resolves to the data resulting
@@ -74,12 +76,14 @@ export async function fetchFromApi(
   options: {
     apiKey?: string;
     baseUrl?: string;
+    timeoutMs?: number;
     userAgent?: string;
   } = {},
 ): Promise<ApiData> {
   const {
     apiKey,
     baseUrl = 'https://haveibeenpwned.com/api/v3',
+    timeoutMs,
     userAgent,
   } = options;
   const headers: Record<string, string> = {};
@@ -97,7 +101,10 @@ export async function fetchFromApi(
     headers['User-Agent'] = `${name} ${version}`;
   }
 
-  const config = { headers };
+  const config: RequestInit = {
+    headers,
+    ...(timeoutMs ? { signal: AbortSignal.timeout(timeoutMs) } : {}),
+  };
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
   const response = await fetch(url, config);
 

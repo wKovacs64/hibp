@@ -41,6 +41,8 @@ export interface SearchResults {
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
+ * @param {number} [options.timeoutMs] timeout for the request in milliseconds
+ * (default: none)
  * @param {string} [options.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
@@ -96,19 +98,37 @@ export async function search(
      */
     baseUrl?: string;
     /**
+     * timeout for the request in milliseconds (default: none)
+     */
+    timeoutMs?: number;
+    /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},
 ): Promise<SearchResults> {
-  const { apiKey, domain, truncate = true, baseUrl, userAgent } = options;
+  const {
+    apiKey,
+    domain,
+    truncate = true,
+    baseUrl,
+    timeoutMs,
+    userAgent,
+  } = options;
 
   const [breaches, pastes] = await Promise.all([
-    breachedAccount(account, { apiKey, domain, truncate, baseUrl, userAgent }),
+    breachedAccount(account, {
+      apiKey,
+      domain,
+      truncate,
+      baseUrl,
+      timeoutMs,
+      userAgent,
+    }),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
-      ? pasteAccount(account, { apiKey, baseUrl, userAgent })
+      ? pasteAccount(account, { apiKey, baseUrl, timeoutMs, userAgent })
       : null,
   ]);
 
