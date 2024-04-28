@@ -52,6 +52,7 @@
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist coverage",
     "format": "prettier --cache --write .",
+    "format:check": "prettier --cache --check .",
     "lint": "eslint .",
     "prebuild": "npm run --silent clean",
     "prepublishOnly": "npm run build",
