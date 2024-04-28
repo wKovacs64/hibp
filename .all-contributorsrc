@@ -7,56 +7,89 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "files": ["README.md", "docs/index.md"],
+  "files": [
+    "README.md",
+    "docs/index.md"
+  ],
   "contributors": [
     {
       "login": "wKovacs64",
       "name": "Justin Hall",
       "avatar_url": "https://avatars.githubusercontent.com/u/1288694?v=4",
       "profile": "https://github.com/wKovacs64",
-      "contributions": ["code", "doc", "infra", "maintenance", "review", "test"]
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "maintenance",
+        "review",
+        "test"
+      ]
     },
     {
       "login": "troyhunt",
       "name": "Troy Hunt",
       "avatar_url": "https://avatars.githubusercontent.com/u/273244?v=4",
       "profile": "https://www.troyhunt.com",
-      "contributions": ["data"]
+      "contributions": [
+        "data"
+      ]
     },
     {
       "login": "jellekralt",
       "name": "Jelle Kralt",
       "avatar_url": "https://avatars.githubusercontent.com/u/214558?v=4",
       "profile": "https://jellekralt.com",
-      "contributions": ["code"]
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "timaschew",
       "name": "Anton W",
       "avatar_url": "https://avatars.githubusercontent.com/u/110870?v=4",
       "profile": "https://github.com/timaschew",
-      "contributions": ["bug"]
+      "contributions": [
+        "bug"
+      ]
     },
     {
       "login": "danieladams456",
       "name": "Daniel Adams",
       "avatar_url": "https://avatars.githubusercontent.com/u/3953840?v=4",
       "profile": "https://github.com/danieladams456",
-      "contributions": ["code"]
+      "contributions": [
+        "code"
+      ]
     },
     {
       "login": "yelworc",
       "name": "Markus Dolic",
       "avatar_url": "https://avatars.githubusercontent.com/u/454308?v=4",
       "profile": "https://twitter.com/d0gb3r7",
-      "contributions": ["bug"]
+      "contributions": [
+        "bug"
+      ]
     },
     {
       "login": "textbook",
       "name": "Jonathan Sharpe",
       "avatar_url": "https://avatars.githubusercontent.com/u/785939?v=4",
       "profile": "https://github.com/textbook/about",
-      "contributions": ["code"]
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ArcadeRenegade",
+      "name": "Ryan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13874898?v=4",
+      "profile": "https://github.com/ArcadeRenegade",
+      "contributions": [
+        "bug"
+      ]
     }
-  ]
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
