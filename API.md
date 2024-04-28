@@ -100,6 +100,7 @@ with an Error
 | breachName | <code>string</code> | the name of a breach in the system |
 | [options] | <code>object</code> | a configuration object |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -138,6 +139,7 @@ an Error
 | [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.includeUnverified] | <code>boolean</code> | include "unverified" breaches in the results (default: true) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.truncate] | <code>boolean</code> | truncate the results to only include the name of each breach (default: true) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
@@ -203,6 +205,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -245,6 +248,7 @@ Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -282,6 +286,7 @@ Error
 | [options] | <code>object</code> | a configuration object |
 | [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -338,6 +343,7 @@ password data set, or rejects with an Error
 | [options.addPadding] | <code>boolean</code> | ask the remote API to add padding to the response to obscure the password prefix (default: `false`) |
 | [options.mode] | <code>&#x27;sha1&#x27;</code> \| <code>&#x27;ntlm&#x27;</code> | return SHA-1 or NTLM hashes (default: `sha1`) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -382,6 +388,7 @@ the password has been exposed in a breach, or rejects with an Error
 | [options] | <code>object</code> | a configuration object |
 | [options.addPadding] | <code>boolean</code> | ask the remote API to add padding to the response to obscure the password prefix (default: `false`) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -430,6 +437,7 @@ rejects with an Error
 | [options.domain] | <code>string</code> | a domain by which to filter the breach results (default: all domains) |
 | [options.truncate] | <code>boolean</code> | truncate the breach results to only include the name of each breach (default: true) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
@@ -481,6 +489,7 @@ subscription status object, or rejects with an Error
 | [options] | <code>object</code> | a configuration object |
 | [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  

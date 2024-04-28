@@ -7,6 +7,8 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
+ * @param {number} [options.timeoutMs] timeout for the request in milliseconds
+ * (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
@@ -31,6 +33,10 @@ export function dataClasses(
      * `https://haveibeenpwned.com/api/v3`)
      */
     baseUrl?: string;
+    /**
+     * timeout for the request in milliseconds (default: none)
+     */
+    timeoutMs?: number;
     /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)

@@ -12,6 +12,8 @@ import { pwnedPasswordRange } from './pwned-password-range.js';
  * the response to obscure the password prefix (default: `false`)
  * @param {string} [options.baseUrl] a custom base URL for the
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
+ * @param {number} [options.timeoutMs] timeout for the request in milliseconds
+ * (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<number>} a Promise which resolves to the number of times
@@ -43,6 +45,10 @@ export async function pwnedPassword(
      * `https://haveibeenpwned.com/api/v3`)
      */
     baseUrl?: string;
+    /**
+     * timeout for the request in milliseconds (default: none)
+     */
+    timeoutMs?: number;
     /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
