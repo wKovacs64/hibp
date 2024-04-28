@@ -40,11 +40,12 @@ export async function fetchFromApi(
     mode = 'sha1',
   } = options;
 
-  const config = Object.assign(
-    {},
-    userAgent ? { headers: { 'User-Agent': userAgent } } : {},
-    addPadding ? { headers: { 'Add-Padding': 'true' } } : {},
-  );
+  const config: RequestInit = {
+    headers: {
+      ...(userAgent ? { 'User-Agent': userAgent } : {}),
+      ...(addPadding ? { 'Add-Padding': 'true' } : {}),
+    },
+  };
   const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}?mode=${mode}`;
   const response = await fetch(url, config);
 
