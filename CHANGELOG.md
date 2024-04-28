@@ -1,5 +1,17 @@
 # Change Log
 
+## 14.1.0
+
+### Minor Changes
+
+- [#462](https://github.com/wKovacs64/hibp/pull/462) [`b6076f2`](https://github.com/wKovacs64/hibp/commit/b6076f21449dac656a2f65137c67af240ae81ed2) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add the `timeoutMs` option to all modules, allowing the consumer to specify a timeout for the underlying network request (in milliseconds). Requests that take longer than the sppecified timeout period will throw/reject. There is no default timeout, as `fetch` itself has no timeout by default and providing one would be arbitrary, unexpected, and a breaking change.
+
+- [#458](https://github.com/wKovacs64/hibp/pull/458) [`0a82b8d`](https://github.com/wKovacs64/hibp/commit/0a82b8d9ea7240735defebf48677e3a00c9634e2) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Only polyfill global `fetch` on Node.js v18, and use `undici` instead of `@remix-run/web-fetch`. This also enables use of `hibp` in web workers and extension background threads.
+
+### Patch Changes
+
+- [#461](https://github.com/wKovacs64/hibp/pull/461) [`aa90167`](https://github.com/wKovacs64/hibp/commit/aa90167cbaffc21bf6e99877bafc00ce7b14dc86) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Fix a bug in `pwnedPassword` and `pwnedPasswordRange` modules where the `addPadding` and `userAgent` options could not be used simultaneously.
+
 ## 14.0.3
 
 ### Patch Changes
