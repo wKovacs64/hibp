@@ -244,6 +244,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ArcadeRenegade"><img src="https://avatars.githubusercontent.com/u/13874898?v=4?s=100" width="100px;" alt="Ryan"/><br /><sub><b>Ryan</b></sub></a><br /><a href="https://github.com/wKovacs64/hibp/issues?q=author%3AArcadeRenegade" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/PodStuart"><img src="https://avatars.githubusercontent.com/u/107403965?v=4?s=100" width="100px;" alt="Stuart McGregor"/><br /><sub><b>Stuart McGregor</b></sub></a><br /><a href="https://github.com/wKovacs64/hibp/issues?q=author%3APodStuart" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
