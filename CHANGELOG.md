@@ -1,5 +1,11 @@
 # Change Log
 
+## 14.1.1
+
+### Patch Changes
+
+- [#464](https://github.com/wKovacs64/hibp/pull/464) [`1dd6547`](https://github.com/wKovacs64/hibp/commit/1dd65475a93a32a0ddcd93bf1696869b266372cf) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Fix consumption from Next.js client components.
+
 ## 14.1.0
 
 ### Minor Changes
