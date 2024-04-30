@@ -106,7 +106,7 @@
     "@types/debug": "4.1.12",
     "@types/node": "20.12.7",
     "@types/ws": "8.5.10",
-    "@vitest/coverage-v8": "1.5.2",
+    "@vitest/coverage-v8": "1.5.3",
     "@wkovacs64/prettier-config": "3.0.3",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "bundlewatch": "0.3.3",
@@ -128,6 +128,6 @@
     "serve": "14.2.3",
     "tslib": "2.6.2",
     "typescript": "5.4.5",
-    "vitest": "1.5.2"
+    "vitest": "1.5.3"
   }
 }
