@@ -15,7 +15,7 @@ pwned?][haveibeenpwned] service._
 
 [![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
 [![Code Coverage][coverage-image]][coverage-url]
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/github/all-contributors/wKovacs64/hibp?style=flat-square)](#contributors-)
 
 ## Installation
 
