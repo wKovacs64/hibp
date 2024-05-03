@@ -23,7 +23,7 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      - uses: jackyef/bundlewatch-gh-action@0.2.1
+      - uses: jackyef/bundlewatch-gh-action@0.3.0
         with:
           bundlewatch-config: .bundlewatch.config.json
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
