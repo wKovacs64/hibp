@@ -121,7 +121,7 @@
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "8.0.1",
     "msw": "2.3.0",
-    "npm-run-all2": "6.1.2",
+    "npm-run-all2": "6.2.0",
     "prettier": "3.2.5",
     "rimraf": "5.0.7",
     "rollup": "4.17.2",
