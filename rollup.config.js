@@ -9,13 +9,7 @@ import terser from '@rollup/plugin-terser';
 
 const supportedNodeVersion = '18.0.0';
 const inputs = globSync('src/**/*.ts', {
-  ignore: [
-    '**/__mocks__/**',
-    '**/__tests__/**',
-    '**/mocks/**',
-    '**/*.test.ts',
-    '**/*.d.ts',
-  ],
+  ignore: ['**/__mocks__/**', '**/__tests__/**', '**/mocks/**', '**/*.test.ts', '**/*.d.ts'],
 });
 const external = (id) => !/^(\.|\/|[a-z]:\\)/i.test(id);
 const umdName = 'hibp';

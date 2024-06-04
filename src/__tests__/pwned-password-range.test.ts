@@ -18,9 +18,7 @@ describe('pwnedPasswordRange', () => {
         }),
       );
 
-      return expect(pwnedPasswordRange(SHA1_PREFIX)).resolves.toEqual(
-        SHA1_SUFFIXES_OBJECT,
-      );
+      return expect(pwnedPasswordRange(SHA1_PREFIX)).resolves.toEqual(SHA1_SUFFIXES_OBJECT);
     });
   });
 
@@ -33,9 +31,9 @@ describe('pwnedPasswordRange', () => {
         }),
       );
 
-      return expect(
-        pwnedPasswordRange(SHA1_PREFIX, { baseUrl }),
-      ).resolves.toEqual(SHA1_SUFFIXES_OBJECT);
+      return expect(pwnedPasswordRange(SHA1_PREFIX, { baseUrl })).resolves.toEqual(
+        SHA1_SUFFIXES_OBJECT,
+      );
     });
   });
 
@@ -52,9 +50,7 @@ describe('pwnedPasswordRange', () => {
         }),
       );
 
-      return expect(
-        pwnedPasswordRange(SHA1_PREFIX, { timeoutMs }),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(pwnedPasswordRange(SHA1_PREFIX, { timeoutMs })).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
     });
@@ -71,9 +67,9 @@ describe('pwnedPasswordRange', () => {
         }),
       );
 
-      return expect(
-        pwnedPasswordRange(SHA1_PREFIX, { userAgent }),
-      ).resolves.toEqual(SHA1_SUFFIXES_OBJECT);
+      return expect(pwnedPasswordRange(SHA1_PREFIX, { userAgent })).resolves.toEqual(
+        SHA1_SUFFIXES_OBJECT,
+      );
     });
   });
 
@@ -102,9 +98,9 @@ describe('pwnedPasswordRange', () => {
         }),
       );
 
-      return expect(
-        pwnedPasswordRange(SHA1_PREFIX, { mode: 'ntlm' }),
-      ).resolves.toEqual(NTLM_SUFFIXES_OBJECT);
+      return expect(pwnedPasswordRange(SHA1_PREFIX, { mode: 'ntlm' })).resolves.toEqual(
+        NTLM_SUFFIXES_OBJECT,
+      );
     });
   });
 });

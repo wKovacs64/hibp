@@ -2,8 +2,8 @@
 
 ## 8.x-11.x
 
-**Please refer to the [releases page](../../releases) for the 8.x-11.x versions
-and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
+**Please refer to the [releases page](../../releases) for the 8.x-11.x versions and
+[CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 ## 7.x and Older
 
@@ -14,31 +14,26 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 7.5.0 _(2019-01-27)_
 
-- Added a `userAgent` option to all functions to facilitate specifying your own
-  `User-Agent` header value for requests made to the haveibeenpwned.com and
-  pwnedpasswords.com APIs ([#63][63])
-- Added a `baseUrl` option to all functions to facilitate specifying your own
-  URL for requests that would normally be made to
-  `https://haveibeenpwned.com/api` and `https://api.pwnedpasswords.com` to
-  facilitate proxying the requests through your own server (which may be
-  necessary if you wish to use the `breachedAccount` and `search` functions
-  after January, 2019 as `haveibeenpwned.com` no longer accepts
-  `breachedaccount` endpoint requests originating from a browser)
+- Added a `userAgent` option to all functions to facilitate specifying your own `User-Agent` header
+  value for requests made to the haveibeenpwned.com and pwnedpasswords.com APIs ([#63][63])
+- Added a `baseUrl` option to all functions to facilitate specifying your own URL for requests that
+  would normally be made to `https://haveibeenpwned.com/api` and `https://api.pwnedpasswords.com` to
+  facilitate proxying the requests through your own server (which may be necessary if you wish to
+  use the `breachedAccount` and `search` functions after January, 2019 as `haveibeenpwned.com` no
+  longer accepts `breachedaccount` endpoint requests originating from a browser)
 
   See issue [#60][60] for more details and discussion.
 
 #### Version 7.4.0 _(2019-01-19)_
 
-- Added an `includeUnverified` option to the `breachedAccount` function to
-  include "unverified" breaches in the results ([be01ad12][be01ad12])
-- Generalized the 403 Forbidden response message to simply "access denied" as
-  this type of response from `haveibeenpwned.com` is no longer limited to a
-  missing `User-Agent` header field ([15e02f97][15e02f97])
-- Added a new error specific to 403 Forbidden responses that includes the Ray ID
-  from Cloudflare so users can contact `haveibeenpwned.com` when they are being
-  blocked ([cd74e40d][cd74e40d])
-- Removed (and prevented future creation of) empty `remote-api` bundle in the
-  ESM build
+- Added an `includeUnverified` option to the `breachedAccount` function to include "unverified"
+  breaches in the results ([be01ad12][be01ad12])
+- Generalized the 403 Forbidden response message to simply "access denied" as this type of response
+  from `haveibeenpwned.com` is no longer limited to a missing `User-Agent` header field
+  ([15e02f97][15e02f97])
+- Added a new error specific to 403 Forbidden responses that includes the Ray ID from Cloudflare so
+  users can contact `haveibeenpwned.com` when they are being blocked ([cd74e40d][cd74e40d])
+- Removed (and prevented future creation of) empty `remote-api` bundle in the ESM build
 - Defined and exported the `hibp` namespace for typing the UMD build
 
 #### Version 7.3.0 _(2019-01-05)_
@@ -53,10 +48,9 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 7.2.2 _(2018-11-26)_
 
-- Updated a **development-only** dependency (`start-server-and-test`) to remove
-  a compromised transitive dependency (`flatmap-stream@0.1.1`). See
-  [dominictarr/event-stream#116][dominictarr/event-stream#116] for further
-  details.
+- Updated a **development-only** dependency (`start-server-and-test`) to remove a compromised
+  transitive dependency (`flatmap-stream@0.1.1`). See
+  [dominictarr/event-stream#116][dominictarr/event-stream#116] for further details.
 - Removed redundant pre-publish build step
 
 #### Version 7.2.1 _(2018-10-23)_
@@ -73,8 +67,8 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 7.1.2 _(2018-06-26)_
 
-- Fixed `Forbidden` errors by adding a custom `User-Agent` request header when
-  running outside the browser ([#39][39])
+- Fixed `Forbidden` errors by adding a custom `User-Agent` request header when running outside the
+  browser ([#39][39])
 
 #### Version 7.1.1 _(2018-04-04)_
 
@@ -92,10 +86,10 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 ##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
 
-- Modified `pwnedPassword` to use the more secure hash range API
-  ([@danieladams456][danieladams456] in [#23][23])
-- Modified `pwnedPasswordRange` to resolve with array of objects
-  ([@danieladams456][danieladams456] in [#24][24])
+- Modified `pwnedPassword` to use the more secure hash range API ([@danieladams456][danieladams456]
+  in [#23][23])
+- Modified `pwnedPasswordRange` to resolve with array of objects ([@danieladams456][danieladams456]
+  in [#24][24])
 
 #### Version 6.0.0 _(2018-02-25)_
 
@@ -110,20 +104,18 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 - Added `"sideEffects": false` to support Webpack 4 tree-shaking
 - Added support for searching pwned passwords by range (#21)
-- Switched API endpoint for `pwnedPassword` module to new `pwnedpasswords.com`
-  domain
+- Switched API endpoint for `pwnedPassword` module to new `pwnedpasswords.com` domain
 
 #### Version 5.2.5 _(2017-12-07)_
 
-- Removed `puppeteer` optional dependency as it was causing downstream consumers
-  to download Chromium (particularly, when running things with `npx`). The
-  `test:umd` script now requires you manually install `puppeteer` before running
-  it, which will be done automatically in CI.
+- Removed `puppeteer` optional dependency as it was causing downstream consumers to download
+  Chromium (particularly, when running things with `npx`). The `test:umd` script now requires you
+  manually install `puppeteer` before running it, which will be done automatically in CI.
 
 #### Version 5.2.4 _(2017-12-07)_
 
-- Reverted `puppeteer` to `0.12.0` ~~as `0.13.0` was causing downstream
-  consumers to download Chromium.~~
+- Reverted `puppeteer` to `0.12.0` ~~as `0.13.0` was causing downstream consumers to download
+  Chromium.~~
 
 #### Version 5.2.3 _(2017-12-07)_
 
@@ -140,8 +132,8 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 5.2.0 _(2017-08-04)_
 
-- Added [`pwnedPassword`][hibp-pwnedpassword] method to check a password to see
-  if it has been previously exposed in a data breach (#16)
+- Added [`pwnedPassword`][hibp-pwnedpassword] method to check a password to see if it has been
+  previously exposed in a data breach (#16)
 
 #### Version 5.1.0 _(2017-07-10)_
 
@@ -168,8 +160,8 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 4.3.0 _(2017-06-08)_
 
-- Added [`search`][hibp-search] method for querying breaches and pastes
-  simultaneously (like the search form on the [website][haveibeenpwned])
+- Added [`search`][hibp-search] method for querying breaches and pastes simultaneously (like the
+  search form on the [website][haveibeenpwned])
 - Set the AMD module name in the UMD build to `hibp` rather than anonymous
 - Updated dependencies
 
@@ -219,8 +211,7 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 ##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
 
-- The browser (UMD) version has moved from the `lib` directory to the `dist`
-  directory.
+- The browser (UMD) version has moved from the `lib` directory to the `dist` directory.
 
 #### Version 2.2.0 _(2016-10-03)_
 
@@ -232,10 +223,8 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 2.1.0 _(2016-09-04)_
 
-- Replaced **npmcdn.com** with **unpkg.com** in the documentation as the service
-  is being renamed
-- Inherited support for `http_proxy` and `https_proxy` environment variables
-  from Axios 0.14.0
+- Replaced **npmcdn.com** with **unpkg.com** in the documentation as the service is being renamed
+- Inherited support for `http_proxy` and `https_proxy` environment variables from Axios 0.14.0
 - Simplified build scripts
 - Refactored test environment
 - Updated dependencies
@@ -248,10 +237,8 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 ##### Breaking Changes (see [MIGRATION.md](MIGRATION.md) for details):
 
-- Changed API methods to resolve to null instead of undefined when no data was
-  found
-- Changed API methods to take a configuration object rather than optional,
-  positional parameters
+- Changed API methods to resolve to null instead of undefined when no data was found
+- Changed API methods to take a configuration object rather than optional, positional parameters
 
 #### Version 1.0.8 _(2016-08-06)_
 
@@ -280,11 +267,10 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 - Changed temporary 'breach' hack to match author's intentions
 
-  _The API author (Troy Hunt) indicated there is no hard format restrictions on
-  a breach name, so the concept of an invalid breach name is not in play here.
-  The API will respond with HTTP status 404 (not found) once the fix has been
-  applied. This change mimics that behavior as opposed to responding with HTTP
-  status 400 (bad request), which was my initial interpretation._
+  _The API author (Troy Hunt) indicated there is no hard format restrictions on a breach name, so
+  the concept of an invalid breach name is not in play here. The API will respond with HTTP status
+  404 (not found) once the fix has been applied. This change mimics that behavior as opposed to
+  responding with HTTP status 400 (bad request), which was my initial interpretation._
 
 #### Version 1.0.3 _(2016-04-10)_
 
@@ -292,19 +278,17 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 
 #### Version 1.0.2 _(2016-04-10)_
 
-- Shield clients from broken '[breach][singlebreach]' endpoint when querying for
-  an invalid breach name
+- Shield clients from broken '[breach][singlebreach]' endpoint when querying for an invalid breach
+  name
 
-  _Currently, the endpoint responds with HTTP status 200 and "page not found"
-  HTML in the body if an invalid breach name is queried (e.g. 'adobe.com',
-  instead of the proper breach name, 'adobe'). Based on the response codes
-  described in the API documentation, I believe it should respond with HTTP
-  status 400 (bad request). Prior to this patch, it lead to a confusing one-off
-  scenario for clients consuming this module. This change should provide a
-  consistent experience by intercepting this specific case and throwing a "bad
-  request" error instead of a `SyntaxError` from trying to parse HTML. I brought
-  this API behavioral discrepancy to the API author's attention and he agreed it
-  was broken and noted that a fix is incoming._
+  _Currently, the endpoint responds with HTTP status 200 and "page not found" HTML in the body if an
+  invalid breach name is queried (e.g. 'adobe.com', instead of the proper breach name, 'adobe').
+  Based on the response codes described in the API documentation, I believe it should respond with
+  HTTP status 400 (bad request). Prior to this patch, it lead to a confusing one-off scenario for
+  clients consuming this module. This change should provide a consistent experience by intercepting
+  this specific case and throwing a "bad request" error instead of a `SyntaxError` from trying to
+  parse HTML. I brought this API behavioral discrepancy to the API author's attention and he agreed
+  it was broken and noted that a fix is incoming._
 
 - Updated tests
 
@@ -332,23 +316,16 @@ and [CHANGELOG.md](CHANGELOG.md) for the newer versions.**
 [39]: https://github.com/wKovacs64/hibp/pull/39
 [40]: https://github.com/wKovacs64/hibp/pull/40
 [49]: https://github.com/wKovacs64/hibp/pull/49
-[3f33becf]:
-  https://github.com/wKovacs64/hibp/commit/3f33becfa23b80abc45fbeaad6c8c9f85113d126
-[dominictarr/event-stream#116]:
-  https://github.com/dominictarr/event-stream/issues/116
-[48d25282]:
-  https://github.com/wKovacs64/hibp/commit/48d25282407d2b1d3cdfac51f311d018a6a16d25
+[3f33becf]: https://github.com/wKovacs64/hibp/commit/3f33becfa23b80abc45fbeaad6c8c9f85113d126
+[dominictarr/event-stream#116]: https://github.com/dominictarr/event-stream/issues/116
+[48d25282]: https://github.com/wKovacs64/hibp/commit/48d25282407d2b1d3cdfac51f311d018a6a16d25
 [52]: https://github.com/wKovacs64/hibp/pull/52
 [53]: https://github.com/wKovacs64/hibp/pull/53
 [56]: https://github.com/wKovacs64/hibp/pull/56
-[be01ad12]:
-  https://github.com/wKovacs64/hibp/commit/be01ad1253b7ceb3c7f844049451a4e8e9e3a858
-[15e02f97]:
-  https://github.com/wKovacs64/hibp/commit/15e02f970286a410a275fe3457f559050632e5bd
-[cd74e40d]:
-  https://github.com/wKovacs64/hibp/commit/cd74e40de95143252ab99f5c070a84e54b1365a6
+[be01ad12]: https://github.com/wKovacs64/hibp/commit/be01ad1253b7ceb3c7f844049451a4e8e9e3a858
+[15e02f97]: https://github.com/wKovacs64/hibp/commit/15e02f970286a410a275fe3457f559050632e5bd
+[cd74e40d]: https://github.com/wKovacs64/hibp/commit/cd74e40de95143252ab99f5c070a84e54b1365a6
 [60]: https://github.com/wKovacs64/hibp/issues/60
 [63]: https://github.com/wKovacs64/hibp/pull/63
 [64]: https://github.com/wKovacs64/hibp/pull/64
-[8e5b4de7]:
-  https://github.com/wKovacs64/hibp/commit/8e5b4de79d25d834e14b8917101b4e0209d52f14
+[8e5b4de7]: https://github.com/wKovacs64/hibp/commit/8e5b4de79d25d834e14b8917101b4e0209d52f14

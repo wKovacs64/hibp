@@ -87,13 +87,7 @@ export async function pwnedPasswordRange(
     userAgent?: string;
   } = {},
 ): Promise<PwnedPasswordSuffixes> {
-  const {
-    baseUrl,
-    timeoutMs,
-    userAgent,
-    addPadding = false,
-    mode = 'sha1',
-  } = options;
+  const { baseUrl, timeoutMs, userAgent, addPadding = false, mode = 'sha1' } = options;
 
   const data = await fetchFromApi(`/range/${encodeURIComponent(prefix)}`, {
     baseUrl,

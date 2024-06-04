@@ -38,9 +38,7 @@ describe('breach', () => {
         }),
       );
 
-      return expect(breach('found', { baseUrl })).resolves.toEqual(
-        VERIFIED_BREACH,
-      );
+      return expect(breach('found', { baseUrl })).resolves.toEqual(VERIFIED_BREACH);
     });
   });
 
@@ -57,9 +55,7 @@ describe('breach', () => {
         }),
       );
 
-      return expect(
-        breach('found', { timeoutMs }),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(breach('found', { timeoutMs })).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
     });

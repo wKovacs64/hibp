@@ -1,12 +1,6 @@
 import { name, version } from '../../../package.json';
 import { installUndiciOnNode18 } from '../fetch-polyfill.js';
-import {
-  BAD_REQUEST,
-  UNAUTHORIZED,
-  FORBIDDEN,
-  NOT_FOUND,
-  TOO_MANY_REQUESTS,
-} from './responses.js';
+import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, NOT_FOUND, TOO_MANY_REQUESTS } from './responses.js';
 import type { ApiData, ErrorData } from './types.js';
 
 installUndiciOnNode18();
@@ -80,12 +74,7 @@ export async function fetchFromApi(
     userAgent?: string;
   } = {},
 ): Promise<ApiData> {
-  const {
-    apiKey,
-    baseUrl = 'https://haveibeenpwned.com/api/v3',
-    timeoutMs,
-    userAgent,
-  } = options;
+  const { apiKey, baseUrl = 'https://haveibeenpwned.com/api/v3', timeoutMs, userAgent } = options;
   const headers: Record<string, string> = {};
 
   if (apiKey) {

@@ -37,9 +37,7 @@ describe('pwnedPassword', () => {
         }),
       );
 
-      return expect(
-        pwnedPassword(PASSWORD, { baseUrl }),
-      ).resolves.toBeGreaterThanOrEqual(0);
+      return expect(pwnedPassword(PASSWORD, { baseUrl })).resolves.toBeGreaterThanOrEqual(0);
     });
   });
 
@@ -56,9 +54,7 @@ describe('pwnedPassword', () => {
         }),
       );
 
-      return expect(
-        pwnedPassword(PASSWORD, { timeoutMs }),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(pwnedPassword(PASSWORD, { timeoutMs })).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
     });
