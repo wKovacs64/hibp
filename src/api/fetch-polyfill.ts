@@ -8,10 +8,7 @@
 
 /* c8 ignore start */
 export function installUndiciOnNode18() {
-  if (
-    typeof process !== 'undefined' &&
-    process.versions?.node?.startsWith('18.')
-  ) {
+  if (typeof process !== 'undefined' && process.versions?.node?.startsWith('18.')) {
     const {
       File: UndiciFile,
       fetch: undiciFetch,

@@ -15,9 +15,7 @@ describe('pasteAccount', () => {
         }),
       );
 
-      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(
-        PASTE_ACCOUNT_DATA,
-      );
+      return expect(pasteAccount('pasted@email.com')).resolves.toEqual(PASTE_ACCOUNT_DATA);
     });
   });
 
@@ -57,9 +55,9 @@ describe('pasteAccount', () => {
         }),
       );
 
-      return expect(
-        pasteAccount('whatever@example.com', { baseUrl }),
-      ).resolves.toEqual(PASTE_ACCOUNT_DATA);
+      return expect(pasteAccount('whatever@example.com', { baseUrl })).resolves.toEqual(
+        PASTE_ACCOUNT_DATA,
+      );
     });
   });
 
@@ -78,9 +76,7 @@ describe('pasteAccount', () => {
 
       return expect(
         pasteAccount('whatever@example.com', { timeoutMs }),
-      ).rejects.toMatchInlineSnapshot(
-        `[TimeoutError: The operation was aborted due to timeout]`,
-      );
+      ).rejects.toMatchInlineSnapshot(`[TimeoutError: The operation was aborted due to timeout]`);
     });
   });
 

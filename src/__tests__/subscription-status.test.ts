@@ -29,9 +29,7 @@ describe('subscriptionStatus', () => {
         }),
       );
 
-      return expect(subscriptionStatus({ baseUrl })).resolves.toEqual(
-        SUBSCRIPTION_STATUS,
-      );
+      return expect(subscriptionStatus({ baseUrl })).resolves.toEqual(SUBSCRIPTION_STATUS);
     });
   });
 
@@ -48,9 +46,7 @@ describe('subscriptionStatus', () => {
         }),
       );
 
-      return expect(
-        subscriptionStatus({ timeoutMs }),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(subscriptionStatus({ timeoutMs })).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
     });

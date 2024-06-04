@@ -1,5 +1,7 @@
 # .gitignore and...
 
 .all-contributorsrc
+.changeset
 package.json
+package-lock.json
 API.md

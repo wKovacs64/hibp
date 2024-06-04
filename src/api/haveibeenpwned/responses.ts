@@ -26,8 +26,7 @@ const emptyHeaders = new Map<string, string>();
 export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
   headers: emptyHeaders,
   status: 400,
-  statusText:
-    'Bad request — the account does not comply with an acceptable format.',
+  statusText: 'Bad request — the account does not comply with an acceptable format.',
 };
 
 /**

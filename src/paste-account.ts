@@ -83,8 +83,7 @@ export function pasteAccount(
     userAgent?: string;
   } = {},
 ): Promise<Paste[] | null> {
-  return fetchFromApi(
-    `/pasteaccount/${encodeURIComponent(email)}`,
-    options,
-  ) as Promise<Paste[] | null>;
+  return fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`, options) as Promise<
+    Paste[] | null
+  >;
 }

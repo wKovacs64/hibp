@@ -24,9 +24,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/bad_request'),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(fetchFromApi('/service/bad_request')).rejects.toMatchInlineSnapshot(
         `[Error: The hash prefix was not in a valid format]`,
       );
     });
@@ -43,9 +41,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/unknown_response'),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(fetchFromApi('/service/unknown_response')).rejects.toMatchInlineSnapshot(
         `[Error: Unknown - something unexpected happened.]`,
       );
     });

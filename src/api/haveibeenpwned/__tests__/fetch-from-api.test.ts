@@ -1,12 +1,6 @@
 import { http } from 'msw';
 import { server } from '../../../mocks/server.js';
-import {
-  BAD_REQUEST,
-  UNAUTHORIZED,
-  FORBIDDEN,
-  BLOCKED,
-  TOO_MANY_REQUESTS,
-} from '../responses.js';
+import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, BLOCKED, TOO_MANY_REQUESTS } from '../responses.js';
 import { fetchFromApi } from '../fetch-from-api.js';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
@@ -75,9 +69,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/bad_request', { apiKey }),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(fetchFromApi('/service/bad_request', { apiKey })).rejects.toMatchInlineSnapshot(
         `[Error: Bad request — the account does not comply with an acceptable format.]`,
       );
     });
@@ -93,9 +85,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/unauthorized'),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(fetchFromApi('/service/unauthorized')).rejects.toMatchInlineSnapshot(
         `[Error: Access denied due to missing hibp-api-key.]`,
       );
     });
@@ -112,9 +102,9 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/forbidden', { apiKey }),
-      ).rejects.toMatchInlineSnapshot(`[Error: Forbidden - access denied.]`);
+      return expect(fetchFromApi('/service/forbidden', { apiKey })).rejects.toMatchInlineSnapshot(
+        `[Error: Forbidden - access denied.]`,
+      );
     });
 
     it('throws a "Blocked Request" error if a cf-ray header is present', () => {
@@ -127,9 +117,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/blocked', { apiKey }),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(fetchFromApi('/service/blocked', { apiKey })).rejects.toMatchInlineSnapshot(
         `[Error: Request blocked, contact haveibeenpwned.com if this continues (Ray ID: someRayId)]`,
       );
     });
@@ -172,9 +160,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         }),
       );
 
-      return expect(
-        fetchFromApi('/service/unknown_response'),
-      ).rejects.toMatchInlineSnapshot(
+      return expect(fetchFromApi('/service/unknown_response')).rejects.toMatchInlineSnapshot(
         `[Error: Unknown - something unexpected happened.]`,
       );
     });

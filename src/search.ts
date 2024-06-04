@@ -108,14 +108,7 @@ export async function search(
     userAgent?: string;
   } = {},
 ): Promise<SearchResults> {
-  const {
-    apiKey,
-    domain,
-    truncate = true,
-    baseUrl,
-    timeoutMs,
-    userAgent,
-  } = options;
+  const { apiKey, domain, truncate = true, baseUrl, timeoutMs, userAgent } = options;
 
   const [breaches, pastes] = await Promise.all([
     breachedAccount(account, {
