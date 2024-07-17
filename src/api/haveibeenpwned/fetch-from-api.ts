@@ -104,8 +104,8 @@ export async function fetchFromApi(
       throw new Error(BAD_REQUEST.statusText);
     }
     case UNAUTHORIZED.status: {
-      const body = (await response.json()) as unknown as ErrorData;
-      throw new Error(body.message);
+      const message = await response.text();
+      throw new Error(message);
     }
     case FORBIDDEN.status: {
       const rayId = response.headers.get('cf-ray');
