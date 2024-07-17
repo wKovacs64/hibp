@@ -1,6 +1,6 @@
 {
   "name": "hibp",
-  "version": "14.1.1",
+  "version": "14.1.2",
   "description": "An unofficial TypeScript SDK for the 'Have I been pwned?' service.",
   "keywords": [
     "haveibeenpwned",
