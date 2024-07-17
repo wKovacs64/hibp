@@ -18,9 +18,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
     it('throws a "Bad Request" error', async () => {
       server.use(
         http.get('*', () => {
-          return new Response(BAD_REQUEST.body, {
-            status: BAD_REQUEST.status,
-          });
+          return new Response(BAD_REQUEST.body, { status: BAD_REQUEST.status });
         }),
       );
 

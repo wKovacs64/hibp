@@ -70,4 +70,4 @@ export interface ErrorData {
  *
  * @internal
  */
-export type ResponseBody = ApiData | ErrorData;
+// export type ResponseBody = ApiData | ErrorData;
