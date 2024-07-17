@@ -1,32 +1,17 @@
 /**
  * Known potential responses from the remote API.
  *
- * Unfortunately, the API does not send a decent human-readable message back
- * with each response, but they are documented on the website:
- * https://haveibeenpwned.com/api/v3#ResponseCodes
+ * Unfortunately, the API does not send a decent human-readable message back with each response, but
+ * they are documented on the website: https://haveibeenpwned.com/api/v3#ResponseCodes
  *
- * These objects simply provide a mapping between the HTTP response status code
- * and the corresponding human-readable message so we can throw a more
- * descriptive error for the consumer. (They are also leveraged in our tests.)
+ * These objects simply provide a mapping between the HTTP response status code and the
+ * corresponding human-readable message so we can throw a more descriptive error for the consumer.
+ * (They are also leveraged in our tests.)
  */
 
-import type { ResponseBody } from './types.js';
-
 /** @internal */
-export interface HaveIBeenPwnedApiResponse {
-  headers: Map<string, string>;
-  status: number;
-  statusText?: string;
-  body?: ResponseBody;
-  text?: string;
-}
-
-const emptyHeaders = new Map<string, string>();
-
-/** @internal */
-export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
-  headers: emptyHeaders,
-  status: 400,
+export const BAD_REQUEST = {
+  status: 400 as const,
   statusText: 'Bad request — the account does not comply with an acceptable format.',
 };
 
@@ -36,29 +21,26 @@ export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
  *
  * @internal
  */
-export const UNAUTHORIZED: HaveIBeenPwnedApiResponse = {
-  headers: emptyHeaders,
-  status: 401,
-  text: `Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation`,
+export const UNAUTHORIZED = {
+  status: 401 as const,
+  body: `Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation`,
 };
 
 /** @internal */
-export const FORBIDDEN: HaveIBeenPwnedApiResponse = {
-  headers: emptyHeaders,
-  status: 403,
+export const FORBIDDEN = {
+  status: 403 as const,
   statusText: 'Forbidden - access denied.',
 };
 
 /** @internal */
-export const BLOCKED: HaveIBeenPwnedApiResponse = {
+export const BLOCKED = {
   headers: new Map([['cf-ray', 'someRayId']]),
-  status: 403,
+  status: 403 as const,
 };
 
 /** @internal */
-export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
-  headers: emptyHeaders,
-  status: 404,
+export const NOT_FOUND = {
+  status: 404 as const,
 };
 
 /**
@@ -68,11 +50,11 @@ export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
  *
  * @internal
  */
-export const TOO_MANY_REQUESTS: HaveIBeenPwnedApiResponse = {
+export const TOO_MANY_REQUESTS = {
   headers: new Map([['retry-after', '2']]),
-  status: 429,
+  status: 429 as const,
   body: {
-    statusCode: 429,
+    statusCode: 429 as const,
     message: 'Rate limit is exceeded. Try again in 2 seconds.',
   },
 };

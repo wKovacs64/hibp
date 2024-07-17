@@ -79,7 +79,7 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('throws an "Unauthorized" error', () => {
       server.use(
         http.get('*', () => {
-          return new Response(UNAUTHORIZED.text, { status: UNAUTHORIZED.status });
+          return new Response(UNAUTHORIZED.body, { status: UNAUTHORIZED.status });
         }),
       );
 
