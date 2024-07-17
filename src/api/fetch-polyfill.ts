@@ -6,8 +6,8 @@
 // This can probably be removed in favor of Node's native fetch once we drop
 // support for v18. https://x.com/ebey_jacob/status/1709975146939973909?s=20
 
-/* c8 ignore start */
 export function installUndiciOnNode18() {
+  /* c8 ignore start */
   if (typeof process !== 'undefined' && process.versions?.node?.startsWith('18.')) {
     const {
       File: UndiciFile,
@@ -24,5 +24,5 @@ export function installUndiciOnNode18() {
     global.fetch = undiciFetch;
     global.FormData = UndiciFormData;
   }
+  /* c8 ignore stop */
 }
-/* c8 ignore stop */
