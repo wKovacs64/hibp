@@ -1,5 +1,11 @@
 # Change Log
 
+## 14.1.2
+
+### Patch Changes
+
+- [#479](https://github.com/wKovacs64/hibp/pull/479) [`f212d87`](https://github.com/wKovacs64/hibp/commit/f212d87a09c31063a655d4ce440e5a4b61f6dcae) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Fix error handling for 401 Unauthorized API responses. The [haveibeenpwned.com API (v3)](https://haveibeenpwned.com/API/v3#Authorisation) changed its response type from a JSON body to text.
+
 ## 14.1.1
 
 ### Patch Changes
