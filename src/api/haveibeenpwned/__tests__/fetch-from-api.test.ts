@@ -79,14 +79,12 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
     it('throws an "Unauthorized" error', () => {
       server.use(
         http.get('*', () => {
-          return new Response(JSON.stringify(UNAUTHORIZED.body), {
-            status: UNAUTHORIZED.status,
-          });
+          return new Response(UNAUTHORIZED.text, { status: UNAUTHORIZED.status });
         }),
       );
 
       return expect(fetchFromApi('/service/unauthorized')).rejects.toMatchInlineSnapshot(
-        `[Error: Access denied due to missing hibp-api-key.]`,
+        `[Error: Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation]`,
       );
     });
   });

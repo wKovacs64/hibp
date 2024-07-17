@@ -18,6 +18,7 @@ export interface HaveIBeenPwnedApiResponse {
   status: number;
   statusText?: string;
   body?: ResponseBody;
+  text?: string;
 }
 
 const emptyHeaders = new Map<string, string>();
@@ -30,19 +31,15 @@ export const BAD_REQUEST: HaveIBeenPwnedApiResponse = {
 };
 
 /**
- * This response has unique behavior. For some reason, the API includes an
- * object in the response body for this one, containing a human-readable
- * message. Manually populating the message here purely for use in tests.
+ * The API includes a human-readable error message as text in the body of this
+ * response type. Manually populating the message here purely for use in tests.
  *
  * @internal
  */
 export const UNAUTHORIZED: HaveIBeenPwnedApiResponse = {
   headers: emptyHeaders,
   status: 401,
-  body: {
-    statusCode: 401,
-    message: 'Access denied due to missing hibp-api-key.',
-  },
+  text: `Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation`,
 };
 
 /** @internal */
@@ -65,9 +62,9 @@ export const NOT_FOUND: HaveIBeenPwnedApiResponse = {
 };
 
 /**
- * This response has unique behavior. For some reason, the API includes an
- * object in the response body for this one, containing a human-readable
- * message. Manually populating the message here purely for use in tests.
+ * The API includes a JSON object containing a human-readable message in the
+ * body of this response type. Manually populating the message here purely for
+ * use in tests.
  *
  * @internal
  */
