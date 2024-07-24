@@ -110,7 +110,7 @@
     "@wkovacs64/eslint-config": "7.2.5",
     "@wkovacs64/prettier-config": "4.1.1",
     "babel-plugin-annotate-pure-calls": "0.4.0",
-    "bundlewatch": "0.3.3",
+    "bundlewatch": "0.4.0",
     "common-tags": "1.8.2",
     "cpy-cli": "5.0.0",
     "cross-env": "7.0.3",
