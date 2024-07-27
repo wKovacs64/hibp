@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event_name != 'push' ||
-      !contains(github.event.head_commit.message, 'chore: release')
+      (
+        !contains(github.event.head_commit.message, 'chore: release') &&
+        github.base_ref == ''
+      )
     steps:
       - name: Bail early if PR is from a fork and not approved
         if: |
