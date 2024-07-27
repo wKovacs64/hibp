@@ -38,4 +38,4 @@ jobs:
         run: npm run build
 
       - name: ⚡ pkg.pr.new
-        run: npx --yes pkg-pr-new publish --compact --no-template
+        run: npx --yes pkg-pr-new publish --compact
