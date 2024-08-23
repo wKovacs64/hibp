@@ -126,7 +126,7 @@
     "rimraf": "6.0.1",
     "rollup": "4.21.0",
     "serve": "14.2.3",
-    "tslib": "2.6.3",
+    "tslib": "2.7.0",
     "typescript": "5.5.4",
     "vitest": "2.0.5"
   }
