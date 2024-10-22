@@ -120,7 +120,7 @@
     "glob": "11.0.0",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "9.0.4",
-    "msw": "2.4.12",
+    "msw": "2.4.13",
     "npm-run-all2": "7.0.0",
     "prettier": "3.3.3",
     "rimraf": "6.0.1",
