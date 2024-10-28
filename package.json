@@ -106,7 +106,7 @@
     "@types/debug": "4.1.12",
     "@types/node": "20.17.1",
     "@types/ws": "8.5.12",
-    "@vitest/coverage-v8": "2.1.3",
+    "@vitest/coverage-v8": "2.1.4",
     "@wkovacs64/eslint-config": "7.3.0",
     "@wkovacs64/prettier-config": "4.1.1",
     "babel-plugin-annotate-pure-calls": "0.4.0",
@@ -127,6 +127,6 @@
     "serve": "14.2.4",
     "tslib": "2.8.0",
     "typescript": "5.6.3",
-    "vitest": "2.1.3"
+    "vitest": "2.1.4"
   }
 }
