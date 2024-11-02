@@ -118,7 +118,7 @@
     "eslint": "8.57.1",
     "glob": "11.0.0",
     "jsdoc-babel": "0.5.0",
-    "jsdoc-to-markdown": "9.0.4",
+    "jsdoc-to-markdown": "9.0.5",
     "msw": "2.6.0",
     "npm-run-all2": "7.0.1",
     "prettier": "3.3.3",
