@@ -105,7 +105,7 @@
     "@types/common-tags": "1.8.4",
     "@types/debug": "4.1.12",
     "@types/node": "22.8.6",
-    "@types/ws": "8.5.12",
+    "@types/ws": "8.5.13",
     "@vitest/coverage-v8": "2.1.4",
     "@wkovacs64/eslint-config": "7.3.0",
     "@wkovacs64/prettier-config": "4.1.1",
