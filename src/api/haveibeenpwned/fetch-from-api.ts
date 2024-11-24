@@ -1,4 +1,4 @@
-import { name, version } from '../../../package.json';
+import type { PackageJson } from 'type-fest';
 import { installUndiciOnNode18 } from '../fetch-polyfill.js';
 import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, NOT_FOUND, TOO_MANY_REQUESTS } from './responses.js';
 import type { ApiData, ErrorData } from './types.js';
@@ -87,6 +87,9 @@ export async function fetchFromApi(
 
   // Provide a default User-Agent when running outside the browser
   if (!userAgent && typeof navigator === 'undefined') {
+    const { name, version } = (await import('../../../package.json', {
+      assert: { type: 'json' },
+    })) as unknown as PackageJson;
     headers['User-Agent'] = `${name} ${version}`;
   }
 
