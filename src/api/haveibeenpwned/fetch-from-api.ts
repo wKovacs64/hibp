@@ -1,11 +1,9 @@
-import * as pkg from '../../../package.json' with { type: 'json' };
+import type { PackageJson } from 'type-fest';
 import { installUndiciOnNode18 } from '../fetch-polyfill.js';
 import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, NOT_FOUND, TOO_MANY_REQUESTS } from './responses.js';
 import type { ApiData, ErrorData } from './types.js';
 
 installUndiciOnNode18();
-
-const packageJson = pkg.default;
 
 /**
  * Custom error thrown when the haveibeenpwned.com API responds with 429 Too
@@ -89,7 +87,10 @@ export async function fetchFromApi(
 
   // Provide a default User-Agent when running outside the browser
   if (!userAgent && typeof navigator === 'undefined') {
-    headers['User-Agent'] = `${packageJson.name} ${packageJson.version}`;
+    const { name, version } = (await import('../../../package.json', {
+      assert: { type: 'json' },
+    })) as unknown as PackageJson;
+    headers['User-Agent'] = `${name} ${version}`;
   }
 
   const config: RequestInit = {
