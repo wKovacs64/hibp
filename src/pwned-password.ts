@@ -56,7 +56,6 @@ export async function pwnedPassword(
     userAgent?: string;
   } = {},
 ): Promise<number> {
-  /* eslint-disable */
   // @ts-expect-error: JSSHA types are busted
   const sha1 = new JSSHA('SHA-1', 'TEXT');
   sha1.update(password);
@@ -66,5 +65,4 @@ export async function pwnedPassword(
 
   const range = await pwnedPasswordRange(prefix, options);
   return range[suffix] || 0;
-  /* eslint-enable */
 }
