@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = process.env.PORT || '3000';
