@@ -104,7 +104,7 @@
     "@rollup/plugin-typescript": "12.1.2",
     "@types/common-tags": "1.8.4",
     "@types/debug": "4.1.12",
-    "@types/node": "22.10.2",
+    "@types/node": "22.10.3",
     "@types/ws": "8.5.13",
     "@vitest/coverage-v8": "2.1.8",
     "@wkovacs64/eslint-config": "7.4.0",
