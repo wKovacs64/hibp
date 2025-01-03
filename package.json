@@ -107,7 +107,7 @@
     "@types/node": "22.10.5",
     "@types/ws": "8.5.13",
     "@vitest/coverage-v8": "2.1.8",
-    "@wkovacs64/eslint-config": "7.4.0",
+    "@wkovacs64/eslint-config": "7.5.0",
     "@wkovacs64/prettier-config": "4.1.1",
     "babel-plugin-annotate-pure-calls": "0.4.0",
     "bundlewatch": "0.4.0",
