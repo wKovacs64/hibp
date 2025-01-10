@@ -116,7 +116,7 @@
     "cross-env": "7.0.3",
     "dts-bundle-generator": "9.5.1",
     "eslint": "9.17.0",
-    "glob": "11.0.0",
+    "glob": "11.0.1",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "9.1.1",
     "msw": "2.7.0",
