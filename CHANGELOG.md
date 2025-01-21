@@ -1,5 +1,11 @@
 # Change Log
 
+## 14.1.3
+
+### Patch Changes
+
+- [#502](https://github.com/wKovacs64/hibp/pull/502) [`e810e6b`](https://github.com/wKovacs64/hibp/commit/e810e6be91024f5554ed22b9004031cea57171fd) Thanks [@dependabot](https://github.com/apps/dependabot)! - Update `undici` to v6.21.1 (only matters on Node v18).
+
 ## 14.1.2
 
 ### Patch Changes
