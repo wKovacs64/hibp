@@ -1,4 +1,3 @@
-import JSSHA from 'jssha/dist/sha1';
 import { pwnedPasswordRange } from './pwned-password-range.js';
 
 /**
@@ -56,13 +55,23 @@ export async function pwnedPassword(
     userAgent?: string;
   } = {},
 ): Promise<number> {
-  // @ts-expect-error: JSSHA types are busted
-  const sha1 = new JSSHA('SHA-1', 'TEXT');
-  sha1.update(password);
-  const hash = sha1.getHash('HEX', { outputUpper: true });
-  const prefix = hash.slice(0, 5);
-  const suffix = hash.slice(5);
-
+  const [prefix, suffix] = await getPasswordHashParts(password);
   const range = await pwnedPasswordRange(prefix, options);
   return range[suffix] || 0;
+}
+
+async function getPasswordHashParts(password: string) {
+  if (typeof crypto === 'object' && crypto.subtle) {
+    const msgUint8 = new TextEncoder().encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-1', msgUint8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('')
+      .toUpperCase();
+
+    return [hashHex.slice(0, 5), hashHex.slice(5)] as const;
+  }
+
+  throw new Error('The Web Crypto API is not available in this environment.');
 }
