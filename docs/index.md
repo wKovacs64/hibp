@@ -164,7 +164,7 @@ You have several options for using this library in a browser environment:
 
 ## Try It Out
 
-[Test hibp in your browser with RunKit.](https://runkit.com/npm/hibp)
+[Test hibp in your browser with StackBlitz.](https://stackblitz.com/edit/stackblitz-starters-atyrc52c?file=index.js)
 
 ## Projects Using hibp
 

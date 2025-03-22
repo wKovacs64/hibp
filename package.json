@@ -32,10 +32,8 @@
   "main": "dist/cjs/hibp.cjs",
   "module": "dist/esm/hibp.js",
   "unpkg": "dist/browser/hibp.umd.js",
-  "runkitExampleFilename": "example/runkit.js",
   "files": [
     "dist",
-    "example",
     "API.md",
     "CHANGELOG.md",
     "MIGRATION.md"

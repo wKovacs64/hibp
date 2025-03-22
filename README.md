@@ -165,7 +165,7 @@ You have several options for using this library in a browser environment:
 
 ## Try It Out
 
-[Test hibp in your browser with RunKit.][runkit]
+[Test hibp in your browser with StackBlitz.][stackblitz]
 
 ## Projects Using hibp
 
@@ -204,7 +204,7 @@ This module is distributed under the [MIT License][license].
 [caniuse-esm]: https://caniuse.com/#feat=es6-module
 [js-modules]: https://v8.dev/features/modules#browser
 [webpack]: https://webpack.js.org
-[runkit]: https://runkit.com/npm/hibp
+[stackblitz]: https://stackblitz.com/edit/stackblitz-starters-atyrc52c?file=index.js
 [pwned]: https://github.com/wKovacs64/pwned
 [pulls]: https://github.com/wKovacs64/hibp/pulls
 [pwl]: https://pwl.netlify.com/
