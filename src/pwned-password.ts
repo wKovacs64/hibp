@@ -71,7 +71,9 @@ async function getPasswordHashParts(password: string) {
       .toUpperCase();
 
     return [hashHex.slice(0, 5), hashHex.slice(5)] as const;
+    /* c8 ignore start */
   }
 
   throw new Error('The Web Crypto API is not available in this environment.');
 }
+/* c8 ignore end */
