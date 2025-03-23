@@ -1,5 +1,11 @@
 # Change Log
 
+## 15.0.1
+
+### Patch Changes
+
+- [#510](https://github.com/wKovacs64/hibp/pull/510) [`879fe9f`](https://github.com/wKovacs64/hibp/commit/879fe9fc3a7853eef69146841be32cdcfab0aa25) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Export the API data model types that were missing in v15.0.0.
+
 ## 15.0.0
 
 ### Major Changes
