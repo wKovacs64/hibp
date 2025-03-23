@@ -1,5 +1,6 @@
+import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
-import { server } from '../mocks/server.js';
+import { server } from '../../mocks/server.js';
 import {
   NTLM_RESPONSE_BODY,
   NTLM_SUFFIXES_OBJECT,

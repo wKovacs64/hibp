@@ -166,6 +166,10 @@ dist/
 ### rollup-plugin-typescript2 ###
 .rpt2_cache
 
+### Playwright ###
 /playwright/results/
 /playwright/report/
 /playwright/.cache/
+
+# Generated at build time
+src/api/haveibeenpwned/package-info.ts

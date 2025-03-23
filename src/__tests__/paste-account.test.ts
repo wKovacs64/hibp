@@ -1,5 +1,6 @@
+import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
-import { server } from '../mocks/server.js';
+import { server } from '../../mocks/server.js';
 import { PASTE } from '../../test/fixtures.js';
 import { NOT_FOUND } from '../api/haveibeenpwned/responses.js';
 import { pasteAccount } from '../paste-account.js';

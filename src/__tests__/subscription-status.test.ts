@@ -1,5 +1,6 @@
+import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
-import { server } from '../mocks/server.js';
+import { server } from '../../mocks/server.js';
 import { SUBSCRIPTION_STATUS } from '../../test/fixtures.js';
 import { subscriptionStatus } from '../subscription-status.js';
 
