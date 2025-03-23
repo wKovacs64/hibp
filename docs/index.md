@@ -120,8 +120,8 @@ You have a couple of options for using this library in a browser environment:
    (including the file extension). It's also strongly recommended to include the exact version
    number as well, otherwise the `latest` tag will be used, which could be dangerous if/when there
    are breaking changes made to the API. See [unpkg](https://unpkg.com) for details and advanced
-   version specification, but generally you will want to do the following (replacing `x.y.z` with
-   the version you want):
+   version specification, but you will probably want to do the following (replacing `x.y.z` with the
+   version you want):
 
    ```html
    <script type="module">
