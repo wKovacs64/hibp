@@ -74,7 +74,7 @@ jobs:
         run: npm run typecheck
 
       - name: 📦 Are the types wrong?
-        run: npx attw --pack --format table
+        run: npx attw --pack --format table --profile esm-only
 
   test:
     name: 🩺 Tests

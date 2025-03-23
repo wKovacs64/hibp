@@ -1,5 +1,6 @@
+import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
-import { server } from '../mocks/server.js';
+import { server } from '../../mocks/server.js';
 import { VERIFIED_BREACH } from '../../test/fixtures.js';
 import { breaches } from '../breaches.js';
 

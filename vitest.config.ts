@@ -2,21 +2,14 @@ import { defineConfig, configDefaults } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    include: ['./src/**/*.test.{ts,tsx}'],
+    include: ['./src/**/__tests__/*'],
     setupFiles: './test/setup.ts',
     coverage: {
-      exclude: [
-        ...(configDefaults.coverage.exclude ?? []),
-        '**/mocks/**',
-        '**/types.ts',
-        '**/index.ts',
-        '**/*.config.ts',
-        '**/*.js',
-      ],
+      exclude: [...(configDefaults.coverage.exclude ?? []), '**/types.ts'],
+      include: ['**/src/**/*'],
       reporter: ['text', 'lcov', 'clover'],
     },
     clearMocks: true,
-    globals: true,
     environment: 'node',
   },
 });

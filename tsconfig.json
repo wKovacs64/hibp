@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "target": "ES2022",
     "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "moduleDetection": "force",
+    "allowJs": true,
+    "isolatedModules": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
     "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
-    "strict": true,
     "stripInternal": true,
-    "types": ["node", "vitest/globals"]
+    "noEmit": true,
+
+    "strict": true,
+    "noImplicitOverride": true
   }
 }

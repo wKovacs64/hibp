@@ -43,27 +43,17 @@ browser.
 - Search for an account in both breaches and pastes at the same time 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
-- Available server-side (Node.js) and client-side (browser)
+- Available server-side (e.g., Node.js) and client-side (browser)
 - Written in TypeScript, so all modules come fully typed
 
 ## Usage
 
-##### ECMAScript module syntax:
-
-```javascript
+```typescript
 // import individual modules as needed
 import { dataClasses, search } from 'hibp';
+
 // or, import all modules into a local namespace
 import * as hibp from 'hibp';
-```
-
-##### CommonJS module syntax:
-
-```javascript
-// require individual modules as needed
-const { dataClasses, search } = require('hibp');
-// or, require all modules into a local namespace
-const hibp = require('hibp');
 ```
 
 The following modules are available:
@@ -102,7 +92,7 @@ async function main() {
   }
 }
 
-main();
+void main();
 ```
 
 #### Rate Limiting
@@ -115,36 +105,23 @@ _should_ never happen).
 
 #### Using in the browser
 
-You have several options for using this library in a browser environment:
+You have a couple of options for using this library in a browser environment:
 
 1. Bundled
 
    The most efficient and recommended method is to bundle it with client-side code using a module
-   bundler like [webpack](https://webpack.js.org) or, more likely, whatever your framework of choice
-   uses under the hood.
-
-1. UMD
-
-   There is also a Universal Module Definition (UMD) build provided for usage in the browser. When
-   using this build, an `hibp` object will be added to the browser's `window` object.
-
-   The recommended way to include the UMD build (when using a `<script>` tag) is to use the
-   [unpkg](https://unpkg.com) CDN, specifying the exact version you want. If you don't specify a
-   version, the `latest` tag will be used, which could be dangerous if/when there are breaking
-   changes made to the API. See [unpkg](https://unpkg.com) for details and advanced version
-   specification, but generally you will want to do the following (replacing `x.y.z` with the
-   version you want):
-
-   ```html
-   <script src="https://unpkg.com/hibp@x.y.z"></script>
-   ```
+   bundler, most likely dictated by your web application framework of choice.
 
 1. ESM for Browsers
 
-   Modern browsers now [support](https://caniuse.com/#feat=es6-module) importing ECMAScript modules
-   via `<script type="module">` tags. Like the UMD option above, this build is also available the
-   [unpkg](https://unpkg.com) CDN (and the same versioning rules apply), but you must specify the
-   full path (including the file extension). For example:
+   Alternatively, you can also import the library directly in your HTML via `<script type="module">`
+   tags in [modern browsers](https://caniuse.com/#feat=es6-module). The pre-bundled module is
+   available through the [unpkg](https://unpkg.com) CDN, but you must specify the full path
+   (including the file extension). It's also strongly recommended to include the exact version
+   number as well, otherwise the `latest` tag will be used, which could be dangerous if/when there
+   are breaking changes made to the API. See [unpkg](https://unpkg.com) for details and advanced
+   version specification, but generally you will want to do the following (replacing `x.y.z` with
+   the version you want):
 
    ```html
    <script type="module">

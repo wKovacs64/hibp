@@ -1,5 +1,6 @@
+import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
-import { server } from '../../../mocks/server.js';
+import { server } from '../../../../mocks/server.js';
 import { BAD_REQUEST } from '../responses.js';
 import { fetchFromApi } from '../fetch-from-api.js';
 
