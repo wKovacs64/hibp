@@ -5,8 +5,9 @@
     "outDir": "dist/esm",
     "sourceMap": true,
     "declaration": true,
+    "stripInternal": true,
     "noEmit": false
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["**/__tests__/*"]
 }

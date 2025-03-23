@@ -64,10 +64,3 @@ export interface ErrorData {
   statusCode: number;
   message: string;
 }
-
-/**
- * All possible values that can be returned in the response body of an API query
- *
- * @internal
- */
-// export type ResponseBody = ApiData | ErrorData;

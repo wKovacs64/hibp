@@ -9,6 +9,8 @@ import { pwnedPasswordRange } from './pwned-password-range.js';
 import { search } from './search.js';
 import { subscriptionStatus } from './subscription-status.js';
 
+export type * from './api/haveibeenpwned/types.js';
+
 /*
  * Export individual named functions to allow the following:
  *
@@ -31,8 +33,7 @@ export {
   RateLimitError,
 };
 
-// Export the overall interface, primarily for typing the `hibp` object placed
-// on `window` in the UMD build
+// Export the overall interface
 export interface HIBP {
   breach: typeof breach;
   breachedAccount: typeof breachedAccount;
