@@ -1,5 +1,22 @@
 # Change Log
 
+## 15.0.0
+
+### Major Changes
+
+- [#509](https://github.com/wKovacs64/hibp/pull/509) [`e8d4986`](https://github.com/wKovacs64/hibp/commit/e8d498622020fe0c99847f915839ce382bf4d817) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Drop support for Node 18 and remove the CommonJS and UMD builds:
+
+  - Drop support for Node.js 18 as it is [end-of-life](https://nodejs.org/en/about/releases/), making the new minimum Node.js runtime v20.19.0. Please upgrade your Node.js environment if necessary, or continue using a previous release if you are unable to upgrade your environment.
+
+    - This also allowed us to drop the `fetch` polyfill that was only necessary in Node 18, which reduced the bundle size by approximately 33%! 📉 The library now officially has **zero dependencies**. 🎉
+
+  - Remove the CommonJS build since [you can now `require()` ESM as of Node v20.19.0](https://github.com/nodejs/node/releases/tag/v20.19.0). **Consumers in a CommonJS environment should still be able to use the library as before** (given the appropriate Node.js version).
+  - Remove the UMD build as all modern browsers support importing ESM via `<script type="module">` tags. See the "[Using in the browser](https://github.com/wKovacs64/hibp?tab=readme-ov-file#using-in-the-browser)" section of the README for more details.
+
+### Minor Changes
+
+- [#506](https://github.com/wKovacs64/hibp/pull/506) [`56fdf38`](https://github.com/wKovacs64/hibp/commit/56fdf3829846962231b08026d31ef195cde2fdef) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Drop `JSSHA` dependency in favor of a native Web Crypto API SHA-1 hashing implementation. This change reduces the size of the library by approximately 30%! 📉
+
 ## 14.1.3
 
 ### Patch Changes
