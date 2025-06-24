@@ -17,7 +17,6 @@
 #### 9.0.3 → 10.0.0
 
 - The production/minified versions of the browser build targets have been renamed:
-
   - ESM for Browsers (`<script type="module">`)
     - `dist/browser/hibp.esm.min.js` → `dist/browser/hibp.module.js`
   - UMD
@@ -38,7 +37,6 @@
 
 - Output files for all build targets have been consolidated under the `dist` directory. This should
   be transparent if you followed the documentation, but the changes are as follows:
-
   - CommonJS
     - `lib/hibp.js` → `dist/cjs/hibp.js`
   - ECMAScript Modules
