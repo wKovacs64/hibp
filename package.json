@@ -87,7 +87,7 @@
     "@babel/preset-typescript": "7.27.1",
     "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.29.5",
-    "@playwright/test": "1.54.0",
+    "@playwright/test": "1.54.1",
     "@types/common-tags": "1.8.4",
     "@types/debug": "4.1.12",
     "@types/node": "22.16.3",
