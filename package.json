@@ -107,7 +107,7 @@
     "pathe": "2.0.3",
     "prettier": "3.6.2",
     "rimraf": "6.0.1",
-    "serve": "14.2.4",
+    "serve": "14.2.5",
     "type-fest": "4.41.0",
     "typescript": "5.9.2",
     "vitest": "3.2.4"
