@@ -98,7 +98,7 @@
     "bundlewatch": "0.4.1",
     "common-tags": "1.8.2",
     "cross-env": "10.0.0",
-    "esbuild": "0.25.9",
+    "esbuild": "0.25.10",
     "eslint": "9.35.0",
     "jsdoc-babel": "0.5.0",
     "jsdoc-to-markdown": "9.1.2",
