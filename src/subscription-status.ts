@@ -10,6 +10,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * @property {string} SubscribedUntil
  * @property {number} Rpm
  * @property {number} DomainSearchMaxBreachedAccounts
+ * @property {boolean} IncludesStealerLogs
  */
 
 /**
