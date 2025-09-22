@@ -36,8 +36,8 @@ browser.
 
 ## Features (🔑 = [requires][api-key-blog-post] an [API key][get-api-key])
 
-- Get a single breach event
 - Get the most recently added breach
+- Get a single breach event
 - Get all breaches for an account 🔑
 - Get all breach events in the system
 - Get all data classes
@@ -64,9 +64,9 @@ The following modules are available:
 
 - [breach](API.md#breach)
 - [breachedAccount](API.md#breachedaccount)
-- [latestBreach](API.md#latestbreach)
 - [breaches](API.md#breaches)
 - [dataClasses](API.md#dataclasses)
+- [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)

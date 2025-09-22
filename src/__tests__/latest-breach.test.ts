@@ -2,35 +2,18 @@ import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
 import { server } from '../../mocks/server.js';
 import { VERIFIED_BREACH } from '../../test/fixtures.js';
-import { breaches } from '../breaches.js';
+import { latestBreach } from '../latest-breach.js';
 
-describe('breaches', () => {
-  const BREACHES = [VERIFIED_BREACH];
-
-  describe('no parameters', () => {
+describe('latestBreach', () => {
+  describe('found', () => {
     it('resolves with data from the remote API', () => {
       server.use(
         http.get('*', () => {
-          return new Response(JSON.stringify(BREACHES));
+          return new Response(JSON.stringify(VERIFIED_BREACH));
         }),
       );
 
-      return expect(breaches()).resolves.toEqual(BREACHES);
-    });
-  });
-
-  describe('domain option', () => {
-    it('sets the domain query parameter in the request', () => {
-      expect.assertions(1);
-      server.use(
-        http.get('*', ({ request }) => {
-          const { searchParams } = new URL(request.url);
-          expect(searchParams.get('domain')).toBe('foo.bar');
-          return new Response(JSON.stringify(BREACHES));
-        }),
-      );
-
-      return breaches({ domain: 'foo.bar' });
+      return expect(latestBreach()).resolves.toEqual(VERIFIED_BREACH);
     });
   });
 
@@ -39,11 +22,11 @@ describe('breaches', () => {
       const baseUrl = 'https://my-hibp-proxy:8080';
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
-          return new Response(JSON.stringify(BREACHES));
+          return new Response(JSON.stringify(VERIFIED_BREACH));
         }),
       );
 
-      return expect(breaches({ baseUrl })).resolves.toEqual(BREACHES);
+      return expect(latestBreach({ baseUrl })).resolves.toEqual(VERIFIED_BREACH);
     });
   });
 
@@ -56,11 +39,11 @@ describe('breaches', () => {
           await new Promise((resolve) => {
             setTimeout(resolve, timeoutMs + 1);
           });
-          return new Response(JSON.stringify(BREACHES));
+          return new Response(JSON.stringify(VERIFIED_BREACH));
         }),
       );
 
-      return expect(breaches({ timeoutMs })).rejects.toThrow();
+      return expect(latestBreach({ timeoutMs })).rejects.toThrow();
     });
   });
 
@@ -71,11 +54,11 @@ describe('breaches', () => {
       server.use(
         http.get('*', ({ request }) => {
           expect(request.headers.get('User-Agent')).toBe(userAgent);
-          return new Response(JSON.stringify(BREACHES));
+          return new Response(JSON.stringify(VERIFIED_BREACH));
         }),
       );
 
-      return breaches({ userAgent });
+      return latestBreach({ userAgent });
     });
   });
 });

@@ -1,8 +1,9 @@
 import { RateLimitError } from './api/haveibeenpwned/fetch-from-api.js';
 import { breach } from './breach.js';
 import { breachedAccount } from './breached-account.js';
-import { breaches, latestBreach } from './breaches.js';
+import { breaches } from './breaches.js';
 import { dataClasses } from './data-classes.js';
+import { latestBreach } from './latest-breach.js';
 import { pasteAccount } from './paste-account.js';
 import { pwnedPassword } from './pwned-password.js';
 import { pwnedPasswordRange } from './pwned-password-range.js';
@@ -21,32 +22,32 @@ export type * from './api/haveibeenpwned/types.js';
  */
 
 export {
+  RateLimitError,
   breach,
   breachedAccount,
   breaches,
-  latestBreach,
   dataClasses,
+  latestBreach,
   pasteAccount,
   pwnedPassword,
   pwnedPasswordRange,
   search,
   subscriptionStatus,
-  RateLimitError,
 };
 
 // Export the overall interface
 export interface HIBP {
+  RateLimitError: typeof RateLimitError;
   breach: typeof breach;
   breachedAccount: typeof breachedAccount;
   breaches: typeof breaches;
-  latestBreach: typeof latestBreach;
   dataClasses: typeof dataClasses;
+  latestBreach: typeof latestBreach;
   pasteAccount: typeof pasteAccount;
   pwnedPassword: typeof pwnedPassword;
   pwnedPasswordRange: typeof pwnedPasswordRange;
   search: typeof search;
   subscriptionStatus: typeof subscriptionStatus;
-  RateLimitError: typeof RateLimitError;
 }
 
 // https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-document-TypeScript#jsdoc-comments-disappear

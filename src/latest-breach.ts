@@ -2,11 +2,9 @@ import type { Breach } from './api/haveibeenpwned/types.js';
 import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
 
 /**
- * Fetches all breach events in the system.
+ * Fetches the most recently added breach.
  *
  * @param {object} [options] a configuration object
- * @param {string} [options.domain] a domain by which to filter the results
- * (default: all domains)
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:
  * `https://haveibeenpwned.com/api/v3`)
@@ -14,22 +12,12 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
- * objects (an empty array if no breaches were found), or rejects with an Error
+ * @returns {(Promise<Breach>|Promise<null>)} a Promise which resolves to an
+ * object representing a breach (or null if no breach was found), or rejects
+ * with an Error
  * @example
  * try {
- *   const data = await breaches();
- *   if (data) {
- *     // ...
- *   } else {
- *     // ...
- *   }
- * } catch (err) {
- *   // ...
- * }
- * @example
- * try {
- *   const data = await breaches({ domain: "adobe.com" });
+ *   const data = await latestBreach();
  *   if (data) {
  *     // ...
  *   } else {
@@ -39,12 +27,8 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  *   // ...
  * }
  */
-export function breaches(
+export function latestBreach(
   options: {
-    /**
-     * a domain by which to filter the results (default: all domains)
-     */
-    domain?: string;
     /**
      * a custom base URL for the haveibeenpwned.com API endpoints (default:
      * `https://haveibeenpwned.com/api/v3`)
@@ -60,18 +44,7 @@ export function breaches(
      */
     userAgent?: string;
   } = {},
-): Promise<Breach[]> {
-  const { domain, baseUrl, timeoutMs, userAgent } = options;
-  const endpoint = '/breaches?';
-  const params: string[] = [];
-
-  if (domain) {
-    params.push(`domain=${encodeURIComponent(domain)}`);
-  }
-
-  return fetchFromApi(`${endpoint}${params.join('&')}`, {
-    baseUrl,
-    timeoutMs,
-    userAgent,
-  }) as Promise<Breach[]>;
+): Promise<Breach | null> {
+  return fetchFromApi('/latestbreach', options) as Promise<Breach | null>;
 }
+
