@@ -47,4 +47,3 @@ export function latestBreach(
 ): Promise<Breach | null> {
   return fetchFromApi('/latestbreach', options) as Promise<Breach | null>;
 }
-
