@@ -1,7 +1,7 @@
 import { RateLimitError } from './api/haveibeenpwned/fetch-from-api.js';
 import { breach } from './breach.js';
 import { breachedAccount } from './breached-account.js';
-import { breaches } from './breaches.js';
+import { breaches, latestBreach } from './breaches.js';
 import { dataClasses } from './data-classes.js';
 import { pasteAccount } from './paste-account.js';
 import { pwnedPassword } from './pwned-password.js';
@@ -24,6 +24,7 @@ export {
   breach,
   breachedAccount,
   breaches,
+  latestBreach,
   dataClasses,
   pasteAccount,
   pwnedPassword,
@@ -38,6 +39,7 @@ export interface HIBP {
   breach: typeof breach;
   breachedAccount: typeof breachedAccount;
   breaches: typeof breaches;
+  latestBreach: typeof latestBreach;
   dataClasses: typeof dataClasses;
   pasteAccount: typeof pasteAccount;
   pwnedPassword: typeof pwnedPassword;
