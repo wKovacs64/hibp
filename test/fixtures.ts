@@ -58,6 +58,7 @@ export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscribedUntil: '2024-04-02T12:34:56',
   Rpm: 10,
   DomainSearchMaxBreachedAccounts: 25,
+  IncludesStealerLogs: false,
 };
 
 export const PASSWORD = 'password';

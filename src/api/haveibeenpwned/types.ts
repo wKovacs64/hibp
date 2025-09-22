@@ -36,6 +36,7 @@ export interface SubscriptionStatus {
   SubscribedUntil: string;
   Rpm: number;
   DomainSearchMaxBreachedAccounts: number;
+  IncludesStealerLogs: boolean;
 }
 
 //

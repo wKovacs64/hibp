@@ -591,4 +591,5 @@ An object representing the status of your HIBP subscription.
 | SubscribedUntil | <code>string</code> | 
 | Rpm | <code>number</code> | 
 | DomainSearchMaxBreachedAccounts | <code>number</code> | 
+| IncludesStealerLogs | <code>boolean</code> | 
 
