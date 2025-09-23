@@ -22,7 +22,6 @@ export type * from './api/haveibeenpwned/types.js';
  */
 
 export {
-  RateLimitError,
   breach,
   breachedAccount,
   breaches,
@@ -33,11 +32,11 @@ export {
   pwnedPasswordRange,
   search,
   subscriptionStatus,
+  RateLimitError,
 };
 
 // Export the overall interface
 export interface HIBP {
-  RateLimitError: typeof RateLimitError;
   breach: typeof breach;
   breachedAccount: typeof breachedAccount;
   breaches: typeof breaches;
@@ -48,6 +47,7 @@ export interface HIBP {
   pwnedPasswordRange: typeof pwnedPasswordRange;
   search: typeof search;
   subscriptionStatus: typeof subscriptionStatus;
+  RateLimitError: typeof RateLimitError;
 }
 
 // https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-document-TypeScript#jsdoc-comments-disappear
