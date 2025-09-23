@@ -2,5 +2,5 @@
 "hibp": minor
 ---
 
-Add `breacheddomain` module.
+Add `breachedDomain` module.
 ---
