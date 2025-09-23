@@ -23,6 +23,10 @@
       "maxSize": "1 kB"
     },
     {
+      "path": "dist/esm/latest-breach.js",
+      "maxSize": "1 kB"
+    },
+    {
       "path": "dist/esm/paste-account.js",
       "maxSize": "1 kB"
     },
