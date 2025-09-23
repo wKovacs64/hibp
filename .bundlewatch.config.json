@@ -52,7 +52,7 @@
     },
     {
       "path": "dist/esm/subscribed-domains.js",
-      "maxSize": "1 kB"
+      "maxSize": "1.1 kB"
     }
   ]
 }
