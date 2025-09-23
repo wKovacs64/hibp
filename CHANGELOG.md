@@ -1,5 +1,19 @@
 # Change Log
 
+## 15.1.0
+
+### Minor Changes
+
+- [#539](https://github.com/wKovacs64/hibp/pull/539) [`a0c6e9a`](https://github.com/wKovacs64/hibp/commit/a0c6e9a01ad25931320e8dc79993faf11b127524) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `subscribedDomains` module.
+
+- [#537](https://github.com/wKovacs64/hibp/pull/537) [`e15c6a7`](https://github.com/wKovacs64/hibp/commit/e15c6a7e053ded3e79ac407a33a213890d642454) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `latestBreach` module.
+
+- [#538](https://github.com/wKovacs64/hibp/pull/538) [`f08af27`](https://github.com/wKovacs64/hibp/commit/f08af2795aac451d2d4abd9bca144214554b2575) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `breachedDomain` module.
+
+### Patch Changes
+
+- [#535](https://github.com/wKovacs64/hibp/pull/535) [`d47d462`](https://github.com/wKovacs64/hibp/commit/d47d46252c96990e35e785239189ca4834a80b4a) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `IncludesStealerLogs` field to `SubscriptionStatus` interface and docs.
+
 ## 15.0.1
 
 ### Patch Changes
