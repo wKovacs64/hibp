@@ -12,6 +12,18 @@
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
+<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#breach--objectedDomainResults">Promise.&lt;BreachedDomainResults&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches all breached email addresses for a domain.</p>
+<p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
+breach names. For example, querying <code>example.com</code> could return an object like
+<code>{ &quot;john&quot;: [&quot;Adobe&quot;], &quot;jane&quot;: [&quot;Adobe&quot;, &quot;Gawker&quot;] }</code>, corresponding to
+<code>john@example.com</code> and <code>jane@example.com</code>.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breacheddomain</code> endpoint. The
+<code>apiKey</code> option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
+</dd>
 <dt><a href="#breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code></dt>
 <dd><p>Fetches all breach events in the system.</p>
 </dd>
@@ -72,6 +84,10 @@ a valid API key on your behalf).</p>
 <dl>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
 <dd><p>An object representing a breach.</p>
+</dd>
+<dt><a href="#breach--objectedDomainResults">BreachedDomainResults</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
+breach names that alias has appeared in for the specified domain.</p>
 </dd>
 <dt><a href="#Paste">Paste</a> : <code>object</code></dt>
 <dd><p>An object representing a paste.</p>
@@ -189,6 +205,49 @@ try {
     // ...
   } else {
     // ...
+  }
+} catch (err) {
+  // ...
+}
+```
+<a name="breachedDomain"></a>
+
+## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainResults&gt;</code>](#breach--objectedDomainResults) \| <code>Promise.&lt;null&gt;</code>
+Fetches all breached email addresses for a domain.
+
+The result maps email aliases (the local-part before the '@') to an array of
+breach names. For example, querying `example.com` could return an object like
+`{ "john": ["Adobe"], "jane": ["Adobe", "Gawker"] }`, corresponding to
+`john@example.com` and `jane@example.com`.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `breacheddomain` endpoint. The
+`apiKey` option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;BreachedDomainResults&gt;</code>](#breach--objectedDomainResults) \| <code>Promise.&lt;null&gt;</code> - a Promise which
+resolves to an object mapping aliases to breach name arrays (or null if no
+results were found), or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| domain | <code>string</code> | the domain to query (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await breachedDomain("example.com", { apiKey: "my-api-key" });
+  if (data) {
+    // { "john": ["Adobe"], "jane": ["Adobe", "Gawker"] }
+  } else {
+    // no results
   }
 } catch (err) {
   // ...
@@ -573,6 +632,13 @@ An object representing a breach.
 | IsSubscriptionFree | <code>boolean</code> | 
 | LogoPath | <code>string</code> | 
 
+<a name="BreachedDomainResults"></a>
+
+## BreachedDomainResults : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
+An object mapping an email alias (local-part before the '@') to the list of
+breach names that alias has appeared in for the specified domain.
+
+**Kind**: global typedef  
 <a name="Paste"></a>
 
 ## Paste : <code>object</code>

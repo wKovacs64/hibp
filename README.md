@@ -39,6 +39,7 @@ browser.
 - Get the most recently added breach
 - Get a single breach event
 - Get all breaches for an account 🔑
+- Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
 - Get all pastes for an account 🔑
@@ -65,6 +66,7 @@ The following modules are available:
 - [breach](API.md#breach)
 - [breachedAccount](API.md#breachedaccount)
 - [breaches](API.md#breaches)
+- [breachedDomain](API.md#breacheddomain)
 - [dataClasses](API.md#dataclasses)
 - [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
