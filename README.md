@@ -46,6 +46,7 @@ browser.
 - [Securely][search-by-range] check a password to see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 - Search for an account in both breaches and pastes at the same time 🔑
+- Get all subscribed domains 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
 - Available server-side (e.g., Node.js) and client-side (browser)
@@ -70,6 +71,7 @@ The following modules are available:
 - [dataClasses](API.md#dataclasses)
 - [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
+- [subscribedDomains](API.md#subscribeddomains)
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)

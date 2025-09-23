@@ -39,6 +39,14 @@ export interface SubscriptionStatus {
   IncludesStealerLogs: boolean;
 }
 
+export interface SubscribedDomain {
+  DomainName: string;
+  PwnCount: number | null;
+  PwnCountExcludingSpamLists: number | null;
+  PwnCountExcludingSpamListsAtLastSubscriptionRenewal: number | null;
+  NextSubscriptionRenewal: string | null;
+}
+
 export type BreachedDomainsByEmailAlias = Record<string, string[]>;
 
 //
@@ -57,6 +65,7 @@ export type ApiData =
   | Paste[] // pasteaccount
   | string[] // dataclasses
   | SubscriptionStatus // subscription/status
+  | SubscribedDomain[] // subscribeddomains
   | null; // most endpoints can return an empty response (404, but not an error)
 
 /**
