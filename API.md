@@ -69,6 +69,17 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it will fail (unless you specify a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
+<dt><a href="#subscribedDomains">subscribedDomains([options])</a> ⇒ <code><a href="#subscribeddomain--object">Promise.&lt;Array.&lt;SubscribedDomain&gt;&gt;</a></code></dt>
+<dd><p>Fetches all subscribed domains for your HIBP account.</p>
+<p>Returns domains that have been successfully added to the Domain Search dashboard
+after verifying control. Each domain includes metadata about breach counts and
+the next renewal date, where available.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>subscribeddomains</code> endpoint. The
+<code>apiKey</code> option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
+</dd>
 <dt><a href="#subscriptionStatus">subscriptionStatus([options])</a> ⇒ <code><a href="#subscriptionstatus--object">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
 <dd><p>Fetches the current status of your HIBP subscription (API key).</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
@@ -98,6 +109,9 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 </dd>
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
+</dd>
+<dt><a href="#SubscribedDomain">SubscribedDomain</a> : <code>object</code></dt>
+<dd><p>An object representing a subscribed domain.</p>
 </dd>
 <dt><a href="#subscriptionstatus--object">SubscriptionStatus</a> : <code>object</code></dt>
 <dd><p>An object representing the status of your HIBP subscription.</p>
@@ -561,6 +575,53 @@ try {
   // ...
 }
 ```
+<a name="subscribedDomains"></a>
+
+## subscribedDomains([options]) ⇒ <code><a href="#subscribeddomain--object">Promise.&lt;Array.&lt;SubscribedDomain&gt;&gt;</a></code>
+Fetches all subscribed domains for your HIBP account.
+
+Returns domains that have been successfully added to the Domain Search dashboard
+after verifying control. Each domain includes metadata about breach counts and
+the next renewal date, where available.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `subscribeddomains` endpoint. The
+`apiKey` option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
+
+**Kind**: global function  
+**Returns**: <code><a href="#subscribeddomain--object">Promise.&lt;Array.&lt;SubscribedDomain&gt;&gt;</a></code> - a Promise which resolves to an array of
+subscribed domain objects (an empty array if none), or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await subscribedDomains({ apiKey: "my-api-key" });
+  // ...
+} catch (err) {
+  // ...
+}
+```
+**Example**  
+```js
+try {
+  const data = await subscribedDomains({
+    baseUrl: "https://my-hibp-proxy:8080",
+  });
+  // ...
+} catch (err) {
+  // ...
+}
+```
 <a name="subscriptionStatus"></a>
 
 ## subscriptionStatus([options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object)
@@ -674,6 +735,22 @@ An object representing search results.
 | --- | --- |
 | breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
 | pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
+
+<a name="SubscribedDomain"></a>
+
+## SubscribedDomain : <code>object</code>
+An object representing a subscribed domain.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| DomainName | <code>string</code> | the fully qualified domain name |
+| PwnCount | <code>number</code> \| <code>null</code> | total breached addresses at last search |
+| PwnCountExcludingSpamLists | <code>number</code> \| <code>null</code> | breached addresses excluding spam lists at last search |
+| PwnCountExcludingSpamListsAtLastSubscriptionRenewal | <code>number</code> \| <code>null</code> | breached addresses excluding spam lists at the time of last subscription renewal |
+| NextSubscriptionRenewal | <code>string</code> \| <code>null</code> | ISO 8601 datetime when the current subscription ends |
 
 <a name="SubscriptionStatus"></a>
 

@@ -49,6 +49,10 @@
     {
       "path": "dist/esm/subscription-status.js",
       "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/subscribed-domains.js",
+      "maxSize": "1 kB"
     }
   ]
 }
