@@ -6,6 +6,10 @@
       "maxSize": "2 kB"
     },
     {
+      "path": "dist/esm/breached-domain.js",
+      "maxSize": "1 kB"
+    },
+    {
       "//": "Unbundled ESM",
       "path": "dist/esm/breach.js",
       "maxSize": "1 kB"

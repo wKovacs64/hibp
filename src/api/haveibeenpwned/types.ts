@@ -52,7 +52,7 @@ export type ApiData =
   | Breach // breach
   | Breach[] // breachedaccount, breaches
   | Paste[] // pasteaccount
-  | string[] // dataclasses
+  | string[] // dataclasses, breacheddomain
   | SubscriptionStatus // subscription/status
   | null; // most endpoints can return an empty response (404, but not an error)
 

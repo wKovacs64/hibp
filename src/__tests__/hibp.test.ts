@@ -8,6 +8,7 @@ describe('hibp', () => {
         "RateLimitError": [Function],
         "breach": [Function],
         "breachedAccount": [Function],
+        "breachedDomain": [Function],
         "breaches": [Function],
         "dataClasses": [Function],
         "latestBreach": [Function],
