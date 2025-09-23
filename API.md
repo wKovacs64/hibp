@@ -18,6 +18,9 @@ a valid API key on your behalf).</p>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
+<dt><a href="#latestBreach">latestBreach([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches the most recently added breach.</p>
+</dd>
 <dt><a href="#pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
@@ -255,6 +258,36 @@ Error
 ```js
 try {
   const data = await dataClasses();
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
+```
+<a name="latestBreach"></a>
+
+## latestBreach([options]) ⇒ [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code>
+Fetches the most recently added breach.
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;Breach&gt;</code>](#breach--object) \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
+object representing a breach (or null if no breach was found), or rejects
+with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await latestBreach();
   if (data) {
     // ...
   } else {

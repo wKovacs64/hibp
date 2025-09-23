@@ -3,6 +3,7 @@ import { breach } from './breach.js';
 import { breachedAccount } from './breached-account.js';
 import { breaches } from './breaches.js';
 import { dataClasses } from './data-classes.js';
+import { latestBreach } from './latest-breach.js';
 import { pasteAccount } from './paste-account.js';
 import { pwnedPassword } from './pwned-password.js';
 import { pwnedPasswordRange } from './pwned-password-range.js';
@@ -25,6 +26,7 @@ export {
   breachedAccount,
   breaches,
   dataClasses,
+  latestBreach,
   pasteAccount,
   pwnedPassword,
   pwnedPasswordRange,
@@ -39,6 +41,7 @@ export interface HIBP {
   breachedAccount: typeof breachedAccount;
   breaches: typeof breaches;
   dataClasses: typeof dataClasses;
+  latestBreach: typeof latestBreach;
   pasteAccount: typeof pasteAccount;
   pwnedPassword: typeof pwnedPassword;
   pwnedPasswordRange: typeof pwnedPasswordRange;
