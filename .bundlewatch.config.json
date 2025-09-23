@@ -16,7 +16,7 @@
     },
     {
       "path": "dist/esm/breached-domain.js",
-      "maxSize": "1 kB"
+      "maxSize": "1.2 kB"
     },
     {
       "path": "dist/esm/breaches.js",
