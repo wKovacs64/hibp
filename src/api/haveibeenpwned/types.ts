@@ -39,6 +39,8 @@ export interface SubscriptionStatus {
   IncludesStealerLogs: boolean;
 }
 
+export type BreachedDomainsByEmailAlias = Record<string, string[]>;
+
 //
 // Internal convenience types
 //
@@ -51,6 +53,7 @@ export interface SubscriptionStatus {
 export type ApiData =
   | Breach // breach
   | Breach[] // breachedaccount, breaches
+  | BreachedDomainsByEmailAlias // breacheddomain
   | Paste[] // pasteaccount
   | string[] // dataclasses
   | SubscriptionStatus // subscription/status
