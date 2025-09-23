@@ -39,7 +39,7 @@ export interface SubscriptionStatus {
   IncludesStealerLogs: boolean;
 }
 
-export type BreachedDomainResults = Record<string, string[]>;
+export type BreachedDomainsByEmailAlias = Record<string, string[]>;
 
 //
 // Internal convenience types
@@ -55,7 +55,7 @@ export type ApiData =
   | Breach[] // breachedaccount, breaches
   | Paste[] // pasteaccount
   | string[] // dataclasses
-  | BreachedDomainResults // breacheddomain
+  | BreachedDomainsByEmailAlias // breacheddomain
   | SubscriptionStatus // subscription/status
   | null; // most endpoints can return an empty response (404, but not an error)
 

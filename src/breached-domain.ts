@@ -1,11 +1,11 @@
-import type { BreachedDomainResults } from './api/haveibeenpwned/types.js';
+import type { BreachedDomainsByEmailAlias } from './api/haveibeenpwned/types.js';
 import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
 
 /**
  * An object mapping an email alias (local-part before the '@') to the list of
  * breach names that alias has appeared in for the specified domain.
  *
- * @typedef {Object.<string, string[]>} BreachedDomainResults
+ * @typedef {Object.<string, string[]>} BreachedDomainsByEmailAlias
  */
 
 /**
@@ -33,7 +33,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {(Promise<BreachedDomainResults> | Promise<null>)} a Promise which
+ * @returns {(Promise<BreachedDomainsByEmailAlias> | Promise<null>)} a Promise which
  * resolves to an object mapping aliases to breach name arrays (or null if no
  * results were found), or rejects with an Error
  * @example
@@ -70,7 +70,7 @@ export function breachedDomain(
      */
     userAgent?: string;
   } = {},
-): Promise<BreachedDomainResults | null> {
+): Promise<BreachedDomainsByEmailAlias | null> {
   const { apiKey, baseUrl, timeoutMs, userAgent } = options;
   const endpoint = `/breacheddomain/${encodeURIComponent(domain)}`;
 
@@ -79,6 +79,5 @@ export function breachedDomain(
     baseUrl,
     timeoutMs,
     userAgent,
-  }) as Promise<BreachedDomainResults | null>;
+  }) as Promise<BreachedDomainsByEmailAlias | null>;
 }
-

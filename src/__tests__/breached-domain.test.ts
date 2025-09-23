@@ -57,9 +57,7 @@ describe('breachedDomain', () => {
         }),
       );
 
-      return expect(breachedDomain('example.com', { baseUrl })).resolves.toEqual(
-        DOMAIN_RESULTS,
-      );
+      return expect(breachedDomain('example.com', { baseUrl })).resolves.toEqual(DOMAIN_RESULTS);
     });
   });
 
@@ -97,4 +95,3 @@ describe('breachedDomain', () => {
     });
   });
 });
-
