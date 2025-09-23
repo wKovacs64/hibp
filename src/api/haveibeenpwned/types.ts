@@ -53,9 +53,9 @@ export type BreachedDomainsByEmailAlias = Record<string, string[]>;
 export type ApiData =
   | Breach // breach
   | Breach[] // breachedaccount, breaches
+  | BreachedDomainsByEmailAlias // breacheddomain
   | Paste[] // pasteaccount
   | string[] // dataclasses
-  | BreachedDomainsByEmailAlias // breacheddomain
   | SubscriptionStatus // subscription/status
   | null; // most endpoints can return an empty response (404, but not an error)
 
