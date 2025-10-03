@@ -69,7 +69,6 @@
     "access": "public"
   },
   "repository": {
-    "type": "git",
     "url": "git+https://github.com/wKovacs64/hibp.git"
   },
   "bugs": {
@@ -90,7 +89,7 @@
     "@playwright/test": "1.55.1",
     "@types/common-tags": "1.8.4",
     "@types/debug": "4.1.12",
-    "@types/node": "22.18.8",
+    "@types/node": "24.6.2",
     "@types/ws": "8.18.1",
     "@vitest/coverage-v8": "3.2.4",
     "@wkovacs64/eslint-config": "7.10.0",
