@@ -66,15 +66,16 @@ The following modules are available:
 
 - [breach](API.md#breach)
 - [breachedAccount](API.md#breachedaccount)
-- [breaches](API.md#breaches)
 - [breachedDomain](API.md#breacheddomain)
+- [breaches](API.md#breaches)
 - [dataClasses](API.md#dataclasses)
 - [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
-- [subscribedDomains](API.md#subscribeddomains)
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
+- [stealerLogsByEmail](API.md#stealerlogsbyemail)
+- [subscribedDomains](API.md#subscribeddomains)
 - [subscriptionStatus](API.md#subscriptionstatus)
 
 Please see the [API reference](API.md) for more detailed usage information and examples.

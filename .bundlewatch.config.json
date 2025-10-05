@@ -53,6 +53,10 @@
     {
       "path": "dist/esm/subscribed-domains.js",
       "maxSize": "1.1 kB"
+    },
+    {
+      "path": "dist/esm/stealer-logs-by-email.js",
+      "maxSize": "1 kB"
     }
   ]
 }
