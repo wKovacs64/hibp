@@ -183,7 +183,7 @@ This module is distributed under the [MIT License][license].
 [ci-url]: https://github.com/wKovacs64/hibp/actions?query=workflow%3Aci
 [coverage-image]: https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
 [coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main
-[deno]: https://deno.land/
+[deno]: https://deno.com/
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
 [haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
