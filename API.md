@@ -79,6 +79,16 @@ supplied email address.</p>
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
+<dt><a href="#stealerLogsByWebsiteDomain">stealerLogsByWebsiteDomain(websiteDomain, [options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches all stealer log email addresses for a website domain.</p>
+<p>The result is an array of strings representing email addresses found in
+stealer logs for the specified website domain (e.g., &quot;example.com&quot;).</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>stealerlogsbywebsitedomain</code>
+endpoint. The <code>apiKey</code> option here is not explicitly required, but direct
+requests made without it will fail (unless you specify a <code>baseUrl</code> to a proxy
+that inserts a valid API key on your behalf).</p>
+</dd>
 <dt><a href="#subscribedDomains">subscribedDomains([options])</a> ⇒ <code><a href="#subscribeddomain--object">Promise.&lt;Array.&lt;SubscribedDomain&gt;&gt;</a></code></dt>
 <dd><p>Fetches all subscribed domains for your HIBP account.</p>
 <p>Returns domains that have been successfully added to the Domain Search dashboard
@@ -630,6 +640,62 @@ try {
 ```js
 try {
   const data = await stealerLogsByEmail("foo@bar.com", {
+    baseUrl: "https://my-hibp-proxy:8080",
+  });
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
+```
+<a name="stealerLogsByWebsiteDomain"></a>
+
+## stealerLogsByWebsiteDomain(websiteDomain, [options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code>
+Fetches all stealer log email addresses for a website domain.
+
+The result is an array of strings representing email addresses found in
+stealer logs for the specified website domain (e.g., "example.com").
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `stealerlogsbywebsitedomain`
+endpoint. The `apiKey` option here is not explicitly required, but direct
+requests made without it will fail (unless you specify a `baseUrl` to a proxy
+that inserts a valid API key on your behalf).
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
+array of email addresses (or null if no results were found), or rejects with
+an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| websiteDomain | <code>string</code> | the website domain to query (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await stealerLogsByWebsiteDomain("example.com", { apiKey: "my-api-key" });
+  if (data) {
+    // ["andy@gmail.com", "jane@gmail.com"]
+  } else {
+    // no results
+  }
+} catch (err) {
+  // ...
+}
+```
+**Example**  
+```js
+try {
+  const data = await stealerLogsByWebsiteDomain("example.com", {
     baseUrl: "https://my-hibp-proxy:8080",
   });
   if (data) {

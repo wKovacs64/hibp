@@ -75,6 +75,7 @@ The following modules are available:
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
 - [stealerLogsByEmail](API.md#stealerlogsbyemail)
+- [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
 - [subscribedDomains](API.md#subscribeddomains)
 - [subscriptionStatus](API.md#subscriptionstatus)
 
