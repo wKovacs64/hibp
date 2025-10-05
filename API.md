@@ -69,7 +69,7 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it will fail (unless you specify a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#stealerLogsByEmail">stealerLogsByEmail(email, [options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#stealerLogsByEmail">stealerLogsByEmail(emailAddress, [options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log domains for an email address.</p>
 <p>Returns an array of domains for which stealer logs contain entries for the
 supplied email address.</p>
@@ -587,7 +587,7 @@ try {
 ```
 <a name="stealerLogsByEmail"></a>
 
-## stealerLogsByEmail(email, [options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code>
+## stealerLogsByEmail(emailAddress, [options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code>
 Fetches all stealer log domains for an email address.
 
 Returns an array of domains for which stealer logs contain entries for the
@@ -606,7 +606,7 @@ Error
 
 | Param | Type | Description |
 | --- | --- | --- |
-| email | <code>string</code> | the email address to query |
+| emailAddress | <code>string</code> | the email address to query |
 | [options] | <code>object</code> | a configuration object |
 | [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |

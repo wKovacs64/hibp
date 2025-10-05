@@ -12,7 +12,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
  * a valid API key on your behalf).
  *
- * @param {string} email the email address to query
+ * @param {string} emailAddress the email address to query
  * @param {object} [options] a configuration object
  * @param {string} [options.apiKey] an API key from
  * https://haveibeenpwned.com/API/Key (default: undefined)
@@ -52,7 +52,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * }
  */
 export function stealerLogsByEmail(
-  email: string,
+  emailAddress: string,
   options: {
     /**
      * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
@@ -75,7 +75,7 @@ export function stealerLogsByEmail(
   } = {},
 ): Promise<string[] | null> {
   const { apiKey, baseUrl, timeoutMs, userAgent } = options;
-  const endpoint = `/stealerlogsbyemail/${encodeURIComponent(email)}`;
+  const endpoint = `/stealerlogsbyemail/${encodeURIComponent(emailAddress)}`;
 
   return fetchFromApi(endpoint, {
     apiKey,
