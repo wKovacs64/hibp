@@ -47,12 +47,16 @@
       "maxSize": "1.4 kB"
     },
     {
-      "path": "dist/esm/subscription-status.js",
+      "path": "dist/esm/stealer-logs-by-email.js",
       "maxSize": "1 kB"
     },
     {
       "path": "dist/esm/subscribed-domains.js",
       "maxSize": "1.1 kB"
+    },
+    {
+      "path": "dist/esm/subscription-status.js",
+      "maxSize": "1 kB"
     }
   ]
 }

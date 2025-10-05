@@ -9,6 +9,7 @@ import { pasteAccount } from './paste-account.js';
 import { pwnedPassword } from './pwned-password.js';
 import { pwnedPasswordRange } from './pwned-password-range.js';
 import { search } from './search.js';
+import { stealerLogsByEmail } from './stealer-logs-by-email.js';
 import { subscribedDomains } from './subscribed-domains.js';
 import { subscriptionStatus } from './subscription-status.js';
 
@@ -34,6 +35,7 @@ export {
   pwnedPassword,
   pwnedPasswordRange,
   search,
+  stealerLogsByEmail,
   subscribedDomains,
   subscriptionStatus,
   RateLimitError,
@@ -51,6 +53,7 @@ export interface HIBP {
   pwnedPassword: typeof pwnedPassword;
   pwnedPasswordRange: typeof pwnedPasswordRange;
   search: typeof search;
+  stealerLogsByEmail: typeof stealerLogsByEmail;
   subscribedDomains: typeof subscribedDomains;
   subscriptionStatus: typeof subscriptionStatus;
   RateLimitError: typeof RateLimitError;
