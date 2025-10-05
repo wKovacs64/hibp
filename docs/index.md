@@ -20,7 +20,7 @@ In Node.js:
 npm install hibp
 ```
 
-In [Deno](https://deno.land/):
+In [Deno](https://deno.com/):
 
 ```ts
 // Replace x.y.z with the desired hibp version
@@ -32,8 +32,10 @@ browser.
 
 ## Features (🔑 = [requires](https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/) an [API key](https://haveibeenpwned.com/API/Key))
 
+- Get the most recently added breach
 - Get a single breach event
 - Get all breaches for an account 🔑
+- Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
 - Get all pastes for an account 🔑
@@ -41,6 +43,10 @@ browser.
   see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 - Search for an account in both breaches and pastes at the same time 🔑
+- Get all stealer log domains for an email address 🔑
+- Get all stealer log email aliases for an email domain 🔑
+- Get all stealer log email addresses for a website domain 🔑
+- Get all subscribed domains 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
 - Available server-side (e.g., Node.js) and client-side (browser)
@@ -60,12 +66,18 @@ The following modules are available:
 
 - [breach](https://github.com/wKovacs64/hibp/tree/main/API.md#breach)
 - [breachedAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#breachedaccount)
+- [breachedDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#breacheddomain)
 - [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
 - [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)
+- [latestBreach](https://github.com/wKovacs64/hibp/tree/main/API.md#latestbreach)
 - [pasteAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#pasteaccount)
 - [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)
 - [pwnedPasswordRange](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpasswordrange)
 - [search](https://github.com/wKovacs64/hibp/tree/main/API.md#search)
+- [stealerLogsByEmail](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbyemail)
+- [stealerLogsByEmailDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbyemaildomain)
+- [stealerLogsByWebsiteDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbywebsitedomain)
+- [subscribedDomains](https://github.com/wKovacs64/hibp/tree/main/API.md#subscribeddomains)
 - [subscriptionStatus](https://github.com/wKovacs64/hibp/tree/main/API.md#subscriptionstatus)
 
 Please see the [API reference](https://github.com/wKovacs64/hibp/tree/main/API.md) for more detailed
