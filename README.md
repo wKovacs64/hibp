@@ -40,7 +40,6 @@ browser.
 - Get a single breach event
 - Get all breaches for an account 🔑
 - Get all breached email addresses for a domain 🔑
-- Get all stealer log email aliases for an email domain 🔑
 - Get all breach events in the system
 - Get all data classes
 - Get all pastes for an account 🔑
