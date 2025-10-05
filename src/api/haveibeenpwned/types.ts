@@ -49,6 +49,8 @@ export interface SubscribedDomain {
 
 export type BreachedDomainsByEmailAlias = Record<string, string[]>;
 
+export type StealerLogDomainsByEmailAlias = Record<string, string[]>;
+
 //
 // Internal convenience types
 //
@@ -63,7 +65,8 @@ export type ApiData =
   | Breach[] // breachedaccount, breaches
   | BreachedDomainsByEmailAlias // breacheddomain
   | Paste[] // pasteaccount
-  | string[] // dataclasses
+  | string[] // dataclasses, stealerlogsbyemail, stealerlogsbywebsitedomain
+  | StealerLogDomainsByEmailAlias // stealerlogsbyemaildomain
   | SubscriptionStatus // subscription/status
   | SubscribedDomain[] // subscribeddomains
   | null; // most endpoints can return an empty response (404, but not an error)

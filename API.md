@@ -69,6 +69,17 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it will fail (unless you specify a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
+<dt><a href="#stealerLogsByEmailDomain">stealerLogsByEmailDomain(emailDomain, [options])</a> ⇒ <code><a href="#StealerLogDomainsByEmailAlias">Promise.&lt;StealerLogDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches all stealer log email aliases for an email domain.</p>
+<p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
+email domains found in stealer logs. For example, querying <code>example.com</code>
+could return an object like <code>{ &quot;andy&quot;: [&quot;netflix.com&quot;], &quot;jane&quot;: [&quot;netflix.com&quot;, &quot;spotify.com&quot;] }</code>, corresponding to <code>andy@example.com</code> and <code>jane@example.com</code>.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>stealerlogsbyemaildomain</code> endpoint.
+The <code>apiKey</code> option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
+</dd>
 <dt><a href="#stealerLogsByEmail">stealerLogsByEmail(emailAddress, [options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log domains for an email address.</p>
 <p>Returns an array of domains for which stealer logs contain entries for the
@@ -129,6 +140,11 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 </dd>
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
+</dd>
+<dt><a href="#StealerLogDomainsByEmailAlias">StealerLogDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
+email domains that alias has appeared in within stealer logs for the specified
+email domain.</p>
 </dd>
 <dt><a href="#SubscribedDomain">SubscribedDomain</a> : <code>object</code></dt>
 <dd><p>An object representing a subscribed domain.</p>
@@ -595,6 +611,49 @@ try {
   // ...
 }
 ```
+<a name="stealerLogsByEmailDomain"></a>
+
+## stealerLogsByEmailDomain(emailDomain, [options]) ⇒ [<code>Promise.&lt;StealerLogDomainsByEmailAlias&gt;</code>](#StealerLogDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
+Fetches all stealer log email aliases for an email domain.
+
+The result maps email aliases (the local-part before the '@') to an array of
+email domains found in stealer logs. For example, querying `example.com`
+could return an object like `{ "andy": ["netflix.com"], "jane": ["netflix.com",
+"spotify.com"] }`, corresponding to `andy@example.com` and `jane@example.com`.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `stealerlogsbyemaildomain` endpoint.
+The `apiKey` option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;StealerLogDomainsByEmailAlias&gt;</code>](#StealerLogDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise
+which resolves to an object mapping aliases to stealer log email domain arrays
+(or null if no results were found), or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| emailDomain | <code>string</code> | the email domain to query (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await stealerLogsByEmailDomain("example.com", { apiKey: "my-api-key" });
+  if (data) {
+    // { "andy": ["netflix.com"], "jane": ["netflix.com", "spotify.com"] }
+  } else {
+    // no results
+  }
+} catch (err) {
+  // ...
+}
+```
 <a name="stealerLogsByEmail"></a>
 
 ## stealerLogsByEmail(emailAddress, [options]) ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code>
@@ -868,6 +927,14 @@ An object representing search results.
 | breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
 | pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
 
+<a name="StealerLogDomainsByEmailAlias"></a>
+
+## StealerLogDomainsByEmailAlias : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
+An object mapping an email alias (local-part before the '@') to the list of
+email domains that alias has appeared in within stealer logs for the specified
+email domain.
+
+**Kind**: global typedef  
 <a name="SubscribedDomain"></a>
 
 ## SubscribedDomain : <code>object</code>
