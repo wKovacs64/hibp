@@ -17,6 +17,7 @@ describe('hibp', () => {
         "pwnedPasswordRange": [Function],
         "search": [Function],
         "stealerLogsByEmail": [Function],
+        "stealerLogsByWebsiteDomain": [Function],
         "subscribedDomains": [Function],
         "subscriptionStatus": [Function],
       }
