@@ -47,6 +47,9 @@ browser.
 - [Securely][search-by-range] check a password to see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 - Search for an account in both breaches and pastes at the same time 🔑
+- Get all stealer log domains for an email address 🔑
+- Get all stealer log email aliases for an email domain 🔑
+- Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
