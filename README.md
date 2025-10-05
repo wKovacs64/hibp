@@ -40,6 +40,7 @@ browser.
 - Get a single breach event
 - Get all breaches for an account 🔑
 - Get all breached email addresses for a domain 🔑
+- Get all stealer log email aliases for an email domain 🔑
 - Get all breach events in the system
 - Get all data classes
 - Get all pastes for an account 🔑
@@ -75,6 +76,7 @@ The following modules are available:
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
 - [stealerLogsByEmail](API.md#stealerlogsbyemail)
+- [stealerLogsByEmailDomain](API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
 - [subscribedDomains](API.md#subscribeddomains)
 - [subscriptionStatus](API.md#subscriptionstatus)
