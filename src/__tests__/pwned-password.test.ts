@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { http } from 'msw';
 import { server } from '../../mocks/server.js';
 import { PASSWORD, SHA1_RESPONSE_BODY } from '../../test/fixtures.js';
@@ -87,6 +87,20 @@ describe('pwnedPassword', () => {
       );
 
       return pwnedPassword(PASSWORD, { addPadding: true });
+    });
+  });
+
+  describe('environment', () => {
+    it('rejects when the Web Crypto API is unavailable', async () => {
+      expect.assertions(1);
+      vi.stubGlobal('crypto', undefined as unknown as Crypto);
+      try {
+        await expect(pwnedPassword('anything')).rejects.toThrow(
+          'The Web Crypto API is not available in this environment.',
+        );
+      } finally {
+        vi.unstubAllGlobals();
+      }
     });
   });
 });

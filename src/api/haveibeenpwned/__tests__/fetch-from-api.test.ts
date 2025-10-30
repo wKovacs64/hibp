@@ -146,6 +146,28 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
         '[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]',
       );
     });
+
+    it('sets retryAfterSeconds to undefined when header is missing', async () => {
+      server.use(
+        http.get('*', () => {
+          return new Response(JSON.stringify(TOO_MANY_REQUESTS.body), {
+            status: TOO_MANY_REQUESTS.status,
+            // omit retry-after header
+          });
+        }),
+      );
+      let err;
+
+      try {
+        await fetchFromApi('/service/rate_limited', { apiKey });
+      } catch (e: unknown) {
+        err = e;
+      }
+
+      expect(err).toBeInstanceOf(Error);
+      expect((err as Error).name).toBe('RateLimitError');
+      expect((err as { retryAfterSeconds?: number }).retryAfterSeconds).toBeUndefined();
+    });
   });
 
   describe('unexpected HTTP error', () => {
