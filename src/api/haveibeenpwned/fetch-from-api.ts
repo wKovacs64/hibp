@@ -26,9 +26,7 @@ export class RateLimitError extends Error {
     super(message, options);
     this.name = this.constructor.name;
     this.retryAfterSeconds =
-      typeof retryAfter === 'string'
-        ? Number.parseInt(retryAfter, 10) /* c8 ignore start */
-        : undefined; /* c8 ignore stop */
+      typeof retryAfter === 'string' ? Number.parseInt(retryAfter, 10) : undefined;
   }
 }
 

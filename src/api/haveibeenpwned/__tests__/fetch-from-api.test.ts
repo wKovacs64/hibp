@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { http } from 'msw';
 import { server } from '../../../../mocks/server.js';
 import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, BLOCKED, TOO_MANY_REQUESTS } from '../responses.js';
-import { fetchFromApi } from '../fetch-from-api.js';
+import { fetchFromApi, RateLimitError } from '../fetch-from-api.js';
 
 describe('internal (haveibeenpwned): fetchFromApi', () => {
   const apiKey = 'my-api-key';
@@ -132,19 +132,35 @@ describe('internal (haveibeenpwned): fetchFromApi', () => {
           });
         }),
       );
-      let err;
 
+      expect.assertions(3);
       try {
         await fetchFromApi('/service/rate_limited', { apiKey });
-      } catch (e: unknown) {
-        err = e;
+      } catch (error) {
+        expect(error).toBeInstanceOf(RateLimitError);
+        expect(error).toHaveProperty('retryAfterSeconds', 2);
+        expect(error).toMatchInlineSnapshot(
+          '[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]',
+        );
       }
+    });
 
-      expect(err).toBeInstanceOf(Error);
-      expect(err).toHaveProperty('retryAfterSeconds', 2);
-      expect(err).toMatchInlineSnapshot(
-        '[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]',
+    it('sets retryAfterSeconds to undefined when header is missing', async () => {
+      server.use(
+        http.get('*', () => {
+          return new Response(JSON.stringify(TOO_MANY_REQUESTS.body), {
+            status: TOO_MANY_REQUESTS.status,
+          });
+        }),
       );
+
+      expect.assertions(2);
+      try {
+        await fetchFromApi('/service/rate_limited', { apiKey });
+      } catch (error) {
+        expect(error).toBeInstanceOf(RateLimitError);
+        expect((error as RateLimitError).retryAfterSeconds).toBeUndefined();
+      }
     });
   });
 
