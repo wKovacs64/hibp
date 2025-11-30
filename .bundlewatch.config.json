@@ -3,10 +3,38 @@
     {
       "//": "Pre-bundled ESM for the Browser",
       "path": "dist/browser/hibp.module.js",
-      "maxSize": "2 kB"
+      "maxSize": "2.1 kB"
     },
     {
       "//": "Unbundled ESM",
+      "path": "dist/esm/api/base-fetch.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/api/haveibeenpwned/fetch-from-api.js",
+      "maxSize": "1.4 kB"
+    },
+    {
+      "path": "dist/esm/api/haveibeenpwned/package-info.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/api/haveibeenpwned/responses.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/api/haveibeenpwned/types.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/api/pwnedpasswords/fetch-from-api.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/api/pwnedpasswords/responses.js",
+      "maxSize": "1 kB"
+    },
+    {
       "path": "dist/esm/breach.js",
       "maxSize": "1 kB"
     },
