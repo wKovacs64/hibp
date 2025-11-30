@@ -26,7 +26,11 @@ export async function baseFetch({
   return fetch(url, requestInit);
 }
 
-function buildUrl(baseUrl: string, endpoint: string, queryParams?: Record<string, string>): string {
+export function buildUrl(
+  baseUrl: string,
+  endpoint: string,
+  queryParams?: Record<string, string>,
+): string {
   const base = baseUrl.replace(/\/$/g, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   const url = new URL(`${base}${normalizedEndpoint}`);
@@ -40,7 +44,10 @@ function buildUrl(baseUrl: string, endpoint: string, queryParams?: Record<string
   return url.toString();
 }
 
-function buildHeaders(userAgent?: string, extra?: Record<string, string>): Record<string, string> {
+export function buildHeaders(
+  userAgent?: string,
+  extra?: Record<string, string>,
+): Record<string, string> {
   const headers: Record<string, string> = { ...extra };
 
   if (userAgent) {
