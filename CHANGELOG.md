@@ -1,5 +1,11 @@
 # Change Log
 
+## 15.2.0
+
+### Minor Changes
+
+- [#562](https://github.com/wKovacs64/hibp/pull/562) [`ab40e4a`](https://github.com/wKovacs64/hibp/commit/ab40e4a1a63809376dde86cc5341055558344d3f) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `signal` option to all modules for user-controlled request cancellation via `AbortSignal`.
+
 ## 15.1.0
 
 ### Minor Changes
