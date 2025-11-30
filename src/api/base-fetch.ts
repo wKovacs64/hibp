@@ -28,7 +28,8 @@ export async function baseFetch({
 
 function buildUrl(baseUrl: string, endpoint: string, queryParams?: Record<string, string>): string {
   const base = baseUrl.replace(/\/$/g, '');
-  const url = new URL(`${base}${endpoint}`);
+  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = new URL(`${base}${normalizedEndpoint}`);
 
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
