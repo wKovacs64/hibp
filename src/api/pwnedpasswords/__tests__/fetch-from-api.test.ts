@@ -9,9 +9,7 @@ describe('internal (pwnedpassword): fetchFromApi', () => {
     it('re-throws request setup errors', () => {
       return expect(
         fetchFromApi('/service', { baseUrl: 'relativeBaseUrl' }),
-      ).rejects.toMatchInlineSnapshot(
-        `[TypeError: Failed to parse URL from relativeBaseUrl/service?mode=sha1]`,
-      );
+      ).rejects.toMatchInlineSnapshot(`[TypeError: Invalid URL]`);
     });
   });
 

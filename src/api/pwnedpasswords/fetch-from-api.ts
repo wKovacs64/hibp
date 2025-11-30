@@ -1,3 +1,4 @@
+import { baseFetch } from '../base-fetch.js';
 import { BAD_REQUEST } from './responses.js';
 
 /**
@@ -41,15 +42,17 @@ export async function fetchFromApi(
     mode = 'sha1',
   } = options;
 
-  const config: RequestInit = {
-    headers: {
-      ...(userAgent ? { 'User-Agent': userAgent } : {}),
-      ...(addPadding ? { 'Add-Padding': 'true' } : {}),
-    },
-    ...(timeoutMs ? { signal: AbortSignal.timeout(timeoutMs) } : {}),
-  };
-  const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}?mode=${mode}`;
-  const response = await fetch(url, config);
+  const headers: Record<string, string> = {};
+  if (addPadding) headers['Add-Padding'] = 'true';
+
+  const response = await baseFetch({
+    baseUrl,
+    endpoint,
+    headers,
+    timeoutMs,
+    userAgent,
+    queryParams: { mode },
+  });
 
   if (response.ok) return response.text();
 

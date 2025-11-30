@@ -1,5 +1,4 @@
-// @ts-ignore - package-info.js is generated and may not exist yet
-import { PACKAGE_NAME, PACKAGE_VERSION } from './package-info.js';
+import { baseFetch } from '../base-fetch.js';
 import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, NOT_FOUND, TOO_MANY_REQUESTS } from './responses.js';
 import type { ApiData, ErrorData } from './types.js';
 
@@ -71,27 +70,17 @@ export async function fetchFromApi(
   } = {},
 ): Promise<ApiData> {
   const { apiKey, baseUrl = 'https://haveibeenpwned.com/api/v3', timeoutMs, userAgent } = options;
+
   const headers: Record<string, string> = {};
+  if (apiKey) headers['HIBP-API-Key'] = apiKey;
 
-  if (apiKey) {
-    headers['HIBP-API-Key'] = apiKey;
-  }
-
-  if (userAgent) {
-    headers['User-Agent'] = userAgent;
-  }
-
-  // Provide a default User-Agent when running outside the browser
-  if (!userAgent && typeof navigator === 'undefined') {
-    headers['User-Agent'] = `${PACKAGE_NAME} ${PACKAGE_VERSION}`;
-  }
-
-  const config: RequestInit = {
+  const response = await baseFetch({
+    baseUrl,
+    endpoint,
     headers,
-    ...(timeoutMs ? { signal: AbortSignal.timeout(timeoutMs) } : {}),
-  };
-  const url = `${baseUrl.replace(/\/$/g, '')}${endpoint}`;
-  const response = await fetch(url, config);
+    timeoutMs,
+    userAgent,
+  });
 
   if (response.ok) return response.json() as Promise<ApiData>;
 
