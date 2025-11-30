@@ -21,6 +21,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<string[]> | Promise<null>)} a Promise which resolves to an
@@ -68,19 +69,24 @@ export function stealerLogsByEmail(
      */
     timeoutMs?: number;
     /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
+    /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},
 ): Promise<string[] | null> {
-  const { apiKey, baseUrl, timeoutMs, userAgent } = options;
+  const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = `/stealerlogsbyemail/${encodeURIComponent(emailAddress)}`;
 
   return fetchFromApi(endpoint, {
     apiKey,
     baseUrl,
     timeoutMs,
+    signal,
     userAgent,
   }) as Promise<string[] | null>;
 }

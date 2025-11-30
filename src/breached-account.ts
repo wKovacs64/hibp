@@ -20,6 +20,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * the results (default: true)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {boolean} [options.truncate] truncate the results to only include
  * the name of each breach (default: true)
  * @param {string} [options.baseUrl] a custom base URL for the
@@ -92,6 +93,10 @@ export function breachedAccount(
      */
     timeoutMs?: number;
     /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
+    /**
      * truncate the results to only include the name of each breach (default:
      * true)
      */
@@ -113,6 +118,7 @@ export function breachedAccount(
     domain,
     includeUnverified = true,
     timeoutMs,
+    signal,
     truncate = true,
     baseUrl,
     userAgent,
@@ -136,6 +142,7 @@ export function breachedAccount(
     apiKey,
     baseUrl,
     timeoutMs,
+    signal,
     userAgent,
   }) as Promise<Breach[] | null>;
 }

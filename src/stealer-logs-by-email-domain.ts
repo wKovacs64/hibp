@@ -32,6 +32,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {(Promise<StealerLogDomainsByEmailAlias> | Promise<null>)} a Promise
@@ -66,19 +67,24 @@ export function stealerLogsByEmailDomain(
      */
     timeoutMs?: number;
     /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
+    /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},
 ): Promise<StealerLogDomainsByEmailAlias | null> {
-  const { apiKey, baseUrl, timeoutMs, userAgent } = options;
+  const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = `/stealerlogsbyemaildomain/${encodeURIComponent(emailDomain)}`;
 
   return fetchFromApi(endpoint, {
     apiKey,
     baseUrl,
     timeoutMs,
+    signal,
     userAgent,
   }) as Promise<StealerLogDomainsByEmailAlias | null>;
 }

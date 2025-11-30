@@ -30,6 +30,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SubscriptionStatus>} a Promise which resolves to a
@@ -66,6 +67,10 @@ export async function subscriptionStatus(
      * timeout for the request in milliseconds (default: none)
      */
     timeoutMs?: number;
+    /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
     /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)

@@ -15,6 +15,7 @@ import { BAD_REQUEST } from './responses.js';
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @param {boolean} [options.addPadding] ask the remote API to add padding to
@@ -29,6 +30,7 @@ export async function fetchFromApi(
   options: {
     baseUrl?: string;
     timeoutMs?: number;
+    signal?: AbortSignal;
     userAgent?: string;
     addPadding?: boolean;
     mode?: 'sha1' | 'ntlm';
@@ -37,6 +39,7 @@ export async function fetchFromApi(
   const {
     baseUrl = 'https://api.pwnedpasswords.com',
     timeoutMs,
+    signal,
     userAgent,
     addPadding = false,
     mode = 'sha1',
@@ -50,6 +53,7 @@ export async function fetchFromApi(
     endpoint,
     headers,
     timeoutMs,
+    signal,
     userAgent,
     queryParams: { mode },
   });

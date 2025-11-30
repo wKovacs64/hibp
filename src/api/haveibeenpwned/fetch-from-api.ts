@@ -54,6 +54,7 @@ function blockedWithRayId(rayId: string) {
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<ApiData>} a Promise which resolves to the data resulting
@@ -66,10 +67,17 @@ export async function fetchFromApi(
     apiKey?: string;
     baseUrl?: string;
     timeoutMs?: number;
+    signal?: AbortSignal;
     userAgent?: string;
   } = {},
 ): Promise<ApiData> {
-  const { apiKey, baseUrl = 'https://haveibeenpwned.com/api/v3', timeoutMs, userAgent } = options;
+  const {
+    apiKey,
+    baseUrl = 'https://haveibeenpwned.com/api/v3',
+    timeoutMs,
+    signal,
+    userAgent,
+  } = options;
 
   const headers: Record<string, string> = {};
   if (apiKey) headers['HIBP-API-Key'] = apiKey;
@@ -79,6 +87,7 @@ export async function fetchFromApi(
     endpoint,
     headers,
     timeoutMs,
+    signal,
     userAgent,
   });
 

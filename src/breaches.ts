@@ -12,6 +12,7 @@ import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<Breach[]>} a Promise which resolves to an array of breach
@@ -55,13 +56,17 @@ export function breaches(
      */
     timeoutMs?: number;
     /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
+    /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},
 ): Promise<Breach[]> {
-  const { domain, baseUrl, timeoutMs, userAgent } = options;
+  const { domain, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = '/breaches?';
   const params: string[] = [];
 
@@ -72,6 +77,7 @@ export function breaches(
   return fetchFromApi(`${endpoint}${params.join('&')}`, {
     baseUrl,
     timeoutMs,
+    signal,
     userAgent,
   }) as Promise<Breach[]>;
 }

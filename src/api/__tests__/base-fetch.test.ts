@@ -1,5 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { buildUrl, buildHeaders } from '../base-fetch.js';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { http } from 'msw';
+import { server } from '../../../mocks/server.js';
+import { buildUrl, buildHeaders, baseFetch } from '../base-fetch.js';
 
 describe('internal: buildUrl', () => {
   describe('base URL normalization', () => {
@@ -93,6 +95,87 @@ describe('internal: buildHeaders', () => {
       expect(result['User-Agent']).toBeUndefined();
 
       global.navigator = originalNavigator;
+    });
+  });
+});
+
+describe('internal: baseFetch', () => {
+  beforeEach(() => {
+    server.use(
+      http.get('*', () => {
+        return new Response(JSON.stringify({ success: true }), {
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }),
+    );
+  });
+
+  describe('AbortSignal', () => {
+    it('cancels request when signal is aborted', async () => {
+      const controller = new AbortController();
+      const abortPromise = baseFetch({
+        baseUrl: 'https://example.com',
+        endpoint: '/test',
+        signal: controller.signal,
+      });
+
+      controller.abort();
+
+      await expect(abortPromise).rejects.toThrow();
+    });
+
+    it('works with timeout alone', async () => {
+      const response = await baseFetch({
+        baseUrl: 'https://example.com',
+        endpoint: '/test',
+        timeoutMs: 5000,
+      });
+
+      expect(response.ok).toBe(true);
+    });
+
+    it('timeout fires first when both timeout and signal are provided', async () => {
+      server.use(
+        http.get('*', async () => {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return new Response(JSON.stringify({ success: true }), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }),
+      );
+
+      const controller = new AbortController();
+      const timeoutPromise = baseFetch({
+        baseUrl: 'https://example.com',
+        endpoint: '/test',
+        timeoutMs: 100,
+        signal: controller.signal,
+      });
+
+      await expect(timeoutPromise).rejects.toThrow();
+    });
+
+    it('signal fires first when aborted before timeout', async () => {
+      const controller = new AbortController();
+      const abortPromise = baseFetch({
+        baseUrl: 'https://example.com',
+        endpoint: '/test',
+        timeoutMs: 5000,
+        signal: controller.signal,
+      });
+
+      controller.abort();
+
+      await expect(abortPromise).rejects.toThrow();
+    });
+
+    it('does not set signal when neither timeout nor signal provided', async () => {
+      const response = await baseFetch({
+        baseUrl: 'https://example.com',
+        endpoint: '/test',
+      });
+
+      expect(response.ok).toBe(true);
     });
   });
 });

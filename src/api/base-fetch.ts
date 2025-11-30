@@ -1,11 +1,22 @@
 // @ts-ignore - package-info.js is generated
 import { PACKAGE_NAME, PACKAGE_VERSION } from './haveibeenpwned/package-info.js';
 
+function buildSignal(timeoutMs?: number, signal?: AbortSignal): AbortSignal | undefined {
+  const signals: AbortSignal[] = [];
+  if (timeoutMs) signals.push(AbortSignal.timeout(timeoutMs));
+  if (signal) signals.push(signal);
+
+  if (signals.length === 0) return undefined;
+  if (signals.length === 1) return signals[0];
+  return AbortSignal.any(signals);
+}
+
 export async function baseFetch({
   baseUrl,
   endpoint,
   headers,
   timeoutMs,
+  signal,
   userAgent,
   queryParams,
 }: {
@@ -13,12 +24,13 @@ export async function baseFetch({
   endpoint: string;
   headers?: Record<string, string>;
   timeoutMs?: number;
+  signal?: AbortSignal;
   userAgent?: string;
   queryParams?: Record<string, string>;
 }): Promise<Response> {
   const requestInit: RequestInit = {
     headers: buildHeaders(userAgent, headers),
-    ...(timeoutMs ? { signal: AbortSignal.timeout(timeoutMs) } : {}),
+    signal: buildSignal(timeoutMs, signal),
   };
 
   const url = buildUrl(baseUrl, endpoint, queryParams);
