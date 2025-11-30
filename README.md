@@ -52,6 +52,7 @@ browser.
 - Get all subscribed domains 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
+- Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)
 - Written in TypeScript, so all modules come fully typed
 

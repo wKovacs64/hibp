@@ -30,6 +30,7 @@ export type PwnedPasswordSuffixes = Record<string, number>;
  * pwnedpasswords.com API endpoints (default: `https://api.pwnedpasswords.com`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<PwnedPasswordSuffixes>} a Promise which resolves to an
@@ -81,17 +82,22 @@ export async function pwnedPasswordRange(
      */
     timeoutMs?: number;
     /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
+    /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},
 ): Promise<PwnedPasswordSuffixes> {
-  const { baseUrl, timeoutMs, userAgent, addPadding = false, mode = 'sha1' } = options;
+  const { baseUrl, timeoutMs, signal, userAgent, addPadding = false, mode = 'sha1' } = options;
 
   const data = await fetchFromApi(`/range/${encodeURIComponent(prefix)}`, {
     baseUrl,
     timeoutMs,
+    signal,
     userAgent,
     addPadding,
     mode,

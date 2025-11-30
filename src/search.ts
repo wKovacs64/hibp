@@ -43,6 +43,7 @@ export interface SearchResults {
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the
  * User-Agent field in the request headers (default: `hibp <version>`)
  * @returns {Promise<SearchResults>} a Promise which resolves to an object
@@ -102,13 +103,17 @@ export async function search(
      */
     timeoutMs?: number;
     /**
+     * an AbortSignal to cancel the request (default: none)
+     */
+    signal?: AbortSignal;
+    /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},
 ): Promise<SearchResults> {
-  const { apiKey, domain, truncate = true, baseUrl, timeoutMs, userAgent } = options;
+  const { apiKey, domain, truncate = true, baseUrl, timeoutMs, signal, userAgent } = options;
 
   const [breaches, pastes] = await Promise.all([
     breachedAccount(account, {
@@ -117,11 +122,12 @@ export async function search(
       truncate,
       baseUrl,
       timeoutMs,
+      signal,
       userAgent,
     }),
     // This email regex is garbage but it seems to be what the API uses:
     /^.+@.+$/.test(account)
-      ? pasteAccount(account, { apiKey, baseUrl, timeoutMs, userAgent })
+      ? pasteAccount(account, { apiKey, baseUrl, timeoutMs, signal, userAgent })
       : null,
   ]);
 

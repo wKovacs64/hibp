@@ -68,7 +68,7 @@
     },
     {
       "path": "dist/esm/pwned-password-range.js",
-      "maxSize": "1.4 kB"
+      "maxSize": "1.5 kB"
     },
     {
       "path": "dist/esm/search.js",
@@ -84,11 +84,11 @@
     },
     {
       "path": "dist/esm/stealer-logs-by-website-domain.js",
-      "maxSize": "1 kB"
+      "maxSize": "1.1 kB"
     },
     {
       "path": "dist/esm/subscribed-domains.js",
-      "maxSize": "1.1 kB"
+      "maxSize": "1.2 kB"
     },
     {
       "path": "dist/esm/subscription-status.js",
