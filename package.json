@@ -88,9 +88,7 @@
     "@changesets/cli": "2.29.8",
     "@playwright/test": "1.57.0",
     "@types/common-tags": "1.8.4",
-    "@types/debug": "4.1.12",
     "@types/node": "24.10.1",
-    "@types/ws": "8.18.1",
     "@vitest/coverage-v8": "4.0.14",
     "@wkovacs64/eslint-config": "7.11.1",
     "@wkovacs64/prettier-config": "4.2.2",
@@ -107,7 +105,6 @@
     "prettier": "3.7.2",
     "rimraf": "6.1.2",
     "serve": "14.2.5",
-    "type-fest": "5.2.0",
     "typescript": "5.9.3",
     "vitest": "4.0.14"
   }
