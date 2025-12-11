@@ -12,17 +12,20 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: 🛠️ Build
-        run: npm run build
+        run: pnpm run build
 
       - uses: jackyef/bundlewatch-gh-action@0.3.0
         with:

@@ -21,17 +21,20 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: 💅 Format check
-        run: npm run format:check
+        run: pnpm run format:check
 
   lint:
     name: ⬣ ESLint
@@ -41,17 +44,20 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: 🔬 Lint
-        run: npm run lint
+        run: pnpm run lint
 
   typecheck:
     name: ʦ TypeScript
@@ -61,23 +67,26 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: 🛠️ Build
-        run: npm run build
+        run: pnpm run build
 
       - name: 🔎 Type check
-        run: npm run typecheck
+        run: pnpm run typecheck
 
       - name: 📦 Are the types wrong?
-        run: npx attw --pack --format table --profile esm-only
+        run: pnpm dlx @arethetypeswrong/cli --pack --format table --profile esm-only
 
   test:
     name: 🩺 Tests
@@ -87,17 +96,20 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: ⚡ Vitest with coverage
-        run: npm run test:coverage
+        run: pnpm run test:coverage
 
       - name: ☂ Codecov
         uses: codecov/codecov-action@v5
@@ -113,17 +125,20 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: 🔢 Get Playwright version
-        run: echo "PLAYWRIGHT_VERSION=$(npx playwright --version | tr ' ' '-')" >> $GITHUB_ENV
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | tr ' ' '-')" >> $GITHUB_ENV
 
       - name: 📦 Cache Playwright binaries
         id: playwright-cache
@@ -133,11 +148,11 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: 📥 Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: pnpm exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: 🎭 Playwright tests
-        run: npm run test:browser:run
+        run: pnpm run test:browser:run
 
       - name: 📊 Upload report
         uses: actions/upload-artifact@v5
@@ -160,21 +175,24 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v6
 
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: ⎔ Setup node
         uses: actions/setup-node@v6
         with:
-          cache: npm
+          cache: pnpm
           node-version-file: '.nvmrc'
 
       - name: 📥 Install deps
-        run: npm install
+        run: pnpm install
 
       - name: 🦋 Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          version: npm run changeset:version
-          publish: npm run changeset:publish
+          version: pnpm run changeset:version
+          publish: pnpm run changeset:publish
           commit: 'chore: release'
           title: 'chore: release'
         env:
