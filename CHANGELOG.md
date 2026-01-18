@@ -1,5 +1,11 @@
 # Change Log
 
+## 15.2.1
+
+### Patch Changes
+
+- [#569](https://github.com/wKovacs64/hibp/pull/569) [`a57fece`](https://github.com/wKovacs64/hibp/commit/a57fecef8a6c7fd82f0d8dfd5697efcd55d9d54e) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Fix preview publishing by adding `type` to the `repository` section of `package.json`. This is a package maintenance release only - no changes in the library itself.
+
 ## 15.2.0
 
 ### Minor Changes
