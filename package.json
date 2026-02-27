@@ -92,7 +92,7 @@
     "@types/common-tags": "1.8.4",
     "@types/node": "24.10.13",
     "@vitest/coverage-v8": "4.0.18",
-    "@wkovacs64/eslint-config": "7.12.0",
+    "@wkovacs64/eslint-config": "7.13.0",
     "@wkovacs64/prettier-config": "4.2.4",
     "bundlewatch": "0.4.1",
     "common-tags": "1.8.2",
