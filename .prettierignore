@@ -1,8 +1,0 @@
-# .gitignore and...
-
-.all-contributorsrc
-.changeset
-package.json
-package-lock.json
-pnpm-lock.yaml
-API.md
