@@ -1,5 +1,5 @@
-import type { Paste } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { Paste } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object representing a paste.
@@ -88,7 +88,8 @@ export function pasteAccount(
     userAgent?: string;
   } = {},
 ): Promise<Paste[] | null> {
-  return fetchFromApi(`/pasteaccount/${encodeURIComponent(email)}`, options) as Promise<
-    Paste[] | null
-  >;
+  return fetchFromApi(
+    `/pasteaccount/${encodeURIComponent(email)}`,
+    options,
+  ) as Promise<Paste[] | null>;
 }

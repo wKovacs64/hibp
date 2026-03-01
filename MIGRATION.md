@@ -113,15 +113,15 @@
 
   ```javascript
   // 4.x
-  import hibp from 'hibp';
+  import hibp from "hibp";
   hibp.breachedAccount(/* ... */).then(/* ... */);
 
   // 5.x (upgrade option 1, one-liner quick fix)
-  import * as hibp from 'hibp';
+  import * as hibp from "hibp";
   hibp.breachedAccount(/* ... */).then(/* ... */);
 
   // 5.x (upgrade option 2, more explicit but requires more code changes)
-  import { breachedAccount } from 'hibp';
+  import { breachedAccount } from "hibp";
   breachedAccount(/* ... */).then(/* ... */);
   ```
 
@@ -183,13 +183,15 @@
   1.0.8 (old):
 
   ```javascript
-  hibp.breachedAccount(account, 'adobe.com', true).then(/* ... */);
+  hibp.breachedAccount(account, "adobe.com", true).then(/* ... */);
   ```
 
   2.0.0 (new):
 
   ```javascript
-  hibp.breachedAccount(account, { domain: 'adobe.com', truncate: true }).then(/* ... */);
+  hibp
+    .breachedAccount(account, { domain: "adobe.com", truncate: true })
+    .then(/* ... */);
   ```
 
   This change was made to make the API more expressive and reduce ambiguity. See the API

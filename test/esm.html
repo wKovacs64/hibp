@@ -12,20 +12,20 @@
     <p>Test Results: <span id="results">failed (or incomplete)</span></p>
 
     <script type="module">
-      import * as hibp from '../dist/browser/hibp.module.js';
+      import * as hibp from "../dist/browser/hibp.module.js";
 
-      if (typeof hibp !== 'object') throw new Error();
-      if (typeof hibp.breach !== 'function') throw new Error();
-      if (typeof hibp.breachedAccount !== 'function') throw new Error();
-      if (typeof hibp.breaches !== 'function') throw new Error();
-      if (typeof hibp.dataClasses !== 'function') throw new Error();
-      if (typeof hibp.pasteAccount !== 'function') throw new Error();
-      if (typeof hibp.pwnedPassword !== 'function') throw new Error();
-      if (typeof hibp.pwnedPasswordRange !== 'function') throw new Error();
-      if (typeof hibp.search !== 'function') throw new Error();
-      if (typeof hibp.subscriptionStatus !== 'function') throw new Error();
+      if (typeof hibp !== "object") throw new Error();
+      if (typeof hibp.breach !== "function") throw new Error();
+      if (typeof hibp.breachedAccount !== "function") throw new Error();
+      if (typeof hibp.breaches !== "function") throw new Error();
+      if (typeof hibp.dataClasses !== "function") throw new Error();
+      if (typeof hibp.pasteAccount !== "function") throw new Error();
+      if (typeof hibp.pwnedPassword !== "function") throw new Error();
+      if (typeof hibp.pwnedPasswordRange !== "function") throw new Error();
+      if (typeof hibp.search !== "function") throw new Error();
+      if (typeof hibp.subscriptionStatus !== "function") throw new Error();
 
-      document.getElementById('results').innerText = 'success';
+      document.getElementById("results").innerText = "success";
     </script>
   </body>
 </html>

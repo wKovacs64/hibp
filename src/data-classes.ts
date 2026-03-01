@@ -1,4 +1,4 @@
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * Fetches all data classes in the system.
@@ -49,5 +49,5 @@ export function dataClasses(
     userAgent?: string;
   } = {},
 ): Promise<string[] | null> {
-  return fetchFromApi('/dataclasses', options) as Promise<string[] | null>;
+  return fetchFromApi("/dataclasses", options) as Promise<string[] | null>;
 }

@@ -28,7 +28,7 @@ In [Deno][deno]:
 
 ```ts
 // Replace x.y.z with the desired hibp version
-import * as hibp from 'npm:hibp@x.y.z';
+import * as hibp from "npm:hibp@x.y.z";
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to use it in the
@@ -60,10 +60,10 @@ browser.
 
 ```typescript
 // import individual modules as needed
-import { dataClasses, search } from 'hibp';
+import { dataClasses, search } from "hibp";
 
 // or, import all modules into a local namespace
-import * as hibp from 'hibp';
+import * as hibp from "hibp";
 ```
 
 The following modules are available:
@@ -89,17 +89,17 @@ Please see the [API reference](API.md) for more detailed usage information and e
 #### Quick-Start Example
 
 ```javascript
-import { search } from 'hibp';
+import { search } from "hibp";
 
 async function main() {
   try {
-    const data = await search('someAccountOrEmail', { apiKey: 'my-api-key' });
+    const data = await search("someAccountOrEmail", { apiKey: "my-api-key" });
     if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
     } else {
       // Phew! We're clear.
-      console.log('Good news — no pwnage found!');
+      console.log("Good news — no pwnage found!");
     }
   } catch (err) {
     // Something went wrong.
@@ -140,7 +140,7 @@ You have a couple of options for using this library in a browser environment:
    ```html
    <script type="module">
      // Replace x.y.z with the desired hibp version      ↓ ↓ ↓
-     import { dataClasses } from 'https://unpkg.com/hibp@x.y.z/dist/browser/hibp.module.js';
+     import { dataClasses } from "https://unpkg.com/hibp@x.y.z/dist/browser/hibp.module.js";
 
      const logDataClasses = async () => {
        console.table(await dataClasses());
@@ -178,8 +178,7 @@ This module is distributed under the [MIT License][license].
 
 [npm-image]: https://img.shields.io/npm/v/hibp.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/hibp
-[ci-image]:
-  https://img.shields.io/github/actions/workflow/status/wKovacs64/hibp/ci.yml?logo=github&style=flat-square
+[ci-image]: https://img.shields.io/github/actions/workflow/status/wKovacs64/hibp/ci.yml?logo=github&style=flat-square
 [ci-url]: https://github.com/wKovacs64/hibp/actions?query=workflow%3Aci
 [coverage-image]: https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
 [coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main

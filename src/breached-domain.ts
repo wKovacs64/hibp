@@ -1,5 +1,5 @@
-import type { BreachedDomainsByEmailAlias } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { BreachedDomainsByEmailAlias } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object mapping an email alias (local-part before the '@') to the list of

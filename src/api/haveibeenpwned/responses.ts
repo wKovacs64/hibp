@@ -12,7 +12,8 @@
 /** @internal */
 export const BAD_REQUEST = {
   status: 400 as const,
-  statusText: 'Bad request — the account does not comply with an acceptable format.',
+  statusText:
+    "Bad request — the account does not comply with an acceptable format.",
 };
 
 /**
@@ -29,12 +30,12 @@ export const UNAUTHORIZED = {
 /** @internal */
 export const FORBIDDEN = {
   status: 403 as const,
-  statusText: 'Forbidden - access denied.',
+  statusText: "Forbidden - access denied.",
 };
 
 /** @internal */
 export const BLOCKED = {
-  headers: new Map([['cf-ray', 'someRayId']]),
+  headers: new Map([["cf-ray", "someRayId"]]),
   status: 403 as const,
 };
 
@@ -51,10 +52,10 @@ export const NOT_FOUND = {
  * @internal
  */
 export const TOO_MANY_REQUESTS = {
-  headers: new Map([['retry-after', '2']]),
+  headers: new Map([["retry-after", "2"]]),
   status: 429 as const,
   body: {
     statusCode: 429 as const,
-    message: 'Rate limit is exceeded. Try again in 2 seconds.',
+    message: "Rate limit is exceeded. Try again in 2 seconds.",
   },
 };

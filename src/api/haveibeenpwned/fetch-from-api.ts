@@ -1,6 +1,12 @@
-import { baseFetch } from '../base-fetch.js';
-import { BAD_REQUEST, UNAUTHORIZED, FORBIDDEN, NOT_FOUND, TOO_MANY_REQUESTS } from './responses.js';
-import type { ApiData, ErrorData } from './types.js';
+import { baseFetch } from "../base-fetch.js";
+import {
+  BAD_REQUEST,
+  UNAUTHORIZED,
+  FORBIDDEN,
+  NOT_FOUND,
+  TOO_MANY_REQUESTS,
+} from "./responses.js";
+import type { ApiData, ErrorData } from "./types.js";
 
 /**
  * Custom error thrown when the haveibeenpwned.com API responds with 429 Too
@@ -18,14 +24,16 @@ export class RateLimitError extends Error {
   public retryAfterSeconds: number | undefined;
 
   constructor(
-    retryAfter: ReturnType<Headers['get']>,
+    retryAfter: ReturnType<Headers["get"]>,
     message: string | undefined,
     options?: ErrorOptions,
   ) {
     super(message, options);
     this.name = this.constructor.name;
     this.retryAfterSeconds =
-      typeof retryAfter === 'string' ? Number.parseInt(retryAfter, 10) : undefined;
+      typeof retryAfter === "string"
+        ? Number.parseInt(retryAfter, 10)
+        : undefined;
   }
 }
 
@@ -73,14 +81,14 @@ export async function fetchFromApi(
 ): Promise<ApiData> {
   const {
     apiKey,
-    baseUrl = 'https://haveibeenpwned.com/api/v3',
+    baseUrl = "https://haveibeenpwned.com/api/v3",
     timeoutMs,
     signal,
     userAgent,
   } = options;
 
   const headers: Record<string, string> = {};
-  if (apiKey) headers['HIBP-API-Key'] = apiKey;
+  if (apiKey) headers["HIBP-API-Key"] = apiKey;
 
   const response = await baseFetch({
     baseUrl,
@@ -102,7 +110,7 @@ export async function fetchFromApi(
       throw new Error(message);
     }
     case FORBIDDEN.status: {
-      const rayId = response.headers.get('cf-ray');
+      const rayId = response.headers.get("cf-ray");
       if (rayId) throw new Error(blockedWithRayId(rayId));
       throw new Error(FORBIDDEN.statusText);
     }
@@ -111,7 +119,7 @@ export async function fetchFromApi(
     }
     case TOO_MANY_REQUESTS.status: {
       const body = (await response.json()) as unknown as ErrorData;
-      const retryAfter = response.headers.get('retry-after');
+      const retryAfter = response.headers.get("retry-after");
       throw new RateLimitError(retryAfter, body.message);
     }
     default: {

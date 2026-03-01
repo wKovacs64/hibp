@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest';
-import { http } from 'msw';
-import { server } from '../../mocks/server.js';
-import { dataClasses } from '../data-classes.js';
+import { describe, it, expect } from "vitest";
+import { http } from "msw";
+import { server } from "../../mocks/server.js";
+import { dataClasses } from "../data-classes.js";
 
-describe('dataClasses', () => {
-  const DATA_CLASSES = ['some', 'data', 'classes'];
+describe("dataClasses", () => {
+  const DATA_CLASSES = ["some", "data", "classes"];
 
-  describe('no parameters', () => {
-    it('resolves with data from the remote API', () => {
+  describe("no parameters", () => {
+    it("resolves with data from the remote API", () => {
       server.use(
-        http.get('*', () => {
+        http.get("*", () => {
           return new Response(JSON.stringify(DATA_CLASSES));
         }),
       );
@@ -18,9 +18,9 @@ describe('dataClasses', () => {
     });
   });
 
-  describe('baseUrl option', () => {
-    it('is the beginning of the final URL', () => {
-      const baseUrl = 'https://my-hibp-proxy:8080';
+  describe("baseUrl option", () => {
+    it("is the beginning of the final URL", () => {
+      const baseUrl = "https://my-hibp-proxy:8080";
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
           return new Response(JSON.stringify(DATA_CLASSES));
@@ -31,12 +31,12 @@ describe('dataClasses', () => {
     });
   });
 
-  describe('timeoutMs option', () => {
-    it('aborts the request after the given value', () => {
+  describe("timeoutMs option", () => {
+    it("aborts the request after the given value", () => {
       expect.assertions(1);
       const timeoutMs = 1;
       server.use(
-        http.get('*', async () => {
+        http.get("*", async () => {
           await new Promise((resolve) => {
             setTimeout(resolve, timeoutMs + 1);
           });
@@ -50,13 +50,13 @@ describe('dataClasses', () => {
     });
   });
 
-  describe('userAgent option', () => {
-    it('is passed on as a request header', () => {
+  describe("userAgent option", () => {
+    it("is passed on as a request header", () => {
       expect.assertions(1);
-      const userAgent = 'Custom UA';
+      const userAgent = "Custom UA";
       server.use(
-        http.get('*', ({ request }) => {
-          expect(request.headers.get('User-Agent')).toBe(userAgent);
+        http.get("*", ({ request }) => {
+          expect(request.headers.get("User-Agent")).toBe(userAgent);
           return new Response(JSON.stringify(DATA_CLASSES));
         }),
       );

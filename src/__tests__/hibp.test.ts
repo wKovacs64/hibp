@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import * as hibp from '../hibp.js';
+import { describe, it, expect } from "vitest";
+import * as hibp from "../hibp.js";
 
-describe('hibp', () => {
-  it('exports an object containing the advertised functions', () => {
+describe("hibp", () => {
+  it("exports an object containing the advertised functions", () => {
     expect(hibp).toMatchInlineSnapshot(`
       {
         "RateLimitError": [Function],

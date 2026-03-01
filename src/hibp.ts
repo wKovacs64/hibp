@@ -1,21 +1,21 @@
-import { RateLimitError } from './api/haveibeenpwned/fetch-from-api.js';
-import { breach } from './breach.js';
-import { breachedAccount } from './breached-account.js';
-import { breachedDomain } from './breached-domain.js';
-import { breaches } from './breaches.js';
-import { dataClasses } from './data-classes.js';
-import { latestBreach } from './latest-breach.js';
-import { pasteAccount } from './paste-account.js';
-import { pwnedPassword } from './pwned-password.js';
-import { pwnedPasswordRange } from './pwned-password-range.js';
-import { search } from './search.js';
-import { stealerLogsByEmail } from './stealer-logs-by-email.js';
-import { stealerLogsByEmailDomain } from './stealer-logs-by-email-domain.js';
-import { stealerLogsByWebsiteDomain } from './stealer-logs-by-website-domain.js';
-import { subscribedDomains } from './subscribed-domains.js';
-import { subscriptionStatus } from './subscription-status.js';
+import { RateLimitError } from "./api/haveibeenpwned/fetch-from-api.js";
+import { breach } from "./breach.js";
+import { breachedAccount } from "./breached-account.js";
+import { breachedDomain } from "./breached-domain.js";
+import { breaches } from "./breaches.js";
+import { dataClasses } from "./data-classes.js";
+import { latestBreach } from "./latest-breach.js";
+import { pasteAccount } from "./paste-account.js";
+import { pwnedPassword } from "./pwned-password.js";
+import { pwnedPasswordRange } from "./pwned-password-range.js";
+import { search } from "./search.js";
+import { stealerLogsByEmail } from "./stealer-logs-by-email.js";
+import { stealerLogsByEmailDomain } from "./stealer-logs-by-email-domain.js";
+import { stealerLogsByWebsiteDomain } from "./stealer-logs-by-website-domain.js";
+import { subscribedDomains } from "./subscribed-domains.js";
+import { subscriptionStatus } from "./subscription-status.js";
 
-export type * from './api/haveibeenpwned/types.js';
+export type * from "./api/haveibeenpwned/types.js";
 
 /*
  * Export individual named functions to allow the following:

@@ -1,26 +1,26 @@
-import { describe, it, expect } from 'vitest';
-import { http } from 'msw';
-import { server } from '../../mocks/server.js';
-import { subscribedDomains } from '../subscribed-domains.js';
+import { describe, it, expect } from "vitest";
+import { http } from "msw";
+import { server } from "../../mocks/server.js";
+import { subscribedDomains } from "../subscribed-domains.js";
 
-describe('subscribedDomains', () => {
+describe("subscribedDomains", () => {
   const DOMAINS = [
     {
-      DomainName: 'example.com',
+      DomainName: "example.com",
       PwnCount: 3,
       PwnCountExcludingSpamLists: 2,
       PwnCountExcludingSpamListsAtLastSubscriptionRenewal: 1,
-      NextSubscriptionRenewal: '2025-12-31T23:59:59Z',
+      NextSubscriptionRenewal: "2025-12-31T23:59:59Z",
     },
   ];
 
-  describe('apiKey parameter', () => {
-    it('sets the hibp-api-key header', async () => {
+  describe("apiKey parameter", () => {
+    it("sets the hibp-api-key header", async () => {
       expect.assertions(1);
-      const apiKey = 'my-api-key';
+      const apiKey = "my-api-key";
       server.use(
-        http.get('*', ({ request }) => {
-          expect(request.headers.get('hibp-api-key')).toBe(apiKey);
+        http.get("*", ({ request }) => {
+          expect(request.headers.get("hibp-api-key")).toBe(apiKey);
           return new Response(JSON.stringify(DOMAINS));
         }),
       );
@@ -29,9 +29,9 @@ describe('subscribedDomains', () => {
     });
   });
 
-  describe('baseUrl option', () => {
-    it('is the beginning of the final URL', () => {
-      const baseUrl = 'https://my-hibp-proxy:8080';
+  describe("baseUrl option", () => {
+    it("is the beginning of the final URL", () => {
+      const baseUrl = "https://my-hibp-proxy:8080";
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
           return new Response(JSON.stringify(DOMAINS));
@@ -42,12 +42,12 @@ describe('subscribedDomains', () => {
     });
   });
 
-  describe('timeoutMs option', () => {
-    it('aborts the request after the given value', () => {
+  describe("timeoutMs option", () => {
+    it("aborts the request after the given value", () => {
       expect.assertions(1);
       const timeoutMs = 1;
       server.use(
-        http.get('*', async () => {
+        http.get("*", async () => {
           await new Promise((resolve) => {
             setTimeout(resolve, timeoutMs + 1);
           });
@@ -55,19 +55,21 @@ describe('subscribedDomains', () => {
         }),
       );
 
-      return expect(subscribedDomains({ timeoutMs })).rejects.toMatchInlineSnapshot(
+      return expect(
+        subscribedDomains({ timeoutMs }),
+      ).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
     });
   });
 
-  describe('userAgent option', () => {
-    it('is passed on as a request header', () => {
+  describe("userAgent option", () => {
+    it("is passed on as a request header", () => {
       expect.assertions(1);
-      const userAgent = 'Custom UA';
+      const userAgent = "Custom UA";
       server.use(
-        http.get('*', ({ request }) => {
-          expect(request.headers.get('User-Agent')).toBe(userAgent);
+        http.get("*", ({ request }) => {
+          expect(request.headers.get("User-Agent")).toBe(userAgent);
           return new Response(JSON.stringify(DOMAINS));
         }),
       );

@@ -1,6 +1,6 @@
-import type { Breach, Paste } from './api/haveibeenpwned/types.js';
-import { breachedAccount } from './breached-account.js';
-import { pasteAccount } from './paste-account.js';
+import type { Breach, Paste } from "./api/haveibeenpwned/types.js";
+import { breachedAccount } from "./breached-account.js";
+import { pasteAccount } from "./paste-account.js";
 
 export interface SearchResults {
   breaches: Breach[] | null;
@@ -113,7 +113,15 @@ export async function search(
     userAgent?: string;
   } = {},
 ): Promise<SearchResults> {
-  const { apiKey, domain, truncate = true, baseUrl, timeoutMs, signal, userAgent } = options;
+  const {
+    apiKey,
+    domain,
+    truncate = true,
+    baseUrl,
+    timeoutMs,
+    signal,
+    userAgent,
+  } = options;
 
   const [breaches, pastes] = await Promise.all([
     breachedAccount(account, {

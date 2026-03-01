@@ -24,7 +24,7 @@ In [Deno](https://deno.com/):
 
 ```ts
 // Replace x.y.z with the desired hibp version
-import * as hibp from 'npm:hibp@x.y.z';
+import * as hibp from "npm:hibp@x.y.z";
 ```
 
 See the [browser](#using-in-the-browser) section below for information on how to use it in the
@@ -57,10 +57,10 @@ browser.
 
 ```typescript
 // import individual modules as needed
-import { dataClasses, search } from 'hibp';
+import { dataClasses, search } from "hibp";
 
 // or, import all modules into a local namespace
-import * as hibp from 'hibp';
+import * as hibp from "hibp";
 ```
 
 The following modules are available:
@@ -87,17 +87,17 @@ usage information and examples.
 #### Quick-Start Example
 
 ```javascript
-import { search } from 'hibp';
+import { search } from "hibp";
 
 async function main() {
   try {
-    const data = await search('someAccountOrEmail', { apiKey: 'my-api-key' });
+    const data = await search("someAccountOrEmail", { apiKey: "my-api-key" });
     if (data.breaches || data.pastes) {
       // Bummer...
       console.log(data);
     } else {
       // Phew! We're clear.
-      console.log('Good news — no pwnage found!');
+      console.log("Good news — no pwnage found!");
     }
   } catch (err) {
     // Something went wrong.
@@ -139,7 +139,7 @@ You have a couple of options for using this library in a browser environment:
    ```html
    <script type="module">
      // Replace x.y.z with the desired hibp version      ↓ ↓ ↓
-     import { dataClasses } from 'https://unpkg.com/hibp@x.y.z/dist/browser/hibp.module.js';
+     import { dataClasses } from "https://unpkg.com/hibp@x.y.z/dist/browser/hibp.module.js";
 
      const logDataClasses = async () => {
        console.table(await dataClasses());
