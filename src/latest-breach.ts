@@ -1,5 +1,5 @@
-import type { Breach } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { Breach } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * Fetches the most recently added breach.
@@ -50,5 +50,5 @@ export function latestBreach(
     userAgent?: string;
   } = {},
 ): Promise<Breach | null> {
-  return fetchFromApi('/latestbreach', options) as Promise<Breach | null>;
+  return fetchFromApi("/latestbreach", options) as Promise<Breach | null>;
 }

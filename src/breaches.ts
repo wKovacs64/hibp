@@ -1,5 +1,5 @@
-import type { Breach } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { Breach } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * Fetches all breach events in the system.
@@ -67,14 +67,14 @@ export function breaches(
   } = {},
 ): Promise<Breach[]> {
   const { domain, baseUrl, timeoutMs, signal, userAgent } = options;
-  const endpoint = '/breaches?';
+  const endpoint = "/breaches?";
   const params: string[] = [];
 
   if (domain) {
     params.push(`domain=${encodeURIComponent(domain)}`);
   }
 
-  return fetchFromApi(`${endpoint}${params.join('&')}`, {
+  return fetchFromApi(`${endpoint}${params.join("&")}`, {
     baseUrl,
     timeoutMs,
     signal,

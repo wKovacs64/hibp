@@ -1,5 +1,5 @@
-import { baseFetch } from '../base-fetch.js';
-import { BAD_REQUEST } from './responses.js';
+import { baseFetch } from "../base-fetch.js";
+import { BAD_REQUEST } from "./responses.js";
 
 /**
  * Fetches data from the supplied API endpoint.
@@ -33,20 +33,20 @@ export async function fetchFromApi(
     signal?: AbortSignal;
     userAgent?: string;
     addPadding?: boolean;
-    mode?: 'sha1' | 'ntlm';
+    mode?: "sha1" | "ntlm";
   } = {},
 ): Promise<string> {
   const {
-    baseUrl = 'https://api.pwnedpasswords.com',
+    baseUrl = "https://api.pwnedpasswords.com",
     timeoutMs,
     signal,
     userAgent,
     addPadding = false,
-    mode = 'sha1',
+    mode = "sha1",
   } = options;
 
   const headers: Record<string, string> = {};
-  if (addPadding) headers['Add-Padding'] = 'true';
+  if (addPadding) headers["Add-Padding"] = "true";
 
   const response = await baseFetch({
     baseUrl,

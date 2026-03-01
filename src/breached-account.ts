@@ -1,5 +1,5 @@
-import type { Breach } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { Breach } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * Fetches breach data for a specific account.
@@ -131,14 +131,14 @@ export function breachedAccount(
   }
 
   if (!includeUnverified) {
-    params.push('includeUnverified=false');
+    params.push("includeUnverified=false");
   }
 
   if (!truncate) {
-    params.push('truncateResponse=false');
+    params.push("truncateResponse=false");
   }
 
-  return fetchFromApi(`${endpoint}${params.join('&')}`, {
+  return fetchFromApi(`${endpoint}${params.join("&")}`, {
     apiKey,
     baseUrl,
     timeoutMs,

@@ -1,5 +1,5 @@
-import type { SubscriptionStatus } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { SubscriptionStatus } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object representing the status of your HIBP subscription.
@@ -78,7 +78,7 @@ export async function subscriptionStatus(
     userAgent?: string;
   } = {},
 ) {
-  const endpoint = '/subscription/status';
+  const endpoint = "/subscription/status";
 
   return fetchFromApi(endpoint, options) as Promise<SubscriptionStatus>;
 }

@@ -1,5 +1,8 @@
 // @ts-ignore - package-info.js is generated
-import { PACKAGE_NAME, PACKAGE_VERSION } from './haveibeenpwned/package-info.js';
+import {
+  PACKAGE_NAME,
+  PACKAGE_VERSION,
+} from "./haveibeenpwned/package-info.js";
 
 export async function baseFetch({
   baseUrl,
@@ -33,8 +36,10 @@ export function buildUrl(
   endpoint: string,
   queryParams?: Record<string, string>,
 ): string {
-  const base = baseUrl.replace(/\/$/g, '');
-  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const base = baseUrl.replace(/\/$/g, "");
+  const normalizedEndpoint = endpoint.startsWith("/")
+    ? endpoint
+    : `/${endpoint}`;
   const url = new URL(`${base}${normalizedEndpoint}`);
 
   if (queryParams) {
@@ -53,15 +58,18 @@ export function buildHeaders(
   const headers: Record<string, string> = { ...extra };
 
   if (userAgent) {
-    headers['User-Agent'] = userAgent;
-  } else if (typeof navigator === 'undefined') {
-    headers['User-Agent'] = `${PACKAGE_NAME} ${PACKAGE_VERSION}`;
+    headers["User-Agent"] = userAgent;
+  } else if (typeof navigator === "undefined") {
+    headers["User-Agent"] = `${PACKAGE_NAME} ${PACKAGE_VERSION}`;
   }
 
   return headers;
 }
 
-function buildSignal(timeoutMs?: number, signal?: AbortSignal): AbortSignal | undefined {
+function buildSignal(
+  timeoutMs?: number,
+  signal?: AbortSignal,
+): AbortSignal | undefined {
   const signals: AbortSignal[] = [];
 
   if (timeoutMs) signals.push(AbortSignal.timeout(timeoutMs));

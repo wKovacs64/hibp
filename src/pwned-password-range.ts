@@ -1,4 +1,4 @@
-import { fetchFromApi } from './api/pwnedpasswords/fetch-from-api.js';
+import { fetchFromApi } from "./api/pwnedpasswords/fetch-from-api.js";
 
 export type PwnedPasswordSuffixes = Record<string, number>;
 
@@ -71,7 +71,7 @@ export async function pwnedPasswordRange(
     /**
      * return SHA-1 or NTLM hashes (default: `sha1`)
      */
-    mode?: 'sha1' | 'ntlm';
+    mode?: "sha1" | "ntlm";
     /**
      * a custom base URL for the haveibeenpwned.com API endpoints (default:
      * `https://haveibeenpwned.com/api/v3`)
@@ -92,7 +92,14 @@ export async function pwnedPasswordRange(
     userAgent?: string;
   } = {},
 ): Promise<PwnedPasswordSuffixes> {
-  const { baseUrl, timeoutMs, signal, userAgent, addPadding = false, mode = 'sha1' } = options;
+  const {
+    baseUrl,
+    timeoutMs,
+    signal,
+    userAgent,
+    addPadding = false,
+    mode = "sha1",
+  } = options;
 
   const data = await fetchFromApi(`/range/${encodeURIComponent(prefix)}`, {
     baseUrl,
@@ -104,11 +111,11 @@ export async function pwnedPasswordRange(
   });
 
   // create array from lines of text in response body
-  const results = data.split('\n').filter(Boolean);
+  const results = data.split("\n").filter(Boolean);
 
   // convert into an object mapping suffix to count for each line
   return results.reduce<PwnedPasswordSuffixes>((acc, row) => {
-    const [suffix, countString] = row.split(':');
+    const [suffix, countString] = row.split(":");
     acc[suffix] = Number.parseInt(countString, 10);
     return acc;
   }, {});

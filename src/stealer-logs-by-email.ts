@@ -1,4 +1,4 @@
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * Fetches all stealer log domains for an email address.

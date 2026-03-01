@@ -1,4 +1,4 @@
-import { pwnedPasswordRange } from './pwned-password-range.js';
+import { pwnedPasswordRange } from "./pwned-password-range.js";
 
 /**
  * Fetches the number of times the the given password has been exposed in a
@@ -66,17 +66,17 @@ export async function pwnedPassword(
 }
 
 async function getPasswordHashParts(password: string) {
-  if (typeof crypto === 'object' && crypto.subtle) {
+  if (typeof crypto === "object" && crypto.subtle) {
     const msgUint8 = new TextEncoder().encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-1', msgUint8);
+    const hashBuffer = await crypto.subtle.digest("SHA-1", msgUint8);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hashHex = hashArray
-      .map((byte) => byte.toString(16).padStart(2, '0'))
-      .join('')
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("")
       .toUpperCase();
 
     return [hashHex.slice(0, 5), hashHex.slice(5)] as const;
   }
 
-  throw new Error('The Web Crypto API is not available in this environment.');
+  throw new Error("The Web Crypto API is not available in this environment.");
 }

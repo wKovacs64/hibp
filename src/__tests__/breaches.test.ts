@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
-import { http } from 'msw';
-import { server } from '../../mocks/server.js';
-import { VERIFIED_BREACH } from '../../test/fixtures.js';
-import { breaches } from '../breaches.js';
+import { describe, it, expect } from "vitest";
+import { http } from "msw";
+import { server } from "../../mocks/server.js";
+import { VERIFIED_BREACH } from "../../test/fixtures.js";
+import { breaches } from "../breaches.js";
 
-describe('breaches', () => {
+describe("breaches", () => {
   const BREACHES = [VERIFIED_BREACH];
 
-  describe('no parameters', () => {
-    it('resolves with data from the remote API', () => {
+  describe("no parameters", () => {
+    it("resolves with data from the remote API", () => {
       server.use(
-        http.get('*', () => {
+        http.get("*", () => {
           return new Response(JSON.stringify(BREACHES));
         }),
       );
@@ -19,24 +19,24 @@ describe('breaches', () => {
     });
   });
 
-  describe('domain option', () => {
-    it('sets the domain query parameter in the request', () => {
+  describe("domain option", () => {
+    it("sets the domain query parameter in the request", () => {
       expect.assertions(1);
       server.use(
-        http.get('*', ({ request }) => {
+        http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
-          expect(searchParams.get('domain')).toBe('foo.bar');
+          expect(searchParams.get("domain")).toBe("foo.bar");
           return new Response(JSON.stringify(BREACHES));
         }),
       );
 
-      return breaches({ domain: 'foo.bar' });
+      return breaches({ domain: "foo.bar" });
     });
   });
 
-  describe('baseUrl option', () => {
-    it('is the beginning of the final URL', () => {
-      const baseUrl = 'https://my-hibp-proxy:8080';
+  describe("baseUrl option", () => {
+    it("is the beginning of the final URL", () => {
+      const baseUrl = "https://my-hibp-proxy:8080";
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
           return new Response(JSON.stringify(BREACHES));
@@ -47,12 +47,12 @@ describe('breaches', () => {
     });
   });
 
-  describe('timeoutMs option', () => {
-    it('aborts the request after the given value', () => {
+  describe("timeoutMs option", () => {
+    it("aborts the request after the given value", () => {
       expect.assertions(1);
       const timeoutMs = 1;
       server.use(
-        http.get('*', async () => {
+        http.get("*", async () => {
           await new Promise((resolve) => {
             setTimeout(resolve, timeoutMs + 1);
           });
@@ -64,13 +64,13 @@ describe('breaches', () => {
     });
   });
 
-  describe('userAgent option', () => {
-    it('is passed on as a request header', () => {
+  describe("userAgent option", () => {
+    it("is passed on as a request header", () => {
       expect.assertions(1);
-      const userAgent = 'Custom UA';
+      const userAgent = "Custom UA";
       server.use(
-        http.get('*', ({ request }) => {
-          expect(request.headers.get('User-Agent')).toBe(userAgent);
+        http.get("*", ({ request }) => {
+          expect(request.headers.get("User-Agent")).toBe(userAgent);
           return new Response(JSON.stringify(BREACHES));
         }),
       );

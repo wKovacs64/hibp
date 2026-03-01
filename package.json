@@ -1,24 +1,43 @@
 {
   "name": "hibp",
   "version": "15.2.1",
+  "private": false,
   "description": "An unofficial TypeScript SDK for the 'Have I been pwned?' service.",
   "keywords": [
+    "breach",
+    "client",
+    "dump",
+    "hack",
     "haveibeenpwned",
     "hibp",
-    "pwned",
-    "security",
-    "hack",
-    "dump",
-    "breach",
-    "pastes",
     "passwords",
-    "client"
+    "pastes",
+    "pwned",
+    "security"
   ],
+  "homepage": "https://wkovacs64.github.io/hibp",
+  "bugs": {
+    "url": "https://github.com/wKovacs64/hibp/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "Justin Hall",
     "email": "justin.r.hall@gmail.com"
   },
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wKovacs64/hibp.git"
+  },
+  "files": [
+    "dist",
+    "API.md",
+    "CHANGELOG.md",
+    "MIGRATION.md"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/esm/hibp.js",
+  "module": "dist/esm/hibp.js",
   "exports": {
     ".": {
       "browser": "./dist/browser/hibp.module.js",
@@ -26,16 +45,9 @@
     },
     "./package.json": "./package.json"
   },
-  "type": "module",
-  "main": "dist/esm/hibp.js",
-  "module": "dist/esm/hibp.js",
-  "files": [
-    "dist",
-    "API.md",
-    "CHANGELOG.md",
-    "MIGRATION.md"
-  ],
-  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "run-s --silent build:package-info build:lib build:browser build:docs",
     "build:package-info": "node --experimental-strip-types scripts/build-package-info.ts",
@@ -64,22 +76,6 @@
     "pretest:watch": "pnpm run --silent build:package-info",
     "test:watch": "vitest watch"
   },
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wKovacs64/hibp.git"
-  },
-  "bugs": {
-    "url": "https://github.com/wKovacs64/hibp/issues"
-  },
-  "homepage": "https://wkovacs64.github.io/hibp",
-  "engines": {
-    "node": ">= 20.19.0"
-  },
-  "packageManager": "pnpm@10.30.1",
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
     "@babel/plugin-proposal-class-properties": "7.18.6",
@@ -108,5 +104,9 @@
     "serve": "14.2.5",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
-  }
+  },
+  "engines": {
+    "node": ">= 20.19.0"
+  },
+  "packageManager": "pnpm@10.30.1"
 }

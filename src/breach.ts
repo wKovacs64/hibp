@@ -1,5 +1,5 @@
-import type { Breach } from './api/haveibeenpwned/types.js';
-import { fetchFromApi } from './api/haveibeenpwned/fetch-from-api.js';
+import type { Breach } from "./api/haveibeenpwned/types.js";
+import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object representing a breach.
