@@ -86,7 +86,7 @@ jobs:
         run: pnpm run typecheck
 
       - name: 📦 Are the types wrong?
-        run: pnpm dlx @arethetypeswrong/cli --pack --format table --profile esm-only
+        run: pnpm exec attw --pack --format table --profile esm-only
 
   test:
     name: 🩺 Tests
