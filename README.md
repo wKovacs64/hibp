@@ -13,7 +13,6 @@
 _An unofficial TypeScript SDK for [Troy Hunt][troy]'s [Have I been pwned?][haveibeenpwned] service._
 
 [![npm Version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url]
-[![Code Coverage][coverage-image]][coverage-url]
 [![All Contributors](https://img.shields.io/github/all-contributors/wKovacs64/hibp?style=flat-square)](#contributors-)
 
 ## Installation
@@ -180,8 +179,6 @@ This module is distributed under the [MIT License][license].
 [npm-url]: https://www.npmjs.com/package/hibp
 [ci-image]: https://img.shields.io/github/actions/workflow/status/wKovacs64/hibp/ci.yml?logo=github&style=flat-square
 [ci-url]: https://github.com/wKovacs64/hibp/actions?query=workflow%3Aci
-[coverage-image]: https://img.shields.io/codecov/c/github/wKovacs64/hibp/main.svg?style=flat-square
-[coverage-url]: https://codecov.io/gh/wKovacs64/hibp/branch/main
 [deno]: https://deno.com/
 [troy]: https://www.troyhunt.com
 [haveibeenpwned]: https://haveibeenpwned.com
