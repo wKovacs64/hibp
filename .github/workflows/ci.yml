@@ -25,7 +25,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           cache: pnpm
           node-version-file: ".nvmrc"
@@ -48,7 +48,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           cache: pnpm
           node-version-file: ".nvmrc"
@@ -71,7 +71,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           cache: pnpm
           node-version-file: ".nvmrc"
@@ -100,7 +100,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           cache: pnpm
           node-version-file: ".nvmrc"
@@ -124,7 +124,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           cache: pnpm
           node-version-file: ".nvmrc"
@@ -174,7 +174,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           cache: pnpm
           node-version-file: ".nvmrc"
