@@ -88,7 +88,7 @@
     "@types/common-tags": "1.8.4",
     "@types/node": "24.13.3",
     "@vitest/coverage-v8": "4.1.10",
-    "@wkovacs64/eslint-config": "8.0.1",
+    "@wkovacs64/eslint-config": "8.0.2",
     "bundlewatch": "0.4.2",
     "common-tags": "1.8.2",
     "cross-env": "10.1.0",
