@@ -49,8 +49,8 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
         }),
       );
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      global.navigator = {} as Navigator;
+      const navigator = Object.create(null) as Navigator;
+      global.navigator = navigator;
 
       return expect(fetchFromApi("/service")).resolves.toEqual({});
     });
@@ -146,15 +146,14 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       );
 
       expect.assertions(3);
-      try {
-        await fetchFromApi("/service/rate_limited", { apiKey });
-      } catch (error) {
-        expect(error).toBeInstanceOf(RateLimitError);
-        expect(error).toHaveProperty("retryAfterSeconds", 2);
-        expect(error).toMatchInlineSnapshot(
-          "[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]",
-        );
-      }
+      const error = await fetchFromApi("/service/rate_limited", {
+        apiKey,
+      }).catch((caughtError: unknown) => caughtError);
+      expect(error).toBeInstanceOf(RateLimitError);
+      expect(error).toHaveProperty("retryAfterSeconds", 2);
+      expect(error).toMatchInlineSnapshot(
+        "[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]",
+      );
     });
 
     it("sets retryAfterSeconds to undefined when header is missing", async () => {
@@ -167,12 +166,11 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       );
 
       expect.assertions(2);
-      try {
-        await fetchFromApi("/service/rate_limited", { apiKey });
-      } catch (error) {
-        expect(error).toBeInstanceOf(RateLimitError);
-        expect((error as RateLimitError).retryAfterSeconds).toBeUndefined();
-      }
+      const error = await fetchFromApi("/service/rate_limited", {
+        apiKey,
+      }).catch((caughtError: unknown) => caughtError);
+      expect(error).toBeInstanceOf(RateLimitError);
+      expect((error as RateLimitError).retryAfterSeconds).toBeUndefined();
     });
   });
 

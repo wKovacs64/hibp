@@ -10,9 +10,9 @@ describe("pwnedPassword", () => {
       expect.assertions(1);
       vi.stubGlobal("crypto", undefined as unknown as Crypto);
       try {
-        await pwnedPassword("anything");
-      } catch (error) {
-        expect(error).toMatchInlineSnapshot(
+        await expect(
+          pwnedPassword("anything"),
+        ).rejects.toThrowErrorMatchingInlineSnapshot(
           `[Error: The Web Crypto API is not available in this environment.]`,
         );
       } finally {

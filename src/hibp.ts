@@ -66,5 +66,5 @@ export interface HIBP {
 }
 
 // https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-document-TypeScript#jsdoc-comments-disappear
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line eslint/no-unused-vars -- Required for jsdoc-to-markdown.
 const JSDOC2MARKDOWN_STUB = undefined;
