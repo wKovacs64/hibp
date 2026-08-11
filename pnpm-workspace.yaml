@@ -5,5 +5,5 @@ allowBuilds:
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
-  # Pinned lint configuration required for this repository.
-  - "@wkovacs64/oxlint-config@0.1.0"
+  # Renovate security update: esbuild@0.28.1
+  - esbuild@0.28.1
