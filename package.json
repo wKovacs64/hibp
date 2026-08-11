@@ -61,7 +61,7 @@
     "clean": "rimraf dist coverage",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "lint": "oxlint --type-aware",
+    "lint": "oxlint",
     "prebuild": "pnpm run --silent clean",
     "prepublishOnly": "pnpm run build",
     "size": "bundlewatch --config .bundlewatch.config.json",
