@@ -84,6 +84,7 @@ TODO         text
 
 ## LINTERS
 .csslintrc    text
+.eslintrc     text
 .jscsrc       text
 .jshintrc     text
 .jshintignore text
