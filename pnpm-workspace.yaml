@@ -4,8 +4,3 @@ allowBuilds:
   unrs-resolver: false
 
 minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-  # Changesets v3 migration
-  - "@changesets/*"
-  # Renovate security update: esbuild@0.28.1
-  - esbuild@0.28.1
