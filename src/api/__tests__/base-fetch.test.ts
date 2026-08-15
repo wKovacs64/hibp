@@ -108,8 +108,8 @@ describe("internal: buildHeaders", () => {
 
     it("does not set User-Agent when inside browser (navigator exists)", () => {
       const originalNavigator = global.navigator;
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      global.navigator = {} as Navigator;
+      const navigator = Object.create(null) as Navigator;
+      global.navigator = navigator;
 
       const result = buildHeaders();
       expect(result["User-Agent"]).toBeUndefined();
@@ -141,7 +141,7 @@ describe("internal: baseFetch", () => {
 
       controller.abort();
 
-      await expect(abortPromise).rejects.toThrow();
+      await expect(abortPromise).rejects.toThrow(/./);
     });
 
     it("works with timeout alone", async () => {
@@ -172,7 +172,7 @@ describe("internal: baseFetch", () => {
         signal: controller.signal,
       });
 
-      await expect(timeoutPromise).rejects.toThrow();
+      await expect(timeoutPromise).rejects.toThrow(/./);
     });
 
     it("signal fires first when aborted before timeout", async () => {
@@ -186,7 +186,7 @@ describe("internal: baseFetch", () => {
 
       controller.abort();
 
-      await expect(abortPromise).rejects.toThrow();
+      await expect(abortPromise).rejects.toThrow(/./);
     });
 
     it("does not set signal when neither timeout nor signal provided", async () => {

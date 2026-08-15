@@ -60,7 +60,7 @@ describe("breaches", () => {
         }),
       );
 
-      return expect(breaches({ timeoutMs })).rejects.toThrow();
+      return expect(breaches({ timeoutMs })).rejects.toThrow(/./);
     });
   });
 

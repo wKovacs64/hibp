@@ -45,7 +45,7 @@ describe("latestBreach", () => {
         }),
       );
 
-      return expect(latestBreach({ timeoutMs })).rejects.toThrow();
+      return expect(latestBreach({ timeoutMs })).rejects.toThrow(/./);
     });
   });
 

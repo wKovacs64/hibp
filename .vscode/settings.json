@@ -10,7 +10,6 @@
     "pwnedpasswords",
     "ssat"
   ],
-  "eslint.useFlatConfig": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "[javascript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
   "[typescript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
