@@ -8,7 +8,7 @@ describe("pwnedPassword", () => {
   describe("environment", () => {
     it("rejects when the Web Crypto API is unavailable", async () => {
       expect.assertions(1);
-      vi.stubGlobal("crypto", undefined as unknown as Crypto);
+      vi.stubGlobal("crypto", undefined);
       try {
         await expect(
           pwnedPassword("anything"),
