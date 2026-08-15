@@ -9,3 +9,5 @@ minimumReleaseAgeExclude:
   - esbuild@0.28.1
   # Renovate security update: @babel/core@7.29.6
   - "@babel/core@7.29.6"
+patchedDependencies:
+  jsdoc-babel@0.5.0: patches/jsdoc-babel@0.5.0.patch

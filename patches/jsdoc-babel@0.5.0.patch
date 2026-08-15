@@ -1,0 +1,26 @@
+diff --git a/lib/transformFile.js b/lib/transformFile.js
+index 64e46c1e60dba21fdf673f09eca7c3da34aa1d50..2e3f28e58bc7527bc5cd03d20a5c603969dd58a2 100644
+--- a/lib/transformFile.js
++++ b/lib/transformFile.js
+@@ -8,7 +8,7 @@ exports.default = transformFile;
+ var _core = require("@babel/core");
+ 
+ function transformFile(source, options) {
+-  var _transform = (0, _core.transform)(source, options),
++  var _transform = (0, _core.transformSync)(source, options),
+       code = _transform.code;
+ 
+   return code;
+diff --git a/src/transformFile.js b/src/transformFile.js
+index 1e3a6d6d3e1aa0eb42414e1a012a2dffce9259dc..c0727f7054f0ee21c1e918eeebd64c3a01811b1c 100644
+--- a/src/transformFile.js
++++ b/src/transformFile.js
+@@ -1,6 +1,6 @@
+-import { transform } from '@babel/core';
++import { transformSync } from '@babel/core';
+ 
+ export default function transformFile(source, options) {
+-  const { code } = transform(source, options);
++  const { code } = transformSync(source, options);
+   return code;
+ }
