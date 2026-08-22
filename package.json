@@ -82,7 +82,7 @@
     "@babel/preset-env": "8.0.2",
     "@babel/preset-typescript": "8.0.1",
     "@changesets/changelog-github": "1.0.0",
-    "@changesets/cli": "3.0.0",
+    "@changesets/cli": "3.0.1",
     "@playwright/test": "1.62.1",
     "@types/common-tags": "1.8.4",
     "@types/node": "24.13.3",
