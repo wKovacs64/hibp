@@ -87,7 +87,7 @@
     "@types/common-tags": "1.8.4",
     "@types/node": "24.13.3",
     "@vitest/coverage-v8": "4.1.11",
-    "@wkovacs64/oxlint-config": "0.1.0",
+    "@wkovacs64/oxlint-config": "0.2.0",
     "bundlewatch": "0.4.2",
     "common-tags": "1.8.2",
     "cross-env": "10.1.0",
