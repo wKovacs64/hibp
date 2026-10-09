@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { http } from "msw";
+import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { PASSWORD, SHA1_RESPONSE_BODY } from "../../test/fixtures.js";
 import { pwnedPassword } from "../pwned-password.js";
