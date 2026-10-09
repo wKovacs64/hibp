@@ -2,7 +2,7 @@ import { beforeAll, afterAll, afterEach } from "vitest";
 import { server } from "../mocks/server.js";
 
 // Establish API mocking before all tests.
-beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
+beforeAll(() => server.listen({ onUnhandledFrame: "error" }));
 
 // Reset any request handlers that we may add during the tests, so they don't
 // affect other tests.
