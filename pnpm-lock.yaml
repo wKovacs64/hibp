@@ -194,8 +194,8 @@ importers:
         specifier: 1.8.4
         version: 1.8.4
       '@types/node':
-        specifier: 24.19.1
-        version: 24.19.1
+        specifier: 24.19.2
+        version: 24.19.2
       '@vitest/coverage-v8':
         specifier: 5.0.3
         version: 5.0.3(vitest@5.0.3)
@@ -222,7 +222,7 @@ importers:
         version: 9.1.3
       msw:
         specifier: 3.0.2
-        version: 3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0))
+        version: 3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0))
       npm-run-all2:
         specifier: 9.0.3
         version: 9.0.3
@@ -249,7 +249,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(msw@3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0))
+        version: 5.0.3(@types/node@24.19.2)(@vitest/coverage-v8@5.0.3)(msw@3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0))
 
 packages:
 
@@ -1737,6 +1737,9 @@ packages:
 
   '@types/node@24.19.1':
     resolution: {integrity: sha512-aS3/DG0oM05K0RIXXP+hKjinGG5IgSSVGzswZxW3O0sS3pH4/fycXundUC9XsszgKCk4gHXylTEK6hyFxVxnoQ==}
+
+  '@types/node@24.19.2':
+    resolution: {integrity: sha512-93d49wCWJkCyN87MxLpNN6KXPCwFw7bVUg79mGUV1OS40JGWwVCr8n61DXCSqz7CV6/VfPkb7xec7uP2M+QHWQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -4458,30 +4461,30 @@ snapshots:
 
   '@inquirer/ansi@2.0.5': {}
 
-  '@inquirer/confirm@6.0.12(@types/node@24.19.1)':
+  '@inquirer/confirm@6.0.12(@types/node@24.19.2)':
     dependencies:
-      '@inquirer/core': 11.1.9(@types/node@24.19.1)
-      '@inquirer/type': 4.0.5(@types/node@24.19.1)
+      '@inquirer/core': 11.1.9(@types/node@24.19.2)
+      '@inquirer/type': 4.0.5(@types/node@24.19.2)
     optionalDependencies:
-      '@types/node': 24.19.1
+      '@types/node': 24.19.2
 
-  '@inquirer/core@11.1.9(@types/node@24.19.1)':
+  '@inquirer/core@11.1.9(@types/node@24.19.2)':
     dependencies:
       '@inquirer/ansi': 2.0.5
       '@inquirer/figures': 2.0.5
-      '@inquirer/type': 4.0.5(@types/node@24.19.1)
+      '@inquirer/type': 4.0.5(@types/node@24.19.2)
       cli-width: 4.1.0
       fast-wrap-ansi: 0.2.0
       mute-stream: 3.0.0
       signal-exit: 4.1.0
     optionalDependencies:
-      '@types/node': 24.19.1
+      '@types/node': 24.19.2
 
   '@inquirer/figures@2.0.5': {}
 
-  '@inquirer/type@4.0.5(@types/node@24.19.1)':
+  '@inquirer/type@4.0.5(@types/node@24.19.2)':
     optionalDependencies:
-      '@types/node': 24.19.1
+      '@types/node': 24.19.2
 
   '@jridgewell/gen-mapping@0.4.0-beta.0':
     dependencies:
@@ -4789,6 +4792,10 @@ snapshots:
     dependencies:
       undici-types: 7.24.6
 
+  '@types/node@24.19.2':
+    dependencies:
+      undici-types: 7.24.6
+
   '@types/normalize-package-data@2.4.4': {}
 
   '@types/set-cookie-parser@2.4.10':
@@ -4865,7 +4872,7 @@ snapshots:
       obug: 2.2.1
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 5.0.3(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(msw@3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0))
+      vitest: 5.0.3(@types/node@24.19.2)(@vitest/coverage-v8@5.0.3)(msw@3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0))
 
   '@vitest/istanbul-lib-coverage@1.0.1': {}
 
@@ -4873,15 +4880,15 @@ snapshots:
     dependencies:
       '@vitest/istanbul-lib-coverage': 1.0.1
 
-  '@vitest/mocker@5.0.3(msw@3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0))':
+  '@vitest/mocker@5.0.3(msw@3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.3
       estree-walker: 3.0.3
       magic-string: 1.3.1
     optionalDependencies:
-      msw: 3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0))
-      vite: 7.2.7(@types/node@24.19.1)(yaml@2.9.0)
+      msw: 3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0))
+      vite: 7.2.7(@types/node@24.19.2)(yaml@2.9.0)
 
   '@vitest/spy@5.0.3': {}
 
@@ -5725,9 +5732,9 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)):
+  msw@3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)):
     dependencies:
-      '@inquirer/confirm': 6.0.12(@types/node@24.19.1)
+      '@inquirer/confirm': 6.0.12(@types/node@24.19.2)
       '@msw/url': 0.1.2
       '@mswjs/interceptors': 0.45.7(supports-color@7.2.0)
       cookie: 2.0.1
@@ -5742,7 +5749,7 @@ snapshots:
     optionalDependencies:
       graphql: 16.13.2
       typescript: 7.0.2
-      vite: 7.2.7(@types/node@24.19.1)(yaml@2.9.0)
+      vite: 7.2.7(@types/node@24.19.2)(yaml@2.9.0)
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -6314,7 +6321,7 @@ snapshots:
 
   verkit@0.5.0: {}
 
-  vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0):
+  vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.7)
@@ -6323,14 +6330,14 @@ snapshots:
       rollup: 4.53.3
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 24.19.1
+      '@types/node': 24.19.2
       fsevents: 2.3.3
       yaml: 2.9.0
 
-  vitest@5.0.3(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(msw@3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)):
+  vitest@5.0.3(@types/node@24.19.2)(@vitest/coverage-v8@5.0.3)(msw@3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.3(msw@3.0.2(@types/node@24.19.1)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.1)(yaml@2.9.0))
+      '@vitest/mocker': 5.0.3(msw@3.0.2(@types/node@24.19.2)(graphql@16.13.2)(supports-color@7.2.0)(typescript@7.0.2)(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0)))(vite@7.2.7(@types/node@24.19.2)(yaml@2.9.0))
       chai: 6.2.2
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
@@ -6341,10 +6348,10 @@ snapshots:
       tinybench: 6.1.4
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
-      vite: 7.2.7(@types/node@24.19.1)(yaml@2.9.0)
+      vite: 7.2.7(@types/node@24.19.2)(yaml@2.9.0)
       why-is-node-running: 3.2.1
     optionalDependencies:
-      '@types/node': 24.19.1
+      '@types/node': 24.19.2
       '@vitest/coverage-v8': 5.0.3(vitest@5.0.3)
     transitivePeerDependencies:
       - msw
