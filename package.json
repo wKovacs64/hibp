@@ -88,7 +88,7 @@
     "@types/node": "24.19.2",
     "@vitest/coverage-v8": "5.0.5",
     "@wkovacs64/oxlint-config": "0.4.0",
-    "bundlewatch": "0.4.2",
+    "bundlewatch": "1.1.0",
     "common-tags": "1.8.2",
     "cross-env": "10.1.0",
     "esbuild": "0.28.2",

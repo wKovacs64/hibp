@@ -1,4 +1,7 @@
 {
+  "ci": {
+    "trackBranches": ["main"]
+  },
   "files": [
     {
       "//": "Pre-bundled ESM for the Browser",
