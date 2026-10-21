@@ -27,8 +27,7 @@ jobs:
       - name: 🛠️ Build
         run: pnpm run build
 
-      - uses: jackyef/bundlewatch-gh-action@0.3.0
-        with:
-          branch-base: main
-          bundlewatch-config: .bundlewatch.config.json
-          bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+      - name: ⚖ Check bundle size
+        run: pnpm run size
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
