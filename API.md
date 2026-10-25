@@ -125,7 +125,16 @@ a valid API key on your behalf).</p>
 
 <dl>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
-<dd><p>An object representing a breach.</p>
+<dd><p>An object representing a full breach.</p>
+<p>Returned by <code>breach</code>, <code>breaches</code>, <code>latestBreach</code>, and by <code>breachedAccount</code>
+and <code>search</code> with <code>truncate: false</code>.</p>
+<p><a href="https://haveibeenpwned.com/api/v3/breach/Adpost">Adpost</a> returns strings for
+<code>Attribution</code> and <code>DisclosureUrl</code>;
+<a href="https://haveibeenpwned.com/api/v3/breach/Adobe">Adobe</a> returns null for both.
+The breach model in the <a href="https://haveibeenpwned.com/API/v3">HIBP API documentation</a>
+documents <code>IsStealerLog</code> as boolean and <code>Attribution</code> as string (its sample
+includes null). <code>DisclosureUrl</code> is present in public responses but absent
+from that documentation.</p>
 </dd>
 <dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
@@ -874,30 +883,44 @@ try {
 <a name="Breach"></a>
 
 ## Breach : <code>object</code>
-An object representing a breach.
+An object representing a full breach.
+
+Returned by `breach`, `breaches`, `latestBreach`, and by `breachedAccount`
+and `search` with `truncate: false`.
+
+[Adpost](https://haveibeenpwned.com/api/v3/breach/Adpost) returns strings for
+`Attribution` and `DisclosureUrl`;
+[Adobe](https://haveibeenpwned.com/api/v3/breach/Adobe) returns null for both.
+The breach model in the [HIBP API documentation](https://haveibeenpwned.com/API/v3)
+documents `IsStealerLog` as boolean and `Attribution` as string (its sample
+includes null). `DisclosureUrl` is present in public responses but absent
+from that documentation.
 
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| Name | <code>string</code> | 
-| Title | <code>string</code> | 
-| Domain | <code>string</code> | 
-| BreachDate | <code>string</code> | 
-| AddedDate | <code>string</code> | 
-| ModifiedDate | <code>string</code> | 
-| PwnCount | <code>number</code> | 
-| Description | <code>string</code> | 
-| DataClasses | <code>Array.&lt;string&gt;</code> | 
-| IsVerified | <code>boolean</code> | 
-| IsFabricated | <code>boolean</code> | 
-| IsSensitive | <code>boolean</code> | 
-| IsRetired | <code>boolean</code> | 
-| IsSpamList | <code>boolean</code> | 
-| IsMalware | <code>boolean</code> | 
-| IsSubscriptionFree | <code>boolean</code> | 
-| LogoPath | <code>string</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| Name | <code>string</code> |  |
+| Title | <code>string</code> |  |
+| Domain | <code>string</code> |  |
+| BreachDate | <code>string</code> |  |
+| AddedDate | <code>string</code> |  |
+| ModifiedDate | <code>string</code> |  |
+| PwnCount | <code>number</code> |  |
+| Description | <code>string</code> |  |
+| DataClasses | <code>Array.&lt;string&gt;</code> |  |
+| IsVerified | <code>boolean</code> |  |
+| IsFabricated | <code>boolean</code> |  |
+| IsSensitive | <code>boolean</code> |  |
+| IsRetired | <code>boolean</code> |  |
+| IsSpamList | <code>boolean</code> |  |
+| IsMalware | <code>boolean</code> |  |
+| IsStealerLog | <code>boolean</code> | whether the breach is sourced from stealer logs |
+| IsSubscriptionFree | <code>boolean</code> |  |
+| LogoPath | <code>string</code> |  |
+| Attribution | <code>string</code> \| <code>null</code> | credit requested by the data provider, or null |
+| DisclosureUrl | <code>string</code> \| <code>null</code> | breach disclosure URL, or null |
 
 <a name="BreachedDomainsByEmailAlias"></a>
 

@@ -2,7 +2,18 @@ import type { Breach } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
- * An object representing a breach.
+ * An object representing a full breach.
+ *
+ * Returned by `breach`, `breaches`, `latestBreach`, and by `breachedAccount`
+ * and `search` with `truncate: false`.
+ *
+ * [Adpost](https://haveibeenpwned.com/api/v3/breach/Adpost) returns strings for
+ * `Attribution` and `DisclosureUrl`;
+ * [Adobe](https://haveibeenpwned.com/api/v3/breach/Adobe) returns null for both.
+ * The breach model in the [HIBP API documentation](https://haveibeenpwned.com/API/v3)
+ * documents `IsStealerLog` as boolean and `Attribution` as string (its sample
+ * includes null). `DisclosureUrl` is present in public responses but absent
+ * from that documentation.
  *
  * @typedef {object} Breach
  * @property {string} Name
@@ -20,8 +31,11 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @property {boolean} IsRetired
  * @property {boolean} IsSpamList
  * @property {boolean} IsMalware
+ * @property {boolean} IsStealerLog whether the breach is sourced from stealer logs
  * @property {boolean} IsSubscriptionFree
  * @property {string} LogoPath
+ * @property {(string | null)} Attribution credit requested by the data provider, or null
+ * @property {(string | null)} DisclosureUrl breach disclosure URL, or null
  */
 
 /**

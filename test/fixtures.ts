@@ -22,8 +22,11 @@ export const VERIFIED_BREACH: Breach = {
   IsRetired: false,
   IsSpamList: false,
   IsMalware: false,
+  IsStealerLog: false,
   IsSubscriptionFree: false,
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Adobe.png",
+  Attribution: null,
+  DisclosureUrl: null,
 };
 
 export const UNVERIFIED_BREACH: Breach = {
@@ -50,8 +53,62 @@ export const UNVERIFIED_BREACH: Breach = {
   IsRetired: false,
   IsSpamList: false,
   IsMalware: false,
+  IsStealerLog: false,
   IsSubscriptionFree: false,
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png",
+  Attribution: null,
+  DisclosureUrl: null,
+};
+
+// https://haveibeenpwned.com/api/v3/breach/Adpost
+export const DISCLOSED_BREACH: Breach = {
+  Name: "Adpost",
+  Title: "Adpost",
+  Domain: "adpost.com",
+  BreachDate: "2025-02-14",
+  AddedDate: "2025-10-07T00:15:09Z",
+  ModifiedDate: "2025-12-17T23:27:30Z",
+  PwnCount: 3339512,
+  Description:
+    'In February 2025, data obtained from an earlier Adpost breach surfaced. The dataset contained 3.3M records including email addresses, usernames, and display names. <a href="https://www.adpost.com/article/security-update-regarding-the-february-2025-adpost-data-breach" target="_blank" rel="noopener">Adpost later published a disclosure notice</a> and advised they\'d forced a credential refresh, among other actions.',
+  LogoPath: "https://logos.haveibeenpwned.com/Adpost.png",
+  Attribution: "https://t.me/all3in",
+  DisclosureUrl:
+    "https://www.adpost.com/article/security-update-regarding-the-february-2025-adpost-data-breach",
+  DataClasses: ["Email addresses", "Names", "Usernames"],
+  IsVerified: true,
+  IsFabricated: false,
+  IsSensitive: false,
+  IsRetired: false,
+  IsSpamList: false,
+  IsMalware: false,
+  IsSubscriptionFree: false,
+  IsStealerLog: false,
+};
+
+// https://haveibeenpwned.com/api/v3/breach/AlienStealerLogs
+export const STEALER_LOG_BREACH: Breach = {
+  Name: "AlienStealerLogs",
+  Title: "ALIEN TXTBASE Stealer Logs",
+  Domain: "",
+  BreachDate: "2025-02-15",
+  AddedDate: "2025-02-25T19:25:18Z",
+  ModifiedDate: "2025-02-25T19:25:18Z",
+  PwnCount: 284132969,
+  Description:
+    'In February 2025, <a href="https://www.troyhunt.com/processing-23-billion-rows-of-alien-txtbase-stealer-logs" target="_blank" rel="noopener">23 billion rows of stealer logs were obtained from a Telegram channel known as ALIEN TXTBASE</a>. The data contained 284M unique email addresses alongside the websites they were entered into and the passwords used. This data is now searchable in HIBP by both email domain and the domain of the target website.',
+  LogoPath: "https://logos.haveibeenpwned.com/List.png",
+  Attribution: null,
+  DisclosureUrl: null,
+  DataClasses: ["Email addresses", "Passwords"],
+  IsVerified: true,
+  IsFabricated: false,
+  IsSensitive: false,
+  IsRetired: false,
+  IsSpamList: false,
+  IsMalware: false,
+  IsSubscriptionFree: false,
+  IsStealerLog: true,
 };
 
 export const PASTE: Paste = {

@@ -1,19 +1,28 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH } from "../../test/fixtures.js";
-import { latestBreach } from "../latest-breach.js";
+import { latestBreach } from "../hibp.js";
 
 describe("latestBreach", () => {
   describe("found", () => {
-    it("resolves with data from the remote API", () => {
+    it("resolves with full breach data from the remote API", async () => {
       server.use(
         http.get("*", () => {
           return new Response(JSON.stringify(VERIFIED_BREACH));
         }),
       );
 
-      return expect(latestBreach()).resolves.toEqual(VERIFIED_BREACH);
+      const data = await latestBreach();
+
+      expectTypeOf(data?.IsStealerLog).toEqualTypeOf<boolean | undefined>();
+      expectTypeOf(data?.Attribution).toEqualTypeOf<
+        string | null | undefined
+      >();
+      expectTypeOf(data?.DisclosureUrl).toEqualTypeOf<
+        string | null | undefined
+      >();
+      expect(data).toEqual(VERIFIED_BREACH);
     });
   });
 

@@ -1,12 +1,77 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { VERIFIED_BREACH } from "../../test/fixtures.js";
+import {
+  VERIFIED_BREACH,
+  DISCLOSED_BREACH,
+  STEALER_LOG_BREACH,
+} from "../../test/fixtures.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
-import { breach } from "../breach.js";
+import { breach, type Breach } from "../hibp.js";
 
 describe("breach", () => {
   describe("found", () => {
+    it.each([
+      { fixture: VERIFIED_BREACH, expected: null },
+      {
+        fixture: DISCLOSED_BREACH,
+        expected:
+          "https://www.adpost.com/article/security-update-regarding-the-february-2025-adpost-data-breach",
+      },
+    ])(
+      "exposes the disclosure URL for $fixture.Name",
+      async ({ fixture, expected }) => {
+        server.use(
+          http.get("*", () => {
+            return new Response(JSON.stringify(fixture));
+          }),
+        );
+
+        const data = await breach(fixture.Name);
+
+        expectTypeOf<Breach["DisclosureUrl"]>().toEqualTypeOf<string | null>();
+        expect(data?.DisclosureUrl).toBe(expected);
+      },
+    );
+
+    it.each([
+      { fixture: VERIFIED_BREACH, expected: null },
+      { fixture: DISCLOSED_BREACH, expected: "https://t.me/all3in" },
+    ])(
+      "exposes attribution for $fixture.Name",
+      async ({ fixture, expected }) => {
+        server.use(
+          http.get("*", () => {
+            return new Response(JSON.stringify(fixture));
+          }),
+        );
+
+        const data = await breach(fixture.Name);
+
+        expectTypeOf<Breach["Attribution"]>().toEqualTypeOf<string | null>();
+        expect(data?.Attribution).toBe(expected);
+      },
+    );
+
+    it.each([
+      { fixture: VERIFIED_BREACH, expected: false },
+      { fixture: STEALER_LOG_BREACH, expected: true },
+    ])(
+      "exposes whether $fixture.Name is sourced from stealer logs",
+      async ({ fixture, expected }) => {
+        server.use(
+          http.get("*", () => {
+            return new Response(JSON.stringify(fixture));
+          }),
+        );
+
+        const data = await breach(fixture.Name);
+
+        expectTypeOf<Breach["IsStealerLog"]>().toEqualTypeOf<boolean>();
+        expect(data?.IsStealerLog).toBe(expected);
+      },
+    );
+
     it("resolves with data from the remote API", () => {
       server.use(
         http.get("*", () => {
