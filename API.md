@@ -25,7 +25,8 @@ without it will fail (unless you specify a <code>baseUrl</code> to a proxy that 
 a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code></dt>
-<dd><p>Fetches all breach events in the system.</p>
+<dd><p>Fetches all breach events in the system. Supports the
+<a href="https://haveibeenpwned.com/API/v3#AllBreaches">public API&#39;s domain and spam-list filters</a>.</p>
 </dd>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
@@ -309,7 +310,8 @@ try {
 <a name="breaches"></a>
 
 ## breaches([options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code>
-Fetches all breach events in the system.
+Fetches all breach events in the system. Supports the
+[public API's domain and spam-list filters](https://haveibeenpwned.com/API/v3#AllBreaches).
 
 **Kind**: global function  
 **Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> - a Promise which resolves to an array of breach
@@ -319,6 +321,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [options.isSpamList] | <code>boolean</code> | true for only spam-list breaches, false for only non-spam-list breaches (default: no spam-list filter) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
@@ -340,7 +343,7 @@ try {
 **Example**  
 ```js
 try {
-  const data = await breaches({ domain: "adobe.com" });
+  const data = await breaches({ domain: "adobe.com", isSpamList: false });
   if (data) {
     // ...
   } else {
