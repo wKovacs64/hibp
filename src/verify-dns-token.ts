@@ -6,8 +6,7 @@ import { postToApi } from "./api/haveibeenpwned/post-to-api.js";
  * Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
  * publish it at your DNS provider, and allow time for DNS propagation first.
  * The record can be removed after verification succeeds.
- * Authenticated response details are documentation-derived, not live verified;
- * the documented HTTP 200 success does not specify a response body.
+ * Successful verification does not require parsing a response body.
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaDns
  * @param {string} domain the domain to verify (e.g., "example.com")

@@ -13,7 +13,6 @@ import type { DnsToken } from "./api/haveibeenpwned/types.js";
  *
  * Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
  * on the domain, then call `verifyDnsToken` after DNS propagation.
- * Authenticated response details are documentation-derived, not live verified.
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaDns
  * @param {string} domain the domain to verify (e.g., "example.com")

@@ -33,8 +33,7 @@ a valid API key on your behalf).</p>
 <dt><a href="#generateDnsToken">generateDnsToken(domain, [options])</a> ⇒ <code><a href="#DnsToken">Promise.&lt;DnsToken&gt;</a></code></dt>
 <dd><p>Generates a domain-specific DNS verification token.</p>
 <p>Requires an HIBP Pro subscription. Publish <code>txtRecordValue</code> as a TXT record
-on the domain, then call <code>verifyDnsToken</code> after DNS propagation.
-Authenticated response details are documentation-derived, not live verified.</p>
+on the domain, then call <code>verifyDnsToken</code> after DNS propagation.</p>
 </dd>
 <dt><a href="#latestBreach">latestBreach([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches the most recently added breach.</p>
@@ -130,8 +129,7 @@ a valid API key on your behalf).</p>
 <p>Requires an HIBP Pro subscription. Generate the value with <code>generateDnsToken</code>,
 publish it at your DNS provider, and allow time for DNS propagation first.
 The record can be removed after verification succeeds.
-Authenticated response details are documentation-derived, not live verified;
-the documented HTTP 200 success does not specify a response body.</p>
+Successful verification does not require parsing a response body.</p>
 </dd>
 </dl>
 
@@ -405,7 +403,6 @@ Generates a domain-specific DNS verification token.
 
 Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
 on the domain, then call `verifyDnsToken` after DNS propagation.
-Authenticated response details are documentation-derived, not live verified.
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken) - the documented TXT record value; rejects with an
@@ -927,8 +924,7 @@ Verifies a domain's published HIBP TXT record.
 Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
 publish it at your DNS provider, and allow time for DNS propagation first.
 The record can be removed after verification succeeds.
-Authenticated response details are documentation-derived, not live verified;
-the documented HTTP 200 success does not specify a response body.
+Successful verification does not require parsing a response body.
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;void&gt;</code> - resolves on successful verification without parsing

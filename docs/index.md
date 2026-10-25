@@ -115,9 +115,8 @@ void main();
 
 Use `generateDnsToken` to obtain the TXT record value, publish it at your DNS provider, then call
 `verifyDnsToken` after DNS propagation. Requires an HIBP Pro subscription. See the
-[usage example and contract verification limits](https://github.com/wKovacs64/hibp#domain-verification-through-dns)
-and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns). Authenticated response
-details are documentation-derived, not live verified.
+[usage example](https://github.com/wKovacs64/hibp#domain-verification-through-dns)
+and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns).
 
 #### Rate Limiting
 

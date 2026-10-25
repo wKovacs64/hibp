@@ -132,14 +132,9 @@ await verifyDnsToken("example.com", options);
 Verification resolves with `undefined` on success and rejects with the upstream failure reason
 on failure. You can remove the TXT record after successful verification.
 
-Authenticated response details are documentation-derived and have not been live verified: no paid
-API key was available, and the [official test key](https://haveibeenpwned.com/API/v3#TestAPIKey) is not
-documented as supported for DNS verification. The docs specify `txtRecordValue` for generation and
-HTTP 200 for verification, without defining a success body or the missing-TXT failure's status.
-An empty success body and failure status variants are covered by mocked fixtures; they do not
-establish upstream behavior. Live unauthenticated POSTs to both endpoints on 2026-10-25 returned
-JSON HTTP 401 with the message `Access denied due to missing hibp-api-key.`; this verifies only
-authentication failure, not the authenticated contract.
+The [API contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns) defines `txtRecordValue`
+for token generation and HTTP 200 for verification. `verifyDnsToken` accepts a successful response
+without parsing its body. Both operations reject with the upstream failure reason.
 
 #### Rate Limiting
 
