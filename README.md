@@ -49,6 +49,7 @@ browser.
 - Get all stealer log email aliases for an email domain 🔑
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
+- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -72,6 +73,7 @@ The following modules are available:
 - [breachedDomain](API.md#breacheddomain)
 - [breaches](API.md#breaches)
 - [dataClasses](API.md#dataclasses)
+- [generateDnsToken](API.md#generatednstoken)
 - [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
 - [pwnedPassword](API.md#pwnedpassword)
@@ -82,6 +84,7 @@ The following modules are available:
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
 - [subscribedDomains](API.md#subscribeddomains)
 - [subscriptionStatus](API.md#subscriptionstatus)
+- [verifyDnsToken](API.md#verifydnstoken)
 
 Please see the [API reference](API.md) for more detailed usage information and examples.
 
@@ -108,6 +111,35 @@ async function main() {
 
 void main();
 ```
+
+#### Domain verification through DNS
+
+[DNS verification](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns) requires an HIBP Pro
+subscription. Generate a token, publish its complete value as a TXT record on the domain through
+your DNS provider, then verify after DNS propagation:
+
+```typescript
+import { generateDnsToken, verifyDnsToken } from "hibp";
+
+const options = { apiKey: "my-pro-api-key" };
+const { txtRecordValue } = await generateDnsToken("example.com", options);
+console.log(txtRecordValue); // Publish this TXT record at your DNS provider.
+
+// Run after publishing the record and allowing time for DNS propagation:
+await verifyDnsToken("example.com", options);
+```
+
+Verification resolves with `undefined` on success and rejects with the upstream failure reason
+on failure. You can remove the TXT record after successful verification.
+
+Authenticated response details are documentation-derived and have not been live verified: no paid
+API key was available, and the [official test key](https://haveibeenpwned.com/API/v3#TestAPIKey) is not
+documented as supported for DNS verification. The docs specify `txtRecordValue` for generation and
+HTTP 200 for verification, without defining a success body or the missing-TXT failure's status.
+An empty success body and failure status variants are covered by mocked fixtures; they do not
+establish upstream behavior. Live unauthenticated POSTs to both endpoints on 2026-10-25 returned
+JSON HTTP 401 with the message `Access denied due to missing hibp-api-key.`; this verifies only
+authentication failure, not the authenticated contract.
 
 #### Rate Limiting
 

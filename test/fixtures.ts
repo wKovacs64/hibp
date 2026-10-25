@@ -1,6 +1,7 @@
 import { stripIndents } from "common-tags";
 import type {
   Breach,
+  DnsToken,
   Paste,
   SubscriptionStatus,
 } from "../src/api/haveibeenpwned/types.js";
@@ -70,6 +71,23 @@ export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   Rpm: 10,
   DomainSearchMaxBreachedAccounts: 25,
   IncludesStealerLogs: false,
+};
+
+// Documentation-derived; authenticated responses have not been live verified.
+// https://haveibeenpwned.com/API/v3#VerifyDomainViaDns
+export const DNS_TOKEN: DnsToken = {
+  txtRecordValue: "hibp-verify=dweb_abc123xyz",
+};
+
+// Documentation does not specify the HTTP status for this failure example.
+export const DNS_VERIFICATION_FAILURE = {
+  message: "No hibp-verify TXT records were found on the domain.",
+};
+
+// Live unauthenticated POST responses from both DNS endpoints, 2026-10-25.
+export const DOMAIN_VERIFICATION_UNAUTHORIZED = {
+  statusCode: 401,
+  message: "Access denied due to missing hibp-api-key.",
 };
 
 export const PASSWORD = "password";

@@ -30,6 +30,12 @@ a valid API key on your behalf).</p>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
+<dt><a href="#generateDnsToken">generateDnsToken(domain, [options])</a> ⇒ <code><a href="#DnsToken">Promise.&lt;DnsToken&gt;</a></code></dt>
+<dd><p>Generates a domain-specific DNS verification token.</p>
+<p>Requires an HIBP Pro subscription. Publish <code>txtRecordValue</code> as a TXT record
+on the domain, then call <code>verifyDnsToken</code> after DNS propagation.
+Authenticated response details are documentation-derived, not live verified.</p>
+</dd>
 <dt><a href="#latestBreach">latestBreach([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches the most recently added breach.</p>
 </dd>
@@ -119,6 +125,14 @@ The <code>apiKey</code> option here is not explicitly required, but direct reque
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
+<dt><a href="#verifyDnsToken">verifyDnsToken(domain, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>Verifies a domain&#39;s published HIBP TXT record.</p>
+<p>Requires an HIBP Pro subscription. Generate the value with <code>generateDnsToken</code>,
+publish it at your DNS provider, and allow time for DNS propagation first.
+The record can be removed after verification succeeds.
+Authenticated response details are documentation-derived, not live verified;
+the documented HTTP 200 success does not specify a response body.</p>
+</dd>
 </dl>
 
 ## Typedefs
@@ -130,6 +144,9 @@ a valid API key on your behalf).</p>
 <dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
+</dd>
+<dt><a href="#DnsToken">DnsToken</a> : <code>object</code></dt>
+<dd><p>The TXT record value to publish at your DNS provider.</p>
 </dd>
 <dt><a href="#Paste">Paste</a> : <code>object</code></dt>
 <dd><p>An object representing a paste.</p>
@@ -380,6 +397,37 @@ try {
 } catch (err) {
   // ...
 }
+```
+<a name="generateDnsToken"></a>
+
+## generateDnsToken(domain, [options]) ⇒ [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken)
+Generates a domain-specific DNS verification token.
+
+Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
+on the domain, then call `verifyDnsToken` after DNS propagation.
+Authenticated response details are documentation-derived, not live verified.
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken) - the documented TXT record value; rejects with an
+Error containing the upstream failure reason  
+**See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaDns  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| domain | <code>string</code> | the domain to verify (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an HIBP Pro API key; optional when a proxy supplies authentication |
+| [options.baseUrl] | <code>string</code> | a custom API base URL (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request |
+| [options.userAgent] | <code>string</code> | a custom User-Agent (default: `hibp <version>`) |
+
+**Example**  
+```js
+const { txtRecordValue } = await generateDnsToken("example.com", {
+  apiKey: "my-pro-api-key",
+});
+// Publish txtRecordValue as a TXT record on example.com at your DNS provider.
 ```
 <a name="latestBreach"></a>
 
@@ -871,6 +919,36 @@ try {
   // ...
 }
 ```
+<a name="verifyDnsToken"></a>
+
+## verifyDnsToken(domain, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
+Verifies a domain's published HIBP TXT record.
+
+Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
+publish it at your DNS provider, and allow time for DNS propagation first.
+The record can be removed after verification succeeds.
+Authenticated response details are documentation-derived, not live verified;
+the documented HTTP 200 success does not specify a response body.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;void&gt;</code> - resolves on successful verification without parsing
+a response body; rejects with an Error containing the upstream failure reason  
+**See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaDns  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| domain | <code>string</code> | the domain to verify (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an HIBP Pro API key; optional when a proxy supplies authentication |
+| [options.baseUrl] | <code>string</code> | a custom API base URL (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request |
+| [options.userAgent] | <code>string</code> | a custom User-Agent (default: `hibp <version>`) |
+
+**Example**  
+```js
+await verifyDnsToken("example.com", { apiKey: "my-pro-api-key" });
+```
 <a name="Breach"></a>
 
 ## Breach : <code>object</code>
@@ -906,6 +984,18 @@ An object mapping an email alias (local-part before the '@') to the list of
 breach names that alias has appeared in for the specified domain.
 
 **Kind**: global typedef  
+<a name="DnsToken"></a>
+
+## DnsToken : <code>object</code>
+The TXT record value to publish at your DNS provider.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| txtRecordValue | <code>string</code> | the complete TXT record value |
+
 <a name="Paste"></a>
 
 ## Paste : <code>object</code>

@@ -47,6 +47,7 @@ browser.
 - Get all stealer log email aliases for an email domain 🔑
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
+- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -70,6 +71,7 @@ The following modules are available:
 - [breachedDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#breacheddomain)
 - [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
 - [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)
+- [generateDnsToken](https://github.com/wKovacs64/hibp/tree/main/API.md#generatednstoken)
 - [latestBreach](https://github.com/wKovacs64/hibp/tree/main/API.md#latestbreach)
 - [pasteAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#pasteaccount)
 - [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)
@@ -80,6 +82,7 @@ The following modules are available:
 - [stealerLogsByWebsiteDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbywebsitedomain)
 - [subscribedDomains](https://github.com/wKovacs64/hibp/tree/main/API.md#subscribeddomains)
 - [subscriptionStatus](https://github.com/wKovacs64/hibp/tree/main/API.md#subscriptionstatus)
+- [verifyDnsToken](https://github.com/wKovacs64/hibp/tree/main/API.md#verifydnstoken)
 
 Please see the [API reference](https://github.com/wKovacs64/hibp/tree/main/API.md) for more detailed
 usage information and examples.
@@ -107,6 +110,14 @@ async function main() {
 
 void main();
 ```
+
+#### Domain verification through DNS
+
+Use `generateDnsToken` to obtain the TXT record value, publish it at your DNS provider, then call
+`verifyDnsToken` after DNS propagation. Requires an HIBP Pro subscription. See the
+[usage example and contract verification limits](https://github.com/wKovacs64/hibp#domain-verification-through-dns)
+and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns). Authenticated response
+details are documentation-derived, not live verified.
 
 #### Rate Limiting
 
