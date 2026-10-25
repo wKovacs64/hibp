@@ -62,6 +62,8 @@ export const PASTE: Paste = {
   EmailCount: 139,
 };
 
+// Documentation-derived example, not a captured authenticated response:
+// https://haveibeenpwned.com/API/v3#SubscriptionStatus
 export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscriptionName: "Pwned 1",
   Description:
@@ -69,7 +71,12 @@ export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscribedUntil: "2024-04-02T12:34:56",
   Rpm: 10,
   DomainSearchMaxBreachedAccounts: 25,
+  MaxBreachedDomains: 2,
   IncludesStealerLogs: false,
+  IncludesBulkDomainAdd: false,
+  IncludesAutoSubdomainVerification: false,
+  IncludesCustomerDomains: false,
+  IncludesKAnon: false,
 };
 
 export const PASSWORD = "password";

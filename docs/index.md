@@ -47,7 +47,7 @@ browser.
 - Get all stealer log email aliases for an email domain 🔑
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
-- Get your subscription status 🔑
+- Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)
