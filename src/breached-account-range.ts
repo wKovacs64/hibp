@@ -26,9 +26,6 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * sensitive and retired breaches are excluded. The API documents HTTP 200 for
  * every valid prefix; an unexpected 404 resolves to null as in other searches.
  *
- * The response contract is documentation-derived; authenticated live behavior
- * has not been verified.
- *
  * @param {string} prefix the first six characters of a SHA-1 email hash
  * (case-insensitive)
  * @param {object} [options] a configuration object

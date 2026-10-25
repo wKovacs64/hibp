@@ -17,8 +17,6 @@ immediately discarding unrelated results without storing or further
 processing them. An absent suffix means the email has no returned breaches;
 sensitive and retired breaches are excluded. The API documents HTTP 200 for
 every valid prefix; an unexpected 404 resolves to null as in other searches.</p>
-<p>The response contract is documentation-derived; authenticated live behavior
-has not been verified.</p>
 </dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
@@ -223,9 +221,6 @@ immediately discarding unrelated results without storing or further
 processing them. An absent suffix means the email has no returned breaches;
 sensitive and retired breaches are excluded. The API documents HTTP 200 for
 every valid prefix; an unexpected 404 resolves to null as in other searches.
-
-The response contract is documentation-derived; authenticated live behavior
-has not been verified.
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;(Array.&lt;BreachedAccountRangeResult&gt;\|null)&gt;</code> - a Promise resolving
