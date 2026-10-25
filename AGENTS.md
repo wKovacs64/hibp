@@ -1,3 +1,7 @@
+# hibp
+
+Unofficial TypeScript SDK for Have I Been Pwned. Supports Node.js and browsers; see [README.md](README.md).
+
 ## Agent skills
 
 ### Issue tracker
