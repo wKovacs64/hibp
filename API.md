@@ -4,6 +4,22 @@
 <dt><a href="#breach">breach(breachName, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches data for a specific breach event.</p>
 </dd>
+<dt><a href="#breachedAccountRange">breachedAccountRange(prefix, [options])</a> ⇒ <code>Promise.&lt;(Array.&lt;BreachedAccountRangeResult&gt;|null)&gt;</code></dt>
+<dd><p>Fetches breached email hash suffixes for a six-character SHA-1 prefix.
+Email prefixes have six characters; Pwned Passwords prefixes have five.
+The prefix is case-insensitive. This function accepts a prefix, not an email
+address, and returns the documented <code>hashSuffix</code> and <code>websites</code> fields.</p>
+<p>Requires an API key with a Pro or High RPM subscription. The <code>apiKey</code> option
+is optional for proxies that supply the key. Direct requests without a key
+fail.</p>
+<p>Compare suffixes locally against the intended email hash. HIBP requires
+immediately discarding unrelated results without storing or further
+processing them. An absent suffix means the email has no returned breaches;
+sensitive and retired breaches are excluded. The API documents HTTP 200 for
+every valid prefix; an unexpected 404 resolves to null as in other searches.</p>
+<p>The response contract is documentation-derived; authenticated live behavior
+has not been verified.</p>
+</dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
@@ -12,7 +28,7 @@
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#breach--objectedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#BreachedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all breached email addresses for a domain.</p>
 <p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
 breach names. For example, querying <code>example.com</code> could return an object like
@@ -127,7 +143,11 @@ a valid API key on your behalf).</p>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
 <dd><p>An object representing a breach.</p>
 </dd>
-<dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dt><a href="#BreachedAccountRangeResult">BreachedAccountRangeResult</a> : <code>Object</code></dt>
+<dd><p>A breached email hash suffix and the breach names associated with it.
+Property names match the API&#39;s lower camel case response.</p>
+</dd>
+<dt><a href="#BreachedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
 </dd>
@@ -185,6 +205,52 @@ try {
 } catch (err) {
   // ...
 }
+```
+<a name="breachedAccountRange"></a>
+
+## breachedAccountRange(prefix, [options]) ⇒ <code>Promise.&lt;(Array.&lt;BreachedAccountRangeResult&gt;\|null)&gt;</code>
+Fetches breached email hash suffixes for a six-character SHA-1 prefix.
+Email prefixes have six characters; Pwned Passwords prefixes have five.
+The prefix is case-insensitive. This function accepts a prefix, not an email
+address, and returns the documented `hashSuffix` and `websites` fields.
+
+Requires an API key with a Pro or High RPM subscription. The `apiKey` option
+is optional for proxies that supply the key. Direct requests without a key
+fail.
+
+Compare suffixes locally against the intended email hash. HIBP requires
+immediately discarding unrelated results without storing or further
+processing them. An absent suffix means the email has no returned breaches;
+sensitive and retired breaches are excluded. The API documents HTTP 200 for
+every valid prefix; an unexpected 404 resolves to null as in other searches.
+
+The response contract is documentation-derived; authenticated live behavior
+has not been verified.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;(Array.&lt;BreachedAccountRangeResult&gt;\|null)&gt;</code> - a Promise resolving
+to the range results (or null for an unexpected 404), or rejecting with an Error  
+**See**
+
+- https://haveibeenpwned.com/API/v3#BreachesForHashRange
+- https://haveibeenpwned.com/TermsOfUse
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| prefix | <code>string</code> | the first six characters of a SHA-1 email hash (case-insensitive) |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom User-Agent header (default: `hibp <version>`) |
+
+**Example**  
+```js
+const match = (await breachedAccountRange("6B5917", { apiKey: "my-api-key" }))
+  ?.find(({ hashSuffix }) => hashSuffix === "C6C0AADE0C085843D66E4944E108C4A4CD");
+// match?.websites: ["Adobe", "Gawker", "Stratfor"] in the documented example
 ```
 <a name="breachedAccount"></a>
 
@@ -264,7 +330,7 @@ try {
 ```
 <a name="breachedDomain"></a>
 
-## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
+## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
 Fetches all breached email addresses for a domain.
 
 The result maps email aliases (the local-part before the '@') to an array of
@@ -279,7 +345,7 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
+**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
 resolves to an object mapping aliases to breach name arrays (or null if no
 results were found), or rejects with an Error  
 
@@ -898,6 +964,20 @@ An object representing a breach.
 | IsMalware | <code>boolean</code> | 
 | IsSubscriptionFree | <code>boolean</code> | 
 | LogoPath | <code>string</code> | 
+
+<a name="BreachedAccountRangeResult"></a>
+
+## BreachedAccountRangeResult : <code>Object</code>
+A breached email hash suffix and the breach names associated with it.
+Property names match the API's lower camel case response.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| hashSuffix | <code>string</code> | the remaining 34 characters of a SHA-1 email hash |
+| websites | <code>Array.&lt;string&gt;</code> | breach names, not website domains or URLs |
 
 <a name="BreachedDomainsByEmailAlias"></a>
 

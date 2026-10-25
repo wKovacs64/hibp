@@ -38,6 +38,7 @@ browser.
 - Get the most recently added breach
 - Get a single breach event
 - Get all breaches for an account 🔑
+- Search breaches by a six-character SHA-1 email prefix (Pro or High RPM) 🔑
 - Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
@@ -69,6 +70,7 @@ The following modules are available:
 
 - [breach](API.md#breach)
 - [breachedAccount](API.md#breachedaccount)
+- [breachedAccountRange](API.md#breachedaccountrange)
 - [breachedDomain](API.md#breacheddomain)
 - [breaches](API.md#breaches)
 - [dataClasses](API.md#dataclasses)
