@@ -1,9 +1,19 @@
 import { stripIndents } from "common-tags";
 import type {
   Breach,
+  DataClassDescription,
   Paste,
   SubscriptionStatus,
 } from "../src/api/haveibeenpwned/types.js";
+
+// https://haveibeenpwned.com/api/v3/dataClasses/descriptions
+export const DATA_CLASS_DESCRIPTIONS: DataClassDescription[] = [
+  {
+    name: "Academic records",
+    description:
+      "School or university records including grades, transcripts, enrolment history, and course information tied to an individual student.",
+  },
+];
 
 export const VERIFIED_BREACH: Breach = {
   Name: "Adobe",

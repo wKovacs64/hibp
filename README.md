@@ -41,6 +41,7 @@ browser.
 - Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
+- Get data class names and descriptions
 - Get all pastes for an account 🔑
 - [Securely][search-by-range] check a password to see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
@@ -72,6 +73,7 @@ The following modules are available:
 - [breachedDomain](API.md#breacheddomain)
 - [breaches](API.md#breaches)
 - [dataClasses](API.md#dataclasses)
+- [dataClassDescriptions](API.md#dataclassdescriptions)
 - [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
 - [pwnedPassword](API.md#pwnedpassword)

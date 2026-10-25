@@ -10,6 +10,7 @@ describe("hibp", () => {
         "breachedAccount": [Function],
         "breachedDomain": [Function],
         "breaches": [Function],
+        "dataClassDescriptions": [Function],
         "dataClasses": [Function],
         "latestBreach": [Function],
         "pasteAccount": [Function],
