@@ -1,13 +1,18 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { VERIFIED_BREACH, PASTE } from "../../test/fixtures.js";
+import {
+  VERIFIED_BREACH,
+  PASTE,
+  PASTE_WITHOUT_TITLE,
+  PASTE_WITH_NULL_DATE,
+} from "../../test/fixtures.js";
 import { search } from "../search.js";
 
 describe("search", () => {
   const BREACHES = [{ Name: VERIFIED_BREACH.Name }];
   const BREACHES_EXPANDED = [VERIFIED_BREACH];
-  const PASTES = [PASTE];
+  const PASTES = [PASTE, PASTE_WITHOUT_TITLE, PASTE_WITH_NULL_DATE];
 
   it("searches breaches by username", () => {
     server.use(

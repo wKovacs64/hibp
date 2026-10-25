@@ -1,12 +1,16 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { PASTE } from "../../test/fixtures.js";
+import {
+  PASTE,
+  PASTE_WITHOUT_TITLE,
+  PASTE_WITH_NULL_DATE,
+} from "../../test/fixtures.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { pasteAccount } from "../paste-account.js";
 
 describe("pasteAccount", () => {
-  const PASTE_ACCOUNT_DATA = [PASTE];
+  const PASTE_ACCOUNT_DATA = [PASTE, PASTE_WITHOUT_TITLE, PASTE_WITH_NULL_DATE];
 
   describe("pasted email", () => {
     it("resolves with data from the remote API", () => {

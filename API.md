@@ -132,7 +132,8 @@ a valid API key on your behalf).</p>
 breach names that alias has appeared in for the specified domain.</p>
 </dd>
 <dt><a href="#Paste">Paste</a> : <code>object</code></dt>
-<dd><p>An object representing a paste.</p>
+<dd><p>An object representing a paste, following the
+<a href="https://haveibeenpwned.com/API/v3#PasteModel">HIBP paste model</a>.</p>
 </dd>
 <dt><a href="#PwnedPasswordSuffixes">PwnedPasswordSuffixes</a> : <code>Object.&lt;string, number&gt;</code></dt>
 <dd><p>An object mapping an exposed password hash suffix (corresponding to a given
@@ -909,18 +910,19 @@ breach names that alias has appeared in for the specified domain.
 <a name="Paste"></a>
 
 ## Paste : <code>object</code>
-An object representing a paste.
+An object representing a paste, following the
+[HIBP paste model](https://haveibeenpwned.com/API/v3#PasteModel).
 
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| Id | <code>string</code> | 
-| Source | <code>string</code> | 
-| Title | <code>string</code> | 
-| Date | <code>string</code> | 
-| EmailCount | <code>number</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| Id | <code>string</code> |  |
+| Source | <code>string</code> |  |
+| [Title] | <code>string</code> | omitted when the source has no title |
+| Date | <code>string</code> \| <code>null</code> | null when the source has no posting date |
+| EmailCount | <code>number</code> |  |
 
 <a name="PwnedPasswordSuffixes"></a>
 
