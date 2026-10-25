@@ -78,7 +78,7 @@ required, but direct requests made without it will fail (unless you specify a
 <dd><p>Requests a domain verification approval email.</p>
 <p>Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
 at the domain to complete verification. Success does not require parsing a
-response body. Authenticated behavior and email delivery are not live verified.</p>
+response body.</p>
 </dd>
 <dt><a href="#stealerLogsByEmailDomain">stealerLogsByEmailDomain(emailDomain, [options])</a> ⇒ <code><a href="#StealerLogDomainsByEmailAlias">Promise.&lt;StealerLogDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log email aliases for an email domain.</p>
@@ -682,7 +682,7 @@ Requests a domain verification approval email.
 
 Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
 at the domain to complete verification. Success does not require parsing a
-response body. Authenticated behavior and email delivery are not live verified.
+response body.
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;void&gt;</code> - resolves when the approval email request succeeds;

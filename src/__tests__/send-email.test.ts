@@ -149,9 +149,14 @@ describe("sendEmail", () => {
 
   it("honors the request timeout", async () => {
     server.use(
-      http.post("*", async () => {
-        await new Promise((resolve) => setTimeout(resolve, 10));
-        return new Response(null, { status: 200 });
+      http.post("*", ({ request }) => {
+        return new Promise<Response>((resolve) => {
+          request.signal.addEventListener(
+            "abort",
+            () => resolve(new Response(null, { status: 200 })),
+            { once: true },
+          );
+        });
       }),
     );
 

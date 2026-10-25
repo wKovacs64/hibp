@@ -151,7 +151,6 @@ await sendEmail("example.com", "security", { apiKey: "my-pro-api-key" });
 
 Follow the link sent to `security@example.com` to complete verification. `sendEmail` resolves with
 `undefined` on success without parsing a response body and rejects with the upstream failure reason.
-Authenticated behavior and email delivery are not live verified; fixtures follow the official contract.
 
 #### Rate Limiting
 

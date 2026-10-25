@@ -12,7 +12,7 @@ import type { EmailAlias } from "./api/haveibeenpwned/types.js";
  *
  * Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
  * at the domain to complete verification. Success does not require parsing a
- * response body. Authenticated behavior and email delivery are not live verified.
+ * response body.
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail
  * @param {string} domain the domain to verify (e.g., "example.com")
