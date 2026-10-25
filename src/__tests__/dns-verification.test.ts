@@ -137,9 +137,14 @@ describe("DNS verification", () => {
 
     it("honors the request timeout", async () => {
       server.use(
-        http.post("*", async () => {
-          await new Promise((resolve) => setTimeout(resolve, 10));
-          return Response.json(DNS_TOKEN);
+        http.post("*", ({ request }) => {
+          return new Promise<Response>((resolve) => {
+            request.signal.addEventListener(
+              "abort",
+              () => resolve(Response.json(DNS_TOKEN)),
+              { once: true },
+            );
+          });
         }),
       );
 
