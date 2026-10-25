@@ -84,6 +84,13 @@ export const DNS_VERIFICATION_FAILURE = {
   message: "No hibp-verify TXT records were found on the domain.",
 };
 
+// Documentation-derived HTTP 400; authenticated behavior is not live verified.
+// https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail
+export const EMAIL_VERIFICATION_INVALID_ALIAS = {
+  message:
+    "The emailAlias field did not contain a valid value. Acceptable values are: admin, hostmaster, info, security, webmaster.",
+};
+
 // Live unauthenticated POST responses from both DNS endpoints, 2026-10-25.
 export const DOMAIN_VERIFICATION_UNAUTHORIZED = {
   statusCode: 401,

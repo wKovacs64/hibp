@@ -50,6 +50,7 @@ browser.
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
 - Generate and verify DNS domain verification tokens (Pro subscription) 🔑
+- Request domain verification approval emails (Pro subscription) 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -79,6 +80,7 @@ The following modules are available:
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
+- [sendEmail](API.md#sendemail)
 - [stealerLogsByEmail](API.md#stealerlogsbyemail)
 - [stealerLogsByEmailDomain](API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
@@ -135,6 +137,21 @@ on failure. You can remove the TXT record after successful verification.
 The [API contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns) defines `txtRecordValue`
 for token generation and HTTP 200 for verification. `verifyDnsToken` accepts a successful response
 without parsing its body. Both operations reject with the upstream failure reason.
+
+#### Domain verification through email
+
+[Email verification](https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail) requires an HIBP Pro
+subscription. Request an approval email using `admin`, `hostmaster`, `info`, `security` or `webmaster`:
+
+```typescript
+import { sendEmail } from "hibp";
+
+await sendEmail("example.com", "security", { apiKey: "my-pro-api-key" });
+```
+
+Follow the link sent to `security@example.com` to complete verification. `sendEmail` resolves with
+`undefined` on success without parsing a response body and rejects with the upstream failure reason.
+Authenticated behavior and email delivery are not live verified; fixtures follow the official contract.
 
 #### Rate Limiting
 

@@ -51,6 +51,13 @@ export interface DnsToken {
   txtRecordValue: string;
 }
 
+export type EmailAlias =
+  | "admin"
+  | "hostmaster"
+  | "info"
+  | "security"
+  | "webmaster";
+
 export type BreachedDomainsByEmailAlias = Record<string, string[]>;
 
 export type StealerLogDomainsByEmailAlias = Record<string, string[]>;
