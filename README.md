@@ -85,6 +85,32 @@ The following modules are available:
 
 Please see the [API reference](API.md) for more detailed usage information and examples.
 
+#### Account breach results
+
+`breachedAccount()` and `search().breaches` return name-only `TruncatedBreach` objects by
+default, matching [HIBP's account search API](https://haveibeenpwned.com/API/v3#BreachesForAccount).
+Pass `truncate: false` for full `Breach` objects, including fields such as `Title` and
+`DataClasses`. A dynamic boolean returns a union of name-only and full results; narrow the
+result before accessing full-only fields. Both modes preserve `null` when no breaches are found.
+
+```typescript
+const names = await hibp.breachedAccount("account@example.com", { apiKey });
+console.log(names?.map((breach) => breach.Name));
+
+const full = await hibp.breachedAccount("account@example.com", {
+  apiKey,
+  truncate: false,
+});
+console.log(full?.map((breach) => breach.DataClasses));
+```
+
+The package exports `TruncatedBreach` and `SearchResults` types. `SearchResults<true>` describes
+name-only searches, `SearchResults<false>` describes full searches, and `SearchResults<boolean>`
+(also the default for the type) allows either.
+
+HIBP supports a [free test API key](https://haveibeenpwned.com/API/v3#TestAPIKey) for account
+searches using its [official test email addresses](https://haveibeenpwned.com/API/v3#TestEmailAddresses).
+
 #### Quick-Start Example
 
 ```javascript

@@ -4,15 +4,19 @@
 <dt><a href="#breach">breach(breachName, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches data for a specific breach event.</p>
 </dd>
-<dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code>Promise.&lt;(Array.&lt;TruncatedBreach&gt;|Array.&lt;Breach&gt;|null)&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
+<p>Results contain only <code>Name</code> by default (<code>TruncatedBreach</code>). Pass
+<code>truncate: false</code> to receive full <code>Breach</code> objects. A dynamic boolean produces
+a union of both result types. Either result can be null when no breaches are
+found. See <a href="https://haveibeenpwned.com/API/v3#BreachesForAccount">https://haveibeenpwned.com/API/v3#BreachesForAccount</a>.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#breach--objectedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#BreachedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all breached email addresses for a domain.</p>
 <p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
 breach names. For example, querying <code>example.com</code> could return an object like
@@ -63,6 +67,9 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
+<p>Breaches contain only <code>Name</code> by default. Pass <code>truncate: false</code> to receive
+full <code>Breach</code> objects. A dynamic boolean produces a union of both breach
+result types. See <a href="https://haveibeenpwned.com/API/v3#BreachesForAccount">https://haveibeenpwned.com/API/v3#BreachesForAccount</a>.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
 <code>pasteaccount</code> endpoints. The <code>apiKey</code> option here is not explicitly
@@ -127,7 +134,10 @@ a valid API key on your behalf).</p>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
 <dd><p>An object representing a breach.</p>
 </dd>
-<dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dt><a href="#TruncatedBreach">TruncatedBreach</a> : <code>object</code></dt>
+<dd><p>A name-only breach returned by a truncated account search.</p>
+</dd>
+<dt><a href="#BreachedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
 </dd>
@@ -139,7 +149,9 @@ breach names that alias has appeared in for the specified domain.</p>
 hash prefix) to how many times it occurred in the Pwned Passwords repository.</p>
 </dd>
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
-<dd><p>An object representing search results.</p>
+<dd><p>An object representing search results.
+<code>SearchResults&lt;true&gt;</code> contains name-only breaches, <code>SearchResults&lt;false&gt;</code>
+contains full breaches, and <code>SearchResults&lt;boolean&gt;</code> allows either.</p>
 </dd>
 <dt><a href="#StealerLogDomainsByEmailAlias">StealerLogDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
@@ -188,8 +200,13 @@ try {
 ```
 <a name="breachedAccount"></a>
 
-## breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
+## breachedAccount(account, [options]) ⇒ <code>Promise.&lt;(Array.&lt;TruncatedBreach&gt;\|Array.&lt;Breach&gt;\|null)&gt;</code>
 Fetches breach data for a specific account.
+
+Results contain only `Name` by default (`TruncatedBreach`). Pass
+`truncate: false` to receive full `Breach` objects. A dynamic boolean produces
+a union of both result types. Either result can be null when no breaches are
+found. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
@@ -198,9 +215,9 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
-array of breach objects (or null if no breaches were found), or rejects with
-an Error  
+**Returns**: <code>Promise.&lt;(Array.&lt;TruncatedBreach&gt;\|Array.&lt;Breach&gt;\|null)&gt;</code> - a Promise which
+resolves to name-only breaches by default, full breaches with
+`truncate: false`, or null if no breaches were found; rejects with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -264,7 +281,7 @@ try {
 ```
 <a name="breachedDomain"></a>
 
-## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
+## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
 Fetches all breached email addresses for a domain.
 
 The result maps email aliases (the local-part before the '@') to an array of
@@ -279,7 +296,7 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
+**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
 resolves to an object mapping aliases to breach name arrays (or null if no
 results were found), or rejects with an Error  
 
@@ -566,6 +583,10 @@ provided account is not a valid email address, only breach data is queried
 and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
+
+Breaches contain only `Name` by default. Pass `truncate: false` to receive
+full `Breach` objects. A dynamic boolean produces a union of both breach
+result types. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` and
@@ -899,6 +920,18 @@ An object representing a breach.
 | IsSubscriptionFree | <code>boolean</code> | 
 | LogoPath | <code>string</code> | 
 
+<a name="TruncatedBreach"></a>
+
+## TruncatedBreach : <code>object</code>
+A name-only breach returned by a truncated account search.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| Name | <code>string</code> | 
+
 <a name="BreachedDomainsByEmailAlias"></a>
 
 ## BreachedDomainsByEmailAlias : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
@@ -933,13 +966,15 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.
 
 ## SearchResults : <code>object</code>
 An object representing search results.
+`SearchResults<true>` contains name-only breaches, `SearchResults<false>`
+contains full breaches, and `SearchResults<boolean>` allows either.
 
 **Kind**: global typedef  
 **Properties**
 
 | Name | Type |
 | --- | --- |
-| breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
+| breaches | [<code>Array.&lt;TruncatedBreach&gt;</code>](#TruncatedBreach) \| [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
 | pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
 
 <a name="StealerLogDomainsByEmailAlias"></a>

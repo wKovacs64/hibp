@@ -1,19 +1,59 @@
-import type { Breach, Paste } from "./api/haveibeenpwned/types.js";
+import type {
+  Breach,
+  Paste,
+  TruncatedBreach,
+} from "./api/haveibeenpwned/types.js";
 import { breachedAccount } from "./breached-account.js";
 import { pasteAccount } from "./paste-account.js";
 
-export interface SearchResults {
-  breaches: Breach[] | null;
+export interface SearchResults<Truncate extends boolean = boolean> {
+  breaches: (Truncate extends false ? Breach[] : TruncatedBreach[]) | null;
   pastes: Paste[] | null;
 }
 
 /**
  * An object representing search results.
+ * `SearchResults<true>` contains name-only breaches, `SearchResults<false>`
+ * contains full breaches, and `SearchResults<boolean>` allows either.
  *
  * @typedef {object} SearchResults
- * @property {(Breach[] | null)} breaches
+ * @property {(TruncatedBreach[] | Breach[] | null)} breaches
  * @property {(Paste[] | null)} pastes
  */
+
+interface SearchOptions {
+  /**
+   * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
+   */
+  apiKey?: string;
+  /**
+   * a domain by which to filter the results (default: all domains)
+   */
+  domain?: string;
+  /**
+   * truncate the results to only include the name of each breach (default:
+   * true)
+   */
+  truncate?: boolean;
+  /**
+   * a custom base URL for the haveibeenpwned.com API endpoints (default:
+   * `https://haveibeenpwned.com/api/v3`)
+   */
+  baseUrl?: string;
+  /**
+   * timeout for the request in milliseconds (default: none)
+   */
+  timeoutMs?: number;
+  /**
+   * an AbortSignal to cancel the request (default: none)
+   */
+  signal?: AbortSignal;
+  /**
+   * a custom string to send as the User-Agent field in the request headers
+   * (default: `hibp <version>`)
+   */
+  userAgent?: string;
+}
 
 /**
  * Fetches all breaches and all pastes associated with the provided account
@@ -23,6 +63,10 @@ export interface SearchResults {
  * and the "pastes" field of the resulting object will always be null. This is
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
+ *
+ * Breaches contain only `Name` by default. Pass `truncate: false` to receive
+ * full `Breach` objects. A dynamic boolean produces a union of both breach
+ * result types. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
  *
  * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` and
@@ -77,41 +121,21 @@ export interface SearchResults {
  * }
  * @see https://haveibeenpwned.com/
  */
+export function search(
+  account: string,
+  options?: SearchOptions & { truncate?: true },
+): Promise<SearchResults<true>>;
+export function search(
+  account: string,
+  options: SearchOptions & { truncate: false },
+): Promise<SearchResults<false>>;
+export function search(
+  account: string,
+  options?: SearchOptions,
+): Promise<SearchResults>;
 export async function search(
   account: string,
-  options: {
-    /**
-     * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
-     */
-    apiKey?: string;
-    /**
-     * a domain by which to filter the results (default: all domains)
-     */
-    domain?: string;
-    /**
-     * truncate the results to only include the name of each breach (default:
-     * true)
-     */
-    truncate?: boolean;
-    /**
-     * a custom base URL for the haveibeenpwned.com API endpoints (default:
-     * `https://haveibeenpwned.com/api/v3`)
-     */
-    baseUrl?: string;
-    /**
-     * timeout for the request in milliseconds (default: none)
-     */
-    timeoutMs?: number;
-    /**
-     * an AbortSignal to cancel the request (default: none)
-     */
-    signal?: AbortSignal;
-    /**
-     * a custom string to send as the User-Agent field in the request headers
-     * (default: `hibp <version>`)
-     */
-    userAgent?: string;
-  } = {},
+  options: SearchOptions = {},
 ): Promise<SearchResults> {
   const {
     apiKey,

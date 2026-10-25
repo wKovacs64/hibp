@@ -1,8 +1,58 @@
-import type { Breach } from "./api/haveibeenpwned/types.js";
+import type { Breach, TruncatedBreach } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
+ * A name-only breach returned by a truncated account search.
+ *
+ * @typedef {object} TruncatedBreach
+ * @property {string} Name
+ */
+
+interface BreachedAccountOptions {
+  /**
+   * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
+   */
+  apiKey?: string;
+  /**
+   * a domain by which to filter the results (default: all domains)
+   */
+  domain?: string;
+  /**
+   * include "unverified" breaches in the results (default: true)
+   */
+  includeUnverified?: boolean;
+  /**
+   * timeout for the request in milliseconds (default: none)
+   */
+  timeoutMs?: number;
+  /**
+   * an AbortSignal to cancel the request (default: none)
+   */
+  signal?: AbortSignal;
+  /**
+   * truncate the results to only include the name of each breach (default:
+   * true)
+   */
+  truncate?: boolean;
+  /**
+   * a custom base URL for the haveibeenpwned.com API endpoints (default:
+   * `https://haveibeenpwned.com/api/v3`)
+   */
+  baseUrl?: string;
+  /**
+   * a custom string to send as the User-Agent field in the request headers
+   * (default: `hibp <version>`)
+   */
+  userAgent?: string;
+}
+
+/**
  * Fetches breach data for a specific account.
+ *
+ * Results contain only `Name` by default (`TruncatedBreach`). Pass
+ * `truncate: false` to receive full `Breach` objects. A dynamic boolean produces
+ * a union of both result types. Either result can be null when no breaches are
+ * found. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
  *
  * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
@@ -28,9 +78,9 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
- * array of breach objects (or null if no breaches were found), or rejects with
- * an Error
+ * @returns {Promise<TruncatedBreach[] | Breach[] | null>} a Promise which
+ * resolves to name-only breaches by default, full breaches with
+ * `truncate: false`, or null if no breaches were found; rejects with an Error
  * @example
  * try {
  *   const data = await breachedAccount("foo", { apiKey: "my-api-key" });
@@ -75,44 +125,20 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  */
 export function breachedAccount(
   account: string,
-  options: {
-    /**
-     * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
-     */
-    apiKey?: string;
-    /**
-     * a domain by which to filter the results (default: all domains)
-     */
-    domain?: string;
-    /**
-     * include "unverified" breaches in the results (default: true)
-     */
-    includeUnverified?: boolean;
-    /**
-     * timeout for the request in milliseconds (default: none)
-     */
-    timeoutMs?: number;
-    /**
-     * an AbortSignal to cancel the request (default: none)
-     */
-    signal?: AbortSignal;
-    /**
-     * truncate the results to only include the name of each breach (default:
-     * true)
-     */
-    truncate?: boolean;
-    /**
-     * a custom base URL for the haveibeenpwned.com API endpoints (default:
-     * `https://haveibeenpwned.com/api/v3`)
-     */
-    baseUrl?: string;
-    /**
-     * a custom string to send as the User-Agent field in the request headers
-     * (default: `hibp <version>`)
-     */
-    userAgent?: string;
-  } = {},
-): Promise<Breach[] | null> {
+  options?: BreachedAccountOptions & { truncate?: true },
+): Promise<TruncatedBreach[] | null>;
+export function breachedAccount(
+  account: string,
+  options: BreachedAccountOptions & { truncate: false },
+): Promise<Breach[] | null>;
+export function breachedAccount(
+  account: string,
+  options?: BreachedAccountOptions,
+): Promise<Breach[] | TruncatedBreach[] | null>;
+export function breachedAccount(
+  account: string,
+  options: BreachedAccountOptions = {},
+): Promise<Breach[] | TruncatedBreach[] | null> {
   const {
     apiKey,
     domain,
@@ -144,5 +170,5 @@ export function breachedAccount(
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<Breach[] | null>;
+  }) as Promise<Breach[] | TruncatedBreach[] | null>;
 }
