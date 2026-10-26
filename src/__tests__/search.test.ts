@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import {
@@ -41,6 +41,23 @@ describe("search", () => {
       breaches: BREACHES,
       pastes: PASTES,
     });
+  });
+
+  it("types absent paste titles and null paste dates", async () => {
+    server.use(
+      http.get(/breachedaccount/, () => {
+        return new Response(JSON.stringify(BREACHES));
+      }),
+      http.get(/pasteaccount/, () => {
+        return new Response(JSON.stringify(PASTES));
+      }),
+    );
+
+    const { pastes } = await search("pasted@email.com");
+    type Result = NonNullable<typeof pastes>[number];
+    expectTypeOf<Result["Title"]>().toEqualTypeOf<string | undefined>();
+    expectTypeOf<Result["Date"]>().toEqualTypeOf<string | null>();
+    expect(pastes).toEqual(PASTES);
   });
 
   it("forwards the apiKey option correctly", async () => {

@@ -54,7 +54,9 @@ export const UNVERIFIED_BREACH: Breach = {
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png",
 };
 
-// Documentation-derived paste fixtures: https://haveibeenpwned.com/API/v3#PasteModel
+// PASTE and PASTE_WITHOUT_TITLE come from the documented sample response; the
+// field contract is https://haveibeenpwned.com/API/v3#PasteModel. Live paste
+// responses are unverified (the test API key cannot query pastes).
 export const PASTE: Paste = {
   Source: "Pastebin",
   Id: "8Q0BvKD8",
@@ -70,6 +72,7 @@ export const PASTE_WITHOUT_TITLE: Paste = {
   EmailCount: 30,
 };
 
+// Synthetic: the documentation allows a null Date but has no sample of one.
 export const PASTE_WITH_NULL_DATE: Paste = {
   Source: "Pastebin",
   Id: "unknown-date",

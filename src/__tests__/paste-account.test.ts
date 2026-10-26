@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import {
@@ -23,6 +23,24 @@ describe("pasteAccount", () => {
       return expect(pasteAccount("pasted@email.com")).resolves.toEqual(
         PASTE_ACCOUNT_DATA,
       );
+    });
+
+    it("types absent titles and null dates", async () => {
+      server.use(
+        http.get("*", () => {
+          return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
+        }),
+      );
+
+      const pastes = await pasteAccount("pasted@email.com");
+      type Result = NonNullable<typeof pastes>[number];
+      expectTypeOf<Result["Title"]>().toEqualTypeOf<string | undefined>();
+      expectTypeOf<Result["Date"]>().toEqualTypeOf<string | null>();
+      expect(pastes?.map(({ Title, Date }) => ({ Title, Date }))).toEqual([
+        { Title: PASTE.Title, Date: PASTE.Date },
+        { Title: undefined, Date: PASTE_WITHOUT_TITLE.Date },
+        { Title: PASTE_WITH_NULL_DATE.Title, Date: null },
+      ]);
     });
   });
 
