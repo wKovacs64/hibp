@@ -53,19 +53,19 @@ them.
 - [Securely][search-by-range] check a password to see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 
-#### ![Core][core-plan] · ![Pro][pro-plan] · ![High RPM][high-rpm-plan]
+#### ![Core][core-plan] / ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
 
 - Get all breaches for an account
 - Get all pastes for an account
 - Search for an account in both breaches and pastes at the same time
 - Get your subscription status, domain limits, and plan capabilities
 
-#### ![Core][core-plan] · ![Pro][pro-plan]
+#### ![Core][core-plan] / ![Pro][pro-plan]
 
 - Get all breached email addresses for a domain
 - Get all subscribed domains
 
-#### ![Pro][pro-plan] · ![High RPM][high-rpm-plan]
+#### ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
 
 - Search breaches by a six-character SHA-1 email prefix
 
