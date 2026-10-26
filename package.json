@@ -85,7 +85,7 @@
     "@changesets/cli": "3.0.3",
     "@playwright/test": "1.64.1",
     "@types/common-tags": "1.8.4",
-    "@types/node": "24.19.2",
+    "@types/node": "22.20.5",
     "@vitest/coverage-v8": "5.0.5",
     "@wkovacs64/oxlint-config": "0.4.0",
     "bundlewatch": "1.1.0",
@@ -106,7 +106,7 @@
     "vitest": "5.0.5"
   },
   "engines": {
-    "node": ">= 20.19.0"
+    "node": ">= 22.12.0"
   },
   "packageManager": "pnpm@12.15.0"
 }
