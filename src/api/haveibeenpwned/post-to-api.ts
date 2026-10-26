@@ -1,5 +1,6 @@
 import {
   blockedWithRayId,
+  jsonMessage,
   RateLimitError,
   requestApi,
   type ApiOptions,
@@ -37,22 +38,4 @@ export async function postToApi(
     throw new RateLimitError(headers.get("retry-after"), message);
   }
   throw new Error(message);
-}
-
-function jsonMessage(text: string): string | null {
-  try {
-    const error: unknown = JSON.parse(text);
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "message" in error &&
-      typeof error.message === "string" &&
-      error.message.trim()
-    ) {
-      return error.message;
-    }
-  } catch {
-    // Not JSON; use the next available reason.
-  }
-  return null;
 }

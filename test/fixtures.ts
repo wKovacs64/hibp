@@ -107,8 +107,8 @@ export const DNS_VERIFICATION_FAILURE = {
   message: "No hibp-verify TXT records were found on the domain.",
 };
 
-// Live unauthenticated POST responses from both DNS endpoints, 2026-10-25.
-export const DOMAIN_VERIFICATION_UNAUTHORIZED = {
+// Live unauthenticated GET and POST responses, 2026-10-25.
+export const MISSING_API_KEY = {
   statusCode: 401,
   message: "Access denied due to missing hibp-api-key.",
 };

@@ -102,13 +102,3 @@ export type ApiData =
   | SubscriptionStatus // subscription/status
   | SubscribedDomain[] // subscribeddomains
   | null; // most endpoints can return an empty response (404, but not an error)
-
-/**
- * Data returned in the response body of a failed API query
- *
- * @internal
- */
-export interface ErrorData {
-  statusCode: number;
-  message: string;
-}

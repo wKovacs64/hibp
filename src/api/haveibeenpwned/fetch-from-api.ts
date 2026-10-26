@@ -6,7 +6,7 @@ import {
   NOT_FOUND,
   TOO_MANY_REQUESTS,
 } from "./responses.js";
-import type { ApiData, ErrorData } from "./types.js";
+import type { ApiData } from "./types.js";
 
 /**
  * Custom error thrown when the haveibeenpwned.com API responds with 429 Too
@@ -40,6 +40,29 @@ export class RateLimitError extends Error {
 /** @internal */
 export function blockedWithRayId(rayId: string) {
   return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
+}
+
+/**
+ * Reads the `message` of a JSON error body, or `null` if absent or blank.
+ *
+ * @internal
+ */
+export function jsonMessage(text: string): string | null {
+  try {
+    const error: unknown = JSON.parse(text);
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "message" in error &&
+      typeof error.message === "string" &&
+      error.message.trim()
+    ) {
+      return error.message;
+    }
+  } catch {
+    // Not JSON.
+  }
+  return null;
 }
 
 /** @internal */
@@ -92,7 +115,8 @@ export function requestApi(
  * HTTP status code 200 returns an Object (data found).
  * HTTP status code 404 returns null (no data found).
  * HTTP status code 400 throws an Error (bad request).
- * HTTP status code 401 throws an Error (unauthorized).
+ * HTTP status code 401 throws an Error (unauthorized) with the body's JSON
+ * `message`, or the body text.
  * HTTP status code 403 throws an Error (forbidden).
  * HTTP status code 429 throws an Error (too many requests).
  *
@@ -127,8 +151,8 @@ export async function fetchFromApi(
       throw new Error(BAD_REQUEST.statusText);
     }
     case UNAUTHORIZED.status: {
-      const message = await response.text();
-      throw new Error(message);
+      const text = await response.text();
+      throw new Error(jsonMessage(text) ?? text);
     }
     case FORBIDDEN.status: {
       const rayId = response.headers.get("cf-ray");
@@ -139,9 +163,9 @@ export async function fetchFromApi(
       return null;
     }
     case TOO_MANY_REQUESTS.status: {
-      const body = (await response.json()) as unknown as ErrorData;
+      const message = jsonMessage(await response.text()) ?? undefined;
       const retryAfter = response.headers.get("retry-after");
-      throw new RateLimitError(retryAfter, body.message);
+      throw new RateLimitError(retryAfter, message);
     }
     default: {
       throw new Error(response.statusText);

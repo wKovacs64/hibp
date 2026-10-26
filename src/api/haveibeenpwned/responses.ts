@@ -17,8 +17,9 @@ export const BAD_REQUEST = {
 };
 
 /**
- * The API includes a human-readable error message as text in the body of this
- * response type. Manually populating the message here purely for use in tests.
+ * A plain-text body for this response type. The live API sends a JSON object
+ * containing a human-readable message instead. Manually populating the message
+ * here purely for use in tests.
  *
  * @internal
  */
