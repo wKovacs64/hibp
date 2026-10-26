@@ -80,7 +80,7 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it will fail (unless you specify a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#sendDomainVerificationEmail">sendDomainVerificationEmail(domain, emailAlias, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dt><a href="#sendEmail">sendEmail(domain, emailAlias, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>Requests a domain verification approval email.</p>
 <p>Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
 at the domain to complete verification.</p>
@@ -177,7 +177,7 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
 </dd>
-<dt><a href="#DomainVerificationEmailAlias">DomainVerificationEmailAlias</a> : <code>&quot;admin&quot;</code> | <code>&quot;hostmaster&quot;</code> | <code>&quot;info&quot;</code> | <code>&quot;security&quot;</code> | <code>&quot;webmaster&quot;</code></dt>
+<dt><a href="#EmailAlias">EmailAlias</a> : <code>&quot;admin&quot;</code> | <code>&quot;hostmaster&quot;</code> | <code>&quot;info&quot;</code> | <code>&quot;security&quot;</code> | <code>&quot;webmaster&quot;</code></dt>
 <dd><p>An administrative alias supported for domain verification emails.</p>
 </dd>
 <dt><a href="#StealerLogDomainsByEmailAlias">StealerLogDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
@@ -701,9 +701,9 @@ try {
   // ...
 }
 ```
-<a name="sendDomainVerificationEmail"></a>
+<a name="sendEmail"></a>
 
-## sendDomainVerificationEmail(domain, emailAlias, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
+## sendEmail(domain, emailAlias, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
 Requests a domain verification approval email.
 
 Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
@@ -724,7 +724,7 @@ Error containing the upstream failure reason
 | Param | Type | Description |
 | --- | --- | --- |
 | domain | <code>string</code> | the domain to verify (e.g., "example.com") |
-| emailAlias | [<code>DomainVerificationEmailAlias</code>](#DomainVerificationEmailAlias) | the administrative alias to receive the email |
+| emailAlias | [<code>EmailAlias</code>](#EmailAlias) | the administrative alias to receive the email |
 | [options] | <code>object</code> | a configuration object |
 | [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
@@ -735,7 +735,7 @@ Error containing the upstream failure reason
 **Example**  
 ```js
 try {
-  await sendDomainVerificationEmail("example.com", "security", {
+  await sendEmail("example.com", "security", {
     apiKey: "my-api-key",
   });
   // Follow the link in the email sent to security@example.com.
@@ -1117,9 +1117,9 @@ An object representing search results.
 | breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
 | pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
 
-<a name="DomainVerificationEmailAlias"></a>
+<a name="EmailAlias"></a>
 
-## DomainVerificationEmailAlias : <code>&quot;admin&quot;</code> \| <code>&quot;hostmaster&quot;</code> \| <code>&quot;info&quot;</code> \| <code>&quot;security&quot;</code> \| <code>&quot;webmaster&quot;</code>
+## EmailAlias : <code>&quot;admin&quot;</code> \| <code>&quot;hostmaster&quot;</code> \| <code>&quot;info&quot;</code> \| <code>&quot;security&quot;</code> \| <code>&quot;webmaster&quot;</code>
 An administrative alias supported for domain verification emails.
 
 **Kind**: global typedef  

@@ -80,7 +80,7 @@ The following modules are available:
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
-- [sendDomainVerificationEmail](API.md#senddomainverificationemail)
+- [sendEmail](API.md#sendemail)
 - [stealerLogsByEmail](API.md#stealerlogsbyemail)
 - [stealerLogsByEmailDomain](API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
@@ -141,9 +141,9 @@ verification.
 subscription. Request an approval email using `admin`, `hostmaster`, `info`, `security` or `webmaster`:
 
 ```typescript
-import { sendDomainVerificationEmail } from "hibp";
+import { sendEmail } from "hibp";
 
-await sendDomainVerificationEmail("example.com", "security", {
+await sendEmail("example.com", "security", {
   apiKey: "my-pro-api-key",
 });
 ```

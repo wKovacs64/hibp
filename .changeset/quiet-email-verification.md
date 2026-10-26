@@ -2,4 +2,4 @@
 "hibp": minor
 ---
 
-Add `sendDomainVerificationEmail` and the `DomainVerificationEmailAlias` type for domain verification approval emails.
+Add `sendEmail` and the `EmailAlias` type for domain verification approval emails.

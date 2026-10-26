@@ -86,7 +86,7 @@
       "maxSize": "1.4 kB"
     },
     {
-      "path": "dist/esm/send-domain-verification-email.js",
+      "path": "dist/esm/send-email.js",
       "maxSize": "1.1 kB"
     },
     {

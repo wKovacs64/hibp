@@ -10,7 +10,7 @@ import { pasteAccount } from "./paste-account.js";
 import { pwnedPassword } from "./pwned-password.js";
 import { pwnedPasswordRange } from "./pwned-password-range.js";
 import { search } from "./search.js";
-import { sendDomainVerificationEmail } from "./send-domain-verification-email.js";
+import { sendEmail } from "./send-email.js";
 import { stealerLogsByEmail } from "./stealer-logs-by-email.js";
 import { stealerLogsByEmailDomain } from "./stealer-logs-by-email-domain.js";
 import { stealerLogsByWebsiteDomain } from "./stealer-logs-by-website-domain.js";
@@ -41,7 +41,7 @@ export {
   pwnedPassword,
   pwnedPasswordRange,
   search,
-  sendDomainVerificationEmail,
+  sendEmail,
   stealerLogsByEmail,
   stealerLogsByEmailDomain,
   stealerLogsByWebsiteDomain,
@@ -64,7 +64,7 @@ export interface HIBP {
   pwnedPassword: typeof pwnedPassword;
   pwnedPasswordRange: typeof pwnedPasswordRange;
   search: typeof search;
-  sendDomainVerificationEmail: typeof sendDomainVerificationEmail;
+  sendEmail: typeof sendEmail;
   stealerLogsByEmail: typeof stealerLogsByEmail;
   stealerLogsByEmailDomain: typeof stealerLogsByEmailDomain;
   stealerLogsByWebsiteDomain: typeof stealerLogsByWebsiteDomain;

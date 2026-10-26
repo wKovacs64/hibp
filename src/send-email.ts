@@ -1,10 +1,10 @@
 import { postToApi } from "./api/haveibeenpwned/post-to-api.js";
-import type { DomainVerificationEmailAlias } from "./api/haveibeenpwned/types.js";
+import type { EmailAlias } from "./api/haveibeenpwned/types.js";
 
 /**
  * An administrative alias supported for domain verification emails.
  *
- * @typedef {("admin"|"hostmaster"|"info"|"security"|"webmaster")} DomainVerificationEmailAlias
+ * @typedef {("admin"|"hostmaster"|"info"|"security"|"webmaster")} EmailAlias
  */
 
 /**
@@ -21,7 +21,7 @@ import type { DomainVerificationEmailAlias } from "./api/haveibeenpwned/types.js
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail
  * @param {string} domain the domain to verify (e.g., "example.com")
- * @param {DomainVerificationEmailAlias} emailAlias the administrative alias to
+ * @param {EmailAlias} emailAlias the administrative alias to
  * receive the email
  * @param {object} [options] a configuration object
  * @param {string} [options.apiKey] an API key from
@@ -39,7 +39,7 @@ import type { DomainVerificationEmailAlias } from "./api/haveibeenpwned/types.js
  * Error containing the upstream failure reason
  * @example
  * try {
- *   await sendDomainVerificationEmail("example.com", "security", {
+ *   await sendEmail("example.com", "security", {
  *     apiKey: "my-api-key",
  *   });
  *   // Follow the link in the email sent to security@example.com.
@@ -47,9 +47,9 @@ import type { DomainVerificationEmailAlias } from "./api/haveibeenpwned/types.js
  *   // ...
  * }
  */
-export async function sendDomainVerificationEmail(
+export async function sendEmail(
   domain: string,
-  emailAlias: DomainVerificationEmailAlias,
+  emailAlias: EmailAlias,
   options: {
     /**
      * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
