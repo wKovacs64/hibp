@@ -93,19 +93,22 @@ describe("internal: buildHeaders", () => {
       });
     });
 
-    it("uses default User-Agent in Node.js", () => {
+    it("uses default User-Agent outside browsers", () => {
       const result = buildHeaders();
       expect(result["User-Agent"]).toMatch(/^hibp \d+\.\d+\.\d+/);
     });
 
-    it("does not set User-Agent outside Node.js", () => {
-      vi.stubGlobal("process", undefined);
-      try {
-        expect(buildHeaders()["User-Agent"]).toBeUndefined();
-      } finally {
-        vi.unstubAllGlobals();
-      }
-    });
+    it.each(["document", "importScripts"])(
+      "does not set User-Agent in browsers (%s exists)",
+      (global) => {
+        vi.stubGlobal(global, {});
+        try {
+          expect(buildHeaders()["User-Agent"]).toBeUndefined();
+        } finally {
+          vi.unstubAllGlobals();
+        }
+      },
+    );
   });
 });
 

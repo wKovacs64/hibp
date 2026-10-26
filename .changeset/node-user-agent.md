@@ -2,4 +2,4 @@
 "hibp": patch
 ---
 
-Send the default `hibp <version>` User-Agent in Node.js 21+, Bun, and Deno. These runtimes define a global `navigator`, which the SDK mistook for a browser, so requests went out with the runtime's default User-Agent (e.g. `node`). Browsers still send their own.
+Send the default `hibp <version>` User-Agent in every non-browser runtime. The SDK skipped it whenever a global `navigator` existed, which Node.js 21+, Bun, Deno, and Cloudflare Workers all define. Those requests went out with the runtime's User-Agent (e.g. `node`), or none at all on Cloudflare Workers. Browser pages and workers still send their own User-Agent, because setting one triggers a CORS preflight that haveibeenpwned.com rejects.

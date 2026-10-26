@@ -15,7 +15,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
   const apiKey = "my-api-key";
 
   describe("User-Agent", () => {
-    it("sends a custom User-Agent request header in Node.js", async () => {
+    it("sends a custom User-Agent request header outside browsers", async () => {
       server.use(
         http.get("*", ({ request }) => {
           return request.headers.get("User-Agent")?.includes("hibp")

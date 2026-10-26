@@ -65,7 +65,7 @@ export function buildHeaders(
 
   if (userAgent) {
     headers["User-Agent"] = userAgent;
-  } else if (isNodeCompatible()) {
+  } else if (!isBrowser()) {
     headers["User-Agent"] = `${PACKAGE_NAME} ${PACKAGE_VERSION}`;
   }
 
@@ -88,12 +88,11 @@ function buildSignal(
 }
 
 /**
- * Node.js, Bun, and Deno all report a Node.js version. Browsers send their own
- * User-Agent, and setting one would force a CORS preflight.
+ * Browser pages have a `document` and browser workers have `importScripts`.
+ * Browsers send their own User-Agent, and setting one would force a CORS
+ * preflight, which haveibeenpwned.com rejects. Server runtimes have neither
+ * global, and some (e.g. Cloudflare Workers) send no User-Agent of their own.
  */
-function isNodeCompatible() {
-  const { process } = globalThis as {
-    process?: { versions?: { node?: unknown } };
-  };
-  return typeof process?.versions?.node === "string";
+function isBrowser() {
+  return typeof document !== "undefined" || "importScripts" in globalThis;
 }
