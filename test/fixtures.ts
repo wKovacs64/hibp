@@ -1,9 +1,19 @@
 import { stripIndents } from "common-tags";
 import type {
   Breach,
+  DataClassDescription,
   Paste,
   SubscriptionStatus,
 } from "../src/api/haveibeenpwned/types.js";
+
+// https://haveibeenpwned.com/api/v3/dataClasses/descriptions
+export const DATA_CLASS_DESCRIPTIONS: DataClassDescription[] = [
+  {
+    name: "Academic records",
+    description:
+      "School or university records including grades, transcripts, enrolment history, and course information tied to an individual student.",
+  },
+];
 
 export const VERIFIED_BREACH: Breach = {
   Name: "Adobe",
@@ -22,8 +32,11 @@ export const VERIFIED_BREACH: Breach = {
   IsRetired: false,
   IsSpamList: false,
   IsMalware: false,
+  IsStealerLog: false,
   IsSubscriptionFree: false,
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Adobe.png",
+  Attribution: null,
+  DisclosureUrl: null,
 };
 
 export const UNVERIFIED_BREACH: Breach = {
@@ -50,8 +63,11 @@ export const UNVERIFIED_BREACH: Breach = {
   IsRetired: false,
   IsSpamList: false,
   IsMalware: false,
+  IsStealerLog: false,
   IsSubscriptionFree: false,
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png",
+  Attribution: null,
+  DisclosureUrl: null,
 };
 
 export const PASTE: Paste = {
@@ -62,6 +78,8 @@ export const PASTE: Paste = {
   EmailCount: 139,
 };
 
+// Synthetic values; field set from
+// https://haveibeenpwned.com/API/v3#SubscriptionStatus. Not a live response.
 export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscriptionName: "Pwned 1",
   Description:
@@ -69,12 +87,27 @@ export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscribedUntil: "2024-04-02T12:34:56",
   Rpm: 10,
   DomainSearchMaxBreachedAccounts: 25,
+  MaxBreachedDomains: 2,
   IncludesStealerLogs: false,
+  IncludesBulkDomainAdd: false,
+  IncludesAutoSubdomainVerification: false,
+  IncludesCustomerDomains: false,
+  IncludesKAnon: false,
 };
 
 export const PASSWORD = "password";
 
 export const SHA1_PREFIX = "5BAA6";
+
+// Documentation-derived example, not an authenticated live response:
+// https://haveibeenpwned.com/API/v3#BreachesForHashRange
+export const EMAIL_SHA1_PREFIX = "6B5917";
+export const EMAIL_RANGE_RESULTS = [
+  {
+    hashSuffix: "C6C0AADE0C085843D66E4944E108C4A4CD",
+    websites: ["Adobe", "Gawker", "Stratfor"],
+  },
+];
 
 export const SHA1_RESPONSE_BODY = stripIndents`
   003D68EB55068C33ACE09247EE4C639306B:3
