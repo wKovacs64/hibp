@@ -319,6 +319,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [options.isSpamList] | <code>boolean</code> | true for only spam-list breaches, false for only non-spam-list breaches (default: no spam-list filter) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
@@ -340,7 +341,7 @@ try {
 **Example**  
 ```js
 try {
-  const data = await breaches({ domain: "adobe.com" });
+  const data = await breaches({ domain: "adobe.com", isSpamList: false });
   if (data) {
     // ...
   } else {
