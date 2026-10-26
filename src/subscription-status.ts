@@ -3,7 +3,6 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object representing the status of your HIBP subscription.
- * Fields follow the [documented HIBP contract](https://haveibeenpwned.com/API/v3).
  *
  * @typedef {object} SubscriptionStatus
  * @property {string} SubscriptionName

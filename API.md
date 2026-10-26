@@ -150,8 +150,7 @@ email domain.</p>
 <dd><p>An object representing a subscribed domain.</p>
 </dd>
 <dt><a href="#subscriptionstatus--object">SubscriptionStatus</a> : <code>object</code></dt>
-<dd><p>An object representing the status of your HIBP subscription.
-Fields follow the <a href="https://haveibeenpwned.com/API/v3">documented HIBP contract</a>.</p>
+<dd><p>An object representing the status of your HIBP subscription.</p>
 </dd>
 </dl>
 
@@ -971,7 +970,6 @@ An object representing a subscribed domain.
 
 ## SubscriptionStatus : <code>object</code>
 An object representing the status of your HIBP subscription.
-Fields follow the [documented HIBP contract](https://haveibeenpwned.com/API/v3).
 
 **Kind**: global typedef  
 **Properties**
