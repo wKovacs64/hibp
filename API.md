@@ -4,15 +4,30 @@
 <dt><a href="#breach">breach(breachName, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches data for a specific breach event.</p>
 </dd>
+<dt><a href="#breachedAccountRange">breachedAccountRange(prefix, [options])</a> ⇒ <code><a href="#breachedaccountrangeresult--object">Promise.&lt;Array.&lt;BreachedAccountRangeResult&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches breached email hash suffixes for a six-character SHA-1 email hash
+prefix.</p>
+<p>Requires a Pro or High RPM subscription.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount/range</code> endpoint.
+The <code>apiKey</code> option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
+<p>Compare suffixes locally against the intended email hash. Per the
+haveibeenpwned.com terms of use, discard unrelated results immediately
+without storing or further processing them.</p>
+</dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
+<p>Results contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
+breaches.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#breach--objectedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#BreachedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all breached email addresses for a domain.</p>
 <p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
 breach names. For example, querying <code>example.com</code> could return an object like
@@ -26,6 +41,9 @@ a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code></dt>
 <dd><p>Fetches all breach events in the system.</p>
+</dd>
+<dt><a href="#dataClassDescriptions">dataClassDescriptions([options])</a> ⇒ <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches all data class names and descriptions.</p>
 </dd>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
@@ -74,6 +92,8 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
+<p>Breaches contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
+breaches.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
 <code>pasteaccount</code> endpoints. The <code>apiKey</code> option here is not explicitly
@@ -159,10 +179,19 @@ behalf).</p>
 <dl>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
 <dd><p>An object representing a breach.</p>
+<p><code>Attribution</code> and <code>DisclosureUrl</code> may be null. See the
+<a href="https://haveibeenpwned.com/API/v3#BreachModel">breach model</a> and the
+<a href="https://haveibeenpwned.com/api/v3/breaches">breach catalogue</a>.</p>
 </dd>
-<dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dt><a href="#BreachedAccountRangeResult">BreachedAccountRangeResult</a> : <code>Object</code></dt>
+<dd><p>A breached email hash suffix and the breach names associated with it.</p>
+</dd>
+<dt><a href="#BreachedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
+</dd>
+<dt><a href="#dataclassdescription--object">DataClassDescription</a> : <code>object</code></dt>
+<dd><p>A data class name and its description.</p>
 </dd>
 <dt><a href="#DnsToken">DnsToken</a> : <code>object</code></dt>
 <dd><p>The TXT record value to publish at your DNS provider.</p>
@@ -225,10 +254,59 @@ try {
   // ...
 }
 ```
+<a name="breachedAccountRange"></a>
+
+## breachedAccountRange(prefix, [options]) ⇒ <code><a href="#breachedaccountrangeresult--object">Promise.&lt;Array.&lt;BreachedAccountRangeResult&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
+Fetches breached email hash suffixes for a six-character SHA-1 email hash
+prefix.
+
+Requires a Pro or High RPM subscription.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `breachedaccount/range` endpoint.
+The `apiKey` option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
+
+Compare suffixes locally against the intended email hash. Per the
+haveibeenpwned.com terms of use, discard unrelated results immediately
+without storing or further processing them.
+
+**Kind**: global function  
+**Returns**: <code><a href="#breachedaccountrangeresult--object">Promise.&lt;Array.&lt;BreachedAccountRangeResult&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise
+which resolves to an array of range results (or null if none were found), or
+rejects with an Error  
+**See**: https://haveibeenpwned.com/API/v3#BreachesForHashRange  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| prefix | <code>string</code> | the first six characters of a SHA-1 email hash (case-insensitive) |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await breachedAccountRange("6B5917", { apiKey: "my-api-key" });
+  const match = data?.find(
+    ({ hashSuffix }) => hashSuffix === "C6C0AADE0C085843D66E4944E108C4A4CD",
+  );
+  // match?.websites: ["Adobe", "Gawker", "Stratfor"] in the documented example
+} catch (err) {
+  // ...
+}
+```
 <a name="breachedAccount"></a>
 
 ## breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches breach data for a specific account.
+
+Results contain only `Name` by default; pass `truncate: false` for full
+breaches.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
@@ -237,9 +315,9 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
-array of breach objects (or null if no breaches were found), or rejects with
-an Error  
+**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
+resolves to name-only breaches by default, full breaches with
+`truncate: false`, or null if no breaches were found; rejects with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -303,7 +381,7 @@ try {
 ```
 <a name="breachedDomain"></a>
 
-## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
+## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
 Fetches all breached email addresses for a domain.
 
 The result maps email aliases (the local-part before the '@') to an array of
@@ -318,7 +396,7 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
+**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
 resolves to an object mapping aliases to breach name arrays (or null if no
 results were found), or rejects with an Error  
 
@@ -358,6 +436,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [options.isSpamList] | <code>boolean</code> | true for only spam-list breaches, false for only non-spam-list breaches (default: no spam-list filter) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
@@ -379,7 +458,38 @@ try {
 **Example**  
 ```js
 try {
-  const data = await breaches({ domain: "adobe.com" });
+  const data = await breaches({ domain: "adobe.com", isSpamList: false });
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
+```
+<a name="dataClassDescriptions"></a>
+
+## dataClassDescriptions([options]) ⇒ <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
+Fetches all data class names and descriptions.
+
+**Kind**: global function  
+**Returns**: <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
+resolves to an array of data class objects (or null if no data classes were
+found), or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await dataClassDescriptions();
   if (data) {
     // ...
   } else {
@@ -646,6 +756,9 @@ provided account is not a valid email address, only breach data is queried
 and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
+
+Breaches contain only `Name` by default; pass `truncate: false` for full
+breaches.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` and
@@ -1039,28 +1152,48 @@ try {
 ## Breach : <code>object</code>
 An object representing a breach.
 
+`Attribution` and `DisclosureUrl` may be null. See the
+[breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the
+[breach catalogue](https://haveibeenpwned.com/api/v3/breaches).
+
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| Name | <code>string</code> | 
-| Title | <code>string</code> | 
-| Domain | <code>string</code> | 
-| BreachDate | <code>string</code> | 
-| AddedDate | <code>string</code> | 
-| ModifiedDate | <code>string</code> | 
-| PwnCount | <code>number</code> | 
-| Description | <code>string</code> | 
-| DataClasses | <code>Array.&lt;string&gt;</code> | 
-| IsVerified | <code>boolean</code> | 
-| IsFabricated | <code>boolean</code> | 
-| IsSensitive | <code>boolean</code> | 
-| IsRetired | <code>boolean</code> | 
-| IsSpamList | <code>boolean</code> | 
-| IsMalware | <code>boolean</code> | 
-| IsSubscriptionFree | <code>boolean</code> | 
-| LogoPath | <code>string</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| Name | <code>string</code> |  |
+| Title | <code>string</code> |  |
+| Domain | <code>string</code> |  |
+| BreachDate | <code>string</code> |  |
+| AddedDate | <code>string</code> |  |
+| ModifiedDate | <code>string</code> |  |
+| PwnCount | <code>number</code> |  |
+| Description | <code>string</code> |  |
+| DataClasses | <code>Array.&lt;string&gt;</code> |  |
+| IsVerified | <code>boolean</code> |  |
+| IsFabricated | <code>boolean</code> |  |
+| IsSensitive | <code>boolean</code> |  |
+| IsRetired | <code>boolean</code> |  |
+| IsSpamList | <code>boolean</code> |  |
+| IsMalware | <code>boolean</code> |  |
+| IsStealerLog | <code>boolean</code> | whether the breach is sourced from stealer logs |
+| IsSubscriptionFree | <code>boolean</code> |  |
+| LogoPath | <code>string</code> |  |
+| Attribution | <code>string</code> \| <code>null</code> | credit requested by the data provider, or null |
+| DisclosureUrl | <code>string</code> \| <code>null</code> | breach disclosure URL, or null |
+
+<a name="BreachedAccountRangeResult"></a>
+
+## BreachedAccountRangeResult : <code>Object</code>
+A breached email hash suffix and the breach names associated with it.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| hashSuffix | <code>string</code> | the remaining 34 characters of a SHA-1 email hash |
+| websites | <code>Array.&lt;string&gt;</code> | breach names, not website domains or URLs |
 
 <a name="BreachedDomainsByEmailAlias"></a>
 
@@ -1069,6 +1202,19 @@ An object mapping an email alias (local-part before the '@') to the list of
 breach names that alias has appeared in for the specified domain.
 
 **Kind**: global typedef  
+<a name="DataClassDescription"></a>
+
+## DataClassDescription : <code>object</code>
+A data class name and its description.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | the data class name |
+| description | <code>string</code> | a description of the compromised data |
+
 <a name="DnsToken"></a>
 
 ## DnsToken : <code>object</code>
@@ -1089,13 +1235,13 @@ An object representing a paste.
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| Id | <code>string</code> | 
-| Source | <code>string</code> | 
-| Title | <code>string</code> | 
-| Date | <code>string</code> | 
-| EmailCount | <code>number</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| Id | <code>string</code> |  |
+| Source | <code>string</code> |  |
+| [Title] | <code>string</code> | omitted when the source has no title |
+| Date | <code>string</code> \| <code>null</code> | null when the source has no posting date |
+| EmailCount | <code>number</code> |  |
 
 <a name="PwnedPasswordSuffixes"></a>
 
@@ -1155,12 +1301,17 @@ An object representing the status of your HIBP subscription.
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| SubscriptionName | <code>string</code> | 
-| Description | <code>string</code> | 
-| SubscribedUntil | <code>string</code> | 
-| Rpm | <code>number</code> | 
-| DomainSearchMaxBreachedAccounts | <code>number</code> | 
-| IncludesStealerLogs | <code>boolean</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| SubscriptionName | <code>string</code> |  |
+| Description | <code>string</code> |  |
+| SubscribedUntil | <code>string</code> |  |
+| Rpm | <code>number</code> |  |
+| DomainSearchMaxBreachedAccounts | <code>number</code> |  |
+| MaxBreachedDomains | <code>number</code> \| <code>null</code> | maximum domains that can be added; null means no limit |
+| IncludesStealerLogs | <code>boolean</code> |  |
+| IncludesBulkDomainAdd | <code>boolean</code> | access to APIs for adding domains in bulk |
+| IncludesAutoSubdomainVerification | <code>boolean</code> | automatic verification of subdomains of a verified apex domain |
+| IncludesCustomerDomains | <code>boolean</code> | permission to add customer domains |
+| IncludesKAnon | <code>boolean</code> | access to email address searches using k-anonymity |
 

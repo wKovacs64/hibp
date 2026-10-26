@@ -4,6 +4,10 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 /**
  * An object representing a breach.
  *
+ * `Attribution` and `DisclosureUrl` may be null. See the
+ * [breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the
+ * [breach catalogue](https://haveibeenpwned.com/api/v3/breaches).
+ *
  * @typedef {object} Breach
  * @property {string} Name
  * @property {string} Title
@@ -20,8 +24,11 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @property {boolean} IsRetired
  * @property {boolean} IsSpamList
  * @property {boolean} IsMalware
+ * @property {boolean} IsStealerLog whether the breach is sourced from stealer logs
  * @property {boolean} IsSubscriptionFree
  * @property {string} LogoPath
+ * @property {(string | null)} Attribution credit requested by the data provider, or null
+ * @property {(string | null)} DisclosureUrl breach disclosure URL, or null
  */
 
 /**

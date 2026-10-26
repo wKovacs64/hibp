@@ -1,8 +1,49 @@
 import type { Breach } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
+interface BreachedAccountOptions {
+  /**
+   * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
+   */
+  apiKey?: string;
+  /**
+   * a domain by which to filter the results (default: all domains)
+   */
+  domain?: string;
+  /**
+   * include "unverified" breaches in the results (default: true)
+   */
+  includeUnverified?: boolean;
+  /**
+   * timeout for the request in milliseconds (default: none)
+   */
+  timeoutMs?: number;
+  /**
+   * an AbortSignal to cancel the request (default: none)
+   */
+  signal?: AbortSignal;
+  /**
+   * truncate the results to only include the name of each breach (default:
+   * true)
+   */
+  truncate?: boolean;
+  /**
+   * a custom base URL for the haveibeenpwned.com API endpoints (default:
+   * `https://haveibeenpwned.com/api/v3`)
+   */
+  baseUrl?: string;
+  /**
+   * a custom string to send as the User-Agent field in the request headers
+   * (default: `hibp <version>`)
+   */
+  userAgent?: string;
+}
+
 /**
  * Fetches breach data for a specific account.
+ *
+ * Results contain only `Name` by default; pass `truncate: false` for full
+ * breaches.
  *
  * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
@@ -28,9 +69,9 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which resolves to an
- * array of breach objects (or null if no breaches were found), or rejects with
- * an Error
+ * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which
+ * resolves to name-only breaches by default, full breaches with
+ * `truncate: false`, or null if no breaches were found; rejects with an Error
  * @example
  * try {
  *   const data = await breachedAccount("foo", { apiKey: "my-api-key" });
@@ -75,44 +116,20 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  */
 export function breachedAccount(
   account: string,
-  options: {
-    /**
-     * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
-     */
-    apiKey?: string;
-    /**
-     * a domain by which to filter the results (default: all domains)
-     */
-    domain?: string;
-    /**
-     * include "unverified" breaches in the results (default: true)
-     */
-    includeUnverified?: boolean;
-    /**
-     * timeout for the request in milliseconds (default: none)
-     */
-    timeoutMs?: number;
-    /**
-     * an AbortSignal to cancel the request (default: none)
-     */
-    signal?: AbortSignal;
-    /**
-     * truncate the results to only include the name of each breach (default:
-     * true)
-     */
-    truncate?: boolean;
-    /**
-     * a custom base URL for the haveibeenpwned.com API endpoints (default:
-     * `https://haveibeenpwned.com/api/v3`)
-     */
-    baseUrl?: string;
-    /**
-     * a custom string to send as the User-Agent field in the request headers
-     * (default: `hibp <version>`)
-     */
-    userAgent?: string;
-  } = {},
-): Promise<Breach[] | null> {
+  options?: BreachedAccountOptions & { truncate?: true },
+): Promise<Pick<Breach, "Name">[] | null>;
+export function breachedAccount(
+  account: string,
+  options: BreachedAccountOptions & { truncate: false },
+): Promise<Breach[] | null>;
+export function breachedAccount(
+  account: string,
+  options?: BreachedAccountOptions,
+): Promise<Breach[] | Pick<Breach, "Name">[] | null>;
+export function breachedAccount(
+  account: string,
+  options: BreachedAccountOptions = {},
+): Promise<Breach[] | Pick<Breach, "Name">[] | null> {
   const {
     apiKey,
     domain,
@@ -144,5 +161,5 @@ export function breachedAccount(
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<Breach[] | null>;
+  }) as Promise<Breach[] | Pick<Breach, "Name">[] | null>;
 }
