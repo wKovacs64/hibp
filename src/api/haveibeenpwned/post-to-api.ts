@@ -26,12 +26,20 @@ export async function postToApi(
   const { headers, status } = response;
   const text = await response.text();
   const rayId = headers.get("cf-ray");
-  let message = `${status} ${response.statusText}`.trim();
-  if (status === FORBIDDEN.status && rayId) {
-    message = blockedWithRayId(rayId);
-  } else if (headers.get("content-type")?.startsWith("text/plain") && text) {
-    message = text;
+  const isPlainText = /^text\/plain\b/i.test(headers.get("content-type") ?? "");
+  const message =
+    jsonMessage(text) ??
+    (status === FORBIDDEN.status && rayId ? blockedWithRayId(rayId) : null) ??
+    (isPlainText && text.trim() ? text : null) ??
+    `${status} ${response.statusText}`.trim();
+
+  if (status === TOO_MANY_REQUESTS.status) {
+    throw new RateLimitError(headers.get("retry-after"), message);
   }
+  throw new Error(message);
+}
+
+function jsonMessage(text: string): string | null {
   try {
     const error: unknown = JSON.parse(text);
     if (
@@ -39,16 +47,12 @@ export async function postToApi(
       error !== null &&
       "message" in error &&
       typeof error.message === "string" &&
-      error.message
+      error.message.trim()
     ) {
-      message = error.message;
+      return error.message;
     }
   } catch {
-    // Not JSON; keep the reason above.
+    // Not JSON; use the next available reason.
   }
-
-  if (status === TOO_MANY_REQUESTS.status) {
-    throw new RateLimitError(headers.get("retry-after"), message);
-  }
-  throw new Error(message);
+  return null;
 }
