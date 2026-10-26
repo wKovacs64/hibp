@@ -19,8 +19,7 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * after verifying control. Each domain includes metadata about breach counts and
  * the next renewal date, where available.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the `subscribeddomains` endpoint. The
+ * Requires a Core or Pro API key from https://haveibeenpwned.com/API/Key. The
  * `apiKey` option here is not explicitly required, but direct requests made
  * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
  * a valid API key on your behalf).

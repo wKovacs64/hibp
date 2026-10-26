@@ -7,9 +7,7 @@
 <dt><a href="#breachedAccountRange">breachedAccountRange(prefix, [options])</a> ⇒ <code><a href="#breachedaccountrangeresult--object">Promise.&lt;Array.&lt;BreachedAccountRangeResult&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breached email hash suffixes for a six-character SHA-1 email hash
 prefix.</p>
-<p>Requires a Pro or High RPM subscription.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount/range</code> endpoint.
+<p>Requires a Pro or High RPM API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>.
 The <code>apiKey</code> option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
@@ -21,11 +19,11 @@ without storing or further processing them.</p>
 <dd><p>Fetches breach data for a specific account.</p>
 <p>Results contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
 breaches.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
-<code>apiKey</code> option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
-a valid API key on your behalf).</p>
+<p>Requires a Core, Pro, or High RPM API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
 </dd>
 <dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#BreachedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all breached email addresses for a domain.</p>
@@ -33,8 +31,7 @@ a valid API key on your behalf).</p>
 breach names. For example, querying <code>example.com</code> could return an object like
 <code>{ &quot;john&quot;: [&quot;Adobe&quot;], &quot;jane&quot;: [&quot;Adobe&quot;, &quot;Gawker&quot;] }</code>, corresponding to
 <code>john@example.com</code> and <code>jane@example.com</code>.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breacheddomain</code> endpoint. The
+<p>Requires a Core or Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
@@ -50,25 +47,23 @@ a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#generateDnsToken">generateDnsToken(domain, [options])</a> ⇒ <code><a href="#DnsToken">Promise.&lt;DnsToken&gt;</a></code></dt>
 <dd><p>Generates a domain-specific DNS verification token.</p>
-<p>Requires an HIBP Pro subscription. Publish <code>txtRecordValue</code> as a TXT record
-on the domain, then call <code>verifyDnsToken</code> after DNS propagation.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the
-<code>domainVerification/generateDnsToken</code> endpoint. The <code>apiKey</code> option here is not
-explicitly required, but direct requests made without it will fail (unless
-you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
-behalf).</p>
+<p>Publish <code>txtRecordValue</code> as a TXT record on the domain, then call
+<code>verifyDnsToken</code> after DNS propagation.</p>
+<p>Requires a Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code>
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts a valid API
+key on your behalf).</p>
 </dd>
 <dt><a href="#latestBreach">latestBreach([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches the most recently added breach.</p>
 </dd>
 <dt><a href="#pasteAccount">pasteAccount(email, [options])</a> ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches paste data for a specific account (email address).</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>pasteaccount</code> endpoint. The
-<code>apiKey</code> option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
-a valid API key on your behalf).</p>
+<p>Requires a Core, Pro, or High RPM API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
 </dd>
 <dt><a href="#pwnedPasswordRange">pwnedPasswordRange(prefix, [options])</a> ⇒ <code><a href="#PwnedPasswordSuffixes">Promise.&lt;PwnedPasswordSuffixes&gt;</a></code></dt>
 <dd><p>Fetches the SHA-1 or NTLM hash suffixes for the given 5-character hash
@@ -94,83 +89,76 @@ exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
 <p>Breaches contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
 breaches.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
-<code>pasteaccount</code> endpoints. The <code>apiKey</code> option here is not explicitly
-required, but direct requests made without it will fail (unless you specify a
-<code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
+<p>Requires a Core, Pro, or High RPM API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
 </dd>
 <dt><a href="#sendEmail">sendEmail(domain, emailAlias, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>Requests a domain verification approval email.</p>
-<p>Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
-at the domain to complete verification.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>domainVerification/sendEmail</code>
-endpoint. The <code>apiKey</code> option here is not explicitly required, but direct
-requests made without it will fail (unless you specify a <code>baseUrl</code> to a proxy
-that inserts a valid API key on your behalf).</p>
+<p>Follow the link sent to the chosen alias at the domain to complete
+verification.</p>
+<p>Requires a Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code>
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts a valid API
+key on your behalf).</p>
 </dd>
 <dt><a href="#stealerLogsByEmailDomain">stealerLogsByEmailDomain(emailDomain, [options])</a> ⇒ <code><a href="#StealerLogDomainsByEmailAlias">Promise.&lt;StealerLogDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log email aliases for an email domain.</p>
 <p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
-email domains found in stealer logs. For example, querying <code>example.com</code>
+website domains found in stealer logs. For example, querying <code>example.com</code>
 could return an object like <code>{ &quot;andy&quot;: [&quot;netflix.com&quot;], &quot;jane&quot;: [&quot;netflix.com&quot;, &quot;spotify.com&quot;] }</code>, corresponding to <code>andy@example.com</code> and <code>jane@example.com</code>.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>stealerlogsbyemaildomain</code> endpoint.
-The <code>apiKey</code> option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
-a valid API key on your behalf).</p>
+<p>Requires a Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code>
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts a valid API
+key on your behalf).</p>
 </dd>
 <dt><a href="#stealerLogsByEmail">stealerLogsByEmail(emailAddress, [options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log domains for an email address.</p>
 <p>Returns an array of domains for which stealer logs contain entries for the
 supplied email address.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>stealerlogsbyemail</code> endpoint. The
-<code>apiKey</code> option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
-a valid API key on your behalf).</p>
+<p>Requires a Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code>
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts a valid API
+key on your behalf).</p>
 </dd>
 <dt><a href="#stealerLogsByWebsiteDomain">stealerLogsByWebsiteDomain(websiteDomain, [options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log email addresses for a website domain.</p>
 <p>The result is an array of strings representing email addresses found in
 stealer logs for the specified website domain (e.g., &quot;example.com&quot;).</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>stealerlogsbywebsitedomain</code>
-endpoint. The <code>apiKey</code> option here is not explicitly required, but direct
-requests made without it will fail (unless you specify a <code>baseUrl</code> to a proxy
-that inserts a valid API key on your behalf).</p>
+<p>Requires a Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code>
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts a valid API
+key on your behalf).</p>
 </dd>
 <dt><a href="#subscribedDomains">subscribedDomains([options])</a> ⇒ <code><a href="#subscribeddomain--object">Promise.&lt;Array.&lt;SubscribedDomain&gt;&gt;</a></code></dt>
 <dd><p>Fetches all subscribed domains for your HIBP account.</p>
 <p>Returns domains that have been successfully added to the Domain Search dashboard
 after verifying control. Each domain includes metadata about breach counts and
 the next renewal date, where available.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>subscribeddomains</code> endpoint. The
+<p>Requires a Core or Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#subscriptionStatus">subscriptionStatus([options])</a> ⇒ <code><a href="#subscriptionstatus--object">Promise.&lt;SubscriptionStatus&gt;</a></code></dt>
 <dd><p>Fetches the current status of your HIBP subscription (API key).</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>subscription/status</code> endpoint.
-The <code>apiKey</code> option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
-a valid API key on your behalf).</p>
-</dd>
-<dt><a href="#verifyDnsToken">verifyDnsToken(domain, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
-<dd><p>Verifies a domain&#39;s published HIBP TXT record.</p>
-<p>Requires an HIBP Pro subscription. Generate the value with <code>generateDnsToken</code>,
-publish it at your DNS provider, and allow time for DNS propagation first.
-The record can be removed after verification succeeds.</p>
-<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
-<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the
-<code>domainVerification/verifyDnsToken</code> endpoint. The <code>apiKey</code> option here is not
+<p>Requires a Core, Pro, or High RPM API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code> option here is not
 explicitly required, but direct requests made without it will fail (unless
 you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
 behalf).</p>
+</dd>
+<dt><a href="#verifyDnsToken">verifyDnsToken(domain, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>Verifies a domain&#39;s published HIBP TXT record.</p>
+<p>Generate the value with <code>generateDnsToken</code>, publish it at your DNS provider,
+and allow time for DNS propagation first. The record can be removed after
+verification succeeds.</p>
+<p>Requires a Pro API key from <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a>. The <code>apiKey</code>
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts a valid API
+key on your behalf).</p>
 </dd>
 </dl>
 
@@ -211,8 +199,8 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 </dd>
 <dt><a href="#StealerLogDomainsByEmailAlias">StealerLogDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
-email domains that alias has appeared in within stealer logs for the specified
-email domain.</p>
+website domains that alias has appeared against in stealer logs for the
+specified email domain.</p>
 </dd>
 <dt><a href="#SubscribedDomain">SubscribedDomain</a> : <code>object</code></dt>
 <dd><p>An object representing a subscribed domain.</p>
@@ -260,10 +248,7 @@ try {
 Fetches breached email hash suffixes for a six-character SHA-1 email hash
 prefix.
 
-Requires a Pro or High RPM subscription.
-
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `breachedaccount/range` endpoint.
+Requires a Pro or High RPM API key from https://haveibeenpwned.com/API/Key.
 The `apiKey` option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
@@ -308,11 +293,11 @@ Fetches breach data for a specific account.
 Results contain only `Name` by default; pass `truncate: false` for full
 breaches.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
-`apiKey` option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a `baseUrl` to a proxy that inserts
-a valid API key on your behalf).
+Requires a Core, Pro, or High RPM API key from
+https://haveibeenpwned.com/API/Key. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
 
 **Kind**: global function  
 **Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
@@ -389,8 +374,7 @@ breach names. For example, querying `example.com` could return an object like
 `{ "john": ["Adobe"], "jane": ["Adobe", "Gawker"] }`, corresponding to
 `john@example.com` and `jane@example.com`.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `breacheddomain` endpoint. The
+Requires a Core or Pro API key from https://haveibeenpwned.com/API/Key. The
 `apiKey` option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
@@ -535,15 +519,13 @@ try {
 ## generateDnsToken(domain, [options]) ⇒ [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken)
 Generates a domain-specific DNS verification token.
 
-Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
-on the domain, then call `verifyDnsToken` after DNS propagation.
+Publish `txtRecordValue` as a TXT record on the domain, then call
+`verifyDnsToken` after DNS propagation.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the
-`domainVerification/generateDnsToken` endpoint. The `apiKey` option here is not
-explicitly required, but direct requests made without it will fail (unless
-you specify a `baseUrl` to a proxy that inserts a valid API key on your
-behalf).
+Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+key on your behalf).
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken) - a Promise which resolves to the TXT record
@@ -607,11 +589,11 @@ try {
 ## pasteAccount(email, [options]) ⇒ <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches paste data for a specific account (email address).
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `pasteaccount` endpoint. The
-`apiKey` option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a `baseUrl` to a proxy that inserts
-a valid API key on your behalf).
+Requires a Core, Pro, or High RPM API key from
+https://haveibeenpwned.com/API/Key. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
 
 **Kind**: global function  
 **Returns**: <code><a href="#paste--object">Promise.&lt;Array.&lt;Paste&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
@@ -760,11 +742,11 @@ convenience method is designed to mimic.
 Breaches contain only `Name` by default; pass `truncate: false` for full
 breaches.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `breachedaccount` and
-`pasteaccount` endpoints. The `apiKey` option here is not explicitly
-required, but direct requests made without it will fail (unless you specify a
-`baseUrl` to a proxy that inserts a valid API key on your behalf).
+Requires a Core, Pro, or High RPM API key from
+https://haveibeenpwned.com/API/Key. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;SearchResults&gt;</code>](#SearchResults) - a Promise which resolves to an object
@@ -819,14 +801,13 @@ try {
 ## sendEmail(domain, emailAlias, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
 Requests a domain verification approval email.
 
-Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
-at the domain to complete verification.
+Follow the link sent to the chosen alias at the domain to complete
+verification.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `domainVerification/sendEmail`
-endpoint. The `apiKey` option here is not explicitly required, but direct
-requests made without it will fail (unless you specify a `baseUrl` to a proxy
-that inserts a valid API key on your behalf).
+Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+key on your behalf).
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;void&gt;</code> - a Promise which resolves without parsing the
@@ -862,15 +843,14 @@ try {
 Fetches all stealer log email aliases for an email domain.
 
 The result maps email aliases (the local-part before the '@') to an array of
-email domains found in stealer logs. For example, querying `example.com`
+website domains found in stealer logs. For example, querying `example.com`
 could return an object like `{ "andy": ["netflix.com"], "jane": ["netflix.com",
 "spotify.com"] }`, corresponding to `andy@example.com` and `jane@example.com`.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `stealerlogsbyemaildomain` endpoint.
-The `apiKey` option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a `baseUrl` to a proxy that inserts
-a valid API key on your behalf).
+Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+key on your behalf).
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;StealerLogDomainsByEmailAlias&gt;</code>](#StealerLogDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise
@@ -908,11 +888,10 @@ Fetches all stealer log domains for an email address.
 Returns an array of domains for which stealer logs contain entries for the
 supplied email address.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `stealerlogsbyemail` endpoint. The
-`apiKey` option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a `baseUrl` to a proxy that inserts
-a valid API key on your behalf).
+Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+key on your behalf).
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
@@ -965,11 +944,10 @@ Fetches all stealer log email addresses for a website domain.
 The result is an array of strings representing email addresses found in
 stealer logs for the specified website domain (e.g., "example.com").
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `stealerlogsbywebsitedomain`
-endpoint. The `apiKey` option here is not explicitly required, but direct
-requests made without it will fail (unless you specify a `baseUrl` to a proxy
-that inserts a valid API key on your behalf).
+Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+key on your behalf).
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
@@ -1023,8 +1001,7 @@ Returns domains that have been successfully added to the Domain Search dashboard
 after verifying control. Each domain includes metadata about breach counts and
 the next renewal date, where available.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `subscribeddomains` endpoint. The
+Requires a Core or Pro API key from https://haveibeenpwned.com/API/Key. The
 `apiKey` option here is not explicitly required, but direct requests made
 without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
@@ -1067,11 +1044,11 @@ try {
 ## subscriptionStatus([options]) ⇒ [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object)
 Fetches the current status of your HIBP subscription (API key).
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the `subscription/status` endpoint.
-The `apiKey` option here is not explicitly required, but direct requests made
-without it will fail (unless you specify a `baseUrl` to a proxy that inserts
-a valid API key on your behalf).
+Requires a Core, Pro, or High RPM API key from
+https://haveibeenpwned.com/API/Key. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;SubscriptionStatus&gt;</code>](#subscriptionstatus--object) - a Promise which resolves to a
@@ -1111,16 +1088,14 @@ try {
 ## verifyDnsToken(domain, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
 Verifies a domain's published HIBP TXT record.
 
-Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
-publish it at your DNS provider, and allow time for DNS propagation first.
-The record can be removed after verification succeeds.
+Generate the value with `generateDnsToken`, publish it at your DNS provider,
+and allow time for DNS propagation first. The record can be removed after
+verification succeeds.
 
-🔑 `haveibeenpwned.com` requires an API key from
-https://haveibeenpwned.com/API/Key for the
-`domainVerification/verifyDnsToken` endpoint. The `apiKey` option here is not
-explicitly required, but direct requests made without it will fail (unless
-you specify a `baseUrl` to a proxy that inserts a valid API key on your
-behalf).
+Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+option here is not explicitly required, but direct requests made without it
+will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+key on your behalf).
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;void&gt;</code> - a Promise which resolves without parsing the
@@ -1273,8 +1248,8 @@ An administrative alias supported for domain verification emails.
 
 ## StealerLogDomainsByEmailAlias : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code>
 An object mapping an email alias (local-part before the '@') to the list of
-email domains that alias has appeared in within stealer logs for the specified
-email domain.
+website domains that alias has appeared against in stealer logs for the
+specified email domain.
 
 **Kind**: global typedef  
 <a name="SubscribedDomain"></a>

@@ -11,15 +11,13 @@ import type { DnsToken } from "./api/haveibeenpwned/types.js";
 /**
  * Generates a domain-specific DNS verification token.
  *
- * Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
- * on the domain, then call `verifyDnsToken` after DNS propagation.
+ * Publish `txtRecordValue` as a TXT record on the domain, then call
+ * `verifyDnsToken` after DNS propagation.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the
- * `domainVerification/generateDnsToken` endpoint. The `apiKey` option here is not
- * explicitly required, but direct requests made without it will fail (unless
- * you specify a `baseUrl` to a proxy that inserts a valid API key on your
- * behalf).
+ * Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+ * option here is not explicitly required, but direct requests made without it
+ * will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+ * key on your behalf).
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaDns
  * @param {string} domain the domain to verify (e.g., "example.com")

@@ -16,8 +16,7 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * `{ "john": ["Adobe"], "jane": ["Adobe", "Gawker"] }`, corresponding to
  * `john@example.com` and `jane@example.com`.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the `breacheddomain` endpoint. The
+ * Requires a Core or Pro API key from https://haveibeenpwned.com/API/Key. The
  * `apiKey` option here is not explicitly required, but direct requests made
  * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
  * a valid API key on your behalf).

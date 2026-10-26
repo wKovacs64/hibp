@@ -30,28 +30,31 @@ import * as hibp from "npm:hibp@x.y.z";
 See the [browser](#using-in-the-browser) section below for information on how to use it in the
 browser.
 
-## Features (🔑 = [requires](https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/) an [API key](https://haveibeenpwned.com/API/Key))
+## Features
+
+Labels name the [HIBP plans](https://haveibeenpwned.com/Subscription) whose
+[API key](https://haveibeenpwned.com/API/Key) unlocks a feature. Unlabeled features need no key.
 
 - Get the most recently added breach
 - Get a single breach event
-- Get all breaches for an account 🔑
-- Search breaches by a six-character SHA-1 email prefix (Pro or High RPM) 🔑
-- Get all breached email addresses for a domain 🔑
+- Get all breaches for an account `Core` `Pro` `High RPM`
+- Search breaches by a six-character SHA-1 email prefix `Pro` `High RPM`
+- Get all breached email addresses for a domain `Core` `Pro`
 - Get all breach events in the system
 - Get all data classes
 - Get data class names and descriptions
-- Get all pastes for an account 🔑
+- Get all pastes for an account `Core` `Pro` `High RPM`
 - [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange) check a password to
   see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
-- Search for an account in both breaches and pastes at the same time 🔑
-- Get all stealer log domains for an email address 🔑
-- Get all stealer log email aliases for an email domain 🔑
-- Get all stealer log email addresses for a website domain 🔑
-- Get all subscribed domains 🔑
-- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
-- Request domain verification approval emails (Pro subscription) 🔑
-- Get your subscription status, domain limits, and plan capabilities 🔑
+- Search for an account in both breaches and pastes at the same time `Core` `Pro` `High RPM`
+- Get all stealer log domains for an email address `Pro`
+- Get all stealer log email aliases for an email domain `Pro`
+- Get all stealer log email addresses for a website domain `Pro`
+- Get all subscribed domains `Core` `Pro`
+- Generate and verify DNS domain verification tokens `Pro`
+- Request domain verification approval emails `Pro`
+- Get your subscription status, domain limits, and plan capabilities `Core` `Pro` `High RPM`
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)

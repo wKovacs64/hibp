@@ -3,16 +3,14 @@ import { postToApi } from "./api/haveibeenpwned/post-to-api.js";
 /**
  * Verifies a domain's published HIBP TXT record.
  *
- * Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
- * publish it at your DNS provider, and allow time for DNS propagation first.
- * The record can be removed after verification succeeds.
+ * Generate the value with `generateDnsToken`, publish it at your DNS provider,
+ * and allow time for DNS propagation first. The record can be removed after
+ * verification succeeds.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the
- * `domainVerification/verifyDnsToken` endpoint. The `apiKey` option here is not
- * explicitly required, but direct requests made without it will fail (unless
- * you specify a `baseUrl` to a proxy that inserts a valid API key on your
- * behalf).
+ * Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+ * option here is not explicitly required, but direct requests made without it
+ * will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+ * key on your behalf).
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaDns
  * @param {string} domain the domain to verify (e.g., "example.com")

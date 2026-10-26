@@ -10,14 +10,13 @@ import type { EmailAlias } from "./api/haveibeenpwned/types.js";
 /**
  * Requests a domain verification approval email.
  *
- * Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
- * at the domain to complete verification.
+ * Follow the link sent to the chosen alias at the domain to complete
+ * verification.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the `domainVerification/sendEmail`
- * endpoint. The `apiKey` option here is not explicitly required, but direct
- * requests made without it will fail (unless you specify a `baseUrl` to a proxy
- * that inserts a valid API key on your behalf).
+ * Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+ * option here is not explicitly required, but direct requests made without it
+ * will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+ * key on your behalf).
  *
  * @see https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail
  * @param {string} domain the domain to verify (e.g., "example.com")
