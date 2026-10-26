@@ -42,10 +42,8 @@ interface BreachedAccountOptions {
 /**
  * Fetches breach data for a specific account.
  *
- * Results contain only `Name` by default. Pass
- * `truncate: false` to receive full `Breach` objects. A dynamic boolean produces
- * a union of both result types. Either result can be null when no breaches are
- * found. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
+ * Results contain only `Name` by default; pass `truncate: false` for full
+ * breaches.
  *
  * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The

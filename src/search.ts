@@ -58,9 +58,8 @@ interface SearchOptions {
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
  *
- * Breaches contain only `Name` by default. Pass `truncate: false` to receive
- * full `Breach` objects. A dynamic boolean produces a union of both breach
- * result types. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
+ * Breaches contain only `Name` by default; pass `truncate: false` for full
+ * breaches.
  *
  * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` and

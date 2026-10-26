@@ -6,10 +6,8 @@
 </dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
-<p>Results contain only <code>Name</code> by default. Pass
-<code>truncate: false</code> to receive full <code>Breach</code> objects. A dynamic boolean produces
-a union of both result types. Either result can be null when no breaches are
-found. See <a href="https://haveibeenpwned.com/API/v3#BreachesForAccount">https://haveibeenpwned.com/API/v3#BreachesForAccount</a>.</p>
+<p>Results contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
+breaches.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
@@ -67,9 +65,8 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
-<p>Breaches contain only <code>Name</code> by default. Pass <code>truncate: false</code> to receive
-full <code>Breach</code> objects. A dynamic boolean produces a union of both breach
-result types. See <a href="https://haveibeenpwned.com/API/v3#BreachesForAccount">https://haveibeenpwned.com/API/v3#BreachesForAccount</a>.</p>
+<p>Breaches contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
+breaches.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
 <code>pasteaccount</code> endpoints. The <code>apiKey</code> option here is not explicitly
@@ -198,10 +195,8 @@ try {
 ## breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches breach data for a specific account.
 
-Results contain only `Name` by default. Pass
-`truncate: false` to receive full `Breach` objects. A dynamic boolean produces
-a union of both result types. Either result can be null when no breaches are
-found. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
+Results contain only `Name` by default; pass `truncate: false` for full
+breaches.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
@@ -579,9 +574,8 @@ and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
 
-Breaches contain only `Name` by default. Pass `truncate: false` to receive
-full `Breach` objects. A dynamic boolean produces a union of both breach
-result types. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
+Breaches contain only `Name` by default; pass `truncate: false` for full
+breaches.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` and
