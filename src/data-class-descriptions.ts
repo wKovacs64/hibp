@@ -12,10 +12,6 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 /**
  * Fetches all data class names and descriptions.
  *
- * No API key is required. Field names match the lowercase `name` and
- * `description` returned by the
- * [public endpoint](https://haveibeenpwned.com/api/v3/dataClasses/descriptions).
- *
  * @param {object} [options] a configuration object
  * @param {string} [options.baseUrl] a custom base URL for the
  * haveibeenpwned.com API endpoints (default:

@@ -29,9 +29,6 @@ a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#dataClassDescriptions">dataClassDescriptions([options])</a> ⇒ <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data class names and descriptions.</p>
-<p>No API key is required. Field names match the lowercase <code>name</code> and
-<code>description</code> returned by the
-<a href="https://haveibeenpwned.com/api/v3/dataClasses/descriptions">public endpoint</a>.</p>
 </dd>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
@@ -363,10 +360,6 @@ try {
 
 ## dataClassDescriptions([options]) ⇒ <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches all data class names and descriptions.
-
-No API key is required. Field names match the lowercase `name` and
-`description` returned by the
-[public endpoint](https://haveibeenpwned.com/api/v3/dataClasses/descriptions).
 
 **Kind**: global function  
 **Returns**: <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
