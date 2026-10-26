@@ -2,8 +2,7 @@ import type { Paste } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
- * An object representing a paste, following the
- * [HIBP paste model](https://haveibeenpwned.com/API/v3#PasteModel).
+ * An object representing a paste.
  *
  * @typedef {object} Paste
  * @property {string} Id
