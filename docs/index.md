@@ -39,6 +39,7 @@ browser.
 - Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
+- Get data class names and descriptions
 - Get all pastes for an account 🔑
 - [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange) check a password to
   see if it has been exposed in a data breach
@@ -72,6 +73,7 @@ The following modules are available:
 - [breachedDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#breacheddomain)
 - [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
 - [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)
+- [dataClassDescriptions](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclassdescriptions)
 - [latestBreach](https://github.com/wKovacs64/hibp/tree/main/API.md#latestbreach)
 - [pasteAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#pasteaccount)
 - [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)

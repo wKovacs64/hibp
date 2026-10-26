@@ -30,6 +30,11 @@ export interface Paste {
   EmailCount: number;
 }
 
+export interface DataClassDescription {
+  name: string;
+  description: string;
+}
+
 export interface SubscriptionStatus {
   SubscriptionName: string;
   Description: string;
@@ -70,6 +75,7 @@ export type ApiData =
   | Breach[] // breachedaccount, breaches
   | BreachedAccountRangeResult[] // breachedaccount/range
   | BreachedDomainsByEmailAlias // breacheddomain
+  | DataClassDescription[] // dataclasses/descriptions
   | Paste[] // pasteaccount
   | string[] // dataclasses, stealerlogsbyemail, stealerlogsbywebsitedomain
   | StealerLogDomainsByEmailAlias // stealerlogsbyemaildomain

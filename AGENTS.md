@@ -15,3 +15,7 @@ Before triage or publishing tickets, read the [label mapping](docs/agents/triage
 ### Domain docs
 
 Before codebase exploration, read the [single-context domain rules](docs/agents/domain.md).
+
+## Tests
+
+Tests exercise runtime behavior. `pnpm typecheck` enforces the types against source signatures, so a type-only change needs no new tests and test files make no type assertions (`expectTypeOf`, type-only `@ts-expect-error`).

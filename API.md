@@ -40,6 +40,9 @@ a valid API key on your behalf).</p>
 <dt><a href="#breaches">breaches([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code></dt>
 <dd><p>Fetches all breach events in the system.</p>
 </dd>
+<dt><a href="#dataClassDescriptions">dataClassDescriptions([options])</a> ⇒ <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dd><p>Fetches all data class names and descriptions.</p>
+</dd>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
@@ -146,6 +149,9 @@ a valid API key on your behalf).</p>
 <dt><a href="#BreachedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
+</dd>
+<dt><a href="#dataclassdescription--object">DataClassDescription</a> : <code>object</code></dt>
+<dd><p>A data class name and its description.</p>
 </dd>
 <dt><a href="#Paste">Paste</a> : <code>object</code></dt>
 <dd><p>An object representing a paste.</p>
@@ -381,6 +387,7 @@ objects (an empty array if no breaches were found), or rejects with an Error
 | --- | --- | --- |
 | [options] | <code>object</code> | a configuration object |
 | [options.domain] | <code>string</code> | a domain by which to filter the results (default: all domains) |
+| [options.isSpamList] | <code>boolean</code> | true for only spam-list breaches, false for only non-spam-list breaches (default: no spam-list filter) |
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
@@ -402,7 +409,38 @@ try {
 **Example**  
 ```js
 try {
-  const data = await breaches({ domain: "adobe.com" });
+  const data = await breaches({ domain: "adobe.com", isSpamList: false });
+  if (data) {
+    // ...
+  } else {
+    // ...
+  }
+} catch (err) {
+  // ...
+}
+```
+<a name="dataClassDescriptions"></a>
+
+## dataClassDescriptions([options]) ⇒ <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
+Fetches all data class names and descriptions.
+
+**Kind**: global function  
+**Returns**: <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
+resolves to an array of data class objects (or null if no data classes were
+found), or rejects with an Error  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | a configuration object |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const data = await dataClassDescriptions();
   if (data) {
     // ...
   } else {
@@ -981,6 +1019,19 @@ An object mapping an email alias (local-part before the '@') to the list of
 breach names that alias has appeared in for the specified domain.
 
 **Kind**: global typedef  
+<a name="DataClassDescription"></a>
+
+## DataClassDescription : <code>object</code>
+A data class name and its description.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | the data class name |
+| description | <code>string</code> | a description of the compromised data |
+
 <a name="Paste"></a>
 
 ## Paste : <code>object</code>
