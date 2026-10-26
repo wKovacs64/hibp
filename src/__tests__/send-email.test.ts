@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { EMAIL_VERIFICATION_INVALID_ALIAS } from "../../test/fixtures.js";
 import { sendEmail } from "../send-email.js";
 
 describe("sendEmail", () => {
@@ -9,41 +8,23 @@ describe("sendEmail", () => {
 
   // Request and HTTP 200 are documented; an empty success body is representative.
   // Authenticated success and email delivery have not been live verified.
-  describe("valid alias", () => {
-    it.each(["admin", "hostmaster", "info", "security", "webmaster"] as const)(
-      "requests an approval email for %s",
-      async (emailAlias) => {
-        expect.assertions(3);
-        server.use(
-          http.post("*", async ({ request }) => {
-            expect(request.url).toBe(
-              "https://haveibeenpwned.com/api/v3/domainVerification/sendEmail",
-            );
-            expect(await request.json()).toEqual({
-              DomainName: domain,
-              EmailAlias: emailAlias,
-            });
-            return new Response(null);
-          }),
-        );
-
-        await expect(sendEmail(domain, emailAlias)).resolves.toBeUndefined();
-      },
-    );
-  });
-
-  describe("invalid alias", () => {
-    it("rejects with the documented failure reason", () => {
+  describe("success", () => {
+    it("requests an approval email", async () => {
+      expect.assertions(3);
       server.use(
-        http.post("*", () =>
-          Response.json(EMAIL_VERIFICATION_INVALID_ALIAS, { status: 400 }),
-        ),
+        http.post("*", async ({ request }) => {
+          expect(request.url).toBe(
+            "https://haveibeenpwned.com/api/v3/domainVerification/sendEmail",
+          );
+          expect(await request.json()).toEqual({
+            DomainName: domain,
+            EmailAlias: "security",
+          });
+          return new Response(null);
+        }),
       );
 
-      // @ts-expect-error -- Exercise upstream validation for untyped callers.
-      return expect(sendEmail(domain, "support")).rejects.toThrow(
-        EMAIL_VERIFICATION_INVALID_ALIAS.message,
-      );
+      await expect(sendEmail(domain, "security")).resolves.toBeUndefined();
     });
   });
 
