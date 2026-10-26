@@ -1,19 +1,17 @@
-import type { Paste } from "./api/haveibeenpwned/types.js";
-import { breachedAccount, type AccountBreaches } from "./breached-account.js";
+import type { Breach, Paste } from "./api/haveibeenpwned/types.js";
+import { breachedAccount } from "./breached-account.js";
 import { pasteAccount } from "./paste-account.js";
 
-export interface SearchResults<Truncate extends boolean = boolean> {
-  breaches: AccountBreaches<Truncate> | null;
+export interface SearchResults {
+  breaches: Breach[] | Pick<Breach, "Name">[] | null;
   pastes: Paste[] | null;
 }
 
 /**
  * An object representing search results.
- * `SearchResults<true>` contains name-only breaches, `SearchResults<false>`
- * contains full breaches, and `SearchResults<boolean>` allows either.
  *
  * @typedef {object} SearchResults
- * @property {(TruncatedBreach[] | Breach[] | null)} breaches
+ * @property {(Breach[] | null)} breaches
  * @property {(Paste[] | null)} pastes
  */
 
@@ -120,11 +118,11 @@ interface SearchOptions {
 export function search(
   account: string,
   options?: SearchOptions & { truncate?: true },
-): Promise<SearchResults<true>>;
+): Promise<{ breaches: Pick<Breach, "Name">[] | null; pastes: Paste[] | null }>;
 export function search(
   account: string,
   options: SearchOptions & { truncate: false },
-): Promise<SearchResults<false>>;
+): Promise<{ breaches: Breach[] | null; pastes: Paste[] | null }>;
 export function search(
   account: string,
   options?: SearchOptions,

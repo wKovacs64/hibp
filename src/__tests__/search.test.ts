@@ -2,12 +2,7 @@ import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH, PASTE } from "../../test/fixtures.js";
-import {
-  search,
-  type Breach,
-  type TruncatedBreach,
-  type SearchResults,
-} from "../hibp.js";
+import { search, type Breach } from "../hibp.js";
 
 describe("search", () => {
   const BREACHES = [{ Name: VERIFIED_BREACH.Name }];
@@ -52,7 +47,9 @@ describe("search", () => {
       const undefinedTruncate = await search("breached", {
         truncate: undefined,
       });
-      expectTypeOf(undefinedTruncate).toEqualTypeOf<SearchResults<true>>();
+      expectTypeOf(undefinedTruncate.breaches).toEqualTypeOf<
+        Pick<Breach, "Name">[] | null
+      >();
       const omitted = await search("breached", { domain: "adobe.com" });
       const truncated = await search("breached", { truncate: true });
       const full = await search("breached", { truncate: false });
@@ -60,17 +57,21 @@ describe("search", () => {
       const optionalOptions: { truncate?: boolean } = {};
       const optional = await search("breached", optionalOptions);
 
-      expectTypeOf(defaults.breaches).toEqualTypeOf<TruncatedBreach[] | null>();
-      expectTypeOf(omitted.breaches).toEqualTypeOf<TruncatedBreach[] | null>();
+      expectTypeOf(defaults.breaches).toEqualTypeOf<
+        Pick<Breach, "Name">[] | null
+      >();
+      expectTypeOf(omitted.breaches).toEqualTypeOf<
+        Pick<Breach, "Name">[] | null
+      >();
       expectTypeOf(truncated.breaches).toEqualTypeOf<
-        TruncatedBreach[] | null
+        Pick<Breach, "Name">[] | null
       >();
       expectTypeOf(full.breaches).toEqualTypeOf<Breach[] | null>();
       expectTypeOf(dynamic.breaches).toEqualTypeOf<
-        Breach[] | TruncatedBreach[] | null
+        Breach[] | Pick<Breach, "Name">[] | null
       >();
       expectTypeOf(optional.breaches).toEqualTypeOf<
-        Breach[] | TruncatedBreach[] | null
+        Breach[] | Pick<Breach, "Name">[] | null
       >();
       // @ts-expect-error Default results only expose the breach name.
       expect(defaults.breaches?.[0].Title).toBeUndefined();
@@ -81,9 +82,6 @@ describe("search", () => {
       expect(full.breaches?.[0].Title).toBe(VERIFIED_BREACH.Title);
       expect(defaults).toEqual({ breaches: BREACHES, pastes: null });
       expect(dynamic.breaches).toEqual(truncate ? BREACHES : BREACHES_EXPANDED);
-      expectTypeOf(defaults).toEqualTypeOf<SearchResults<true>>();
-      expectTypeOf(full).toEqualTypeOf<SearchResults<false>>();
-      expectTypeOf(dynamic).toEqualTypeOf<SearchResults>();
     },
   );
 

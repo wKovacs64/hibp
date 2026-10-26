@@ -2,12 +2,7 @@ import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from "../../test/fixtures.js";
-import {
-  breachedAccount,
-  type AccountBreaches,
-  type Breach,
-  type TruncatedBreach,
-} from "../hibp.js";
+import { breachedAccount, type Breach } from "../hibp.js";
 
 describe("breachedAccount", () => {
   const BREACHED_ACCOUNT_DATA = [
@@ -58,7 +53,7 @@ describe("breachedAccount", () => {
           truncate: undefined,
         });
         expectTypeOf(undefinedTruncate).toEqualTypeOf<
-          TruncatedBreach[] | null
+          Pick<Breach, "Name">[] | null
         >();
         const omitted = await breachedAccount("breached", {
           domain: "adobe.com",
@@ -69,18 +64,15 @@ describe("breachedAccount", () => {
         const optionalOptions: { truncate?: boolean } = {};
         const optional = await breachedAccount("breached", optionalOptions);
 
-        expectTypeOf(defaults).toEqualTypeOf<TruncatedBreach[] | null>();
-        expectTypeOf(omitted).toEqualTypeOf<TruncatedBreach[] | null>();
-        expectTypeOf(truncated).toEqualTypeOf<TruncatedBreach[] | null>();
+        expectTypeOf(defaults).toEqualTypeOf<Pick<Breach, "Name">[] | null>();
+        expectTypeOf(omitted).toEqualTypeOf<Pick<Breach, "Name">[] | null>();
+        expectTypeOf(truncated).toEqualTypeOf<Pick<Breach, "Name">[] | null>();
         expectTypeOf(full).toEqualTypeOf<Breach[] | null>();
-        expectTypeOf(full).toEqualTypeOf<AccountBreaches<false> | null>();
-        expectTypeOf(defaults).toEqualTypeOf<AccountBreaches<true> | null>();
-        expectTypeOf(dynamic).toEqualTypeOf<AccountBreaches | null>();
         expectTypeOf(dynamic).toEqualTypeOf<
-          Breach[] | TruncatedBreach[] | null
+          Breach[] | Pick<Breach, "Name">[] | null
         >();
         expectTypeOf(optional).toEqualTypeOf<
-          Breach[] | TruncatedBreach[] | null
+          Breach[] | Pick<Breach, "Name">[] | null
         >();
         // @ts-expect-error Default results only expose the breach name.
         expect(defaults?.[0].Title).toBeUndefined();

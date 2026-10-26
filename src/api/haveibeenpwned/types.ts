@@ -22,8 +22,6 @@ export interface Breach {
   LogoPath: string;
 }
 
-export type TruncatedBreach = Pick<Breach, "Name">;
-
 export interface Paste {
   Id: string;
   Source: string;
@@ -65,7 +63,7 @@ export type StealerLogDomainsByEmailAlias = Record<string, string[]>;
 export type ApiData =
   | Breach // breach
   | Breach[] // breachedaccount, breaches
-  | TruncatedBreach[] // breachedaccount
+  | Pick<Breach, "Name">[] // breachedaccount
   | BreachedDomainsByEmailAlias // breacheddomain
   | Paste[] // pasteaccount
   | string[] // dataclasses, stealerlogsbyemail, stealerlogsbywebsitedomain

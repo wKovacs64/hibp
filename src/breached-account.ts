@@ -1,16 +1,5 @@
-import type { Breach, TruncatedBreach } from "./api/haveibeenpwned/types.js";
+import type { Breach } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
-
-/**
- * A name-only breach returned by a truncated account search.
- *
- * @typedef {object} TruncatedBreach
- * @property {string} Name
- */
-
-/** Breaches returned by an account search with the given `truncate` option. */
-export type AccountBreaches<Truncate extends boolean = boolean> =
-  Truncate extends false ? Breach[] : TruncatedBreach[];
 
 interface BreachedAccountOptions {
   /**
@@ -53,7 +42,7 @@ interface BreachedAccountOptions {
 /**
  * Fetches breach data for a specific account.
  *
- * Results contain only `Name` by default (`TruncatedBreach`). Pass
+ * Results contain only `Name` by default. Pass
  * `truncate: false` to receive full `Breach` objects. A dynamic boolean produces
  * a union of both result types. Either result can be null when no breaches are
  * found. See https://haveibeenpwned.com/API/v3#BreachesForAccount.
@@ -82,7 +71,7 @@ interface BreachedAccountOptions {
  * `https://haveibeenpwned.com/api/v3`)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {Promise<TruncatedBreach[] | Breach[] | null>} a Promise which
+ * @returns {(Promise<Breach[]> | Promise<null>)} a Promise which
  * resolves to name-only breaches by default, full breaches with
  * `truncate: false`, or null if no breaches were found; rejects with an Error
  * @example
@@ -130,19 +119,19 @@ interface BreachedAccountOptions {
 export function breachedAccount(
   account: string,
   options?: BreachedAccountOptions & { truncate?: true },
-): Promise<AccountBreaches<true> | null>;
+): Promise<Pick<Breach, "Name">[] | null>;
 export function breachedAccount(
   account: string,
   options: BreachedAccountOptions & { truncate: false },
-): Promise<AccountBreaches<false> | null>;
+): Promise<Breach[] | null>;
 export function breachedAccount(
   account: string,
   options?: BreachedAccountOptions,
-): Promise<AccountBreaches | null>;
+): Promise<Breach[] | Pick<Breach, "Name">[] | null>;
 export function breachedAccount(
   account: string,
   options: BreachedAccountOptions = {},
-): Promise<AccountBreaches | null> {
+): Promise<Breach[] | Pick<Breach, "Name">[] | null> {
   const {
     apiKey,
     domain,
@@ -174,5 +163,5 @@ export function breachedAccount(
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<AccountBreaches | null>;
+  }) as Promise<Breach[] | Pick<Breach, "Name">[] | null>;
 }

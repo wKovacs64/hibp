@@ -16,8 +16,6 @@ import { subscribedDomains } from "./subscribed-domains.js";
 import { subscriptionStatus } from "./subscription-status.js";
 
 export type * from "./api/haveibeenpwned/types.js";
-export type { AccountBreaches } from "./breached-account.js";
-export type { SearchResults } from "./search.js";
 
 /*
  * Export individual named functions to allow the following:
