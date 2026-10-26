@@ -3,7 +3,6 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * A breached email hash suffix and the breach names associated with it.
- * Property names match the API's lower camel case response.
  *
  * @typedef {Object} BreachedAccountRangeResult
  * @property {string} hashSuffix the remaining 34 characters of a SHA-1 email hash
@@ -11,10 +10,8 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  */
 
 /**
- * Fetches breached email hash suffixes for a six-character SHA-1 prefix.
- * Email prefixes have six characters; Pwned Passwords prefixes have five.
- * The prefix is case-insensitive. This function accepts a prefix, not an email
- * address, and returns the documented `hashSuffix` and `websites` fields.
+ * Fetches breached email hash suffixes for a six-character SHA-1 email hash
+ * prefix.
  *
  * Requires a Pro or High RPM subscription.
  *
@@ -24,11 +21,9 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
  * a valid API key on your behalf).
  *
- * Compare suffixes locally against the intended email hash. HIBP requires
- * immediately discarding unrelated results without storing or further
- * processing them. An absent suffix means the email has no returned breaches;
- * sensitive and retired breaches are excluded. The API documents HTTP 200 for
- * every valid prefix; an unexpected 404 resolves to null as in other searches.
+ * Compare suffixes locally against the intended email hash. Per the
+ * haveibeenpwned.com terms of use, discard unrelated results immediately
+ * without storing or further processing them.
  *
  * @param {string} prefix the first six characters of a SHA-1 email hash
  * (case-insensitive)
@@ -43,8 +38,9 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {Promise<BreachedAccountRangeResult[] | null>} a Promise resolving
- * to the range results (or null for an unexpected 404), or rejecting with an Error
+ * @returns {(Promise<BreachedAccountRangeResult[]> | Promise<null>)} a Promise
+ * which resolves to an array of range results (or null if none were found), or
+ * rejects with an Error
  * @example
  * try {
  *   const data = await breachedAccountRange("6B5917", { apiKey: "my-api-key" });
@@ -56,7 +52,6 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  *   // ...
  * }
  * @see https://haveibeenpwned.com/API/v3#BreachesForHashRange
- * @see https://haveibeenpwned.com/TermsOfUse
  */
 export function breachedAccountRange(
   prefix: string,
