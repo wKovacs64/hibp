@@ -53,7 +53,7 @@
     "build:package-info": "node --experimental-strip-types scripts/build-package-info.ts",
     "build:lib": "tsc --project tsconfig.tsc.json",
     "build:browser": "esbuild src/hibp.ts --minify --bundle --format=esm --platform=browser --tsconfig=tsconfig.esbuild.json --outfile=dist/browser/hibp.module.js",
-    "build:docs": "jsdoc2md --no-cache --files src/*.ts --configure jsdoc2md.json > API.md && node scripts/fix-api-docs.js",
+    "build:docs": "jsdoc2md --no-cache --files 'src/*.ts' --configure jsdoc2md.json > API.md && node scripts/fix-api-docs.js",
     "changeset": "changeset",
     "changeset:version": "changeset version && pnpm install",
     "changeset:publish": "changeset publish",
