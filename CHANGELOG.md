@@ -1,5 +1,49 @@
 # Change Log
 
+## 16.0.0
+
+### Major Changes
+
+- [#637](https://github.com/wKovacs64/hibp/pull/637) [`d65fda6`](https://github.com/wKovacs64/hibp/commit/d65fda6f9b0703aa622324ed76760b4bbf0a5a80) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Drop support for Node.js 20, which is [end-of-life](https://nodejs.org/en/about/previous-releases). The minimum Node.js version is now 22.12.0, the first Node.js 22 release that can `require()` ESM without a flag. Upgrade Node.js, or keep using hibp 15.x if you can't.
+
+- [#625](https://github.com/wKovacs64/hibp/pull/625) [`c55048e`](https://github.com/wKovacs64/hibp/commit/c55048e82227cb3850269d5602882e3d35c60a9f) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Correct `breachedAccount()` and `search().breaches` types to reflect truncation. Default and `truncate: true` searches expose only `Name`; `truncate: false` exposes full `Breach` objects. Dynamic boolean options allow either result shape. Both preserve `null`.
+
+  TypeScript consumers accessing full-only fields such as `Title` or `DataClasses` must pass `truncate: false` or narrow dynamic results. Runtime requests and responses are unchanged.
+
+- [#624](https://github.com/wKovacs64/hibp/pull/624) [`8517b19`](https://github.com/wKovacs64/hibp/commit/8517b19819a2005da8de8c7a535152ddff83a440) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Correct `Paste.Title` to an optional string and `Paste.Date` to `string | null`, matching the [haveibeenpwned.com paste model](https://haveibeenpwned.com/API/v3#PasteModel).
+
+  TypeScript consumers of `Paste`, `pasteAccount()`, and `search()` must handle absent titles and null dates before using them as strings. This can introduce compile errors with strict null checks; HTTP response handling is unchanged.
+
+### Minor Changes
+
+- [#619](https://github.com/wKovacs64/hibp/pull/619) [`9bf2740`](https://github.com/wKovacs64/hibp/commit/9bf27402f53aba1864228005e088f09aafcb95ed) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `dataClassDescriptions` and the `DataClassDescription` type with lowercase `name` and `description` fields matching haveibeenpwned.com's live response.
+
+- [#626](https://github.com/wKovacs64/hibp/pull/626) [`d47a032`](https://github.com/wKovacs64/hibp/commit/d47a03208b72c0750f1a2f74e8fad262a8059f1e) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `sendEmail` and the `EmailAlias` type for domain verification approval emails.
+
+- [#620](https://github.com/wKovacs64/hibp/pull/620) [`87f02b6`](https://github.com/wKovacs64/hibp/commit/87f02b6616e703804145dd90ec821da8e7bd989f) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `breachedAccountRange` for six-character SHA-1 email hash prefixes, returning `hashSuffix` and `websites` results. Requires a Pro or High RPM subscription; callers must discard unrelated results per haveibeenpwned.com's terms of use.
+
+- [#623](https://github.com/wKovacs64/hibp/pull/623) [`a451599`](https://github.com/wKovacs64/hibp/commit/a4515993bc0c3ca4828b4c91cde0e204767f344e) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add `generateDnsToken` and `verifyDnsToken` for domain verification through DNS.
+
+- [#618](https://github.com/wKovacs64/hibp/pull/618) [`1df8169`](https://github.com/wKovacs64/hibp/commit/1df816999c3b0af19bcbd8ca7dca4631a4ca4e1b) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Add the `isSpamList` option to `breaches()`: `true` selects spam-list breaches, `false` selects non-spam-list breaches, and omission applies no spam-list filter. Can be combined with `domain`.
+
+### Patch Changes
+
+- [#621](https://github.com/wKovacs64/hibp/pull/621) [`cc059b1`](https://github.com/wKovacs64/hibp/commit/cc059b183c586a4762f7bb59fc757d28077a7ec4) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Complete the exported `Breach` type with required `IsStealerLog: boolean`,
+  `Attribution: string | null`, and `DisclosureUrl: string | null` fields, matching
+  [haveibeenpwned.com's live responses](https://haveibeenpwned.com/api/v3/breaches).
+
+  TypeScript consumers constructing `Breach` objects, including mocks and fixtures,
+  must supply these fields. Handle null when reading attribution or disclosure URLs.
+  The SDK continues returning the upstream response without transforming it.
+
+- [#622](https://github.com/wKovacs64/hibp/pull/622) [`70c08fb`](https://github.com/wKovacs64/hibp/commit/70c08fbe4a805e5e0e929f219dbc47450f3ddd1d) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Complete `SubscriptionStatus` with the [documented haveibeenpwned.com fields](https://haveibeenpwned.com/API/v3#SubscriptionStatus): `MaxBreachedDomains` (`number | null`), `IncludesBulkDomainAdd`, `IncludesAutoSubdomainVerification`, `IncludesCustomerDomains`, and `IncludesKAnon` (`boolean`). These fields are required, so TypeScript consumers constructing subscription status objects, including mocks and fixtures, must supply them. A `null` domain limit means unlimited domains. Runtime response handling is unchanged.
+
+- [#636](https://github.com/wKovacs64/hibp/pull/636) [`99e437b`](https://github.com/wKovacs64/hibp/commit/99e437b40ca0380cbe0c2a14abe74117eabfba4f) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Send the default `hibp <version>` User-Agent in every non-browser runtime. The SDK skipped it whenever a global `navigator` existed, which Node.js 21+, Bun, Deno, and Cloudflare Workers all define. Those requests went out with the runtime's User-Agent (e.g. `node`), or none at all on Cloudflare Workers. Browser pages and workers still send their own User-Agent, because setting one triggers a CORS preflight that haveibeenpwned.com rejects.
+
+- [#635](https://github.com/wKovacs64/hibp/pull/635) [`f165d82`](https://github.com/wKovacs64/hibp/commit/f165d82983fd1be04c73277f2f4093599ac7dcfc) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Document which HIBP plans (Core, Pro, High RPM) include each key-requiring function.
+
+- [#633](https://github.com/wKovacs64/hibp/pull/633) [`5b645a5`](https://github.com/wKovacs64/hibp/commit/5b645a58b25fbb3b89da93a7e7a6b10feec60595) Thanks [@wKovacs64](https://github.com/wKovacs64)! - GET operations reject a 401 with the JSON body's `message` as `error.message` (e.g. `Access denied due to missing hibp-api-key.`) instead of the raw JSON body, matching domain verification POST operations. Plain-text 401 bodies are still used as-is, and an empty 401 body rejects with the HTTP status (e.g. `401 Unauthorized`). A 429 without a JSON body now rejects with `RateLimitError` carrying the HTTP status as its message, instead of `SyntaxError`.
+
 ## 15.2.1
 
 ### Patch Changes
