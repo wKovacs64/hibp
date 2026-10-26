@@ -43,11 +43,11 @@ export function blockedWithRayId(rayId: string) {
 }
 
 /**
- * Reads the `message` of a JSON error body, or `null` if absent or blank.
+ * Reads the `message` of a JSON error body, or `undefined` if absent or blank.
  *
  * @internal
  */
-export function jsonMessage(text: string): string | null {
+export function jsonMessage(text: string): string | undefined {
   try {
     const error: unknown = JSON.parse(text);
     if (
@@ -62,7 +62,7 @@ export function jsonMessage(text: string): string | null {
   } catch {
     // Not JSON.
   }
-  return null;
+  return undefined;
 }
 
 /** @internal */
@@ -118,7 +118,7 @@ export function requestApi(
  * HTTP status code 401 throws an Error (unauthorized) with the body's JSON
  * `message`, or the body text.
  * HTTP status code 403 throws an Error (forbidden).
- * HTTP status code 429 throws an Error (too many requests).
+ * HTTP status code 429 throws a RateLimitError (too many requests).
  *
  * @internal
  * @private
@@ -163,7 +163,7 @@ export async function fetchFromApi(
       return null;
     }
     case TOO_MANY_REQUESTS.status: {
-      const message = jsonMessage(await response.text()) ?? undefined;
+      const message = jsonMessage(await response.text());
       const retryAfter = response.headers.get("retry-after");
       throw new RateLimitError(retryAfter, message);
     }

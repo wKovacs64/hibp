@@ -30,8 +30,10 @@ export async function postToApi(
   const isPlainText = /^text\/plain\b/i.test(headers.get("content-type") ?? "");
   const message =
     jsonMessage(text) ??
-    (status === FORBIDDEN.status && rayId ? blockedWithRayId(rayId) : null) ??
-    (isPlainText && text.trim() ? text : null) ??
+    (status === FORBIDDEN.status && rayId
+      ? blockedWithRayId(rayId)
+      : undefined) ??
+    (isPlainText && text.trim() ? text : undefined) ??
     `${status} ${response.statusText}`.trim();
 
   if (status === TOO_MANY_REQUESTS.status) {
