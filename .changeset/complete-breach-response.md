@@ -1,5 +1,5 @@
 ---
-"hibp": major
+"hibp": patch
 ---
 
 Complete the exported `Breach` type with required `IsStealerLog: boolean`,
