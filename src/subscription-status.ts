@@ -10,7 +10,12 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @property {string} SubscribedUntil
  * @property {number} Rpm
  * @property {number} DomainSearchMaxBreachedAccounts
+ * @property {number|null} MaxBreachedDomains maximum domains that can be added; null means no limit
  * @property {boolean} IncludesStealerLogs
+ * @property {boolean} IncludesBulkDomainAdd access to APIs for adding domains in bulk
+ * @property {boolean} IncludesAutoSubdomainVerification automatic verification of subdomains of a verified apex domain
+ * @property {boolean} IncludesCustomerDomains permission to add customer domains
+ * @property {boolean} IncludesKAnon access to email address searches using k-anonymity
  */
 
 /**

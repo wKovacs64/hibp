@@ -44,7 +44,12 @@ export interface SubscriptionStatus {
   SubscribedUntil: string;
   Rpm: number;
   DomainSearchMaxBreachedAccounts: number;
+  MaxBreachedDomains: number | null;
   IncludesStealerLogs: boolean;
+  IncludesBulkDomainAdd: boolean;
+  IncludesAutoSubdomainVerification: boolean;
+  IncludesCustomerDomains: boolean;
+  IncludesKAnon: boolean;
 }
 
 export interface SubscribedDomain {

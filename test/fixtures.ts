@@ -78,6 +78,8 @@ export const PASTE: Paste = {
   EmailCount: 139,
 };
 
+// Synthetic values; field set from
+// https://haveibeenpwned.com/API/v3#SubscriptionStatus. Not a live response.
 export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscriptionName: "Pwned 1",
   Description:
@@ -85,7 +87,12 @@ export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscribedUntil: "2024-04-02T12:34:56",
   Rpm: 10,
   DomainSearchMaxBreachedAccounts: 25,
+  MaxBreachedDomains: 2,
   IncludesStealerLogs: false,
+  IncludesBulkDomainAdd: false,
+  IncludesAutoSubdomainVerification: false,
+  IncludesCustomerDomains: false,
+  IncludesKAnon: false,
 };
 
 export const PASSWORD = "password";

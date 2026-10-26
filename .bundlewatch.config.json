@@ -103,7 +103,7 @@
     },
     {
       "path": "dist/esm/subscription-status.js",
-      "maxSize": "1 kB"
+      "maxSize": "1.1 kB"
     }
   ]
 }

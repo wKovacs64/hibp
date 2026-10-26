@@ -1110,12 +1110,17 @@ An object representing the status of your HIBP subscription.
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| SubscriptionName | <code>string</code> | 
-| Description | <code>string</code> | 
-| SubscribedUntil | <code>string</code> | 
-| Rpm | <code>number</code> | 
-| DomainSearchMaxBreachedAccounts | <code>number</code> | 
-| IncludesStealerLogs | <code>boolean</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| SubscriptionName | <code>string</code> |  |
+| Description | <code>string</code> |  |
+| SubscribedUntil | <code>string</code> |  |
+| Rpm | <code>number</code> |  |
+| DomainSearchMaxBreachedAccounts | <code>number</code> |  |
+| MaxBreachedDomains | <code>number</code> \| <code>null</code> | maximum domains that can be added; null means no limit |
+| IncludesStealerLogs | <code>boolean</code> |  |
+| IncludesBulkDomainAdd | <code>boolean</code> | access to APIs for adding domains in bulk |
+| IncludesAutoSubdomainVerification | <code>boolean</code> | automatic verification of subdomains of a verified apex domain |
+| IncludesCustomerDomains | <code>boolean</code> | permission to add customer domains |
+| IncludesKAnon | <code>boolean</code> | access to email address searches using k-anonymity |
 
