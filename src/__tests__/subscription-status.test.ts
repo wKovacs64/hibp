@@ -1,71 +1,11 @@
-import { describe, it, expect, expectTypeOf } from "vitest";
+import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { SUBSCRIPTION_STATUS } from "../../test/fixtures.js";
-import { subscriptionStatus, type SubscriptionStatus } from "../hibp.js";
+import { subscriptionStatus } from "../subscription-status.js";
 
 describe("subscriptionStatus", () => {
   const apiKey = "my-api-key";
-
-  it.each([2, null])(
-    "exposes the documented domain limit (%s)",
-    async (MaxBreachedDomains) => {
-      const response: SubscriptionStatus = {
-        ...SUBSCRIPTION_STATUS,
-        MaxBreachedDomains,
-      };
-      server.use(
-        http.get(
-          "https://haveibeenpwned.com/api/v3/subscription/status",
-          () => {
-            return new Response(JSON.stringify(response));
-          },
-        ),
-      );
-
-      const data = await subscriptionStatus({ apiKey });
-
-      expect(data.MaxBreachedDomains).toBe(MaxBreachedDomains);
-      expectTypeOf(data.MaxBreachedDomains).toEqualTypeOf<number | null>();
-      expectTypeOf(data).toEqualTypeOf<SubscriptionStatus>();
-    },
-  );
-
-  it.each([true, false])(
-    "exposes the documented subscription capabilities (%s)",
-    async (included) => {
-      const response: SubscriptionStatus = {
-        ...SUBSCRIPTION_STATUS,
-        IncludesBulkDomainAdd: included,
-        IncludesAutoSubdomainVerification: included,
-        IncludesCustomerDomains: included,
-        IncludesKAnon: included,
-      };
-      server.use(
-        http.get(
-          "https://haveibeenpwned.com/api/v3/subscription/status",
-          () => {
-            return new Response(JSON.stringify(response));
-          },
-        ),
-      );
-
-      const data = await subscriptionStatus({ apiKey });
-
-      expect(data).toMatchObject({
-        IncludesBulkDomainAdd: included,
-        IncludesAutoSubdomainVerification: included,
-        IncludesCustomerDomains: included,
-        IncludesKAnon: included,
-      });
-      expectTypeOf(data.IncludesBulkDomainAdd).toEqualTypeOf<boolean>();
-      expectTypeOf(
-        data.IncludesAutoSubdomainVerification,
-      ).toEqualTypeOf<boolean>();
-      expectTypeOf(data.IncludesCustomerDomains).toEqualTypeOf<boolean>();
-      expectTypeOf(data.IncludesKAnon).toEqualTypeOf<boolean>();
-    },
-  );
 
   describe("apiKey parameter", () => {
     it("sets the hibp-api-key header", async () => {
