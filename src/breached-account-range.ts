@@ -16,9 +16,13 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * The prefix is case-insensitive. This function accepts a prefix, not an email
  * address, and returns the documented `hashSuffix` and `websites` fields.
  *
- * Requires an API key with a Pro or High RPM subscription. The `apiKey` option
- * is optional for proxies that supply the key. Direct requests without a key
- * fail.
+ * Requires a Pro or High RPM subscription.
+ *
+ * 🔑 `haveibeenpwned.com` requires an API key from
+ * https://haveibeenpwned.com/API/Key for the `breachedaccount/range` endpoint.
+ * The `apiKey` option here is not explicitly required, but direct requests made
+ * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+ * a valid API key on your behalf).
  *
  * Compare suffixes locally against the intended email hash. HIBP requires
  * immediately discarding unrelated results without storing or further
@@ -36,16 +40,21 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * `https://haveibeenpwned.com/api/v3`)
  * @param {number} [options.timeoutMs] timeout for the request in milliseconds
  * (default: none)
- * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request
- * (default: none)
- * @param {string} [options.userAgent] a custom User-Agent header
- * (default: `hibp <version>`)
+ * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
+ * @param {string} [options.userAgent] a custom string to send as the User-Agent
+ * field in the request headers (default: `hibp <version>`)
  * @returns {Promise<BreachedAccountRangeResult[] | null>} a Promise resolving
  * to the range results (or null for an unexpected 404), or rejecting with an Error
  * @example
- * const match = (await breachedAccountRange("6B5917", { apiKey: "my-api-key" }))
- *   ?.find(({ hashSuffix }) => hashSuffix === "C6C0AADE0C085843D66E4944E108C4A4CD");
- * // match?.websites: ["Adobe", "Gawker", "Stratfor"] in the documented example
+ * try {
+ *   const data = await breachedAccountRange("6B5917", { apiKey: "my-api-key" });
+ *   const match = data?.find(
+ *     ({ hashSuffix }) => hashSuffix === "C6C0AADE0C085843D66E4944E108C4A4CD",
+ *   );
+ *   // match?.websites: ["Adobe", "Gawker", "Stratfor"] in the documented example
+ * } catch (err) {
+ *   // ...
+ * }
  * @see https://haveibeenpwned.com/API/v3#BreachesForHashRange
  * @see https://haveibeenpwned.com/TermsOfUse
  */
@@ -57,8 +66,8 @@ export function breachedAccountRange(
      */
     apiKey?: string;
     /**
-     * a custom base URL for the haveibeenpwned.com API endpoints
-     * (default: `https://haveibeenpwned.com/api/v3`)
+     * a custom base URL for the haveibeenpwned.com API endpoints (default:
+     * `https://haveibeenpwned.com/api/v3`)
      */
     baseUrl?: string;
     /**
@@ -70,7 +79,8 @@ export function breachedAccountRange(
      */
     signal?: AbortSignal;
     /**
-     * a custom User-Agent header (default: `hibp <version>`)
+     * a custom string to send as the User-Agent field in the request headers
+     * (default: `hibp <version>`)
      */
     userAgent?: string;
   } = {},

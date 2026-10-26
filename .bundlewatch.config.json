@@ -46,6 +46,10 @@
       "maxSize": "1.2 kB"
     },
     {
+      "path": "dist/esm/breached-account-range.js",
+      "maxSize": "1.5 kB"
+    },
+    {
       "path": "dist/esm/breached-domain.js",
       "maxSize": "1.2 kB"
     },

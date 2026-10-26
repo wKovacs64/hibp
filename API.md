@@ -9,9 +9,12 @@
 Email prefixes have six characters; Pwned Passwords prefixes have five.
 The prefix is case-insensitive. This function accepts a prefix, not an email
 address, and returns the documented <code>hashSuffix</code> and <code>websites</code> fields.</p>
-<p>Requires an API key with a Pro or High RPM subscription. The <code>apiKey</code> option
-is optional for proxies that supply the key. Direct requests without a key
-fail.</p>
+<p>Requires a Pro or High RPM subscription.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount/range</code> endpoint.
+The <code>apiKey</code> option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
+a valid API key on your behalf).</p>
 <p>Compare suffixes locally against the intended email hash. HIBP requires
 immediately discarding unrelated results without storing or further
 processing them. An absent suffix means the email has no returned breaches;
@@ -212,9 +215,13 @@ Email prefixes have six characters; Pwned Passwords prefixes have five.
 The prefix is case-insensitive. This function accepts a prefix, not an email
 address, and returns the documented `hashSuffix` and `websites` fields.
 
-Requires an API key with a Pro or High RPM subscription. The `apiKey` option
-is optional for proxies that supply the key. Direct requests without a key
-fail.
+Requires a Pro or High RPM subscription.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `breachedaccount/range` endpoint.
+The `apiKey` option here is not explicitly required, but direct requests made
+without it will fail (unless you specify a `baseUrl` to a proxy that inserts
+a valid API key on your behalf).
 
 Compare suffixes locally against the intended email hash. HIBP requires
 immediately discarding unrelated results without storing or further
@@ -239,13 +246,19 @@ to the range results (or null for an unexpected 404), or rejecting with an Error
 | [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
 | [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
 | [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
-| [options.userAgent] | <code>string</code> | a custom User-Agent header (default: `hibp <version>`) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
-const match = (await breachedAccountRange("6B5917", { apiKey: "my-api-key" }))
-  ?.find(({ hashSuffix }) => hashSuffix === "C6C0AADE0C085843D66E4944E108C4A4CD");
-// match?.websites: ["Adobe", "Gawker", "Stratfor"] in the documented example
+try {
+  const data = await breachedAccountRange("6B5917", { apiKey: "my-api-key" });
+  const match = data?.find(
+    ({ hashSuffix }) => hashSuffix === "C6C0AADE0C085843D66E4944E108C4A4CD",
+  );
+  // match?.websites: ["Adobe", "Gawker", "Stratfor"] in the documented example
+} catch (err) {
+  // ...
+}
 ```
 <a name="breachedAccount"></a>
 
