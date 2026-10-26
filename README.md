@@ -80,7 +80,7 @@ The following modules are available:
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
-- [sendEmail](API.md#sendemail)
+- [sendDomainVerificationEmail](API.md#senddomainverificationemail)
 - [stealerLogsByEmail](API.md#stealerlogsbyemail)
 - [stealerLogsByEmailDomain](API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
@@ -141,12 +141,14 @@ verification.
 subscription. Request an approval email using `admin`, `hostmaster`, `info`, `security` or `webmaster`:
 
 ```typescript
-import { sendEmail } from "hibp";
+import { sendDomainVerificationEmail } from "hibp";
 
-await sendEmail("example.com", "security", { apiKey: "my-pro-api-key" });
+await sendDomainVerificationEmail("example.com", "security", {
+  apiKey: "my-pro-api-key",
+});
 ```
 
-Follow the link sent to `security@example.com` to complete verification. `sendEmail` resolves with
+Follow the link sent to `security@example.com` to complete verification. The request resolves with
 `undefined` on success without parsing a response body and rejects with the upstream failure reason.
 
 #### Rate Limiting

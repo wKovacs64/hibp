@@ -80,11 +80,15 @@ convenience method is designed to mimic.</p>
 required, but direct requests made without it will fail (unless you specify a
 <code>baseUrl</code> to a proxy that inserts a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#sendEmail">sendEmail(domain, emailAlias, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dt><a href="#sendDomainVerificationEmail">sendDomainVerificationEmail(domain, emailAlias, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>Requests a domain verification approval email.</p>
 <p>Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
-at the domain to complete verification. Success does not require parsing a
-response body.</p>
+at the domain to complete verification.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>domainVerification/sendEmail</code>
+endpoint. The <code>apiKey</code> option here is not explicitly required, but direct
+requests made without it will fail (unless you specify a <code>baseUrl</code> to a proxy
+that inserts a valid API key on your behalf).</p>
 </dd>
 <dt><a href="#stealerLogsByEmailDomain">stealerLogsByEmailDomain(emailDomain, [options])</a> ⇒ <code><a href="#StealerLogDomainsByEmailAlias">Promise.&lt;StealerLogDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all stealer log email aliases for an email domain.</p>
@@ -173,7 +177,7 @@ hash prefix) to how many times it occurred in the Pwned Passwords repository.</p
 <dt><a href="#SearchResults">SearchResults</a> : <code>object</code></dt>
 <dd><p>An object representing search results.</p>
 </dd>
-<dt><a href="#EmailAlias">EmailAlias</a> : <code>&quot;admin&quot;</code> | <code>&quot;hostmaster&quot;</code> | <code>&quot;info&quot;</code> | <code>&quot;security&quot;</code> | <code>&quot;webmaster&quot;</code></dt>
+<dt><a href="#DomainVerificationEmailAlias">DomainVerificationEmailAlias</a> : <code>&quot;admin&quot;</code> | <code>&quot;hostmaster&quot;</code> | <code>&quot;info&quot;</code> | <code>&quot;security&quot;</code> | <code>&quot;webmaster&quot;</code></dt>
 <dd><p>An administrative alias supported for domain verification emails.</p>
 </dd>
 <dt><a href="#StealerLogDomainsByEmailAlias">StealerLogDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
@@ -697,35 +701,47 @@ try {
   // ...
 }
 ```
-<a name="sendEmail"></a>
+<a name="sendDomainVerificationEmail"></a>
 
-## sendEmail(domain, emailAlias, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
+## sendDomainVerificationEmail(domain, emailAlias, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
 Requests a domain verification approval email.
 
 Requires an HIBP Pro subscription. Follow the link sent to the chosen alias
-at the domain to complete verification. Success does not require parsing a
-response body.
+at the domain to complete verification.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the `domainVerification/sendEmail`
+endpoint. The `apiKey` option here is not explicitly required, but direct
+requests made without it will fail (unless you specify a `baseUrl` to a proxy
+that inserts a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;void&gt;</code> - resolves when the approval email request succeeds;
-rejects with an Error containing the upstream failure reason  
+**Returns**: <code>Promise.&lt;void&gt;</code> - a Promise which resolves without parsing the
+response body when the approval email request succeeds, or rejects with an
+Error containing the upstream failure reason  
 **See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | domain | <code>string</code> | the domain to verify (e.g., "example.com") |
-| emailAlias | [<code>EmailAlias</code>](#EmailAlias) | the administrative alias to receive the email |
+| emailAlias | [<code>DomainVerificationEmailAlias</code>](#DomainVerificationEmailAlias) | the administrative alias to receive the email |
 | [options] | <code>object</code> | a configuration object |
-| [options.apiKey] | <code>string</code> | an HIBP Pro API key; optional when a proxy supplies authentication |
-| [options.baseUrl] | <code>string</code> | a custom API base URL (default: `https://haveibeenpwned.com/api/v3`) |
-| [options.timeoutMs] | <code>number</code> | timeout in milliseconds (default: none) |
-| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request |
-| [options.userAgent] | <code>string</code> | a custom User-Agent (default: `hibp <version>`) |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
-await sendEmail("example.com", "security", { apiKey: "my-pro-api-key" });
-// Follow the link in the email sent to security@example.com.
+try {
+  await sendDomainVerificationEmail("example.com", "security", {
+    apiKey: "my-api-key",
+  });
+  // Follow the link in the email sent to security@example.com.
+} catch (err) {
+  // ...
+}
 ```
 <a name="stealerLogsByEmailDomain"></a>
 
@@ -1101,9 +1117,9 @@ An object representing search results.
 | breaches | [<code>Array.&lt;Breach&gt;</code>](#breach--object) \| <code>null</code> | 
 | pastes | [<code>Array.&lt;Paste&gt;</code>](#Paste) \| <code>null</code> | 
 
-<a name="EmailAlias"></a>
+<a name="DomainVerificationEmailAlias"></a>
 
-## EmailAlias : <code>&quot;admin&quot;</code> \| <code>&quot;hostmaster&quot;</code> \| <code>&quot;info&quot;</code> \| <code>&quot;security&quot;</code> \| <code>&quot;webmaster&quot;</code>
+## DomainVerificationEmailAlias : <code>&quot;admin&quot;</code> \| <code>&quot;hostmaster&quot;</code> \| <code>&quot;info&quot;</code> \| <code>&quot;security&quot;</code> \| <code>&quot;webmaster&quot;</code>
 An administrative alias supported for domain verification emails.
 
 **Kind**: global typedef  

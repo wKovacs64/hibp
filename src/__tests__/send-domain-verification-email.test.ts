@@ -7,18 +7,20 @@ import {
 } from "../../test/fixtures.js";
 import { TOO_MANY_REQUESTS } from "../api/haveibeenpwned/responses.js";
 import {
-  sendEmail,
+  sendDomainVerificationEmail,
   RateLimitError,
-  type EmailAlias,
+  type DomainVerificationEmailAlias,
   type HIBP,
 } from "../hibp.js";
 
-describe("sendEmail", () => {
+describe("sendDomainVerificationEmail", () => {
   it("restricts consumers to the supported administrative aliases", () => {
-    expectTypeOf<EmailAlias>().toEqualTypeOf<
+    expectTypeOf<DomainVerificationEmailAlias>().toEqualTypeOf<
       "admin" | "hostmaster" | "info" | "security" | "webmaster"
     >();
-    expectTypeOf(sendEmail).parameter(1).toEqualTypeOf<EmailAlias>();
+    expectTypeOf(sendDomainVerificationEmail)
+      .parameter(1)
+      .toEqualTypeOf<DomainVerificationEmailAlias>();
   });
 
   // Request and HTTP 200 are documented; an empty success body is representative.
@@ -44,10 +46,16 @@ describe("sendEmail", () => {
         ),
       );
 
-      const client: Pick<HIBP, "sendEmail"> = { sendEmail };
-      const request = client.sendEmail("example.com", emailAlias, {
-        apiKey: "my-api-key",
-      });
+      const client: Pick<HIBP, "sendDomainVerificationEmail"> = {
+        sendDomainVerificationEmail,
+      };
+      const request = client.sendDomainVerificationEmail(
+        "example.com",
+        emailAlias,
+        {
+          apiKey: "my-api-key",
+        },
+      );
       expectTypeOf(request).toEqualTypeOf<Promise<void>>();
       await expect(request).resolves.toBeUndefined();
     },
@@ -61,7 +69,7 @@ describe("sendEmail", () => {
     );
 
     // @ts-expect-error -- Exercise upstream validation for untyped callers.
-    const request = sendEmail("example.com", "support");
+    const request = sendDomainVerificationEmail("example.com", "support");
     await expect(request).rejects.toThrow(
       "The emailAlias field did not contain a valid value. Acceptable values are: admin, hostmaster, info, security, webmaster.",
     );
@@ -74,9 +82,9 @@ describe("sendEmail", () => {
       ),
     );
 
-    await expect(sendEmail("example.com", "admin")).rejects.toThrow(
-      "Access denied due to missing hibp-api-key.",
-    );
+    await expect(
+      sendDomainVerificationEmail("example.com", "admin"),
+    ).rejects.toThrow("Access denied due to missing hibp-api-key.");
   });
 
   // Representative transport responses, not live captures.
@@ -89,9 +97,9 @@ describe("sendEmail", () => {
       ),
     );
 
-    await expect(sendEmail("example.com", "admin")).rejects.toThrow(
-      "Email verification is unavailable.",
-    );
+    await expect(
+      sendDomainVerificationEmail("example.com", "admin"),
+    ).rejects.toThrow("Email verification is unavailable.");
   });
 
   it("preserves rate-limit retry guidance", async () => {
@@ -104,9 +112,10 @@ describe("sendEmail", () => {
       ),
     );
 
-    const error = await sendEmail("example.com", "admin").catch(
-      (caught: unknown) => caught,
-    );
+    const error = await sendDomainVerificationEmail(
+      "example.com",
+      "admin",
+    ).catch((caught: unknown) => caught);
     expect(error).toBeInstanceOf(RateLimitError);
     expect(error).toHaveProperty("retryAfterSeconds", 2);
     expect(error).toHaveProperty(
@@ -134,7 +143,10 @@ describe("sendEmail", () => {
     );
 
     await expect(
-      sendEmail("example.com", "security", { baseUrl, userAgent: "Custom UA" }),
+      sendDomainVerificationEmail("example.com", "security", {
+        baseUrl,
+        userAgent: "Custom UA",
+      }),
     ).resolves.toBeUndefined();
   });
 
@@ -143,7 +155,9 @@ describe("sendEmail", () => {
     controller.abort();
 
     await expect(
-      sendEmail("example.com", "admin", { signal: controller.signal }),
+      sendDomainVerificationEmail("example.com", "admin", {
+        signal: controller.signal,
+      }),
     ).rejects.toMatchObject({ name: "AbortError" });
   });
 
@@ -161,7 +175,7 @@ describe("sendEmail", () => {
     );
 
     await expect(
-      sendEmail("example.com", "admin", { timeoutMs: 1 }),
+      sendDomainVerificationEmail("example.com", "admin", { timeoutMs: 1 }),
     ).rejects.toMatchObject({ name: "TimeoutError" });
   });
 });

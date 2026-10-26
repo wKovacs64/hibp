@@ -77,7 +77,7 @@ The following modules are available:
 - [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)
 - [pwnedPasswordRange](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpasswordrange)
 - [search](https://github.com/wKovacs64/hibp/tree/main/API.md#search)
-- [sendEmail](https://github.com/wKovacs64/hibp/tree/main/API.md#sendemail)
+- [sendDomainVerificationEmail](https://github.com/wKovacs64/hibp/tree/main/API.md#senddomainverificationemail)
 - [stealerLogsByEmail](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbyemail)
 - [stealerLogsByEmailDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbywebsitedomain)
@@ -121,8 +121,8 @@ and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns).
 
 #### Domain verification through email
 
-Use `sendEmail` with `admin`, `hostmaster`, `info`, `security` or `webmaster`, then follow the link in
-the approval email to complete verification. Requires an HIBP Pro subscription. Success resolves
+Use `sendDomainVerificationEmail` with `admin`, `hostmaster`, `info`, `security` or `webmaster`,
+then follow the link in the approval email to complete verification. Requires an HIBP Pro subscription. Success resolves
 without parsing a response body; failures preserve the upstream reason. See the
 [usage example](https://github.com/wKovacs64/hibp#domain-verification-through-email)
 and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail).

@@ -51,7 +51,7 @@ export interface DnsToken {
   txtRecordValue: string;
 }
 
-export type EmailAlias =
+export type DomainVerificationEmailAlias =
   | "admin"
   | "hostmaster"
   | "info"
