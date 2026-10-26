@@ -89,13 +89,9 @@ jobs:
         run: pnpm exec attw --pack --format table --profile esm-only
 
   test:
-    name: 🩺 Tests (Node ${{ matrix.node-version || '.nvmrc' }})
+    name: 🩺 Tests
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
-    strategy:
-      matrix:
-        # Minimum supported version (package.json engines) and .nvmrc
-        node-version: ["22.12.0", ""]
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v7
@@ -107,7 +103,6 @@ jobs:
         uses: actions/setup-node@v7
         with:
           cache: pnpm
-          node-version: ${{ matrix.node-version }}
           node-version-file: ".nvmrc"
 
       - name: 📥 Install deps
@@ -115,6 +110,48 @@ jobs:
 
       - name: ⚡ Vitest with coverage
         run: pnpm run test:coverage
+
+  package:
+    name: 📦 Package on minimum Node
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v7
+
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v7
+        with:
+          cache: pnpm
+          node-version-file: ".nvmrc"
+
+      - name: 📥 Install deps
+        run: pnpm install
+
+      - name: 🛠️ Build and pack
+        run: |
+          pnpm run build
+          pnpm pack --pack-destination "$RUNNER_TEMP/consumer"
+
+      # Dev dependencies may require a newer Node.js than the published
+      # package, so only the packed output runs on the engines minimum.
+      - name: 🔢 Get minimum Node version
+        run: echo "NODE_MIN=$(node -p 'require("./package.json").engines.node.match(/[\d.]+/)[0]')" >> $GITHUB_ENV
+
+      - name: ⎔ Setup minimum node
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_MIN }}
+
+      - name: 💨 Smoke test
+        working-directory: ${{ runner.temp }}/consumer
+        run: |
+          npm init -y > /dev/null
+          npm install ./hibp-*.tgz
+          node "$GITHUB_WORKSPACE/test/package-smoke.mjs"
 
   playwright:
     name: 🎭 Playwright
@@ -165,7 +202,7 @@ jobs:
   release:
     name: 🚀 Release
     runs-on: ubuntu-latest
-    needs: [format, lint, typecheck, test, playwright]
+    needs: [format, lint, typecheck, test, package, playwright]
     if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
