@@ -43,6 +43,15 @@ export function blockedWithRayId(rayId: string) {
 }
 
 /**
+ * Formats the HTTP status of a response, e.g. `429 Too Many Requests`.
+ *
+ * @internal
+ */
+export function statusLine({ status, statusText }: Response) {
+  return `${status} ${statusText}`.trim();
+}
+
+/**
  * Reads the `message` of a JSON error body, or `undefined` if absent or blank.
  *
  * @internal
@@ -116,9 +125,10 @@ export function requestApi(
  * HTTP status code 404 returns null (no data found).
  * HTTP status code 400 throws an Error (bad request).
  * HTTP status code 401 throws an Error (unauthorized) with the body's JSON
- * `message`, or the body text.
+ * `message`, the body text, or the HTTP status.
  * HTTP status code 403 throws an Error (forbidden).
- * HTTP status code 429 throws a RateLimitError (too many requests).
+ * HTTP status code 429 throws a RateLimitError (too many requests) with the
+ * body's JSON `message`, or the HTTP status.
  *
  * @internal
  * @private
@@ -152,7 +162,9 @@ export async function fetchFromApi(
     }
     case UNAUTHORIZED.status: {
       const text = await response.text();
-      throw new Error(jsonMessage(text) ?? text);
+      throw new Error(
+        jsonMessage(text) ?? (text.trim() ? text : statusLine(response)),
+      );
     }
     case FORBIDDEN.status: {
       const rayId = response.headers.get("cf-ray");
@@ -163,7 +175,8 @@ export async function fetchFromApi(
       return null;
     }
     case TOO_MANY_REQUESTS.status: {
-      const message = jsonMessage(await response.text());
+      const message =
+        jsonMessage(await response.text()) ?? statusLine(response);
       const retryAfter = response.headers.get("retry-after");
       throw new RateLimitError(retryAfter, message);
     }

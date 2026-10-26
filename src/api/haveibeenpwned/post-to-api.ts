@@ -3,6 +3,7 @@ import {
   jsonMessage,
   RateLimitError,
   requestApi,
+  statusLine,
   type ApiOptions,
 } from "./fetch-from-api.js";
 import { FORBIDDEN, TOO_MANY_REQUESTS } from "./responses.js";
@@ -34,7 +35,7 @@ export async function postToApi(
       ? blockedWithRayId(rayId)
       : undefined) ??
     (isPlainText && text.trim() ? text : undefined) ??
-    `${status} ${response.statusText}`.trim();
+    statusLine(response);
 
   if (status === TOO_MANY_REQUESTS.status) {
     throw new RateLimitError(headers.get("retry-after"), message);

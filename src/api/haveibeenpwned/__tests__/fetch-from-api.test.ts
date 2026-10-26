@@ -111,6 +111,22 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
         `[Error: Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation]`,
       );
     });
+    it("throws the HTTP status for an empty body", () => {
+      server.use(
+        http.get(
+          "*",
+          () =>
+            new Response(null, {
+              status: UNAUTHORIZED.status,
+              statusText: "Unauthorized",
+            }),
+        ),
+      );
+
+      return expect(fetchFromApi("/service/unauthorized")).rejects.toThrow(
+        /^401 Unauthorized$/,
+      );
+    });
   });
 
   describe("forbidden request", () => {
@@ -169,13 +185,17 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       );
     });
 
-    it("throws a rate limit error for a non-JSON body", async () => {
+    it("throws a rate limit error with the HTTP status for a non-JSON body", async () => {
       server.use(
         http.get("*", () => {
-          return new Response("Too Many Requests", {
-            status: TOO_MANY_REQUESTS.status,
-            headers: Array.from(TOO_MANY_REQUESTS.headers),
-          });
+          return new Response(
+            "<!DOCTYPE html><title>Too Many Requests</title>",
+            {
+              status: TOO_MANY_REQUESTS.status,
+              statusText: "Too Many Requests",
+              headers: Array.from(TOO_MANY_REQUESTS.headers),
+            },
+          );
         }),
       );
 
@@ -184,7 +204,10 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
         apiKey,
       }).catch((caughtError: unknown) => caughtError);
       expect(error).toBeInstanceOf(RateLimitError);
-      expect(error).toHaveProperty("retryAfterSeconds", 2);
+      expect(error).toMatchObject({
+        message: "429 Too Many Requests",
+        retryAfterSeconds: 2,
+      });
     });
 
     it("sets retryAfterSeconds to undefined when header is missing", async () => {
