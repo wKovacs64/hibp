@@ -35,9 +35,11 @@ browser.
 - Get the most recently added breach
 - Get a single breach event
 - Get all breaches for an account 🔑
+- Search breaches by a six-character SHA-1 email prefix (Pro or High RPM) 🔑
 - Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
+- Get data class names and descriptions
 - Get all pastes for an account 🔑
 - [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange) check a password to
   see if it has been exposed in a data breach
@@ -48,7 +50,7 @@ browser.
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
 - Generate and verify DNS domain verification tokens (Pro subscription) 🔑
-- Get your subscription status 🔑
+- Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)
@@ -68,9 +70,11 @@ The following modules are available:
 
 - [breach](https://github.com/wKovacs64/hibp/tree/main/API.md#breach)
 - [breachedAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#breachedaccount)
+- [breachedAccountRange](https://github.com/wKovacs64/hibp/tree/main/API.md#breachedaccountrange)
 - [breachedDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#breacheddomain)
 - [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
 - [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)
+- [dataClassDescriptions](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclassdescriptions)
 - [generateDnsToken](https://github.com/wKovacs64/hibp/tree/main/API.md#generatednstoken)
 - [latestBreach](https://github.com/wKovacs64/hibp/tree/main/API.md#latestbreach)
 - [pasteAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#pasteaccount)

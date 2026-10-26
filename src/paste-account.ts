@@ -7,8 +7,8 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @typedef {object} Paste
  * @property {string} Id
  * @property {string} Source
- * @property {string} Title
- * @property {string} Date
+ * @property {string} [Title] omitted when the source has no title
+ * @property {(string | null)} Date null when the source has no posting date
  * @property {number} EmailCount
  */
 
