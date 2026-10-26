@@ -52,6 +52,7 @@ browser.
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
 - Generate and verify DNS domain verification tokens (Pro subscription) 🔑
+- Request domain verification approval emails (Pro subscription) 🔑
 - Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -83,6 +84,7 @@ The following modules are available:
 - [pwnedPassword](API.md#pwnedpassword)
 - [pwnedPasswordRange](API.md#pwnedpasswordrange)
 - [search](API.md#search)
+- [sendEmail](API.md#sendemail)
 - [stealerLogsByEmail](API.md#stealerlogsbyemail)
 - [stealerLogsByEmailDomain](API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)

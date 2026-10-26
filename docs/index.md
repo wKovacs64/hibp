@@ -50,6 +50,7 @@ browser.
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
 - Generate and verify DNS domain verification tokens (Pro subscription) 🔑
+- Request domain verification approval emails (Pro subscription) 🔑
 - Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -81,6 +82,7 @@ The following modules are available:
 - [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)
 - [pwnedPasswordRange](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpasswordrange)
 - [search](https://github.com/wKovacs64/hibp/tree/main/API.md#search)
+- [sendEmail](https://github.com/wKovacs64/hibp/tree/main/API.md#sendemail)
 - [stealerLogsByEmail](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbyemail)
 - [stealerLogsByEmailDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbyemaildomain)
 - [stealerLogsByWebsiteDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbywebsitedomain)
