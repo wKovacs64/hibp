@@ -111,6 +111,55 @@ describe("DNS verification", () => {
       );
     });
 
+    it("reports the Ray ID of a blocked request", async () => {
+      server.use(
+        http.post(
+          "*",
+          () =>
+            new Response("<!DOCTYPE html><title>Attention Required</title>", {
+              status: 403,
+              headers: { "content-type": "text/html", "cf-ray": "someRayId" },
+            }),
+        ),
+      );
+
+      await expect(operation("example.com")).rejects.toThrow(
+        "Request blocked, contact haveibeenpwned.com if this continues (Ray ID: someRayId)",
+      );
+    });
+
+    it.each([
+      { case: "an empty JSON body", body: "", type: "application/json" },
+      { case: "an invalid JSON body", body: "{", type: "application/json" },
+      {
+        case: "a JSON body without a message",
+        body: JSON.stringify({ statusCode: 503 }),
+        type: "application/json",
+      },
+      { case: "an empty body", body: null, type: "" },
+      {
+        case: "an HTML body",
+        body: "<!DOCTYPE html><title>Service Unavailable</title>",
+        type: "text/html",
+      },
+    ])("rejects with the HTTP status for $case", async ({ body, type }) => {
+      server.use(
+        http.post(
+          "*",
+          () =>
+            new Response(body, {
+              status: 503,
+              statusText: "Service Unavailable",
+              headers: type ? { "content-type": type } : undefined,
+            }),
+        ),
+      );
+
+      await expect(operation("example.com")).rejects.toThrow(
+        /^503 Service Unavailable$/,
+      );
+    });
+
     it("supports an authenticating proxy and a custom User-Agent", async () => {
       expect.assertions(3);
       const baseUrl = "https://my-hibp-proxy:8080/api";

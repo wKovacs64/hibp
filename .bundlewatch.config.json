@@ -15,10 +15,14 @@
     },
     {
       "path": "dist/esm/api/haveibeenpwned/fetch-from-api.js",
-      "maxSize": "1.4 kB"
+      "maxSize": "1.6 kB"
     },
     {
       "path": "dist/esm/api/haveibeenpwned/package-info.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/api/haveibeenpwned/post-to-api.js",
       "maxSize": "1 kB"
     },
     {
@@ -58,6 +62,10 @@
       "maxSize": "1 kB"
     },
     {
+      "path": "dist/esm/generate-dns-token.js",
+      "maxSize": "1.1 kB"
+    },
+    {
       "path": "dist/esm/latest-breach.js",
       "maxSize": "1 kB"
     },
@@ -95,6 +103,10 @@
     },
     {
       "path": "dist/esm/subscription-status.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/verify-dns-token.js",
       "maxSize": "1 kB"
     }
   ]
