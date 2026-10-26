@@ -12,6 +12,8 @@ export async function baseFetch({
   signal,
   userAgent,
   queryParams,
+  method,
+  body,
 }: {
   baseUrl: string;
   endpoint: string;
@@ -20,8 +22,12 @@ export async function baseFetch({
   signal?: AbortSignal;
   userAgent?: string;
   queryParams?: Record<string, string>;
+  method?: "POST";
+  body?: string;
 }): Promise<Response> {
   const requestInit: RequestInit = {
+    method,
+    body,
     headers: buildHeaders(userAgent, headers),
     signal: buildSignal(timeoutMs, signal),
   };

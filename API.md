@@ -48,6 +48,17 @@ a valid API key on your behalf).</p>
 <dt><a href="#dataClasses">dataClasses([options])</a> ⇒ <code>Promise.&lt;Array.&lt;string&gt;&gt;</code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all data classes in the system.</p>
 </dd>
+<dt><a href="#generateDnsToken">generateDnsToken(domain, [options])</a> ⇒ <code><a href="#DnsToken">Promise.&lt;DnsToken&gt;</a></code></dt>
+<dd><p>Generates a domain-specific DNS verification token.</p>
+<p>Requires an HIBP Pro subscription. Publish <code>txtRecordValue</code> as a TXT record
+on the domain, then call <code>verifyDnsToken</code> after DNS propagation.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the
+<code>domainVerification/generateDnsToken</code> endpoint. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
+</dd>
 <dt><a href="#latestBreach">latestBreach([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches the most recently added breach.</p>
 </dd>
@@ -139,6 +150,18 @@ The <code>apiKey</code> option here is not explicitly required, but direct reque
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
+<dt><a href="#verifyDnsToken">verifyDnsToken(domain, [options])</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
+<dd><p>Verifies a domain&#39;s published HIBP TXT record.</p>
+<p>Requires an HIBP Pro subscription. Generate the value with <code>generateDnsToken</code>,
+publish it at your DNS provider, and allow time for DNS propagation first.
+The record can be removed after verification succeeds.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the
+<code>domainVerification/verifyDnsToken</code> endpoint. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
+</dd>
 </dl>
 
 ## Typedefs
@@ -159,6 +182,9 @@ breach names that alias has appeared in for the specified domain.</p>
 </dd>
 <dt><a href="#dataclassdescription--object">DataClassDescription</a> : <code>object</code></dt>
 <dd><p>A data class name and its description.</p>
+</dd>
+<dt><a href="#DnsToken">DnsToken</a> : <code>object</code></dt>
+<dd><p>The TXT record value to publish at your DNS provider.</p>
 </dd>
 <dt><a href="#Paste">Paste</a> : <code>object</code></dt>
 <dd><p>An object representing a paste.</p>
@@ -487,6 +513,47 @@ try {
   } else {
     // ...
   }
+} catch (err) {
+  // ...
+}
+```
+<a name="generateDnsToken"></a>
+
+## generateDnsToken(domain, [options]) ⇒ [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken)
+Generates a domain-specific DNS verification token.
+
+Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
+on the domain, then call `verifyDnsToken` after DNS propagation.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the
+`domainVerification/generateDnsToken` endpoint. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken) - a Promise which resolves to the TXT record
+value, or rejects with an Error containing the upstream failure reason  
+**See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaDns  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| domain | <code>string</code> | the domain to verify (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  const { txtRecordValue } = await generateDnsToken("example.com", {
+    apiKey: "my-api-key",
+  });
+  // Publish txtRecordValue as a TXT record on example.com.
 } catch (err) {
   // ...
 }
@@ -984,6 +1051,47 @@ try {
   // ...
 }
 ```
+<a name="verifyDnsToken"></a>
+
+## verifyDnsToken(domain, [options]) ⇒ <code>Promise.&lt;void&gt;</code>
+Verifies a domain's published HIBP TXT record.
+
+Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
+publish it at your DNS provider, and allow time for DNS propagation first.
+The record can be removed after verification succeeds.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the
+`domainVerification/verifyDnsToken` endpoint. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;void&gt;</code> - a Promise which resolves without parsing the
+response body when verification succeeds, or rejects with an Error
+containing the upstream failure reason  
+**See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaDns  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| domain | <code>string</code> | the domain to verify (e.g., "example.com") |
+| [options] | <code>object</code> | a configuration object |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
+
+**Example**  
+```js
+try {
+  await verifyDnsToken("example.com", { apiKey: "my-api-key" });
+  // ...
+} catch (err) {
+  // ...
+}
+```
 <a name="Breach"></a>
 
 ## Breach : <code>object</code>
@@ -1051,6 +1159,18 @@ A data class name and its description.
 | --- | --- | --- |
 | name | <code>string</code> | the data class name |
 | description | <code>string</code> | a description of the compromised data |
+
+<a name="DnsToken"></a>
+
+## DnsToken : <code>object</code>
+The TXT record value to publish at your DNS provider.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| txtRecordValue | <code>string</code> | the complete TXT record value |
 
 <a name="Paste"></a>
 

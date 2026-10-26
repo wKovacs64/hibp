@@ -49,6 +49,7 @@ browser.
 - Get all stealer log email aliases for an email domain 🔑
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
+- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
 - Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -74,6 +75,7 @@ The following modules are available:
 - [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
 - [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)
 - [dataClassDescriptions](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclassdescriptions)
+- [generateDnsToken](https://github.com/wKovacs64/hibp/tree/main/API.md#generatednstoken)
 - [latestBreach](https://github.com/wKovacs64/hibp/tree/main/API.md#latestbreach)
 - [pasteAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#pasteaccount)
 - [pwnedPassword](https://github.com/wKovacs64/hibp/tree/main/API.md#pwnedpassword)
@@ -84,6 +86,7 @@ The following modules are available:
 - [stealerLogsByWebsiteDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#stealerlogsbywebsitedomain)
 - [subscribedDomains](https://github.com/wKovacs64/hibp/tree/main/API.md#subscribeddomains)
 - [subscriptionStatus](https://github.com/wKovacs64/hibp/tree/main/API.md#subscriptionstatus)
+- [verifyDnsToken](https://github.com/wKovacs64/hibp/tree/main/API.md#verifydnstoken)
 
 Please see the [API reference](https://github.com/wKovacs64/hibp/tree/main/API.md) for more detailed
 usage information and examples.

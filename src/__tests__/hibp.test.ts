@@ -13,6 +13,7 @@ describe("hibp", () => {
         "breaches": [Function],
         "dataClassDescriptions": [Function],
         "dataClasses": [Function],
+        "generateDnsToken": [Function],
         "latestBreach": [Function],
         "pasteAccount": [Function],
         "pwnedPassword": [Function],
@@ -23,6 +24,7 @@ describe("hibp", () => {
         "stealerLogsByWebsiteDomain": [Function],
         "subscribedDomains": [Function],
         "subscriptionStatus": [Function],
+        "verifyDnsToken": [Function],
       }
     `);
   });

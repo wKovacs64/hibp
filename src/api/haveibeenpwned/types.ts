@@ -60,6 +60,10 @@ export interface SubscribedDomain {
   NextSubscriptionRenewal: string | null;
 }
 
+export interface DnsToken {
+  txtRecordValue: string;
+}
+
 export type BreachedDomainsByEmailAlias = Record<string, string[]>;
 
 export interface BreachedAccountRangeResult {

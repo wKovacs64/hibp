@@ -6,6 +6,7 @@ import { breachedDomain } from "./breached-domain.js";
 import { breaches } from "./breaches.js";
 import { dataClasses } from "./data-classes.js";
 import { dataClassDescriptions } from "./data-class-descriptions.js";
+import { generateDnsToken } from "./generate-dns-token.js";
 import { latestBreach } from "./latest-breach.js";
 import { pasteAccount } from "./paste-account.js";
 import { pwnedPassword } from "./pwned-password.js";
@@ -16,6 +17,7 @@ import { stealerLogsByEmailDomain } from "./stealer-logs-by-email-domain.js";
 import { stealerLogsByWebsiteDomain } from "./stealer-logs-by-website-domain.js";
 import { subscribedDomains } from "./subscribed-domains.js";
 import { subscriptionStatus } from "./subscription-status.js";
+import { verifyDnsToken } from "./verify-dns-token.js";
 
 export type * from "./api/haveibeenpwned/types.js";
 
@@ -36,6 +38,7 @@ export {
   breaches,
   dataClasses,
   dataClassDescriptions,
+  generateDnsToken,
   latestBreach,
   pasteAccount,
   pwnedPassword,
@@ -46,6 +49,7 @@ export {
   stealerLogsByWebsiteDomain,
   subscribedDomains,
   subscriptionStatus,
+  verifyDnsToken,
   RateLimitError,
 };
 
@@ -58,6 +62,7 @@ export interface HIBP {
   breaches: typeof breaches;
   dataClasses: typeof dataClasses;
   dataClassDescriptions: typeof dataClassDescriptions;
+  generateDnsToken: typeof generateDnsToken;
   latestBreach: typeof latestBreach;
   pasteAccount: typeof pasteAccount;
   pwnedPassword: typeof pwnedPassword;
@@ -68,6 +73,7 @@ export interface HIBP {
   stealerLogsByWebsiteDomain: typeof stealerLogsByWebsiteDomain;
   subscribedDomains: typeof subscribedDomains;
   subscriptionStatus: typeof subscriptionStatus;
+  verifyDnsToken: typeof verifyDnsToken;
   RateLimitError: typeof RateLimitError;
 }
 

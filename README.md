@@ -51,6 +51,7 @@ browser.
 - Get all stealer log email aliases for an email domain 🔑
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
+- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
 - Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
@@ -76,6 +77,7 @@ The following modules are available:
 - [breaches](API.md#breaches)
 - [dataClasses](API.md#dataclasses)
 - [dataClassDescriptions](API.md#dataclassdescriptions)
+- [generateDnsToken](API.md#generatednstoken)
 - [latestBreach](API.md#latestbreach)
 - [pasteAccount](API.md#pasteaccount)
 - [pwnedPassword](API.md#pwnedpassword)
@@ -86,6 +88,7 @@ The following modules are available:
 - [stealerLogsByWebsiteDomain](API.md#stealerlogsbywebsitedomain)
 - [subscribedDomains](API.md#subscribeddomains)
 - [subscriptionStatus](API.md#subscriptionstatus)
+- [verifyDnsToken](API.md#verifydnstoken)
 
 Please see the [API reference](API.md) for more detailed usage information and examples.
 
