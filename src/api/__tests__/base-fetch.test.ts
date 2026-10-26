@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../../mocks/server.js";
 import { respondOnAbort } from "../../../test/handlers.js";
@@ -73,12 +73,9 @@ describe("internal: buildHeaders", () => {
   describe("extra headers", () => {
     it("returns extra headers when provided", () => {
       expect(buildHeaders(undefined, { "X-Custom": "value" })).toEqual({
+        "User-Agent": expect.stringMatching(/^hibp /),
         "X-Custom": "value",
       });
-    });
-
-    it("returns empty object when no args provided", () => {
-      expect(buildHeaders()).toEqual({});
     });
   });
 
@@ -96,26 +93,18 @@ describe("internal: buildHeaders", () => {
       });
     });
 
-    it("uses default User-Agent when outside browser (no navigator)", () => {
-      const originalNavigator = global.navigator;
-      // @ts-expect-error: faking a non-browser (Node) environment
-      delete global.navigator;
-
+    it("uses default User-Agent in Node.js", () => {
       const result = buildHeaders();
       expect(result["User-Agent"]).toMatch(/^hibp \d+\.\d+\.\d+/);
-
-      global.navigator = originalNavigator;
     });
 
-    it("does not set User-Agent when inside browser (navigator exists)", () => {
-      const originalNavigator = global.navigator;
-      const navigator = Object.create(null) as Navigator;
-      global.navigator = navigator;
-
-      const result = buildHeaders();
-      expect(result["User-Agent"]).toBeUndefined();
-
-      global.navigator = originalNavigator;
+    it("does not set User-Agent outside Node.js", () => {
+      vi.stubGlobal("process", undefined);
+      try {
+        expect(buildHeaders()["User-Agent"]).toBeUndefined();
+      } finally {
+        vi.unstubAllGlobals();
+      }
     });
   });
 });

@@ -65,7 +65,7 @@ export function buildHeaders(
 
   if (userAgent) {
     headers["User-Agent"] = userAgent;
-  } else if (typeof navigator === "undefined") {
+  } else if (isNodeCompatible()) {
     headers["User-Agent"] = `${PACKAGE_NAME} ${PACKAGE_VERSION}`;
   }
 
@@ -85,4 +85,15 @@ function buildSignal(
   if (signals.length === 1) return signals[0];
 
   return AbortSignal.any(signals);
+}
+
+/**
+ * Node.js, Bun, and Deno all report a Node.js version. Browsers send their own
+ * User-Agent, and setting one would force a CORS preflight.
+ */
+function isNodeCompatible() {
+  const { process } = globalThis as {
+    process?: { versions?: { node?: unknown } };
+  };
+  return typeof process?.versions?.node === "string";
 }

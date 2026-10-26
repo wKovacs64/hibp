@@ -15,8 +15,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
   const apiKey = "my-api-key";
 
   describe("User-Agent", () => {
-    // Node
-    it("sends a custom User-Agent request header when outside the browser", async () => {
+    it("sends a custom User-Agent request header in Node.js", async () => {
       server.use(
         http.get("*", ({ request }) => {
           return request.headers.get("User-Agent")?.includes("hibp")
@@ -25,35 +24,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
         }),
       );
 
-      const originalNavigator = global.navigator;
-
-      // @ts-expect-error: faking a non-browser (Node) environment
-      delete global.navigator;
-
       await expect(fetchFromApi("/service")).resolves.toEqual({});
-
-      global.navigator = originalNavigator;
-    });
-
-    // Browser
-    it("sends a natural User-Agent request header when inside the browser", () => {
-      // Note: this test is _kinda_ bogus because it runs in Node so node-fetch
-      // is used to make the request and node-fetch sends its own UA, whereas in
-      // a browser environment, the browser would send its own UA. But I think
-      // it accomplishes the same thing by checking for our custom UA (which we
-      // don't want to see).
-      server.use(
-        http.get("*", ({ request }) => {
-          return !request.headers.get("User-Agent")?.includes("hibp")
-            ? new Response(JSON.stringify({}))
-            : new Response(null, { status: FORBIDDEN.status });
-        }),
-      );
-
-      const navigator = Object.create(null) as Navigator;
-      global.navigator = navigator;
-
-      return expect(fetchFromApi("/service")).resolves.toEqual({});
     });
   });
 
