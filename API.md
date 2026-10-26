@@ -142,6 +142,9 @@ a valid API key on your behalf).</p>
 <dl>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
 <dd><p>An object representing a breach.</p>
+<p><code>Attribution</code> and <code>DisclosureUrl</code> may be null. See the
+<a href="https://haveibeenpwned.com/API/v3#BreachModel">breach model</a> and the
+<a href="https://haveibeenpwned.com/api/v3/breaches">breach catalogue</a>.</p>
 </dd>
 <dt><a href="#BreachedAccountRangeResult">BreachedAccountRangeResult</a> : <code>Object</code></dt>
 <dd><p>A breached email hash suffix and the breach names associated with it.</p>
@@ -976,28 +979,35 @@ try {
 ## Breach : <code>object</code>
 An object representing a breach.
 
+`Attribution` and `DisclosureUrl` may be null. See the
+[breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the
+[breach catalogue](https://haveibeenpwned.com/api/v3/breaches).
+
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| Name | <code>string</code> | 
-| Title | <code>string</code> | 
-| Domain | <code>string</code> | 
-| BreachDate | <code>string</code> | 
-| AddedDate | <code>string</code> | 
-| ModifiedDate | <code>string</code> | 
-| PwnCount | <code>number</code> | 
-| Description | <code>string</code> | 
-| DataClasses | <code>Array.&lt;string&gt;</code> | 
-| IsVerified | <code>boolean</code> | 
-| IsFabricated | <code>boolean</code> | 
-| IsSensitive | <code>boolean</code> | 
-| IsRetired | <code>boolean</code> | 
-| IsSpamList | <code>boolean</code> | 
-| IsMalware | <code>boolean</code> | 
-| IsSubscriptionFree | <code>boolean</code> | 
-| LogoPath | <code>string</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| Name | <code>string</code> |  |
+| Title | <code>string</code> |  |
+| Domain | <code>string</code> |  |
+| BreachDate | <code>string</code> |  |
+| AddedDate | <code>string</code> |  |
+| ModifiedDate | <code>string</code> |  |
+| PwnCount | <code>number</code> |  |
+| Description | <code>string</code> |  |
+| DataClasses | <code>Array.&lt;string&gt;</code> |  |
+| IsVerified | <code>boolean</code> |  |
+| IsFabricated | <code>boolean</code> |  |
+| IsSensitive | <code>boolean</code> |  |
+| IsRetired | <code>boolean</code> |  |
+| IsSpamList | <code>boolean</code> |  |
+| IsMalware | <code>boolean</code> |  |
+| IsStealerLog | <code>boolean</code> | whether the breach is sourced from stealer logs |
+| IsSubscriptionFree | <code>boolean</code> |  |
+| LogoPath | <code>string</code> |  |
+| Attribution | <code>string</code> \| <code>null</code> | credit requested by the data provider, or null |
+| DisclosureUrl | <code>string</code> \| <code>null</code> | breach disclosure URL, or null |
 
 <a name="BreachedAccountRangeResult"></a>
 

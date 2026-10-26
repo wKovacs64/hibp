@@ -32,8 +32,11 @@ export const VERIFIED_BREACH: Breach = {
   IsRetired: false,
   IsSpamList: false,
   IsMalware: false,
+  IsStealerLog: false,
   IsSubscriptionFree: false,
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Adobe.png",
+  Attribution: null,
+  DisclosureUrl: null,
 };
 
 export const UNVERIFIED_BREACH: Breach = {
@@ -60,8 +63,11 @@ export const UNVERIFIED_BREACH: Breach = {
   IsRetired: false,
   IsSpamList: false,
   IsMalware: false,
+  IsStealerLog: false,
   IsSubscriptionFree: false,
   LogoPath: "https://haveibeenpwned.com/Content/Images/PwnedLogos/Badoo.png",
+  Attribution: null,
+  DisclosureUrl: null,
 };
 
 export const PASTE: Paste = {

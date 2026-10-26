@@ -18,8 +18,11 @@ export interface Breach {
   IsRetired: boolean;
   IsSpamList: boolean;
   IsMalware: boolean;
+  IsStealerLog: boolean;
   IsSubscriptionFree: boolean;
   LogoPath: string;
+  Attribution: string | null;
+  DisclosureUrl: string | null;
 }
 
 export interface Paste {
