@@ -125,9 +125,7 @@ a valid API key on your behalf).</p>
 
 <dl>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
-<dd><p>An object representing a full breach.</p>
-<p>Returned by <code>breach</code>, <code>breaches</code>, <code>latestBreach</code>, and by <code>breachedAccount</code>
-and <code>search</code> with <code>truncate: false</code>.</p>
+<dd><p>An object representing a breach.</p>
 <p><code>Attribution</code> and <code>DisclosureUrl</code> may be null. See the
 <a href="https://haveibeenpwned.com/API/v3#BreachModel">breach model</a> and the
 <a href="https://haveibeenpwned.com/api/v3/breaches">breach catalogue</a>.</p>
@@ -879,10 +877,7 @@ try {
 <a name="Breach"></a>
 
 ## Breach : <code>object</code>
-An object representing a full breach.
-
-Returned by `breach`, `breaches`, `latestBreach`, and by `breachedAccount`
-and `search` with `truncate: false`.
+An object representing a breach.
 
 `Attribution` and `DisclosureUrl` may be null. See the
 [breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the

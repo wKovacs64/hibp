@@ -2,10 +2,7 @@ import type { Breach } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
- * An object representing a full breach.
- *
- * Returned by `breach`, `breaches`, `latestBreach`, and by `breachedAccount`
- * and `search` with `truncate: false`.
+ * An object representing a breach.
  *
  * `Attribution` and `DisclosureUrl` may be null. See the
  * [breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the
