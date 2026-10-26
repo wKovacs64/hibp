@@ -20,7 +20,7 @@ In Node.js:
 npm install hibp
 ```
 
-In [Deno](https://deno.com/):
+In [Deno][deno]:
 
 ```ts
 // Replace x.y.z with the desired hibp version
@@ -37,8 +37,8 @@ browser.
 - Available server-side (e.g., Node.js) and client-side (browser)
 - Written in TypeScript, so all modules come fully typed
 
-API features are grouped by the [HIBP plans](https://haveibeenpwned.com/Subscription) whose
-[API key](https://haveibeenpwned.com/API/Key) unlocks them.
+API features are grouped by the [HIBP plans][hibp-plans] whose [API key][get-api-key] unlocks
+them.
 
 #### No API key
 
@@ -47,8 +47,7 @@ API features are grouped by the [HIBP plans](https://haveibeenpwned.com/Subscrip
 - Get all breach events in the system
 - Get all data classes
 - Get data class names and descriptions
-- [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange) check a password to
-  see if it has been exposed in a data breach
+- [Securely][search-by-range] check a password to see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
 
 #### ![Core][core-plan] / ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
@@ -137,11 +136,11 @@ void main();
 
 #### Rate Limiting
 
-The haveibeenpwned.com API [rate limits](https://haveibeenpwned.com/API/v3#RateLimiting) requests to
-prevent abuse. In the event you get rate limited, the module will throw a custom `RateLimitError`
-which will include a `retryAfterSeconds` property so you know when you can try the call again (as a
-`number`, unless the remote API did not provide one, in which case it will be `undefined` - but that
-_should_ never happen).
+The haveibeenpwned.com API [rate limits][haveibeenpwned-rate-limiting] requests to prevent abuse. In
+the event you get rate limited, the module will throw a custom `RateLimitError` which will include a
+`retryAfterSeconds` property so you know when you can try the call again (as a `number`, unless the
+remote API did not provide one, in which case it will be `undefined` - but that _should_ never
+happen).
 
 #### Using in the browser
 
@@ -155,13 +154,12 @@ You have a couple of options for using this library in a browser environment:
 1. ESM for Browsers
 
    Alternatively, you can also import the library directly in your HTML via `<script type="module">`
-   tags in [modern browsers](https://caniuse.com/#feat=es6-module). The pre-bundled module is
-   available through the [unpkg](https://unpkg.com) CDN, but you must specify the full path
-   (including the file extension). It's also strongly recommended to include the exact version
-   number as well, otherwise the `latest` tag will be used, which could be dangerous if/when there
-   are breaking changes made to the API. See [unpkg](https://unpkg.com) for details and advanced
-   version specification, but you will probably want to do the following (replacing `x.y.z` with the
-   version you want):
+   tags in [modern browsers][caniuse-esm]. The pre-bundled module is available through the
+   [unpkg][unpkg] CDN, but you must specify the full path (including the file extension). It's also
+   strongly recommended to include the exact version number as well, otherwise the `latest` tag will
+   be used, which could be dangerous if/when there are breaking changes made to the API. See
+   [unpkg][unpkg] for details and advanced version specification, but you will probably want to do
+   the following (replacing `x.y.z` with the version you want):
 
    ```html
    <script type="module">
@@ -176,19 +174,18 @@ You have a couple of options for using this library in a browser environment:
    </script>
    ```
 
-   For more information on ESM in the browser, check out
-   [Using JS modules in the browser](https://v8.dev/features/modules#browser).
+   For more information on ESM in the browser, check out [Using JS modules in the
+   browser][js-modules].
 
 ## Try It Out
 
-[Test hibp in your browser with StackBlitz.](https://stackblitz.com/edit/stackblitz-starters-atyrc52c?file=index.js)
+[Test hibp in your browser with StackBlitz.][stackblitz]
 
 ## Projects Using hibp
 
-- [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying the
-  '[Have I been pwned?](https://haveibeenpwned.com)' service
-- [Password Lense](https://pwl.netlify.com/) - a static web application to reveal character types in
-  a password
+- [pwned][pwned] - a command-line tool for querying the '[Have I been pwned?][haveibeenpwned]'
+  service
+- [Password Lense][pwl] - a static web application to reveal character types in a password
 - [Plasmic](https://www.plasmic.app/) - the open-source visual builder for your tech stack
 - [Medplum](https://www.medplum.com/) - fast and easy healthcare dev
 - [Hasura Backend Plus](https://nhost.github.io/hasura-backend-plus/) - Authentication & Storage for
@@ -197,12 +194,29 @@ You have a couple of options for using this library in a browser environment:
 - [BanManager-WebUI](https://github.com/BanManagement/BanManager-WebUI) - Web interface for
   BanManager
 
-Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add yours to the list!
+Send me a [PR][pulls] or an email and I'll add yours to the list!
 
 ## License
 
-This module is distributed under the
-[MIT License](https://github.com/wKovacs64/hibp/tree/main/LICENSE.txt).
+This module is distributed under the [MIT License][license].
+
+[deno]: https://deno.com/
+[haveibeenpwned]: https://haveibeenpwned.com
+[haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
+[search-by-range]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+[hibp-plans]: https://haveibeenpwned.com/Subscription
+[core-plan]: https://img.shields.io/badge/Core-3c9f43?style=flat-square
+[pro-plan]: https://img.shields.io/badge/Pro-187dbd?style=flat-square
+[high-rpm-plan]: https://img.shields.io/badge/High%20RPM-ef4444?style=flat-square
+[get-api-key]: https://haveibeenpwned.com/API/Key
+[unpkg]: https://unpkg.com
+[caniuse-esm]: https://caniuse.com/#feat=es6-module
+[js-modules]: https://v8.dev/features/modules#browser
+[stackblitz]: https://stackblitz.com/edit/stackblitz-starters-atyrc52c?file=index.js
+[pwned]: https://github.com/wKovacs64/pwned
+[pulls]: https://github.com/wKovacs64/hibp/pulls
+[pwl]: https://pwl.netlify.com/
+[license]: https://github.com/wKovacs64/hibp/tree/main/LICENSE.txt
 
 ## Contributors ✨
 
@@ -236,7 +250,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
-
-[core-plan]: https://img.shields.io/badge/Core-3c9f43?style=flat-square
-[pro-plan]: https://img.shields.io/badge/Pro-187dbd?style=flat-square
-[high-rpm-plan]: https://img.shields.io/badge/High%20RPM-ef4444?style=flat-square
