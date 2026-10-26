@@ -1,4 +1,4 @@
-import { describe, it, expect, expectTypeOf } from "vitest";
+import { describe, it, expect, expectTypeOf, vi } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import {
@@ -137,6 +137,12 @@ describe("DNS verification", () => {
         type: "application/json",
       },
       { case: "an empty body", body: null, type: "" },
+      { case: "a whitespace plain-text body", body: " \n", type: "text/plain" },
+      {
+        case: "a whitespace JSON message",
+        body: JSON.stringify({ message: " " }),
+        type: "application/json",
+      },
       {
         case: "an HTML body",
         body: "<!DOCTYPE html><title>Service Unavailable</title>",
@@ -157,6 +163,36 @@ describe("DNS verification", () => {
 
       await expect(operation("example.com")).rejects.toThrow(
         /^503 Service Unavailable$/,
+      );
+    });
+
+    it("rejects with the bare HTTP status without a reason phrase", async () => {
+      // MSW fills in reason phrases, so stub fetch to mimic HTTP/2 responses.
+      const fetchSpy = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 503 }));
+
+      try {
+        await expect(operation("example.com")).rejects.toThrow(/^503$/);
+      } finally {
+        fetchSpy.mockRestore();
+      }
+    });
+
+    it("matches plain-text content types case-insensitively", async () => {
+      server.use(
+        http.post(
+          "*",
+          () =>
+            new Response("Domain verification is unavailable.", {
+              status: 503,
+              headers: { "content-type": "Text/Plain; charset=utf-8" },
+            }),
+        ),
+      );
+
+      await expect(operation("example.com")).rejects.toThrow(
+        "Domain verification is unavailable.",
       );
     });
 
