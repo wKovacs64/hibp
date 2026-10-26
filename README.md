@@ -40,23 +40,23 @@ Unlabeled features need no key.
 
 - Get the most recently added breach
 - Get a single breach event
-- Get all breaches for an account `Core` `Pro` `High RPM`
-- Search breaches by a six-character SHA-1 email prefix `Pro` `High RPM`
-- Get all breached email addresses for a domain `Core` `Pro`
+- Get all breaches for an account ![Core][core-plan] ![Pro][pro-plan] ![High RPM][high-rpm-plan]
+- Search breaches by a six-character SHA-1 email prefix ![Pro][pro-plan] ![High RPM][high-rpm-plan]
+- Get all breached email addresses for a domain ![Core][core-plan] ![Pro][pro-plan]
 - Get all breach events in the system
 - Get all data classes
 - Get data class names and descriptions
-- Get all pastes for an account `Core` `Pro` `High RPM`
+- Get all pastes for an account ![Core][core-plan] ![Pro][pro-plan] ![High RPM][high-rpm-plan]
 - [Securely][search-by-range] check a password to see if it has been exposed in a data breach
 - Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
-- Search for an account in both breaches and pastes at the same time `Core` `Pro` `High RPM`
-- Get all stealer log domains for an email address `Pro`
-- Get all stealer log email aliases for an email domain `Pro`
-- Get all stealer log email addresses for a website domain `Pro`
-- Get all subscribed domains `Core` `Pro`
-- Generate and verify DNS domain verification tokens `Pro`
-- Request domain verification approval emails `Pro`
-- Get your subscription status, domain limits, and plan capabilities `Core` `Pro` `High RPM`
+- Search for an account in both breaches and pastes at the same time ![Core][core-plan] ![Pro][pro-plan] ![High RPM][high-rpm-plan]
+- Get all stealer log domains for an email address ![Pro][pro-plan]
+- Get all stealer log email aliases for an email domain ![Pro][pro-plan]
+- Get all stealer log email addresses for a website domain ![Pro][pro-plan]
+- Get all subscribed domains ![Core][core-plan] ![Pro][pro-plan]
+- Generate and verify DNS domain verification tokens ![Pro][pro-plan]
+- Request domain verification approval emails ![Pro][pro-plan]
+- Get your subscription status, domain limits, and plan capabilities ![Core][core-plan] ![Pro][pro-plan] ![High RPM][high-rpm-plan]
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)
@@ -197,6 +197,9 @@ This module is distributed under the [MIT License][license].
 [haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
 [search-by-range]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
 [hibp-plans]: https://haveibeenpwned.com/Subscription
+[core-plan]: https://img.shields.io/badge/Core-3c9f43?style=flat-square
+[pro-plan]: https://img.shields.io/badge/Pro-187dbd?style=flat-square
+[high-rpm-plan]: https://img.shields.io/badge/High%20RPM-ef4444?style=flat-square
 [get-api-key]: https://haveibeenpwned.com/API/Key
 [unpkg]: https://unpkg.com
 [caniuse-esm]: https://caniuse.com/#feat=es6-module
