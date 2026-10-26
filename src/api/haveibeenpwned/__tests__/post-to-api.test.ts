@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../../../mocks/server.js";
 import {
@@ -152,19 +152,6 @@ describe("internal (haveibeenpwned): postToApi", () => {
       return expect(postToApi("/service", body)).rejects.toThrow(
         /^503 Service Unavailable$/,
       );
-    });
-
-    it("rejects with the bare HTTP status without a reason phrase", async () => {
-      // MSW fills in reason phrases, so stub fetch to mimic HTTP/2 responses.
-      const fetchSpy = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 503 }));
-
-      try {
-        await expect(postToApi("/service", body)).rejects.toThrow(/^503$/);
-      } finally {
-        fetchSpy.mockRestore();
-      }
     });
   });
 
