@@ -30,16 +30,12 @@ export interface Paste {
   EmailCount: number;
 }
 
-/**
- * Subscription details from https://haveibeenpwned.com/API/v3#SubscriptionStatus.
- */
 export interface SubscriptionStatus {
   SubscriptionName: string;
   Description: string;
   SubscribedUntil: string;
   Rpm: number;
   DomainSearchMaxBreachedAccounts: number;
-  /** Maximum domains that can be added; null means no limit. */
   MaxBreachedDomains: number | null;
   IncludesStealerLogs: boolean;
   IncludesBulkDomainAdd: boolean;

@@ -62,8 +62,8 @@ export const PASTE: Paste = {
   EmailCount: 139,
 };
 
-// Documentation-derived example, not a captured authenticated response:
-// https://haveibeenpwned.com/API/v3#SubscriptionStatus
+// Synthetic values; field set from
+// https://haveibeenpwned.com/API/v3#SubscriptionStatus. Not a live response.
 export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscriptionName: "Pwned 1",
   Description:
