@@ -1050,13 +1050,13 @@ An object representing a paste.
 **Kind**: global typedef  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| Id | <code>string</code> | 
-| Source | <code>string</code> | 
-| Title | <code>string</code> | 
-| Date | <code>string</code> | 
-| EmailCount | <code>number</code> | 
+| Name | Type | Description |
+| --- | --- | --- |
+| Id | <code>string</code> |  |
+| Source | <code>string</code> |  |
+| [Title] | <code>string</code> | omitted when the source has no title |
+| Date | <code>string</code> \| <code>null</code> | null when the source has no posting date |
+| EmailCount | <code>number</code> |  |
 
 <a name="PwnedPasswordSuffixes"></a>
 

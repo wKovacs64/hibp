@@ -28,8 +28,8 @@ export interface Breach {
 export interface Paste {
   Id: string;
   Source: string;
-  Title: string;
-  Date: string;
+  Title?: string;
+  Date: string | null;
   EmailCount: number;
 }
 
