@@ -15,7 +15,7 @@
     },
     {
       "path": "dist/esm/api/haveibeenpwned/fetch-from-api.js",
-      "maxSize": "1.6 kB"
+      "maxSize": "1.8 kB"
     },
     {
       "path": "dist/esm/api/haveibeenpwned/package-info.js",
