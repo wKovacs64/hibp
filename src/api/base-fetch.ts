@@ -65,7 +65,7 @@ export function buildHeaders(
 
   if (userAgent) {
     headers["User-Agent"] = userAgent;
-  } else if (typeof navigator === "undefined") {
+  } else if (!isBrowser()) {
     headers["User-Agent"] = `${PACKAGE_NAME} ${PACKAGE_VERSION}`;
   }
 
@@ -85,4 +85,14 @@ function buildSignal(
   if (signals.length === 1) return signals[0];
 
   return AbortSignal.any(signals);
+}
+
+/**
+ * Browser pages have a `document` and browser workers have `importScripts`.
+ * Browsers send their own User-Agent, and setting one would force a CORS
+ * preflight, which haveibeenpwned.com rejects. Server runtimes have neither
+ * global, and some (e.g. Cloudflare Workers) send no User-Agent of their own.
+ */
+function isBrowser() {
+  return typeof document !== "undefined" || "importScripts" in globalThis;
 }
