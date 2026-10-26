@@ -113,21 +113,6 @@ async function main() {
 void main();
 ```
 
-#### Domain verification through DNS
-
-Use `generateDnsToken` to obtain the TXT record value, publish it at your DNS provider, then call
-`verifyDnsToken` after DNS propagation. Requires an HIBP Pro subscription. See the
-[usage example](https://github.com/wKovacs64/hibp#domain-verification-through-dns)
-and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns).
-
-#### Domain verification through email
-
-Use `sendEmail` with `admin`, `hostmaster`, `info`, `security` or `webmaster`, then follow the link
-in the approval email to complete verification. Requires an HIBP Pro subscription. Success resolves
-without parsing a response body; failures preserve the upstream reason. See the
-[usage example](https://github.com/wKovacs64/hibp#domain-verification-through-email)
-and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail).
-
 #### Rate Limiting
 
 The haveibeenpwned.com API [rate limits](https://haveibeenpwned.com/API/v3#RateLimiting) requests to

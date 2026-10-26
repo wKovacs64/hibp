@@ -114,43 +114,6 @@ async function main() {
 void main();
 ```
 
-#### Domain verification through DNS
-
-[DNS verification](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns) requires an HIBP Pro
-subscription. Generate a token, publish its complete value as a TXT record on the domain through
-your DNS provider, then verify after DNS propagation:
-
-```typescript
-import { generateDnsToken, verifyDnsToken } from "hibp";
-
-const options = { apiKey: "my-pro-api-key" };
-const { txtRecordValue } = await generateDnsToken("example.com", options);
-console.log(txtRecordValue); // Publish this TXT record at your DNS provider.
-
-// Run after publishing the record and allowing time for DNS propagation:
-await verifyDnsToken("example.com", options);
-```
-
-Verification resolves with `undefined` on HTTP 200 without parsing the response body. Both
-operations reject with the upstream failure reason. You can remove the TXT record after successful
-verification.
-
-#### Domain verification through email
-
-[Email verification](https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail) requires an HIBP Pro
-subscription. Request an approval email using `admin`, `hostmaster`, `info`, `security` or `webmaster`:
-
-```typescript
-import { sendEmail } from "hibp";
-
-await sendEmail("example.com", "security", {
-  apiKey: "my-pro-api-key",
-});
-```
-
-Follow the link sent to `security@example.com` to complete verification. The request resolves with
-`undefined` on success without parsing a response body and rejects with the upstream failure reason.
-
 #### Rate Limiting
 
 The haveibeenpwned.com API [rate limits][haveibeenpwned-rate-limiting] requests to prevent abuse. In
