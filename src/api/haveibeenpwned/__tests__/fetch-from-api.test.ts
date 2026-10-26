@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../../../mocks/server.js";
+import { MISSING_API_KEY } from "../../../../test/fixtures.js";
 import {
   BAD_REQUEST,
   UNAUTHORIZED,
@@ -83,7 +84,19 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
   });
 
   describe("unauthorized", () => {
-    it('throws an "Unauthorized" error', () => {
+    it("throws the message from a JSON body", () => {
+      server.use(
+        http.get("*", () =>
+          Response.json(MISSING_API_KEY, { status: UNAUTHORIZED.status }),
+        ),
+      );
+
+      return expect(fetchFromApi("/service/unauthorized")).rejects.toThrow(
+        /^Access denied due to missing hibp-api-key\.$/,
+      );
+    });
+
+    it("throws a plain-text body", () => {
       server.use(
         http.get("*", () => {
           return new Response(UNAUTHORIZED.body, {
@@ -96,6 +109,22 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
         fetchFromApi("/service/unauthorized"),
       ).rejects.toMatchInlineSnapshot(
         `[Error: Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation]`,
+      );
+    });
+    it("throws the HTTP status for an empty body", () => {
+      server.use(
+        http.get(
+          "*",
+          () =>
+            new Response(null, {
+              status: UNAUTHORIZED.status,
+              statusText: "Unauthorized",
+            }),
+        ),
+      );
+
+      return expect(fetchFromApi("/service/unauthorized")).rejects.toThrow(
+        /^401 Unauthorized$/,
       );
     });
   });
@@ -154,6 +183,31 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       expect(error).toMatchInlineSnapshot(
         "[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]",
       );
+    });
+
+    it("throws a rate limit error with the HTTP status for a non-JSON body", async () => {
+      server.use(
+        http.get("*", () => {
+          return new Response(
+            "<!DOCTYPE html><title>Too Many Requests</title>",
+            {
+              status: TOO_MANY_REQUESTS.status,
+              statusText: "Too Many Requests",
+              headers: Array.from(TOO_MANY_REQUESTS.headers),
+            },
+          );
+        }),
+      );
+
+      expect.assertions(2);
+      const error = await fetchFromApi("/service/rate_limited", {
+        apiKey,
+      }).catch((caughtError: unknown) => caughtError);
+      expect(error).toBeInstanceOf(RateLimitError);
+      expect(error).toMatchObject({
+        message: "429 Too Many Requests",
+        retryAfterSeconds: 2,
+      });
     });
 
     it("sets retryAfterSeconds to undefined when header is missing", async () => {

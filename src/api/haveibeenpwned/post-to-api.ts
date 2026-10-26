@@ -1,7 +1,9 @@
 import {
   blockedWithRayId,
+  jsonMessage,
   RateLimitError,
   requestApi,
+  statusLine,
   type ApiOptions,
 } from "./fetch-from-api.js";
 import { FORBIDDEN, TOO_MANY_REQUESTS } from "./responses.js";
@@ -29,30 +31,14 @@ export async function postToApi(
   const isPlainText = /^text\/plain\b/i.test(headers.get("content-type") ?? "");
   const message =
     jsonMessage(text) ??
-    (status === FORBIDDEN.status && rayId ? blockedWithRayId(rayId) : null) ??
-    (isPlainText && text.trim() ? text : null) ??
-    `${status} ${response.statusText}`.trim();
+    (status === FORBIDDEN.status && rayId
+      ? blockedWithRayId(rayId)
+      : undefined) ??
+    (isPlainText && text.trim() ? text : undefined) ??
+    statusLine(response);
 
   if (status === TOO_MANY_REQUESTS.status) {
     throw new RateLimitError(headers.get("retry-after"), message);
   }
   throw new Error(message);
-}
-
-function jsonMessage(text: string): string | null {
-  try {
-    const error: unknown = JSON.parse(text);
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "message" in error &&
-      typeof error.message === "string" &&
-      error.message.trim()
-    ) {
-      return error.message;
-    }
-  } catch {
-    // Not JSON; use the next available reason.
-  }
-  return null;
 }

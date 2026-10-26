@@ -3,7 +3,7 @@ import { http } from "msw/http";
 import { server } from "../../../../mocks/server.js";
 import {
   DNS_VERIFICATION_FAILURE,
-  DOMAIN_VERIFICATION_UNAUTHORIZED,
+  MISSING_API_KEY,
 } from "../../../../test/fixtures.js";
 import { BLOCKED, TOO_MANY_REQUESTS } from "../responses.js";
 import { RateLimitError } from "../fetch-from-api.js";
@@ -60,9 +60,7 @@ describe("internal (haveibeenpwned): postToApi", () => {
 
     it("unwraps the observed missing-key response", () => {
       server.use(
-        http.post("*", () =>
-          Response.json(DOMAIN_VERIFICATION_UNAUTHORIZED, { status: 401 }),
-        ),
+        http.post("*", () => Response.json(MISSING_API_KEY, { status: 401 })),
       );
 
       return expect(postToApi("/service", body)).rejects.toThrow(
