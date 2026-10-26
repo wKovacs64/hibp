@@ -123,8 +123,9 @@ and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns).
 #### Domain verification through email
 
 Use `sendDomainVerificationEmail` with `admin`, `hostmaster`, `info`, `security` or `webmaster`,
-then follow the link in the approval email to complete verification. Requires an HIBP Pro subscription. Success resolves
-without parsing a response body; failures preserve the upstream reason. See the
+then follow the link in the approval email to complete verification. Requires an HIBP Pro
+subscription. Success resolves without parsing a response body; failures preserve the upstream
+reason. See the
 [usage example](https://github.com/wKovacs64/hibp#domain-verification-through-email)
 and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaEmail).
 
