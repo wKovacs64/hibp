@@ -369,8 +369,9 @@ No API key is required. Field names match the lowercase `name` and
 [public endpoint](https://haveibeenpwned.com/api/v3/dataClasses/descriptions).
 
 **Kind**: global function  
-**Returns**: <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves
-to data class objects (or null for a 404 response), or rejects with an Error  
+**Returns**: <code><a href="#dataclassdescription--object">Promise.&lt;Array.&lt;DataClassDescription&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
+resolves to an array of data class objects (or null if no data classes were
+found), or rejects with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -382,11 +383,15 @@ to data class objects (or null for a 404 response), or rejects with an Error
 
 **Example**  
 ```js
-const data = await dataClassDescriptions();
-if (data) {
-  for (const { name, description } of data) {
-    console.log(name, description);
+try {
+  const data = await dataClassDescriptions();
+  if (data) {
+    // ...
+  } else {
+    // ...
   }
+} catch (err) {
+  // ...
 }
 ```
 <a name="dataClasses"></a>

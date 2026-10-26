@@ -25,14 +25,19 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
  * @param {string} [options.userAgent] a custom string to send as the User-Agent
  * field in the request headers (default: `hibp <version>`)
- * @returns {(Promise<DataClassDescription[]>|Promise<null>)} a Promise which resolves
- * to data class objects (or null for a 404 response), or rejects with an Error
+ * @returns {(Promise<DataClassDescription[]> | Promise<null>)} a Promise which
+ * resolves to an array of data class objects (or null if no data classes were
+ * found), or rejects with an Error
  * @example
- * const data = await dataClassDescriptions();
- * if (data) {
- *   for (const { name, description } of data) {
- *     console.log(name, description);
+ * try {
+ *   const data = await dataClassDescriptions();
+ *   if (data) {
+ *     // ...
+ *   } else {
+ *     // ...
  *   }
+ * } catch (err) {
+ *   // ...
  * }
  */
 export function dataClassDescriptions(
