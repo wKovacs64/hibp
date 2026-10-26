@@ -48,6 +48,7 @@ browser.
 - Get all stealer log email addresses for a website domain 🔑
 - Get all subscribed domains 🔑
 - Generate and verify DNS domain verification tokens (Pro subscription) 🔑
+- Request domain verification approval emails (Pro subscription) 🔑
 - Get your subscription status 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
