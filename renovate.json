@@ -22,6 +22,11 @@
       "enabled": false
     },
     {
+      "matchPackageNames": ["@types/node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["minor"],
       "automerge": false
