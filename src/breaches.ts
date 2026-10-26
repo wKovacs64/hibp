@@ -2,8 +2,7 @@ import type { Breach } from "./api/haveibeenpwned/types.js";
 import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
- * Fetches all breach events in the system. Supports the
- * [public API's domain and spam-list filters](https://haveibeenpwned.com/API/v3#AllBreaches).
+ * Fetches all breach events in the system.
  *
  * @param {object} [options] a configuration object
  * @param {string} [options.domain] a domain by which to filter the results
