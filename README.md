@@ -104,9 +104,9 @@ const full = await hibp.breachedAccount("account@example.com", {
 console.log(full?.map((breach) => breach.DataClasses));
 ```
 
-The package exports `TruncatedBreach` and `SearchResults` types. `SearchResults<true>` describes
-name-only searches, `SearchResults<false>` describes full searches, and `SearchResults<boolean>`
-(also the default for the type) allows either.
+The package exports `TruncatedBreach`, `AccountBreaches` and `SearchResults` types.
+`AccountBreaches<true>` and `SearchResults<true>` describe name-only results, `<false>` describes
+full results, and `<boolean>` (also the type default) allows either.
 
 HIBP supports a [free test API key](https://haveibeenpwned.com/API/v3#TestAPIKey) for account
 searches using its [official test email addresses](https://haveibeenpwned.com/API/v3#TestAccounts).

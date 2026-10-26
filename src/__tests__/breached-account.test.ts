@@ -2,7 +2,12 @@ import { describe, it, expect, expectTypeOf } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from "../../test/fixtures.js";
-import { breachedAccount, type Breach, type TruncatedBreach } from "../hibp.js";
+import {
+  breachedAccount,
+  type AccountBreaches,
+  type Breach,
+  type TruncatedBreach,
+} from "../hibp.js";
 
 describe("breachedAccount", () => {
   const BREACHED_ACCOUNT_DATA = [
@@ -68,6 +73,9 @@ describe("breachedAccount", () => {
         expectTypeOf(omitted).toEqualTypeOf<TruncatedBreach[] | null>();
         expectTypeOf(truncated).toEqualTypeOf<TruncatedBreach[] | null>();
         expectTypeOf(full).toEqualTypeOf<Breach[] | null>();
+        expectTypeOf(full).toEqualTypeOf<AccountBreaches<false> | null>();
+        expectTypeOf(defaults).toEqualTypeOf<AccountBreaches<true> | null>();
+        expectTypeOf(dynamic).toEqualTypeOf<AccountBreaches | null>();
         expectTypeOf(dynamic).toEqualTypeOf<
           Breach[] | TruncatedBreach[] | null
         >();

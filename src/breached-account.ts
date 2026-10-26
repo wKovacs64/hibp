@@ -8,7 +8,7 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @property {string} Name
  */
 
-// Breaches returned by an account search with the given `truncate` option.
+/** Breaches returned by an account search with the given `truncate` option. */
 export type AccountBreaches<Truncate extends boolean = boolean> =
   Truncate extends false ? Breach[] : TruncatedBreach[];
 
