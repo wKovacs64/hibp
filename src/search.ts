@@ -3,7 +3,7 @@ import { breachedAccount } from "./breached-account.js";
 import { pasteAccount } from "./paste-account.js";
 
 export interface SearchResults {
-  breaches: Breach[] | null;
+  breaches: Breach[] | Pick<Breach, "Name">[] | null;
   pastes: Paste[] | null;
 }
 
@@ -15,6 +15,40 @@ export interface SearchResults {
  * @property {(Paste[] | null)} pastes
  */
 
+interface SearchOptions {
+  /**
+   * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
+   */
+  apiKey?: string;
+  /**
+   * a domain by which to filter the results (default: all domains)
+   */
+  domain?: string;
+  /**
+   * truncate the results to only include the name of each breach (default:
+   * true)
+   */
+  truncate?: boolean;
+  /**
+   * a custom base URL for the haveibeenpwned.com API endpoints (default:
+   * `https://haveibeenpwned.com/api/v3`)
+   */
+  baseUrl?: string;
+  /**
+   * timeout for the request in milliseconds (default: none)
+   */
+  timeoutMs?: number;
+  /**
+   * an AbortSignal to cancel the request (default: none)
+   */
+  signal?: AbortSignal;
+  /**
+   * a custom string to send as the User-Agent field in the request headers
+   * (default: `hibp <version>`)
+   */
+  userAgent?: string;
+}
+
 /**
  * Fetches all breaches and all pastes associated with the provided account
  * (email address or username). Note that the remote API does not support
@@ -23,6 +57,9 @@ export interface SearchResults {
  * and the "pastes" field of the resulting object will always be null. This is
  * exactly how searching via the current web interface behaves, which this
  * convenience method is designed to mimic.
+ *
+ * Breaches contain only `Name` by default; pass `truncate: false` for full
+ * breaches.
  *
  * 🔑 `haveibeenpwned.com` requires an API key from
  * https://haveibeenpwned.com/API/Key for the `breachedaccount` and
@@ -77,41 +114,21 @@ export interface SearchResults {
  * }
  * @see https://haveibeenpwned.com/
  */
+export function search(
+  account: string,
+  options?: SearchOptions & { truncate?: true },
+): Promise<{ breaches: Pick<Breach, "Name">[] | null; pastes: Paste[] | null }>;
+export function search(
+  account: string,
+  options: SearchOptions & { truncate: false },
+): Promise<{ breaches: Breach[] | null; pastes: Paste[] | null }>;
+export function search(
+  account: string,
+  options?: SearchOptions,
+): Promise<SearchResults>;
 export async function search(
   account: string,
-  options: {
-    /**
-     * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
-     */
-    apiKey?: string;
-    /**
-     * a domain by which to filter the results (default: all domains)
-     */
-    domain?: string;
-    /**
-     * truncate the results to only include the name of each breach (default:
-     * true)
-     */
-    truncate?: boolean;
-    /**
-     * a custom base URL for the haveibeenpwned.com API endpoints (default:
-     * `https://haveibeenpwned.com/api/v3`)
-     */
-    baseUrl?: string;
-    /**
-     * timeout for the request in milliseconds (default: none)
-     */
-    timeoutMs?: number;
-    /**
-     * an AbortSignal to cancel the request (default: none)
-     */
-    signal?: AbortSignal;
-    /**
-     * a custom string to send as the User-Agent field in the request headers
-     * (default: `hibp <version>`)
-     */
-    userAgent?: string;
-  } = {},
+  options: SearchOptions = {},
 ): Promise<SearchResults> {
   const {
     apiKey,

@@ -19,6 +19,8 @@ without storing or further processing them.</p>
 </dd>
 <dt><a href="#breachedAccount">breachedAccount(account, [options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches breach data for a specific account.</p>
+<p>Results contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
+breaches.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> endpoint. The
 <code>apiKey</code> option here is not explicitly required, but direct requests made
@@ -79,6 +81,8 @@ provided account is not a valid email address, only breach data is queried
 and the &quot;pastes&quot; field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.</p>
+<p>Breaches contain only <code>Name</code> by default; pass <code>truncate: false</code> for full
+breaches.</p>
 <p>🔑 <code>haveibeenpwned.com</code> requires an API key from
 <a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the <code>breachedaccount</code> and
 <code>pasteaccount</code> endpoints. The <code>apiKey</code> option here is not explicitly
@@ -262,6 +266,9 @@ try {
 ## breachedAccount(account, [options]) ⇒ <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code>
 Fetches breach data for a specific account.
 
+Results contain only `Name` by default; pass `truncate: false` for full
+breaches.
+
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` endpoint. The
 `apiKey` option here is not explicitly required, but direct requests made
@@ -269,9 +276,9 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which resolves to an
-array of breach objects (or null if no breaches were found), or rejects with
-an Error  
+**Returns**: <code><a href="#breach--object">Promise.&lt;Array.&lt;Breach&gt;&gt;</a></code> \| <code>Promise.&lt;null&gt;</code> - a Promise which
+resolves to name-only breaches by default, full breaches with
+`truncate: false`, or null if no breaches were found; rejects with an Error  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -669,6 +676,9 @@ provided account is not a valid email address, only breach data is queried
 and the "pastes" field of the resulting object will always be null. This is
 exactly how searching via the current web interface behaves, which this
 convenience method is designed to mimic.
+
+Breaches contain only `Name` by default; pass `truncate: false` for full
+breaches.
 
 🔑 `haveibeenpwned.com` requires an API key from
 https://haveibeenpwned.com/API/Key for the `breachedaccount` and

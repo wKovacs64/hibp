@@ -82,6 +82,7 @@ export type ApiData =
   | Breach // breach
   | Breach[] // breachedaccount, breaches
   | BreachedAccountRangeResult[] // breachedaccount/range
+  | Pick<Breach, "Name">[] // breachedaccount
   | BreachedDomainsByEmailAlias // breacheddomain
   | DataClassDescription[] // dataclasses/descriptions
   | Paste[] // pasteaccount
