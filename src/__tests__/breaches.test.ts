@@ -2,30 +2,94 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH } from "../../test/fixtures.js";
-import { breaches } from "../breaches.js";
+import { breaches } from "../hibp.js";
 
 describe("breaches", () => {
   const BREACHES = [VERIFIED_BREACH];
 
-  describe("no parameters", () => {
-    it("resolves with data from the remote API", () => {
+  describe("isSpamList option", () => {
+    it("sends true to request only spam-list breaches", async () => {
+      const spamLists = [{ ...VERIFIED_BREACH, IsSpamList: true }];
+      expect.assertions(2);
       server.use(
-        http.get("*", () => {
+        http.get("*", ({ request }) => {
+          const { searchParams } = new URL(request.url);
+          expect(searchParams.get("isSpamList")).toBe("true");
+          return new Response(JSON.stringify(spamLists));
+        }),
+      );
+
+      await expect(breaches({ isSpamList: true })).resolves.toEqual(spamLists);
+    });
+
+    it("sends false to request only non-spam-list breaches", async () => {
+      expect.assertions(2);
+      server.use(
+        http.get("*", ({ request }) => {
+          const { searchParams } = new URL(request.url);
+          expect(searchParams.get("isSpamList")).toBe("false");
           return new Response(JSON.stringify(BREACHES));
         }),
       );
 
-      return expect(breaches()).resolves.toEqual(BREACHES);
+      await expect(breaches({ isSpamList: false })).resolves.toEqual(BREACHES);
     });
+
+    it.each([
+      { isSpamList: true, expected: "true" },
+      { isSpamList: false, expected: "false" },
+    ])(
+      "preserves domain encoding when isSpamList is $isSpamList",
+      async ({ isSpamList, expected }) => {
+        expect.assertions(2);
+        server.use(
+          http.get("*", ({ request }) => {
+            const { searchParams } = new URL(request.url);
+            expect(Object.fromEntries(searchParams)).toEqual({
+              domain: "foo.bar&other=value",
+              isSpamList: expected,
+            });
+            return new Response(JSON.stringify([]));
+          }),
+        );
+
+        await expect(
+          breaches({ domain: "foo.bar&other=value", isSpamList }),
+        ).resolves.toEqual([]);
+      },
+    );
+  });
+
+  describe("no parameters", () => {
+    it.each([undefined, {}, { isSpamList: undefined }])(
+      "omits the spam-list filter for options %j",
+      async (options) => {
+        const allBreaches = [
+          VERIFIED_BREACH,
+          { ...VERIFIED_BREACH, IsSpamList: true },
+        ];
+        expect.assertions(2);
+        server.use(
+          http.get("*", ({ request }) => {
+            const { searchParams } = new URL(request.url);
+            expect(searchParams.has("isSpamList")).toBe(false);
+            return new Response(JSON.stringify(allBreaches));
+          }),
+        );
+
+        await expect(breaches(options)).resolves.toEqual(allBreaches);
+      },
+    );
   });
 
   describe("domain option", () => {
     it("sets the domain query parameter in the request", () => {
-      expect.assertions(1);
+      expect.assertions(2);
       server.use(
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("domain")).toBe("foo.bar");
+          expect(searchParams.has("isSpamList")).toBe(false);
           return new Response(JSON.stringify(BREACHES));
         }),
       );

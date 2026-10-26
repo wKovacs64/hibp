@@ -18,8 +18,11 @@ export interface Breach {
   IsRetired: boolean;
   IsSpamList: boolean;
   IsMalware: boolean;
+  IsStealerLog: boolean;
   IsSubscriptionFree: boolean;
   LogoPath: string;
+  Attribution: string | null;
+  DisclosureUrl: string | null;
 }
 
 export interface Paste {
@@ -30,13 +33,23 @@ export interface Paste {
   EmailCount: number;
 }
 
+export interface DataClassDescription {
+  name: string;
+  description: string;
+}
+
 export interface SubscriptionStatus {
   SubscriptionName: string;
   Description: string;
   SubscribedUntil: string;
   Rpm: number;
   DomainSearchMaxBreachedAccounts: number;
+  MaxBreachedDomains: number | null;
   IncludesStealerLogs: boolean;
+  IncludesBulkDomainAdd: boolean;
+  IncludesAutoSubdomainVerification: boolean;
+  IncludesCustomerDomains: boolean;
+  IncludesKAnon: boolean;
 }
 
 export interface SubscribedDomain {
@@ -48,6 +61,11 @@ export interface SubscribedDomain {
 }
 
 export type BreachedDomainsByEmailAlias = Record<string, string[]>;
+
+export interface BreachedAccountRangeResult {
+  hashSuffix: string;
+  websites: string[];
+}
 
 export type StealerLogDomainsByEmailAlias = Record<string, string[]>;
 
@@ -63,7 +81,9 @@ export type StealerLogDomainsByEmailAlias = Record<string, string[]>;
 export type ApiData =
   | Breach // breach
   | Breach[] // breachedaccount, breaches
+  | BreachedAccountRangeResult[] // breachedaccount/range
   | BreachedDomainsByEmailAlias // breacheddomain
+  | DataClassDescription[] // dataclasses/descriptions
   | Paste[] // pasteaccount
   | string[] // dataclasses, stealerlogsbyemail, stealerlogsbywebsitedomain
   | StealerLogDomainsByEmailAlias // stealerlogsbyemaildomain

@@ -6,7 +6,7 @@
     {
       "//": "Pre-bundled ESM for the Browser",
       "path": "dist/browser/hibp.module.js",
-      "maxSize": "2.1 kB"
+      "maxSize": "2.6 kB"
     },
     {
       "//": "Unbundled ESM",
@@ -39,11 +39,15 @@
     },
     {
       "path": "dist/esm/breach.js",
-      "maxSize": "1 kB"
+      "maxSize": "1.1 kB"
     },
     {
       "path": "dist/esm/breached-account.js",
       "maxSize": "1.2 kB"
+    },
+    {
+      "path": "dist/esm/breached-account-range.js",
+      "maxSize": "1.5 kB"
     },
     {
       "path": "dist/esm/breached-domain.js",
@@ -51,6 +55,10 @@
     },
     {
       "path": "dist/esm/breaches.js",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "dist/esm/data-class-descriptions.js",
       "maxSize": "1 kB"
     },
     {
@@ -95,7 +103,7 @@
     },
     {
       "path": "dist/esm/subscription-status.js",
-      "maxSize": "1 kB"
+      "maxSize": "1.1 kB"
     }
   ]
 }
