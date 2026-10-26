@@ -1,6 +1,7 @@
 import { RateLimitError } from "./api/haveibeenpwned/fetch-from-api.js";
 import { breach } from "./breach.js";
 import { breachedAccount } from "./breached-account.js";
+import { breachedAccountRange } from "./breached-account-range.js";
 import { breachedDomain } from "./breached-domain.js";
 import { breaches } from "./breaches.js";
 import { dataClasses } from "./data-classes.js";
@@ -30,6 +31,7 @@ export type * from "./api/haveibeenpwned/types.js";
 export {
   breach,
   breachedAccount,
+  breachedAccountRange,
   breachedDomain,
   breaches,
   dataClasses,
@@ -51,6 +53,7 @@ export {
 export interface HIBP {
   breach: typeof breach;
   breachedAccount: typeof breachedAccount;
+  breachedAccountRange: typeof breachedAccountRange;
   breachedDomain: typeof breachedDomain;
   breaches: typeof breaches;
   dataClasses: typeof dataClasses;

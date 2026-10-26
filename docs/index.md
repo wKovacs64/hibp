@@ -35,6 +35,7 @@ browser.
 - Get the most recently added breach
 - Get a single breach event
 - Get all breaches for an account 🔑
+- Search breaches by a six-character SHA-1 email prefix (Pro or High RPM) 🔑
 - Get all breached email addresses for a domain 🔑
 - Get all breach events in the system
 - Get all data classes
@@ -68,6 +69,7 @@ The following modules are available:
 
 - [breach](https://github.com/wKovacs64/hibp/tree/main/API.md#breach)
 - [breachedAccount](https://github.com/wKovacs64/hibp/tree/main/API.md#breachedaccount)
+- [breachedAccountRange](https://github.com/wKovacs64/hibp/tree/main/API.md#breachedaccountrange)
 - [breachedDomain](https://github.com/wKovacs64/hibp/tree/main/API.md#breacheddomain)
 - [breaches](https://github.com/wKovacs64/hibp/tree/main/API.md#breaches)
 - [dataClasses](https://github.com/wKovacs64/hibp/tree/main/API.md#dataclasses)

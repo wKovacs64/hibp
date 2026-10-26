@@ -86,6 +86,16 @@ export const PASSWORD = "password";
 
 export const SHA1_PREFIX = "5BAA6";
 
+// Documentation-derived example, not an authenticated live response:
+// https://haveibeenpwned.com/API/v3#BreachesForHashRange
+export const EMAIL_SHA1_PREFIX = "6B5917";
+export const EMAIL_RANGE_RESULTS = [
+  {
+    hashSuffix: "C6C0AADE0C085843D66E4944E108C4A4CD",
+    websites: ["Adobe", "Gawker", "Stratfor"],
+  },
+];
+
 export const SHA1_RESPONSE_BODY = stripIndents`
   003D68EB55068C33ACE09247EE4C639306B:3
   1E4C9B93F3F0682250B6CF8331B7EE68FD8:3303003
