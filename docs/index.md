@@ -111,13 +111,6 @@ async function main() {
 void main();
 ```
 
-#### Domain verification through DNS
-
-Use `generateDnsToken` to obtain the TXT record value, publish it at your DNS provider, then call
-`verifyDnsToken` after DNS propagation. Requires an HIBP Pro subscription. See the
-[usage example](https://github.com/wKovacs64/hibp#domain-verification-through-dns)
-and [official contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns).
-
 #### Rate Limiting
 
 The haveibeenpwned.com API [rate limits](https://haveibeenpwned.com/API/v3#RateLimiting) requests to
