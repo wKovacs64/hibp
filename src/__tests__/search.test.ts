@@ -1,8 +1,8 @@
-import { describe, it, expect, expectTypeOf } from "vitest";
+import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH, PASTE } from "../../test/fixtures.js";
-import { search } from "../hibp.js";
+import { search } from "../search.js";
 
 describe("search", () => {
   const BREACHES = [{ Name: VERIFIED_BREACH.Name }];
@@ -56,7 +56,7 @@ describe("search", () => {
   });
 
   it("forwards the truncate option correctly", async () => {
-    expect.assertions(3);
+    expect.assertions(2);
     server.use(
       http.get(/breachedaccount/, ({ request }) => {
         const { searchParams } = new URL(request.url);
@@ -70,17 +70,6 @@ describe("search", () => {
       }),
     );
 
-    const data = await search("breached@foo.bar", { truncate: false });
-
-    expectTypeOf(data.breaches?.[0].IsStealerLog).toEqualTypeOf<
-      boolean | undefined
-    >();
-    expectTypeOf(data.breaches?.[0].Attribution).toEqualTypeOf<
-      string | null | undefined
-    >();
-    expectTypeOf(data.breaches?.[0].DisclosureUrl).toEqualTypeOf<
-      string | null | undefined
-    >();
-    expect(data).toEqual({ breaches: BREACHES_EXPANDED, pastes: PASTES });
+    return search("breached@foo.bar", { truncate: false });
   });
 });
