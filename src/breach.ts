@@ -7,13 +7,9 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * Returned by `breach`, `breaches`, `latestBreach`, and by `breachedAccount`
  * and `search` with `truncate: false`.
  *
- * [Adpost](https://haveibeenpwned.com/api/v3/breach/Adpost) returns strings for
- * `Attribution` and `DisclosureUrl`;
- * [Adobe](https://haveibeenpwned.com/api/v3/breach/Adobe) returns null for both.
- * The breach model in the [HIBP API documentation](https://haveibeenpwned.com/API/v3)
- * documents `IsStealerLog` as boolean and `Attribution` as string (its sample
- * includes null). `DisclosureUrl` is present in public responses but absent
- * from that documentation.
+ * `Attribution` and `DisclosureUrl` may be null. See the
+ * [breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the
+ * [breach catalogue](https://haveibeenpwned.com/api/v3/breaches).
  *
  * @typedef {object} Breach
  * @property {string} Name

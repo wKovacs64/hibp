@@ -12,7 +12,7 @@
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#breach--objectedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#BreachedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all breached email addresses for a domain.</p>
 <p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
 breach names. For example, querying <code>example.com</code> could return an object like
@@ -128,15 +128,11 @@ a valid API key on your behalf).</p>
 <dd><p>An object representing a full breach.</p>
 <p>Returned by <code>breach</code>, <code>breaches</code>, <code>latestBreach</code>, and by <code>breachedAccount</code>
 and <code>search</code> with <code>truncate: false</code>.</p>
-<p><a href="https://haveibeenpwned.com/api/v3/breach/Adpost">Adpost</a> returns strings for
-<code>Attribution</code> and <code>DisclosureUrl</code>;
-<a href="https://haveibeenpwned.com/api/v3/breach/Adobe">Adobe</a> returns null for both.
-The breach model in the <a href="https://haveibeenpwned.com/API/v3">HIBP API documentation</a>
-documents <code>IsStealerLog</code> as boolean and <code>Attribution</code> as string (its sample
-includes null). <code>DisclosureUrl</code> is present in public responses but absent
-from that documentation.</p>
+<p><code>Attribution</code> and <code>DisclosureUrl</code> may be null. See the
+<a href="https://haveibeenpwned.com/API/v3#BreachModel">breach model</a> and the
+<a href="https://haveibeenpwned.com/api/v3/breaches">breach catalogue</a>.</p>
 </dd>
-<dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dt><a href="#BreachedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
 </dd>
@@ -273,7 +269,7 @@ try {
 ```
 <a name="breachedDomain"></a>
 
-## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
+## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
 Fetches all breached email addresses for a domain.
 
 The result maps email aliases (the local-part before the '@') to an array of
@@ -288,7 +284,7 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
+**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
 resolves to an object mapping aliases to breach name arrays (or null if no
 results were found), or rejects with an Error  
 
@@ -888,13 +884,9 @@ An object representing a full breach.
 Returned by `breach`, `breaches`, `latestBreach`, and by `breachedAccount`
 and `search` with `truncate: false`.
 
-[Adpost](https://haveibeenpwned.com/api/v3/breach/Adpost) returns strings for
-`Attribution` and `DisclosureUrl`;
-[Adobe](https://haveibeenpwned.com/api/v3/breach/Adobe) returns null for both.
-The breach model in the [HIBP API documentation](https://haveibeenpwned.com/API/v3)
-documents `IsStealerLog` as boolean and `Attribution` as string (its sample
-includes null). `DisclosureUrl` is present in public responses but absent
-from that documentation.
+`Attribution` and `DisclosureUrl` may be null. See the
+[breach model](https://haveibeenpwned.com/API/v3#BreachModel) and the
+[breach catalogue](https://haveibeenpwned.com/api/v3/breaches).
 
 **Kind**: global typedef  
 **Properties**
