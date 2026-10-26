@@ -54,6 +54,10 @@
       "maxSize": "1 kB"
     },
     {
+      "path": "dist/esm/data-class-descriptions.js",
+      "maxSize": "1 kB"
+    },
+    {
       "path": "dist/esm/data-classes.js",
       "maxSize": "1 kB"
     },
