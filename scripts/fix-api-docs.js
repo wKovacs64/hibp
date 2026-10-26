@@ -7,6 +7,7 @@ const newApiDocs = generatedApiDocs
   // names as the generated ones collide with functions that share a name with
   // the objects (as anchor links are case insensitive).
   .replace(/#Breach\b/g, "#breach--object")
+  .replace(/#DataClassDescription\b/g, "#dataclassdescription--object")
   .replace(/#SubscriptionStatus/g, "#subscriptionstatus--object")
   // Surround all the generated Promise.<Array.<Type>> strings with links to the
   // corresponding typedef object as jsdoc2md seems to have an issue parsing the
