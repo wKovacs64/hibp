@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { EMAIL_SHA1_PREFIX, EMAIL_RANGE_RESULTS } from "../../test/fixtures.js";
+import { respondOnAbort } from "../../test/handlers.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { breachedAccountRange } from "../breached-account-range.js";
 
@@ -73,18 +74,10 @@ describe("breachedAccountRange", () => {
   describe("timeoutMs option", () => {
     it("aborts the request after the given value", () => {
       expect.assertions(1);
-      const timeoutMs = 1;
-      server.use(
-        http.get("*", async () => {
-          await new Promise((resolve) => {
-            setTimeout(resolve, timeoutMs + 1);
-          });
-          return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
-        }),
-      );
+      server.use(http.get("*", respondOnAbort));
 
       return expect(
-        breachedAccountRange(EMAIL_SHA1_PREFIX, { timeoutMs }),
+        breachedAccountRange(EMAIL_SHA1_PREFIX, { timeoutMs: 1 }),
       ).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );

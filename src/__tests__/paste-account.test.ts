@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { PASTE } from "../../test/fixtures.js";
+import { respondOnAbort } from "../../test/handlers.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { pasteAccount } from "../paste-account.js";
 
@@ -67,18 +68,10 @@ describe("pasteAccount", () => {
   describe("timeoutMs option", () => {
     it("aborts the request after the given value", () => {
       expect.assertions(1);
-      const timeoutMs = 1;
-      server.use(
-        http.get("*", async () => {
-          await new Promise((resolve) => {
-            setTimeout(resolve, timeoutMs + 1);
-          });
-          return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
-        }),
-      );
+      server.use(http.get("*", respondOnAbort));
 
       return expect(
-        pasteAccount("whatever@example.com", { timeoutMs }),
+        pasteAccount("whatever@example.com", { timeoutMs: 1 }),
       ).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );

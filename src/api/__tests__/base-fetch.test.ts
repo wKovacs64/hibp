@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../../mocks/server.js";
+import { respondOnAbort } from "../../../test/handlers.js";
 import { buildUrl, buildHeaders, baseFetch } from "../base-fetch.js";
 
 describe("internal: buildUrl", () => {
@@ -155,24 +156,19 @@ describe("internal: baseFetch", () => {
     });
 
     it("timeout fires first when both timeout and signal are provided", async () => {
-      server.use(
-        http.get("*", async () => {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          return new Response(JSON.stringify({ success: true }), {
-            headers: { "Content-Type": "application/json" },
-          });
-        }),
-      );
+      server.use(http.get("*", respondOnAbort));
 
       const controller = new AbortController();
       const timeoutPromise = baseFetch({
         baseUrl: "https://example.com",
         endpoint: "/test",
-        timeoutMs: 100,
+        timeoutMs: 1,
         signal: controller.signal,
       });
 
-      await expect(timeoutPromise).rejects.toThrow(/./);
+      await expect(timeoutPromise).rejects.toMatchInlineSnapshot(
+        `[TimeoutError: The operation was aborted due to timeout]`,
+      );
     });
 
     it("signal fires first when aborted before timeout", async () => {

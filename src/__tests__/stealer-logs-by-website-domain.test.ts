@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
+import { respondOnAbort } from "../../test/handlers.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { stealerLogsByWebsiteDomain } from "../stealer-logs-by-website-domain.js";
 
@@ -68,18 +69,10 @@ describe("stealerLogsByWebsiteDomain", () => {
   describe("timeoutMs option", () => {
     it("aborts the request after the given value", () => {
       expect.assertions(1);
-      const timeoutMs = 1;
-      server.use(
-        http.get("*", async () => {
-          await new Promise((resolve) => {
-            setTimeout(resolve, timeoutMs + 1);
-          });
-          return new Response(JSON.stringify(RESULTS));
-        }),
-      );
+      server.use(http.get("*", respondOnAbort));
 
       return expect(
-        stealerLogsByWebsiteDomain("example.com", { timeoutMs }),
+        stealerLogsByWebsiteDomain("example.com", { timeoutMs: 1 }),
       ).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
