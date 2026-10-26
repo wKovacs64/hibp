@@ -12,7 +12,7 @@
 without it will fail (unless you specify a <code>baseUrl</code> to a proxy that inserts
 a valid API key on your behalf).</p>
 </dd>
-<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#breach--objectedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
+<dt><a href="#breachedDomain">breachedDomain(domain, [options])</a> ⇒ <code><a href="#BreachedDomainsByEmailAlias">Promise.&lt;BreachedDomainsByEmailAlias&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches all breached email addresses for a domain.</p>
 <p>The result maps email aliases (the local-part before the &#39;@&#39;) to an array of
 breach names. For example, querying <code>example.com</code> could return an object like
@@ -133,7 +133,7 @@ a valid API key on your behalf).</p>
 <dt><a href="#breach--object">Breach</a> : <code>object</code></dt>
 <dd><p>An object representing a breach.</p>
 </dd>
-<dt><a href="#breach--objectedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
+<dt><a href="#BreachedDomainsByEmailAlias">BreachedDomainsByEmailAlias</a> : <code>Object.&lt;string, Array.&lt;string&gt;&gt;</code></dt>
 <dd><p>An object mapping an email alias (local-part before the &#39;@&#39;) to the list of
 breach names that alias has appeared in for the specified domain.</p>
 </dd>
@@ -273,7 +273,7 @@ try {
 ```
 <a name="breachedDomain"></a>
 
-## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
+## breachedDomain(domain, [options]) ⇒ [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code>
 Fetches all breached email addresses for a domain.
 
 The result maps email aliases (the local-part before the '@') to an array of
@@ -288,7 +288,7 @@ without it will fail (unless you specify a `baseUrl` to a proxy that inserts
 a valid API key on your behalf).
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#breach--objectedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
+**Returns**: [<code>Promise.&lt;BreachedDomainsByEmailAlias&gt;</code>](#BreachedDomainsByEmailAlias) \| <code>Promise.&lt;null&gt;</code> - a Promise which
 resolves to an object mapping aliases to breach name arrays (or null if no
 results were found), or rejects with an Error  
 
