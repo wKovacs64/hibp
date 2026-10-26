@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH, UNVERIFIED_BREACH } from "../../test/fixtures.js";
+import { respondOnAbort } from "../../test/handlers.js";
 import { breachedAccount } from "../breached-account.js";
 
 describe("breachedAccount", () => {
@@ -92,18 +93,10 @@ describe("breachedAccount", () => {
   describe("timeoutMs option", () => {
     it("aborts the request after the given value", () => {
       expect.assertions(1);
-      const timeoutMs = 1;
-      server.use(
-        http.get("*", async () => {
-          await new Promise((resolve) => {
-            setTimeout(resolve, timeoutMs + 1);
-          });
-          return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
-        }),
-      );
+      server.use(http.get("*", respondOnAbort));
 
       return expect(
-        breachedAccount("breached", { timeoutMs }),
+        breachedAccount("breached", { timeoutMs: 1 }),
       ).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );

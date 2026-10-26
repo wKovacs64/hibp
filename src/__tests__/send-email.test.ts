@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
+import { respondOnAbort } from "../../test/handlers.js";
 import { sendEmail } from "../send-email.js";
 
 describe("sendEmail", () => {
@@ -61,18 +62,7 @@ describe("sendEmail", () => {
   describe("timeoutMs option", () => {
     it("aborts the request after the given value", () => {
       expect.assertions(1);
-      server.use(
-        http.post("*", ({ request }) => {
-          // Respond only once aborted so the timeout cannot race the response.
-          return new Promise<Response>((resolve) => {
-            request.signal.addEventListener(
-              "abort",
-              () => resolve(new Response(null)),
-              { once: true },
-            );
-          });
-        }),
-      );
+      server.use(http.post("*", respondOnAbort));
 
       return expect(
         sendEmail(domain, "security", { timeoutMs: 1 }),

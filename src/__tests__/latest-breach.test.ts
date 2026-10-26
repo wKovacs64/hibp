@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { VERIFIED_BREACH } from "../../test/fixtures.js";
+import { respondOnAbort } from "../../test/handlers.js";
 import { latestBreach } from "../latest-breach.js";
 
 describe("latestBreach", () => {
@@ -35,17 +36,13 @@ describe("latestBreach", () => {
   describe("timeoutMs option", () => {
     it("aborts the request after the given value", () => {
       expect.assertions(1);
-      const timeoutMs = 1;
-      server.use(
-        http.get("*", async () => {
-          await new Promise((resolve) => {
-            setTimeout(resolve, timeoutMs + 1);
-          });
-          return new Response(JSON.stringify(VERIFIED_BREACH));
-        }),
-      );
+      server.use(http.get("*", respondOnAbort));
 
-      return expect(latestBreach({ timeoutMs })).rejects.toThrow(/./);
+      return expect(
+        latestBreach({ timeoutMs: 1 }),
+      ).rejects.toMatchInlineSnapshot(
+        `[TimeoutError: The operation was aborted due to timeout]`,
+      );
     });
   });
 
