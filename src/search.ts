@@ -61,11 +61,11 @@ interface SearchOptions {
  * Breaches contain only `Name` by default; pass `truncate: false` for full
  * breaches.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the `breachedaccount` and
- * `pasteaccount` endpoints. The `apiKey` option here is not explicitly
- * required, but direct requests made without it will fail (unless you specify a
- * `baseUrl` to a proxy that inserts a valid API key on your behalf).
+ * Requires a Core, Pro, or High RPM API key from
+ * https://haveibeenpwned.com/API/Key. The `apiKey` option here is not
+ * explicitly required, but direct requests made without it will fail (unless
+ * you specify a `baseUrl` to a proxy that inserts a valid API key on your
+ * behalf).
  *
  * @param {string} account an email address or username
  * @param {object} [options] a configuration object

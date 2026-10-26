@@ -6,11 +6,10 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * The result is an array of strings representing email addresses found in
  * stealer logs for the specified website domain (e.g., "example.com").
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the `stealerlogsbywebsitedomain`
- * endpoint. The `apiKey` option here is not explicitly required, but direct
- * requests made without it will fail (unless you specify a `baseUrl` to a proxy
- * that inserts a valid API key on your behalf).
+ * Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+ * option here is not explicitly required, but direct requests made without it
+ * will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+ * key on your behalf).
  *
  * @param {string} websiteDomain the website domain to query (e.g., "example.com")
  * @param {object} [options] a configuration object

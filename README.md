@@ -33,31 +33,49 @@ import * as hibp from "npm:hibp@x.y.z";
 See the [browser](#using-in-the-browser) section below for information on how to use it in the
 browser.
 
-## Features (🔑 = [requires][api-key-blog-post] an [API key][get-api-key])
+## Features
 
-- Get the most recently added breach
-- Get a single breach event
-- Get all breaches for an account 🔑
-- Search breaches by a six-character SHA-1 email prefix (Pro or High RPM) 🔑
-- Get all breached email addresses for a domain 🔑
-- Get all breach events in the system
-- Get all data classes
-- Get data class names and descriptions
-- Get all pastes for an account 🔑
-- [Securely][search-by-range] check a password to see if it has been exposed in a data breach
-- Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
-- Search for an account in both breaches and pastes at the same time 🔑
-- Get all stealer log domains for an email address 🔑
-- Get all stealer log email aliases for an email domain 🔑
-- Get all stealer log email addresses for a website domain 🔑
-- Get all subscribed domains 🔑
-- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
-- Request domain verification approval emails (Pro subscription) 🔑
-- Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)
 - Written in TypeScript, so all modules come fully typed
+
+API features are grouped by the [HIBP plans][hibp-plans] whose [API key][get-api-key] unlocks
+them.
+
+#### No API key
+
+- Get the most recently added breach
+- Get a single breach event
+- Get all breach events in the system
+- Get all data classes
+- Get data class names and descriptions
+- [Securely][search-by-range] check a password to see if it has been exposed in a data breach
+- Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
+
+#### ![Core][core-plan] / ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
+
+- Get all breaches for an account
+- Get all pastes for an account
+- Search for an account in both breaches and pastes at the same time
+- Get your subscription status, domain limits, and plan capabilities
+
+#### ![Core][core-plan] / ![Pro][pro-plan]
+
+- Get all breached email addresses for a domain
+- Get all subscribed domains
+
+#### ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
+
+- Search breaches by a six-character SHA-1 email prefix
+
+#### ![Pro][pro-plan]
+
+- Get all stealer log domains for an email address
+- Get all stealer log email aliases for an email domain
+- Get all stealer log email addresses for a website domain
+- Generate and verify DNS domain verification tokens
+- Request domain verification approval emails
 
 ## Usage
 
@@ -193,7 +211,10 @@ This module is distributed under the [MIT License][license].
 [haveibeenpwned]: https://haveibeenpwned.com
 [haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
 [search-by-range]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
-[api-key-blog-post]: https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/
+[hibp-plans]: https://haveibeenpwned.com/Subscription
+[core-plan]: https://img.shields.io/badge/Core-3c9f43?style=flat-square
+[pro-plan]: https://img.shields.io/badge/Pro-187dbd?style=flat-square
+[high-rpm-plan]: https://img.shields.io/badge/High%20RPM-ef4444?style=flat-square
 [get-api-key]: https://haveibeenpwned.com/API/Key
 [unpkg]: https://unpkg.com
 [caniuse-esm]: https://caniuse.com/#feat=es6-module

@@ -3,8 +3,8 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object mapping an email alias (local-part before the '@') to the list of
- * email domains that alias has appeared in within stealer logs for the specified
- * email domain.
+ * website domains that alias has appeared against in stealer logs for the
+ * specified email domain.
  *
  * @typedef {Object.<string, string[]>} StealerLogDomainsByEmailAlias
  */
@@ -13,15 +13,14 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * Fetches all stealer log email aliases for an email domain.
  *
  * The result maps email aliases (the local-part before the '@') to an array of
- * email domains found in stealer logs. For example, querying `example.com`
+ * website domains found in stealer logs. For example, querying `example.com`
  * could return an object like `{ "andy": ["netflix.com"], "jane": ["netflix.com",
  * "spotify.com"] }`, corresponding to `andy@example.com` and `jane@example.com`.
  *
- * 🔑 `haveibeenpwned.com` requires an API key from
- * https://haveibeenpwned.com/API/Key for the `stealerlogsbyemaildomain` endpoint.
- * The `apiKey` option here is not explicitly required, but direct requests made
- * without it will fail (unless you specify a `baseUrl` to a proxy that inserts
- * a valid API key on your behalf).
+ * Requires a Pro API key from https://haveibeenpwned.com/API/Key. The `apiKey`
+ * option here is not explicitly required, but direct requests made without it
+ * will fail (unless you specify a `baseUrl` to a proxy that inserts a valid API
+ * key on your behalf).
  *
  * @param {string} emailDomain the email domain to query (e.g., "example.com")
  * @param {object} [options] a configuration object

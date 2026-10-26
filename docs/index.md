@@ -20,7 +20,7 @@ In Node.js:
 npm install hibp
 ```
 
-In [Deno](https://deno.com/):
+In [Deno][deno]:
 
 ```ts
 // Replace x.y.z with the desired hibp version
@@ -30,32 +30,49 @@ import * as hibp from "npm:hibp@x.y.z";
 See the [browser](#using-in-the-browser) section below for information on how to use it in the
 browser.
 
-## Features (🔑 = [requires](https://www.troyhunt.com/authentication-and-the-have-i-been-pwned-api/) an [API key](https://haveibeenpwned.com/API/Key))
+## Features
 
-- Get the most recently added breach
-- Get a single breach event
-- Get all breaches for an account 🔑
-- Search breaches by a six-character SHA-1 email prefix (Pro or High RPM) 🔑
-- Get all breached email addresses for a domain 🔑
-- Get all breach events in the system
-- Get all data classes
-- Get data class names and descriptions
-- Get all pastes for an account 🔑
-- [Securely](https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange) check a password to
-  see if it has been exposed in a data breach
-- Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
-- Search for an account in both breaches and pastes at the same time 🔑
-- Get all stealer log domains for an email address 🔑
-- Get all stealer log email aliases for an email domain 🔑
-- Get all stealer log email addresses for a website domain 🔑
-- Get all subscribed domains 🔑
-- Generate and verify DNS domain verification tokens (Pro subscription) 🔑
-- Request domain verification approval emails (Pro subscription) 🔑
-- Get your subscription status, domain limits, and plan capabilities 🔑
 - All queries return a Promise
 - Provide your own `AbortSignal` to cancel in-flight requests
 - Available server-side (e.g., Node.js) and client-side (browser)
 - Written in TypeScript, so all modules come fully typed
+
+API features are grouped by the [HIBP plans][hibp-plans] whose [API key][get-api-key] unlocks
+them.
+
+#### No API key
+
+- Get the most recently added breach
+- Get a single breach event
+- Get all breach events in the system
+- Get all data classes
+- Get data class names and descriptions
+- [Securely][search-by-range] check a password to see if it has been exposed in a data breach
+- Check a SHA-1 or NTLM prefix to see if it has been exposed in a data breach
+
+#### ![Core][core-plan] / ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
+
+- Get all breaches for an account
+- Get all pastes for an account
+- Search for an account in both breaches and pastes at the same time
+- Get your subscription status, domain limits, and plan capabilities
+
+#### ![Core][core-plan] / ![Pro][pro-plan]
+
+- Get all breached email addresses for a domain
+- Get all subscribed domains
+
+#### ![Pro][pro-plan] / ![High RPM][high-rpm-plan]
+
+- Search breaches by a six-character SHA-1 email prefix
+
+#### ![Pro][pro-plan]
+
+- Get all stealer log domains for an email address
+- Get all stealer log email aliases for an email domain
+- Get all stealer log email addresses for a website domain
+- Generate and verify DNS domain verification tokens
+- Request domain verification approval emails
 
 ## Usage
 
@@ -119,11 +136,11 @@ void main();
 
 #### Rate Limiting
 
-The haveibeenpwned.com API [rate limits](https://haveibeenpwned.com/API/v3#RateLimiting) requests to
-prevent abuse. In the event you get rate limited, the module will throw a custom `RateLimitError`
-which will include a `retryAfterSeconds` property so you know when you can try the call again (as a
-`number`, unless the remote API did not provide one, in which case it will be `undefined` - but that
-_should_ never happen).
+The haveibeenpwned.com API [rate limits][haveibeenpwned-rate-limiting] requests to prevent abuse. In
+the event you get rate limited, the module will throw a custom `RateLimitError` which will include a
+`retryAfterSeconds` property so you know when you can try the call again (as a `number`, unless the
+remote API did not provide one, in which case it will be `undefined` - but that _should_ never
+happen).
 
 #### Using in the browser
 
@@ -137,13 +154,12 @@ You have a couple of options for using this library in a browser environment:
 1. ESM for Browsers
 
    Alternatively, you can also import the library directly in your HTML via `<script type="module">`
-   tags in [modern browsers](https://caniuse.com/#feat=es6-module). The pre-bundled module is
-   available through the [unpkg](https://unpkg.com) CDN, but you must specify the full path
-   (including the file extension). It's also strongly recommended to include the exact version
-   number as well, otherwise the `latest` tag will be used, which could be dangerous if/when there
-   are breaking changes made to the API. See [unpkg](https://unpkg.com) for details and advanced
-   version specification, but you will probably want to do the following (replacing `x.y.z` with the
-   version you want):
+   tags in [modern browsers][caniuse-esm]. The pre-bundled module is available through the
+   [unpkg][unpkg] CDN, but you must specify the full path (including the file extension). It's also
+   strongly recommended to include the exact version number as well, otherwise the `latest` tag will
+   be used, which could be dangerous if/when there are breaking changes made to the API. See
+   [unpkg][unpkg] for details and advanced version specification, but you will probably want to do
+   the following (replacing `x.y.z` with the version you want):
 
    ```html
    <script type="module">
@@ -158,19 +174,18 @@ You have a couple of options for using this library in a browser environment:
    </script>
    ```
 
-   For more information on ESM in the browser, check out
-   [Using JS modules in the browser](https://v8.dev/features/modules#browser).
+   For more information on ESM in the browser, check out [Using JS modules in the
+   browser][js-modules].
 
 ## Try It Out
 
-[Test hibp in your browser with StackBlitz.](https://stackblitz.com/edit/stackblitz-starters-atyrc52c?file=index.js)
+[Test hibp in your browser with StackBlitz.][stackblitz]
 
 ## Projects Using hibp
 
-- [pwned](https://github.com/wKovacs64/pwned) - a command-line tool for querying the
-  '[Have I been pwned?](https://haveibeenpwned.com)' service
-- [Password Lense](https://pwl.netlify.com/) - a static web application to reveal character types in
-  a password
+- [pwned][pwned] - a command-line tool for querying the '[Have I been pwned?][haveibeenpwned]'
+  service
+- [Password Lense][pwl] - a static web application to reveal character types in a password
 - [Plasmic](https://www.plasmic.app/) - the open-source visual builder for your tech stack
 - [Medplum](https://www.medplum.com/) - fast and easy healthcare dev
 - [Hasura Backend Plus](https://nhost.github.io/hasura-backend-plus/) - Authentication & Storage for
@@ -179,12 +194,29 @@ You have a couple of options for using this library in a browser environment:
 - [BanManager-WebUI](https://github.com/BanManagement/BanManager-WebUI) - Web interface for
   BanManager
 
-Send me a [PR](https://github.com/wKovacs64/hibp/pulls) or an email and I'll add yours to the list!
+Send me a [PR][pulls] or an email and I'll add yours to the list!
 
 ## License
 
-This module is distributed under the
-[MIT License](https://github.com/wKovacs64/hibp/tree/main/LICENSE.txt).
+This module is distributed under the [MIT License][license].
+
+[deno]: https://deno.com/
+[haveibeenpwned]: https://haveibeenpwned.com
+[haveibeenpwned-rate-limiting]: https://haveibeenpwned.com/API/v3#RateLimiting
+[search-by-range]: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+[hibp-plans]: https://haveibeenpwned.com/Subscription
+[core-plan]: https://img.shields.io/badge/Core-3c9f43?style=flat-square
+[pro-plan]: https://img.shields.io/badge/Pro-187dbd?style=flat-square
+[high-rpm-plan]: https://img.shields.io/badge/High%20RPM-ef4444?style=flat-square
+[get-api-key]: https://haveibeenpwned.com/API/Key
+[unpkg]: https://unpkg.com
+[caniuse-esm]: https://caniuse.com/#feat=es6-module
+[js-modules]: https://v8.dev/features/modules#browser
+[stackblitz]: https://stackblitz.com/edit/stackblitz-starters-atyrc52c?file=index.js
+[pwned]: https://github.com/wKovacs64/pwned
+[pulls]: https://github.com/wKovacs64/hibp/pulls
+[pwl]: https://pwl.netlify.com/
+[license]: https://github.com/wKovacs64/hibp/tree/main/LICENSE.txt
 
 ## Contributors ✨
 
