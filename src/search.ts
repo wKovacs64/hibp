@@ -1,13 +1,9 @@
-import type {
-  Breach,
-  Paste,
-  TruncatedBreach,
-} from "./api/haveibeenpwned/types.js";
-import { breachedAccount } from "./breached-account.js";
+import type { Paste } from "./api/haveibeenpwned/types.js";
+import { breachedAccount, type AccountBreaches } from "./breached-account.js";
 import { pasteAccount } from "./paste-account.js";
 
 export interface SearchResults<Truncate extends boolean = boolean> {
-  breaches: (Truncate extends false ? Breach[] : TruncatedBreach[]) | null;
+  breaches: AccountBreaches<Truncate> | null;
   pastes: Paste[] | null;
 }
 

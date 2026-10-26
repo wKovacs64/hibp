@@ -8,6 +8,10 @@ import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
  * @property {string} Name
  */
 
+// Breaches returned by an account search with the given `truncate` option.
+export type AccountBreaches<Truncate extends boolean = boolean> =
+  Truncate extends false ? Breach[] : TruncatedBreach[];
+
 interface BreachedAccountOptions {
   /**
    * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
@@ -126,19 +130,19 @@ interface BreachedAccountOptions {
 export function breachedAccount(
   account: string,
   options?: BreachedAccountOptions & { truncate?: true },
-): Promise<TruncatedBreach[] | null>;
+): Promise<AccountBreaches<true> | null>;
 export function breachedAccount(
   account: string,
   options: BreachedAccountOptions & { truncate: false },
-): Promise<Breach[] | null>;
+): Promise<AccountBreaches<false> | null>;
 export function breachedAccount(
   account: string,
   options?: BreachedAccountOptions,
-): Promise<Breach[] | TruncatedBreach[] | null>;
+): Promise<AccountBreaches | null>;
 export function breachedAccount(
   account: string,
   options: BreachedAccountOptions = {},
-): Promise<Breach[] | TruncatedBreach[] | null> {
+): Promise<AccountBreaches | null> {
   const {
     apiKey,
     domain,
@@ -170,5 +174,5 @@ export function breachedAccount(
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<Breach[] | TruncatedBreach[] | null>;
+  }) as Promise<AccountBreaches | null>;
 }

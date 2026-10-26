@@ -109,7 +109,7 @@ name-only searches, `SearchResults<false>` describes full searches, and `SearchR
 (also the default for the type) allows either.
 
 HIBP supports a [free test API key](https://haveibeenpwned.com/API/v3#TestAPIKey) for account
-searches using its [official test email addresses](https://haveibeenpwned.com/API/v3#TestEmailAddresses).
+searches using its [official test email addresses](https://haveibeenpwned.com/API/v3#TestAccounts).
 
 #### Quick-Start Example
 
