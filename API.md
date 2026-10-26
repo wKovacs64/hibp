@@ -34,6 +34,12 @@ a valid API key on your behalf).</p>
 <dd><p>Generates a domain-specific DNS verification token.</p>
 <p>Requires an HIBP Pro subscription. Publish <code>txtRecordValue</code> as a TXT record
 on the domain, then call <code>verifyDnsToken</code> after DNS propagation.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the
+<code>domainVerification/generateDnsToken</code> endpoint. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
 </dd>
 <dt><a href="#latestBreach">latestBreach([options])</a> ⇒ <code><a href="#breach--object">Promise.&lt;Breach&gt;</a></code> | <code>Promise.&lt;null&gt;</code></dt>
 <dd><p>Fetches the most recently added breach.</p>
@@ -134,8 +140,13 @@ a valid API key on your behalf).</p>
 <dd><p>Verifies a domain&#39;s published HIBP TXT record.</p>
 <p>Requires an HIBP Pro subscription. Generate the value with <code>generateDnsToken</code>,
 publish it at your DNS provider, and allow time for DNS propagation first.
-The record can be removed after verification succeeds.
-Successful verification does not require parsing a response body.</p>
+The record can be removed after verification succeeds.</p>
+<p>🔑 <code>haveibeenpwned.com</code> requires an API key from
+<a href="https://haveibeenpwned.com/API/Key">https://haveibeenpwned.com/API/Key</a> for the
+<code>domainVerification/verifyDnsToken</code> endpoint. The <code>apiKey</code> option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a <code>baseUrl</code> to a proxy that inserts a valid API key on your
+behalf).</p>
 </dd>
 </dl>
 
@@ -413,27 +424,38 @@ Generates a domain-specific DNS verification token.
 Requires an HIBP Pro subscription. Publish `txtRecordValue` as a TXT record
 on the domain, then call `verifyDnsToken` after DNS propagation.
 
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the
+`domainVerification/generateDnsToken` endpoint. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
+
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken) - the documented TXT record value; rejects with an
-Error containing the upstream failure reason  
+**Returns**: [<code>Promise.&lt;DnsToken&gt;</code>](#DnsToken) - a Promise which resolves to the TXT record
+value, or rejects with an Error containing the upstream failure reason  
 **See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaDns  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | domain | <code>string</code> | the domain to verify (e.g., "example.com") |
 | [options] | <code>object</code> | a configuration object |
-| [options.apiKey] | <code>string</code> | an HIBP Pro API key; optional when a proxy supplies authentication |
-| [options.baseUrl] | <code>string</code> | a custom API base URL (default: `https://haveibeenpwned.com/api/v3`) |
-| [options.timeoutMs] | <code>number</code> | timeout in milliseconds (default: none) |
-| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request |
-| [options.userAgent] | <code>string</code> | a custom User-Agent (default: `hibp <version>`) |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
-const { txtRecordValue } = await generateDnsToken("example.com", {
-  apiKey: "my-pro-api-key",
-});
-// Publish txtRecordValue as a TXT record on example.com at your DNS provider.
+try {
+  const { txtRecordValue } = await generateDnsToken("example.com", {
+    apiKey: "my-api-key",
+  });
+  // Publish txtRecordValue as a TXT record on example.com.
+} catch (err) {
+  // ...
+}
 ```
 <a name="latestBreach"></a>
 
@@ -963,26 +985,38 @@ Verifies a domain's published HIBP TXT record.
 Requires an HIBP Pro subscription. Generate the value with `generateDnsToken`,
 publish it at your DNS provider, and allow time for DNS propagation first.
 The record can be removed after verification succeeds.
-Successful verification does not require parsing a response body.
+
+🔑 `haveibeenpwned.com` requires an API key from
+https://haveibeenpwned.com/API/Key for the
+`domainVerification/verifyDnsToken` endpoint. The `apiKey` option here is not
+explicitly required, but direct requests made without it will fail (unless
+you specify a `baseUrl` to a proxy that inserts a valid API key on your
+behalf).
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;void&gt;</code> - resolves on successful verification without parsing
-a response body; rejects with an Error containing the upstream failure reason  
+**Returns**: <code>Promise.&lt;void&gt;</code> - a Promise which resolves without parsing the
+response body when verification succeeds, or rejects with an Error
+containing the upstream failure reason  
 **See**: https://haveibeenpwned.com/API/v3#VerifyDomainViaDns  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | domain | <code>string</code> | the domain to verify (e.g., "example.com") |
 | [options] | <code>object</code> | a configuration object |
-| [options.apiKey] | <code>string</code> | an HIBP Pro API key; optional when a proxy supplies authentication |
-| [options.baseUrl] | <code>string</code> | a custom API base URL (default: `https://haveibeenpwned.com/api/v3`) |
-| [options.timeoutMs] | <code>number</code> | timeout in milliseconds (default: none) |
-| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request |
-| [options.userAgent] | <code>string</code> | a custom User-Agent (default: `hibp <version>`) |
+| [options.apiKey] | <code>string</code> | an API key from https://haveibeenpwned.com/API/Key (default: undefined) |
+| [options.baseUrl] | <code>string</code> | a custom base URL for the haveibeenpwned.com API endpoints (default: `https://haveibeenpwned.com/api/v3`) |
+| [options.timeoutMs] | <code>number</code> | timeout for the request in milliseconds (default: none) |
+| [options.signal] | <code>AbortSignal</code> | an AbortSignal to cancel the request (default: none) |
+| [options.userAgent] | <code>string</code> | a custom string to send as the User-Agent field in the request headers (default: `hibp <version>`) |
 
 **Example**  
 ```js
-await verifyDnsToken("example.com", { apiKey: "my-pro-api-key" });
+try {
+  await verifyDnsToken("example.com", { apiKey: "my-api-key" });
+  // ...
+} catch (err) {
+  // ...
+}
 ```
 <a name="Breach"></a>
 

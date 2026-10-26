@@ -131,12 +131,9 @@ console.log(txtRecordValue); // Publish this TXT record at your DNS provider.
 await verifyDnsToken("example.com", options);
 ```
 
-Verification resolves with `undefined` on success and rejects with the upstream failure reason
-on failure. You can remove the TXT record after successful verification.
-
-The [API contract](https://haveibeenpwned.com/API/v3#VerifyDomainViaDns) defines `txtRecordValue`
-for token generation and HTTP 200 for verification. `verifyDnsToken` accepts a successful response
-without parsing its body. Both operations reject with the upstream failure reason.
+Verification resolves with `undefined` on HTTP 200 without parsing the response body. Both
+operations reject with the upstream failure reason. You can remove the TXT record after successful
+verification.
 
 #### Domain verification through email
 

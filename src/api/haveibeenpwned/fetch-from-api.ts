@@ -37,8 +37,53 @@ export class RateLimitError extends Error {
   }
 }
 
-function blockedWithRayId(rayId: string) {
+/** @internal */
+export function blockedWithRayId(rayId: string) {
   return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
+}
+
+/** @internal */
+export interface ApiOptions {
+  apiKey?: string;
+  baseUrl?: string;
+  timeoutMs?: number;
+  signal?: AbortSignal;
+  userAgent?: string;
+}
+
+/**
+ * Sends a request to the haveibeenpwned.com API, as a JSON POST when `body` is
+ * supplied.
+ *
+ * @internal
+ */
+export function requestApi(
+  endpoint: string,
+  options: ApiOptions = {},
+  body?: Record<string, string>,
+): Promise<Response> {
+  const {
+    apiKey,
+    baseUrl = "https://haveibeenpwned.com/api/v3",
+    timeoutMs,
+    signal,
+    userAgent,
+  } = options;
+
+  const headers: Record<string, string> = {};
+  if (apiKey) headers["HIBP-API-Key"] = apiKey;
+  if (body) headers["Content-Type"] = "application/json";
+
+  return baseFetch({
+    baseUrl,
+    endpoint,
+    headers,
+    timeoutMs,
+    signal,
+    userAgent,
+    method: body ? "POST" : undefined,
+    body: body && JSON.stringify(body),
+  });
 }
 
 /**
@@ -71,33 +116,9 @@ function blockedWithRayId(rayId: string) {
  */
 export async function fetchFromApi(
   endpoint: string,
-  options: {
-    apiKey?: string;
-    baseUrl?: string;
-    timeoutMs?: number;
-    signal?: AbortSignal;
-    userAgent?: string;
-  } = {},
+  options: ApiOptions = {},
 ): Promise<ApiData> {
-  const {
-    apiKey,
-    baseUrl = "https://haveibeenpwned.com/api/v3",
-    timeoutMs,
-    signal,
-    userAgent,
-  } = options;
-
-  const headers: Record<string, string> = {};
-  if (apiKey) headers["HIBP-API-Key"] = apiKey;
-
-  const response = await baseFetch({
-    baseUrl,
-    endpoint,
-    headers,
-    timeoutMs,
-    signal,
-    userAgent,
-  });
+  const response = await requestApi(endpoint, options);
 
   if (response.ok) return response.json() as Promise<ApiData>;
 

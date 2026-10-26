@@ -1,59 +1,54 @@
-import { baseFetch } from "../base-fetch.js";
-import { RateLimitError } from "./fetch-from-api.js";
-import { TOO_MANY_REQUESTS } from "./responses.js";
+import {
+  blockedWithRayId,
+  RateLimitError,
+  requestApi,
+  type ApiOptions,
+} from "./fetch-from-api.js";
+import { FORBIDDEN, TOO_MANY_REQUESTS } from "./responses.js";
 
-/** @internal */
+/**
+ * Posts a JSON body to the supplied API endpoint.
+ *
+ * Failures reject with the first available reason: the JSON body's `message`,
+ * the Cloudflare Ray ID of a blocked (403) request, a plain-text body, or the
+ * HTTP status.
+ *
+ * @internal
+ */
 export async function postToApi(
   endpoint: string,
   body: Record<string, string>,
-  options: {
-    apiKey?: string;
-    baseUrl?: string;
-    timeoutMs?: number;
-    signal?: AbortSignal;
-    userAgent?: string;
-  } = {},
+  options?: ApiOptions,
 ): Promise<Response> {
-  const {
-    apiKey,
-    baseUrl = "https://haveibeenpwned.com/api/v3",
-    timeoutMs,
-    signal,
-    userAgent,
-  } = options;
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-  if (apiKey) headers["HIBP-API-Key"] = apiKey;
-
-  const response = await baseFetch({
-    baseUrl,
-    endpoint,
-    method: "POST",
-    body: JSON.stringify(body),
-    headers,
-    timeoutMs,
-    signal,
-    userAgent,
-  });
-
+  const response = await requestApi(endpoint, options, body);
   if (response.ok) return response;
 
-  let message = await response.text();
-  if (response.headers.get("content-type")?.includes("json")) {
-    const error: unknown = JSON.parse(message);
+  const { headers, status } = response;
+  const text = await response.text();
+  const rayId = headers.get("cf-ray");
+  let message = `${status} ${response.statusText}`.trim();
+  if (status === FORBIDDEN.status && rayId) {
+    message = blockedWithRayId(rayId);
+  } else if (headers.get("content-type")?.startsWith("text/plain") && text) {
+    message = text;
+  }
+  try {
+    const error: unknown = JSON.parse(text);
     if (
       typeof error === "object" &&
       error !== null &&
       "message" in error &&
-      typeof error.message === "string"
+      typeof error.message === "string" &&
+      error.message
     ) {
       message = error.message;
     }
+  } catch {
+    // Not JSON; keep the reason above.
   }
 
-  if (response.status === TOO_MANY_REQUESTS.status) {
-    throw new RateLimitError(response.headers.get("retry-after"), message);
+  if (status === TOO_MANY_REQUESTS.status) {
+    throw new RateLimitError(headers.get("retry-after"), message);
   }
   throw new Error(message);
 }
