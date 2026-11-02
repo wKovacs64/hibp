@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
-    "@babel/core": "8.0.9",
+    "@babel/core": "8.0.10",
     "@babel/preset-env": "8.0.7",
     "@babel/preset-typescript": "8.0.7",
     "@changesets/changelog-github": "1.0.1",
@@ -96,8 +96,8 @@
     "jsdoc-to-markdown": "9.1.3",
     "msw": "3.0.3",
     "npm-run-all2": "9.0.4",
-    "oxfmt": "0.74.0",
-    "oxlint": "1.89.0",
+    "oxfmt": "0.75.0",
+    "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
     "pathe": "2.0.3",
     "rimraf": "6.1.3",
@@ -108,5 +108,5 @@
   "engines": {
     "node": ">= 22.12.0"
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.16.1"
 }
