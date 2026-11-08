@@ -49,6 +49,6 @@ export function dataClasses(
     userAgent?: string;
   } = {},
 ): Promise<string[] | null> {
-  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
+  // SAFETY: documented API response shape
   return fetchFromApi("/dataclasses", options) as Promise<string[] | null>;
 }

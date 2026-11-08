@@ -160,7 +160,7 @@ export async function fetchFromApi(
   const response = await requestApi(endpoint, options);
 
   if (response.ok) {
-    // SAFETY: a successful response body is JSON of the endpoint's documented shape; callers narrow ApiData to it.
+    // SAFETY: documented API response shape
     return response.json() as Promise<ApiData>;
   }
 

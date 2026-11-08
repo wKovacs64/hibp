@@ -50,6 +50,6 @@ export function latestBreach(
     userAgent?: string;
   } = {},
 ): Promise<Breach | null> {
-  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
+  // SAFETY: documented API response shape
   return fetchFromApi("/latestbreach", options) as Promise<Breach | null>;
 }

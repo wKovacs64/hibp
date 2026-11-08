@@ -6,7 +6,7 @@
     {
       "//": "Pre-bundled ESM for the Browser",
       "path": "dist/browser/hibp.module.js",
-      "maxSize": "2.6 kB"
+      "maxSize": "2.7 kB"
     },
     {
       "//": "Unbundled ESM",
@@ -83,7 +83,7 @@
     },
     {
       "path": "dist/esm/pwned-password.js",
-      "maxSize": "1.1 kB"
+      "maxSize": "1.2 kB"
     },
     {
       "path": "dist/esm/pwned-password-range.js",

@@ -85,7 +85,7 @@ export function breaches(
     params.push(`isSpamList=${isSpamList}`);
   }
 
-  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
+  // SAFETY: documented API response shape
   return fetchFromApi(`${endpoint}${params.join("&")}`, {
     baseUrl,
     timeoutMs,

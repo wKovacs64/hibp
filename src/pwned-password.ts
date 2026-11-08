@@ -65,19 +65,12 @@ export async function pwnedPassword(
 
   const count = range[suffix];
 
-  // A missing suffix or an unparseable count means not pwned.
   return count === undefined || Number.isNaN(count) ? 0 : count;
 }
 
-// `crypto.subtle` is undefined outside secure contexts despite its DOM type,
-// and `crypto` itself may be undeclared.
-function getSubtleCrypto(): SubtleCrypto | undefined {
-  // oxlint-disable-next-line anti-slop/no-runtime-typeof -- feature-detects a global that may be undeclared
-  return typeof crypto === "object" ? crypto.subtle : undefined;
-}
-
 async function getPasswordHashParts(password: string) {
-  const subtle = getSubtleCrypto();
+  // oxlint-disable-next-line anti-slop/no-runtime-typeof -- crypto may be undeclared
+  const subtle = typeof crypto === "object" ? crypto.subtle : undefined;
 
   if (subtle) {
     const msgUint8 = new TextEncoder().encode(password);
