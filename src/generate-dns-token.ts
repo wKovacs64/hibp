@@ -76,5 +76,7 @@ export async function generateDnsToken(
     { DomainName: domain },
     options,
   );
+
+  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
   return response.json() as Promise<DnsToken>;
 }

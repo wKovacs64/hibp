@@ -83,6 +83,7 @@ export function subscribedDomains(
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = "/subscribeddomains";
 
+  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
   return fetchFromApi(endpoint, {
     apiKey,
     baseUrl,

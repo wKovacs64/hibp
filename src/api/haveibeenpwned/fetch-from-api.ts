@@ -31,9 +31,7 @@ export class RateLimitError extends Error {
     super(message, options);
     this.name = this.constructor.name;
     this.retryAfterSeconds =
-      typeof retryAfter === "string"
-        ? Number.parseInt(retryAfter, 10)
-        : undefined;
+      retryAfter === null ? undefined : Number.parseInt(retryAfter, 10);
   }
 }
 
@@ -59,19 +57,24 @@ export function statusLine({ status, statusText }: Response) {
 export function jsonMessage(text: string): string | undefined {
   try {
     const error: unknown = JSON.parse(text);
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "message" in error &&
-      typeof error.message === "string" &&
-      error.message.trim()
-    ) {
+
+    if (hasStringMessage(error) && error.message.trim()) {
       return error.message;
     }
   } catch {
     // Not JSON.
   }
+
   return undefined;
+}
+
+function hasStringMessage(value: unknown): value is { message: string } {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "message" in value &&
+    typeof value.message === "string"
+  );
 }
 
 /** @internal */
@@ -103,7 +106,9 @@ export function requestApi(
   } = options;
 
   const headers: Record<string, string> = {};
+
   if (apiKey) headers["HIBP-API-Key"] = apiKey;
+
   if (body) headers["Content-Type"] = "application/json";
 
   return baseFetch({
@@ -154,32 +159,42 @@ export async function fetchFromApi(
 ): Promise<ApiData> {
   const response = await requestApi(endpoint, options);
 
-  if (response.ok) return response.json() as Promise<ApiData>;
+  if (response.ok) {
+    // SAFETY: a successful response body is JSON of the endpoint's documented shape; callers narrow ApiData to it.
+    return response.json() as Promise<ApiData>;
+  }
 
   switch (response.status) {
     case BAD_REQUEST.status: {
       throw new Error(BAD_REQUEST.statusText);
     }
+
     case UNAUTHORIZED.status: {
       const text = await response.text();
       throw new Error(
         jsonMessage(text) ?? (text.trim() ? text : statusLine(response)),
       );
     }
+
     case FORBIDDEN.status: {
       const rayId = response.headers.get("cf-ray");
+
       if (rayId) throw new Error(blockedWithRayId(rayId));
       throw new Error(FORBIDDEN.statusText);
     }
+
     case NOT_FOUND.status: {
       return null;
     }
+
     case TOO_MANY_REQUESTS.status: {
       const message =
         jsonMessage(await response.text()) ?? statusLine(response);
+
       const retryAfter = response.headers.get("retry-after");
       throw new RateLimitError(retryAfter, message);
     }
+
     default: {
       throw new Error(response.statusText);
     }

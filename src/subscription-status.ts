@@ -85,5 +85,6 @@ export async function subscriptionStatus(
 ) {
   const endpoint = "/subscription/status";
 
+  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
   return fetchFromApi(endpoint, options) as Promise<SubscriptionStatus>;
 }

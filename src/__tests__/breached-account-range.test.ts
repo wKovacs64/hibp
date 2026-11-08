@@ -15,6 +15,7 @@ describe("breachedAccountRange", () => {
           expect(request.url).toBe(
             "https://haveibeenpwned.com/api/v3/breachedaccount/range/6B5917",
           );
+
           return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
         }),
       );
@@ -48,6 +49,7 @@ describe("breachedAccountRange", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
           return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
         }),
       );
@@ -91,6 +93,7 @@ describe("breachedAccountRange", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
         }),
       );

@@ -42,6 +42,7 @@ describe("pasteAccount", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
           return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
         }),
       );
@@ -85,6 +86,7 @@ describe("pasteAccount", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(PASTE_ACCOUNT_DATA));
         }),
       );

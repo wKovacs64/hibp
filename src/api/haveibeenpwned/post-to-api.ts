@@ -23,12 +23,14 @@ export async function postToApi(
   options?: ApiOptions,
 ): Promise<Response> {
   const response = await requestApi(endpoint, options, body);
+
   if (response.ok) return response;
 
   const { headers, status } = response;
   const text = await response.text();
   const rayId = headers.get("cf-ray");
   const isPlainText = /^text\/plain\b/i.test(headers.get("content-type") ?? "");
+
   const message =
     jsonMessage(text) ??
     (status === FORBIDDEN.status && rayId
@@ -40,5 +42,6 @@ export async function postToApi(
   if (status === TOO_MANY_REQUESTS.status) {
     throw new RateLimitError(headers.get("retry-after"), message);
   }
+
   throw new Error(message);
 }

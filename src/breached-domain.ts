@@ -78,6 +78,7 @@ export function breachedDomain(
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = `/breacheddomain/${encodeURIComponent(domain)}`;
 
+  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
   return fetchFromApi(endpoint, {
     apiKey,
     baseUrl,

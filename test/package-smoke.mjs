@@ -10,19 +10,43 @@ import { pathToFileURL } from "node:url";
 
 // Resolve from the consumer directory, not this repo (package self-reference).
 const require = createRequire(`${process.cwd()}/`);
-const hibp = await import(pathToFileURL(require.resolve("hibp")).href);
-const { version } = require("hibp/package.json");
 
+// SAFETY: the packed package is built from src/hibp.ts.
+const hibp = /** @type {typeof import("../src/hibp.js")} */ (
+  await import(pathToFileURL(require.resolve("hibp")).href)
+);
+
+// SAFETY: package.json always has a version string.
+const { version } = /** @type {{ version: string }} */ (
+  require("hibp/package.json")
+);
+
+// oxlint-disable-next-line anti-slop/no-runtime-typeof -- asserts the packed export's runtime shape; unicorn/no-instanceof-builtins rejects `instanceof Function`
 assert.equal(typeof hibp.breach, "function");
-assert.equal(require("hibp").breach, hibp.breach, "require(esm)");
+
+// SAFETY: require(esm) loads the same built module as the import above.
+const requiredHibp = /** @type {typeof hibp} */ (require("hibp"));
+
+assert.equal(requiredHibp.breach, hibp.breach, "require(esm)");
 
 const password = "password";
 const sha1 = createHash("sha1").update(password).digest("hex").toUpperCase();
 
 let userAgent;
-const server = createServer(async (req, res) => {
+
+const server = createServer((req, res) => {
+  void respond(req, res);
+});
+
+/**
+ * @param {import("node:http").IncomingMessage} req
+ * @param {import("node:http").ServerResponse} res
+ */
+async function respond(req, res) {
   userAgent = req.headers["user-agent"];
+
   if (req.url.startsWith("/slow")) await delay(1000);
+
   if (req.url.startsWith("/range/")) {
     res.end(`${sha1.slice(5)}:42\r\n`);
   } else if (req.url.startsWith("/limited")) {
@@ -31,8 +55,10 @@ const server = createServer(async (req, res) => {
     res.setHeader("content-type", "application/json");
     res.end(JSON.stringify(["Passwords"]));
   }
-});
+}
+
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+
 const baseUrl = `http://127.0.0.1:${server.address().port}`;
 
 try {
@@ -58,6 +84,7 @@ try {
     (error) => {
       assert.ok(error instanceof hibp.RateLimitError);
       assert.equal(error.retryAfterSeconds, 2);
+
       return true;
     },
   );

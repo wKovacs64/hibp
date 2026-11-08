@@ -82,6 +82,7 @@ export function breach(
     userAgent?: string;
   } = {},
 ): Promise<Breach | null> {
+  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
   return fetchFromApi(
     `/breach/${encodeURIComponent(breachName)}`,
     options,

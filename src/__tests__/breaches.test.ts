@@ -16,6 +16,7 @@ describe("breaches", () => {
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("isSpamList")).toBe("true");
+
           return new Response(JSON.stringify(spamLists));
         }),
       );
@@ -29,6 +30,7 @@ describe("breaches", () => {
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("isSpamList")).toBe("false");
+
           return new Response(JSON.stringify(BREACHES));
         }),
       );
@@ -50,6 +52,7 @@ describe("breaches", () => {
               domain: "foo.bar&other=value",
               isSpamList: expected,
             });
+
             return new Response(JSON.stringify([]));
           }),
         );
@@ -69,11 +72,13 @@ describe("breaches", () => {
           VERIFIED_BREACH,
           { ...VERIFIED_BREACH, IsSpamList: true },
         ];
+
         expect.assertions(2);
         server.use(
           http.get("*", ({ request }) => {
             const { searchParams } = new URL(request.url);
             expect(searchParams.has("isSpamList")).toBe(false);
+
             return new Response(JSON.stringify(allBreaches));
           }),
         );
@@ -91,6 +96,7 @@ describe("breaches", () => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("domain")).toBe("foo.bar");
           expect(searchParams.has("isSpamList")).toBe(false);
+
           return new Response(JSON.stringify(BREACHES));
         }),
       );
@@ -130,6 +136,7 @@ describe("breaches", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(BREACHES));
         }),
       );

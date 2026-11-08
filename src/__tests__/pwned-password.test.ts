@@ -10,6 +10,7 @@ describe("pwnedPassword", () => {
     it("rejects when the Web Crypto API is unavailable", async () => {
       expect.assertions(1);
       vi.stubGlobal("crypto", undefined);
+
       try {
         await expect(
           pwnedPassword("anything"),
@@ -81,6 +82,7 @@ describe("pwnedPassword", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(SHA1_RESPONSE_BODY);
         }),
       );
@@ -95,6 +97,7 @@ describe("pwnedPassword", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("Add-Padding")).toBe("true");
+
           return new Response(SHA1_RESPONSE_BODY);
         }),
       );

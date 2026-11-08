@@ -1,4 +1,3 @@
-// @ts-ignore - package-info.js is generated
 import {
   PACKAGE_NAME,
   PACKAGE_VERSION,
@@ -43,9 +42,11 @@ export function buildUrl(
   queryParams?: Record<string, string>,
 ): string {
   const base = baseUrl.replace(/\/$/g, "");
+
   const normalizedEndpoint = endpoint.startsWith("/")
     ? endpoint
     : `/${endpoint}`;
+
   const url = new URL(`${base}${normalizedEndpoint}`);
 
   if (queryParams) {
@@ -60,8 +61,8 @@ export function buildUrl(
 export function buildHeaders(
   userAgent?: string,
   extra?: Record<string, string>,
-): Record<string, string> {
-  const headers: Record<string, string> = { ...extra };
+) {
+  const headers = { ...extra };
 
   if (userAgent) {
     headers["User-Agent"] = userAgent;
@@ -78,10 +79,14 @@ function buildSignal(
 ): AbortSignal | undefined {
   const signals: AbortSignal[] = [];
 
-  if (timeoutMs) signals.push(AbortSignal.timeout(timeoutMs));
+  if (timeoutMs !== undefined && timeoutMs !== 0 && !Number.isNaN(timeoutMs)) {
+    signals.push(AbortSignal.timeout(timeoutMs));
+  }
+
   if (signal) signals.push(signal);
 
   if (signals.length === 0) return undefined;
+
   if (signals.length === 1) return signals[0];
 
   return AbortSignal.any(signals);

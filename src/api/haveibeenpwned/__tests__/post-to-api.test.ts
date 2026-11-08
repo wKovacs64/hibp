@@ -21,6 +21,7 @@ describe("internal (haveibeenpwned): postToApi", () => {
           expect(request.headers.get("hibp-api-key")).toBe("my-api-key");
           expect(request.headers.get("content-type")).toBe("application/json");
           expect(await request.json()).toEqual(body);
+
           return new Response(null);
         }),
       );
@@ -164,11 +165,10 @@ describe("internal (haveibeenpwned): postToApi", () => {
         ),
       );
 
-      const error = await postToApi("/service", body).catch(
-        (caught: unknown) => caught,
-      );
-      expect(error).toBeInstanceOf(RateLimitError);
-      expect(error).toMatchObject({
+      const request = postToApi("/service", body);
+
+      await expect(request).rejects.toBeInstanceOf(RateLimitError);
+      await expect(request).rejects.toMatchObject({
         message: TOO_MANY_REQUESTS.body.message,
         retryAfterSeconds: 2,
       });

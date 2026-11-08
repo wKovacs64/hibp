@@ -78,6 +78,8 @@ export function breachedAccountRange(
   } = {},
 ): Promise<BreachedAccountRangeResult[] | null> {
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
+
+  // SAFETY: the API documents this endpoint's JSON response shape; it is not validated at runtime.
   return fetchFromApi(`/breachedaccount/range/${encodeURIComponent(prefix)}`, {
     apiKey,
     baseUrl,
