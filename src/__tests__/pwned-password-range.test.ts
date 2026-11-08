@@ -61,6 +61,7 @@ describe("pwnedPasswordRange", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(SHA1_RESPONSE_BODY);
         }),
       );
@@ -77,6 +78,7 @@ describe("pwnedPasswordRange", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("Add-Padding")).toBe("true");
+
           return new Response(SHA1_RESPONSE_BODY);
         }),
       );
@@ -92,6 +94,7 @@ describe("pwnedPasswordRange", () => {
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("mode")).toBe("ntlm");
+
           return new Response(NTLM_RESPONSE_BODY);
         }),
       );

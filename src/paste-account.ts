@@ -88,6 +88,7 @@ export function pasteAccount(
     userAgent?: string;
   } = {},
 ): Promise<Paste[] | null> {
+  // SAFETY: documented API response shape
   return fetchFromApi(
     `/pasteaccount/${encodeURIComponent(email)}`,
     options,

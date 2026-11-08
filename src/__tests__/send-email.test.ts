@@ -21,6 +21,7 @@ describe("sendEmail", () => {
             DomainName: domain,
             EmailAlias: "security",
           });
+
           return new Response(null);
         }),
       );
@@ -36,6 +37,7 @@ describe("sendEmail", () => {
       server.use(
         http.post("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
           return new Response(null);
         }),
       );
@@ -79,6 +81,7 @@ describe("sendEmail", () => {
       server.use(
         http.post("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(null);
         }),
       );

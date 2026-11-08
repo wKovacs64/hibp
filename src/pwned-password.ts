@@ -62,14 +62,21 @@ export async function pwnedPassword(
 ): Promise<number> {
   const [prefix, suffix] = await getPasswordHashParts(password);
   const range = await pwnedPasswordRange(prefix, options);
-  return range[suffix] || 0;
+
+  const count = range[suffix];
+
+  return count === undefined || Number.isNaN(count) ? 0 : count;
 }
 
 async function getPasswordHashParts(password: string) {
-  if (typeof crypto === "object" && crypto.subtle) {
+  // oxlint-disable-next-line anti-slop/no-runtime-typeof -- crypto may be undeclared
+  const subtle = typeof crypto === "object" ? crypto.subtle : undefined;
+
+  if (subtle) {
     const msgUint8 = new TextEncoder().encode(password);
-    const hashBuffer = await crypto.subtle.digest("SHA-1", msgUint8);
+    const hashBuffer = await subtle.digest("SHA-1", msgUint8);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
+
     const hashHex = hashArray
       .map((byte) => byte.toString(16).padStart(2, "0"))
       .join("")

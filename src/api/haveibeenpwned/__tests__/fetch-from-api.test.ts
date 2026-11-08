@@ -18,7 +18,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
     it("sends a custom User-Agent request header outside browsers", async () => {
       server.use(
         http.get("*", ({ request }) => {
-          return request.headers.get("User-Agent")?.includes("hibp")
+          return request.headers.get("User-Agent")?.includes("hibp") === true
             ? new Response(JSON.stringify({}))
             : new Response(null, { status: FORBIDDEN.status });
         }),
@@ -146,12 +146,12 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       );
 
       expect.assertions(3);
-      const error = await fetchFromApi("/service/rate_limited", {
-        apiKey,
-      }).catch((caughtError: unknown) => caughtError);
-      expect(error).toBeInstanceOf(RateLimitError);
-      expect(error).toHaveProperty("retryAfterSeconds", 2);
-      expect(error).toMatchInlineSnapshot(
+
+      const request = fetchFromApi("/service/rate_limited", { apiKey });
+
+      await expect(request).rejects.toBeInstanceOf(RateLimitError);
+      await expect(request).rejects.toHaveProperty("retryAfterSeconds", 2);
+      await expect(request).rejects.toMatchInlineSnapshot(
         "[RateLimitError: Rate limit is exceeded. Try again in 2 seconds.]",
       );
     });
@@ -171,11 +171,11 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       );
 
       expect.assertions(2);
-      const error = await fetchFromApi("/service/rate_limited", {
-        apiKey,
-      }).catch((caughtError: unknown) => caughtError);
-      expect(error).toBeInstanceOf(RateLimitError);
-      expect(error).toMatchObject({
+
+      const request = fetchFromApi("/service/rate_limited", { apiKey });
+
+      await expect(request).rejects.toBeInstanceOf(RateLimitError);
+      await expect(request).rejects.toMatchObject({
         message: "429 Too Many Requests",
         retryAfterSeconds: 2,
       });
@@ -191,11 +191,14 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       );
 
       expect.assertions(2);
-      const error = await fetchFromApi("/service/rate_limited", {
-        apiKey,
-      }).catch((caughtError: unknown) => caughtError);
-      expect(error).toBeInstanceOf(RateLimitError);
-      expect((error as RateLimitError).retryAfterSeconds).toBeUndefined();
+
+      const request = fetchFromApi("/service/rate_limited", { apiKey });
+
+      await expect(request).rejects.toBeInstanceOf(RateLimitError);
+      await expect(request).rejects.toHaveProperty(
+        "retryAfterSeconds",
+        undefined,
+      );
     });
   });
 

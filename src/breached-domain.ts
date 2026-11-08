@@ -78,6 +78,7 @@ export function breachedDomain(
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = `/breacheddomain/${encodeURIComponent(domain)}`;
 
+  // SAFETY: documented API response shape
   return fetchFromApi(endpoint, {
     apiKey,
     baseUrl,

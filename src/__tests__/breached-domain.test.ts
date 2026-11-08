@@ -41,6 +41,7 @@ describe("breachedDomain", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
           return new Response(JSON.stringify(DOMAIN_RESULTS));
         }),
       );
@@ -84,6 +85,7 @@ describe("breachedDomain", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(DOMAIN_RESULTS));
         }),
       );

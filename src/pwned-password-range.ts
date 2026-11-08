@@ -117,6 +117,7 @@ export async function pwnedPasswordRange(
   return results.reduce<PwnedPasswordSuffixes>((acc, row) => {
     const [suffix, countString] = row.split(":");
     acc[suffix] = Number.parseInt(countString, 10);
+
     return acc;
   }, {});
 }

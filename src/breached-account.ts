@@ -140,6 +140,7 @@ export function breachedAccount(
     baseUrl,
     userAgent,
   } = options;
+
   const endpoint = `/breachedaccount/${encodeURIComponent(account)}?`;
   const params: string[] = [];
 
@@ -155,6 +156,7 @@ export function breachedAccount(
     params.push("truncateResponse=false");
   }
 
+  // SAFETY: documented API response shape
   return fetchFromApi(`${endpoint}${params.join("&")}`, {
     apiKey,
     baseUrl,

@@ -46,6 +46,7 @@ export async function fetchFromApi(
   } = options;
 
   const headers: Record<string, string> = {};
+
   if (addPadding) headers["Add-Padding"] = "true";
 
   const response = await baseFetch({

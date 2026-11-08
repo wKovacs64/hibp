@@ -102,6 +102,7 @@ describe("internal: buildHeaders", () => {
       "does not set User-Agent in browsers (%s exists)",
       (global) => {
         vi.stubGlobal(global, {});
+
         try {
           expect(buildHeaders()["User-Agent"]).toBeUndefined();
         } finally {
@@ -126,6 +127,7 @@ describe("internal: baseFetch", () => {
   describe("AbortSignal", () => {
     it("cancels request when signal is aborted", async () => {
       const controller = new AbortController();
+
       const abortPromise = baseFetch({
         baseUrl: "https://example.com",
         endpoint: "/test",
@@ -151,6 +153,7 @@ describe("internal: baseFetch", () => {
       server.use(http.get("*", respondOnAbort));
 
       const controller = new AbortController();
+
       const timeoutPromise = baseFetch({
         baseUrl: "https://example.com",
         endpoint: "/test",
@@ -165,6 +168,7 @@ describe("internal: baseFetch", () => {
 
     it("signal fires first when aborted before timeout", async () => {
       const controller = new AbortController();
+
       const abortPromise = baseFetch({
         baseUrl: "https://example.com",
         endpoint: "/test",

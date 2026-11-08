@@ -52,6 +52,7 @@ describe("dataClasses", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(DATA_CLASSES));
         }),
       );

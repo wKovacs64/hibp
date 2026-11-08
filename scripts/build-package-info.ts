@@ -8,4 +8,5 @@ export const PACKAGE_VERSION = ${JSON.stringify(packageJson.version)};
 `;
 
 const outPath = resolve("./src/api/haveibeenpwned/package-info.ts");
+
 writeFileSync(outPath, content);

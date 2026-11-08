@@ -81,6 +81,7 @@ export function stealerLogsByWebsiteDomain(
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = `/stealerlogsbywebsitedomain/${encodeURIComponent(websiteDomain)}`;
 
+  // SAFETY: documented API response shape
   return fetchFromApi(endpoint, {
     apiKey,
     baseUrl,

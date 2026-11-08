@@ -44,10 +44,12 @@ describe("search", () => {
     server.use(
       http.get(/breachedaccount/, ({ request }) => {
         expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
         return new Response(JSON.stringify(BREACHES));
       }),
       http.get(/pasteaccount/, ({ request }) => {
         expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
         return new Response(JSON.stringify(PASTES));
       }),
     );
@@ -61,11 +63,13 @@ describe("search", () => {
       http.get(/breachedaccount/, ({ request }) => {
         const { searchParams } = new URL(request.url);
         expect(searchParams.get("truncateResponse")).toBe("false");
+
         return new Response(JSON.stringify(BREACHES_EXPANDED));
       }),
       http.get(/pasteaccount/, ({ request }) => {
         const { searchParams } = new URL(request.url);
         expect(searchParams.has("truncateResponse")).toBe(false);
+
         return new Response(JSON.stringify(PASTES));
       }),
     );

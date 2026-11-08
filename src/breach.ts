@@ -82,6 +82,7 @@ export function breach(
     userAgent?: string;
   } = {},
 ): Promise<Breach | null> {
+  // SAFETY: documented API response shape
   return fetchFromApi(
     `/breach/${encodeURIComponent(breachName)}`,
     options,

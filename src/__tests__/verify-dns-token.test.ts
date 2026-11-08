@@ -17,6 +17,7 @@ describe("verifyDnsToken", () => {
             "https://haveibeenpwned.com/api/v3/domainVerification/verifyDnsToken",
           );
           expect(await request.json()).toEqual({ DomainName: domain });
+
           return new Response(null);
         }),
       );
@@ -47,6 +48,7 @@ describe("verifyDnsToken", () => {
       server.use(
         http.post("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
           return new Response(null);
         }),
       );
@@ -90,6 +92,7 @@ describe("verifyDnsToken", () => {
       server.use(
         http.post("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(null);
         }),
       );

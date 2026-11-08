@@ -76,5 +76,7 @@ export async function generateDnsToken(
     { DomainName: domain },
     options,
   );
+
+  // SAFETY: documented API response shape
   return response.json() as Promise<DnsToken>;
 }

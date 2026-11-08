@@ -50,5 +50,6 @@ export function latestBreach(
     userAgent?: string;
   } = {},
 ): Promise<Breach | null> {
+  // SAFETY: documented API response shape
   return fetchFromApi("/latestbreach", options) as Promise<Breach | null>;
 }

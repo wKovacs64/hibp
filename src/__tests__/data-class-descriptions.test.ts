@@ -14,6 +14,7 @@ describe("dataClassDescriptions", () => {
           expect(request.url).toBe(
             "https://haveibeenpwned.com/api/v3/dataclasses/descriptions",
           );
+
           return new Response(JSON.stringify(DATA_CLASS_DESCRIPTIONS));
         }),
       );
@@ -59,6 +60,7 @@ describe("dataClassDescriptions", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(DATA_CLASS_DESCRIPTIONS));
         }),
       );

@@ -120,6 +120,7 @@ export const SHA1_PREFIX = "5BAA6";
 // Documentation-derived example, not an authenticated live response:
 // https://haveibeenpwned.com/API/v3#BreachesForHashRange
 export const EMAIL_SHA1_PREFIX = "6B5917";
+
 export const EMAIL_RANGE_RESULTS = [
   {
     hashSuffix: "C6C0AADE0C085843D66E4944E108C4A4CD",

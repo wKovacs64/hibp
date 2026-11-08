@@ -10,6 +10,7 @@ describe("breachedAccount", () => {
     { Name: VERIFIED_BREACH.Name },
     { Name: UNVERIFIED_BREACH.Name },
   ];
+
   const BREACHED_ACCOUNT_DATA_EXPANDED = [VERIFIED_BREACH, UNVERIFIED_BREACH];
   const BREACHED_ACCOUNT_DATA_NO_UNVERIFIED = [{ Name: VERIFIED_BREACH.Name }];
 
@@ -20,6 +21,7 @@ describe("breachedAccount", () => {
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("truncateResponse")).toBe("false");
+
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA_EXPANDED));
         }),
       );
@@ -35,6 +37,7 @@ describe("breachedAccount", () => {
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("includeUnverified")).toBe("false");
+
           return new Response(
             JSON.stringify(BREACHED_ACCOUNT_DATA_NO_UNVERIFIED),
           );
@@ -52,6 +55,7 @@ describe("breachedAccount", () => {
         http.get("*", ({ request }) => {
           const { searchParams } = new URL(request.url);
           expect(searchParams.get("domain")).toBe("foo.bar");
+
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
         }),
       );
@@ -67,6 +71,7 @@ describe("breachedAccount", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
+
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
         }),
       );
@@ -110,6 +115,7 @@ describe("breachedAccount", () => {
       server.use(
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
+
           return new Response(JSON.stringify(BREACHED_ACCOUNT_DATA));
         }),
       );
