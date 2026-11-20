@@ -1,5 +1,13 @@
 # Change Log
 
+## 16.0.1
+
+### Patch Changes
+
+- [#648](https://github.com/wKovacs64/hibp/pull/648) [`0deb503`](https://github.com/wKovacs64/hibp/commit/0deb503540d765e7a6368bd09b0739323fea25f0) Thanks [@wKovacs64](https://github.com/wKovacs64)! - Accept `undefined` for every optional option property, so consumers using `exactOptionalPropertyTypes` can pass possibly-unset values, such as `{ domain }` where `domain` is `string | undefined`, without conditional spreads. hibp treats `undefined` the same as an omitted option.
+
+- [#645](https://github.com/wKovacs64/hibp/pull/645) [`7617801`](https://github.com/wKovacs64/hibp/commit/7617801e5391b5060e90fb1a28b2f85069f15048) Thanks [@wKovacs64](https://github.com/wKovacs64)! - `breaches()`, `subscribedDomains()`, and `subscriptionStatus()` reject on HTTP 404 instead of resolving `null`, which their return types exclude. haveibeenpwned.com does not send 404 for these endpoints, so this only affects responses from elsewhere, such as a proxy at a custom `baseUrl`.
+
 ## 16.0.0
 
 ### Major Changes
