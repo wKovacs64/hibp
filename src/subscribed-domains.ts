@@ -1,5 +1,5 @@
 import type { SubscribedDomain } from "./api/haveibeenpwned/types.js";
-import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
+import { fetchRequiredFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * An object representing a subscribed domain.
@@ -84,7 +84,7 @@ export function subscribedDomains(
   const endpoint = "/subscribeddomains";
 
   // SAFETY: documented API response shape
-  return fetchFromApi(endpoint, {
+  return fetchRequiredFromApi(endpoint, {
     apiKey,
     baseUrl,
     timeoutMs,

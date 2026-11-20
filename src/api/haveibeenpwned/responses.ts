@@ -43,6 +43,7 @@ export const BLOCKED = {
 /** @internal */
 export const NOT_FOUND = {
   status: 404 as const,
+  statusText: "Not found.",
 };
 
 /**
