@@ -76,11 +76,11 @@ function hasStringMessage(value: unknown): value is { message: string } {
 
 /** @internal */
 export interface ApiOptions {
-  apiKey?: string;
-  baseUrl?: string;
-  timeoutMs?: number;
-  signal?: AbortSignal;
-  userAgent?: string;
+  apiKey?: string | undefined;
+  baseUrl?: string | undefined;
+  timeoutMs?: number | undefined;
+  signal?: AbortSignal | undefined;
+  userAgent?: string | undefined;
 }
 
 /** @internal */

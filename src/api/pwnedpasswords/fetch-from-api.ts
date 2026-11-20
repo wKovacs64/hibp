@@ -5,12 +5,12 @@ import { BAD_REQUEST } from "./responses.js";
 export async function fetchFromApi(
   endpoint: string,
   options: {
-    baseUrl?: string;
-    timeoutMs?: number;
-    signal?: AbortSignal;
-    userAgent?: string;
-    addPadding?: boolean;
-    mode?: "sha1" | "ntlm";
+    baseUrl?: string | undefined;
+    timeoutMs?: number | undefined;
+    signal?: AbortSignal | undefined;
+    userAgent?: string | undefined;
+    addPadding?: boolean | undefined;
+    mode?: "sha1" | "ntlm" | undefined;
   } = {},
 ): Promise<string> {
   const {

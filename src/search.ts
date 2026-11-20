@@ -21,34 +21,34 @@ interface SearchOptions {
   /**
    * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
    */
-  apiKey?: string;
+  apiKey?: string | undefined;
   /**
    * a domain by which to filter the results (default: all domains)
    */
-  domain?: string;
+  domain?: string | undefined;
   /**
    * truncate the results to only include the name of each breach (default:
    * true)
    */
-  truncate?: boolean;
+  truncate?: boolean | undefined;
   /**
    * a custom base URL for the haveibeenpwned.com API endpoints (default:
    * `https://haveibeenpwned.com/api/v3`)
    */
-  baseUrl?: string;
+  baseUrl?: string | undefined;
   /**
    * timeout for the request in milliseconds (default: none)
    */
-  timeoutMs?: number;
+  timeoutMs?: number | undefined;
   /**
    * an AbortSignal to cancel the request (default: none)
    */
-  signal?: AbortSignal;
+  signal?: AbortSignal | undefined;
   /**
    * a custom string to send as the User-Agent field in the request headers
    * (default: `hibp <version>`)
    */
-  userAgent?: string;
+  userAgent?: string | undefined;
 }
 
 /**
@@ -118,7 +118,7 @@ interface SearchOptions {
  */
 export function search(
   account: string,
-  options?: SearchOptions & { truncate?: true },
+  options?: SearchOptions & { truncate?: true | undefined },
 ): Promise<{ breaches: Pick<Breach, "Name">[] | null; pastes: Paste[] | null }>;
 export function search(
   account: string,
