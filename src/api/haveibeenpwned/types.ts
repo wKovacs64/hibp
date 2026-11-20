@@ -1,7 +1,3 @@
-//
-// Data Models from the API
-//
-
 export interface Breach {
   Name: string;
   Title: string;
@@ -79,26 +75,3 @@ export interface BreachedAccountRangeResult {
 }
 
 export type StealerLogDomainsByEmailAlias = Record<string, string[]>;
-
-//
-// Internal convenience types
-//
-
-/**
- * Data returned in the response body of a successful API query
- *
- * @internal
- */
-export type ApiData =
-  | Breach // breach
-  | Breach[] // breachedaccount, breaches
-  | BreachedAccountRangeResult[] // breachedaccount/range
-  | Pick<Breach, "Name">[] // breachedaccount
-  | BreachedDomainsByEmailAlias // breacheddomain
-  | DataClassDescription[] // dataclasses/descriptions
-  | Paste[] // pasteaccount
-  | string[] // dataclasses, stealerlogsbyemail, stealerlogsbywebsitedomain
-  | StealerLogDomainsByEmailAlias // stealerlogsbyemaildomain
-  | SubscriptionStatus // subscription/status
-  | SubscribedDomain[] // subscribeddomains
-  | null; // most endpoints can return an empty response (404, but not an error)

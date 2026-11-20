@@ -1,3 +1,4 @@
+import { readJson } from "./api/haveibeenpwned/fetch-from-api.js";
 import { postToApi } from "./api/haveibeenpwned/post-to-api.js";
 import type { DnsToken } from "./api/haveibeenpwned/types.js";
 
@@ -77,6 +78,5 @@ export async function generateDnsToken(
     options,
   );
 
-  // SAFETY: documented API response shape
-  return response.json() as Promise<DnsToken>;
+  return readJson<DnsToken>(response);
 }

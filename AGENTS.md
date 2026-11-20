@@ -2,6 +2,8 @@
 
 Unofficial TypeScript SDK for Have I Been Pwned. Supports Node.js and browsers; see [README.md](README.md).
 
+Write the service as haveibeenpwned.com in full; `hibp` names this library, so the abbreviation is ambiguous.
+
 ## Agent skills
 
 ### Issue tracker

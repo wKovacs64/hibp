@@ -83,12 +83,11 @@ export function subscribedDomains(
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = "/subscribeddomains";
 
-  // SAFETY: documented API response shape
-  return fetchRequiredFromApi(endpoint, {
+  return fetchRequiredFromApi<SubscribedDomain[]>(endpoint, {
     apiKey,
     baseUrl,
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<SubscribedDomain[]>;
+  });
 }

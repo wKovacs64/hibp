@@ -156,12 +156,14 @@ export function breachedAccount(
     params.push("truncateResponse=false");
   }
 
-  // SAFETY: documented API response shape
-  return fetchFromApi(`${endpoint}${params.join("&")}`, {
-    apiKey,
-    baseUrl,
-    timeoutMs,
-    signal,
-    userAgent,
-  }) as Promise<Breach[] | Pick<Breach, "Name">[] | null>;
+  return fetchFromApi<Breach[] | Pick<Breach, "Name">[]>(
+    `${endpoint}${params.join("&")}`,
+    {
+      apiKey,
+      baseUrl,
+      timeoutMs,
+      signal,
+      userAgent,
+    },
+  );
 }

@@ -2,10 +2,12 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../../../mocks/server.js";
 import {
-  DNS_VERIFICATION_FAILURE,
-  MISSING_API_KEY,
+  DOCUMENTED_DNS_VERIFICATION_FAILURE,
+  LIVE_MISSING_API_KEY,
+  RATE_LIMITED,
+  RETRY_AFTER_HEADERS,
 } from "../../../../test/fixtures.js";
-import { BLOCKED, TOO_MANY_REQUESTS } from "../responses.js";
+import { FORBIDDEN, TOO_MANY_REQUESTS } from "../responses.js";
 import { RateLimitError } from "../fetch-from-api.js";
 import { postToApi } from "../post-to-api.js";
 
@@ -39,14 +41,13 @@ describe("internal (haveibeenpwned): postToApi", () => {
     });
   });
 
-  // Status variants exercise error handling; they are not live captures.
-  describe("failure with a JSON message", () => {
+  describe("failure with a JSON message at synthetic statuses", () => {
     it.each([400, 401, 403, 404, 409, 500])(
       "rejects with the message for HTTP %i",
       (status) => {
         server.use(
           http.post("*", () =>
-            Response.json(DNS_VERIFICATION_FAILURE, {
+            Response.json(DOCUMENTED_DNS_VERIFICATION_FAILURE, {
               status,
               headers: { "cf-ray": "someRayId" },
             }),
@@ -54,14 +55,16 @@ describe("internal (haveibeenpwned): postToApi", () => {
         );
 
         return expect(postToApi("/service", body)).rejects.toThrow(
-          DNS_VERIFICATION_FAILURE.message,
+          DOCUMENTED_DNS_VERIFICATION_FAILURE.message,
         );
       },
     );
 
     it("unwraps the observed missing-key response", () => {
       server.use(
-        http.post("*", () => Response.json(MISSING_API_KEY, { status: 401 })),
+        http.post("*", () =>
+          Response.json(LIVE_MISSING_API_KEY, { status: 401 }),
+        ),
       );
 
       return expect(postToApi("/service", body)).rejects.toThrow(
@@ -77,7 +80,7 @@ describe("internal (haveibeenpwned): postToApi", () => {
           "*",
           () =>
             new Response("<!DOCTYPE html><title>Attention Required</title>", {
-              status: BLOCKED.status,
+              status: FORBIDDEN.status,
               headers: {
                 "content-type": "text/html",
                 "cf-ray": "someRayId",
@@ -158,9 +161,9 @@ describe("internal (haveibeenpwned): postToApi", () => {
     it("throws a RateLimitError with the retry delay", async () => {
       server.use(
         http.post("*", () =>
-          Response.json(TOO_MANY_REQUESTS.body, {
+          Response.json(RATE_LIMITED, {
             status: TOO_MANY_REQUESTS.status,
-            headers: Array.from(TOO_MANY_REQUESTS.headers),
+            headers: RETRY_AFTER_HEADERS,
           }),
         ),
       );
@@ -169,7 +172,7 @@ describe("internal (haveibeenpwned): postToApi", () => {
 
       await expect(request).rejects.toBeInstanceOf(RateLimitError);
       await expect(request).rejects.toMatchObject({
-        message: TOO_MANY_REQUESTS.body.message,
+        message: RATE_LIMITED.message,
         retryAfterSeconds: 2,
       });
     });

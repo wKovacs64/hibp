@@ -93,13 +93,13 @@ describe("internal: buildHeaders", () => {
       });
     });
 
-    it("uses default User-Agent outside browsers", () => {
+    it("sets default User-Agent on servers, which may send none (e.g. Cloudflare Workers)", () => {
       const result = buildHeaders();
       expect(result["User-Agent"]).toMatch(/^hibp \d+\.\d+\.\d+/);
     });
 
     it.each(["document", "importScripts"])(
-      "does not set User-Agent in browsers (%s exists)",
+      "omits User-Agent in browsers (%s exists), avoiding a CORS preflight haveibeenpwned.com rejects",
       (global) => {
         vi.stubGlobal(global, {});
 

@@ -7,9 +7,7 @@ import { sendEmail } from "../send-email.js";
 describe("sendEmail", () => {
   const domain = "example.com";
 
-  // Request and HTTP 200 are documented; an empty success body is representative.
-  // Authenticated success and email delivery have not been live verified.
-  describe("success", () => {
+  describe("documented success, not live verified", () => {
     it("requests an approval email", async () => {
       expect.assertions(3);
       server.use(

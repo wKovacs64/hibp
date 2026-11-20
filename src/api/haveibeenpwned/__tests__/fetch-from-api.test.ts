@@ -1,12 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../../../mocks/server.js";
-import { MISSING_API_KEY } from "../../../../test/fixtures.js";
+import {
+  CLOUDFLARE_BLOCK_HEADERS,
+  LIVE_MISSING_API_KEY,
+  RATE_LIMITED,
+  RETRY_AFTER_HEADERS,
+  SYNTHETIC_PLAIN_TEXT_UNAUTHORIZED,
+} from "../../../../test/fixtures.js";
 import {
   BAD_REQUEST,
   UNAUTHORIZED,
   FORBIDDEN,
-  BLOCKED,
   TOO_MANY_REQUESTS,
 } from "../responses.js";
 import { fetchFromApi, RateLimitError } from "../fetch-from-api.js";
@@ -58,7 +63,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
     it("throws the message from a JSON body", () => {
       server.use(
         http.get("*", () =>
-          Response.json(MISSING_API_KEY, { status: UNAUTHORIZED.status }),
+          Response.json(LIVE_MISSING_API_KEY, { status: UNAUTHORIZED.status }),
         ),
       );
 
@@ -70,7 +75,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
     it("throws a plain-text body", () => {
       server.use(
         http.get("*", () => {
-          return new Response(UNAUTHORIZED.body, {
+          return new Response(SYNTHETIC_PLAIN_TEXT_UNAUTHORIZED, {
             status: UNAUTHORIZED.status,
           });
         }),
@@ -120,8 +125,8 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
       server.use(
         http.get("*", () => {
           return new Response(null, {
-            status: BLOCKED.status,
-            headers: Array.from(BLOCKED.headers),
+            status: FORBIDDEN.status,
+            headers: CLOUDFLARE_BLOCK_HEADERS,
           });
         }),
       );
@@ -138,9 +143,9 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
     it('throws a "Too Many Requests" rate limit error', async () => {
       server.use(
         http.get("*", () => {
-          return new Response(JSON.stringify(TOO_MANY_REQUESTS.body), {
+          return new Response(JSON.stringify(RATE_LIMITED), {
             status: TOO_MANY_REQUESTS.status,
-            headers: Array.from(TOO_MANY_REQUESTS.headers),
+            headers: RETRY_AFTER_HEADERS,
           });
         }),
       );
@@ -164,7 +169,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
             {
               status: TOO_MANY_REQUESTS.status,
               statusText: "Too Many Requests",
-              headers: Array.from(TOO_MANY_REQUESTS.headers),
+              headers: RETRY_AFTER_HEADERS,
             },
           );
         }),
@@ -184,7 +189,7 @@ describe("internal (haveibeenpwned): fetchFromApi", () => {
     it("sets retryAfterSeconds to undefined when header is missing", async () => {
       server.use(
         http.get("*", () => {
-          return new Response(JSON.stringify(TOO_MANY_REQUESTS.body), {
+          return new Response(JSON.stringify(RATE_LIMITED), {
             status: TOO_MANY_REQUESTS.status,
           });
         }),

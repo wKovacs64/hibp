@@ -79,12 +79,14 @@ export function breachedAccountRange(
 ): Promise<BreachedAccountRangeResult[] | null> {
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
 
-  // SAFETY: documented API response shape
-  return fetchFromApi(`/breachedaccount/range/${encodeURIComponent(prefix)}`, {
-    apiKey,
-    baseUrl,
-    timeoutMs,
-    signal,
-    userAgent,
-  }) as Promise<BreachedAccountRangeResult[] | null>;
+  return fetchFromApi<BreachedAccountRangeResult[]>(
+    `/breachedaccount/range/${encodeURIComponent(prefix)}`,
+    {
+      apiKey,
+      baseUrl,
+      timeoutMs,
+      signal,
+      userAgent,
+    },
+  );
 }

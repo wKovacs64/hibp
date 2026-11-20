@@ -110,10 +110,8 @@ export async function pwnedPasswordRange(
     mode,
   });
 
-  // create array from lines of text in response body
   const results = data.split("\n").filter(Boolean);
 
-  // convert into an object mapping suffix to count for each line
   return results.reduce<PwnedPasswordSuffixes>((acc, row) => {
     const [suffix, countString] = row.split(":");
     acc[suffix] = Number.parseInt(countString, 10);

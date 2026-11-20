@@ -6,7 +6,6 @@ import {
   NOT_FOUND,
   TOO_MANY_REQUESTS,
 } from "./responses.js";
-import type { ApiData } from "./types.js";
 
 /**
  * Custom error thrown when the haveibeenpwned.com API responds with 429 Too
@@ -36,24 +35,22 @@ export class RateLimitError extends Error {
 }
 
 /** @internal */
+export async function readJson<Data>(response: Response): Promise<Data> {
+  // SAFETY: haveibeenpwned.com documents each endpoint's response shape
+  return (await response.json()) as Data;
+}
+
+/** @internal */
 export function blockedWithRayId(rayId: string) {
   return `Request blocked, contact haveibeenpwned.com if this continues (Ray ID: ${rayId})`;
 }
 
-/**
- * Formats the HTTP status of a response, e.g. `429 Too Many Requests`.
- *
- * @internal
- */
+/** @internal */
 export function statusLine({ status, statusText }: Response) {
   return `${status} ${statusText}`.trim();
 }
 
-/**
- * Reads the `message` of a JSON error body, or `undefined` if absent or blank.
- *
- * @internal
- */
+/** @internal */
 export function jsonMessage(text: string): string | undefined {
   try {
     const error: unknown = JSON.parse(text);
@@ -62,7 +59,7 @@ export function jsonMessage(text: string): string | undefined {
       return error.message;
     }
   } catch {
-    // Not JSON.
+    return undefined;
   }
 
   return undefined;
@@ -86,12 +83,7 @@ export interface ApiOptions {
   userAgent?: string;
 }
 
-/**
- * Sends a request to the haveibeenpwned.com API, as a JSON POST when `body` is
- * supplied.
- *
- * @internal
- */
+/** @internal */
 export function requestApi(
   endpoint: string,
   options: ApiOptions = {},
@@ -123,45 +115,15 @@ export function requestApi(
   });
 }
 
-/**
- * Fetches data from the supplied API endpoint.
- *
- * HTTP status code 200 returns an Object (data found).
- * HTTP status code 404 returns null (no data found).
- * HTTP status code 400 throws an Error (bad request).
- * HTTP status code 401 throws an Error (unauthorized) with the body's JSON
- * `message`, the body text, or the HTTP status.
- * HTTP status code 403 throws an Error (forbidden).
- * HTTP status code 429 throws a RateLimitError (too many requests) with the
- * body's JSON `message`, or the HTTP status.
- *
- * @internal
- * @private
- * @param {string} endpoint the API endpoint to query
- * @param {object} [options] a configuration object
- * @param {string} [options.apiKey] an API key from
- * https://haveibeenpwned.com/API/Key
- * @param {string} [options.baseUrl] a custom base URL for the
- * haveibeenpwned.com API endpoints (default:
- * `https://haveibeenpwned.com/api/v3`)
- * @param {number} [options.timeoutMs] timeout for the request in milliseconds
- * (default: none)
- * @param {AbortSignal} [options.signal] an AbortSignal to cancel the request (default: none)
- * @param {string} [options.userAgent] a custom string to send as the User-Agent
- * field in the request headers (default: `hibp <version>`)
- * @returns {Promise<ApiData>} a Promise which resolves to the data resulting
- * from the query (or null for 404 Not Found responses), or rejects with an
- * Error
- */
-export async function fetchFromApi(
+/** @internal */
+export async function fetchFromApi<Data>(
   endpoint: string,
   options: ApiOptions = {},
-): Promise<ApiData> {
+): Promise<Data | null> {
   const response = await requestApi(endpoint, options);
 
   if (response.ok) {
-    // SAFETY: documented API response shape
-    return response.json() as Promise<ApiData>;
+    return readJson<Data>(response);
   }
 
   switch (response.status) {
@@ -202,11 +164,11 @@ export async function fetchFromApi(
 }
 
 /** @internal */
-export async function fetchRequiredFromApi(
+export async function fetchRequiredFromApi<Data>(
   endpoint: string,
   options: ApiOptions = {},
-): Promise<NonNullable<ApiData>> {
-  const data = await fetchFromApi(endpoint, options);
+): Promise<Data> {
+  const data = await fetchFromApi<Data>(endpoint, options);
 
   if (data === null) throw new Error(NOT_FOUND.statusText);
 

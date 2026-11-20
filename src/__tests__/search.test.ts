@@ -38,6 +38,22 @@ describe("search", () => {
     });
   });
 
+  it("searches pastes for any account the paste API accepts as an email address", () => {
+    server.use(
+      http.get(/breachedaccount/, () => {
+        return new Response(JSON.stringify(BREACHES));
+      }),
+      http.get(/pasteaccount/, () => {
+        return new Response(JSON.stringify(PASTES));
+      }),
+    );
+
+    return expect(search("pasted@localhost")).resolves.toEqual({
+      breaches: BREACHES,
+      pastes: PASTES,
+    });
+  });
+
   it("forwards the apiKey option correctly", async () => {
     expect.assertions(2);
     const apiKey = "my-api-key";

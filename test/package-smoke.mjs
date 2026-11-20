@@ -1,6 +1,3 @@
-// Smoke tests the packed package on the minimum supported Node.js version,
-// without dev dependencies. Run from a directory where the tarball is
-// installed (`npm install ./hibp-<version>.tgz`).
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createServer } from "node:http";
@@ -8,24 +5,19 @@ import { createRequire } from "node:module";
 import { setTimeout as delay } from "node:timers/promises";
 import { pathToFileURL } from "node:url";
 
-// Resolve from the consumer directory, not this repo (package self-reference).
-const require = createRequire(`${process.cwd()}/`);
+const requireFromConsumer = createRequire(`${process.cwd()}/`);
 
-// SAFETY: the packed package is built from src/hibp.ts.
 const hibp = /** @type {typeof import("../src/hibp.js")} */ (
-  await import(pathToFileURL(require.resolve("hibp")).href)
+  await import(pathToFileURL(requireFromConsumer.resolve("hibp")).href)
 );
 
-// SAFETY: package.json always has a version string.
 const { version } = /** @type {{ version: string }} */ (
-  require("hibp/package.json")
+  requireFromConsumer("hibp/package.json")
 );
 
-// oxlint-disable-next-line anti-slop/no-runtime-typeof -- asserts the packed export's runtime shape; unicorn/no-instanceof-builtins rejects `instanceof Function`
-assert.equal(typeof hibp.breach, "function");
+assert.equal(hibp.breach.name, "breach");
 
-// SAFETY: require(esm) loads the same built module as the import above.
-const requiredHibp = /** @type {typeof hibp} */ (require("hibp"));
+const requiredHibp = /** @type {typeof hibp} */ (requireFromConsumer("hibp"));
 
 assert.equal(requiredHibp.breach, hibp.breach, "require(esm)");
 

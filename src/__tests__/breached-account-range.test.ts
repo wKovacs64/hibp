@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { EMAIL_SHA1_PREFIX, EMAIL_RANGE_RESULTS } from "../../test/fixtures.js";
+import {
+  DOCUMENTED_EMAIL_SHA1_PREFIX,
+  DOCUMENTED_EMAIL_RANGE_RESULTS,
+} from "../../test/fixtures.js";
 import { respondOnAbort } from "../../test/handlers.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { breachedAccountRange } from "../breached-account-range.js";
@@ -16,20 +19,18 @@ describe("breachedAccountRange", () => {
             "https://haveibeenpwned.com/api/v3/breachedaccount/range/6B5917",
           );
 
-          return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
+          return new Response(JSON.stringify(DOCUMENTED_EMAIL_RANGE_RESULTS));
         }),
       );
 
-      return expect(breachedAccountRange(EMAIL_SHA1_PREFIX)).resolves.toEqual(
-        EMAIL_RANGE_RESULTS,
-      );
+      return expect(
+        breachedAccountRange(DOCUMENTED_EMAIL_SHA1_PREFIX),
+      ).resolves.toEqual(DOCUMENTED_EMAIL_RANGE_RESULTS);
     });
   });
 
   describe("not found", () => {
-    it("resolves with null", () => {
-      // The API documents HTTP 200 for every valid prefix; a 404 follows the
-      // SDK's existing not-found contract.
+    it("resolves with null for an undocumented 404, like other endpoints", () => {
       server.use(
         http.get("*", () => {
           return new Response(null, { status: NOT_FOUND.status });
@@ -37,7 +38,7 @@ describe("breachedAccountRange", () => {
       );
 
       return expect(
-        breachedAccountRange(EMAIL_SHA1_PREFIX),
+        breachedAccountRange(DOCUMENTED_EMAIL_SHA1_PREFIX),
       ).resolves.toBeNull();
     });
   });
@@ -50,11 +51,11 @@ describe("breachedAccountRange", () => {
         http.get("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
 
-          return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
+          return new Response(JSON.stringify(DOCUMENTED_EMAIL_RANGE_RESULTS));
         }),
       );
 
-      return breachedAccountRange(EMAIL_SHA1_PREFIX, { apiKey });
+      return breachedAccountRange(DOCUMENTED_EMAIL_SHA1_PREFIX, { apiKey });
     });
   });
 
@@ -63,13 +64,13 @@ describe("breachedAccountRange", () => {
       const baseUrl = "https://my-hibp-proxy:8080";
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
-          return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
+          return new Response(JSON.stringify(DOCUMENTED_EMAIL_RANGE_RESULTS));
         }),
       );
 
       return expect(
-        breachedAccountRange(EMAIL_SHA1_PREFIX, { baseUrl }),
-      ).resolves.toEqual(EMAIL_RANGE_RESULTS);
+        breachedAccountRange(DOCUMENTED_EMAIL_SHA1_PREFIX, { baseUrl }),
+      ).resolves.toEqual(DOCUMENTED_EMAIL_RANGE_RESULTS);
     });
   });
 
@@ -79,7 +80,7 @@ describe("breachedAccountRange", () => {
       server.use(http.get("*", respondOnAbort));
 
       return expect(
-        breachedAccountRange(EMAIL_SHA1_PREFIX, { timeoutMs: 1 }),
+        breachedAccountRange(DOCUMENTED_EMAIL_SHA1_PREFIX, { timeoutMs: 1 }),
       ).rejects.toMatchInlineSnapshot(
         `[TimeoutError: The operation was aborted due to timeout]`,
       );
@@ -94,11 +95,11 @@ describe("breachedAccountRange", () => {
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
 
-          return new Response(JSON.stringify(EMAIL_RANGE_RESULTS));
+          return new Response(JSON.stringify(DOCUMENTED_EMAIL_RANGE_RESULTS));
         }),
       );
 
-      return breachedAccountRange(EMAIL_SHA1_PREFIX, { userAgent });
+      return breachedAccountRange(DOCUMENTED_EMAIL_SHA1_PREFIX, { userAgent });
     });
   });
 });

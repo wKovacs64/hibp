@@ -8,15 +8,7 @@ import {
 } from "./fetch-from-api.js";
 import { FORBIDDEN, TOO_MANY_REQUESTS } from "./responses.js";
 
-/**
- * Posts a JSON body to the supplied API endpoint.
- *
- * Failures reject with the first available reason: the JSON body's `message`,
- * the Cloudflare Ray ID of a blocked (403) request, a plain-text body, or the
- * HTTP status.
- *
- * @internal
- */
+/** @internal */
 export async function postToApi(
   endpoint: string,
   body: Record<string, string>,

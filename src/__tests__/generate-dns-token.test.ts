@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { DNS_TOKEN } from "../../test/fixtures.js";
+import { DOCUMENTED_DNS_TOKEN } from "../../test/fixtures.js";
 import { respondOnAbort } from "../../test/handlers.js";
 import { generateDnsToken } from "../generate-dns-token.js";
 
@@ -18,11 +18,13 @@ describe("generateDnsToken", () => {
           );
           expect(await request.json()).toEqual({ DomainName: domain });
 
-          return Response.json(DNS_TOKEN);
+          return Response.json(DOCUMENTED_DNS_TOKEN);
         }),
       );
 
-      await expect(generateDnsToken(domain)).resolves.toEqual(DNS_TOKEN);
+      await expect(generateDnsToken(domain)).resolves.toEqual(
+        DOCUMENTED_DNS_TOKEN,
+      );
     });
   });
 
@@ -34,7 +36,7 @@ describe("generateDnsToken", () => {
         http.post("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
 
-          return Response.json(DNS_TOKEN);
+          return Response.json(DOCUMENTED_DNS_TOKEN);
         }),
       );
 
@@ -47,12 +49,12 @@ describe("generateDnsToken", () => {
       const baseUrl = "https://my-hibp-proxy:8080";
       server.use(
         http.post(new RegExp(`^${baseUrl}`), () => {
-          return Response.json(DNS_TOKEN);
+          return Response.json(DOCUMENTED_DNS_TOKEN);
         }),
       );
 
       return expect(generateDnsToken(domain, { baseUrl })).resolves.toEqual(
-        DNS_TOKEN,
+        DOCUMENTED_DNS_TOKEN,
       );
     });
   });
@@ -78,7 +80,7 @@ describe("generateDnsToken", () => {
         http.post("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
 
-          return Response.json(DNS_TOKEN);
+          return Response.json(DOCUMENTED_DNS_TOKEN);
         }),
       );
 

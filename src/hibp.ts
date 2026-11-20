@@ -22,15 +22,6 @@ import { verifyDnsToken } from "./verify-dns-token.js";
 
 export type * from "./api/haveibeenpwned/types.js";
 
-/*
- * Export individual named functions to allow the following:
- *
- * import * as hibp from 'hibp';       // ESM (with tree-shaking)
- * import { search } from 'hibp';      // ESM (with tree-shaking)
- * const { search } = require('hibp'); // CommonJS
- * const hibp = require('hibp');       // CommonJS
- */
-
 export {
   breach,
   breachedAccount,
@@ -55,7 +46,6 @@ export {
   RateLimitError,
 };
 
-// Export the overall interface
 export interface HIBP {
   breach: typeof breach;
   breachedAccount: typeof breachedAccount;
@@ -79,7 +69,3 @@ export interface HIBP {
   verifyDnsToken: typeof verifyDnsToken;
   RateLimitError: typeof RateLimitError;
 }
-
-// https://github.com/jsdoc2md/jsdoc-to-markdown/wiki/How-to-document-TypeScript#jsdoc-comments-disappear
-// oxlint-disable-next-line eslint/no-unused-vars -- Required for jsdoc-to-markdown.
-const JSDOC2MARKDOWN_STUB = undefined;

@@ -2,6 +2,8 @@ import type { Breach, Paste } from "./api/haveibeenpwned/types.js";
 import { breachedAccount } from "./breached-account.js";
 import { pasteAccount } from "./paste-account.js";
 
+const PASTE_API_EMAIL_PATTERN = /^.+@.+$/;
+
 export interface SearchResults {
   breaches: Breach[] | Pick<Breach, "Name">[] | null;
   pastes: Paste[] | null;
@@ -150,8 +152,7 @@ export async function search(
       signal,
       userAgent,
     }),
-    // This email regex is garbage but it seems to be what the API uses:
-    /^.+@.+$/.test(account)
+    PASTE_API_EMAIL_PATTERN.test(account)
       ? pasteAccount(account, { apiKey, baseUrl, timeoutMs, signal, userAgent })
       : null,
   ]);
