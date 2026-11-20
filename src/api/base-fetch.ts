@@ -92,12 +92,6 @@ function buildSignal(
   return AbortSignal.any(signals);
 }
 
-/**
- * Browser pages have a `document` and browser workers have `importScripts`.
- * Browsers send their own User-Agent, and setting one would force a CORS
- * preflight, which haveibeenpwned.com rejects. Server runtimes have neither
- * global, and some (e.g. Cloudflare Workers) send no User-Agent of their own.
- */
 function isBrowser() {
   return typeof document !== "undefined" || "importScripts" in globalThis;
 }

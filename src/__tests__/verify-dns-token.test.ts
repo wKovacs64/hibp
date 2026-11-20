@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
-import { DNS_VERIFICATION_FAILURE } from "../../test/fixtures.js";
+import { DOCUMENTED_DNS_VERIFICATION_FAILURE } from "../../test/fixtures.js";
 import { respondOnAbort } from "../../test/handlers.js";
 import { verifyDnsToken } from "../verify-dns-token.js";
 
@@ -27,16 +27,15 @@ describe("verifyDnsToken", () => {
   });
 
   describe("not verified", () => {
-    it("rejects with the documented failure reason", () => {
-      // The docs give this body without a status code.
+    it("rejects with the documented failure body at an undocumented status", () => {
       server.use(
         http.post("*", () =>
-          Response.json(DNS_VERIFICATION_FAILURE, { status: 400 }),
+          Response.json(DOCUMENTED_DNS_VERIFICATION_FAILURE, { status: 400 }),
         ),
       );
 
       return expect(verifyDnsToken(domain)).rejects.toThrow(
-        DNS_VERIFICATION_FAILURE.message,
+        DOCUMENTED_DNS_VERIFICATION_FAILURE.message,
       );
     });
   });

@@ -69,8 +69,7 @@ export async function pwnedPassword(
 }
 
 async function getPasswordHashParts(password: string) {
-  // oxlint-disable-next-line anti-slop/no-runtime-typeof -- crypto may be undeclared
-  const subtle = typeof crypto === "object" ? crypto.subtle : undefined;
+  const subtle = webCryptoIfAvailable()?.subtle;
 
   if (subtle) {
     const msgUint8 = new TextEncoder().encode(password);
@@ -86,4 +85,8 @@ async function getPasswordHashParts(password: string) {
   }
 
   throw new Error("The Web Crypto API is not available in this environment.");
+}
+
+function webCryptoIfAvailable(): Crypto | undefined {
+  return globalThis.crypto;
 }

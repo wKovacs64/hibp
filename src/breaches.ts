@@ -85,11 +85,10 @@ export function breaches(
     params.push(`isSpamList=${isSpamList}`);
   }
 
-  // SAFETY: documented API response shape
-  return fetchRequiredFromApi(`${endpoint}${params.join("&")}`, {
+  return fetchRequiredFromApi<Breach[]>(`${endpoint}${params.join("&")}`, {
     baseUrl,
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<Breach[]>;
+  });
 }

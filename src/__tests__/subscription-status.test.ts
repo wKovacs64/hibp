@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
 import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
-import { SUBSCRIPTION_STATUS } from "../../test/fixtures.js";
+import { SYNTHETIC_SUBSCRIPTION_STATUS } from "../../test/fixtures.js";
 import { respondOnAbort } from "../../test/handlers.js";
 import { subscriptionStatus } from "../subscription-status.js";
 
@@ -16,7 +16,7 @@ describe("subscriptionStatus", () => {
         http.get("*", ({ request }) => {
           expect(request.headers.get("hibp-api-key")).toBe(apiKey);
 
-          return new Response(JSON.stringify(SUBSCRIPTION_STATUS));
+          return new Response(JSON.stringify(SYNTHETIC_SUBSCRIPTION_STATUS));
         }),
       );
 
@@ -29,12 +29,12 @@ describe("subscriptionStatus", () => {
       const baseUrl = "https://my-hibp-proxy:8080";
       server.use(
         http.get(new RegExp(`^${baseUrl}`), () => {
-          return new Response(JSON.stringify(SUBSCRIPTION_STATUS));
+          return new Response(JSON.stringify(SYNTHETIC_SUBSCRIPTION_STATUS));
         }),
       );
 
       return expect(subscriptionStatus({ baseUrl })).resolves.toEqual(
-        SUBSCRIPTION_STATUS,
+        SYNTHETIC_SUBSCRIPTION_STATUS,
       );
     });
   });
@@ -60,7 +60,7 @@ describe("subscriptionStatus", () => {
         http.get("*", ({ request }) => {
           expect(request.headers.get("User-Agent")).toBe(userAgent);
 
-          return new Response(JSON.stringify(SUBSCRIPTION_STATUS));
+          return new Response(JSON.stringify(SYNTHETIC_SUBSCRIPTION_STATUS));
         }),
       );
 

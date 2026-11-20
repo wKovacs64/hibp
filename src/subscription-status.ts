@@ -85,6 +85,5 @@ export async function subscriptionStatus(
 ) {
   const endpoint = "/subscription/status";
 
-  // SAFETY: documented API response shape
-  return fetchRequiredFromApi(endpoint, options) as Promise<SubscriptionStatus>;
+  return fetchRequiredFromApi<SubscriptionStatus>(endpoint, options);
 }

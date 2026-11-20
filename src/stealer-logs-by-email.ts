@@ -81,12 +81,11 @@ export function stealerLogsByEmail(
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;
   const endpoint = `/stealerlogsbyemail/${encodeURIComponent(emailAddress)}`;
 
-  // SAFETY: documented API response shape
-  return fetchFromApi(endpoint, {
+  return fetchFromApi<string[]>(endpoint, {
     apiKey,
     baseUrl,
     timeoutMs,
     signal,
     userAgent,
-  }) as Promise<string[] | null>;
+  });
 }

@@ -49,6 +49,5 @@ export function dataClasses(
     userAgent?: string;
   } = {},
 ): Promise<string[] | null> {
-  // SAFETY: documented API response shape
-  return fetchFromApi("/dataclasses", options) as Promise<string[] | null>;
+  return fetchFromApi<string[]>("/dataclasses", options);
 }

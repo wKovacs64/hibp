@@ -7,7 +7,6 @@ import type {
   SubscriptionStatus,
 } from "../src/api/haveibeenpwned/types.js";
 
-// https://haveibeenpwned.com/api/v3/dataClasses/descriptions
 export const DATA_CLASS_DESCRIPTIONS: DataClassDescription[] = [
   {
     name: "Academic records",
@@ -79,9 +78,7 @@ export const PASTE: Paste = {
   EmailCount: 139,
 };
 
-// Synthetic values; field set from
-// https://haveibeenpwned.com/API/v3#SubscriptionStatus. Not a live response.
-export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
+export const SYNTHETIC_SUBSCRIPTION_STATUS: SubscriptionStatus = {
   SubscriptionName: "Pwned 1",
   Description:
     "Domains with up to 25 breached addresses each, and a rate limited API key allowing 10 email address searches per minute",
@@ -96,32 +93,37 @@ export const SUBSCRIPTION_STATUS: SubscriptionStatus = {
   IncludesKAnon: false,
 };
 
-// Documentation-derived; authenticated responses have not been live verified.
-// https://haveibeenpwned.com/API/v3#VerifyDomainViaDns
-export const DNS_TOKEN: DnsToken = {
+export const DOCUMENTED_DNS_TOKEN: DnsToken = {
   txtRecordValue: "hibp-verify=dweb_abc123xyz",
 };
 
-// Documentation does not specify the HTTP status for this failure example.
-export const DNS_VERIFICATION_FAILURE = {
+export const DOCUMENTED_DNS_VERIFICATION_FAILURE = {
   message: "No hibp-verify TXT records were found on the domain.",
 };
 
-// Live unauthenticated GET and POST responses, 2026-10-25.
-export const MISSING_API_KEY = {
+export const LIVE_MISSING_API_KEY = {
   statusCode: 401,
   message: "Access denied due to missing hibp-api-key.",
 };
+
+export const SYNTHETIC_PLAIN_TEXT_UNAUTHORIZED = `Your request to the API couldn't be authorised. Check you have the right value in the "hibp-api-key" header, refer to the documentation for more: https://haveibeenpwned.com/API/v3#Authorisation`;
+
+export const RATE_LIMITED = {
+  statusCode: 429,
+  message: "Rate limit is exceeded. Try again in 2 seconds.",
+};
+
+export const RETRY_AFTER_HEADERS = { "retry-after": "2" };
+
+export const CLOUDFLARE_BLOCK_HEADERS = { "cf-ray": "someRayId" };
 
 export const PASSWORD = "password";
 
 export const SHA1_PREFIX = "5BAA6";
 
-// Documentation-derived example, not an authenticated live response:
-// https://haveibeenpwned.com/API/v3#BreachesForHashRange
-export const EMAIL_SHA1_PREFIX = "6B5917";
+export const DOCUMENTED_EMAIL_SHA1_PREFIX = "6B5917";
 
-export const EMAIL_RANGE_RESULTS = [
+export const DOCUMENTED_EMAIL_RANGE_RESULTS = [
   {
     hashSuffix: "C6C0AADE0C085843D66E4944E108C4A4CD",
     websites: ["Adobe", "Gawker", "Stratfor"],
