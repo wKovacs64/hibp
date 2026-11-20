@@ -1,5 +1,5 @@
 import type { Breach } from "./api/haveibeenpwned/types.js";
-import { fetchFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
+import { fetchRequiredFromApi } from "./api/haveibeenpwned/fetch-from-api.js";
 
 /**
  * Fetches all breach events in the system.
@@ -86,7 +86,7 @@ export function breaches(
   }
 
   // SAFETY: documented API response shape
-  return fetchFromApi(`${endpoint}${params.join("&")}`, {
+  return fetchRequiredFromApi(`${endpoint}${params.join("&")}`, {
     baseUrl,
     timeoutMs,
     signal,

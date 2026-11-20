@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
+import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { VERIFIED_BREACH } from "../../test/fixtures.js";
 import { respondOnAbort } from "../../test/handlers.js";
 import { breaches } from "../hibp.js";
@@ -142,6 +143,16 @@ describe("breaches", () => {
       );
 
       return breaches({ userAgent });
+    });
+  });
+
+  describe("not found", () => {
+    it("rejects, since haveibeenpwned.com does not 404 this endpoint", () => {
+      server.use(
+        http.get("*", () => new Response(null, { status: NOT_FOUND.status })),
+      );
+
+      return expect(breaches()).rejects.toThrow(NOT_FOUND.statusText);
     });
   });
 });

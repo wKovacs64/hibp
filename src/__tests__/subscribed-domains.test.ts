@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { http } from "msw/http";
 import { server } from "../../mocks/server.js";
+import { NOT_FOUND } from "../api/haveibeenpwned/responses.js";
 import { respondOnAbort } from "../../test/handlers.js";
 import { subscribedDomains } from "../subscribed-domains.js";
 
@@ -70,6 +71,18 @@ describe("subscribedDomains", () => {
       );
 
       return subscribedDomains({ userAgent });
+    });
+  });
+
+  describe("not found", () => {
+    it("rejects, since haveibeenpwned.com does not 404 this endpoint", () => {
+      server.use(
+        http.get("*", () => new Response(null, { status: NOT_FOUND.status })),
+      );
+
+      return expect(
+        subscribedDomains({ apiKey: "my-api-key" }),
+      ).rejects.toThrow(NOT_FOUND.statusText);
     });
   });
 });

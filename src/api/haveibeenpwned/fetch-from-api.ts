@@ -200,3 +200,15 @@ export async function fetchFromApi(
     }
   }
 }
+
+/** @internal */
+export async function fetchRequiredFromApi(
+  endpoint: string,
+  options: ApiOptions = {},
+): Promise<NonNullable<ApiData>> {
+  const data = await fetchFromApi(endpoint, options);
+
+  if (data === null) throw new Error(NOT_FOUND.statusText);
+
+  return data;
+}
