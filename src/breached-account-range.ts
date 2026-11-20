@@ -56,25 +56,25 @@ export function breachedAccountRange(
     /**
      * an API key from https://haveibeenpwned.com/API/Key (default: undefined)
      */
-    apiKey?: string;
+    apiKey?: string | undefined;
     /**
      * a custom base URL for the haveibeenpwned.com API endpoints (default:
      * `https://haveibeenpwned.com/api/v3`)
      */
-    baseUrl?: string;
+    baseUrl?: string | undefined;
     /**
      * timeout for the request in milliseconds (default: none)
      */
-    timeoutMs?: number;
+    timeoutMs?: number | undefined;
     /**
      * an AbortSignal to cancel the request (default: none)
      */
-    signal?: AbortSignal;
+    signal?: AbortSignal | undefined;
     /**
      * a custom string to send as the User-Agent field in the request headers
      * (default: `hibp <version>`)
      */
-    userAgent?: string;
+    userAgent?: string | undefined;
   } = {},
 ): Promise<BreachedAccountRangeResult[] | null> {
   const { apiKey, baseUrl, timeoutMs, signal, userAgent } = options;

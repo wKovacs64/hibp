@@ -17,16 +17,16 @@ export async function baseFetch({
   baseUrl: string;
   endpoint: string;
   headers?: Record<string, string>;
-  timeoutMs?: number;
-  signal?: AbortSignal;
-  userAgent?: string;
+  timeoutMs?: number | undefined;
+  signal?: AbortSignal | undefined;
+  userAgent?: string | undefined;
   queryParams?: Record<string, string>;
-  method?: "POST";
-  body?: string;
+  method?: "POST" | undefined;
+  body?: string | undefined;
 }): Promise<Response> {
   const requestInit: RequestInit = {
-    method,
-    body,
+    method: method ?? "GET",
+    body: body ?? null,
     headers: buildHeaders(userAgent, headers),
     signal: buildSignal(timeoutMs, signal),
   };
@@ -76,7 +76,7 @@ export function buildHeaders(
 function buildSignal(
   timeoutMs?: number,
   signal?: AbortSignal,
-): AbortSignal | undefined {
+): AbortSignal | null {
   const signals: AbortSignal[] = [];
 
   if (timeoutMs !== undefined && timeoutMs !== 0 && !Number.isNaN(timeoutMs)) {
@@ -85,7 +85,7 @@ function buildSignal(
 
   if (signal) signals.push(signal);
 
-  if (signals.length === 0) return undefined;
+  if (signals.length === 0) return null;
 
   if (signals.length === 1) return signals[0];
 

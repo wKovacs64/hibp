@@ -146,7 +146,7 @@ describe("internal (haveibeenpwned): postToApi", () => {
             new Response(text, {
               status: 503,
               statusText: "Service Unavailable",
-              headers: type ? { "content-type": type } : undefined,
+              headers: type ? { "content-type": type } : {},
             }),
         ),
       );
